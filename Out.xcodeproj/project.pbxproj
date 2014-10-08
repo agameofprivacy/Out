@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
 		2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */; };
+		2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C17111A19E4E65600EA1D72 /* Out-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Out-Bridging-Header.h"; sourceTree = "<group>"; };
+		2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeCardsCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeCardsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
 		2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabCollectionViewController.swift; sourceTree = "<group>"; };
+		2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCardCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,7 @@
 				2C5D996B19E4A9FB00133F59 /* Out */,
 				2C5D998119E4A9FB00133F59 /* OutTests */,
 				2C5D996A19E4A9FB00133F59 /* Products */,
+				2C17111A19E4E65600EA1D72 /* Out-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,9 +84,12 @@
 		2C5D996B19E4A9FB00133F59 /* Out */ = {
 			isa = PBXGroup;
 			children = (
+				2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */,
+				2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */,
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
 				2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */,
 				2C5D997219E4A9FB00133F59 /* Main.storyboard */,
+				2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
 				2C5D996C19E4A9FB00133F59 /* Supporting Files */,
@@ -212,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
+				2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +350,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Out/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -348,9 +363,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Out/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -407,6 +424,7 @@
 				2C5D998A19E4A9FB00133F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C5D998B19E4A9FB00133F59 /* Build configuration list for PBXNativeTarget "OutTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +433,7 @@
 				2C5D998D19E4A9FB00133F59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -11,7 +11,10 @@ import UIKit
 let reuseIdentifier = "Cell"
 
 class ChallengesTabCollectionViewController: UICollectionViewController {
+    @IBOutlet weak var challengesCardNumPageControl: UIPageControl!
 
+    var labels:[String] = ["Hello", "My", "Name", "Is", "Eddie"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,9 +22,11 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //        self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
 
         // Do any additional setup after loading the view.
+        challengesCardNumPageControl.numberOfPages = labels.count
+        challengesCardNumPageControl.currentPage = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,22 +46,24 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         //#warning Incomplete method implementation -- Return the number of sections
-        return 0
+        return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return 0
+        return labels.count
     }
 
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell! {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
     
         // Configure the cell
-    
+        cell.cardLabel.text = labels[indexPath.item];
+        challengesCardNumPageControl.currentPage = indexPath.item
+
         return cell
     }
 
