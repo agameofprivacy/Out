@@ -3,6 +3,9 @@
 //  Out
 //
 //  Created by Eddie Chen on 10/7/14.
+//  Portions of this class was pulled from stackoverflow user Ji Fang
+//  at this location:
+//  http://stackoverflow.com/questions/13179703/uicollectionview-scrolling-in-both-directions
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 

@@ -67,6 +67,11 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {
+        println("Add Challenge")
+    }
+    
+    
     // MARK: UICollectionViewDelegate
 
     /*

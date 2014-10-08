@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */; };
+		2C04D0C619E5D6660091B626 /* AddChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */; };
 		2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTabBarViewController.swift; sourceTree = "<group>"; };
+		2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddChallengeViewController.swift; sourceTree = "<group>"; };
 		2C17111A19E4E65600EA1D72 /* Out-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Out-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeCardsCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeCardsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
 				2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */,
 				2C5D997219E4A9FB00133F59 /* Main.storyboard */,
+				2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */,
+				2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */,
 				2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
@@ -222,8 +228,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C04D0C619E5D6660091B626 /* AddChallengeViewController.swift in Sources */,
 				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */,
+				2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
 				2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */,
 			);
