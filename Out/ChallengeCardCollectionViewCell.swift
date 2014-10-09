@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
+import Foundation
 class ChallengeCardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cardLabel: UILabel!
+
+    
 }

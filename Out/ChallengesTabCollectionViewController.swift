@@ -27,6 +27,7 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         challengesCardNumPageControl.numberOfPages = labels.count
         challengesCardNumPageControl.currentPage = 0
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +62,11 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
     
         // Configure the cell
-        cell.cardLabel.text = labels[indexPath.item];
+        cell.cardLabel.text = labels[indexPath.item]
+        cell.layer.cornerRadius = 6
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+
         challengesCardNumPageControl.currentPage = indexPath.item
 
         return cell

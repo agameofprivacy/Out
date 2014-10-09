@@ -8,33 +8,40 @@
 
 import UIKit
 
-class AddChallengeViewController: UIViewController {
+class AddChallengeViewController: UICollectionViewController {
 
-    @IBOutlet weak var challengeGalleryCollectionView: UICollectionView!
-    
-    var challengeGalleryDataSource:UICollectionViewDataSource!
-    var challengeGalleryDelegate:UICollectionViewDelegate!
+    @IBOutlet var challengeGalleryCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        challengeGalleryCollectionView.dataSource = challengeGalleryDataSource
-        challengeGalleryCollectionView.delegate = challengeGalleryDelegate
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeGalleryCard", forIndexPath: indexPath) as ChallengeGalleryCollectionViewCell
+
+        cell.layer.cornerRadius = 6
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+
+        return cell
+    }
     
     @IBAction func closeBarButtonItemTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-
-    
     
     /*
     // MARK: - Navigation
