@@ -70,25 +70,6 @@ class ChallengeFilterTableViewController: UITableViewController {
     }
     
     @IBAction func applyBarButtonItemTapped(sender: UIBarButtonItem) {
-        var testUser = User()
-        
-        testUser.alias = "agameofprivacy"
-        testUser.age = 25
-        testUser.genderIdentity = "Male"
-        testUser.sexualOrientation = "Gay"
-        testUser.avatar = "Dog"
-        testUser.color = "Black"
-        testUser.ethnicity = "Taiwanese"
-        testUser.city = "New York"
-        testUser.state = "NY"
-        testUser.currentChallengesKeys = ["1", "2", "3"]
-        testUser.completedChallengesKeys = ["1", "2", "3"]
-        
-        // Get the default Realm
-        
-        let realm = RLMRealm.defaultRealm()
-        
-        println(realm.path)
 
     }
     // Delegate Methods

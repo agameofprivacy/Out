@@ -8,24 +8,26 @@
 
 import UIKit
 import Realm
+
 let reuseIdentifier = "Cell"
 
 class ChallengesTabCollectionViewController: UICollectionViewController {
+
+
     @IBOutlet weak var challengesCardNumPageControl: UIPageControl!
 
-    var labels:[String] = ["Hello", "My", "Name", "Is", "Eddie"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        //        self.collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
+        self.collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
 
         // Do any additional setup after loading the view.
-        challengesCardNumPageControl.numberOfPages = labels.count
+        
+        challengesCardNumPageControl.numberOfPages = 5
         challengesCardNumPageControl.currentPage = 0
 
     }
@@ -55,14 +57,15 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return labels.count
+        
+        return 3
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
-    
+        
         // Configure the cell
-        cell.cardLabel.text = labels[indexPath.item]
+        cell.cardLabel.text = "Hello"
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
