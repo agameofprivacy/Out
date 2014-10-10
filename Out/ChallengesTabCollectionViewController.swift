@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Realm
 let reuseIdentifier = "Cell"
 
 class ChallengesTabCollectionViewController: UICollectionViewController {

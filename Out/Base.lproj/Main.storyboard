@@ -161,7 +161,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="6wi-Qo-3Ky">
                             <connections>
-                                <segue destination="BRI-Fu-p3L" kind="presentation" id="hYw-jB-TUX"/>
+                                <segue destination="BRI-Fu-p3L" kind="presentation" modalTransitionStyle="coverVertical" id="hYw-jB-TUX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -175,17 +175,28 @@
         <!--Filter-->
         <scene sceneID="sCQ-Ya-k9t">
             <objects>
-                <tableViewController id="JUM-1N-qWW" customClass="FilterChallengeTableViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0m6-V8-5Xs">
+                <tableViewController id="JUM-1N-qWW" customClass="ChallengeFilterTableViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="54" sectionHeaderHeight="10" sectionFooterHeight="10" id="0m6-V8-5Xs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zIh-bf-RnQ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChallengeFilterCell" id="zIh-bf-RnQ" customClass="ChallengeFilterTableViewCell" customModule="Out" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zIh-bf-RnQ" id="FwD-tF-zOA">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PQ-0i-iNS">
+                                            <rect key="frame" x="15" y="16" width="210" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="challengeFilterTitleLabel" destination="9PQ-0i-iNS" id="ZwN-Ya-jjT"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -196,10 +207,14 @@
                     <navigationItem key="navigationItem" title="Filter" id="5HD-N2-m0Y">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="TpJ-fY-gcu">
                             <connections>
-                                <action selector="cancelBarButtonItemTapped:" destination="JUM-1N-qWW" id="aCo-bR-qcx"/>
+                                <action selector="cancelBarButtonItemTapped:" destination="JUM-1N-qWW" id="scc-6s-Peh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Apply" id="uh8-Kh-z1j"/>
+                        <barButtonItem key="rightBarButtonItem" title="Apply" id="uh8-Kh-z1j">
+                            <connections>
+                                <action selector="applyBarButtonItemTapped:" destination="JUM-1N-qWW" id="zkB-ue-jIQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbb-eU-ZZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>

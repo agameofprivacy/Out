@@ -10,7 +10,7 @@
 		2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */; };
 		2C04D0C619E5D6660091B626 /* AddChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */; };
 		2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */; };
-		2C3BD33019E627ED00D84074 /* FilterChallengeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3BD32F19E627ED00D84074 /* FilterChallengeTableViewController.swift */; };
+		2C24F8B819E75C73007FC970 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24F8B719E75C73007FC970 /* RealmObjects.swift */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
@@ -18,6 +18,11 @@
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
 		2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */; };
 		2C60963119E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */; };
+		2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */; };
+		2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */; };
+		2CA1B6F019E754FA00B872F7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1B6EF19E754FA00B872F7 /* libc++.dylib */; };
+		2CA1B6F219E7552400B872F7 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6F119E7552400B872F7 /* RLMSupport.swift */; };
+		2CA1B6F419E7553300B872F7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1B6F319E7553300B872F7 /* Realm.framework */; };
 		2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +42,7 @@
 		2C17111A19E4E65600EA1D72 /* Out-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Out-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeCardsCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeCardsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		2C3BD32F19E627ED00D84074 /* FilterChallengeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterChallengeTableViewController.swift; sourceTree = "<group>"; };
+		2C24F8B719E75C73007FC970 /* RealmObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmObjects.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +54,11 @@
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
 		2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabCollectionViewController.swift; sourceTree = "<group>"; };
 		2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewController.swift; sourceTree = "<group>"; };
+		2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewCell.swift; sourceTree = "<group>"; };
+		2CA1B6EF19E754FA00B872F7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		2CA1B6F119E7552400B872F7 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
+		2CA1B6F319E7553300B872F7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Realm.framework; sourceTree = "<group>"; };
 		2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCardCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA1B6F419E7553300B872F7 /* Realm.framework in Frameworks */,
+				2CA1B6F019E754FA00B872F7 /* libc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,18 +104,15 @@
 		2C5D996B19E4A9FB00133F59 /* Out */ = {
 			isa = PBXGroup;
 			children = (
-				2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */,
-				2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */,
+				2C24F8B719E75C73007FC970 /* RealmObjects.swift */,
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
-				2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */,
-				2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */,
 				2C5D997219E4A9FB00133F59 /* Main.storyboard */,
-				2C3BD32F19E627ED00D84074 /* FilterChallengeTableViewController.swift */,
-				2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */,
 				2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */,
-				2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
+				2CA1B6E519E72D4800B872F7 /* ChallengesTab */,
+				2CA1B6E619E72D6300B872F7 /* ChallengeGallery */,
+				2C634D4819E76D7200E017E7 /* RealmSwift */,
 				2C5D996C19E4A9FB00133F59 /* Supporting Files */,
 			);
 			path = Out;
@@ -132,6 +141,38 @@
 				2C5D998319E4A9FB00133F59 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2C634D4819E76D7200E017E7 /* RealmSwift */ = {
+			isa = PBXGroup;
+			children = (
+				2CA1B6F319E7553300B872F7 /* Realm.framework */,
+				2CA1B6EF19E754FA00B872F7 /* libc++.dylib */,
+				2CA1B6F119E7552400B872F7 /* RLMSupport.swift */,
+			);
+			name = RealmSwift;
+			sourceTree = "<group>";
+		};
+		2CA1B6E519E72D4800B872F7 /* ChallengesTab */ = {
+			isa = PBXGroup;
+			children = (
+				2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */,
+				2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */,
+				2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */,
+				2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */,
+			);
+			name = ChallengesTab;
+			sourceTree = "<group>";
+		};
+		2CA1B6E619E72D6300B872F7 /* ChallengeGallery */ = {
+			isa = PBXGroup;
+			children = (
+				2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */,
+				2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */,
+				2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */,
+				2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */,
+			);
+			name = ChallengeGallery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +275,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C24F8B819E75C73007FC970 /* RealmObjects.swift in Sources */,
 				2C04D0C619E5D6660091B626 /* AddChallengeViewController.swift in Sources */,
+				2CA1B6F219E7552400B872F7 /* RLMSupport.swift in Sources */,
 				2C60963119E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift in Sources */,
+				2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */,
 				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
-				2C3BD33019E627ED00D84074 /* FilterChallengeTableViewController.swift in Sources */,
+				2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */,
 				2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */,
 				2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
@@ -367,6 +411,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Out/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,6 +429,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Out/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
