@@ -23,7 +23,6 @@
 		2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B919E87B91006975DA /* StoreKit.framework */; };
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C1C23BE19E8A65A006975DA /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C23BD19E8A65A006975DA /* Challenge.swift */; };
-		2C24F8B819E75C73007FC970 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24F8B719E75C73007FC970 /* RealmObjects.swift */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
@@ -31,12 +30,13 @@
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
 		2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */; };
 		2C60963119E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */; };
+		2C8C20CF19E9AAE1009E84C7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */; };
+		2C8C20D119E9ACCE009E84C7 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */; };
 		2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */; };
 		2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */; };
-		2CA1B6F019E754FA00B872F7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1B6EF19E754FA00B872F7 /* libc++.dylib */; };
-		2CA1B6F219E7552400B872F7 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6F119E7552400B872F7 /* RLMSupport.swift */; };
-		2CA1B6F419E7553300B872F7 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1B6F319E7553300B872F7 /* Realm.framework */; };
 		2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */; };
+		2CF49ADE19E95FB900E98AD1 /* ChallengeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF49ADD19E95FB900E98AD1 /* ChallengeModel.swift */; };
+		2CF49AE119E96AB400E98AD1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF49AE019E96AB400E98AD1 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,6 @@
 		2C1C23B919E87B91006975DA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2C1C23BD19E8A65A006975DA /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
-		2C24F8B719E75C73007FC970 /* RealmObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmObjects.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,12 +79,13 @@
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
 		2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabCollectionViewController.swift; sourceTree = "<group>"; };
 		2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewController.swift; sourceTree = "<group>"; };
 		2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewCell.swift; sourceTree = "<group>"; };
-		2CA1B6EF19E754FA00B872F7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		2CA1B6F119E7552400B872F7 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
-		2CA1B6F319E7553300B872F7 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Realm.framework; sourceTree = "<group>"; };
 		2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CF49ADD19E95FB900E98AD1 /* ChallengeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeModel.swift; sourceTree = "<group>"; };
+		2CF49AE019E96AB400E98AD1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +104,7 @@
 				2C1C23AC19E87B5B006975DA /* CFNetwork.framework in Frameworks */,
 				2C1C23AA19E87B54006975DA /* AudioToolbox.framework in Frameworks */,
 				2C1C23A719E87B16006975DA /* Bolts.framework in Frameworks */,
-				2CA1B6F419E7553300B872F7 /* Realm.framework in Frameworks */,
 				2C1C23A819E87B16006975DA /* Parse.framework in Frameworks */,
-				2CA1B6F019E754FA00B872F7 /* libc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,15 +160,16 @@
 			children = (
 				2C1C23A519E87B16006975DA /* Bolts.framework */,
 				2C1C23A619E87B16006975DA /* Parse.framework */,
-				2C24F8B719E75C73007FC970 /* RealmObjects.swift */,
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
+				2CF49AE019E96AB400E98AD1 /* User.swift */,
 				2C5D997219E4A9FB00133F59 /* Main.storyboard */,
+				2C8C20D219E9ACD4009E84C7 /* DashboardTab */,
+				2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */,
 				2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
 				2CA1B6E519E72D4800B872F7 /* ChallengesTab */,
 				2CA1B6E619E72D6300B872F7 /* ChallengeGallery */,
-				2C634D4819E76D7200E017E7 /* RealmSwift */,
 				2C5D996C19E4A9FB00133F59 /* Supporting Files */,
 			);
 			path = Out;
@@ -201,14 +200,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2C634D4819E76D7200E017E7 /* RealmSwift */ = {
+		2C8C20D219E9ACD4009E84C7 /* DashboardTab */ = {
 			isa = PBXGroup;
 			children = (
-				2CA1B6F319E7553300B872F7 /* Realm.framework */,
-				2CA1B6EF19E754FA00B872F7 /* libc++.dylib */,
-				2CA1B6F119E7552400B872F7 /* RLMSupport.swift */,
+				2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */,
 			);
-			name = RealmSwift;
+			name = DashboardTab;
 			sourceTree = "<group>";
 		};
 		2CA1B6E519E72D4800B872F7 /* ChallengesTab */ = {
@@ -230,8 +227,17 @@
 				2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */,
 				2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */,
 				2C04D0C519E5D6660091B626 /* AddChallengeViewController.swift */,
+				2CF49ADF19E95FBE00E98AD1 /* Model */,
 			);
 			name = ChallengeGallery;
+			sourceTree = "<group>";
+		};
+		2CF49ADF19E95FBE00E98AD1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CF49ADD19E95FB900E98AD1 /* ChallengeModel.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,10 +340,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C24F8B819E75C73007FC970 /* RealmObjects.swift in Sources */,
+				2CF49AE119E96AB400E98AD1 /* User.swift in Sources */,
+				2C8C20D119E9ACCE009E84C7 /* DashboardViewController.swift in Sources */,
 				2C04D0C619E5D6660091B626 /* AddChallengeViewController.swift in Sources */,
-				2CA1B6F219E7552400B872F7 /* RLMSupport.swift in Sources */,
 				2C60963119E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift in Sources */,
+				2CF49ADE19E95FB900E98AD1 /* ChallengeModel.swift in Sources */,
 				2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */,
 				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */,
@@ -345,6 +352,7 @@
 				2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */,
 				2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
+				2C8C20CF19E9AAE1009E84C7 /* LoginViewController.swift in Sources */,
 				2CAC55EE19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

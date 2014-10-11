@@ -7,24 +7,38 @@
 //
 
 import UIKit
-import Realm
 
 let reuseIdentifier = "Cell"
 
+
 class ChallengesTabCollectionViewController: UICollectionViewController {
 
+    var currentChallengesObjects:[AnyObject] = []
     
+    @IBOutlet var currentChallengesCardsCollectionView: UICollectionView!
     @IBOutlet weak var challengesCardNumPageControl: UIPageControl!
 
-    var currentChallengesObjects:[PFObject] = []
     var currentChallenges:[Challenge] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let predicate = NSPredicate(format:"isCurrent = true AND alias = '\(PFUser.currentUser().username)'")
+        var query = PFQuery(className:"UserChallengeData", predicate: predicate)
+
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                self.currentChallengesObjects = objects
+                self.currentChallengesCardsCollectionView.reloadData()
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
 
 
-        self.loadCurrentChallenges()
-        challengesCardNumPageControl.numberOfPages = self.currentChallenges.count
+        challengesCardNumPageControl.numberOfPages = self.currentChallengesObjects.count
         challengesCardNumPageControl.currentPage = 0
     }
 
@@ -47,14 +61,14 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        return currentChallenges.count
+        return currentChallengesObjects.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
         
         // Configure the cell
-        cell.cardLabel.text = self.currentChallenges[indexPath.item].title
+        cell.cardLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
@@ -68,16 +82,5 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         println("Add Challenge")
     }
     
-    func loadCurrentChallenges() {
-        let predicate = NSPredicate(format:"isCurrent = true AND alias = 'agameofprivacy'")
-        var query = PFQuery(className:"UserChallengeData", predicate:predicate)
-        // Do any additional setup after loading the view.
-        currentChallengesObjects = query.findObjects() as [PFObject]
-        for object in currentChallengesObjects {
-            var challenge = Challenge(title: object["title"] as String)
-            self.currentChallenges += [challenge]
-            println(self.currentChallenges[0].title)
-        }
-    }
 
 }

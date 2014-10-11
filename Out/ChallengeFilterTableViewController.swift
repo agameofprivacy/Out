@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import Realm
 
 class ChallengeFilterTableViewController: UITableViewController {
 
     
     // Array of tuples of type (Filter Title, [Filter Accessory Items]) for Filters
-    var challengeFilters:[(filterTitle:String, filterDescription:String, filterParameters:[(parameterTitle:String, parameterSelected:Bool)])] = [("Difficulty", "intense, intermediate, or casual", [("Intense", false), ("Intermediate", false), ("Casual", false)]), ("People", "strangers, friends, or family", [("Strangers", false), ("Friends", false), ("Family", false)]), ("Places", "school, work, or home", [("School", false), ("Work", false), ("Home", false)])]
-
+    var challengeFilters:[(filterTitle:String, filterDescription:String, filterParameters:[(parameterTitle:String, parameterSelected:Bool)])] = [("Difficulty", "intense, intermediate, or casual", [("Intense", true), ("Intermediate", true), ("Casual", true)]), ("People", "strangers, friends, or family", [("Strangers", true), ("Friends", true), ("Family", true)]), ("Places", "school, work, or home", [("School", true), ("Work", true), ("Home", true)])]
+    var filterStrings:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +36,13 @@ class ChallengeFilterTableViewController: UITableViewController {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return challengeFilters.count
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ApplyFilters"{
+            let galleryVC:AddChallengeViewController = segue.destinationViewController.childViewControllers[0] as AddChallengeViewController
+            galleryVC.filters = self.filterStrings
+        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -70,9 +76,19 @@ class ChallengeFilterTableViewController: UITableViewController {
     }
     
     @IBAction func applyBarButtonItemTapped(sender: UIBarButtonItem) {
-
+        for filterCategory in challengeFilters{
+            for filterParameter in filterCategory.filterParameters{
+                if filterParameter.parameterSelected{
+                    filterStrings += [filterParameter.parameterTitle]
+                }
+            }
+        }
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).filters).removeAll(keepCapacity: true)
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).filters) += self.filterStrings
+        (self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).viewDidLoad()
+        dismissViewControllerAnimated(true, completion: nil)
     }
-    // Delegate Methods
+        // Delegate Methods
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected = !challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected
