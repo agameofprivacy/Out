@@ -13,39 +13,29 @@ let reuseIdentifier = "Cell"
 
 class ChallengesTabCollectionViewController: UICollectionViewController {
 
-
+    
     @IBOutlet weak var challengesCardNumPageControl: UIPageControl!
 
-
+    var currentChallengesObjects:[PFObject] = []
+    var currentChallenges:[Challenge] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
 
-        // Do any additional setup after loading the view.
-        
-        challengesCardNumPageControl.numberOfPages = 5
+        self.loadCurrentChallenges()
+        challengesCardNumPageControl.numberOfPages = self.currentChallenges.count
         challengesCardNumPageControl.currentPage = 0
-
     }
 
+//    override func viewDidAppear(animated: Bool) {
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
     // MARK: UICollectionViewDataSource
 
@@ -57,15 +47,14 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //#warning Incomplete method implementation -- Return the number of items in the section
-        
-        return 3
+        return currentChallenges.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
         
         // Configure the cell
-        cell.cardLabel.text = "Hello"
+        cell.cardLabel.text = self.currentChallenges[indexPath.item].title
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
@@ -79,36 +68,16 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         println("Add Challenge")
     }
     
-    
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    func collectionView(collectionView: UICollectionView!, shouldHighlightItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
+    func loadCurrentChallenges() {
+        let predicate = NSPredicate(format:"isCurrent = true AND alias = 'agameofprivacy'")
+        var query = PFQuery(className:"UserChallengeData", predicate:predicate)
+        // Do any additional setup after loading the view.
+        currentChallengesObjects = query.findObjects() as [PFObject]
+        for object in currentChallengesObjects {
+            var challenge = Challenge(title: object["title"] as String)
+            self.currentChallenges += [challenge]
+            println(self.currentChallenges[0].title)
+        }
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    func collectionView(collectionView: UICollectionView!, shouldSelectItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    func collectionView(collectionView: UICollectionView!, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return false
-    }
-
-    func collectionView(collectionView: UICollectionView!, canPerformAction action: String!, forItemAtIndexPath indexPath: NSIndexPath!, withSender sender: AnyObject!) -> Bool {
-        return false
-    }
-
-    func collectionView(collectionView: UICollectionView!, performAction action: String!, forItemAtIndexPath indexPath: NSIndexPath!, withSender sender: AnyObject!) {
-    
-    }
-    */
 
 }

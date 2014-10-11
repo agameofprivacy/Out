@@ -22,6 +22,7 @@
 		2C1C23B819E87B8A006975DA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B719E87B8A006975DA /* Security.framework */; };
 		2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B919E87B91006975DA /* StoreKit.framework */; };
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
+		2C1C23BE19E8A65A006975DA /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C23BD19E8A65A006975DA /* Challenge.swift */; };
 		2C24F8B819E75C73007FC970 /* RealmObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C24F8B719E75C73007FC970 /* RealmObjects.swift */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		2C1C23B719E87B8A006975DA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2C1C23B919E87B91006975DA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2C1C23BD19E8A65A006975DA /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		2C24F8B719E75C73007FC970 /* RealmObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmObjects.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C1C23BF19E8A661006975DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C1C23BD19E8A65A006975DA /* Challenge.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		2C5D996019E4A9FB00133F59 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 				2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */,
 				2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */,
 				2C5D998E19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift */,
+				2C1C23BF19E8A661006975DA /* Model */,
 				2CAC55ED19E4CFD300663162 /* ChallengeCardCollectionViewCell.swift */,
 			);
 			name = ChallengesTab;
@@ -330,6 +341,7 @@
 				2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */,
 				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */,
+				2C1C23BE19E8A65A006975DA /* Challenge.swift in Sources */,
 				2C5D998F19E4AB4100133F59 /* ChallengesTabCollectionViewController.swift in Sources */,
 				2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
