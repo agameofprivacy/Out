@@ -36,10 +36,6 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
-
-
-        challengesCardNumPageControl.numberOfPages = self.currentChallengesObjects.count
-        challengesCardNumPageControl.currentPage = 0
     }
 
 //    override func viewDidAppear(animated: Bool) {
@@ -66,6 +62,8 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengeCardCollectionViewCell
+        challengesCardNumPageControl.numberOfPages = self.currentChallengesObjects.count
+        challengesCardNumPageControl.currentPage = 0
         
         // Configure the cell
         cell.cardLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?

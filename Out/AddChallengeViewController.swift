@@ -13,16 +13,18 @@ class AddChallengeViewController: UICollectionViewController {
     var challengeModels:[ChallengeModel] = []
     var challengeModelsObjects:[AnyObject] = []
     var filters:[String] = []
-    
+    // TODO: Set filters default so gallery shows all challenges if no filter applied.
+
     @IBOutlet var challengeGalleryCollectionView: UICollectionView!
     @IBOutlet weak var challengeGalleryCardTitleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         var query = PFQuery(className:"Challenge")
-        query.whereKey("tags", containedIn: filters)
+        if filters.count > 0{
+            query.whereKey("tags", containedIn: filters)
+        }
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -45,7 +47,12 @@ class AddChallengeViewController: UICollectionViewController {
         return self.challengeModelsObjects.count
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PickFilters"{
+            let FilterVC:ChallengeFilterTableViewController = segue.destinationViewController.childViewControllers[0] as ChallengeFilterTableViewController
+            FilterVC.filterStrings = self.filters
+        }
+    }
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
@@ -63,5 +70,8 @@ class AddChallengeViewController: UICollectionViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func filterBarButtonItemTapped(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("PickFilters", sender: self)
+    }
 
 }

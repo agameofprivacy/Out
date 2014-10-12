@@ -8,21 +8,20 @@
 
 import UIKit
 
+// TODO: Filters Applied are shown in gallery view
+
 class ChallengeFilterTableViewController: UITableViewController {
 
     
     // Array of tuples of type (Filter Title, [Filter Accessory Items]) for Filters
-    var challengeFilters:[(filterTitle:String, filterDescription:String, filterParameters:[(parameterTitle:String, parameterSelected:Bool)])] = [("Difficulty", "intense, intermediate, or casual", [("Intense", true), ("Intermediate", true), ("Casual", true)]), ("People", "strangers, friends, or family", [("Strangers", true), ("Friends", true), ("Family", true)]), ("Places", "school, work, or home", [("School", true), ("Work", true), ("Home", true)])]
+    var challengeFilters:[(filterTitle:String, filterDescription:String, filterParameters:[(parameterTitle:String, parameterSelected:Bool)])] = [("Difficulty", "intense, intermediate, or casual", [("Intense", false), ("Intermediate", false), ("Casual", false)]), ("People", "strangers, friends, or family", [("Strangers", false), ("Friends", false), ("Family", false)]), ("Places", "school, work, or home", [("School", false), ("Work", false), ("Home", false)])]
     var filterStrings:[String] = []
+
+    
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +60,8 @@ class ChallengeFilterTableViewController: UITableViewController {
         // Configure the cell...
         
         cell.challengeFilterTitleLabel.text = challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle
-        if challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected{
+        
+        if challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected || contains(filterStrings, challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle){
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         else{
@@ -92,6 +92,7 @@ class ChallengeFilterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected = !challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected
+        self.filterStrings = self.filterStrings.filter{($0 != self.challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle)}
         self.tableView.reloadData()
     }
     
