@@ -22,21 +22,14 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let predicate = NSPredicate(format:"isCurrent = true AND alias = '\(PFUser.currentUser().username)'")
-        var query = PFQuery(className:"UserChallengeData", predicate: predicate)
-
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                // The find succeeded.
-                self.currentChallengesObjects = objects
-                self.currentChallengesCardsCollectionView.reloadData()
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
-        }
+        loadCurrentChallenges()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        loadCurrentChallenges()
+    }
+    
 
 //    override func viewDidAppear(animated: Bool) {
 //    }
@@ -74,6 +67,25 @@ class ChallengesTabCollectionViewController: UICollectionViewController {
         challengesCardNumPageControl.currentPage = indexPath.item
 
         return cell
+    }
+    
+    func loadCurrentChallenges(){
+        var queryIsCurrentIsCurrentUser = PFQuery(className:"UserChallengeData")
+        queryIsCurrentIsCurrentUser.whereKey("isCurrent", equalTo:true)
+        queryIsCurrentIsCurrentUser.whereKey("username", equalTo: PFUser.currentUser())
+        queryIsCurrentIsCurrentUser.orderByDescending("createdAt")
+        queryIsCurrentIsCurrentUser.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                self.currentChallengesObjects = objects
+                self.currentChallengesCardsCollectionView.reloadData()
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+
     }
 
     @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {

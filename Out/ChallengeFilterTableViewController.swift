@@ -20,7 +20,7 @@ class ChallengeFilterTableViewController: UITableViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
 
     }
 
