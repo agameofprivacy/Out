@@ -43,6 +43,7 @@ class AddChallengeViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        collectionView!.registerClass(ChallengeGalleryCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeGalleryCard")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -65,19 +66,22 @@ class AddChallengeViewController: UICollectionViewController {
             FilterVC.filterStrings = self.filters
         }
     }
+    
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeGalleryCard", forIndexPath: indexPath) as ChallengeGalleryCollectionViewCell
-
-        cell.challengeGalleryCardTitleLabel.text = challengeObject["title"] as String?
+        cell.titleLabel.text = challengeObject["title"] as String?
+        cell.reasonLabel.text = challengeObject["reason"]![1] as String?
+        cell.introLabel.text = challengeObject["blurb"] as String?
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
 
         return cell
     }
+
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
@@ -91,6 +95,7 @@ class AddChallengeViewController: UICollectionViewController {
             newChallengeModel.saveInBackground()
             self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     @IBAction func closeBarButtonItemTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)

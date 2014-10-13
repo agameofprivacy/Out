@@ -101,7 +101,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8f-wW-p7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="304"/>
+            <point key="canvasLocation" x="1920" y="276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="v9R-Kc-evK">
@@ -140,20 +140,9 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="240"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Challenge Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvV-S8-TpY">
-                                            <rect key="frame" x="16" y="23" width="318" height="60"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="challengeGalleryCardTitleLabel" destination="GvV-S8-TpY" id="aEz-Dv-t7A"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -198,7 +187,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLb-Zv-Hme" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3940" y="-357"/>
+            <point key="canvasLocation" x="4166" y="392"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3v2-ba-nqX">
+            <objects>
+                <viewController id="WmD-jo-65G" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BAk-Ly-rKt"/>
+                        <viewControllerLayoutGuide type="bottom" id="P5S-bb-I1c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fBu-0l-KIq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="03n-xK-KGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4166" y="1122"/>
         </scene>
         <!--Filter-->
         <scene sceneID="sCQ-Ya-k9t">
@@ -260,7 +267,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="4780" y="392"/>
+            <point key="canvasLocation" x="4872" y="392"/>
         </scene>
         <!--Activity-->
         <scene sceneID="f0Z-Hh-9nB">
@@ -295,7 +302,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRk-Vg-Sa7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="1270"/>
+            <point key="canvasLocation" x="1920" y="1434"/>
         </scene>
         <!--People-->
         <scene sceneID="DWF-Dq-mLu">
@@ -322,7 +329,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vKQ-bQ-Xcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="2090"/>
+            <point key="canvasLocation" x="1921" y="2458"/>
         </scene>
         <!--Help-->
         <scene sceneID="WOD-Nb-9gf">
@@ -341,7 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BvZ-by-EL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="2950"/>
+            <point key="canvasLocation" x="1921" y="3450"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="bdI-7U-fsR">
@@ -402,7 +409,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBc-tO-qdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="1270"/>
+            <point key="canvasLocation" x="1109" y="1434"/>
         </scene>
         <!--People-->
         <scene sceneID="YXt-cp-vBa">
@@ -421,7 +428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9a1-lQ-A5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="2090"/>
+            <point key="canvasLocation" x="1109" y="2458"/>
         </scene>
         <!--Help-->
         <scene sceneID="Qwj-ko-ZxG">
@@ -440,7 +447,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Usm-tT-qUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="2950"/>
+            <point key="canvasLocation" x="1109" y="3450"/>
         </scene>
         <!--Out-->
         <scene sceneID="oog-gJ-je5">
@@ -500,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZI-qH-gn1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1187" y="-1580"/>
+            <point key="canvasLocation" x="1921" y="-1908"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="DWC-gG-Ips">
@@ -547,7 +554,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72A-0f-OPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="-1580"/>
+            <point key="canvasLocation" x="2655" y="-1908"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="uvS-1y-Ocp">
@@ -584,7 +591,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDN-TR-uwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="375" y="-1580"/>
+            <point key="canvasLocation" x="1109" y="-1908"/>
         </scene>
     </scenes>
     <resources>
