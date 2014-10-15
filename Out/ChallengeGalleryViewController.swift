@@ -1,64 +1,61 @@
 //
-//  AddChallengeViewController.swift
+//  ChallengeGalleryViewController.swift
 //  Out
 //
-//  Created by Eddie Chen on 10/8/14.
+//  Created by Eddie Chen on 10/14/14.
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 
 import UIKit
 
-extension Array {
-    mutating func removeObjectAtIndexes(indexes: [Int]) {
-        var indexSet = NSMutableIndexSet()
-        
-        for index in indexes {
-            indexSet.addIndex(index)
-        }
-        
-        indexSet.enumerateIndexesWithOptions(.Reverse) {
-            self.removeAtIndex($0.0)
-            return
-        }
-    }
-    
-    mutating func removeObjectAtIndexes(indexes: Int...) {
-        removeObjectAtIndexes(indexes)
-    }
-}
 
-
-class AddChallengeViewController: UICollectionViewController {
+class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     var challengeModels:[ChallengeModel] = []
     var challengeModelsObjects:[AnyObject] = []
     var filters:[String] = []
     var currentChallengesStrings:[String] = []
-
-    // TODO: Set filters default so gallery shows all challenges if no filter applied.
-
-    @IBOutlet var challengeGalleryCollectionView: UICollectionView!
-    @IBOutlet weak var challengeGalleryCardTitleLabel: UILabel!
+    var challengeGallery:UICollectionView!
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    
+    let horizontalSectionInset:CGFloat = 8.0
+    let verticalSectionInset:CGFloat = 12.0
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        collectionView!.registerClass(ChallengeGalleryCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeGalleryCard")
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+        
+        // layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: 200)
+        layout.itemSize = CGSize(width: self.view.frame.size.width - horizontalSectionInset * 2, height: 200)
+        layout.sectionInset.left = horizontalSectionInset
+        layout.sectionInset.right = horizontalSectionInset
+        layout.sectionInset.top = verticalSectionInset
+        layout.sectionInset.bottom = verticalSectionInset
+
+        challengeGallery = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, UIScreen.mainScreen().bounds.origin.y, self.view.frame.size.width, UIScreen.mainScreen().bounds.size.height), collectionViewLayout: layout)
+
+        challengeGallery.autoresizesSubviews = true
+        challengeGallery!.dataSource = self
+        challengeGallery!.delegate = self
+        challengeGallery!.registerClass(ChallengeGalleryCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeGalleryCard")
+        challengeGallery!.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        
+        self.view.addSubview(challengeGallery!)
+
         loadAvailableChallenges()
     }
+    
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.challengeModelsObjects.count
+    
+    override func viewDidAppear(animated: Bool) {
+        loadAvailableChallenges()
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickFilters"{
@@ -67,35 +64,31 @@ class AddChallengeViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.challengeModelsObjects.count
+    }
 
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeGalleryCard", forIndexPath: indexPath) as ChallengeGalleryCollectionViewCell
         cell.titleLabel.text = challengeObject["title"] as String?
-        cell.reasonLabel.text = challengeObject["reason"]![1] as String?
+        var reasonType:String = challengeObject["reason"]![0] as String
+        var reasonText:String = challengeObject["reason"]![1] as String
+        cell.reasonLabel.text = "\(reasonType): \(reasonText)"
         cell.introLabel.text = challengeObject["blurb"] as String?
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
-
         return cell
     }
 
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
-        var newChallengeModel = PFObject(className: "UserChallengeData")
-            newChallengeModel["alias"] = PFUser.currentUser().username
-            newChallengeModel["title"] = selectedChallengeObject["title"]
-            newChallengeModel["version"] = selectedChallengeObject["version"]
-            newChallengeModel["isCurrent"] = true
-            newChallengeModel["username"] = PFUser.currentUser()
-
-            newChallengeModel.saveInBackground()
-            self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     
     @IBAction func closeBarButtonItemTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -105,6 +98,19 @@ class AddChallengeViewController: UICollectionViewController {
         performSegueWithIdentifier("PickFilters", sender: self)
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
+        var newChallengeModel = PFObject(className: "UserChallengeData")
+        newChallengeModel["alias"] = PFUser.currentUser().username
+        newChallengeModel["title"] = selectedChallengeObject["title"]
+        newChallengeModel["version"] = selectedChallengeObject["version"]
+        newChallengeModel["isCurrent"] = true
+        newChallengeModel["username"] = PFUser.currentUser()
+        
+        newChallengeModel.saveInBackground()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     func loadAvailableChallenges(){
         self.challengeModelsObjects.removeAll(keepCapacity: true)
         self.currentChallengesStrings.removeAll(keepCapacity: true)
@@ -134,7 +140,7 @@ class AddChallengeViewController: UICollectionViewController {
                             }
                             self.challengeModelsObjects.removeObjectAtIndexes(indexForToRemove)
                         }
-                        self.challengeGalleryCollectionView.reloadData()
+                        self.challengeGallery!.reloadData()
                     } else {
                         // Log details of the failure
                         NSLog("Error: %@ %@", error, error.userInfo!)
@@ -145,9 +151,25 @@ class AddChallengeViewController: UICollectionViewController {
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
+    }
+
+}
+
+extension Array {
+    mutating func removeObjectAtIndexes(indexes: [Int]) {
+        var indexSet = NSMutableIndexSet()
         
+        for index in indexes {
+            indexSet.addIndex(index)
+        }
         
+        indexSet.enumerateIndexesWithOptions(.Reverse) {
+            self.removeAtIndex($0.0)
+            return
+        }
     }
     
-    
+    mutating func removeObjectAtIndexes(indexes: Int...) {
+        removeObjectAtIndexes(indexes)
+    }
 }

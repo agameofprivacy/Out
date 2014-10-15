@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <scenes>
         <!--Dashboard-->
@@ -35,7 +35,7 @@
             <objects>
                 <collectionViewController id="3vs-v9-iKd" customClass="ChallengesTabCollectionViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mEf-MW-5eP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="FhU-zS-UAO" customClass="ChallengeCardsCollectionViewFlowLayout">
@@ -45,7 +45,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="9xk-ZN-uRO">
-                            <rect key="frame" x="-138" y="-260" width="600" height="1000"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-Qa-oJO">
@@ -88,12 +88,10 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wz3-Ph-eh2">
                             <connections>
                                 <action selector="addChallengeBarButtonItemTapped:" destination="3vs-v9-iKd" id="754-Tz-Pey"/>
-                                <segue destination="AgA-wA-34m" kind="presentation" identifier="" id="ujI-1k-vev"/>
+                                <segue destination="OBZ-uH-Sxv" kind="presentation" id="tcT-ox-VK4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="1000"/>
                     <connections>
                         <outlet property="challengesCardNumPageControl" destination="8Li-Qa-oJO" id="QpX-Yz-hXq"/>
                         <outlet property="currentChallengesCardsCollectionView" destination="mEf-MW-5eP" id="q7q-qD-4eH"/>
@@ -101,77 +99,38 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8f-wW-p7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="276"/>
+            <point key="canvasLocation" x="1936" y="392"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="v9R-Kc-evK">
+        <!--Add Challenge-->
+        <scene sceneID="Nw3-WN-56N">
             <objects>
-                <navigationController id="AgA-wA-34m" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mis-7w-B58">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="dfD-jr-TlB" kind="relationship" relationship="rootViewController" id="uTv-I5-77q"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oWg-x8-FSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2940" y="392"/>
-        </scene>
-        <!--AddChallengeViewController-->
-        <scene sceneID="gPZ-vr-xhB">
-            <objects>
-                <collectionViewController title="AddChallengeViewController" id="dfD-jr-TlB" customClass="AddChallengeViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="tU0-as-xvs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="2Nx-Bb-y0x" customClass="ChallengeGalleryViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3w6-8o-qJs"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ine-PY-05R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nbI-dj-TGG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.89644491790000003" green="0.89644491790000003" blue="0.89644491790000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="0.0" id="KHU-xt-ynC">
-                            <size key="itemSize" width="350" height="240"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="12" maxX="0.0" maxY="15"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChallengeGalleryCard" id="oes-ll-81j" customClass="ChallengeGalleryCollectionViewCell" customModule="Out" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="240"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="dfD-jr-TlB" id="UYA-GV-fmP"/>
-                            <outlet property="delegate" destination="dfD-jr-TlB" id="5NC-xD-0Yb"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Add Challenges" id="x3G-Qd-FYA">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="vuj-xk-ja9">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Challenge" id="hPJ-Uo-xzR">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="vWk-p6-MCX">
                             <connections>
-                                <action selector="closeBarButtonItemTapped:" destination="dfD-jr-TlB" id="VUj-Cy-eAZ"/>
+                                <action selector="closeBarButtonItemTapped:" destination="2Nx-Bb-y0x" id="StW-Nc-dGY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="6wi-Qo-3Ky">
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="hxc-aw-gUn">
                             <connections>
-                                <action selector="filterBarButtonItemTapped:" destination="dfD-jr-TlB" id="z7B-V7-3iV"/>
-                                <segue destination="zis-Kc-pkj" kind="presentation" identifier="PickFilters" id="0DC-vX-6ZX"/>
+                                <action selector="filterBarButtonItemTapped:" destination="2Nx-Bb-y0x" id="A4J-Ji-riV"/>
+                                <segue destination="zis-Kc-pkj" kind="presentation" identifier="PickFilters" id="NVY-yD-IOH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="667"/>
-                    <connections>
-                        <outlet property="challengeGalleryCollectionView" destination="tU0-as-xvs" id="e5k-pH-quT"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="orB-Ri-PqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2HK-dY-MBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3559.5" y="425.5"/>
+            <point key="canvasLocation" x="3499" y="392"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VIB-P0-ncc">
@@ -187,7 +146,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLb-Zv-Hme" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4166" y="392"/>
+            <point key="canvasLocation" x="4179" y="392"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3v2-ba-nqX">
@@ -367,7 +326,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5N-ae-jsc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="376"/>
+            <point key="canvasLocation" x="1119" y="392"/>
         </scene>
         <!--Out Tab Bar View Controller-->
         <scene sceneID="zRy-sR-0iz">
@@ -462,17 +421,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="alias" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-jB-ebr">
-                                <rect key="frame" x="16" y="135" width="260" height="30"/>
+                                <rect key="frame" x="15" y="154" width="345" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DsX-fa-683">
-                                <rect key="frame" x="16" y="182" width="260" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                <rect key="frame" x="15" y="201" width="345" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlm-bk-aNQ">
-                                <rect key="frame" x="35" y="271" width="225" height="30"/>
+                                <rect key="frame" x="15" y="323" width="345" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Create an Account Anonymously">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -481,13 +442,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login or create an account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yB-oU-aTk">
-                                <rect key="frame" x="16" y="83" width="206" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="15" y="116" width="255" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UwH-iY-4GC">
-                                <rect key="frame" x="127" y="233" width="38" height="30"/>
+                                <rect key="frame" x="15" y="280" width="345" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -592,6 +554,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDN-TR-uwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1109" y="-1908"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0vB-jh-SJD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OBZ-uH-Sxv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dhT-7s-rHz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2Nx-Bb-y0x" kind="relationship" relationship="rootViewController" id="Il6-GE-DEY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GMf-sy-cCM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2683" y="392"/>
         </scene>
     </scenes>
     <resources>

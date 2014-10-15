@@ -21,32 +21,24 @@ class ChallengeGalleryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.backgroundColor = UIColor.whiteColor()
-
+        var labelMarginFromCellEdge = 15
+        
         titleLabel = UILabel(frame: CGRectZero)
         titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         titleLabel.textAlignment = .Left
         titleLabel.numberOfLines = 0
-//        var borderWidth:CGFloat = 1.5
-//        var bottomBorder:CALayer = CALayer()
-//        
-//        bottomBorder.borderColor = UIColor.blackColor().CGColor
-//        bottomBorder.borderWidth = borderWidth
-//        bottomBorder.frame = CGRectMake(borderWidth * -1.0, borderWidth * -1.0, CGRectGetWidth(titleLabel.frame) + borderWidth * 2.0, CGRectGetHeight(titleLabel.frame) - borderWidth * 2.0)
-//        titleLabel.layer.addSublayer(bottomBorder)
-
-        titleLabel.preferredMaxLayoutWidth = 300
+        titleLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
         contentView.addSubview(titleLabel)
-
-        
 
         reasonLabel = UILabel(frame: CGRectZero)
         reasonLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         reasonLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
         reasonLabel.textAlignment = .Left
         reasonLabel.numberOfLines = 0
-        reasonLabel.preferredMaxLayoutWidth = 300
+        reasonLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
         contentView.addSubview(reasonLabel)
         
         introLabel = UILabel(frame: CGRectZero)
@@ -54,40 +46,21 @@ class ChallengeGalleryCollectionViewCell: UICollectionViewCell {
         introLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         introLabel.textAlignment = .Left
         introLabel.numberOfLines = 0
-        introLabel.preferredMaxLayoutWidth = 300
+        introLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
         contentView.addSubview(introLabel)
         
         let viewsDictionary = ["titleLabel":titleLabel, "reasonLabel":reasonLabel, "introLabel":introLabel]
-        let metricsDictionary = ["hSpaceFromCellEdge": 18, "topSpaceFromCellEdge": 30]
-        let titleLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[titleLabel(>=240)]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-        let reasonLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[reasonLabel(>=240)]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-        let introLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[introLabel(>=240)]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
+        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "topSpaceFromCellEdge": (labelMarginFromCellEdge - 2) * 1, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 3) * 2.5, "shortVerticalSpace": 4]
+        
+        let titleLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[titleLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
+        let reasonLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[reasonLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
+        let introLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[introLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
 
-        let label_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topSpaceFromCellEdge-[titleLabel(>=20)]-[reasonLabel(>=20)]-hSpaceFromCellEdge-[introLabel(>=20)]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let label_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[titleLabel(<=100)]-0-[reasonLabel(>=0)]-hSpaceFromCellEdge-[introLabel(>=0)]-bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
         contentView.addConstraints(titleLabel_constraint_H)
         contentView.addConstraints(reasonLabel_constraint_H)
         contentView.addConstraints(introLabel_constraint_H)
         contentView.addConstraints(label_constraint_V)
     }
-
-    
-//
-//    
-//    reasonLabel = UILabel(frame: CGRectZero)
-//    reasonLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-//    reasonLabel.textAlignment = .Left
-//    self.contentView.addSubview(reasonLabel)
-//    self.backgroundColor = UIColor.whiteColor()
-
-    
-    func makeLayout(){
-    }
-
-    // MARK: Title Label
-    
-
-    
-    // MARK: Constraints
-    
-    
 }

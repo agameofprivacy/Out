@@ -39,7 +39,7 @@ class ChallengeFilterTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ApplyFilters"{
-            let galleryVC:AddChallengeViewController = segue.destinationViewController.childViewControllers[0] as AddChallengeViewController
+            let galleryVC:ChallengeGalleryViewController = segue.destinationViewController.childViewControllers[0] as ChallengeGalleryViewController
             galleryVC.filters = self.filterStrings
         }
     }
@@ -83,9 +83,8 @@ class ChallengeFilterTableViewController: UITableViewController {
                 }
             }
         }
-        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).filters).removeAll(keepCapacity: true)
-        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).filters) += self.filterStrings
-        (self.parentViewController?.presentingViewController?.childViewControllers[0] as AddChallengeViewController).viewDidLoad()
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as ChallengeGalleryViewController).filters).removeAll(keepCapacity: true)
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as ChallengeGalleryViewController).filters) += self.filterStrings
         dismissViewControllerAnimated(true, completion: nil)
     }
         // Delegate Methods

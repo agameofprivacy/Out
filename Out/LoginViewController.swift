@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        aliasTextField.becomeFirstResponder()
         var currentUser = PFUser.currentUser()
         // Do any additional setup after loading the view.
         if currentUser != nil {
