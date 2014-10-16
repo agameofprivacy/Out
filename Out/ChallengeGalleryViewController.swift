@@ -9,24 +9,25 @@
 import UIKit
 
 
-class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
+    var challengeGallery:UICollectionView!
+    let layout: ChallengeGalleryCollectionViewFlowLayout = ChallengeGalleryCollectionViewFlowLayout()
+    let horizontalSectionInset:CGFloat = 8.0
+    let verticalSectionInset:CGFloat = 12.0
+    
     var challengeModels:[ChallengeModel] = []
     var challengeModelsObjects:[AnyObject] = []
     var filters:[String] = []
     var currentChallengesStrings:[String] = []
-    var challengeGallery:UICollectionView!
-    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
-    let horizontalSectionInset:CGFloat = 8.0
-    let verticalSectionInset:CGFloat = 12.0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: 200)
-        layout.itemSize = CGSize(width: self.view.frame.size.width - horizontalSectionInset * 2, height: 200)
+        layout.itemSize = CGSize(width: self.view.frame.size.width - horizontalSectionInset * 2, height: 210)
         layout.sectionInset.left = horizontalSectionInset
         layout.sectionInset.right = horizontalSectionInset
         layout.sectionInset.top = verticalSectionInset
@@ -71,7 +72,6 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.challengeModelsObjects.count
     }
-
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         

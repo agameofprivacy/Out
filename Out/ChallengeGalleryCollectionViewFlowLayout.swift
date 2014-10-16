@@ -8,6 +8,10 @@
 
 import UIKit
 
-class ChallengeGalleryCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
+class ChallengeGalleryCollectionViewFlowLayout: UICollectionViewFlowLayout, UICollectionViewDelegateFlowLayout{
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 359, height: 210)
+    }
+
 }

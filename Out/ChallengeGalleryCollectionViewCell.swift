@@ -23,7 +23,7 @@ class ChallengeGalleryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.whiteColor()
-        var labelMarginFromCellEdge = 15
+        var labelMarginFromCellEdge = 20
         
         titleLabel = UILabel(frame: CGRectZero)
         titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -50,13 +50,13 @@ class ChallengeGalleryCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(introLabel)
         
         let viewsDictionary = ["titleLabel":titleLabel, "reasonLabel":reasonLabel, "introLabel":introLabel]
-        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "topSpaceFromCellEdge": (labelMarginFromCellEdge - 2) * 1, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 3) * 2.5, "shortVerticalSpace": 4]
+        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "topSpaceFromCellEdge": (labelMarginFromCellEdge - 2) * 1, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 3) * 1.8, "shortVerticalSpace": 4]
         
         let titleLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[titleLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
         let reasonLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[reasonLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
         let introLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[introLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
 
-        let label_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[titleLabel(<=100)]-0-[reasonLabel(>=0)]-hSpaceFromCellEdge-[introLabel(>=0)]-bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let label_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[titleLabel(>=0)]-5-[reasonLabel(>=0)]-hSpaceFromCellEdge-[introLabel(>=0)]-bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(titleLabel_constraint_H)
         contentView.addConstraints(reasonLabel_constraint_H)

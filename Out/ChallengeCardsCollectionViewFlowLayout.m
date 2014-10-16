@@ -41,7 +41,8 @@
     CGSize canvasSize = self.collectionView.frame.size;
     canvasSize.height -= 114;
     
-    NSUInteger rowCount = (canvasSize.height - self.itemSize.height) / (self.itemSize.height + self.minimumInteritemSpacing) + 1;
+//    NSUInteger rowCount = (canvasSize.height - self.itemSize.height) / (self.itemSize.height + self.minimumInteritemSpacing) + 1;
+    NSUInteger rowCount = 1;
     NSUInteger columnCount = (canvasSize.width - self.itemSize.width) / (self.itemSize.width + self.minimumLineSpacing) + 1;
     
     CGFloat pageMarginX =(canvasSize.width - columnCount * self.itemSize.width - (columnCount > 1 ? (columnCount - 1) * self.minimumLineSpacing : 0)) / 2.0f;
@@ -64,7 +65,15 @@
     {
         cellFrame.origin.x += page * canvasSize.width;
     }
-    
+//    NSLog(@"Cell Frame Height: %f", cellFrame.size.height);
+//    NSLog(@"Cell Frame Width: %f", cellFrame.size.width);
+//    NSLog(@"Canvas Width: %f", canvasSize.width);
+//    NSLog(@"Canvas Height: %f", canvasSize.height);
+//    NSLog(@"Item Height: %f", self.itemSize.height);
+//    NSLog(@"Item Width: %f", self.itemSize.width);
+//    NSLog(@"Section Inset Top: %f", self.sectionInset.top);
+//    NSLog(@"Section Inset Bottom: %f", self.sectionInset.bottom);
+//    NSLog(@"Collection View Height: %f", self.collectionViewContentSize.height);
     return cellFrame;
 }
 

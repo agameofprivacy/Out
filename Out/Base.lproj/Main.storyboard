@@ -30,77 +30,6 @@
             </objects>
             <point key="canvasLocation" x="1921" y="-888"/>
         </scene>
-        <!--Challenges-->
-        <scene sceneID="GLI-TE-QfG">
-            <objects>
-                <collectionViewController id="3vs-v9-iKd" customClass="ChallengesTabCollectionViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="mEf-MW-5eP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="FhU-zS-UAO" customClass="ChallengeCardsCollectionViewFlowLayout">
-                            <size key="itemSize" width="350" height="480"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="9xk-ZN-uRO">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-Qa-oJO">
-                                    <rect key="frame" x="87" y="575" width="201" height="37"/>
-                                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </pageControl>
-                            </subviews>
-                            <color key="backgroundColor" red="0.89644491792929293" green="0.89644491792929293" blue="0.89644491792929293" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ChallengeCard" id="r02-yh-gkw" customClass="ChallengeCardCollectionViewCell" customModule="Out" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="480"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl5-a6-ZmP">
-                                            <rect key="frame" x="22" y="72" width="307" height="91"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="cardLabel" destination="rl5-a6-ZmP" id="0Hq-4C-PxJ"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="3vs-v9-iKd" id="6jJ-47-Vg5"/>
-                            <outlet property="delegate" destination="3vs-v9-iKd" id="6gB-MR-GmS"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Challenges" id="BYG-5E-6Jt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="wz3-Ph-eh2">
-                            <connections>
-                                <action selector="addChallengeBarButtonItemTapped:" destination="3vs-v9-iKd" id="754-Tz-Pey"/>
-                                <segue destination="OBZ-uH-Sxv" kind="presentation" id="tcT-ox-VK4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="challengesCardNumPageControl" destination="8Li-Qa-oJO" id="QpX-Yz-hXq"/>
-                        <outlet property="currentChallengesCardsCollectionView" destination="mEf-MW-5eP" id="q7q-qD-4eH"/>
-                    </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S8f-wW-p7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1936" y="392"/>
-        </scene>
         <!--Add Challenge-->
         <scene sceneID="Nw3-WN-56N">
             <objects>
@@ -148,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="4179" y="392"/>
         </scene>
-        <!--View Controller-->
+        <!--Challenges-->
         <scene sceneID="3v2-ba-nqX">
             <objects>
-                <viewController id="WmD-jo-65G" sceneMemberID="viewController">
+                <viewController id="WmD-jo-65G" customClass="ChallengesTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BAk-Ly-rKt"/>
                         <viewControllerLayoutGuide type="bottom" id="P5S-bb-I1c"/>
@@ -161,16 +90,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Challenges" id="ycy-e3-3Xn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LaI-kS-ZYq">
+                            <connections>
+                                <segue destination="OBZ-uH-Sxv" kind="presentation" id="f75-gr-uxH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="03n-xK-KGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4166" y="1122"/>
+            <point key="canvasLocation" x="1802" y="376"/>
         </scene>
         <!--Filter-->
         <scene sceneID="sCQ-Ya-k9t">
             <objects>
                 <tableViewController id="JUM-1N-qWW" customClass="ChallengeFilterTableViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="54" sectionHeaderHeight="10" sectionFooterHeight="10" id="0m6-V8-5Xs">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="49" sectionHeaderHeight="10" sectionFooterHeight="10" id="0m6-V8-5Xs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -181,8 +117,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PQ-0i-iNS">
-                                            <rect key="frame" x="15" y="16" width="210" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="16" y="14" width="210" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -309,25 +245,6 @@
             </objects>
             <point key="canvasLocation" x="1921" y="3450"/>
         </scene>
-        <!--Challenges-->
-        <scene sceneID="bdI-7U-fsR">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bKb-km-JvX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Challenges" selectedImage="challengesSelected" id="05Z-e4-hxu"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zga-2l-jEk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="3vs-v9-iKd" kind="relationship" relationship="rootViewController" id="gpB-mH-laf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b5N-ae-jsc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1119" y="392"/>
-        </scene>
         <!--Out Tab Bar View Controller-->
         <scene sceneID="zRy-sR-0iz">
             <objects>
@@ -341,7 +258,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="g6S-b5-zB0" kind="relationship" relationship="viewControllers" id="VQS-mb-PK2"/>
-                        <segue destination="bKb-km-JvX" kind="relationship" relationship="viewControllers" id="Xg9-oL-RX4"/>
+                        <segue destination="MgJ-H1-1rM" kind="relationship" relationship="viewControllers" id="9RT-d4-34I"/>
                         <segue destination="kRB-pn-2ni" kind="relationship" relationship="viewControllers" id="vfc-T0-drK"/>
                         <segue destination="DlD-eR-RLe" kind="relationship" relationship="viewControllers" id="8uw-aq-rfE"/>
                         <segue destination="wpT-2B-Svu" kind="relationship" relationship="viewControllers" id="afN-Ve-an4"/>
@@ -349,7 +266,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UI3-hg-7fl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="376"/>
+            <point key="canvasLocation" x="165" y="376"/>
         </scene>
         <!--Activity-->
         <scene sceneID="Kg8-Bn-xYi">
@@ -423,13 +340,13 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="alias" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-jB-ebr">
                                 <rect key="frame" x="15" y="154" width="345" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DsX-fa-683">
                                 <rect key="frame" x="15" y="201" width="345" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlm-bk-aNQ">
                                 <rect key="frame" x="15" y="323" width="345" height="30"/>
@@ -573,9 +490,25 @@
             </objects>
             <point key="canvasLocation" x="2683" y="392"/>
         </scene>
+        <!--Challenges-->
+        <scene sceneID="eJl-LS-9ga">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MgJ-H1-1rM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Challenges" id="Qtj-mW-tP1"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bb5-AG-pts">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WmD-jo-65G" kind="relationship" relationship="rootViewController" id="r0S-xP-9DA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="llv-bl-hB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="990" y="376"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="challengesSelected" width="25" height="25"/>
-    </resources>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
