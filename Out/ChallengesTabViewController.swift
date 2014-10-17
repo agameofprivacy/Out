@@ -69,7 +69,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
         cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
-        cell.subtitleLabel.text = "hello"
+        cell.subtitleLabel.text = "this is where step titles go"
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
         
         

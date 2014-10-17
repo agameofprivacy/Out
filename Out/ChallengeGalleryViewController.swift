@@ -16,7 +16,6 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
     let horizontalSectionInset:CGFloat = 8.0
     let verticalSectionInset:CGFloat = 12.0
     
-    var challengeModels:[ChallengeModel] = []
     var challengeModelsObjects:[AnyObject] = []
     var filters:[String] = []
     var currentChallengesStrings:[String] = []

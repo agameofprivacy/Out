@@ -20,7 +20,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     let titleSeparator:UIView!
     let subtitleLabel:UILabel!
     let canvasTableView:UITableView!
-    let nextStepButton:UIButton!
+    let nextStepButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
     
     let cardInset:CGFloat = 20
     
@@ -53,34 +53,49 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.backgroundColor = UIColor(red:0.995, green:0.995, blue:0.995, alpha:1)
         self.canvasTableView.showsVerticalScrollIndicator = true
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
+        self.canvasTableView.registerClass(TextBlockTableViewCell.self, forCellReuseIdentifier: "TextBlockTableViewCell")
         self.canvasTableView.separatorStyle = .None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
-        self.canvasTableView.rowHeight = 80
+        self.canvasTableView.rowHeight = UITableViewAutomaticDimension
+        self.canvasTableView.estimatedRowHeight = 200
         contentView.addSubview(canvasTableView)
         
-        self.nextStepButton = UIButton(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40))
+        self.nextStepButton.frame = CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40)
         self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
         self.nextStepButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.nextStepButton.titleLabel!.font = UIFont(name: "UIFontTextStyleHeadline", size: CGFloat(30.0))
         self.nextStepButton.userInteractionEnabled = true
-        self.nextStepButton.showsTouchWhenHighlighted = true
+        self.nextStepButton.layer.borderWidth = 1
+        self.nextStepButton.layer.borderColor = UIColor.blackColor().CGColor
+        self.nextStepButton.layer.cornerRadius = 6
+
         contentView.addSubview(nextStepButton)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var  cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
-        cell.mediaTitle.text = "Hello"
+        if indexPath.item % 2 == 0{
+            var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
+            cell.mediaTitle.text = "The Normal Heart"
+            cell.mediaTimes.text = "2:10pm 7:00pm 9:30pm 2:10pm 7:00pm 9:30pm"
+            cell.mediaVenue.text = "HBO"
+            cell.mediaPreview.image = UIImage(named: "ruffalonormalheart")
+            return cell
+        }
+    
+        var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
+        cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
         return cell
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
     
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 200
     }
 
 }
