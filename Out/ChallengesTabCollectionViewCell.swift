@@ -8,60 +8,79 @@
 
 import UIKit
 
-class ChallengesTabCollectionViewCell: UICollectionViewCell {
+class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITableViewDelegate {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     // Mark: UI Elements Declarations
+    
+    let titleLabel:UILabel!
+    let titleSeparator:UIView!
+    let subtitleLabel:UILabel!
+    let canvasTableView:UITableView!
+    let nextStepButton:UIButton!
+    
+    let cardInset:CGFloat = 20
+    
 //    let titleLabel:UILabel!
 //    let reasonLabel:UILabel!
 //    let introLabel:UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.backgroundColor = UIColor.whiteColor()
-//        var labelMarginFromCellEdge = 20
-//        
-//        titleLabel = UILabel(frame: CGRectZero)
-//        titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-//        titleLabel.textAlignment = .Left
-//        titleLabel.numberOfLines = 0
-//        titleLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
-//        contentView.addSubview(titleLabel)
-//        
-//        reasonLabel = UILabel(frame: CGRectZero)
-//        reasonLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        reasonLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
-//        reasonLabel.textAlignment = .Left
-//        reasonLabel.numberOfLines = 0
-//        reasonLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
-//        contentView.addSubview(reasonLabel)
-//        
-//        introLabel = UILabel(frame: CGRectZero)
-//        introLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        introLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-//        introLabel.textAlignment = .Left
-//        introLabel.numberOfLines = 0
-//        introLabel.preferredMaxLayoutWidth = self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)
-//        contentView.addSubview(introLabel)
-//        
-//        let viewsDictionary = ["titleLabel":titleLabel, "reasonLabel":reasonLabel, "introLabel":introLabel]
-//        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "topSpaceFromCellEdge": (labelMarginFromCellEdge - 2) * 1, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 3) * 1.8, "shortVerticalSpace": 4]
-//        
-//        let titleLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[titleLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-//        let reasonLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[reasonLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-//        let introLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-hSpaceFromCellEdge-[introLabel(==\(self.bounds.width - CGFloat(labelMarginFromCellEdge * 2)))]-hSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeading, metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        let label_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[titleLabel(>=0)]-5-[reasonLabel(>=0)]-hSpaceFromCellEdge-[introLabel(>=0)]-bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        contentView.addConstraints(titleLabel_constraint_H)
-//        contentView.addConstraints(reasonLabel_constraint_H)
-//        contentView.addConstraints(introLabel_constraint_H)
-//        contentView.addConstraints(label_constraint_V)
+        
+        self.titleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset, self.bounds.size.width - cardInset * 2, 30))
+        self.titleLabel.numberOfLines = 0
+        self.titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        self.titleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
+        contentView.addSubview(titleLabel)
+        
+        self.titleSeparator = UIView(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30, self.bounds.size.width - cardInset * 2, 2))
+        self.titleSeparator.backgroundColor = UIColor.blackColor()
+        contentView.addSubview(titleSeparator)
+        
+        self.subtitleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2, self.bounds.size.width - cardInset * 2, 30))
+        self.subtitleLabel.numberOfLines = 0
+        self.subtitleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.subtitleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
+        contentView.addSubview(subtitleLabel)
+        
+        self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
+        self.canvasTableView.backgroundColor = UIColor(red:0.995, green:0.995, blue:0.995, alpha:1)
+        self.canvasTableView.showsVerticalScrollIndicator = true
+        self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
+        self.canvasTableView.separatorStyle = .None
+        self.canvasTableView.dataSource = self
+        self.canvasTableView.delegate = self
+        self.canvasTableView.rowHeight = 80
+        contentView.addSubview(canvasTableView)
+        
+        self.nextStepButton = UIButton(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40))
+        self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
+        self.nextStepButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        self.nextStepButton.userInteractionEnabled = true
+        self.nextStepButton.showsTouchWhenHighlighted = true
+        contentView.addSubview(nextStepButton)
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var  cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
+        cell.mediaTitle.text = "Hello"
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 100
     }
 
 }

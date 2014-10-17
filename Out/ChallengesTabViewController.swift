@@ -15,7 +15,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     let layout = ChallengeCardsCollectionViewFlowLayout()
     
     var currentChallengesObjects:[AnyObject] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
@@ -35,6 +35,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cardNumberPageControl.backgroundColor = UIColor.clearColor()
         cardNumberPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
         cardNumberPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
+        cardNumberPageControl.userInteractionEnabled = false
         self.view.addSubview(currentChallengesCardsCollectionView)
         self.view.addSubview(cardNumberPageControl)
         loadCurrentChallenges()
@@ -63,12 +64,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengesTabCollectionViewCell
-
-
         // Configure the cell
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+        cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
+        cell.subtitleLabel.text = "hello"
+        cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
+        
         
         
         return cell
@@ -99,8 +102,16 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         
     }
     @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {
-        println("Add Challenge")
+
     }
 
+    
+    func nextStepButtonTapped(sender:UIButton!){
+        var cells = self.currentChallengesCardsCollectionView.visibleCells()
+        var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
+        var itemNumber = indexPath.item
+        println(itemNumber)
+        println(currentChallengesObjects[itemNumber]["title"] as String)
+    }
 
 }
