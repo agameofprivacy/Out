@@ -25,6 +25,7 @@
 		2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B919E87B91006975DA /* StoreKit.framework */; };
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C26941819F1B7DE0088AFD1 /* TextBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */; };
+		2C26941A19F1C9170088AFD1 /* GallerySelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */; };
 		2C543B0419EDC7FC00324C12 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewController.swift */; };
 		2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
@@ -70,6 +71,7 @@
 		2C1C23B919E87B91006975DA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
+		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
 		2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */,
+				2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */,
 				2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */,
 			);
 			name = "Canvas TableViewCells";
@@ -340,6 +343,7 @@
 				2CA1B6E819E72DA600B872F7 /* ChallengeFilterTableViewController.swift in Sources */,
 				2C17111D19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2C0ABBB519EF284A00259B29 /* ChallengesTabViewController.swift in Sources */,
+				2C26941A19F1C9170088AFD1 /* GallerySelectTableViewCell.swift in Sources */,
 				2CA1B6EA19E7323D00B872F7 /* ChallengeFilterTableViewCell.swift in Sources */,
 				2C04D0C219E5BF060091B626 /* OutTabBarViewController.swift in Sources */,
 				2C5D996F19E4A9FB00133F59 /* AppDelegate.swift in Sources */,
@@ -482,7 +486,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -501,7 +505,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

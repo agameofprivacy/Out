@@ -105,6 +105,7 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
         newChallengeModel["version"] = selectedChallengeObject["version"]
         newChallengeModel["isCurrent"] = true
         newChallengeModel["username"] = PFUser.currentUser()
+        newChallengeModel["challenge"] = selectedChallengeObject
         
         newChallengeModel.saveInBackground()
         self.dismissViewControllerAnimated(true, completion: nil)

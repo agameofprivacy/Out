@@ -73,7 +73,7 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         
         let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "longVerticalSpace": (labelMarginFromCellEdge - 6) * 1, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 3) * 1.2, "shortVerticalSpace": 4]
         
-        let mediaPreviewLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[mediaPreview(==80)]-hSpaceFromCellEdge-[mediaTitle(>=0)]-0-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: metricsDictionary, views: viewsDictionary)
+        let mediaPreviewLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[mediaPreview(==80)]-hSpaceFromCellEdge-[mediaTitle(>=0)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
         let mediaPreview_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mediaPreview(<=130)]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
 
