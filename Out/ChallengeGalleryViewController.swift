@@ -13,6 +13,9 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
 
     var challengeGallery:UICollectionView!
     let layout: ChallengeGalleryCollectionViewFlowLayout = ChallengeGalleryCollectionViewFlowLayout()
+
+    var activityIndicator: UIActivityIndicatorView!
+
     let horizontalSectionInset:CGFloat = 8.0
     let verticalSectionInset:CGFloat = 12.0
     
@@ -42,6 +45,14 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
         
         self.view.addSubview(challengeGallery!)
 
+        activityIndicator = UIActivityIndicatorView(frame: self.challengeGallery.frame)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        self.view.addSubview(activityIndicator)
+
+        
         loadAvailableChallenges()
     }
     
@@ -106,12 +117,15 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
         newChallengeModel["isCurrent"] = true
         newChallengeModel["username"] = PFUser.currentUser()
         newChallengeModel["challenge"] = selectedChallengeObject
+        newChallengeModel["currentStepCount"] = 0
         
         newChallengeModel.saveInBackground()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func loadAvailableChallenges(){
+        self.challengeGallery.hidden = true
+        self.activityIndicator.startAnimating()
         self.challengeModelsObjects.removeAll(keepCapacity: true)
         self.currentChallengesStrings.removeAll(keepCapacity: true)
         var query = PFQuery(className:"Challenge")
@@ -141,6 +155,8 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
                             self.challengeModelsObjects.removeObjectAtIndexes(indexForToRemove)
                         }
                         self.challengeGallery!.reloadData()
+                        self.activityIndicator.stopAnimating()
+                        self.challengeGallery.hidden = false
                     } else {
                         // Log details of the failure
                         NSLog("Error: %@ %@", error, error.userInfo!)

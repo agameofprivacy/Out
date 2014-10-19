@@ -13,8 +13,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     var currentChallengesCardsCollectionView: UICollectionView!
     var cardNumberPageControl: UIPageControl!
     let layout = ChallengeCardsCollectionViewFlowLayout()
-    
+    var activityIndicator: UIActivityIndicatorView!
     var currentChallengesObjects:[AnyObject] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cardNumberPageControl.userInteractionEnabled = false
         self.view.addSubview(currentChallengesCardsCollectionView)
         self.view.addSubview(cardNumberPageControl)
+        
+        activityIndicator = UIActivityIndicatorView(frame: self.currentChallengesCardsCollectionView.frame)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        self.view.addSubview(activityIndicator)
         loadCurrentChallenges()
         
     }
@@ -68,12 +76,18 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cell.layer.cornerRadius = 6
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+
+        var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as PFObject
+        var currentChallengeData = self.currentChallengesObjects[indexPath.item] as PFObject
+        cell.currentChallengeModel = challengeModel
+        cell.currentChallengeData = currentChallengeData
         cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
-        cell.subtitleLabel.text = "this is where step titles go"
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
+        var reason = challengeModel["reason"] as [String]
+        var subtitleString = reason[0] + ": " + reason[1]
+        cell.subtitleLabel.text = subtitleString
         
-        
-        
+
         return cell
     }
     
@@ -83,9 +97,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func loadCurrentChallenges(){
+        self.currentChallengesCardsCollectionView.hidden = true
+        self.activityIndicator.startAnimating()
         var queryIsCurrentIsCurrentUser = PFQuery(className:"UserChallengeData")
         queryIsCurrentIsCurrentUser.whereKey("isCurrent", equalTo:true)
         queryIsCurrentIsCurrentUser.whereKey("username", equalTo: PFUser.currentUser())
+        queryIsCurrentIsCurrentUser.includeKey("challenge")
         queryIsCurrentIsCurrentUser.orderByDescending("createdAt")
         queryIsCurrentIsCurrentUser.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -94,12 +111,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 self.currentChallengesObjects = objects
                 self.cardNumberPageControl.numberOfPages = self.currentChallengesObjects.count
                 self.currentChallengesCardsCollectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.currentChallengesCardsCollectionView.hidden = false
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
-        
     }
     @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {
 
@@ -114,4 +132,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         println(currentChallengesObjects[itemNumber]["title"] as String)
     }
 
+    func returnCurrentChallengesObjects() -> [AnyObject]{
+        return self.currentChallengesObjects
+    }
+    
 }
