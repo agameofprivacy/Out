@@ -51,9 +51,6 @@ class ChallengeGalleryViewController: UIViewController, UICollectionViewDataSour
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.view.addSubview(activityIndicator)
-
-        
-        loadAvailableChallenges()
     }
     
 

@@ -26,12 +26,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var currentChallengeModel:PFObject!
     var currentChallengeData:PFObject!
     var test:Int = 0
+    var contentDictionary:[[String:String]]!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
-        self.canvasTableView.backgroundColor = UIColor(red:0.995, green:0.995, blue:0.995, alpha:1)
         self.canvasTableView.showsVerticalScrollIndicator = true
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
         self.canvasTableView.registerClass(TextBlockTableViewCell.self, forCellReuseIdentifier: "TextBlockTableViewCell")
@@ -81,7 +81,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        var currentCellTypes:[String] = currentCellTypeArray[1]
+        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
         var currentCellType = currentCellTypes[indexPath.row]
         
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
@@ -94,10 +95,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         else if currentCellType == "mediaAvailability"{
             var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
-            cell.mediaTitle.text = "The Normal Heart"
-            cell.mediaTimes.text = "2:10pm 7:00pm 9:30pm"
-            cell.mediaVenue.text = "HBO"
-            cell.mediaPreview.image = UIImage(named: "ruffalonormalheart")
+            cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle2"]
+            cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes2"]
+            cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue2"]
+            cell.mediaPreview.image = UIImage(named: contentDictionary[currentStepCount]["mediaPreview2"]!)
             return cell
         }
             
@@ -119,7 +120,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        return currentCellTypeArray[1].count
+        var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
+        if currentStepCount == 0{
+            return 1
+        }
+        else{
+            return currentCellTypeArray[currentStepCount].count
+        }
     }
     
     

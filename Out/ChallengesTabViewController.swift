@@ -46,7 +46,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.view.addSubview(activityIndicator)
-        loadCurrentChallenges()
         
     }
 
@@ -79,13 +78,25 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
         var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as PFObject
         var currentChallengeData = self.currentChallengesObjects[indexPath.item] as PFObject
+        var currentCellContentArray:[[String]] = challengeModel["stepContent"] as [[String]]
+        var contentDictionary:[[String:String]] = self.contentDictionary(currentCellContentArray)
         cell.currentChallengeModel = challengeModel
         cell.currentChallengeData = currentChallengeData
+        cell.contentDictionary = contentDictionary
         cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
-        var reason = challengeModel["reason"] as [String]
-        var subtitleString = reason[0] + ": " + reason[1]
-        cell.subtitleLabel.text = subtitleString
+        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        if currentStepCount == 0{
+            var reason = challengeModel["reason"] as [String]
+            var subtitleString = reason[0] + ": " + reason[1]
+            cell.subtitleLabel.text = subtitleString
+        }
+        else{
+            var currentStepTitles:[String] = challengeModel["stepTitle"] as [String]
+            var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
+            var subtitleString = "Step \(currentStepCount): \(currentStepTitle)"
+            cell.subtitleLabel.text = subtitleString
+        }
         
 
         return cell
@@ -126,14 +137,62 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     
     func nextStepButtonTapped(sender:UIButton!){
         var cells = self.currentChallengesCardsCollectionView.visibleCells()
+        var currentCell = cells[0] as ChallengesTabCollectionViewCell
         var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
         var itemNumber = indexPath.item
-        println(itemNumber)
-        println(currentChallengesObjects[itemNumber]["title"] as String)
+        var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as PFObject
+        var currentStepCount = currentChallengeObject["currentStepCount"] as Int
+        var currentChallengeModel = currentChallengeObject["challenge"] as PFObject
+        if currentStepCount < currentChallengeModel["stepTitle"].count{
+            currentChallengeObject["currentStepCount"] = ++currentStepCount
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                if error == nil{
+                    currentCell.canvasTableView.reloadData()
+                    var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as [String]
+                    var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
+                    var subtitleString:String = "Step \(currentStepCount): \(currentStepTitle)"
+                    currentCell.subtitleLabel.text = subtitleString
+                }
+            }
+        }
+        else{
+            let date = NSDate()
+//            let calendar = NSCalendar.currentCalendar()
+//            let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+//            let hour = components.hour
+//            let minutes = components.minute
+            currentChallengeObject["isCurrent"] = false
+            currentChallengeObject["completedDate"] = date
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                if error == nil{
+                    self.loadCurrentChallenges()
+                }
+            }
+
+        }
+        
     }
 
     func returnCurrentChallengesObjects() -> [AnyObject]{
         return self.currentChallengesObjects
+    }
+
+    func contentDictionary(raw:[[String]]) -> [[String:String]]{
+        var arrayCount = 0
+        var contentDictionary:[[String:String]] = []
+        for contentArrayOfAStep in raw{
+            var indexCount = 0
+            var stepDictionary:[String:String] = ["":""]
+            while(indexCount < raw[arrayCount].count){
+                var key = contentArrayOfAStep[indexCount]
+                var value = contentArrayOfAStep[indexCount + 1]
+                stepDictionary.updateValue(value, forKey: key)
+                indexCount += 2
+            }
+            contentDictionary.append(stepDictionary)
+            arrayCount += 1
+        }
+        return contentDictionary
     }
     
 }
