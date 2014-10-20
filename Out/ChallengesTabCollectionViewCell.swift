@@ -36,6 +36,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
         self.canvasTableView.registerClass(TextBlockTableViewCell.self, forCellReuseIdentifier: "TextBlockTableViewCell")
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
+        self.canvasTableView.registerClass(ChallengeOverviewTableViewCell.self, forCellReuseIdentifier: "ChallengeOverviewTableViewCell")
         self.canvasTableView.separatorStyle = .None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -112,6 +113,20 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         else if currentCellType == "promptAndAnswer"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            return cell
+        }
+        else if currentCellType == "challengeOverview"{
+            var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
+            cell.challengeIntro.text = contentDictionary[currentStepCount]["challengeIntro"]
+            
+            var stepTitlesArray:[String] = self.currentChallengeModel["stepTitle"] as [String]
+            var stepTitles = ""
+            var stepCount = 1
+            for stepTitle in stepTitlesArray{
+                stepTitles += "Step \(stepCount): \(stepTitlesArray[stepCount - 1]) \n"
+                ++stepCount
+            }
+            cell.stepTitles.text = stepTitles
             return cell
         }
         

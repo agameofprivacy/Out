@@ -90,12 +90,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             var reason = challengeModel["reason"] as [String]
             var subtitleString = reason[0] + ": " + reason[1]
             cell.subtitleLabel.text = subtitleString
+            cell.canvasTableView.reloadData()
         }
         else{
             var currentStepTitles:[String] = challengeModel["stepTitle"] as [String]
             var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
             var subtitleString = "Step \(currentStepCount): \(currentStepTitle)"
             cell.subtitleLabel.text = subtitleString
+            cell.canvasTableView.reloadData()
         }
         
 
@@ -166,6 +168,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
                     self.loadCurrentChallenges()
+                    // Challenge Completed, show message
                 }
             }
 
