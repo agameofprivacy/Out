@@ -51,10 +51,10 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
         contentView.addSubview(stepTitles)
         
         let viewsDictionary = ["challengeIntro":challengeIntro, "stepTitles":stepTitles]
-        let metricsDictionary = ["longVerticalSpace":14]
+        let metricsDictionary = ["mediumVerticalSpace":14, "longVerticalSpace":20]
         
         let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeIntro]->=8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-longVerticalSpace-[challengeIntro]-longVerticalSpace-[stepTitles]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-mediumVerticalSpace-[challengeIntro]-longVerticalSpace-[stepTitles]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)
