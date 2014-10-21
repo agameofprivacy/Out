@@ -27,35 +27,42 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
     override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.userInteractionEnabled = false
-        self.backgroundColor = UIColor.clearColor()
-        self.galleryCollectionView = UICollectionView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width - 64, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
-        self.galleryCollectionView.backgroundColor = UIColor.clearColor()
 
+        self.backgroundColor = UIColor.clearColor()
+
+        self.galleryCollectionView = UICollectionView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width - 64, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
+        
         self.galleryCollectionView.registerClass(GallerySelectCollectionViewCell.self, forCellWithReuseIdentifier: "GallerySelectCollectionViewCell")
-        layout.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width - 64, height: UIScreen.mainScreen().bounds.height - 331)
-        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+
+        self.galleryCollectionView.backgroundColor = UIColor.clearColor()
+        self.galleryCollectionView.userInteractionEnabled = true
+        self.galleryCollectionView.pagingEnabled = true
+        self.galleryCollectionView.alwaysBounceHorizontal = true
+        self.galleryCollectionView.directionalLockEnabled = true
+        
         
         self.galleryCollectionView.showsHorizontalScrollIndicator = false
+        
         self.galleryCollectionView.delegate = self
         self.galleryCollectionView.dataSource = self
 
+        layout.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width - 64, height: UIScreen.mainScreen().bounds.height - 331)
+        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+
         contentView.addSubview(self.galleryCollectionView)
-//        var viewsDictionary = ["galleryCollectionView":galleryCollectionView]
-//        var metricsDictionary = ["horizontalPadding": 0]
-//        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-horizontalPadding-[galleryCollectionView]-horizontalPadding-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[galleryCollectionView]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        contentView.addConstraints(horizontalConstraints)
-//        contentView.addConstraints(verticalConstraints)
     }
+    
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell:GallerySelectCollectionViewCell = self.galleryCollectionView.dequeueReusableCellWithReuseIdentifier("GallerySelectCollectionViewCell", forIndexPath: indexPath) as GallerySelectCollectionViewCell
         cell.titleLabel.text = itemTitles[indexPath.item]
         cell.imageImageView.image = UIImage(named: itemImages[indexPath.item])
         cell.blurbLabel.text = itemBlurbs[indexPath.item]
+        self.frame.size = self.galleryCollectionView.contentSize
+
         return cell
     }
+    
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         //#warning Incomplete method implementation -- Return the number of sections

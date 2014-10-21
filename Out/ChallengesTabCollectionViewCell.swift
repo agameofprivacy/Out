@@ -30,7 +30,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
         self.canvasTableView.showsVerticalScrollIndicator = true
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
@@ -43,6 +42,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.delegate = self
         self.canvasTableView.rowHeight = UITableViewAutomaticDimension
         self.canvasTableView.estimatedRowHeight = 200
+
         contentView.addSubview(canvasTableView)
         
         activityIndicator = UIActivityIndicatorView(frame: frame)
@@ -90,7 +90,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
         
         if currentCellType == "gallerySelect"{
+            
             self.canvasTableView.alwaysBounceVertical = false
+            
             var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
             
             var itemTitles:[String] = ["","","","",""]
@@ -120,6 +122,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.itemImages = itemImages
             cell.itemBlurbs = itemBlurbs
             
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+//            var itemWidth = UIScreen.mainScreen().bounds.width - 64.0
+//            var cellWidth = itemWidth * CGFloat(itemTitles.count)
+//            var itemHeight = UIScreen.mainScreen().bounds.height - 331.0
+//            cell.frame.size = CGSize(width: cellWidth, height: itemHeight)
+//            cell.galleryCollectionView.bounds.size = cell.frame.size
             return cell
         }
             
@@ -129,12 +138,14 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes2"]
             cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue2"]
             cell.mediaPreview.image = UIImage(named: contentDictionary[currentStepCount]["mediaPreview2"]!)
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
         else if currentCellType == "textBlock"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
@@ -142,6 +153,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         else if currentCellType == "promptAndAnswer"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
         else if currentCellType == "challengeOverview"{
@@ -157,6 +169,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
                 ++stepCount
             }
             cell.stepTitles.text = stepTitles
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
         

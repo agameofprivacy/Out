@@ -23,7 +23,7 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         imageImageView = UIImageView(frame: CGRectZero)
         imageImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         imageImageView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -34,6 +34,10 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = NSTextAlignment.Center
         titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        titleLabel.preferredMaxLayoutWidth = self.bounds.width
+        if UIScreen.mainScreen().bounds.width == 320{
+            titleLabel.preferredMaxLayoutWidth = self.bounds.width - 10
+        }
         contentView.addSubview(titleLabel)
         
         blurbLabel = UILabel(frame: CGRectZero)
@@ -41,7 +45,11 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         blurbLabel.numberOfLines = 0
         blurbLabel.textAlignment = NSTextAlignment.Left
         blurbLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        blurbLabel.font = UIFont.systemFontOfSize(13.0)
+        blurbLabel.font = UIFont.systemFontOfSize(14.0)
+        blurbLabel.preferredMaxLayoutWidth = self.bounds.width
+        if UIScreen.mainScreen().bounds.width == 320{
+            blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 10
+        }
         contentView.addSubview(blurbLabel)
         
         var viewsDictionary = ["imageImageView":imageImageView, "titleLabel":titleLabel, "blurbLabel":blurbLabel]
@@ -49,7 +57,7 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=10-[imageImageView]->=10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictioanry, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-<=15-[imageImageView(<=200)]->=labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-<=20-[imageImageView(<=240)]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

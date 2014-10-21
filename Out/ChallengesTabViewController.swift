@@ -25,6 +25,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.delegate = self
         currentChallengesCardsCollectionView.dataSource = self
         currentChallengesCardsCollectionView.pagingEnabled = true
+        currentChallengesCardsCollectionView.alwaysBounceHorizontal = true
         layout.itemSize = CGSizeMake(self.view.frame.size.width - 24.0, self.view.frame.size.height - 167)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
@@ -85,11 +86,15 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cell.contentDictionary = contentDictionary
         cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
+        
+        // Check for currentStepCount correctness.
         var currentStepCount = currentChallengeData["currentStepCount"] as Int
         if currentStepCount == 0{
             var reason = challengeModel["reason"] as [String]
             var subtitleString = reason[0] + ": " + reason[1]
             cell.subtitleLabel.text = subtitleString
+            
+            // galleryselect lockup bug here caused by reloadData
             cell.canvasTableView.reloadData()
         }
         else{
@@ -97,7 +102,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
             var subtitleString = "Step \(currentStepCount): \(currentStepTitle)"
             cell.subtitleLabel.text = subtitleString
-            cell.canvasTableView.reloadData()
+            if currentStepCount > 1{
+                cell.canvasTableView.reloadData()
+            }
         }
         
 

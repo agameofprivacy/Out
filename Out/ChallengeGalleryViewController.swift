@@ -26,7 +26,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengesTableView = UITableView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height), style: UITableViewStyle.Plain)
         self.challengesTableView.dataSource = self
         self.challengesTableView.delegate = self
-        
+        self.challengesTableView.alwaysBounceVertical = true
         self.challengesTableView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.challengesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.challengesTableView.rowHeight = UITableViewAutomaticDimension
