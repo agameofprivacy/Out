@@ -51,21 +51,22 @@ class LoginViewController: UIViewController {
         loginButton.addTarget(self, action: "loginButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         loginButton.setTitle("Login", forState: UIControlState.Normal)
         loginButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        loginButton.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         self.view.addSubview(loginButton)
         
         createAccountButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         createAccountButton.addTarget(self, action: "createAccountButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         createAccountButton.setTitle("Create an Account Anonymously", forState: UIControlState.Normal)
         createAccountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-
+        createAccountButton.titleLabel?.font = UIFont.systemFontOfSize(18.0)
         self.view.addSubview(createAccountButton)
         
         let viewsDictionary = ["instructionLabel":instructionLabel, "aliasTextField":aliasTextField, "passwordTextField":passwordTextField, "loginButton":loginButton, "createAccountButton":createAccountButton]
         
-        let metricsDictionary = ["longVerticalSpace": 33,"mediumVerticalSpace": 25, "shortVerticalSpace": 16]
+        let metricsDictionary = ["longVerticalSpace": 33,"mediumVerticalSpace": 20, "shortVerticalSpace": 16]
         
         let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-<=20-[instructionLabel(<=374)]-<=20-|", options: NSLayoutFormatOptions.AlignAllTop, metrics: metricsDictionary, views: viewsDictionary)
-        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=36-[instructionLabel]-mediumVerticalSpace-[aliasTextField]-shortVerticalSpace-[passwordTextField]->=mediumVerticalSpace-[loginButton]-shortVerticalSpace-[createAccountButton]-<=322-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=40-[instructionLabel]-mediumVerticalSpace-[aliasTextField]-shortVerticalSpace-[passwordTextField]->=mediumVerticalSpace-[loginButton]->=4-[createAccountButton]-<=322-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
         

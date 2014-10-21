@@ -20,10 +20,12 @@
 		2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B919E87B91006975DA /* StoreKit.framework */; };
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
+		2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
+		2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2264719F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m */; };
 		2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EA19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift */; };
 		2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */; };
 		2CA435EF19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */; };
@@ -39,17 +41,19 @@
 		2CB170F919F2C7860086C95F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */; };
 		2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */; };
 		2CB170FB19F2C7860086C95F /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */; };
-		2CB170FC19F2C7860086C95F /* ChallengeGalleryCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayout.swift */; };
+		2CB170FC19F2C7860086C95F /* ChallengeGalleryCollectionViewFlowLayoutOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayoutOld.swift */; };
 		2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */; };
 		2CB170FE19F2C7860086C95F /* ChallengeFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */; };
-		2CB170FF19F2C7860086C95F /* ChallengeGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */; };
-		2CB1710019F2C7860086C95F /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewController.swift */; };
+		2CB170FF19F2C7860086C95F /* ChallengeGalleryCollectionViewCellOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCellOld.swift */; };
+		2CB1710019F2C7860086C95F /* ChallengeGalleryViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewControllerOld.swift */; };
 		2CB1710119F2C7860086C95F /* ChallengeCardsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */; };
 		2CB1710219F2C7860086C95F /* ChallengesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ABBB419EF284A00259B29 /* ChallengesTabViewController.swift */; };
 		2CB1710319F2C7860086C95F /* ChallengesTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0ABBB619EF445000259B29 /* ChallengesTabCollectionViewCell.swift */; };
 		2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */; };
 		2CB1710519F2C7860086C95F /* GallerySelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */; };
 		2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */; };
+		2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */; };
+		2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayoutOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewFlowLayoutOld.swift; sourceTree = "<group>"; };
 		2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTabBarViewController.swift; sourceTree = "<group>"; };
 		2C0ABBB419EF284A00259B29 /* ChallengesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabViewController.swift; sourceTree = "<group>"; };
 		2C0ABBB619EF445000259B29 /* ChallengesTabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,7 +89,8 @@
 		2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
-		2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
+		2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewControllerOld.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,12 +100,14 @@
 		2C5D997E19E4A9FB00133F59 /* OutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
-		2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCellOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewCellOld.swift; sourceTree = "<group>"; };
 		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaAvailabilityTableViewCell.swift; sourceTree = "<group>"; };
 		2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewController.swift; sourceTree = "<group>"; };
 		2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFilterTableViewCell.swift; sourceTree = "<group>"; };
+		2CA2264719F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GallerySelectCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		2CA2264A19F5E03F0018266F /* GallerySelectCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GallerySelectCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2CA435EA19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeOverviewTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptAndAnswerTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringValuePickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +119,8 @@
 		2CA435FA19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchWebViewTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FC19F48BE700DC1C6E /* HeroImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroImageTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FE19F48C1000DC1C6E /* BoolPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolPickerTableViewCell.swift; sourceTree = "<group>"; };
+		2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
+		2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,10 +156,13 @@
 		2C26941619F14EFB0088AFD1 /* Canvas TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				2CA2264A19F5E03F0018266F /* GallerySelectCollectionViewFlowLayout.h */,
+				2CA2264719F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m */,
 				2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */,
 				2CA435EA19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift */,
 				2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */,
 				2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */,
+				2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */,
 				2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */,
 				2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */,
 				2CA435F019F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift */,
@@ -262,11 +274,13 @@
 		2CA1B6E619E72D6300B872F7 /* ChallengeGallery */ = {
 			isa = PBXGroup;
 			children = (
-				2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayout.swift */,
+				2C02D08A19EC46A40012F956 /* ChallengeGalleryCollectionViewFlowLayoutOld.swift */,
 				2CA1B6E719E72DA600B872F7 /* ChallengeFilterTableViewController.swift */,
 				2CA1B6E919E7323D00B872F7 /* ChallengeFilterTableViewCell.swift */,
-				2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCell.swift */,
-				2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewController.swift */,
+				2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCellOld.swift */,
+				2C543B0319EDC7FC00324C12 /* ChallengeGalleryViewControllerOld.swift */,
+				2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */,
+				2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */,
 			);
 			name = ChallengeGallery;
 			sourceTree = "<group>";
@@ -371,7 +385,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
+				2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */,
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
 				2CA435FF19F48C1000DC1C6E /* BoolPickerTableViewCell.swift in Sources */,
 				2CB170F919F2C7860086C95F /* LoginViewController.swift in Sources */,
@@ -380,7 +396,8 @@
 				2CB170FB19F2C7860086C95F /* DashboardViewController.swift in Sources */,
 				2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */,
 				2CA435FB19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift in Sources */,
-				2CB170FC19F2C7860086C95F /* ChallengeGalleryCollectionViewFlowLayout.swift in Sources */,
+				2CB170FC19F2C7860086C95F /* ChallengeGalleryCollectionViewFlowLayoutOld.swift in Sources */,
+				2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */,
 				2CA435FD19F48BE700DC1C6E /* HeroImageTableViewCell.swift in Sources */,
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
 				2CA435EF19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift in Sources */,
@@ -388,8 +405,9 @@
 				2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */,
 				2CB170FE19F2C7860086C95F /* ChallengeFilterTableViewCell.swift in Sources */,
 				2CA435F119F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift in Sources */,
-				2CB170FF19F2C7860086C95F /* ChallengeGalleryCollectionViewCell.swift in Sources */,
-				2CB1710019F2C7860086C95F /* ChallengeGalleryViewController.swift in Sources */,
+				2CB170FF19F2C7860086C95F /* ChallengeGalleryCollectionViewCellOld.swift in Sources */,
+				2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */,
+				2CB1710019F2C7860086C95F /* ChallengeGalleryViewControllerOld.swift in Sources */,
 				2CA435F719F48B8100DC1C6E /* CallTableViewCell.swift in Sources */,
 				2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */,
 				2CB1710119F2C7860086C95F /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,

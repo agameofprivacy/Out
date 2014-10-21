@@ -37,6 +37,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(TextBlockTableViewCell.self, forCellReuseIdentifier: "TextBlockTableViewCell")
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.registerClass(ChallengeOverviewTableViewCell.self, forCellReuseIdentifier: "ChallengeOverviewTableViewCell")
+        self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.separatorStyle = .None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -89,8 +90,36 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
         
         if currentCellType == "gallerySelect"{
-            var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-            cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            self.canvasTableView.alwaysBounceVertical = false
+            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
+            
+            var itemTitles:[String] = ["","","","",""]
+            var itemImages:[String] = ["","","","",""]
+            var itemBlurbs:[String] = ["","","","",""]
+            var indexCount = 0
+            for (key, value) in contentDictionary[currentStepCount]{
+                var keyPairArray:[String] = key.componentsSeparatedByString("--")
+                if(keyPairArray.count == 2){
+                    var indexToInsert = keyPairArray[1].toInt()! - 1
+                    if key.hasPrefix("item"){
+                        itemTitles[indexToInsert] = value
+                    }
+                    else if key.hasPrefix("image"){
+                        itemImages[indexToInsert] = value
+                    }
+                    else if key.hasPrefix("blurb"){
+                        itemBlurbs[indexToInsert] = value
+                    }
+                }
+            }
+            itemTitles = itemTitles.filter{$0 != ""}
+            itemImages = itemImages.filter{$0 != ""}
+            itemBlurbs = itemBlurbs.filter{$0 != ""}
+            
+            cell.itemTitles = itemTitles
+            cell.itemImages = itemImages
+            cell.itemBlurbs = itemBlurbs
+            
             return cell
         }
             
@@ -117,6 +146,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "challengeOverview"{
             var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
+            
             cell.challengeIntro.text = contentDictionary[currentStepCount]["challengeIntro"]
             
             var stepTitlesArray:[String] = self.currentChallengeModel["stepTitle"] as [String]

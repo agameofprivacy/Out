@@ -4,3 +4,4 @@
 
 #import <Parse/Parse.h>
 #import "ChallengeCardsCollectionViewFlowLayout.h"
+#import "GallerySelectCollectionViewFlowLayout.h"
