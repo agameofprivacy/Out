@@ -10,6 +10,9 @@ import UIKit
 
 class CautionTextTableViewCell: UITableViewCell {
 
+    var userDataDictionary:[String:String] = ["":""]
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

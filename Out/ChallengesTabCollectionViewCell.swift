@@ -30,7 +30,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
+//        self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
+        self.canvasTableView = UITableView(frame: CGRectZero)
+        self.canvasTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.canvasTableView.showsVerticalScrollIndicator = true
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
         self.canvasTableView.registerClass(TextBlockTableViewCell.self, forCellReuseIdentifier: "TextBlockTableViewCell")
@@ -42,7 +44,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.delegate = self
         self.canvasTableView.rowHeight = UITableViewAutomaticDimension
         self.canvasTableView.estimatedRowHeight = 200
-
+        
         contentView.addSubview(canvasTableView)
         
         activityIndicator = UIActivityIndicatorView(frame: frame)
@@ -53,23 +55,32 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         
         self.backgroundColor = UIColor.whiteColor()
         
-        self.titleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset, self.bounds.size.width - cardInset * 2, 30))
+//        self.titleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset, self.bounds.size.width - cardInset * 2, 30))
+        self.titleLabel = UILabel(frame:CGRectZero)
+        self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.titleLabel.numberOfLines = 0
         self.titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         self.titleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
         contentView.addSubview(titleLabel)
         
-        self.titleSeparator = UIView(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30, self.bounds.size.width - cardInset * 2, 2))
+//        self.titleSeparator = UIView(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30, self.bounds.size.width - cardInset * 2, 2))
+        self.titleSeparator = UIView(frame:CGRectZero)
+        self.titleSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.titleSeparator.backgroundColor = UIColor.blackColor()
         contentView.addSubview(titleSeparator)
         
-        self.subtitleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2, self.bounds.size.width - cardInset * 2, 30))
+
+//        self.subtitleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2, self.bounds.size.width - cardInset * 2, 30))
+        self.subtitleLabel = UILabel(frame:CGRectZero)
+        self.subtitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.subtitleLabel.numberOfLines = 0
         self.subtitleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.subtitleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
         contentView.addSubview(subtitleLabel)
         
-        self.nextStepButton.frame = CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40)
+//        self.nextStepButton.frame = CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40)
+        self.nextStepButton.frame = CGRectZero
+        self.nextStepButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
         self.nextStepButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.nextStepButton.titleLabel!.font = UIFont(name: "UIFontTextStyleHeadline", size: CGFloat(30.0))
@@ -78,6 +89,23 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.nextStepButton.layer.borderColor = UIColor.blackColor().CGColor
         self.nextStepButton.layer.cornerRadius = 6
         contentView.addSubview(nextStepButton)
+        
+        var viewsDictionary = ["canvasTableView":canvasTableView, "titleLabel":titleLabel, "titleSeparator":titleSeparator, "subtitleLabel":subtitleLabel, "nextStepButton":nextStepButton]
+        var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 4]
+        
+        var horizontalTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleLabel(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleSeparator(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalSubtitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[subtitleLabel(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalCanvasConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[canvasTableView(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalButtonConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[nextStepButton(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-cardInset-[titleLabel(==24)]-[titleSeparator(==2)]-[subtitleLabel]-<=14-[canvasTableView]-<=4-[nextStepButton(>=40)]-bottomCardInset-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        self.addConstraints(horizontalTitleConstraints)
+        self.addConstraints(horizontalSeparatorConstraints)
+        self.addConstraints(horizontalSubtitleConstraints)
+        self.addConstraints(horizontalCanvasConstraints)
+        self.addConstraints(horizontalButtonConstraints)
+        self.addConstraints(verticalConstraints)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

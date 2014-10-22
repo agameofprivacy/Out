@@ -10,6 +10,8 @@ import UIKit
 
 class EventInfoTableViewCell: UITableViewCell {
 
+    var userDataDictionary:[String:String] = ["":""]
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

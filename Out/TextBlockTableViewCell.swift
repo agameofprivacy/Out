@@ -14,6 +14,8 @@ class TextBlockTableViewCell: UITableViewCell {
     
     let labelMarginFromCellEdge =  20
     
+    var userDataDictionary:[String:String] = ["":""]
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

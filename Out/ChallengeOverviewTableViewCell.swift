@@ -13,6 +13,8 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
     let challengeIntro:UILabel!
     let stepTitles:UILabel!
     
+    var userDataDictionary:[String:String] = ["":""]
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

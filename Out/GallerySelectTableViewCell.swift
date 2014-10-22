@@ -16,6 +16,8 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
     var itemTitles:[String]!
     var itemImages:[String]!
     var itemBlurbs:[String]!
+
+    var userDataDictionary:[String:String] = ["":""]
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,7 +32,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
 
         self.backgroundColor = UIColor.clearColor()
 
-        self.galleryCollectionView = UICollectionView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width - 64, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
+        self.galleryCollectionView = UICollectionView(frame: CGRectMake(frame.origin.x, frame.origin.y, UIScreen.mainScreen().bounds.width - 74, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
         
         self.galleryCollectionView.registerClass(GallerySelectCollectionViewCell.self, forCellWithReuseIdentifier: "GallerySelectCollectionViewCell")
 
@@ -39,17 +41,27 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         self.galleryCollectionView.pagingEnabled = true
         self.galleryCollectionView.alwaysBounceHorizontal = true
         self.galleryCollectionView.directionalLockEnabled = true
-        
+        self.galleryCollectionView.tag = 12345 as Int
+        self.galleryCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         self.galleryCollectionView.showsHorizontalScrollIndicator = false
         
         self.galleryCollectionView.delegate = self
         self.galleryCollectionView.dataSource = self
 
-        layout.itemSize = CGSize(width: UIScreen.mainScreen().bounds.width - 64, height: UIScreen.mainScreen().bounds.height - 331)
+        layout.itemSize = CGSize(width: self.galleryCollectionView.frame.width, height: self.galleryCollectionView.frame.height)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-
+        
+//        var viewsDictionary = ["galleryCollectionView":galleryCollectionView]
+//        var metricsDictionary = ["":""]
         contentView.addSubview(self.galleryCollectionView)
+//
+//        var horizontalGalleryConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[galleryCollectionView]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//        var verticalGalleryConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[galleryCollectionView(>=44)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//        
+//        contentView.addConstraints(horizontalGalleryConstraints)
+//        contentView.addConstraints(verticalGalleryConstraints)
+        
     }
     
     
@@ -59,7 +71,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         cell.imageImageView.image = UIImage(named: itemImages[indexPath.item])
         cell.blurbLabel.text = itemBlurbs[indexPath.item]
         self.frame.size = self.galleryCollectionView.contentSize
-
+        userDataDictionary.updateValue("\(indexPath.item)", forKey: "challengeTrack")
         return cell
     }
     
@@ -74,5 +86,9 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         return itemTitles.count
     }
 
-
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.frame.size = self.galleryCollectionView.contentSize
+    }
+    
 }

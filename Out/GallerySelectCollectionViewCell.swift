@@ -57,7 +57,7 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=10-[imageImageView]->=10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictioanry, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-<=20-[imageImageView(<=240)]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[imageImageView]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

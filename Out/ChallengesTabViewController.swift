@@ -15,8 +15,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     let layout = ChallengeCardsCollectionViewFlowLayout()
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengesObjects:[AnyObject] = []
+    var stepFullUserDataDictionary:[String:String] = ["":""]
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
@@ -105,9 +105,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             if currentStepCount > 1{
                 cell.canvasTableView.reloadData()
             }
+            else if currentStepCount == 1{
+                cell.canvasTableView.reloadData()
+//                cell.canvasTableView.layoutSubviews()
+                // Adjust tableviewcell frame size to galleryCollectionCell.contentSize
+            }
         }
         
-
         return cell
     }
     
@@ -147,6 +151,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     func nextStepButtonTapped(sender:UIButton!){
         var cells = self.currentChallengesCardsCollectionView.visibleCells()
         var currentCell = cells[0] as ChallengesTabCollectionViewCell
+        
+        
         var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
         var itemNumber = indexPath.item
         var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as PFObject
