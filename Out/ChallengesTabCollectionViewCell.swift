@@ -39,6 +39,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.registerClass(ChallengeOverviewTableViewCell.self, forCellReuseIdentifier: "ChallengeOverviewTableViewCell")
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
+        self.canvasTableView.registerClass(PromptAndAnswerTableViewCell.self, forCellReuseIdentifier: "PromptAndAnswerTableViewCell")
         self.canvasTableView.separatorStyle = .None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -114,7 +115,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentStepCount = currentChallengeData["currentStepCount"] as Int
         var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
         var currentCellType = currentCellTypes[indexPath.row]
-        
+        var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
         
         if currentCellType == "gallerySelect"{
@@ -140,6 +141,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
                     else if key.hasPrefix("blurb"){
                         itemBlurbs[indexToInsert] = value
                     }
+                    else if key.hasPrefix("type"){
+                        cell.itemType = value
+                    }
                 }
             }
             itemTitles = itemTitles.filter{$0 != ""}
@@ -161,30 +165,41 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
             
         else if currentCellType == "mediaAvailability"{
+            self.canvasTableView.alwaysBounceVertical = true
             var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
-            cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle2"]
-            cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes2"]
-            cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue2"]
-            cell.mediaPreview.image = UIImage(named: contentDictionary[currentStepCount]["mediaPreview2"]!)
+            cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle\(challengeTrackNumber)"]
+            cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes\(challengeTrackNumber)"]
+            cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue\(challengeTrackNumber)"]
+            cell.mediaPreview.image = UIImage(named: contentDictionary[currentStepCount]["mediaPreview\(challengeTrackNumber)"]!)
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
         else if currentCellType == "textBlock"{
+            self.canvasTableView.alwaysBounceVertical = true
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-            cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            cell.textBlock.text = contentDictionary[currentStepCount]["blockText\(challengeTrackNumber)"]
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
             
         else if currentCellType == "promptAndAnswer"{
-            var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-            cell.textBlock.text = "The Normal Heart depicts the rise of the HIV-AIDS crisis in New York City (among gay people) between 1981 and 1984, as seen through the eyes of writer/activist Ned Weeks, the founder of a prominent HIV advocacy group. Weeks prefers public confrontations to the calmer, more private strategies favored by his associates, friends, and closeted lover Felix Turner (Bomer). Their differences of opinion lead to arguments that threaten to undermine their shared goals."
+            self.canvasTableView.alwaysBounceVertical = true
+            
+            var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
+            
+            var cell:PromptAndAnswerTableViewCell = tableView.dequeueReusableCellWithIdentifier("PromptAndAnswerTableViewCell") as PromptAndAnswerTableViewCell
+            
+            cell.prompt1.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-1"]
+            cell.prompt2.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-2"]
+            
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
             return cell
         }
         else if currentCellType == "challengeOverview"{
+            self.canvasTableView.alwaysBounceVertical = true
             var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
             
             cell.challengeIntro.text = contentDictionary[currentStepCount]["challengeIntro"]
@@ -219,7 +234,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 200
     }
-    
+        
     func loadCurrentChallenges(objectId:String){
         self.canvasTableView.hidden = true
         self.activityIndicator.startAnimating()
@@ -241,3 +256,5 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
 
 }
+
+

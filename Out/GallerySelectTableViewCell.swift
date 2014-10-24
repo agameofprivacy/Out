@@ -8,11 +8,12 @@
 
 import UIKit
 
-class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
+class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, CollectStepData {
 
     var galleryCollectionView:UICollectionView!
     var galleryPageControl:UIPageControl!
     let layout = GallerySelectCollectionViewFlowLayout()
+    var itemType:String!
     var itemTitles:[String]!
     var itemImages:[String]!
     var itemBlurbs:[String]!
@@ -65,6 +66,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
     }
     
     
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell:GallerySelectCollectionViewCell = self.galleryCollectionView.dequeueReusableCellWithReuseIdentifier("GallerySelectCollectionViewCell", forIndexPath: indexPath) as GallerySelectCollectionViewCell
         cell.titleLabel.text = itemTitles[indexPath.item]
@@ -73,6 +75,15 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         self.frame.size = self.galleryCollectionView.contentSize
         userDataDictionary.updateValue("\(indexPath.item)", forKey: "challengeTrack")
         return cell
+    }
+    
+    func collectData() -> [String : String] {
+        var galleryItems = self.galleryCollectionView.visibleCells()
+        var currentItem = galleryItems[0] as GallerySelectCollectionViewCell
+        var indexPath:NSIndexPath = self.galleryCollectionView.indexPathForCell(currentItem)!
+        var galleryNumber:String = "\(indexPath.item + 1)"
+        var challengeTrackDictionary:[String:String] = [itemType:galleryNumber]
+        return challengeTrackDictionary
     }
     
     

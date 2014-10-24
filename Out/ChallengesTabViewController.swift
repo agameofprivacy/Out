@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol CollectStepData {
+
+    func collectData() -> [String:String]
+    
+}
+
+
 class ChallengesTabViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate{
     
     var currentChallengesCardsCollectionView: UICollectionView!
@@ -15,7 +22,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     let layout = ChallengeCardsCollectionViewFlowLayout()
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengesObjects:[AnyObject] = []
-    var stepFullUserDataDictionary:[String:String] = ["":""]
+    var stepFullUserDataDictionary:[String:String] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,14 +109,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
             var subtitleString = "Step \(currentStepCount): \(currentStepTitle)"
             cell.subtitleLabel.text = subtitleString
-            if currentStepCount > 1{
-                cell.canvasTableView.reloadData()
-            }
-            else if currentStepCount == 1{
-                cell.canvasTableView.reloadData()
-//                cell.canvasTableView.layoutSubviews()
-                // Adjust tableviewcell frame size to galleryCollectionCell.contentSize
-            }
+            cell.canvasTableView.reloadData()
         }
         
         return cell
@@ -152,12 +152,42 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         var cells = self.currentChallengesCardsCollectionView.visibleCells()
         var currentCell = cells[0] as ChallengesTabCollectionViewCell
         
-        
+        for var section:Int = 0; section < currentCell.canvasTableView.numberOfSections(); section++ {
+            for var row:Int = 0; row < currentCell.canvasTableView.numberOfRowsInSection(section); row++ {
+                var cellPath:NSIndexPath = NSIndexPath(forRow: row, inSection: section)
+                if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is GallerySelectTableViewCell{
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as GallerySelectTableViewCell
+                    self.stepFullUserDataDictionary += cell.collectData()
+                    self.stepFullUserDataDictionary.removeValueForKey("")
+                }
+                else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PromptAndAnswerTableViewCell{
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PromptAndAnswerTableViewCell
+                    self.stepFullUserDataDictionary += cell.collectData()
+                    self.stepFullUserDataDictionary.removeValueForKey("")
+                }
+            }
+        }
         var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
         var itemNumber = indexPath.item
         var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as PFObject
         var currentStepCount = currentChallengeObject["currentStepCount"] as Int
         var currentChallengeModel = currentChallengeObject["challenge"] as PFObject
+        if currentStepCount > 0{
+            if stepFullUserDataDictionary["challengeTrack"] != nil{
+                currentChallengeObject["challengeTrackNumber"] = stepFullUserDataDictionary["challengeTrack"]
+            }
+            var dictionary:[String] = []
+            for (key, value) in stepFullUserDataDictionary{
+                dictionary.append(key)
+                dictionary.append(value)
+            }
+            dictionary.filter{$0 != ""}
+            var stepContent:[[String]] = currentChallengeObject["stepContent"] as [[String]]
+    //        stepContent[currentStepCount].removeAll(keepCapacity: false)
+    //        stepContent[currentStepCount] = dictionary
+            stepContent.append(dictionary)
+            currentChallengeObject["stepContent"] = stepContent
+        }
         if currentStepCount < currentChallengeModel["stepTitle"].count{
             currentChallengeObject["currentStepCount"] = ++currentStepCount
             currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
@@ -166,6 +196,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                     var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as [String]
                     var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
                     var subtitleString:String = "Step \(currentStepCount): \(currentStepTitle)"
+                    self.stepFullUserDataDictionary.removeAll(keepCapacity:true)
                     currentCell.subtitleLabel.text = subtitleString
                 }
             }
@@ -186,7 +217,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             }
 
         }
-        
     }
 
     func returnCurrentChallengesObjects() -> [AnyObject]{
@@ -212,3 +242,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     }
     
 }
+
+
+func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {     for (k, v) in right {         left.updateValue(v, forKey: k)     } }

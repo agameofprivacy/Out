@@ -98,6 +98,8 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["username"] = PFUser.currentUser()
         newChallengeModel["challenge"] = selectedChallengeObject
         newChallengeModel["currentStepCount"] = 0
+        newChallengeModel["challengeTrackNumber"] = ""
+        newChallengeModel["stepContent"] = []
 
         newChallengeModel.saveInBackground()
         self.dismissViewControllerAnimated(true, completion: nil)
