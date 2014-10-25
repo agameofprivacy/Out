@@ -52,6 +52,10 @@
 		2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */; };
 		2CB1710519F2C7860086C95F /* GallerySelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */; };
 		2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */; };
+		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
+		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
+		2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */; };
+		2CD5303019FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302C19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */; };
 		2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -119,6 +123,14 @@
 		2CA435FA19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchWebViewTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FC19F48BE700DC1C6E /* HeroImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroImageTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FE19F48C1000DC1C6E /* BoolPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolPickerTableViewCell.swift; sourceTree = "<group>"; };
+		2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		2CD5302719FB42E500D38896 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		2CD5302919FB42E500D38896 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		2CD5302B19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		2CD5302C19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +240,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CD5302419FB42E500D38896 /* TPKeyboardAvoiding */,
 				2C5D996D19E4A9FB00133F59 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -261,11 +274,11 @@
 		2CA1B6E519E72D4800B872F7 /* ChallengesTab */ = {
 			isa = PBXGroup;
 			children = (
-				2CA1B6E619E72D6300B872F7 /* ChallengeGallery */,
 				2C17111B19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.h */,
 				2C17111C19E4E65600EA1D72 /* ChallengeCardsCollectionViewFlowLayout.m */,
 				2C0ABBB419EF284A00259B29 /* ChallengesTabViewController.swift */,
 				2C0ABBB619EF445000259B29 /* ChallengesTabCollectionViewCell.swift */,
+				2CA1B6E619E72D6300B872F7 /* ChallengeGallery */,
 				2C26941619F14EFB0088AFD1 /* Canvas TableViewCells */,
 			);
 			name = ChallengesTab;
@@ -283,6 +296,21 @@
 				2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */,
 			);
 			name = ChallengeGallery;
+			sourceTree = "<group>";
+		};
+		2CD5302419FB42E500D38896 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */,
+				2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */,
+				2CD5302719FB42E500D38896 /* TPKeyboardAvoidingScrollView.h */,
+				2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */,
+				2CD5302919FB42E500D38896 /* TPKeyboardAvoidingTableView.h */,
+				2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */,
+				2CD5302B19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				2CD5302C19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,14 +431,18 @@
 				2CA435EF19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
 				2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */,
+				2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */,
 				2CB170FE19F2C7860086C95F /* ChallengeFilterTableViewCell.swift in Sources */,
 				2CA435F119F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift in Sources */,
 				2CB170FF19F2C7860086C95F /* ChallengeGalleryCollectionViewCellOld.swift in Sources */,
 				2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */,
+				2CD5303019FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				2CB1710019F2C7860086C95F /* ChallengeGalleryViewControllerOld.swift in Sources */,
 				2CA435F719F48B8100DC1C6E /* CallTableViewCell.swift in Sources */,
 				2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */,
 				2CB1710119F2C7860086C95F /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
+				2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				2CB1710219F2C7860086C95F /* ChallengesTabViewController.swift in Sources */,
 				2CB1710319F2C7860086C95F /* ChallengesTabCollectionViewCell.swift in Sources */,
 				2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */,

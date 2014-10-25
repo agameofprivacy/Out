@@ -5,3 +5,4 @@
 #import <Parse/Parse.h>
 #import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "GallerySelectCollectionViewFlowLayout.h"
+#import "TPKeyboardAvoidingTableView.h"

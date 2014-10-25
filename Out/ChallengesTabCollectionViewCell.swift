@@ -19,7 +19,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     let titleLabel:UILabel!
     let titleSeparator:UIView!
     let subtitleLabel:UILabel!
-    let canvasTableView:UITableView!
+    let canvasTableView:TPKeyboardAvoidingTableView!
     let nextStepButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
     let cardInset:CGFloat = 20
     var activityIndicator: UIActivityIndicatorView!
@@ -31,7 +31,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
-        self.canvasTableView = UITableView(frame: CGRectZero)
+        self.canvasTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
         self.canvasTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.canvasTableView.showsVerticalScrollIndicator = true
         self.canvasTableView.registerClass(MediaAvailabilityTableViewCell.self, forCellReuseIdentifier: "MediaAvailabilityTableViewCell")
@@ -40,6 +40,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(ChallengeOverviewTableViewCell.self, forCellReuseIdentifier: "ChallengeOverviewTableViewCell")
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.registerClass(PromptAndAnswerTableViewCell.self, forCellReuseIdentifier: "PromptAndAnswerTableViewCell")
+        self.canvasTableView.registerClass(StringValuePickerTableViewCell.self, forCellReuseIdentifier: "StringValuePickerTableViewCell")
         self.canvasTableView.separatorStyle = .None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -214,6 +215,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.stepTitles.text = stepTitles
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
+        }
+        else if currentCellType == "valuePicker"{
+            self.canvasTableView.alwaysBounceVertical = true
+            var cell:StringValuePickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("StringValuePickerTableViewCell") as StringValuePickerTableViewCell
+            
+            return cell
+        
         }
         
         return cell
