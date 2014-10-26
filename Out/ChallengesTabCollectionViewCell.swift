@@ -30,7 +30,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.canvasTableView = UITableView(frame: CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8, self.bounds.width - cardInset * 2, self.bounds.height - 164), style: UITableViewStyle.Plain)
+
         self.canvasTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
         self.canvasTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.canvasTableView.showsVerticalScrollIndicator = true
@@ -41,7 +41,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.registerClass(PromptAndAnswerTableViewCell.self, forCellReuseIdentifier: "PromptAndAnswerTableViewCell")
         self.canvasTableView.registerClass(StringValuePickerTableViewCell.self, forCellReuseIdentifier: "StringValuePickerTableViewCell")
-        self.canvasTableView.separatorStyle = .None
+        self.canvasTableView.registerClass(FieldsAndActivatorTableViewCell.self, forCellReuseIdentifier: "FieldsAndActivatorTableViewCell")
+        self.canvasTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
         self.canvasTableView.rowHeight = UITableViewAutomaticDimension
@@ -57,7 +58,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         
         self.backgroundColor = UIColor.whiteColor()
         
-//        self.titleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset, self.bounds.size.width - cardInset * 2, 30))
         self.titleLabel = UILabel(frame:CGRectZero)
         self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.titleLabel.numberOfLines = 0
@@ -65,14 +65,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.titleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
         contentView.addSubview(titleLabel)
         
-//        self.titleSeparator = UIView(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30, self.bounds.size.width - cardInset * 2, 2))
         self.titleSeparator = UIView(frame:CGRectZero)
         self.titleSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.titleSeparator.backgroundColor = UIColor.blackColor()
         contentView.addSubview(titleSeparator)
         
 
-//        self.subtitleLabel = UILabel(frame:CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2, self.bounds.size.width - cardInset * 2, 30))
         self.subtitleLabel = UILabel(frame:CGRectZero)
         self.subtitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.subtitleLabel.numberOfLines = 0
@@ -80,7 +78,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.subtitleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
         contentView.addSubview(subtitleLabel)
         
-//        self.nextStepButton.frame = CGRectMake(self.bounds.origin.x + cardInset, self.bounds.origin.y + cardInset + 30 + 2 + 30 + 8 + (self.bounds.height - 164) + 20, self.bounds.width - cardInset * 2, 40)
         self.nextStepButton.frame = CGRectZero
         self.nextStepButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
@@ -124,7 +121,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             self.canvasTableView.alwaysBounceVertical = false
             
             var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
-            
+
             var itemTitles:[String] = ["","","","",""]
             var itemImages:[String] = ["","","","",""]
             var itemBlurbs:[String] = ["","","","",""]
@@ -166,7 +163,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
             
         else if currentCellType == "mediaAvailability"{
-            self.canvasTableView.alwaysBounceVertical = true
             var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
             cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle\(challengeTrackNumber)"]
             cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes\(challengeTrackNumber)"]
@@ -177,7 +173,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
             
         else if currentCellType == "textBlock"{
-            self.canvasTableView.alwaysBounceVertical = true
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             cell.textBlock.text = contentDictionary[currentStepCount]["blockText\(challengeTrackNumber)"]
             cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -186,7 +181,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
             
         else if currentCellType == "promptAndAnswer"{
-            self.canvasTableView.alwaysBounceVertical = true
             
             var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
             
@@ -200,7 +194,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             return cell
         }
         else if currentCellType == "challengeOverview"{
-            self.canvasTableView.alwaysBounceVertical = true
             var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
             
             cell.challengeIntro.text = contentDictionary[currentStepCount]["challengeIntro"]
@@ -217,11 +210,20 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             return cell
         }
         else if currentCellType == "valuePicker"{
-            self.canvasTableView.alwaysBounceVertical = true
             var cell:StringValuePickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("StringValuePickerTableViewCell") as StringValuePickerTableViewCell
-            
+            cell.fieldTitle = "Title"
             return cell
         
+        }
+        
+        else if currentCellType == "fieldsAndActivator"{
+            var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
+            cell.fieldTitle.text = "Title"
+            cell.fieldValuePlaceholder.text = "Value"
+            cell.tag = 123
+            var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView")
+            cell.addGestureRecognizer(tapRecognizer)
+            return cell
         }
         
         return cell
@@ -262,7 +264,21 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             }
         }
     }
-
+    
+    func showHidePickerView(){
+        println("hello")
+        var cell:FieldsAndActivatorTableViewCell = viewWithTag(123) as FieldsAndActivatorTableViewCell
+        var indexPath = self.canvasTableView.indexPathForCell(cell)!
+        println(indexPath)
+        self.canvasTableView.beginUpdates()
+        var indexPathToDelete = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+        self.canvasTableView.deleteRowsAtIndexPaths([indexPathToDelete], withRowAnimation: UITableViewRowAnimation.Automatic)
+        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
+        var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
+        currentCellTypeArray[currentStepCount].removeAtIndex(indexPathToDelete.row)
+        self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
+        self.canvasTableView.endUpdates()
+    }
 }
 
 
