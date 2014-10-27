@@ -25,8 +25,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengeModel:PFObject!
     var currentChallengeData:PFObject!
-    var test:Int = 0
     var contentDictionary:[[String:String]]!
+    var tempString = ""
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,8 +41,14 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(ChallengeOverviewTableViewCell.self, forCellReuseIdentifier: "ChallengeOverviewTableViewCell")
         self.canvasTableView.registerClass(GallerySelectTableViewCell.self, forCellReuseIdentifier: "GallerySelectTableViewCell")
         self.canvasTableView.registerClass(PromptAndAnswerTableViewCell.self, forCellReuseIdentifier: "PromptAndAnswerTableViewCell")
-        self.canvasTableView.registerClass(StringValuePickerTableViewCell.self, forCellReuseIdentifier: "StringValuePickerTableViewCell")
+        self.canvasTableView.registerClass(PickerViewTableViewCell.self, forCellReuseIdentifier: "PickerViewTableViewCell")
         self.canvasTableView.registerClass(FieldsAndActivatorTableViewCell.self, forCellReuseIdentifier: "FieldsAndActivatorTableViewCell")
+        self.canvasTableView.registerClass(LaunchWebViewTableViewCell.self, forCellReuseIdentifier: "LaunchWebViewTableViewCell")
+        self.canvasTableView.registerClass(EventInfoTableViewCell.self, forCellReuseIdentifier: "EventInfoTableViewCell")
+        self.canvasTableView.registerClass(CallTableViewCell.self, forCellReuseIdentifier: "CallTableViewCell")
+        self.canvasTableView.registerClass(HeroImageTableViewCell.self, forCellReuseIdentifier: "HeroImageTableViewCell")
+        self.canvasTableView.registerClass(BoolPickerTableViewCell.self, forCellReuseIdentifier: "BoolPickerTableViewCell")
+        self.canvasTableView.registerClass(CautionTextTableViewCell.self, forCellReuseIdentifier: "CautionTextTableViewCell")
         self.canvasTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -154,11 +161,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             
-//            var itemWidth = UIScreen.mainScreen().bounds.width - 64.0
-//            var cellWidth = itemWidth * CGFloat(itemTitles.count)
-//            var itemHeight = UIScreen.mainScreen().bounds.height - 331.0
-//            cell.frame.size = CGSize(width: cellWidth, height: itemHeight)
-//            cell.galleryCollectionView.bounds.size = cell.frame.size
             return cell
         }
             
@@ -210,12 +212,11 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             return cell
         }
         else if currentCellType == "valuePicker"{
-            var cell:StringValuePickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("StringValuePickerTableViewCell") as StringValuePickerTableViewCell
-            cell.fieldTitle = "Title"
+            var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as PickerViewTableViewCell
+            cell.values = ["Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye"]
             return cell
         
         }
-        
         else if currentCellType == "fieldsAndActivator"{
             var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
             cell.fieldTitle.text = "Title"
@@ -223,6 +224,30 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.tag = 123
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView")
             cell.addGestureRecognizer(tapRecognizer)
+            return cell
+        }
+        else if currentCellType == "launchWebView"{
+            var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
+            return cell
+        }
+        else if currentCellType == "eventInfo"{
+            var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
+            return cell
+        }
+        else if currentCellType == "callNumber"{
+            var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
+            return cell
+        }
+        else if currentCellType == "heroImage"{
+            var cell:HeroImageTableViewCell = tableView.dequeueReusableCellWithIdentifier("HeroImageTableViewCell") as HeroImageTableViewCell
+            return cell
+        }
+        else if currentCellType == "boolPicker"{
+            var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
+            return cell
+        }
+        else if currentCellType == "cautionText"{
+            var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as CautionTextTableViewCell
             return cell
         }
         
@@ -266,18 +291,31 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
     
     func showHidePickerView(){
-        println("hello")
         var cell:FieldsAndActivatorTableViewCell = viewWithTag(123) as FieldsAndActivatorTableViewCell
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
-        println(indexPath)
-        self.canvasTableView.beginUpdates()
-        var indexPathToDelete = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
-        self.canvasTableView.deleteRowsAtIndexPaths([indexPathToDelete], withRowAnimation: UITableViewRowAnimation.Automatic)
-        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
-        currentCellTypeArray[currentStepCount].removeAtIndex(indexPathToDelete.row)
-        self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
-        self.canvasTableView.endUpdates()
+        var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+        var nextCellIsExpandedCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) is PickerViewTableViewCell
+        if nextCellIsExpandedCell{
+            self.canvasTableView.beginUpdates()
+            self.canvasTableView.deleteRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
+            var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
+            var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
+            self.tempString = currentCellTypeArray[currentStepCount][nextIndexPath.row]
+            currentCellTypeArray[currentStepCount].removeAtIndex(nextIndexPath.row)
+            self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
+            self.canvasTableView.endUpdates()
+        }
+        else{
+            self.canvasTableView.beginUpdates()
+            var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
+            var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
+            var currentCellTypes = currentCellTypeArray[currentStepCount]
+            currentCellTypes.insert(tempString, atIndex: nextIndexPath.row)
+            currentCellTypeArray[currentStepCount] = currentCellTypes
+            self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
+            self.canvasTableView.insertRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
+            self.canvasTableView.endUpdates()
+        }
     }
 }
 

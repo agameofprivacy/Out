@@ -25,12 +25,10 @@
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
-		2C7E803919FBFC5F00F1FC4B /* PickerFieldsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803819FBFC5F00F1FC4B /* PickerFieldsTableViewCell.swift */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA2264719F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m */; };
 		2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EA19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift */; };
 		2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */; };
-		2CA435EF19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */; };
 		2CA435F119F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435F019F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift */; };
 		2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435F219F48B5600DC1C6E /* EventInfoTableViewCell.swift */; };
 		2CA435F519F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA435F419F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift */; };
@@ -108,7 +106,6 @@
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
 		2C60963019E60FBA001F9A34 /* ChallengeGalleryCollectionViewCellOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryCollectionViewCellOld.swift; sourceTree = "<group>"; };
-		2C7E803819FBFC5F00F1FC4B /* PickerFieldsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerFieldsTableViewCell.swift; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -119,7 +116,6 @@
 		2CA2264A19F5E03F0018266F /* GallerySelectCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GallerySelectCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2CA435EA19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeOverviewTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptAndAnswerTableViewCell.swift; sourceTree = "<group>"; };
-		2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringValuePickerTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435F019F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePickerTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435F219F48B5600DC1C6E /* EventInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435F419F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDirectionsTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,8 +179,6 @@
 				2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */,
 				2CA435EC19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift */,
 				2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */,
-				2CA435EE19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift */,
-				2C7E803819FBFC5F00F1FC4B /* PickerFieldsTableViewCell.swift */,
 				2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */,
 				2CA435F019F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift */,
 				2CA435F219F48B5600DC1C6E /* EventInfoTableViewCell.swift */,
@@ -437,7 +431,6 @@
 				2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */,
 				2CA435FD19F48BE700DC1C6E /* HeroImageTableViewCell.swift in Sources */,
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
-				2CA435EF19F48B0500DC1C6E /* StringValuePickerTableViewCell.swift in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
 				2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */,
 				2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */,
@@ -453,7 +446,6 @@
 				2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */,
 				2CB1710119F2C7860086C95F /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */,
-				2C7E803919FBFC5F00F1FC4B /* PickerFieldsTableViewCell.swift in Sources */,
 				2CB1710219F2C7860086C95F /* ChallengesTabViewController.swift in Sources */,
 				2CB1710319F2C7860086C95F /* ChallengesTabCollectionViewCell.swift in Sources */,
 				2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */,

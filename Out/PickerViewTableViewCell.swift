@@ -38,7 +38,7 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         
         var viewsDictionary = ["pickerView":pickerView]
         var metricsDictionary = ["zeroMargin":0]
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[pickerView]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-8-[pickerView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-zeroMargin-[pickerView]-zeroMargin-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
@@ -56,7 +56,6 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         valueLabel.font = valueFont
         valueLabel.font = valueFont?.fontWithSize(20.0)
         valueLabel.text = self.values[row]
-
         return valueLabel
     }
     

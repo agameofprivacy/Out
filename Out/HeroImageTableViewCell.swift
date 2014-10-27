@@ -10,18 +10,36 @@ import UIKit
 
 class HeroImageTableViewCell: UITableViewCell {
 
+    var heroImage:UIImageView!
+    
     var userDataDictionary:[String:String] = ["":""]
 
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.heroImage = UIImageView(frame: CGRectZero)
+        self.heroImage.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.heroImage.contentMode = UIViewContentMode.ScaleAspectFill
+        contentView.addSubview(self.heroImage)
+        
+        var viewsDictionary = ["heroImage":self.heroImage]
+        var metricsDictionary = ["bottomMargin":4]
+        
+        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImage]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==100)]-bottomMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
+        contentView.addConstraints(horizontalConstraints)
+        contentView.addConstraints(verticalConstraints)
+        
     }
 
 }

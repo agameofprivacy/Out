@@ -10,18 +10,45 @@ import UIKit
 
 class BoolPickerTableViewCell: UITableViewCell {
 
-    var userDataDictionary:[String:String] = ["":""]
-
+    var titleLabel:UILabel!
+    var switchControl:UISwitch!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var userDataDictionary:[String:String] = ["":""]
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-
+    
+    override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.titleLabel = UILabel(frame: CGRectZero)
+        self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.titleLabel.textAlignment = NSTextAlignment.Left
+        self.titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        contentView.addSubview(self.titleLabel)
+        
+        self.switchControl = UISwitch(frame: CGRectZero)
+        self.switchControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.switchControl.on = false
+        contentView.addSubview(self.switchControl)
+        
+        var viewsDictionary = ["titleLabel":self.titleLabel, "switchControl":self.switchControl]
+        var metricsDictionary = ["sideEdgeMargin":8]
+        
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[titleLabel]-[switchControl]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var verticalConstraintsLabel:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[titleLabel]-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var verticalConstraintsSwitch:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[switchControl]-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        
+        contentView.addConstraints(horizontalConstraints)
+        contentView.addConstraints(verticalConstraintsLabel)
+        contentView.addConstraints(verticalConstraintsSwitch)
+    }
+    
 }
