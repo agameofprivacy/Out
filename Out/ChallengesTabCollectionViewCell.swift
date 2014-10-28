@@ -322,6 +322,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
         var nextCellIsExpandedCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) is PickerViewTableViewCell
+        var indexToUpdate:Int = find(self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!,indexPath.row)!
         if nextCellIsExpandedCell{
             self.canvasTableView.beginUpdates()
             self.canvasTableView.deleteRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
@@ -330,6 +331,16 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             self.tempString = currentCellTypeArray[currentStepCount][nextIndexPath.row]
             currentCellTypeArray[currentStepCount].removeAtIndex(nextIndexPath.row)
             self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
+            var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
+            var tempIndex = 0
+            for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
+                if rowCount > indexToUpdate{
+                    currentRowNumbersArray[tempIndex] = rowCount - 1
+                }
+                ++tempIndex
+            }
+            tempIndex = 0
+            self.countofCellTypeDictionary["fieldsAndActivator"] = currentRowNumbersArray
             self.canvasTableView.endUpdates()
         }
         else{
@@ -341,6 +352,16 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             currentCellTypeArray[currentStepCount] = currentCellTypes
             self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
             self.canvasTableView.insertRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
+            var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
+            var tempIndex = 0
+            for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
+                if rowCount > indexToUpdate{
+                    currentRowNumbersArray[tempIndex] = rowCount + 1
+                }
+                ++tempIndex
+            }
+            tempIndex = 0
+            self.countofCellTypeDictionary["fieldsAndActivator"] = currentRowNumbersArray
             self.canvasTableView.endUpdates()
         }
     }
