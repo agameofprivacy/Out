@@ -27,6 +27,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var currentChallengeData:PFObject!
     var contentDictionary:[[String:String]]!
     var tempString = ""
+    var countofCellTypeDictionary:[String:[Int]] = ["":[0]]
     
     
     override init(frame: CGRect) {
@@ -124,7 +125,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentCellType = currentCellTypes[indexPath.row]
         var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-        
+        if self.countofCellTypeDictionary[currentCellType] == nil{
+            self.countofCellTypeDictionary.updateValue([indexPath.row], forKey: currentCellType)
+        }
+        else if !contains(self.countofCellTypeDictionary[currentCellType] as [Int]!, indexPath.row){
+            self.countofCellTypeDictionary[currentCellType]?.append(indexPath.row)
+        }
         if currentCellType == "gallerySelect"{
             
             self.canvasTableView.alwaysBounceVertical = false
@@ -217,8 +223,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "fieldsAndActivator"{
             var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
-            cell.fieldTitle.text = "Title"
-            cell.fieldValuePlaceholder.text = "Value"
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["fieldsAndActivator"]!
+            println(rowNumbers)
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            println(contentDictionary[currentStepCount]["picker\(count)Title"])
+            cell.fieldTitle.text = contentDictionary[currentStepCount]["picker\(count)Title"]
+            cell.fieldValuePlaceholder.text = contentDictionary[currentStepCount]["picker\(count)ValuePlaceholder"]
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell

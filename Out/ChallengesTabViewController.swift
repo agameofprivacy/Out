@@ -212,6 +212,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                     var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
                     var subtitleString:String = "Step \(currentStepCount): \(currentStepTitle)"
                     self.stepFullUserDataDictionary.removeAll(keepCapacity:true)
+                    currentCell.countofCellTypeDictionary.removeAll(keepCapacity: true)
                     currentCell.subtitleLabel.text = subtitleString
                 }
             }
