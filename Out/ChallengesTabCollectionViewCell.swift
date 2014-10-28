@@ -49,6 +49,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.registerClass(HeroImageTableViewCell.self, forCellReuseIdentifier: "HeroImageTableViewCell")
         self.canvasTableView.registerClass(BoolPickerTableViewCell.self, forCellReuseIdentifier: "BoolPickerTableViewCell")
         self.canvasTableView.registerClass(CautionTextTableViewCell.self, forCellReuseIdentifier: "CautionTextTableViewCell")
+        self.canvasTableView.registerClass(TextFieldInputTableViewCell.self, forCellReuseIdentifier: "TextFieldInputTableViewCell")
         self.canvasTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
@@ -82,6 +83,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.subtitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.subtitleLabel.numberOfLines = 0
         self.subtitleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.subtitleLabel.font = UIFont.systemFontOfSize(15.0)
         self.subtitleLabel.preferredMaxLayoutWidth = self.bounds.width - cardInset
         contentView.addSubview(subtitleLabel)
         
@@ -97,14 +99,14 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         contentView.addSubview(nextStepButton)
         
         var viewsDictionary = ["canvasTableView":canvasTableView, "titleLabel":titleLabel, "titleSeparator":titleSeparator, "subtitleLabel":subtitleLabel, "nextStepButton":nextStepButton]
-        var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 4]
+        var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 10]
         
         var horizontalTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleLabel(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleSeparator(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var horizontalSubtitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[subtitleLabel(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var horizontalCanvasConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[canvasTableView(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var horizontalButtonConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[nextStepButton(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-cardInset-[titleLabel(==24)]-[titleSeparator(==2)]-[subtitleLabel]-<=14-[canvasTableView]-<=4-[nextStepButton(>=40)]-bottomCardInset-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-cardInset-[titleLabel(==24)]-0-[titleSeparator(==2)]-4-[subtitleLabel]-<=14-[canvasTableView]-<=10-[nextStepButton(>=40)]-bottomCardInset-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
         self.addConstraints(horizontalTitleConstraints)
         self.addConstraints(horizontalSeparatorConstraints)
@@ -170,14 +172,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes\(challengeTrackNumber)"]
             cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue\(challengeTrackNumber)"]
             cell.mediaPreview.image = UIImage(named: contentDictionary[currentStepCount]["mediaPreview\(challengeTrackNumber)"]!)
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
         else if currentCellType == "textBlock"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             cell.textBlock.text = contentDictionary[currentStepCount]["blockText\(challengeTrackNumber)"]
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
             
@@ -190,8 +190,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
             cell.prompt1.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-1"]
             cell.prompt2.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-2"]
-            
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
             
             return cell
         }
@@ -208,12 +206,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
                 ++stepCount
             }
             cell.stepTitles.text = stepTitles
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
         else if currentCellType == "valuePicker"{
             var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as PickerViewTableViewCell
             cell.values = ["Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye"]
+            cell.key = "Greeting"
             return cell
         
         }
@@ -221,33 +219,51 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
             cell.fieldTitle.text = "Title"
             cell.fieldValuePlaceholder.text = "Value"
-            cell.tag = 123
-            var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView")
+            var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
         else if currentCellType == "launchWebView"{
             var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
+            cell.fieldTitle.text = "HRC"
+            cell.fieldValue.text = "www.hrc.org"
             return cell
         }
         else if currentCellType == "eventInfo"{
             var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
+//            cell.eventImage.image = UIImage(named: "ruffalonormalheart")
+            cell.eventTitle.text = contentDictionary[currentStepCount]["eventTitle\(challengeTrackNumber)"]
+            cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
+            cell.eventTimes.text = contentDictionary[currentStepCount]["eventTimes\(challengeTrackNumber)"]
             return cell
         }
         else if currentCellType == "callNumber"{
             var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
+            cell.titleLabel.text = "The Trevor Project"
+            cell.numberLabel.text = "425-408-3772"
+            var tapRecognizer = UITapGestureRecognizer(target: self, action: "dialNumber")
+            cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
         else if currentCellType == "heroImage"{
             var cell:HeroImageTableViewCell = tableView.dequeueReusableCellWithIdentifier("HeroImageTableViewCell") as HeroImageTableViewCell
+            var imageString = contentDictionary[currentStepCount]["heroImage\(challengeTrackNumber)"]
+            cell.heroImage.image = UIImage(named: imageString!)
             return cell
         }
         else if currentCellType == "boolPicker"{
             var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
+            cell.titleLabel.text = "Notify Mentor"
             return cell
         }
         else if currentCellType == "cautionText"{
             var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as CautionTextTableViewCell
+            cell.cautionTextLabel.text = contentDictionary[currentStepCount]["cautionText\(challengeTrackNumber)"]
+            return cell
+        }
+        else if currentCellType == "textField"{
+            var cell:TextFieldInputTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextFieldInputTableViewCell") as TextFieldInputTableViewCell
+            cell.textField.placeholder = "Placeholder"
             return cell
         }
         
@@ -269,7 +285,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 200
     }
-        
+            
     func loadCurrentChallenges(objectId:String){
         self.canvasTableView.hidden = true
         self.activityIndicator.startAnimating()
@@ -290,8 +306,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
     }
     
-    func showHidePickerView(){
-        var cell:FieldsAndActivatorTableViewCell = viewWithTag(123) as FieldsAndActivatorTableViewCell
+    func showHidePickerView(sender:UITapGestureRecognizer!){
+        var cell:FieldsAndActivatorTableViewCell = sender.view as FieldsAndActivatorTableViewCell
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
         var nextCellIsExpandedCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) is PickerViewTableViewCell
@@ -316,6 +332,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             self.canvasTableView.insertRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
             self.canvasTableView.endUpdates()
         }
+    }
+    
+    func dialNumber(){
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://4254083772")!)
     }
 }
 

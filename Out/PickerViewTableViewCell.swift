@@ -8,14 +8,17 @@
 
 import UIKit
 
-class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
+class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate, CollectStepData{
 
     var pickerView:UIPickerView!
     var values:[String]!
+    var key:String!
     
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-    
+
+    var userDataDictionary:[String:String] = ["":""]
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -27,13 +30,14 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
     override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
         self.pickerView = UIPickerView(frame: CGRectZero)
         self.pickerView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
+        self.pickerView.showsSelectionIndicator = true
         contentView.addSubview(self.pickerView)
         
         var viewsDictionary = ["pickerView":pickerView]
@@ -54,12 +58,17 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         var valueLabel = UILabel()
         valueLabel.textAlignment = NSTextAlignment.Right
         valueLabel.font = valueFont
-        valueLabel.font = valueFont?.fontWithSize(20.0)
         valueLabel.text = self.values[row]
         return valueLabel
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    func collectData() -> [String : String] {
+        var selectedRow = self.pickerView.selectedRowInComponent(0)
+        self.userDataDictionary = [key:values[selectedRow]]
+        return self.userDataDictionary
     }
 }

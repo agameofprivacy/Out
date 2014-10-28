@@ -28,13 +28,14 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.userInteractionEnabled = false
         self.backgroundColor = UIColor.clearColor()
-        
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+
         self.challengeIntro = UILabel(frame: CGRectZero)
         self.challengeIntro.numberOfLines = 0
         self.challengeIntro.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.challengeIntro.textAlignment = NSTextAlignment.Left
         self.challengeIntro.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.challengeIntro.preferredMaxLayoutWidth = self.bounds.width
+        self.challengeIntro.preferredMaxLayoutWidth = self.bounds.width - 10
         if UIScreen.mainScreen().bounds.width == 320{
             self.challengeIntro.preferredMaxLayoutWidth = self.bounds.width - 72
         }
@@ -46,7 +47,7 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
         self.stepTitles.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.stepTitles.textAlignment = NSTextAlignment.Left
         self.stepTitles.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        self.stepTitles.preferredMaxLayoutWidth = self.bounds.width
+        self.stepTitles.preferredMaxLayoutWidth = self.bounds.width - 10
         if UIScreen.mainScreen().bounds.width == 320{
             self.stepTitles.preferredMaxLayoutWidth = self.bounds.width - 72
         }

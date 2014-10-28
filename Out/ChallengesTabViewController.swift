@@ -165,6 +165,21 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                     self.stepFullUserDataDictionary += cell.collectData()
                     self.stepFullUserDataDictionary.removeValueForKey("")
                 }
+                else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PickerViewTableViewCell{
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PickerViewTableViewCell
+                    self.stepFullUserDataDictionary += cell.collectData()
+                    self.stepFullUserDataDictionary.removeValueForKey("")
+                }
+                else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is TextFieldInputTableViewCell{
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as TextFieldInputTableViewCell
+                    self.stepFullUserDataDictionary += cell.collectData()
+                    self.stepFullUserDataDictionary.removeValueForKey("")
+                }
+                else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is BoolPickerTableViewCell{
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as BoolPickerTableViewCell
+                    self.stepFullUserDataDictionary += cell.collectData()
+                    self.stepFullUserDataDictionary.removeValueForKey("")
+                }
             }
         }
         var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!

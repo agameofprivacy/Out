@@ -17,6 +17,9 @@ class CautionTextTableViewCell: UITableViewCell {
     var topMargin = 10
     var bottomMargin = 20
 
+    let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
+    let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -27,13 +30,15 @@ class CautionTextTableViewCell: UITableViewCell {
 
     override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+
         self.cautionTextLabel = UILabel(frame: CGRectZero)
         self.cautionTextLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.cautionTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        self.cautionTextLabel.font = titleFont?.fontWithSize(16.0)
         self.cautionTextLabel.numberOfLines = 0
         self.cautionTextLabel.textAlignment = NSTextAlignment.Left
-        self.cautionTextLabel.preferredMaxLayoutWidth =  self.bounds.size.width
+        self.cautionTextLabel.preferredMaxLayoutWidth =  self.bounds.size.width - 8
         if UIScreen.mainScreen().bounds.size.width == 320{
             self.cautionTextLabel.preferredMaxLayoutWidth = self.bounds.size.width - 20
         }
@@ -42,7 +47,7 @@ class CautionTextTableViewCell: UITableViewCell {
         var viewsDictionary = ["cautionTextLabel":self.cautionTextLabel]
         var metricsDictionary = ["topMargin":topMargin, "bottomMargin":bottomMargin]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[cautionTextLabel]-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[cautionTextLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[cautionTextLabel]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)

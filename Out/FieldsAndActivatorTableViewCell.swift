@@ -12,8 +12,12 @@ class FieldsAndActivatorTableViewCell: UITableViewCell {
 
     var fieldTitle:UILabel!
     var fieldValuePlaceholder:UILabel!
-
+    let fontSize:CGFloat = 16
+    
     var sideEdgeMargin = 8
+    
+    let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
+    let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -25,25 +29,27 @@ class FieldsAndActivatorTableViewCell: UITableViewCell {
     
     override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        self.selectionStyle = UITableViewCellSelectionStyle.Default
+        
         fieldTitle = UILabel(frame: CGRectZero)
         fieldTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
         fieldTitle.textAlignment = NSTextAlignment.Left
-        fieldTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        fieldTitle.font = self.titleFont?.fontWithSize(fontSize)
         contentView.addSubview(fieldTitle)
         
         fieldValuePlaceholder = UILabel(frame: CGRectZero)
         fieldValuePlaceholder.setTranslatesAutoresizingMaskIntoConstraints(false)
         fieldValuePlaceholder.textAlignment = NSTextAlignment.Right
-        fieldValuePlaceholder.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        fieldValuePlaceholder.font = self.valueFont?.fontWithSize(fontSize)
         contentView.addSubview(fieldValuePlaceholder)
         
         var viewsDictionary = ["fieldTitle":fieldTitle, "fieldValuePlaceholder":fieldValuePlaceholder]
-        var metricsDictionary = ["sideEdgeMargin":sideEdgeMargin]
+        var metricsDictionary = ["sideEdgeMargin":sideEdgeMargin, "verticalMargin":fontSize]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[fieldTitle]-[fieldValuePlaceholder]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
-        var verticalFieldTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[fieldTitle(>=36)]-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        var verticalValuePlaceholderConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[fieldValuePlaceholder(>=36)]-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[fieldTitle]-[fieldValuePlaceholder]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalFieldTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldTitle]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalValuePlaceholderConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldValuePlaceholder]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalFieldTitleConstraints)

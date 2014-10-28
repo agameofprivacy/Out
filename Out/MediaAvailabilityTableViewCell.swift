@@ -16,6 +16,9 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
     let mediaVenue:UILabel!
     let mediaIntro:UILabel!
 
+    let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
+    let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+    
     let labelMarginFromCellEdge =  20
     
     var userDataDictionary:[String:String] = ["":""]
@@ -33,7 +36,8 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.userInteractionEnabled = false
         self.backgroundColor = UIColor.clearColor()
-        
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+
         mediaPreview = UIImageView(frame: CGRectZero)
         mediaPreview.setTranslatesAutoresizingMaskIntoConstraints(false)
         mediaPreview.contentMode = UIViewContentMode.ScaleAspectFill
@@ -43,7 +47,7 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         self.mediaTitle.numberOfLines = 0
         mediaTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mediaTitle.textAlignment = NSTextAlignment.Left
-        self.mediaTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        self.mediaTitle.font = titleFont?.fontWithSize(17.0)
         self.mediaTitle.preferredMaxLayoutWidth = self.bounds.width - 136
         if UIScreen.mainScreen().bounds.width == 320{
             self.mediaTitle.preferredMaxLayoutWidth = self.bounds.width - 139
@@ -54,7 +58,7 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         self.mediaVenue.numberOfLines = 0
         mediaVenue.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mediaVenue.textAlignment = NSTextAlignment.Left
-        self.mediaVenue.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.mediaVenue.font = titleFont?.fontWithSize(15.0)
         self.mediaVenue.preferredMaxLayoutWidth = self.bounds.width - 136
         if UIScreen.mainScreen().bounds.width == 320{
             self.mediaVenue.preferredMaxLayoutWidth = self.bounds.width - 139
@@ -64,7 +68,7 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         mediaTimes = UILabel(frame: CGRectZero)
         mediaTimes.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mediaTimes.textAlignment = NSTextAlignment.Left
-        self.mediaTimes.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        self.mediaTimes.font = titleFont?.fontWithSize(14.0)
         self.mediaTimes.preferredMaxLayoutWidth = self.bounds.width - 136
         if UIScreen.mainScreen().bounds.width == 320{
             self.mediaTimes.preferredMaxLayoutWidth = self.bounds.width - 139
@@ -75,13 +79,13 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         
         let viewsDictionary = ["mediaPreview":mediaPreview, "mediaTitle":mediaTitle, "mediaTimes":mediaTimes, "mediaVenue":mediaVenue]
         
-        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "longVerticalSpace": labelMarginFromCellEdge - 6, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 8), "mediumVerticalSpace":labelMarginFromCellEdge - 12, "shortVerticalSpace": 8]
+        let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge - 2, "longVerticalSpace": labelMarginFromCellEdge - 6, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 8), "mediumVerticalSpace":labelMarginFromCellEdge - 12, "shortVerticalSpace": 6]
         
         let mediaPreviewLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[mediaPreview(==80)]-hSpaceFromCellEdge-[mediaTitle]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
         let mediaPreview_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mediaPreview(==130)]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
 
-        let labels_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-longVerticalSpace-[mediaTitle]-mediumVerticalSpace-[mediaVenue]-shortVerticalSpace-[mediaTimes]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let labels_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[mediaTitle]-mediumVerticalSpace-[mediaVenue]-shortVerticalSpace-[mediaTimes]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(labels_constraint_V)
         contentView.addConstraints(mediaPreview_constraint_V)
