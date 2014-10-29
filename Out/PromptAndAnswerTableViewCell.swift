@@ -44,6 +44,10 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         self.prompt1.textAlignment = NSTextAlignment.Left
         self.prompt1.font = titleFont?.fontWithSize(17.0)
         self.prompt1.preferredMaxLayoutWidth = contentView.frame.width - 20
+        if UIScreen.mainScreen().bounds.size.width == 320{
+            self.prompt1.preferredMaxLayoutWidth = self.bounds.size.width - 60
+        }
+
         contentView.addSubview(prompt1)
         
         self.prompt2 = UILabel(frame: CGRectZero)
@@ -52,6 +56,10 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         self.prompt2.textAlignment = NSTextAlignment.Left
         self.prompt2.font = titleFont?.fontWithSize(17.0)
         self.prompt2.preferredMaxLayoutWidth = contentView.frame.width - 20
+        if UIScreen.mainScreen().bounds.size.width == 320{
+            self.prompt2.preferredMaxLayoutWidth = self.bounds.size.width - 60
+        }
+
         contentView.addSubview(prompt2)
         
         self.textView1 = UITextView(frame: CGRectZero)

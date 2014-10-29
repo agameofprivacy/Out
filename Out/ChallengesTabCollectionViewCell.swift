@@ -100,7 +100,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         contentView.addSubview(nextStepButton)
         
         var viewsDictionary = ["canvasTableView":canvasTableView, "titleLabel":titleLabel, "titleSeparator":titleSeparator, "subtitleLabel":subtitleLabel, "nextStepButton":nextStepButton]
-        var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 10]
+        var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 6]
         
         var horizontalTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleLabel(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInset-[titleSeparator(==contentWidth)]-cardInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
@@ -242,6 +242,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
             cell.fieldTitle.text = "HRC"
             cell.fieldValue.text = "www.hrc.org"
+            var tapRecognizer = UITapGestureRecognizer(target: self, action: "launchWebView:")
             return cell
         }
         else if currentCellType == "eventInfo"{
@@ -267,7 +268,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "boolPicker"{
             var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
-            cell.titleLabel.text = "Notify Mentor"
+            cell.titleLabel.text = contentDictionary[currentStepCount]["boolTitle\(challengeTrackNumber)"]
             return cell
         }
         else if currentCellType == "cautionText"{
@@ -372,6 +373,11 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     func dialNumber(sender:UITapGestureRecognizer!){
         var cell:CallTableViewCell = sender.view as CallTableViewCell
         UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(cell.numberLabel.text!)")!)
+    }
+    
+    func launchWebView(sender:UITapGestureRecognizer!){
+        var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
+        
     }
 }
 

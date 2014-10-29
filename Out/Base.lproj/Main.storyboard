@@ -77,6 +77,25 @@
             </objects>
             <point key="canvasLocation" x="4179" y="392"/>
         </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="9Sk-XK-H0G">
+            <objects>
+                <viewController id="cGl-bT-5W6" customClass="WebViewViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IK2-6M-0n3"/>
+                        <viewControllerLayoutGuide type="bottom" id="KTW-MI-m8E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oBU-ZJ-OJq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HTc-8h-PIg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7SC-1g-Aie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4037" y="1414"/>
+        </scene>
         <!--Challenges-->
         <scene sceneID="3v2-ba-nqX">
             <objects>

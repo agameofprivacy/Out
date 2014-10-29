@@ -40,7 +40,7 @@ class CautionTextTableViewCell: UITableViewCell {
         self.cautionTextLabel.textAlignment = NSTextAlignment.Left
         self.cautionTextLabel.preferredMaxLayoutWidth =  self.bounds.size.width - 8
         if UIScreen.mainScreen().bounds.size.width == 320{
-            self.cautionTextLabel.preferredMaxLayoutWidth = self.bounds.size.width - 20
+            self.cautionTextLabel.preferredMaxLayoutWidth = self.bounds.size.width - 60
         }
         contentView.addSubview(self.cautionTextLabel)
         

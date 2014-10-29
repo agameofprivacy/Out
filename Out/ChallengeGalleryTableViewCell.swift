@@ -86,7 +86,7 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
         var metricsDictionary = ["cardInsetH":cardInsetH, "cardInsetV":cardInsetV, "labelInsetH":labelInsetH, "labelInsetTop":labelInsetTop, "labelInsetBottom":labelInsetBottom]
         
         var labelsConstraints_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-labelInsetH-[titleLabel]-labelInsetH-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var labelsConstraints_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-labelInsetTop-[titleLabel]-[separatorLine(==2)]-[reasonLabel]-[introLabel]-labelInsetBottom-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var labelsConstraints_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-labelInsetTop-[titleLabel]-0-[separatorLine(==2)]-[reasonLabel]-[introLabel]-labelInsetBottom-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
 
         var cardContainerConstraints_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardInsetH-[cardContainerView]-cardInsetH-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var cardContainerConstraints_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-cardInsetV-[cardContainerView]-cardInsetV-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
