@@ -106,11 +106,6 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
 //        doneToolBar.setItems(toolBarItems, animated: false)
 //        currentTextView.inputAccessoryView = doneToolBar
 //    }
-    
-//    func doneButtonPressed(sender:UIBarButtonItem){
-//        textView1.resignFirstResponder()
-//        textView2.resignFirstResponder()
-//    }
-    
+        
     
 }

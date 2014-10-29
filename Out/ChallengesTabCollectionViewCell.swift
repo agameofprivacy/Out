@@ -125,12 +125,14 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentCellType = currentCellTypes[indexPath.row]
         var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
+        
         if self.countofCellTypeDictionary[currentCellType] == nil{
             self.countofCellTypeDictionary.updateValue([indexPath.row], forKey: currentCellType)
         }
         else if !contains(self.countofCellTypeDictionary[currentCellType] as [Int]!, indexPath.row){
             self.countofCellTypeDictionary[currentCellType]?.append(indexPath.row)
         }
+        
         if currentCellType == "gallerySelect"{
             
             self.canvasTableView.alwaysBounceVertical = false
@@ -242,7 +244,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "eventInfo"{
             var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
-//            cell.eventImage.image = UIImage(named: "ruffalonormalheart")
             cell.eventTitle.text = contentDictionary[currentStepCount]["eventTitle\(challengeTrackNumber)"]
             cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
             cell.eventTimes.text = contentDictionary[currentStepCount]["eventTimes\(challengeTrackNumber)"]
@@ -334,7 +335,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
             var tempIndex = 0
             for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
-                if rowCount > indexToUpdate{
+                if rowCount > currentRowNumbersArray[indexToUpdate]{
                     currentRowNumbersArray[tempIndex] = rowCount - 1
                 }
                 ++tempIndex
@@ -355,7 +356,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
             var tempIndex = 0
             for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
-                if rowCount > indexToUpdate{
+                if rowCount > currentRowNumbersArray[indexToUpdate]{
                     currentRowNumbersArray[tempIndex] = rowCount + 1
                 }
                 ++tempIndex

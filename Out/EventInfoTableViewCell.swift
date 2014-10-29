@@ -37,12 +37,7 @@ class EventInfoTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.selectionStyle = UITableViewCellSelectionStyle.None
-        
-//        self.eventImage = UIImageView(frame: CGRectZero)
-//        self.eventImage.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        self.eventImage.contentMode = UIViewContentMode.ScaleAspectFill
-//        contentView.addSubview(self.eventImage)
-        
+                
         self.eventTitle = UILabel(frame: CGRectZero)
         self.eventTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.eventTitle.textAlignment = NSTextAlignment.Left

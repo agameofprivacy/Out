@@ -53,16 +53,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         layout.itemSize = CGSize(width: self.galleryCollectionView.frame.width, height: self.galleryCollectionView.frame.height)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         
-//        var viewsDictionary = ["galleryCollectionView":galleryCollectionView]
-//        var metricsDictionary = ["":""]
         contentView.addSubview(self.galleryCollectionView)
-//
-//        var horizontalGalleryConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[galleryCollectionView]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        var verticalGalleryConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[galleryCollectionView(>=44)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        contentView.addConstraints(horizontalGalleryConstraints)
-//        contentView.addConstraints(verticalGalleryConstraints)
-        
     }
     
     
