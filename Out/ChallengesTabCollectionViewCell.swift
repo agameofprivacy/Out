@@ -218,18 +218,20 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "valuePicker"{
             var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as PickerViewTableViewCell
-            cell.values = ["Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye","Hello", "Hi", "Goodbye"]
-            cell.key = "Greeting"
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["valuePicker"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            var valuesString = contentDictionary[currentStepCount]["picker\(count)Values"]
+            var arrayOfValuesStrings = valuesString?.componentsSeparatedByString("--")
+            cell.values = arrayOfValuesStrings
+            cell.key = contentDictionary[currentStepCount]["picker\(count)Key"]
             return cell
-        
         }
         else if currentCellType == "fieldsAndActivator"{
             var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["fieldsAndActivator"]!
-            println(rowNumbers)
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
-            println(contentDictionary[currentStepCount]["picker\(count)Title"])
             cell.fieldTitle.text = contentDictionary[currentStepCount]["picker\(count)Title"]
             cell.fieldValuePlaceholder.text = contentDictionary[currentStepCount]["picker\(count)ValuePlaceholder"]
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView:")
@@ -251,9 +253,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "callNumber"{
             var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
-            cell.titleLabel.text = "The Trevor Project"
-            cell.numberLabel.text = "425-408-3772"
-            var tapRecognizer = UITapGestureRecognizer(target: self, action: "dialNumber")
+            cell.titleLabel.text = contentDictionary[currentStepCount]["callTitle\(challengeTrackNumber)"]
+            cell.numberLabel.text = contentDictionary[currentStepCount]["callNumber\(challengeTrackNumber)"]
+            var tapRecognizer = UITapGestureRecognizer(target: self, action: "dialNumber:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
@@ -367,8 +369,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
     }
     
-    func dialNumber(){
-        UIApplication.sharedApplication().openURL(NSURL(string: "tel://4254083772")!)
+    func dialNumber(sender:UITapGestureRecognizer!){
+        var cell:CallTableViewCell = sender.view as CallTableViewCell
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(cell.numberLabel.text!)")!)
     }
 }
 
