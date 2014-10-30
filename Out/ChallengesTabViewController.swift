@@ -260,7 +260,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     func presentWebView(url: NSURL) {
         var webView = WebViewViewController()
         webView.url = url
-        self.presentViewController(webView, animated: true, completion: {println("Presented!")})
+        var newViewController = UINavigationController(rootViewController: webView)
+        newViewController?.setToolbarHidden(false, animated: true)
+        self.presentViewController(newViewController!, animated: true, completion: nil)
     }
     
 }
