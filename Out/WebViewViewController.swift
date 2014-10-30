@@ -7,29 +7,24 @@
 //
 
 import UIKit
+import WebKit
 
 class WebViewViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var webView:WKWebView!
+    
+    override func loadView() {
+        super.loadView()
+        webView = WKWebView()
+        self.view = webView
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var url = NSURL(string:"http://www.hrc.org/")
+        var req = NSURLRequest(URL:url!)
+        self.webView!.loadRequest(req)
+        
     }
-    */
-
 }

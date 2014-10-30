@@ -15,7 +15,7 @@ protocol CollectStepData {
 }
 
 
-class ChallengesTabViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate{
+class ChallengesTabViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, PresentNewView{
     
     var currentChallengesCardsCollectionView: UICollectionView!
     var cardNumberPageControl: UIPageControl!
@@ -255,6 +255,11 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             arrayCount += 1
         }
         return contentDictionary
+    }
+    
+    func presentWebView(url: NSURL) {
+        var webView = WebViewViewController()
+        self.presentViewController(webView, animated: true, completion: {println("Presented!")})
     }
     
 }

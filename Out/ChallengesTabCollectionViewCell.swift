@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol PresentNewView{
+
+    func presentWebView(url:NSURL)
+}
+
+
 class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITableViewDelegate {
 
     required init(coder aDecoder: NSCoder) {
@@ -243,6 +249,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.fieldTitle.text = "HRC"
             cell.fieldValue.text = "www.hrc.org"
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "launchWebView:")
+            cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
         else if currentCellType == "eventInfo"{
@@ -377,7 +384,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     func launchWebView(sender:UITapGestureRecognizer!){
         var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
-        
+        var collectionView = self.superview as UICollectionView
+        var baseClass = collectionView.delegate as ChallengesTabViewController
+        var urlString = NSURL(string: "http://www.hrc.org")
+        baseClass.presentWebView(urlString!)
     }
 }
 

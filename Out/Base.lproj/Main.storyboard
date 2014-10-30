@@ -94,7 +94,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7SC-1g-Aie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4037" y="1414"/>
+            <point key="canvasLocation" x="3717" y="2374"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="spQ-og-b0H">
+            <objects>
+                <navigationController id="EYd-9a-n00" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B1M-jo-Gbj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cGl-bT-5W6" kind="relationship" relationship="rootViewController" id="Zzu-Ii-uqx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9hX-79-oIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3056" y="2374"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="3v2-ba-nqX">
