@@ -386,8 +386,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
         var collectionView = self.superview as UICollectionView
         var baseClass = collectionView.delegate as ChallengesTabViewController
-        var urlString = NSURL(string: "http://www.hrc.org")
-        baseClass.presentWebView(urlString!)
+        var urlFromCell = cell.fieldValue.text
+        var urlObject = NSURL(string: "http://\(urlFromCell!)")
+        baseClass.presentWebView(urlObject!)
     }
 }
 
