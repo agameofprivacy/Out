@@ -12,7 +12,7 @@ import WebKit
 class WebViewViewController: UIViewController {
 
     var webView:WKWebView!
-    
+    var url:NSURL!
     override func loadView() {
         super.loadView()
         webView = WKWebView()
@@ -22,8 +22,7 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var url = NSURL(string:"http://www.hrc.org/")
-        var req = NSURLRequest(URL:url!)
+        var req = NSURLRequest(URL:self.url)
         self.webView!.loadRequest(req)
         
     }

@@ -259,6 +259,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     
     func presentWebView(url: NSURL) {
         var webView = WebViewViewController()
+        webView.url = url
         self.presentViewController(webView, animated: true, completion: {println("Presented!")})
     }
     
