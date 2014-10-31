@@ -24,12 +24,15 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
     let labelInsetH = 24
     let labelInsetV = 18
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        var imageImageViewHeight = frame.size.height / 2.1
         imageImageView = UIImageView(frame: CGRectZero)
         imageImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        imageImageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageImageView.clipsToBounds = true
+        imageImageView.layer.cornerRadius = 5
         contentView.addSubview(imageImageView)
         
         titleLabel = UILabel(frame: CGRectZero)
@@ -55,11 +58,11 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(blurbLabel)
         
         var viewsDictionary = ["imageImageView":imageImageView, "titleLabel":titleLabel, "blurbLabel":blurbLabel]
-        var metricsDictioanry = ["labelInsetH":labelInsetH, "labelInsetV":labelInsetV]
+        var metricsDictioanry = ["labelInsetH":labelInsetH, "labelInsetV":labelInsetV, "imageImageViewHeight":imageImageViewHeight]
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[imageImageView]-10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictioanry, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[imageImageView]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[imageImageView(<=imageImageViewHeight)]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

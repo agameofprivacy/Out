@@ -16,11 +16,11 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
     let introLabel:UILabel!
     let cardContainerView:UIView!
     
-    let cardInsetH =  12
-    let cardInsetV =  5
-    let labelInsetH = 20
+    let cardInsetH =  8
+    let cardInsetV =  4
+    let labelInsetH = 18
     let labelInsetTop = 24
-    let labelInsetBottom = 28
+    let labelInsetBottom = 26
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,7 +37,7 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.cardContainerView = UIView(frame: CGRectZero)
         self.cardContainerView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.cardContainerView.layer.cornerRadius = 6
+        self.cardContainerView.layer.cornerRadius = 5
         self.cardContainerView.layer.borderWidth = 1
         self.cardContainerView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
         self.cardContainerView.backgroundColor = UIColor.whiteColor()

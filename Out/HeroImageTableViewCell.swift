@@ -31,7 +31,7 @@ class HeroImageTableViewCell: UITableViewCell {
         self.heroImage.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.heroImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.heroImage.clipsToBounds = true
-        self.heroImage.layer.cornerRadius = 6
+        self.heroImage.layer.cornerRadius = 5
         contentView.addSubview(self.heroImage)
         
         var viewsDictionary = ["heroImage":self.heroImage]
@@ -39,7 +39,7 @@ class HeroImageTableViewCell: UITableViewCell {
         
         var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImage]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(<=100)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==130)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

@@ -13,9 +13,6 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     var challengesTableView:UITableView!
     var activityIndicator: UIActivityIndicatorView!
     
-    let horizontalSectionInset:CGFloat = 8.0
-    let verticalSectionInset:CGFloat = 12.0
-    
     var challengeModelsObjects:[AnyObject] = []
     var filters:[String] = []
     var currentChallengesStrings:[String] = []
@@ -31,6 +28,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.challengesTableView.rowHeight = UITableViewAutomaticDimension
         self.challengesTableView.estimatedRowHeight = 150
+        self.challengesTableView.contentInset = UIEdgeInsets(top: 6, left: 0, bottom: 10, right: 0)
         
         self.challengesTableView.registerClass(ChallengeGalleryTableViewCell.self, forCellReuseIdentifier: "ChallengeGalleryTableViewCell")
         

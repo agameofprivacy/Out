@@ -23,7 +23,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengesObjects:[AnyObject] = []
     var stepFullUserDataDictionary:[String:String] = [:]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
@@ -80,7 +79,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengesTabCollectionViewCell
         // Configure the cell
-        cell.layer.cornerRadius = 6
+        cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
 

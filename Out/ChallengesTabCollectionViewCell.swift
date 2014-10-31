@@ -34,6 +34,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var contentDictionary:[[String:String]]!
     var tempString = ""
     var countofCellTypeDictionary:[String:[Int]] = ["":[0]]
+    var shownHiddenRows:[NSIndexPath] = []
     
     
     override init(frame: CGRect) {
@@ -102,7 +103,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.nextStepButton.userInteractionEnabled = true
         self.nextStepButton.layer.borderWidth = 1
         self.nextStepButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.nextStepButton.layer.cornerRadius = 6
+        self.nextStepButton.layer.cornerRadius = 5
         contentView.addSubview(nextStepButton)
         
         var viewsDictionary = ["canvasTableView":canvasTableView, "titleLabel":titleLabel, "titleSeparator":titleSeparator, "subtitleLabel":subtitleLabel, "nextStepButton":nextStepButton]
@@ -142,7 +143,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         if currentCellType == "gallerySelect"{
             
             self.canvasTableView.alwaysBounceVertical = false
-            
             var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
 
             var itemTitles:[String] = ["","","","",""]
@@ -304,9 +304,23 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
     
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
+        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
+        var currentCellType = currentCellTypes[indexPath.row]
+        if currentCellType == "valuePicker" && !contains(shownHiddenRows, indexPath){
+            return 1
+        }
+        else if currentCellType == "valuePicker" && contains(shownHiddenRows, indexPath){
+            return UITableViewAutomaticDimension
+        }
+        else{
+        return UITableViewAutomaticDimension
+        }
     }
+    
             
     func loadCurrentChallenges(objectId:String){
         self.canvasTableView.hidden = true
@@ -328,54 +342,33 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
     }
     
+
+    
     func showHidePickerView(sender:UITapGestureRecognizer!){
+
+        self.canvasTableView.beginUpdates()
+
         var cell:FieldsAndActivatorTableViewCell = sender.view as FieldsAndActivatorTableViewCell
+        
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-        var nextCellIsExpandedCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) is PickerViewTableViewCell
-        var indexToUpdate:Int = find(self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!,indexPath.row)!
-        if nextCellIsExpandedCell{
-            self.canvasTableView.beginUpdates()
-            self.canvasTableView.deleteRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
-            var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-            var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
-            self.tempString = currentCellTypeArray[currentStepCount][nextIndexPath.row]
-            currentCellTypeArray[currentStepCount].removeAtIndex(nextIndexPath.row)
-            self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
-            var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
-            var tempIndex = 0
-            for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
-                if rowCount > currentRowNumbersArray[indexToUpdate]{
-                    currentRowNumbersArray[tempIndex] = rowCount - 1
-                }
-                ++tempIndex
-            }
-            tempIndex = 0
-            self.countofCellTypeDictionary["fieldsAndActivator"] = currentRowNumbersArray
-            self.canvasTableView.endUpdates()
+
+        var pickerCell:PickerViewTableViewCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) as PickerViewTableViewCell
+        if contains(shownHiddenRows, nextIndexPath){
+            var indexToRemove = find(shownHiddenRows, nextIndexPath)
+            self.shownHiddenRows.removeAtIndex(indexToRemove!)
+            pickerCell.pickerView.hidden = true
         }
-        else{
-            self.canvasTableView.beginUpdates()
-            var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-            var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
-            var currentCellTypes = currentCellTypeArray[currentStepCount]
-            currentCellTypes.insert(tempString, atIndex: nextIndexPath.row)
-            currentCellTypeArray[currentStepCount] = currentCellTypes
-            self.currentChallengeModel["stepCellsType"] = currentCellTypeArray
-            self.canvasTableView.insertRowsAtIndexPaths([nextIndexPath], withRowAnimation: UITableViewRowAnimation.Top)
-            var currentRowNumbersArray = self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!
-            var tempIndex = 0
-            for rowCount in self.countofCellTypeDictionary["fieldsAndActivator"] as [Int]!{
-                if rowCount > currentRowNumbersArray[indexToUpdate]{
-                    currentRowNumbersArray[tempIndex] = rowCount + 1
-                }
-                ++tempIndex
-            }
-            tempIndex = 0
-            self.countofCellTypeDictionary["fieldsAndActivator"] = currentRowNumbersArray
-            self.canvasTableView.endUpdates()
+
+        else if !contains(shownHiddenRows, nextIndexPath){
+            self.shownHiddenRows.append(nextIndexPath)
+            pickerCell.pickerView.hidden = false
+
         }
+
+        self.canvasTableView.endUpdates()
     }
+    
     
     func dialNumber(sender:UITapGestureRecognizer!){
         var cell:CallTableViewCell = sender.view as CallTableViewCell

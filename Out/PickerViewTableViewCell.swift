@@ -38,6 +38,7 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         self.pickerView.showsSelectionIndicator = true
+        self.pickerView.hidden = true
         contentView.addSubview(self.pickerView)
         
         var viewsDictionary = ["pickerView":pickerView]

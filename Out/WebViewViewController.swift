@@ -21,15 +21,17 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         super.loadView()
         webView = WKWebView()
         webView.navigationDelegate = self
-        toolBar = UIToolbar()
-        navBar = UINavigationBar()
-
         var closeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneWithView")
         closeButton.enabled = false
+        closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = closeButton
+        var backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
+        backButton.tintColor = UIColor.blackColor()
+        var reloadButton = UIBarButtonItem(title: "Reload", style: UIBarButtonItemStyle.Plain, target: self, action: "reload")
+        reloadButton.tintColor = UIColor.blackColor()
+        var flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        self.toolbarItems = [backButton,flexibleSpace,reloadButton]
         self.navigationItem.title = "Loading..."
-        webView.addSubview(toolBar)
-        webView.addSubview(navBar)
         self.view = webView
     }
     
@@ -46,5 +48,13 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
     
     func doneWithView(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func back(){
+        self.webView.goBack()
+    }
+    
+    func reload(){
+        self.webView.reload()
     }
 }
