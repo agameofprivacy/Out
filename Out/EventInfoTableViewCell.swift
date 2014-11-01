@@ -10,14 +10,10 @@ import UIKit
 
 class EventInfoTableViewCell: UITableViewCell {
 
-    var eventImage:UIImageView!
     var eventTitle:UILabel!
     var eventVenue:UILabel!
     var eventTimes:UILabel!
     
-    let eventImageHeight = 130
-    let eventImageWidth = 80
-
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
     
@@ -43,7 +39,7 @@ class EventInfoTableViewCell: UITableViewCell {
         self.eventTitle.textAlignment = NSTextAlignment.Left
         self.eventTitle.numberOfLines = 0
         self.eventTitle.font = titleFont?.fontWithSize(17.0)
-        self.eventTitle.preferredMaxLayoutWidth = self.bounds.width - 136
+        self.eventTitle.preferredMaxLayoutWidth = self.bounds.width - 20
         if UIScreen.mainScreen().bounds.width == 320{
             self.eventTitle.preferredMaxLayoutWidth = self.bounds.width - 139
         }
@@ -54,7 +50,7 @@ class EventInfoTableViewCell: UITableViewCell {
         self.eventTimes.textAlignment = NSTextAlignment.Left
         self.eventTimes.numberOfLines = 0
         self.eventTimes.font = valueFont?.fontWithSize(15.0)
-        self.eventTimes.preferredMaxLayoutWidth = self.bounds.width - 136
+        self.eventTimes.preferredMaxLayoutWidth = self.bounds.width - 20
         if UIScreen.mainScreen().bounds.width == 320{
             self.eventTimes.preferredMaxLayoutWidth = self.bounds.width - 139
         }
@@ -65,7 +61,7 @@ class EventInfoTableViewCell: UITableViewCell {
         self.eventVenue.textAlignment = NSTextAlignment.Left
         self.eventVenue.numberOfLines = 0
         self.eventVenue.font = valueFont?.fontWithSize(15.0)
-        self.eventVenue.preferredMaxLayoutWidth = self.bounds.width - 136
+        self.eventVenue.preferredMaxLayoutWidth = self.bounds.width - 20
         if UIScreen.mainScreen().bounds.width == 320{
             self.eventVenue.preferredMaxLayoutWidth = self.bounds.width - 139
         }
@@ -77,7 +73,7 @@ class EventInfoTableViewCell: UITableViewCell {
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[eventTitle]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
         
-        var verticalConstraintsLabels:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[eventTitle]-0-[eventTimes]-shortVerticalBuffer-[eventVenue]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraintsLabels:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-labelsTopMargin-[eventTitle]-4-[eventTimes]-8-[eventVenue]-4-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraintsLabels)

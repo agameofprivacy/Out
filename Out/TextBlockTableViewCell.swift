@@ -45,7 +45,7 @@ class TextBlockTableViewCell: UITableViewCell {
         
         let textBlockLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textBlock]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        let textBlockLabel_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[textBlock]-bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let textBlockLabel_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[textBlock]-10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(textBlockLabel_constraint_H)
         contentView.addConstraints(textBlockLabel_constraint_V)

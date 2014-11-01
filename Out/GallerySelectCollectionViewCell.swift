@@ -33,13 +33,15 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         imageImageView.contentMode = UIViewContentMode.ScaleAspectFill
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = 5
+//        imageImageView.layer.borderWidth = 1
+//        imageImageView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).CGColor
         contentView.addSubview(imageImageView)
         
         titleLabel = UILabel(frame: CGRectZero)
         titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.font = titleFont?.fontWithSize(16.0)
+        titleLabel.font = titleFont?.fontWithSize(17.0)
         titleLabel.preferredMaxLayoutWidth = self.bounds.width - 12
         if UIScreen.mainScreen().bounds.width == 320{
             titleLabel.preferredMaxLayoutWidth = self.bounds.width - 14
@@ -50,7 +52,7 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         blurbLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         blurbLabel.numberOfLines = 0
         blurbLabel.textAlignment = NSTextAlignment.Left
-        blurbLabel.font = valueFont?.fontWithSize(14.0)
+        blurbLabel.font = valueFont?.fontWithSize(16.0)
         blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 12
         if UIScreen.mainScreen().bounds.width == 320{
             blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 14

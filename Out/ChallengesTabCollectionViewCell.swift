@@ -62,7 +62,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.dataSource = self
         self.canvasTableView.delegate = self
         self.canvasTableView.rowHeight = UITableViewAutomaticDimension
-        self.canvasTableView.estimatedRowHeight = 200
+        self.canvasTableView.estimatedRowHeight = 90
         
         contentView.addSubview(canvasTableView)
         
@@ -98,6 +98,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.nextStepButton.frame = CGRectZero
         self.nextStepButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
+
         self.nextStepButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.nextStepButton.titleLabel!.font = UIFont(name: "UIFontTextStyleHeadline", size: CGFloat(30.0))
         self.nextStepButton.userInteractionEnabled = true
@@ -191,7 +192,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         else if currentCellType == "textBlock"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-            cell.textBlock.text = contentDictionary[currentStepCount]["blockText\(challengeTrackNumber)"]
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["textBlock"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            cell.textBlock.text = contentDictionary[currentStepCount]["block\(count)Text\(challengeTrackNumber)"]
             return cell
         }
             
@@ -227,10 +231,11 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var rowNumbers:[Int] = self.countofCellTypeDictionary["valuePicker"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
-            var valuesString = contentDictionary[currentStepCount]["picker\(count)Values"]
+            var valuesString = contentDictionary[currentStepCount]["picker\(count)Values\(challengeTrackNumber)"]
             var arrayOfValuesStrings = valuesString?.componentsSeparatedByString("--")
             cell.values = arrayOfValuesStrings
             cell.key = contentDictionary[currentStepCount]["picker\(count)Key"]
+            cell.pickerView.selectRow(2, inComponent: 0, animated: true)
             return cell
         }
         else if currentCellType == "fieldsAndActivator"{
@@ -246,8 +251,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "launchWebView"{
             var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
-            cell.fieldTitle.text = "HRC"
-            cell.fieldValue.text = "www.hrc.org"
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["launchWebView"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            var urlString = contentDictionary[currentStepCount]["launch\(count)URL\(challengeTrackNumber)"]
+            cell.launchURL = NSURL(string: urlString!)
+            cell.fieldTitle.text = contentDictionary[currentStepCount]["field\(count)Title\(challengeTrackNumber)"]
+            cell.fieldValue.text = contentDictionary[currentStepCount]["field\(count)Value\(challengeTrackNumber)"]
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "launchWebView:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell
@@ -255,14 +265,17 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         else if currentCellType == "eventInfo"{
             var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
             cell.eventTitle.text = contentDictionary[currentStepCount]["eventTitle\(challengeTrackNumber)"]
-            cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
             cell.eventTimes.text = contentDictionary[currentStepCount]["eventTimes\(challengeTrackNumber)"]
+            cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
             return cell
         }
         else if currentCellType == "callNumber"{
             var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
-            cell.titleLabel.text = contentDictionary[currentStepCount]["callTitle\(challengeTrackNumber)"]
-            cell.numberLabel.text = contentDictionary[currentStepCount]["callNumber\(challengeTrackNumber)"]
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["callNumber"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            cell.titleLabel.text = contentDictionary[currentStepCount]["call\(count)Title\(challengeTrackNumber)"]
+            cell.numberLabel.text = contentDictionary[currentStepCount]["call\(count)Number\(challengeTrackNumber)"]
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "dialNumber:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell
@@ -275,17 +288,29 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         else if currentCellType == "boolPicker"{
             var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
-            cell.titleLabel.text = contentDictionary[currentStepCount]["boolTitle\(challengeTrackNumber)"]
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["boolPicker"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            cell.titleLabel.text = contentDictionary[currentStepCount]["bool\(count)Title\(challengeTrackNumber)"]
+            cell.key = contentDictionary[currentStepCount]["bool\(count)Title\(challengeTrackNumber)"]
             return cell
         }
         else if currentCellType == "cautionText"{
             var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as CautionTextTableViewCell
-            cell.cautionTextLabel.text = contentDictionary[currentStepCount]["cautionText\(challengeTrackNumber)"]
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["cautionText"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            cell.cautionTextLabel.text = contentDictionary[currentStepCount]["caution\(count)Text\(challengeTrackNumber)"]
+
             return cell
         }
         else if currentCellType == "textField"{
             var cell:TextFieldInputTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextFieldInputTableViewCell") as TextFieldInputTableViewCell
-            cell.textField.placeholder = "Placeholder"
+            var rowNumbers:[Int] = self.countofCellTypeDictionary["textField"]!
+            var count:Int = find(rowNumbers, indexPath.row)!
+            ++count
+            cell.textField.placeholder = contentDictionary[currentStepCount]["formField\(count)Placeholder\(challengeTrackNumber)"]
+            cell.key = contentDictionary[currentStepCount]["formField\(count)Placeholder\(challengeTrackNumber)"]
             return cell
         }
         
@@ -349,7 +374,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.beginUpdates()
 
         var cell:FieldsAndActivatorTableViewCell = sender.view as FieldsAndActivatorTableViewCell
-        
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
 
@@ -358,12 +382,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var indexToRemove = find(shownHiddenRows, nextIndexPath)
             self.shownHiddenRows.removeAtIndex(indexToRemove!)
             pickerCell.pickerView.hidden = true
+            cell.fieldValuePlaceholder.text = pickerCell.values[pickerCell.pickerView.selectedRowInComponent(0)]
         }
 
         else if !contains(shownHiddenRows, nextIndexPath){
             self.shownHiddenRows.append(nextIndexPath)
             pickerCell.pickerView.hidden = false
-
+            cell.fieldValuePlaceholder.text = "tap to confirm"
         }
 
         self.canvasTableView.endUpdates()
@@ -380,7 +405,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var collectionView = self.superview as UICollectionView
         var baseClass = collectionView.delegate as ChallengesTabViewController
         var urlFromCell = cell.fieldValue.text
-        var urlObject = NSURL(string: "http://\(urlFromCell!)")
+        var urlObject = cell.launchURL
         baseClass.presentWebView(urlObject!)
     }
 }

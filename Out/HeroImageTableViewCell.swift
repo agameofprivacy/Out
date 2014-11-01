@@ -32,6 +32,8 @@ class HeroImageTableViewCell: UITableViewCell {
         self.heroImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.heroImage.clipsToBounds = true
         self.heroImage.layer.cornerRadius = 5
+//        self.heroImage.layer.borderWidth = 1
+//        self.heroImage.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).CGColor
         contentView.addSubview(self.heroImage)
         
         var viewsDictionary = ["heroImage":self.heroImage]

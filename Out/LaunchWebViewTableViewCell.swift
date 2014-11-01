@@ -13,6 +13,7 @@ class LaunchWebViewTableViewCell: UITableViewCell {
     var fieldTitle:UILabel!
     var fieldValue:UILabel!
     let fontSize:CGFloat = 16.0
+    var launchURL:NSURL!
 
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
