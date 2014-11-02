@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(containerScrollView)
         
         
-        let labelWidth = UIScreen.mainScreen().bounds.size.width - 40
+        let labelWidth = UIScreen.mainScreen().bounds.size.width - 24
         
         instructionLabel = UILabel(frame: CGRectZero)
         instructionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -82,7 +82,7 @@ class LoginViewController: UIViewController {
         
         let metricsDictionary = ["longVerticalSpace": 33,"mediumVerticalSpace": 20, "shortVerticalSpace": 16, "labelWidth":labelWidth]
         
-        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-<=20-[instructionLabel(==labelWidth)]-<=20-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-<=12-[instructionLabel(==labelWidth)]-<=12-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
 
         let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=40-[instructionLabel]-mediumVerticalSpace-[aliasTextField(44)]-shortVerticalSpace-[passwordTextField(44)]->=40-[loginButton(44)]-shortVerticalSpace-[createAccountButton(44)]->=236-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
