@@ -9,9 +9,29 @@
 import UIKit
 
 class DashboardViewController: UIViewController {
-
+    
+    var currentUserLabel:UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Dashboard"
+        
+        currentUserLabel = UILabel(frame: CGRectZero)
+        currentUserLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        currentUserLabel.text = PFUser.currentUser().username
+        currentUserLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(currentUserLabel)
+        
+        var viewsDictionary = ["currentUserLabel":currentUserLabel]
+        var metricsDictionary = ["margin": 20]
+        
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-==margin-[currentUserLabel]-==margin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=80-[currentUserLabel]->=330-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        
+        self.view.addConstraints(horizontalConstraints)
+        self.view.addConstraints(verticalConstraints)
+        
 
         // Do any additional setup after loading the view.
     }
