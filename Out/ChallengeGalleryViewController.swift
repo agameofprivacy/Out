@@ -96,7 +96,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["username"] = PFUser.currentUser()
         newChallengeModel["challenge"] = selectedChallengeObject
         newChallengeModel["currentStepCount"] = 0
-        newChallengeModel["challengeTrackNumber"] = ""
+        newChallengeModel["challengeTrackNumber"] = "1"
         newChallengeModel["stepContent"] = []
 
         newChallengeModel.saveInBackground()
@@ -113,6 +113,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
             query.whereKey("tags", containedIn: filters)
         }
         var currentChallengesQuery = PFQuery(className: "UserChallengeData")
+        currentChallengesQuery.whereKey("username", equalTo: PFUser.currentUser())
         currentChallengesQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {

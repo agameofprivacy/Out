@@ -177,7 +177,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.itemBlurbs = itemBlurbs
             
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            
+            cell.galleryCollectionView.reloadData()
+
             return cell
         }
             
@@ -206,8 +207,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
             var cell:PromptAndAnswerTableViewCell = tableView.dequeueReusableCellWithIdentifier("PromptAndAnswerTableViewCell") as PromptAndAnswerTableViewCell
             
-            cell.prompt1.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-1"]
-            cell.prompt2.text = contentDictionary[currentStepCount]["prompt\(challengeTrackNumber)-2"]
+            cell.prompt1.text = contentDictionary[currentStepCount]["prompt1-\(challengeTrackNumber)"]
+            cell.prompt2.text = contentDictionary[currentStepCount]["prompt2-\(challengeTrackNumber)"]
             
             return cell
         }
@@ -243,8 +244,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             var rowNumbers:[Int] = self.countofCellTypeDictionary["fieldsAndActivator"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
-            cell.fieldTitle.text = contentDictionary[currentStepCount]["picker\(count)Title"]
-            cell.fieldValuePlaceholder.text = contentDictionary[currentStepCount]["picker\(count)ValuePlaceholder"]
+            cell.fieldTitle.text = contentDictionary[currentStepCount]["activator\(count)Title"]
+            cell.fieldValuePlaceholder.text = contentDictionary[currentStepCount]["activator\(count)ValuePlaceholder"]
             var tapRecognizer = UITapGestureRecognizer(target: self, action: "showHidePickerView:")
             cell.addGestureRecognizer(tapRecognizer)
             return cell

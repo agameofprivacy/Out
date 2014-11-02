@@ -15,7 +15,7 @@ class CautionTextTableViewCell: UITableViewCell {
     var userDataDictionary:[String:String] = ["":""]
     
     var topMargin = 10
-    var bottomMargin = 20
+    var bottomMargin = 10
 
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)

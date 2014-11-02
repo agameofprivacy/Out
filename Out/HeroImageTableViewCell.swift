@@ -32,7 +32,7 @@ class HeroImageTableViewCell: UITableViewCell {
         self.heroImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.heroImage.clipsToBounds = true
         self.heroImage.layer.cornerRadius = 5
-//        self.heroImage.layer.borderWidth = 1
+//        self.heroImage.layer.borderWidth = 0.75
 //        self.heroImage.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).CGColor
         contentView.addSubview(self.heroImage)
         
@@ -41,7 +41,7 @@ class HeroImageTableViewCell: UITableViewCell {
         
         var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImage]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==130)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==130)]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

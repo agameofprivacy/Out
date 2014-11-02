@@ -21,7 +21,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="jqF-SY-eHb">
                             <connections>
                                 <action selector="logoutBarButtonItemTapped:" destination="0TN-8B-36n" id="K4y-JT-sFP"/>
-                                <segue destination="xGb-D8-E3Q" kind="presentation" identifier="LoggedOut" id="R4G-IP-Ih2"/>
+                                <segue destination="xGb-D8-E3Q" kind="presentation" identifier="LoggedOut" modalTransitionStyle="flipHorizontal" id="R4G-IP-Ih2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -360,7 +360,7 @@
             </objects>
             <point key="canvasLocation" x="1109" y="3450"/>
         </scene>
-        <!--Out-->
+        <!--Login View Controller-->
         <scene sceneID="oog-gJ-je5">
             <objects>
                 <viewController id="OqC-Fw-gTN" customClass="LoginViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
@@ -373,9 +373,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Out" id="HxT-FK-gGJ"/>
+                    <navigationItem key="navigationItem" id="HxT-FK-gGJ"/>
                     <connections>
-                        <segue destination="ujj-EG-4nN" kind="presentation" identifier="LoggedIn" id="27d-c0-TyZ"/>
+                        <segue destination="ujj-EG-4nN" kind="presentation" identifier="LoggedIn" modalTransitionStyle="flipHorizontal" id="27d-c0-TyZ"/>
                         <segue destination="TBt-ss-Dgd" kind="show" identifier="CreateAccount" id="e5y-IV-8RG"/>
                     </connections>
                 </viewController>
@@ -383,10 +383,10 @@
             </objects>
             <point key="canvasLocation" x="1921" y="-1908"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Account View Controller-->
         <scene sceneID="DWC-gG-Ips">
             <objects>
-                <viewController id="TBt-ss-Dgd" sceneMemberID="viewController">
+                <viewController id="TBt-ss-Dgd" customClass="CreateAccountViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N1J-yR-b8O"/>
                         <viewControllerLayoutGuide type="bottom" id="jhc-j7-Rx8"/>
@@ -394,37 +394,11 @@
                     <view key="view" contentMode="scaleToFill" id="fhG-av-TBC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fill in the following to create an account" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKx-bb-MKC">
-                                <rect key="frame" x="16" y="89" width="260" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="alias" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qo1-wV-7Fj">
-                                <rect key="frame" x="16" y="141" width="260" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DvQ-as-rGa">
-                                <rect key="frame" x="16" y="201" width="260" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="re-enter password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O9T-dM-14x">
-                                <rect key="frame" x="16" y="239" width="260" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cc-nc-OMd">
-                                <rect key="frame" x="93" y="290" width="107" height="30"/>
-                                <state key="normal" title="Create Account">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="ujj-EG-4nN" kind="presentation" identifier="AccountCreated" modalTransitionStyle="flipHorizontal" id="Sok-aU-O8u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72A-0f-OPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -505,5 +479,8 @@
             <point key="canvasLocation" x="990" y="376"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Sok-aU-O8u"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

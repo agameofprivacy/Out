@@ -52,8 +52,8 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         blurbLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         blurbLabel.numberOfLines = 0
         blurbLabel.textAlignment = NSTextAlignment.Left
-        blurbLabel.font = valueFont?.fontWithSize(16.0)
-        blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 12
+        blurbLabel.font = valueFont?.fontWithSize(15.0)
+        blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 20
         if UIScreen.mainScreen().bounds.width == 320{
             blurbLabel.preferredMaxLayoutWidth = self.bounds.width - 14
         }

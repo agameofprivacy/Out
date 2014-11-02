@@ -6,3 +6,4 @@
 #import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "TPKeyboardAvoidingTableView.h"
+#import "TPKeyboardAvoidingScrollView.h"

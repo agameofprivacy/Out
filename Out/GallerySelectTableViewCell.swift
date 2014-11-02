@@ -76,7 +76,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         var challengeTrackDictionary:[String:String] = [itemType:galleryNumber]
         return challengeTrackDictionary
     }
-    
+
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         //#warning Incomplete method implementation -- Return the number of sections

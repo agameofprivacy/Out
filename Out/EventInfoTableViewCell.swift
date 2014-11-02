@@ -68,12 +68,12 @@ class EventInfoTableViewCell: UITableViewCell {
         contentView.addSubview(self.eventVenue)
         
         var viewsDictionary = ["eventTitle":eventTitle, "eventTimes":eventTimes, "eventVenue":eventVenue]
-        var metricsDictionary = ["labelsTopMargin":14, "shortVerticalBuffer":4]
+        var metricsDictionary = ["labelsTopMargin":10, "shortVerticalBuffer":4]
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[eventTitle]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
         
-        var verticalConstraintsLabels:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-labelsTopMargin-[eventTitle]-4-[eventTimes]-8-[eventVenue]-4-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraintsLabels:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-labelsTopMargin-[eventTitle]-6-[eventTimes]-2-[eventVenue]-10-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraintsLabels)
