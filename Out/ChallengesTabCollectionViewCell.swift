@@ -40,6 +40,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.blackColor().CGColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowRadius = 1
+
+        
         self.canvasTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
         self.canvasTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.canvasTableView.showsVerticalScrollIndicator = true

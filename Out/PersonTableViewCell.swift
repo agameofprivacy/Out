@@ -9,7 +9,129 @@
 import UIKit
 
 class PersonTableViewCell: UITableViewCell {
+    
+    var userAvatar:UIImageView!
+    var userAlias:UILabel!
+    var userOrientationAge:UILabel!
+    var userLocation:UILabel!
+    var userButton:UIButton!
 
+    
+    let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+    let regularFont = UIFont(name: "HelveticaNeue-Regular", size: 15.0)
+    let valueFont = UIFont(name: "HelveticaNeue-Light", size: 15.0)
+    
+    var colorDictionary =
+    [
+        "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
+        "brown":UIColor(red: 139/255, green: 87/255, blue: 42/255, alpha: 1),
+        "teal":UIColor(red: 34/255, green: 200/255, blue: 165/255, alpha: 1),
+        "purple":UIColor(red: 140/255, green: 76/255, blue: 233/255, alpha: 1),
+        "pink":UIColor(red: 252/255, green: 52/255, blue: 106/255, alpha: 1),
+        "lightBlue":UIColor(red: 30/255, green: 169/255, blue: 238/255, alpha: 1),
+        "yellowGreen":UIColor(red: 211/255, green: 206/255, blue: 52/255, alpha: 1),
+        "vibrantBlue":UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1),
+        "vibrantGreen":UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
+    ]
+    
+    var avatarImageDictionary =
+    [
+        "elephant":UIImage(named: "elephant-icon"),
+        "snake":UIImage(named: "snake-icon"),
+        "butterfly":UIImage(named: "butterfly-icon"),
+        "snail":UIImage(named: "snail-icon"),
+        "horse":UIImage(named: "horse-icon"),
+        "bird":UIImage(named: "bird-icon"),
+        "turtle":UIImage(named: "turtle-icon"),
+        "sheep":UIImage(named: "sheep-icon"),
+        "bear":UIImage(named: "bear-icon"),
+        "littleBird":UIImage(named: "littleBird-icon"),
+        "dog":UIImage(named: "dog-icon"),
+        "rabbit":UIImage(named: "rabbit-icon"),
+        "caterpillar":UIImage(named: "caterpillar-icon"),
+        "crab":UIImage(named: "crab"),
+        "fish":UIImage(named: "fish"),
+        "cat":UIImage(named: "cat")
+    ]
+    
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsetsZero
+        self.userAvatar = UIImageView(frame: CGRectZero)
+        self.userAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAvatar.layer.cornerRadius = 25
+        self.userAvatar.clipsToBounds = true
+//        var userColor = self.user["color"] as String
+//        self.userAvatar.backgroundColor = self.colorDictionary[userColor]
+//        var userAvatarImage = self.user["avatar"] as String
+//        self.userAvatar.image = self.avatarImageDictionary[userAvatarImage]!
+        contentView.addSubview(self.userAvatar)
+        
+        self.userAlias = UILabel(frame: CGRectZero)
+        self.userAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAlias.textAlignment = NSTextAlignment.Left
+        self.userAlias.font = regularFont?.fontWithSize(15.0)
+//        self.userAlias.text = self.user.username
+        contentView.addSubview(self.userAlias)
+        
+        self.userOrientationAge = UILabel(frame: CGRectZero)
+        self.userOrientationAge.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userOrientationAge.textAlignment = NSTextAlignment.Left
+        self.userOrientationAge.font = titleFont?.fontWithSize(14.0)
+//        var userOrientation = self.user["sexualOrientation"] as String
+//        var userAge = self.user["age"] as Int
+//        self.userOrientationAge.text = "\(userOrientation) . \(userAge)"
+        contentView.addSubview(self.userOrientationAge)
+        
+        self.userLocation = UILabel(frame: CGRectZero)
+        self.userLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userLocation.textAlignment = NSTextAlignment.Left
+        self.userLocation.font = valueFont?.fontWithSize(14.0)
+//        var userCity = self.user["city"] as String
+//        var userState = self.user["state"] as String
+//        self.userLocation.text = "\(userCity), \(userState)"
+        contentView.addSubview(self.userLocation)
+        
+        self.userButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.userButton.frame = CGRectZero
+        self.userButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
+        self.userButton.contentMode = UIViewContentMode.ScaleAspectFit
+        contentView.addSubview(self.userButton)
+        
+        
+        var viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation, "userButton":userButton]
+        var metricsDictionary = ["verticalMargin":15, "sideMargin":15]
+        
+        
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]-sideMargin-[userOrientationAge]-20-[userButton]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+
+        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-28-[userAlias]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22-[userOrientationAge]-2-[userLocation]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var userButtonVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-28-[userButton]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        
+        contentView.addConstraints(horizontalConstraints)
+        contentView.addConstraints(avatarVerticalConstraints)
+        contentView.addConstraints(aliasVerticalConstraints)
+        contentView.addConstraints(orientationAgeLocationVerticalConstraints)
+        contentView.addConstraints(userButtonVerticalConstraints)
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
