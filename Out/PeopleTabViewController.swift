@@ -56,9 +56,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         "dog":UIImage(named: "dog-icon"),
         "rabbit":UIImage(named: "rabbit-icon"),
         "caterpillar":UIImage(named: "caterpillar-icon"),
-        "crab":UIImage(named: "crab"),
-        "fish":UIImage(named: "fish"),
-        "cat":UIImage(named: "cat")
+        "crab":UIImage(named: "crab-icon"),
+        "fish":UIImage(named: "fish-icon"),
+        "cat":UIImage(named: "cat-icon")
     ]
 
     
@@ -93,7 +93,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addSubview(self.peopleTableView)
 
         
-//        self.mentorCellOverlay = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         self.mentorCellOverlay = UIView(frame: CGRectZero)
         self.mentorCellOverlay.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorCellOverlay.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -108,6 +107,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorAvatar.layer.cornerRadius = 25
         self.mentorAvatar.clipsToBounds = true
         self.mentorAvatar.image = UIImage(named: "elephant-icon")
+        self.mentorAvatar.contentMode = UIViewContentMode.ScaleAspectFit
         self.mentorCellOverlay.addSubview(self.mentorAvatar)
         
         self.mentorRole = UILabel(frame: CGRectZero)
@@ -135,7 +135,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorOrganization.preferredMaxLayoutWidth = 200
         self.mentorOrganization.numberOfLines = 1
         self.mentorOrganization.text = "The Trevor Project"
-//        self.mentorCellOverlay.addSubview(self.mentorOrganization)
+
         
         self.mentorLocation = UILabel(frame: CGRectZero)
         self.mentorLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -144,36 +144,28 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorLocation.preferredMaxLayoutWidth = 200
         self.mentorLocation.numberOfLines = 1
         self.mentorLocation.text = "New York, NY"
-//        self.mentorCellOverlay.addSubview(self.mentorLocation)
         
         self.mentorButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.mentorButton.frame = CGRectZero
         self.mentorButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
         self.mentorButton.contentMode = UIViewContentMode.ScaleAspectFit
-//        self.mentorCellOverlay.addSubview(self.mentorButton)
+        
         
         var mentorCellViewsDictionary = ["mentorAvatar":mentorAvatar, "mentorRole":mentorRole, "mentorAlias":mentorAlias, "mentorOrganization":mentorOrganization, "mentorLocation":mentorLocation, "mentorButton":mentorButton]
         var mentorCellMetricsDictionary = ["sideMargin":15, "topMargin":64 + 16, "bottomMargin": 18]
         
         var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
         
-//        var mentorChevronHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[mentorButton(12)]-sideMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-
-//        var mentorChevronVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-92-[mentorButton(22.5)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
 
         var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAvatar(50)]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
         
         var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-82-[mentorRole]-3-[mentorAlias]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
         
-//        var rightVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-85-[mentorOrganization]-4-[mentorLocation]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-        
+
         self.mentorCellOverlay.addConstraints(topHorizontalConstraints)
         self.mentorCellOverlay.addConstraints(avatarVerticalConstraints)
         self.mentorCellOverlay.addConstraints(leftVerticalConstraints)
-//        self.mentorCellOverlay.addConstraints(rightVerticalConstraints)
-//        self.mentorCellOverlay.addConstraints(mentorChevronHorizontalConstraints)
-//        self.mentorCellOverlay.addConstraints(mentorChevronVerticalConstraints)
         
 
         
@@ -210,19 +202,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsVerticalConstraints)
         
-//        var mentorCellBlurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
-//        mentorCellBlurView.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        mentorCellBlurView.frame = self.mentorCellOverlay.bounds
-//        self.mentorCellOverlay.addSubview(mentorCellBlurView)
-//        
-//        var viewsBlurredDictionary = ["mentorCellOverlay":mentorCellOverlay, "mentorCellBlurView":mentorCellBlurView]
-//        var metricsBlurredDiciontary = ["margin":0]
-//        
-//        var verticalBlurredConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-margin-[mentorCellBlurView(144)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsBlurredDiciontary, views: viewsBlurredDictionary)
-//        var horizontalBlurredConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[mentorCellBlurView]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsBlurredDiciontary, views: viewsBlurredDictionary)
-//        self.mentorCellOverlay.addConstraints(verticalBlurredConstraints)
-//        self.mentorCellOverlay.addConstraints(horizontalBlurredConstraints)
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -236,12 +215,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
-//        if indexPath.row % 2 == 0 {
-//            cell.backgroundColor = UIColor.whiteColor()
-//        }
-//        else{
-//            cell.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
-//        }
         var user = self.users[indexPath.row] as PFUser
         cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
         cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
@@ -265,15 +238,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     func mentorCellTapped(sender:UIGestureRecognizer){
         println("mentorButtonTapped!")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
     func loadUsers(){
@@ -296,7 +260,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func addPeople(sender:UIBarButtonItem){
-        println("Add People!")
+        self.performSegueWithIdentifier("presentPeopleGallery", sender: self)
     }
 
 

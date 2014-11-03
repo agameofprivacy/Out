@@ -21,6 +21,8 @@
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
+		2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */; };
+		2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */; };
 		2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */; };
 		2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997219E4A9FB00133F59 /* Main.storyboard */; };
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
@@ -97,6 +99,8 @@
 		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
+		2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleGalleryViewController.swift; sourceTree = "<group>"; };
+		2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonFollowTableViewCell.swift; sourceTree = "<group>"; };
 		2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C5D996919E4A9FB00133F59 /* Out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Out.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D996D19E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -199,6 +203,15 @@
 			name = "Canvas TableViewCells";
 			sourceTree = "<group>";
 		};
+		2C470F531A06F62F008EADB4 /* PeopleGallery */ = {
+			isa = PBXGroup;
+			children = (
+				2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */,
+				2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */,
+			);
+			name = PeopleGallery;
+			sourceTree = "<group>";
+		};
 		2C5D996019E4A9FB00133F59 = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +302,7 @@
 			children = (
 				2C9CA60D1A05AE4E00BC4D93 /* PeopleTabViewController.swift */,
 				2C9CA6161A05B58200BC4D93 /* PersonTableViewCell.swift */,
+				2C470F531A06F62F008EADB4 /* PeopleGallery */,
 			);
 			name = PeopleTab;
 			sourceTree = "<group>";
@@ -465,11 +479,13 @@
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
 				2CA435FF19F48C1000DC1C6E /* BoolPickerTableViewCell.swift in Sources */,
+				2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */,
 				2CB170F919F2C7860086C95F /* LoginViewController.swift in Sources */,
 				2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */,
 				2CA435F519F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift in Sources */,
 				2CB170FB19F2C7860086C95F /* DashboardViewController.swift in Sources */,
 				2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */,
+				2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */,
 				2CA435FB19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift in Sources */,
 				2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */,
 				2CA435FD19F48BE700DC1C6E /* HeroImageTableViewCell.swift in Sources */,

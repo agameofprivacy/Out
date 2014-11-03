@@ -49,9 +49,9 @@ class PersonTableViewCell: UITableViewCell {
         "dog":UIImage(named: "dog-icon"),
         "rabbit":UIImage(named: "rabbit-icon"),
         "caterpillar":UIImage(named: "caterpillar-icon"),
-        "crab":UIImage(named: "crab"),
-        "fish":UIImage(named: "fish"),
-        "cat":UIImage(named: "cat")
+        "crab":UIImage(named: "crab-icon"),
+        "fish":UIImage(named: "fish-icon"),
+        "cat":UIImage(named: "cat-icon")
     ]
     
     
@@ -71,6 +71,7 @@ class PersonTableViewCell: UITableViewCell {
         self.userAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.userAvatar.layer.cornerRadius = 25
         self.userAvatar.clipsToBounds = true
+        self.userAvatar.contentMode = UIViewContentMode.ScaleAspectFit
 //        var userColor = self.user["color"] as String
 //        self.userAvatar.backgroundColor = self.colorDictionary[userColor]
 //        var userAvatarImage = self.user["avatar"] as String

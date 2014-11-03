@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7SC-1g-Aie" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3717" y="2374"/>
+            <point key="canvasLocation" x="1921" y="4262"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="spQ-og-b0H">
@@ -110,7 +110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9hX-79-oIz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3056" y="2374"/>
+            <point key="canvasLocation" x="1109" y="4262"/>
         </scene>
         <!--Challenges-->
         <scene sceneID="3v2-ba-nqX">
@@ -277,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ot-x9-Svn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="1434"/>
+            <point key="canvasLocation" x="1902" y="1434"/>
         </scene>
         <!--People-->
         <scene sceneID="YXt-cp-vBa">
@@ -312,10 +312,48 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="11s-2Z-msZ"/>
+                    <connections>
+                        <segue destination="jLH-dJ-9fL" kind="presentation" identifier="presentPeopleGallery" id="yo0-za-uib"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="341-CU-dgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1902" y="2458"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0WS-re-Ayg">
+            <objects>
+                <navigationController id="jLH-dJ-9fL" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="m3V-tS-vN9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HbF-24-dW2" kind="relationship" relationship="rootViewController" id="xus-8A-fE5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJg-or-s8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2664" y="2458"/>
+        </scene>
+        <!--People Gallery View Controller-->
+        <scene sceneID="vgi-qg-MTb">
+            <objects>
+                <viewController id="HbF-24-dW2" customClass="PeopleGalleryViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FKS-Cy-Alk"/>
+                        <viewControllerLayoutGuide type="bottom" id="S4q-QQ-rlL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1V7-GE-fRr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VKg-kB-Jrx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N0a-ZH-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3456" y="2458"/>
         </scene>
         <!--Help-->
         <scene sceneID="Qwj-ko-ZxG">
