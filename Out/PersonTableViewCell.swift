@@ -72,35 +72,24 @@ class PersonTableViewCell: UITableViewCell {
         self.userAvatar.layer.cornerRadius = 25
         self.userAvatar.clipsToBounds = true
         self.userAvatar.contentMode = UIViewContentMode.ScaleAspectFit
-//        var userColor = self.user["color"] as String
-//        self.userAvatar.backgroundColor = self.colorDictionary[userColor]
-//        var userAvatarImage = self.user["avatar"] as String
-//        self.userAvatar.image = self.avatarImageDictionary[userAvatarImage]!
         contentView.addSubview(self.userAvatar)
         
         self.userAlias = UILabel(frame: CGRectZero)
         self.userAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.userAlias.textAlignment = NSTextAlignment.Left
         self.userAlias.font = regularFont?.fontWithSize(15.0)
-//        self.userAlias.text = self.user.username
         contentView.addSubview(self.userAlias)
         
         self.userOrientationAge = UILabel(frame: CGRectZero)
         self.userOrientationAge.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.userOrientationAge.textAlignment = NSTextAlignment.Left
         self.userOrientationAge.font = titleFont?.fontWithSize(14.0)
-//        var userOrientation = self.user["sexualOrientation"] as String
-//        var userAge = self.user["age"] as Int
-//        self.userOrientationAge.text = "\(userOrientation) . \(userAge)"
         contentView.addSubview(self.userOrientationAge)
         
         self.userLocation = UILabel(frame: CGRectZero)
         self.userLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.userLocation.textAlignment = NSTextAlignment.Left
         self.userLocation.font = valueFont?.fontWithSize(14.0)
-//        var userCity = self.user["city"] as String
-//        var userState = self.user["state"] as String
-//        self.userLocation.text = "\(userCity), \(userState)"
         contentView.addSubview(self.userLocation)
         
         self.userButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
