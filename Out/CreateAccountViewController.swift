@@ -109,11 +109,16 @@ class CreateAccountViewController: UIViewController {
                     (succeeded: Bool!, error: NSError!) -> Void in
                     if error == nil {
                         // Hooray! Let them use the app now.
+                        var followRequestsObject = PFObject(className: "FollowRequests")
+                        followRequestsObject["ownerUser"] = PFUser.currentUser()
+                        followRequestsObject["fromUsers"] = []
+                        followRequestsObject.saveInBackground()
                         self.performSegueWithIdentifier("AccountCreated", sender: nil)
                     } else {
                         // Show the errorString somewhere and let the user try again.
                     }
                 }
+                
             }
             else{
                 self.createAccountButton.enabled = true

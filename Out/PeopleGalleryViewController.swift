@@ -12,6 +12,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
 
     var peopleTableView:UITableView!
     var people:[AnyObject] = []
+    var followRequestsFrom:[AnyObject] = []
     
     let colorDictionary =
     [
@@ -127,6 +128,9 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         for user in PFUser.currentUser()["following"] as [PFUser]{
             objectIdArray.append(user.objectId)
         }
+        for user in PFUser.currentUser()["followingRequested"] as [PFUser]{
+            objectIdArray.append(user.objectId)
+        }
 
         queryPeople.whereKey("objectId", notContainedIn:objectIdArray)
         queryPeople.findObjectsInBackgroundWithBlock {
@@ -149,22 +153,48 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func followButtonTapped(sender:UIButton){
-        println("follow!")
         var currentCell = sender.superview?.superview as PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.peopleTableView.indexPathForCell(currentCell)!
         var userToFollow = self.people[currentIndexPath.row] as PFUser
-        var currentUserFollowing:[PFUser] = PFUser.currentUser()["following"] as [PFUser]
-        println(currentUserFollowing)
-        currentUserFollowing.append(userToFollow)
-        PFUser.currentUser()["following"] = currentUserFollowing
+        var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as [PFUser]
+        var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as [PFUser]
+        currentUserFollowingRequested.append(userToFollow)
+        PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
+        
+        var queryFollowRequests = PFQuery(className:"FollowRequests")
+        queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
+        queryFollowRequests.findObjectsInBackgroundWithBlock{
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                self.followRequestsFrom = objects
+                var currentFollowRequestsObject = self.followRequestsFrom[0] as PFObject
+                var currentFollowRequestsFrom = currentFollowRequestsObject["fromUsers"] as [PFUser]
+                currentFollowRequestsFrom.append(PFUser.currentUser())
+                currentFollowRequestsObject["fromUsers"] = currentFollowRequestsFrom
+                currentFollowRequestsObject.saveInBackground()
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+        
         PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
             if error == nil{
                 self.loadPeople()
                 self.peopleTableView.reloadData()
-                println("followed!")
-                println(PFUser.currentUser()["following"] as [PFUser])
             }
         }
+        
+        userToFollow.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            if error == nil{
+
+            }
+            else{
+                println("error sending follow requests")
+            }
+        }
+
 
     }
     
