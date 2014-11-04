@@ -17,6 +17,8 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     var filters:[String] = []
     var currentChallengesStrings:[String] = []
     
+    var challengeTabVC:ChallengesTabViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,7 +101,12 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["challengeTrackNumber"] = "1"
         newChallengeModel["stepContent"] = []
 
-        newChallengeModel.saveInBackground()
+        newChallengeModel.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            if error == nil{
+                self.challengeTabVC.loadCurrentChallenges()
+            }
+        }
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

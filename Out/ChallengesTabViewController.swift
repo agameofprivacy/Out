@@ -53,6 +53,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.view.addSubview(activityIndicator)
+        loadCurrentChallenges()
         
     }
 
@@ -63,7 +64,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        loadCurrentChallenges()
+
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -144,6 +145,15 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     }
     @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {
 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addChallenge"{
+            var modalVC = segue.destinationViewController as UINavigationController
+            var challengeGalleryVC = modalVC.childViewControllers[0] as ChallengeGalleryViewController
+            challengeGalleryVC.challengeTabVC = self
+            println("hello")
+        }
     }
 
     

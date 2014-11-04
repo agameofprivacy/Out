@@ -14,7 +14,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     var followingUsers:[PFUser] = []
     var followers:[AnyObject] = []
     var following:[AnyObject] = []
-    var followerFollowingObject:PFObject!
+    var followerFollowingObject:PFObject = PFObject(className: "FollowerFollowing", dictionary: ["requestsFromUsers":[],"followers":[], "followingUsers":[]])
     
     var followerTableView:TPKeyboardAvoidingTableView!
     var followingTableView:TPKeyboardAvoidingTableView!
@@ -272,7 +272,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if tableView == self.followerTableView{
             if(indexPath.section == 1){
                 var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
-                var user = self.followers[indexPath.row] as PFUser
+                var followersUsers:[PFUser] = self.followers as [PFUser]
+                var user = followersUsers[indexPath.row] as PFUser
                 user.fetchIfNeeded()
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
@@ -287,7 +288,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             else{
                 var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as PersonFollowTableViewCell
-                var user = self.followingRequestedFrom[indexPath.row] as PFUser
+                var followingRequestsFromUsers:[PFUser] = self.followingRequestedFrom as [PFUser]
+                var user = followingRequestsFromUsers[indexPath.row] as PFUser
 
                 user.fetchIfNeeded()
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
@@ -305,7 +307,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if tableView == self.followingTableView{
             var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
-            var user = self.following[indexPath.row] as PFUser
+            var followingUsers:[PFUser] = self.following as [PFUser]
+            var user = followingUsers[indexPath.row] as PFUser
             user.fetchIfNeeded()
             cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
             cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!

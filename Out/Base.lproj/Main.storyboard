@@ -128,7 +128,7 @@
                     <navigationItem key="navigationItem" title="Challenges" id="ycy-e3-3Xn">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="LaI-kS-ZYq">
                             <connections>
-                                <segue destination="OBZ-uH-Sxv" kind="presentation" id="f75-gr-uxH"/>
+                                <segue destination="OBZ-uH-Sxv" kind="presentation" identifier="addChallenge" id="f75-gr-uxH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
