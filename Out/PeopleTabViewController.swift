@@ -376,26 +376,15 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 
         var currentUserFollowers:[PFUser] = self.followerFollowingObject["followers"] as [PFUser]
         currentUserFollowers.append(userToAcceptFollowRequest)
-//        var requestedUserCurrentFollowing:[PFUser] = followerFollowingObject["followingUsers"] as [PFUser]
-//        requestedUserCurrentFollowing.append(currentUserFollowingRequestedFrom[currentIndexPath.row] as PFUser)
         currentUserFollowingRequestedFrom.removeAtIndex(currentIndexPath.row)
         self.followerFollowingObject["requestsFromUsers"] = currentUserFollowingRequestedFrom
         self.followerFollowingObject["followers"] = currentUserFollowers
-//        followerFollowingObject["followingUsers"] = requestedUserCurrentFollowing
         self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
             if error == nil{
                 self.loadPeople()
                 self.followerTableView.reloadData()
             }
         }
-//        PFUser.currentUser()["followers"] = currentUserFollowers
-//        PFUser.currentUser()["followingRequested"] = currentUserFollowingRequestedFrom
-//        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
-//            if error == nil{
-//                self.loadPeople(nil)
-//                self.followerTableView.reloadData()
-//            }
-//        }
     }
 
     

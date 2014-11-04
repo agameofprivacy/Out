@@ -232,6 +232,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 //            let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
 //            let hour = components.hour
 //            let minutes = components.minute
+            
             currentChallengeObject["isCurrent"] = false
             currentChallengeObject["completedDate"] = date
             currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
@@ -240,7 +241,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                     // Challenge Completed, show message
                 }
             }
-
+            
+            var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject])
+            newActivity.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                if error == nil{
+                    println("activity created!")
+                    // Challenge Completed, show message
+                }
+            }
         }
     }
 

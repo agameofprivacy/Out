@@ -150,6 +150,10 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    func presentFilterView(sender:UIBarButtonItem){
+        println("Present Filter")
+    }
+    
     func followButtonTapped(sender:UIButton){
         var currentCell = sender.superview?.superview as PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.peopleTableView.indexPathForCell(currentCell)!
