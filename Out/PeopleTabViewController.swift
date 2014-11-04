@@ -11,9 +11,10 @@ import UIKit
 class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var followingRequestedFrom:[PFUser] = []
+    var followingUsers:[PFUser] = []
     var followers:[AnyObject] = []
     var following:[AnyObject] = []
-    var followingRequestedFromObject:PFObject!
+    var followerFollowingObject:PFObject!
     
     var followerTableView:TPKeyboardAvoidingTableView!
     var followingTableView:TPKeyboardAvoidingTableView!
@@ -81,23 +82,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         
         
-        self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followerTableView.contentInset = UIEdgeInsets(top: 130.0, left: 0, bottom:0, right: 0)
-        self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
-        self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
-
-        self.followerTableView.backgroundColor = UIColor.whiteColor()
-        self.followerTableView.frame = self.view.frame
-        self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-        self.followerTableView.rowHeight = UITableViewAutomaticDimension
-        self.followerTableView.estimatedRowHeight = 80
-        self.followerTableView.delegate = self
-        self.followerTableView.dataSource = self
-        self.followerTableView.layoutMargins = UIEdgeInsetsZero
-        self.followerTableView.separatorInset = UIEdgeInsetsZero
-        self.view.addSubview(self.followerTableView)
-
         self.followingTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followingTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.followingTableView.contentInset = UIEdgeInsets(top: 130.0, left: 0, bottom:0, right: 0)
@@ -113,6 +97,24 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followingTableView.separatorInset = UIEdgeInsetsZero
         self.followingTableView.hidden = true
         self.view.addSubview(self.followingTableView)
+
+        
+        self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
+        self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.followerTableView.contentInset = UIEdgeInsets(top: 194.0, left: 0, bottom:0, right: 0)
+        self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
+        self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
+        self.followerTableView.backgroundColor = UIColor.whiteColor()
+        self.followerTableView.frame = self.view.frame
+        self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.followerTableView.rowHeight = UITableViewAutomaticDimension
+        self.followerTableView.estimatedRowHeight = 80
+        self.followerTableView.delegate = self
+        self.followerTableView.dataSource = self
+        self.followerTableView.layoutMargins = UIEdgeInsetsZero
+        self.followerTableView.separatorInset = UIEdgeInsetsZero
+        self.view.addSubview(self.followerTableView)
+
 
         
         
@@ -228,9 +230,16 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == "presentPeopleGallery"{
+            var newVC = segue.destinationViewController as PeopleGalleryViewController
+            newVC.currentFollowerFollowingObject = self.followerFollowingObject
+        }
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.loadPeople(nil)
+        self.loadPeople()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -263,6 +272,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             if(indexPath.section == 1){
                 var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
                 var user = self.followers[indexPath.row] as PFUser
+                user.fetchIfNeeded()
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
                 cell.userAlias.text = user.username
@@ -279,7 +289,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 var user = self.followingRequestedFrom[indexPath.row] as PFUser
 
                 user.fetchIfNeeded()
-                println(user)
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
                 cell.userAlias.text = user.username
@@ -293,9 +302,10 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 return cell
             }
         }
-        else{
+        else if tableView == self.followingTableView{
             var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
             var user = self.following[indexPath.row] as PFUser
+            user.fetchIfNeeded()
             cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
             cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
             cell.userAlias.text = user.username
@@ -306,6 +316,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             var userState = user["state"] as String
             cell.userLocation.text = "\(userCity), \(userState)"
             return cell
+        }
+        else{
+            return tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
         }
     }
 
@@ -334,105 +347,82 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     func acceptButtonTapped(sender:UIButton){
         var currentCell = sender.superview?.superview as PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.followerTableView.indexPathForCell(currentCell)!
-        var userToFollow = self.followingRequestedFrom[currentIndexPath.row] as PFUser
+        var userToAcceptFollowRequest = self.followingRequestedFrom[currentIndexPath.row] as PFUser
         var currentUserFollowers:[PFUser] = PFUser.currentUser()["followers"] as [PFUser]
-        var currentUserFollowingRequested = self.followingRequestedFrom
-        currentUserFollowers.append(userToFollow)
-        currentUserFollowingRequested.removeAtIndex(currentIndexPath.row)
-        followingRequestedFromObject["fromUsers"] = currentUserFollowingRequested
-        followingRequestedFromObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        var currentUserFollowingRequestedFrom = self.followingRequestedFrom
+        
+        var queryUserFollowRequestedFromFollowerFollowing = PFQuery(className: "FollowerFollowing")
+        queryUserFollowRequestedFromFollowerFollowing.whereKey("ownerUser", equalTo:currentUserFollowingRequestedFrom[currentIndexPath.row])
+        queryUserFollowRequestedFromFollowerFollowing.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                var userFollowRequestedFrom = objects[0] as PFObject
+                var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as [PFUser]
+                userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser())
+                userFollowRequestedFrom["followingUsers"] = userFollowRequestedFromCurrentlyfollowing
+                userFollowRequestedFrom.saveInBackground()
+                self.followerTableView.reloadData()
+                //                self.activityIndicator.stopAnimating()
+                self.followerTableView.hidden = false
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+
+        
+        currentUserFollowers.append(userToAcceptFollowRequest)
+//        var requestedUserCurrentFollowing:[PFUser] = followerFollowingObject["followingUsers"] as [PFUser]
+//        requestedUserCurrentFollowing.append(currentUserFollowingRequestedFrom[currentIndexPath.row] as PFUser)
+        currentUserFollowingRequestedFrom.removeAtIndex(currentIndexPath.row)
+        self.followerFollowingObject["requestsFromUsers"] = currentUserFollowingRequestedFrom
+        self.followerFollowingObject["followers"] = currentUserFollowers
+//        followerFollowingObject["followingUsers"] = requestedUserCurrentFollowing
+        self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
             if error == nil{
-                self.loadPeople(nil)
+                self.loadPeople()
                 self.followerTableView.reloadData()
             }
         }
-        PFUser.currentUser()["followers"] = currentUserFollowers
-        PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
-            if error == nil{
-                self.loadPeople(nil)
-                self.followerTableView.reloadData()
-            }
-        }
-    }
-
-    
-    func loadPeople(sender:UISegmentedControlSegment?){
-        self.followerTableView.hidden = true
-//        self.activityIndicator.startAnimating()
-        var queryFollowingRequestedFrom = PFQuery(className:"FollowRequests")
-        queryFollowingRequestedFrom.whereKey("ownerUser", equalTo: PFUser.currentUser())
-        queryFollowingRequestedFrom.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                // The find succeeded.
-                self.followingRequestedFromObject = objects[0] as PFObject
-                self.followingRequestedFrom = self.followingRequestedFromObject["fromUsers"] as [PFUser]
-                self.followerTableView.reloadData()
-                //                self.activityIndicator.stopAnimating()
-                self.followerTableView.hidden = false
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
-        }
-        
-        var queryFollowers = PFQuery(className:"_User")
-        var followersObjectIdArray:[String] = []
-        for user in PFUser.currentUser()["followers"] as [PFUser]{
-            followersObjectIdArray.append(user.objectId)
-        }
-        queryFollowers.whereKey("objectId", containedIn:followersObjectIdArray)
-        queryFollowers.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                // The find succeeded.
-                self.followers = objects
-                self.followerTableView.reloadData()
-                //                self.activityIndicator.stopAnimating()
-                self.followerTableView.hidden = false
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
-        }
-        
-        var queryFollowing = PFQuery(className:"_User")
-        var followingObjectIdArray:[String] = []
-        for user in PFUser.currentUser()["followingRequested"] as [PFUser]{
-            followingObjectIdArray.append(user.objectId)
-        }
-        queryFollowing.whereKey("objectId", containedIn:followingObjectIdArray)
-        queryFollowing.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                // The find succeeded.
-                self.following = objects
-                self.followerTableView.reloadData()
-                //                self.activityIndicator.stopAnimating()
-                self.followerTableView.hidden = false
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
-        }
-
-        
-
-//        queryUsers.findObjectsInBackgroundWithBlock {
-//            (objects: [AnyObject]!, error: NSError!) -> Void in
-//            if error == nil {
-//                // The find succeeded.
-//                self.users = objects
+//        PFUser.currentUser()["followers"] = currentUserFollowers
+//        PFUser.currentUser()["followingRequested"] = currentUserFollowingRequestedFrom
+//        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+//            if error == nil{
+//                self.loadPeople(nil)
 //                self.followerTableView.reloadData()
-////                self.activityIndicator.stopAnimating()
-//                self.followerTableView.hidden = false
-//            } else {
-//                // Log details of the failure
-//                NSLog("Error: %@ %@", error, error.userInfo!)
 //            }
 //        }
     }
+
+    
+    func loadPeople(){
+        self.followerTableView.hidden = true
+//        self.activityIndicator.startAnimating()
+        var queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
+        queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        queryFollowerFollowing.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                self.followerFollowingObject = objects[0] as PFObject
+                // Causes long running operation warning
+                self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as [PFUser]
+                self.following = self.followerFollowingObject["followingUsers"] as [PFUser]
+                self.followers = self.followerFollowingObject["followers"] as [PFUser]
+                // Causes long running operation warning
+                self.followerTableView.reloadData()
+                self.followingTableView.reloadData()
+                //                self.activityIndicator.stopAnimating()
+                self.followerTableView.hidden = false
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+    
+    
     
     func addPeople(sender:UIBarButtonItem){
         self.performSegueWithIdentifier("presentPeopleGallery", sender: self)

@@ -13,7 +13,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     var peopleTableView:UITableView!
     var people:[AnyObject] = []
     var followRequestsFrom:[AnyObject] = []
-    
+    var currentFollowerFollowingObject:PFObject!
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -125,9 +125,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         //        self.activityIndicator.startAnimating()
         var queryPeople = PFQuery(className:"_User")
         var objectIdArray:[String] = []
-        for user in PFUser.currentUser()["following"] as [PFUser]{
-            objectIdArray.append(user.objectId)
-        }
+        objectIdArray.append(PFUser.currentUser().objectId)
         for user in PFUser.currentUser()["followingRequested"] as [PFUser]{
             objectIdArray.append(user.objectId)
         }
@@ -161,18 +159,18 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         currentUserFollowingRequested.append(userToFollow)
         PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
         
-        var queryFollowRequests = PFQuery(className:"FollowRequests")
+        var queryFollowRequests = PFQuery(className:"FollowerFollowing")
         queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
         queryFollowRequests.findObjectsInBackgroundWithBlock{
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 // The find succeeded.
                 self.followRequestsFrom = objects
-                var currentFollowRequestsObject = self.followRequestsFrom[0] as PFObject
-                var currentFollowRequestsFrom = currentFollowRequestsObject["fromUsers"] as [PFUser]
+                var currentFollowerFollowingObject = self.followRequestsFrom[0] as PFObject
+                var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as [PFUser]
                 currentFollowRequestsFrom.append(PFUser.currentUser())
-                currentFollowRequestsObject["fromUsers"] = currentFollowRequestsFrom
-                currentFollowRequestsObject.saveInBackground()
+                currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
+                currentFollowerFollowingObject.saveInBackground()
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
