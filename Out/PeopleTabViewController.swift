@@ -227,6 +227,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsVerticalConstraints)
+        self.loadPeople()
+
         
     }
     
@@ -239,7 +241,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.loadPeople()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -348,7 +349,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         var currentCell = sender.superview?.superview as PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.followerTableView.indexPathForCell(currentCell)!
         var userToAcceptFollowRequest = self.followingRequestedFrom[currentIndexPath.row] as PFUser
-        var currentUserFollowers:[PFUser] = PFUser.currentUser()["followers"] as [PFUser]
         var currentUserFollowingRequestedFrom = self.followingRequestedFrom
         
         var queryUserFollowRequestedFromFollowerFollowing = PFQuery(className: "FollowerFollowing")
@@ -371,7 +371,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
 
-        
+        var currentUserFollowers:[PFUser] = self.followerFollowingObject["followers"] as [PFUser]
         currentUserFollowers.append(userToAcceptFollowRequest)
 //        var requestedUserCurrentFollowing:[PFUser] = followerFollowingObject["followingUsers"] as [PFUser]
 //        requestedUserCurrentFollowing.append(currentUserFollowingRequestedFrom[currentIndexPath.row] as PFUser)
