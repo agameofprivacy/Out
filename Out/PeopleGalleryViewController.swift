@@ -193,7 +193,6 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
 
             }
             else{
-                println("error sending follow requests")
             }
         }
 

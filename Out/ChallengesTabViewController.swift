@@ -152,7 +152,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             var modalVC = segue.destinationViewController as UINavigationController
             var challengeGalleryVC = modalVC.childViewControllers[0] as ChallengeGalleryViewController
             challengeGalleryVC.challengeTabVC = self
-            println("hello")
         }
     }
 
@@ -245,7 +244,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject])
             newActivity.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
-                    println("activity created!")
                     // Challenge Completed, show message
                 }
             }
