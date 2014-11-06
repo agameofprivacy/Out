@@ -93,12 +93,16 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         var avatarString = currentUser["avatar"] as String
         var currentUserColor = currentUser["color"] as String
         var currentAction = currentChallenge["action"] as String
-        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()
-        --currentChallengeTrackNumber!
-        var currentActivityImageString = (currentChallenge["narrativeImages"] as [String])[currentChallengeTrackNumber!] as String
-        
-        println(currentChallenge)
-        println(currentUserChallengeData)
+        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()!
+        currentChallengeTrackNumber = currentChallengeTrackNumber - 1
+        var currentActivityImageString:String
+        if (currentChallenge["narrativeImages"] as [String]).count > 0{
+            currentActivityImageString = (currentChallenge["narrativeImages"] as [String])[currentChallengeTrackNumber] as String
+        }
+        else{
+            currentActivityImageString = ""
+        }
+
         
         cell.reverseTimeLabel.text = "2h ago"
         cell.avatarImageView.image = UIImage(named: "\(avatarString)-icon")
@@ -107,8 +111,27 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         cell.actionLabel.text = currentAction
         cell.heroImageView.image = UIImage(named: currentActivityImageString)
 //        cell.contentTypeIconImageView.image = UIImage(named: "web-icon")
-        cell.narrativeTitleLabel.text = (currentChallenge["narrativeTitles"] as [String])[currentChallengeTrackNumber!] as String
-        cell.narrativeContentLabel.text = (currentChallenge["narrativeContents"] as [String])[currentChallengeTrackNumber!] as String
+        
+        var currentNarrativeTitleString:String
+        if (currentChallenge["narrativeTitles"] as [String]).count > 0{
+            currentNarrativeTitleString = (currentChallenge["narrativeTitles"] as [String])[currentChallengeTrackNumber] as String
+        }
+        else{
+            currentNarrativeTitleString = ""
+        }
+
+        cell.narrativeTitleLabel.text = currentNarrativeTitleString
+
+        var currentNarrativeContentString:String
+        if (currentChallenge["narrativeTitles"] as [String]).count > 0{
+            currentNarrativeContentString = (currentChallenge["narrativeContents"] as [String])[currentChallengeTrackNumber] as String
+        }
+        else{
+            currentNarrativeContentString = ""
+        }
+
+        
+        cell.narrativeContentLabel.text = currentNarrativeContentString
         cell.commentsCountLabel.text = "2 comments"
         cell.writeACommentLabel.text = "write a comment"
 //        cell.likeCountLabel.text = "4 likes"

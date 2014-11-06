@@ -291,7 +291,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         var horizontalnarrativeContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-mediumVerticalPadding-[narrativeContentLabel]-mediumVerticalPadding-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
 
-        var verticalContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImageView(140)]-mediumVerticalPadding-[narrativeTitleLabel]-shortVerticalPadding-[narrativeContentLabel]-0-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
+        var verticalContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImageView(<=140)]-mediumVerticalPadding-[narrativeTitleLabel]-shortVerticalPadding-[narrativeContentLabel]-0-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
 
         self.contentCanvas.addConstraints(horizontalContentCanvasViewConstraints)
         self.contentCanvas.addConstraints(horizontalnarrativeTitleContentCanvasViewConstraints)
@@ -359,7 +359,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         var horizontalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[likeCountLabel]-[likeButton(44)]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
         
-        var verticalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[likeButton(44)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
+        var verticalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=2-[likeButton(44)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
         
         self.likeButtonArea.addConstraints(horizontalLikeButtonAreaConstraints)
         self.likeButtonArea.addConstraints(verticalLikeButtonAreaConstraints)
