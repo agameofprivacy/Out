@@ -53,6 +53,14 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationItem.title = "Activity"
+        var composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped:")
+        composeButton.tintColor = UIColor.blackColor()
+        self.navigationItem.rightBarButtonItem = composeButton
+        
+        var notificationButton = UIBarButtonItem(image: UIImage(named: "notification-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "notificationButtonTapped:")
+        notificationButton.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = notificationButton
+        
         
         self.activityTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.activityTableView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
@@ -192,6 +200,14 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         println("Start Refreshing")
 //        self.refreshControl.endRefreshing()
         println("Refreshing Ended")
+    }
+    
+    func notificationButtonTapped(sender:UIBarButtonItem){
+        println("present Notifications")
+    }
+    
+    func composeButtonTapped(sender:UIBarButtonItem){
+        println("present Compose")
     }
 
 }
