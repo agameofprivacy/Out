@@ -10,11 +10,38 @@ import UIKit
 
 class DashboardViewController: UIViewController {
     
+    var scrollView:TPKeyboardAvoidingScrollView!
+    
+    var myProfileView:UIView!
+    var avatarImageView:UIImageView!
+    var myProfileLabel:UILabel!
     var currentUserLabel:UILabel!
+    
+    var myProgressView:UIView!
+    var myProgressLabel:UILabel!
+    var myProgressPieImageView:UIImageView!
+    
+    var currentChallengesView:UIView!
+    var currentChallengesLabel:UILabel!
+    var currentChallengesHeaderSeparator:UIView!
+    var currentChallengesPageControl:UIPageControl!
+    var currentChallengesCollectionView:UICollectionView!
+    
+    var whatsNewView:UIView!
+    var whatsNewLabel:UILabel!
+    var whatsNewHeaderSeparator:UIView!
+    var whatsNewPageControl:UIPageControl!
+    var whatsNewCollectionView:UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Dashboard"
+
+        self.scrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
+        self.view = self.scrollView
+        
+        
         
         currentUserLabel = UILabel(frame: CGRectZero)
         currentUserLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -22,15 +49,15 @@ class DashboardViewController: UIViewController {
         currentUserLabel.textAlignment = NSTextAlignment.Center
         self.view.addSubview(currentUserLabel)
         
-        var viewsDictionary = ["currentUserLabel":currentUserLabel]
-        var metricsDictionary = ["margin": 20]
-        
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-==margin-[currentUserLabel]-==margin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
-        
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=80-[currentUserLabel]->=330-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
-        
-        self.view.addConstraints(horizontalConstraints)
-        self.view.addConstraints(verticalConstraints)
+//        var viewsDictionary = ["currentUserLabel":currentUserLabel]
+//        var metricsDictionary = ["margin": 20]
+//        
+//        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-==margin-[currentUserLabel]-==margin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+//        
+//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=80-[currentUserLabel]->=330-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+//        
+//        self.view.addConstraints(horizontalConstraints)
+//        self.view.addConstraints(verticalConstraints)
         
 
         // Do any additional setup after loading the view.
