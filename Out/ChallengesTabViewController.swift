@@ -241,7 +241,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 }
             }
             
-            var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject])
+            var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject, "ownerUser":PFUser.currentUser()])
             newActivity.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
                     // Challenge Completed, show message

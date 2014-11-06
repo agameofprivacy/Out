@@ -10,6 +10,7 @@ import UIKit
 
 class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var currentActivities:[PFObject] = []
     
     let colorDictionary =
     [
@@ -68,7 +69,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
 //        self.activityTableView.addSubview(refreshControl)
 
         self.view.addSubview(self.activityTableView)
-        
+        loadActivities()
 
     }
 
@@ -78,24 +79,39 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return self.currentActivities.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
         
+        var currentActivity = self.currentActivities[indexPath.row]
+        var currentChallenge = currentActivity["challenge"] as PFObject
+        var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
+        var currentUser = currentActivity["ownerUser"] as PFUser
+
+        var avatarString = currentUser["avatar"] as String
+        var currentUserColor = currentUser["color"] as String
+        var currentAction = currentChallenge["action"] as String
+        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()
+        --currentChallengeTrackNumber!
+        var currentActivityImageString = (currentChallenge["narrativeImages"] as [String])[currentChallengeTrackNumber!] as String
+        
+        println(currentChallenge)
+        println(currentUserChallengeData)
+        
         cell.reverseTimeLabel.text = "2h ago"
-        cell.avatarImageView.image = UIImage(named: "dog-icon")
-        cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]
-        cell.aliasLabel.text = "dog320"
-        cell.actionLabel.text = "Volunteered at an Lesbian, Gay, Bisexual and Transgender community non-profit"
-        cell.heroImageView.image = UIImage(named: "glwdActivityHero")
-        cell.contentTypeIconImageView.image = UIImage(named: "web-icon")
-        cell.narrativeTitleLabel.text = "God's Love We Deliver"
-        cell.narrativeContentLabel.text = "God's Love We Deliver prepare and deliver nutritious, high-quality meals to people who, because of their illness, are unable to provide or prepare meals for themselves."
+        cell.avatarImageView.image = UIImage(named: "\(avatarString)-icon")
+        cell.avatarImageView.backgroundColor = self.colorDictionary[currentUserColor]
+        cell.aliasLabel.text = currentUser.username
+        cell.actionLabel.text = currentAction
+        cell.heroImageView.image = UIImage(named: currentActivityImageString)
+//        cell.contentTypeIconImageView.image = UIImage(named: "web-icon")
+        cell.narrativeTitleLabel.text = (currentChallenge["narrativeTitles"] as [String])[currentChallengeTrackNumber!] as String
+        cell.narrativeContentLabel.text = (currentChallenge["narrativeContents"] as [String])[currentChallengeTrackNumber!] as String
         cell.commentsCountLabel.text = "2 comments"
         cell.writeACommentLabel.text = "write a comment"
-        cell.likeCountLabel.text = "4 likes"
+//        cell.likeCountLabel.text = "4 likes"
 
         if indexPath.row == 1{
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
@@ -112,6 +128,42 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func loadActivities(){
+        
+        var followingQuery = PFQuery(className: "FollowerFollowing")
+        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        followingQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                var activityQuery = PFQuery(className: "Activity")
+                var currentUserFollowerFollowingObject = objects[0] as PFObject
+                var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as [PFUser]
+                activityQuery.whereKey("ownerUser", containedIn: currentUserFollowingUsers)
+                activityQuery.includeKey("challenge")
+                activityQuery.includeKey("userChallengeData")
+                activityQuery.includeKey("ownerUser")
+                activityQuery.orderByDescending("createdAt")
+                activityQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        self.currentActivities = objects as [PFObject]
+                        self.activityTableView.reloadData()
+                    } else {
+                        // Log details of the failure
+                        NSLog("Error: %@ %@", error, error.userInfo!)
+                    }
+                }
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+        
+    }
+
     
     func refresh(sender:UIRefreshControl){
         println("Start Refreshing")

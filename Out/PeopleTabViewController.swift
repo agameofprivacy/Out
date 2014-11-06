@@ -274,7 +274,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
                 var followersUsers:[PFUser] = self.followers as [PFUser]
                 var user = followersUsers[indexPath.row] as PFUser
-                user.fetchIfNeeded()
+//                user.fetchIfNeeded()
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
                 cell.userAlias.text = user.username
@@ -291,7 +291,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 var followingRequestsFromUsers:[PFUser] = self.followingRequestedFrom as [PFUser]
                 var user = followingRequestsFromUsers[indexPath.row] as PFUser
 
-                user.fetchIfNeeded()
+//                user.fetchIfNeeded()
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
                 cell.userAlias.text = user.username
@@ -309,7 +309,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
             var followingUsers:[PFUser] = self.following as [PFUser]
             var user = followingUsers[indexPath.row] as PFUser
-            user.fetchIfNeeded()
+//            user.fetchIfNeeded()
             cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
             cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
             cell.userAlias.text = user.username
@@ -393,6 +393,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        self.activityIndicator.startAnimating()
         var queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
         queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        queryFollowerFollowing.includeKey("followingUsers")
+        queryFollowerFollowing.includeKey("followers")
+        queryFollowerFollowing.includeKey("requestsFromUsers")
         queryFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
