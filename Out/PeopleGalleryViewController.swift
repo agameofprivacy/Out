@@ -61,7 +61,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         
-        self.view.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         
         self.peopleTableView = UITableView(frame: self.view.frame)
 //        self.peopleTableView.setTranslatesAutoresizingMaskIntoConstraints(false)

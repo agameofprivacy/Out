@@ -34,7 +34,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.alwaysBounceHorizontal = true
         layout.itemSize = CGSizeMake(self.view.frame.size.width - 24.0, self.view.frame.size.height - 167)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
+        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         currentChallengesCardsCollectionView.showsHorizontalScrollIndicator = false
         currentChallengesCardsCollectionView.registerClass(ChallengesTabCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
         
