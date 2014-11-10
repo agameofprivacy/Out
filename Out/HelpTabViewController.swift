@@ -79,16 +79,18 @@ class HelpTabViewController: UIViewController {
         
         self.topPromptLabel = UILabel(frame: CGRectZero)
         self.topPromptLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.topPromptLabel.font = titleFont?.fontWithSize(24.0)
+        self.topPromptLabel.font = regularFont?.fontWithSize(30.0)
         self.topPromptLabel.textAlignment = NSTextAlignment.Left
         self.topPromptLabel.numberOfLines = 0
+        self.topPromptLabel.text = "Need help?"
         self.helpPromptView.addSubview(self.topPromptLabel)
         
         self.followUpPromptLabel = UILabel(frame: CGRectZero)
         self.followUpPromptLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followUpPromptLabel.font = titleFont?.fontWithSize(20.0)
+        self.followUpPromptLabel.font = regularFont?.fontWithSize(24.0)
         self.followUpPromptLabel.textAlignment = NSTextAlignment.Left
         self.followUpPromptLabel.numberOfLines = 0
+        self.followUpPromptLabel.text = "We are here for you. 24/7."
         self.helpPromptView.addSubview(self.followUpPromptLabel)
         
         self.infoParagraphLabel = UILabel(frame: CGRectZero)
@@ -96,6 +98,7 @@ class HelpTabViewController: UIViewController {
         self.infoParagraphLabel.font = valueFont
         self.infoParagraphLabel.textAlignment = NSTextAlignment.Left
         self.infoParagraphLabel.numberOfLines = 0
+        self.infoParagraphLabel.text = "Everything will be anonymous, confidential and off-record."
         self.helpPromptView.addSubview(self.infoParagraphLabel)
         
         self.chatView = UIView(frame: CGRectZero)
@@ -104,13 +107,16 @@ class HelpTabViewController: UIViewController {
         
         self.chatPromptLabel = UILabel(frame: CGRectZero)
         self.chatPromptLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.chatPromptLabel.font = titleFont?.fontWithSize(17.0)
+        self.chatPromptLabel.font = regularFont?.fontWithSize(17.0)
         self.chatPromptLabel.textAlignment = NSTextAlignment.Left
         self.chatPromptLabel.numberOfLines = 1
+        self.chatPromptLabel.text = "Chat with someone."
         self.chatView.addSubview(self.chatPromptLabel)
         
         self.chatButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        self.chatButton.setImage(UIImage(named: "chatButton"), forState: UIControlState.Normal)
+        self.chatButton.setTitle("Chat", forState: UIControlState.Normal)
+        self.chatButton.layer.cornerRadius = 5
+        self.chatButton.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
         self.chatButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.chatView.addSubview(self.chatButton)
         
@@ -119,6 +125,7 @@ class HelpTabViewController: UIViewController {
         self.chatRequirementsLabel.textAlignment = NSTextAlignment.Right
         self.chatRequirementsLabel.numberOfLines = 0
         self.chatRequirementsLabel.font = regularFont?.fontWithSize(14.0)
+        self.chatRequirementsLabel.text = "*Requires Internet connection"
         self.chatView.addSubview(self.chatRequirementsLabel)
         
         self.talkView = UIView(frame: CGRectZero)
@@ -127,13 +134,16 @@ class HelpTabViewController: UIViewController {
         
         self.talkPromptLabel = UILabel(frame: CGRectZero)
         self.talkPromptLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.talkPromptLabel.font = titleFont?.fontWithSize(17.0)
+        self.talkPromptLabel.font = regularFont?.fontWithSize(17.0)
         self.talkPromptLabel.textAlignment = NSTextAlignment.Left
         self.talkPromptLabel.numberOfLines = 1
+        self.talkPromptLabel.text = "Talk to someone"
         self.talkView.addSubview(self.talkPromptLabel)
         
         self.talkButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        self.talkButton.setImage(UIImage(named: "talkButton"), forState: UIControlState.Normal)
+        self.talkButton.setTitle("Talk", forState: UIControlState.Normal)
+        self.talkButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        self.talkButton.layer.cornerRadius = 5
         self.talkButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.talkView.addSubview(self.talkButton)
         
@@ -142,6 +152,7 @@ class HelpTabViewController: UIViewController {
         self.talkRequirementsLabel.textAlignment = NSTextAlignment.Right
         self.talkRequirementsLabel.numberOfLines = 0
         self.talkRequirementsLabel.font = regularFont?.fontWithSize(14.0)
+        self.talkRequirementsLabel.text = "*Requires Internet connection"
         self.talkView.addSubview(self.talkRequirementsLabel)
         
         self.servicePartnerView = UIView(frame: CGRectZero)
@@ -153,6 +164,7 @@ class HelpTabViewController: UIViewController {
         self.servicePartnerInfoLabel.font = regularFont?.fontWithSize(14.0)
         self.servicePartnerInfoLabel.textAlignment = NSTextAlignment.Right
         self.servicePartnerInfoLabel.numberOfLines = 1
+        self.servicePartnerInfoLabel.text = "Service provided by"
         self.servicePartnerView.addSubview(self.servicePartnerInfoLabel)
         
         self.servicePartnerLogoImageView = UIImageView(frame: CGRectZero)
@@ -161,6 +173,57 @@ class HelpTabViewController: UIViewController {
         self.servicePartnerView.addSubview(self.servicePartnerLogoImageView)
         
         
+        var rootViewsDictionary = ["helpPromptView":self.helpPromptView, "chatView":self.chatView, "talkView":self.talkView, "servicePartnerView":self.servicePartnerView]
+        var rootMetricsDictionary = ["topMarginMin":134, "sideMargin":12, "bottomMarginMin":120]
+        
+        var rootHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[helpPromptView]-sideMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+        
+        var rootVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMarginMin-[helpPromptView]-40-[chatView]-[talkView]->=50-[servicePartnerView]->=bottomMarginMin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+        
+        self.view.addConstraints(rootHorizontalConstraints)
+        self.view.addConstraints(rootVerticalConstraints)
+        
+        
+        var helpPromptViewViewsDictionary = ["topPromptLabel":self.topPromptLabel, "followUpPromptLabel":self.followUpPromptLabel, "infoParagraphLabel":self.infoParagraphLabel]
+        var helpPromptViewMetricsDictionary = ["mediumVerticalMargin":10, "largeVerticalMargin": 20]
+        
+        var helpPromptViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[topPromptLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: helpPromptViewMetricsDictionary, views: helpPromptViewViewsDictionary)
+        
+        var helpPromptViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[topPromptLabel]-6-[followUpPromptLabel]-largeVerticalMargin-[infoParagraphLabel]-0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: helpPromptViewMetricsDictionary, views: helpPromptViewViewsDictionary)
+        
+        self.helpPromptView.addConstraints(helpPromptViewHorizontalConstraints)
+        self.helpPromptView.addConstraints(helpPromptViewVerticalConstraints)
+        
+        
+        var chatViewViewsDictionary = ["chatPromptLabel":self.chatPromptLabel, "chatButton":self.chatButton, "chatRequirementsLabel":self.chatRequirementsLabel]
+        var chatViewMetricsDictionary = ["shortVerticalMargin":4]
+        
+        var chatViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[chatPromptLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: chatViewMetricsDictionary, views: chatViewViewsDictionary)
+        var chatViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[chatPromptLabel]-shortVerticalMargin-[chatButton(44)]-shortVerticalMargin-[chatRequirementsLabel]-0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: chatViewMetricsDictionary, views: chatViewViewsDictionary)
+        
+        self.chatView.addConstraints(chatViewHorizontalConstraints)
+        self.chatView.addConstraints(chatViewVerticalConstraints)
+        
+        
+        var talkViewViewsDictionary = ["talkPromptLabel":self.talkPromptLabel, "talkButton":self.talkButton, "talkRequirementsLabel":self.talkRequirementsLabel]
+        var talkViewMetricsDictionary = ["shortVerticalMargin":4]
+        
+        var talkViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[talkPromptLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: talkViewMetricsDictionary, views: talkViewViewsDictionary)
+        var talkViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[talkPromptLabel]-shortVerticalMargin-[talkButton(44)]-shortVerticalMargin-[talkRequirementsLabel]-0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: talkViewMetricsDictionary, views: talkViewViewsDictionary)
+        
+        self.talkView.addConstraints(talkViewHorizontalConstraints)
+        self.talkView.addConstraints(talkViewVerticalConstraints)
+        
+        
+        var servicePartnerViewViewsDictionary = ["servicePartnerInfoLabel":self.servicePartnerInfoLabel, "servicePartnerLogoImageView":self.servicePartnerLogoImageView]
+        var servicePartnerViewMetricsDictionary = ["shortHorizontalMargin":4]
+
+        var servicePartnerViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=0-[servicePartnerInfoLabel(<=150)]-shortHorizontalMargin-[servicePartnerLogoImageView(<=100)]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
+        
+        var servicePartnerViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[servicePartnerInfoLabel]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
+        
+        self.servicePartnerView.addConstraints(servicePartnerViewHorizontalConstraints)
+        self.servicePartnerView.addConstraints(servicePartnerViewVerticalConstraints)
     }
 
     override func didReceiveMemoryWarning() {
