@@ -112,26 +112,32 @@ class DashboardViewController: UIViewController {
 
         self.myProfileView = UIView(frame: CGRectZero)
         self.myProfileView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        var profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProfileTapped")
+        self.myProfileView.addGestureRecognizer(profileTapGestureRecognizer)
         self.profileProgressView.addSubview(self.myProfileView)
         
         self.profileProgressSeparator = UIView(frame: CGRectZero)
         self.profileProgressSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.profileProgressSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+        self.profileProgressSeparator.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         self.profileProgressView.addSubview(self.profileProgressSeparator)
         
         self.myProgressView = UIView(frame: CGRectZero)
         self.myProgressView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        var progressTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProgressTapped")
+        self.myProgressView.addGestureRecognizer(progressTapGestureRecognizer)
         self.profileProgressView.addSubview(self.myProgressView)
         
         var profileProgressSubcontainersViewsDictionary = ["myProfileView":self.myProfileView, "profileProgressSeparator":self.profileProgressSeparator, "myProgressView":self.myProgressView]
         var profileProgressSubcontainersMetricsDictionary = ["sideMargin":15]
         
-        var horizontalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[myProfileView]->=sideMargin-[profileProgressSeparator(2)]->=0-[myProgressView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
+        var horizontalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[myProfileView]->=sideMargin-[profileProgressSeparator(1)]->=sideMargin-[myProgressView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
         
         var verticalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[myProgressView]-0-|", options: NSLayoutFormatOptions(0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
+        var verticalProfileProgressSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[profileProgressSeparator]-0-|", options: NSLayoutFormatOptions(0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
         
         self.profileProgressView.addConstraints(horizontalProfileProgressConstraints)
         self.profileProgressView.addConstraints(verticalProfileProgressConstraints)
+        self.profileProgressView.addConstraints(verticalProfileProgressSeparatorConstraints)
         
         
         // Profile View Initiation and Layout
@@ -182,7 +188,7 @@ class DashboardViewController: UIViewController {
         self.myProgressLabel.numberOfLines = 0
         self.myProgressView.addSubview(self.myProgressLabel)
         
-        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["vibrantBlue"],description: ""), PNPieChartDataItem(value: 0.1, color: self.colorDictionary["pink"],description: ""),PNPieChartDataItem(value: 0.6, color: self.colorDictionary["vibrantGreen"],description: "")]
+        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["yellowGreen"],description: ""), PNPieChartDataItem(value: 0.1, color: self.colorDictionary["pink"],description: ""),PNPieChartDataItem(value: 0.6, color: self.colorDictionary["vibrantGreen"],description: "")]
         self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 70, 70), items: items)
         self.myProgressPieChart.strokeChart()
         self.myProgressView.addSubview(self.myProgressPieChart)
@@ -201,18 +207,6 @@ class DashboardViewController: UIViewController {
         self.myProgressView.addConstraints(verticalLeftMyProgressViewConstraint)
         self.myProgressView.addConstraints(verticalRightMyProgressViewConstraint)
         
-//        var viewsDictionary = ["currentUserLabel":currentUserLabel]
-//        var metricsDictionary = ["margin": 20]
-//        
-//        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=0-[currentUserLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentUserLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        self.scrollView.addConstraints(horizontalConstraints)
-//        self.scrollView.addConstraints(verticalConstraints)
-        
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -221,19 +215,18 @@ class DashboardViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func logoutBarButtonItemTapped(sender: UIBarButtonItem) {
         PFUser.logOut()
         var currentUser = PFUser.currentUser()
         self.performSegueWithIdentifier("LoggedOut", sender: nil)
+    }
+    
+    func myProfileTapped(){
+        println("profile tapped")
+    }
+    
+    func myProgressTapped(){
+        println("progress tapped")
     }
 
 }

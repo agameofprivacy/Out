@@ -142,7 +142,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         cell.narrativeContentLabel.text = currentNarrativeContentString
         cell.commentsCountLabel.text = "2 comments"
         cell.writeACommentLabel.text = "write a comment"
-//        cell.likeCountLabel.text = "4 likes"
+        cell.likeCountLabel.text = "4 likes"
 
         if indexPath.row == 1{
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
