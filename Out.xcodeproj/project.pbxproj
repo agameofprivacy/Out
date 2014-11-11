@@ -42,6 +42,7 @@
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
+		2C6AFF531A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
@@ -158,6 +159,8 @@
 		2C5D997E19E4A9FB00133F59 /* OutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
+		2C6AFF511A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardWhatsNewCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardWhatsNewCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
@@ -381,14 +384,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2C6AFF541A128D680006C7A9 /* FlowLayouts */ = {
+			isa = PBXGroup;
+			children = (
+				2C6AFF511A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.h */,
+				2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */,
+				2C3A7BFC1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.h */,
+				2C3A7BFD1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.m */,
+			);
+			name = FlowLayouts;
+			sourceTree = "<group>";
+		};
+		2C6AFF551A128D7B0006C7A9 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */,
+				2C93EE501A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift */,
+			);
+			name = CollectionViewCells;
+			sourceTree = "<group>";
+		};
 		2C8C20D219E9ACD4009E84C7 /* DashboardTab */ = {
 			isa = PBXGroup;
 			children = (
-				2C3A7BFC1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.h */,
-				2C3A7BFD1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.m */,
 				2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */,
-				2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */,
-				2C93EE501A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift */,
+				2C6AFF541A128D680006C7A9 /* FlowLayouts */,
+				2C6AFF551A128D7B0006C7A9 /* CollectionViewCells */,
 				2C3A7BFF1A117EB700FC4516 /* MyProfileViewController.swift */,
 				2C3A7C011A117EC900FC4516 /* MyProgressViewController.swift */,
 			);
@@ -574,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */,
+				2C6AFF531A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m in Sources */,
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,

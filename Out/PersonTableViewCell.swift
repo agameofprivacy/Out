@@ -92,19 +92,19 @@ class PersonTableViewCell: UITableViewCell {
         self.userLocation.font = valueFont?.fontWithSize(14.0)
         contentView.addSubview(self.userLocation)
         
-        self.userButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        self.userButton.frame = CGRectZero
-        self.userButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.userButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
-        self.userButton.contentMode = UIViewContentMode.ScaleAspectFit
-        contentView.addSubview(self.userButton)
+//        self.userButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+//        self.userButton.frame = CGRectZero
+//        self.userButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.userButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
+//        self.userButton.contentMode = UIViewContentMode.ScaleAspectFit
+//        contentView.addSubview(self.userButton)
         
         
-        var viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation, "userButton":userButton]
+        var viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation]
         var metricsDictionary = ["verticalMargin":15, "sideMargin":15]
         
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]-sideMargin-[userOrientationAge]-20-[userButton]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]->=sideMargin-[userOrientationAge]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
         var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
@@ -112,13 +112,11 @@ class PersonTableViewCell: UITableViewCell {
         
         var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22-[userOrientationAge]-2-[userLocation]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
-        var userButtonVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-28-[userButton]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(avatarVerticalConstraints)
         contentView.addConstraints(aliasVerticalConstraints)
         contentView.addConstraints(orientationAgeLocationVerticalConstraints)
-        contentView.addConstraints(userButtonVerticalConstraints)
         
     }
     

@@ -6,6 +6,7 @@
 #import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "DashboardCurrentChallengesCollectionViewFlowLayout.h"
+#import "DashboardWhatsNewCollectionViewFlowLayout.h"
 #import "TPKeyboardAvoidingTableView.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "UICountingLabel.h"

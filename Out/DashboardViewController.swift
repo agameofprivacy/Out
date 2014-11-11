@@ -37,6 +37,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     var whatsNewHeaderSeparator:UIView!
     var whatsNewPageControl:UIPageControl!
     var whatsNewCollectionView:UICollectionView!
+    var whatsNewLayout = DashboardWhatsNewCollectionViewFlowLayout()
 
     let colorDictionary =
     [
@@ -84,7 +85,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         self.scrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
         self.scrollView.alwaysBounceVertical = true
-        self.scrollView.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+        self.scrollView.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
         self.view = self.scrollView
         
         // container views initiation and layout
@@ -122,7 +123,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         self.profileProgressSeparator = UIView(frame: CGRectZero)
         self.profileProgressSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.profileProgressSeparator.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        self.profileProgressSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.profileProgressView.addSubview(self.profileProgressSeparator)
         
         self.myProgressView = UIView(frame: CGRectZero)
@@ -286,8 +287,13 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.whatsNewPageControl.userInteractionEnabled = false
         self.whatsNewView.addSubview(whatsNewPageControl)
         
-        self.whatsNewCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.whatsNewCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.whatsNewLayout)
+        self.whatsNewLayout.itemSize = CGSizeMake(self.view.frame.size.width - 40.0, 54)
+        self.whatsNewLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         self.whatsNewCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.whatsNewCollectionView.showsHorizontalScrollIndicator = false
+        self.whatsNewCollectionView.pagingEnabled = true
+        self.whatsNewCollectionView.alwaysBounceHorizontal = true
         self.whatsNewCollectionView.delegate = self
         self.whatsNewCollectionView.dataSource = self
         self.whatsNewCollectionView.backgroundColor = UIColor.clearColor()
@@ -299,9 +305,9 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var horizontalWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[whatsNewLabel]-[whatsNewPageControl]-0-|", options: NSLayoutFormatOptions(0), metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
         
-        var verticalLeftWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewLabel]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        var verticalLeftWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewLabel]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
         
-        var verticalRightWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewPageControl]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        var verticalRightWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewPageControl]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
         
         self.whatsNewView.addConstraints(horizontalWhatsNewConstraints)
         self.whatsNewView.addConstraints(verticalLeftWhatsNewConstraints)
@@ -335,14 +341,14 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
             return 3
         }
         else{
-            return 0
+            return 3
         }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if collectionView == self.currentChallengesCollectionView{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardCurrentChallengesCollectionViewCell", forIndexPath: indexPath) as DashboardCurrentChallengesCollectionViewCell
-            cell.tagLabel.text = "  Casual  "
+            cell.tagLabel.text = "  Intermediate  "
 //            cell.tagLabel.backgroundColor = self.colorDictionary["casualGreen"]
             cell.challengeTitleLabel.text = "Volunteer at an LGBT non-profit"
             cell.currentStepTitleLabel.text = "Step 3: Attend Shift"
@@ -352,6 +358,12 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         else{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardWhatsNewCollectionViewCell", forIndexPath: indexPath) as DashboardWhatsNewCollectionViewCell
+            cell.avatarImageView.image = self.avatarImageDictionary["rabbit"]!
+            cell.avatarImageView.backgroundColor = self.colorDictionary["orange"]
+            cell.aliasLabel.text = "ogdog7"
+            cell.roleLabel.text = "mentor"
+            cell.alertCountLabel.text = "3"
+            cell.alertTypeLabel.text = "new messages"
             return cell
         }
     }
