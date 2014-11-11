@@ -38,6 +38,13 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     var whatsNewPageControl:UIPageControl!
     var whatsNewCollectionView:UICollectionView!
     var whatsNewLayout = DashboardWhatsNewCollectionViewFlowLayout()
+    
+    var triviaView:UIView!
+    var triviaLabel:UILabel!
+    var triviaHeaderSeparator:UILabel!
+    var triviaPageControl:UIPageControl!
+    var triviaCollectionView:UICollectionView!
+    var triviaLayout = DashboardTriviaCollectionViewFlowLayout()
 
     let colorDictionary =
     [
@@ -101,13 +108,17 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.whatsNewView = UIView(frame: CGRectZero)
         self.whatsNewView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.scrollView.addSubview(self.whatsNewView)
+
+        self.triviaView = UIView(frame: CGRectZero)
+        self.triviaView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.scrollView.addSubview(self.triviaView)
         
-        var containerViewsDictionary = ["profileProgressView":self.profileProgressView, "currentChallengesView":self.currentChallengesView, "whatsNewView":self.whatsNewView]
+        var containerViewsDictionary = ["profileProgressView":self.profileProgressView, "currentChallengesView":self.currentChallengesView, "whatsNewView":self.whatsNewView, "triviaView":self.triviaView]
         var containerMetricsDictionary = ["sideMargin": 15, "topMargin":30, "bottomMargin":30]
         
         var horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
-        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[currentChallengesView]->=25-[whatsNewView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[currentChallengesView]->=25-[whatsNewView]->=25-[triviaView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
         self.scrollView.addConstraints(horizontalContainerViewsConstraints)
         self.scrollView.addConstraints(verticalContainerViewsConstraints)
@@ -313,6 +324,59 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.whatsNewView.addConstraints(verticalLeftWhatsNewConstraints)
         self.whatsNewView.addConstraints(verticalRightWhatsNewConstraints)        
         
+        
+        // Trivia initiation and layout
+
+        self.triviaLabel = UILabel(frame: CGRectZero)
+        self.triviaLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.triviaLabel.text = "Trivia"
+        self.triviaLabel.textAlignment = NSTextAlignment.Left
+        self.triviaLabel.font = regularFont?.fontWithSize(15.0)
+        self.triviaLabel.numberOfLines = 1
+        self.triviaView.addSubview(self.triviaLabel)
+        
+        self.triviaHeaderSeparator = UILabel(frame: CGRectZero)
+        self.triviaHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.triviaHeaderSeparator.backgroundColor = UIColor.blackColor()
+        self.triviaView.addSubview(self.triviaHeaderSeparator)
+        
+        self.triviaPageControl = UIPageControl(frame: CGRectZero)
+        self.triviaPageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.triviaPageControl.hidesForSinglePage = true
+        self.triviaPageControl.backgroundColor = UIColor.clearColor()
+        self.triviaPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
+        self.triviaPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
+        self.triviaPageControl.userInteractionEnabled = false
+        self.triviaView.addSubview(self.triviaPageControl)
+        
+        self.triviaCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: triviaLayout)
+        self.triviaLayout.itemSize = CGSizeMake(self.view.frame.size.width - 40.0, 140)
+        self.triviaLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        self.triviaCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.triviaCollectionView.showsHorizontalScrollIndicator = false
+        self.triviaCollectionView.pagingEnabled = true
+        self.triviaCollectionView.alwaysBounceHorizontal = true
+        self.triviaCollectionView.delegate = self
+        self.triviaCollectionView.dataSource = self
+        self.triviaCollectionView.backgroundColor = UIColor.clearColor()
+        self.triviaCollectionView.registerClass(DashboardTriviaCollectionViewCell.self, forCellWithReuseIdentifier: "DashboardTriviaCollectionViewCell")
+        self.triviaView.addSubview(self.triviaCollectionView)
+
+        var triviaViewsDictionary = ["triviaLabel":self.triviaLabel, "triviaHeaderSeparator":self.triviaHeaderSeparator, "triviaPageControl":self.triviaPageControl, "triviaCollectionView":self.triviaCollectionView]
+        var triviaMetricsDictionary = ["pageControlRightSideMargin":15]
+        
+        var horizontalTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[triviaLabel]-[triviaPageControl]-0-|", options: NSLayoutFormatOptions(0), metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
+        
+        var verticalLeftTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[triviaLabel]-2-[triviaHeaderSeparator(1)]-10-[triviaCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
+        
+        var verticalRightTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[triviaPageControl]-2-[triviaHeaderSeparator(1)]-10-[triviaCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
+        
+        self.triviaView.addConstraints(horizontalTriviaConstraints)
+        self.triviaView.addConstraints(verticalLeftTriviaConstraints)
+        self.triviaView.addConstraints(verticalRightTriviaConstraints)
+
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -340,6 +404,9 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         if collectionView == self.currentChallengesCollectionView{
             return 3
         }
+        else if collectionView == self.whatsNewCollectionView{
+            return 3
+        }
         else{
             return 3
         }
@@ -356,14 +423,23 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
             return cell
 
         }
-        else{
+        else if collectionView == self.whatsNewCollectionView{
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardWhatsNewCollectionViewCell", forIndexPath: indexPath) as DashboardWhatsNewCollectionViewCell
             cell.avatarImageView.image = self.avatarImageDictionary["rabbit"]!
-            cell.avatarImageView.backgroundColor = self.colorDictionary["orange"]
+            cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]
             cell.aliasLabel.text = "ogdog7"
             cell.roleLabel.text = "mentor"
             cell.alertCountLabel.text = "3"
             cell.alertTypeLabel.text = "new messages"
+            return cell
+        }
+        else{
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardTriviaCollectionViewCell", forIndexPath: indexPath) as DashboardTriviaCollectionViewCell
+            cell.tagLabel.text = "  Intermediate  "
+//            cell.tagLabel.backgroundColor = self.colorDictionary["casualGreen"]
+            cell.challengeTitleLabel.text = "Volunteer at an LGBT non-profit"
+            cell.currentStepTitleLabel.text = "Step 3: Attend Shift"
+            cell.currentStepBlurbLabel.text = "Testing, testing, testing, 123"
             return cell
         }
     }

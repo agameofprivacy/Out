@@ -43,6 +43,8 @@
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
 		2C6AFF531A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */; };
+		2C6AFF581A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF571A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m */; };
+		2C6AFF5A1A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF591A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
@@ -161,6 +163,9 @@
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
 		2C6AFF511A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardWhatsNewCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardWhatsNewCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		2C6AFF561A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardTriviaCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		2C6AFF571A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardTriviaCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		2C6AFF591A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardTriviaCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +392,8 @@
 		2C6AFF541A128D680006C7A9 /* FlowLayouts */ = {
 			isa = PBXGroup;
 			children = (
+				2C6AFF561A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.h */,
+				2C6AFF571A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m */,
 				2C6AFF511A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.h */,
 				2C6AFF521A128D4C0006C7A9 /* DashboardWhatsNewCollectionViewFlowLayout.m */,
 				2C3A7BFC1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.h */,
@@ -399,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */,
+				2C6AFF591A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift */,
 				2C93EE501A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
@@ -599,6 +607,7 @@
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
+				2C6AFF5A1A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
 				2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */,
 				2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */,
@@ -654,6 +663,7 @@
 				2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */,
 				2C3A7BFE1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.m in Sources */,
 				2C5C56B21A106E6200B8EBC7 /* PNLineChartData.m in Sources */,
+				2C6AFF581A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m in Sources */,
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
