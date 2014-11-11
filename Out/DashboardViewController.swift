@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var scrollView:TPKeyboardAvoidingScrollView!
     
@@ -30,6 +30,7 @@ class DashboardViewController: UIViewController {
     var currentChallengesHeaderSeparator:UIView!
     var currentChallengesPageControl:UIPageControl!
     var currentChallengesCollectionView:UICollectionView!
+    var currentChallengesLayout = DashboardCurrentChallengesCollectionViewFlowLayout()
     
     var whatsNewView:UIView!
     var whatsNewLabel:UILabel!
@@ -47,7 +48,10 @@ class DashboardViewController: UIViewController {
         "lightBlue":UIColor(red: 30/255, green: 169/255, blue: 238/255, alpha: 1),
         "yellowGreen":UIColor(red: 211/255, green: 206/255, blue: 52/255, alpha: 1),
         "vibrantBlue":UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1),
-        "vibrantGreen":UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1)
+        "vibrantGreen":UIColor(red: 46/255, green: 204/255, blue: 113/255, alpha: 1),
+        "intermediateYellow":UIColor(red: 255/255, green: 206/255, blue: 0/255, alpha: 1),
+        "intenseRed":UIColor(red: 223/255, green: 48/255, blue: 97/255, alpha: 1),
+        "casualGreen":UIColor(red: 32/255, green: 220/255, blue: 129/255, alpha: 1)
     ]
     
     let avatarImageDictionary =
@@ -102,7 +106,7 @@ class DashboardViewController: UIViewController {
         
         var horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
-        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]-[currentChallengesView]-[whatsNewView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[currentChallengesView]->=25-[whatsNewView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
         self.scrollView.addConstraints(horizontalContainerViewsConstraints)
         self.scrollView.addConstraints(verticalContainerViewsConstraints)
@@ -188,7 +192,7 @@ class DashboardViewController: UIViewController {
         self.myProgressLabel.numberOfLines = 0
         self.myProgressView.addSubview(self.myProgressLabel)
         
-        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["yellowGreen"],description: ""), PNPieChartDataItem(value: 0.1, color: self.colorDictionary["pink"],description: ""),PNPieChartDataItem(value: 0.6, color: self.colorDictionary["vibrantGreen"],description: "")]
+        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.4, color: self.colorDictionary["casualGreen"],description: "")]
         self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 70, 70), items: items)
         self.myProgressPieChart.strokeChart()
         self.myProgressView.addSubview(self.myProgressPieChart)
@@ -207,6 +211,102 @@ class DashboardViewController: UIViewController {
         self.myProgressView.addConstraints(verticalLeftMyProgressViewConstraint)
         self.myProgressView.addConstraints(verticalRightMyProgressViewConstraint)
         
+        // currentChallengesView initiation and layout
+        
+        self.currentChallengesLabel = UILabel(frame: CGRectZero)
+        self.currentChallengesLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.currentChallengesLabel.text = "Challenges on Deck"
+        self.currentChallengesLabel.textAlignment = NSTextAlignment.Left
+        self.currentChallengesLabel.font = regularFont?.fontWithSize(15.0)
+        self.currentChallengesLabel.numberOfLines = 1
+        self.currentChallengesView.addSubview(self.currentChallengesLabel)
+        
+        self.currentChallengesHeaderSeparator = UIView(frame: CGRectZero)
+        self.currentChallengesHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.currentChallengesHeaderSeparator.backgroundColor = UIColor.blackColor()
+        self.currentChallengesView.addSubview(self.currentChallengesHeaderSeparator)
+        
+        self.currentChallengesPageControl = UIPageControl(frame: CGRectZero)
+        self.currentChallengesPageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.currentChallengesPageControl.hidesForSinglePage = true
+        self.currentChallengesPageControl.backgroundColor = UIColor.clearColor()
+        self.currentChallengesPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
+        self.currentChallengesPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
+        self.currentChallengesPageControl.userInteractionEnabled = false
+        self.currentChallengesView.addSubview(self.currentChallengesPageControl)
+        
+        
+        self.currentChallengesCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.currentChallengesLayout)
+        self.currentChallengesLayout.itemSize = CGSizeMake(self.view.frame.size.width - 40.0, 140)
+        self.currentChallengesLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        self.currentChallengesCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.currentChallengesCollectionView.backgroundColor = UIColor.clearColor()
+        self.currentChallengesCollectionView.dataSource = self
+        self.currentChallengesCollectionView.delegate = self
+        self.currentChallengesCollectionView.pagingEnabled = true
+        self.currentChallengesCollectionView.alwaysBounceHorizontal = true
+        self.currentChallengesCollectionView.showsHorizontalScrollIndicator = false
+        self.currentChallengesCollectionView.registerClass(DashboardCurrentChallengesCollectionViewCell.self, forCellWithReuseIdentifier: "DashboardCurrentChallengesCollectionViewCell")
+        self.currentChallengesView.addSubview(self.currentChallengesCollectionView)
+        
+        var currentChallengesViewViewsDictionary = ["currentChallengesLabel":self.currentChallengesLabel, "currentChallengesHeaderSeparator":self.currentChallengesHeaderSeparator, "currentChallengesPageControl":self.currentChallengesPageControl, "currentChallengesCollectionView":self.currentChallengesCollectionView]
+        var currentChallengesMetricsDictionary = ["pageControlRightSideMargin":15]
+        
+        var horizontalCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[currentChallengesLabel]-[currentChallengesPageControl]-0-|", options: NSLayoutFormatOptions(0), metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
+        
+        var verticalLeftCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentChallengesLabel]-2-[currentChallengesHeaderSeparator(1)]-10-[currentChallengesCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
+        
+        var verticalRightCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentChallengesPageControl]-2-[currentChallengesHeaderSeparator(1)]-10-[currentChallengesCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
+        
+        self.currentChallengesView.addConstraints(horizontalCurrentChallengesConstraints)
+        self.currentChallengesView.addConstraints(verticalLeftCurrentChallengesConstraints)
+        self.currentChallengesView.addConstraints(verticalRightCurrentChallengesConstraints)
+        
+        // whatsNewView initialization and layout
+        
+        self.whatsNewLabel = UILabel(frame: CGRectZero)
+        self.whatsNewLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.whatsNewLabel.text = "What's New"
+        self.whatsNewLabel.textAlignment = NSTextAlignment.Left
+        self.whatsNewLabel.font = regularFont?.fontWithSize(15.0)
+        self.whatsNewLabel.numberOfLines = 1
+        self.whatsNewView.addSubview(self.whatsNewLabel)
+        
+        self.whatsNewHeaderSeparator = UIView(frame: CGRectZero)
+        self.whatsNewHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.whatsNewHeaderSeparator.backgroundColor = UIColor.blackColor()
+        self.whatsNewView.addSubview(self.whatsNewHeaderSeparator)
+        
+        self.whatsNewPageControl = UIPageControl(frame: CGRectZero)
+        self.whatsNewPageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.whatsNewPageControl.hidesForSinglePage = true
+        self.whatsNewPageControl.backgroundColor = UIColor.clearColor()
+        self.whatsNewPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
+        self.whatsNewPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
+        self.whatsNewPageControl.userInteractionEnabled = false
+        self.whatsNewView.addSubview(whatsNewPageControl)
+        
+        self.whatsNewCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.whatsNewCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.whatsNewCollectionView.delegate = self
+        self.whatsNewCollectionView.dataSource = self
+        self.whatsNewCollectionView.backgroundColor = UIColor.clearColor()
+        self.whatsNewCollectionView.registerClass(DashboardWhatsNewCollectionViewCell.self, forCellWithReuseIdentifier: "DashboardWhatsNewCollectionViewCell")
+        self.whatsNewView.addSubview(self.whatsNewCollectionView)
+
+        var whatsNewViewsDictionary = ["whatsNewLabel":self.whatsNewLabel, "whatsNewHeaderSeparator":self.whatsNewHeaderSeparator, "whatsNewPageControl":self.whatsNewPageControl, "whatsNewCollectionView":self.whatsNewCollectionView]
+        var whatsNewMetricsDictionary = ["pageControlRightSideMargin":15]
+        
+        var horizontalWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[whatsNewLabel]-[whatsNewPageControl]-0-|", options: NSLayoutFormatOptions(0), metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        
+        var verticalLeftWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewLabel]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        
+        var verticalRightWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewPageControl]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        
+        self.whatsNewView.addConstraints(horizontalWhatsNewConstraints)
+        self.whatsNewView.addConstraints(verticalLeftWhatsNewConstraints)
+        self.whatsNewView.addConstraints(verticalRightWhatsNewConstraints)        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -222,11 +322,38 @@ class DashboardViewController: UIViewController {
     }
     
     func myProfileTapped(){
-        println("profile tapped")
+        self.performSegueWithIdentifier("showMyProfile", sender: self)
     }
     
     func myProgressTapped(){
-        println("progress tapped")
+        self.performSegueWithIdentifier("showMyProgress", sender: self)
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == self.currentChallengesCollectionView{
+            return 3
+        }
+        else{
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        if collectionView == self.currentChallengesCollectionView{
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardCurrentChallengesCollectionViewCell", forIndexPath: indexPath) as DashboardCurrentChallengesCollectionViewCell
+            cell.tagLabel.text = "  Casual  "
+//            cell.tagLabel.backgroundColor = self.colorDictionary["casualGreen"]
+            cell.challengeTitleLabel.text = "Volunteer at an LGBT non-profit"
+            cell.currentStepTitleLabel.text = "Step 3: Attend Shift"
+            cell.currentStepBlurbLabel.text = "Testing, testing, testing, 123"
+            return cell
+
+        }
+        else{
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardWhatsNewCollectionViewCell", forIndexPath: indexPath) as DashboardWhatsNewCollectionViewCell
+            return cell
+        }
     }
 
 }

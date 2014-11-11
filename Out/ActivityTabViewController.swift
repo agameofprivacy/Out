@@ -203,11 +203,11 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func notificationButtonTapped(sender:UIBarButtonItem){
-        println("present Notifications")
+        self.performSegueWithIdentifier("showNotifications", sender: self)
     }
     
     func composeButtonTapped(sender:UIBarButtonItem){
-        println("present Compose")
+        self.performSegueWithIdentifier("showCompose", sender: self)
     }
 
 }
