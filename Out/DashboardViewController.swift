@@ -92,6 +92,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         self.scrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
         self.scrollView.alwaysBounceVertical = true
+        self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.backgroundColor = UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
         self.view = self.scrollView
         
@@ -118,7 +119,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
-        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[currentChallengesView]->=25-[whatsNewView]->=25-[triviaView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[whatsNewView]->=25-[currentChallengesView]->=25-[triviaView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
         self.scrollView.addConstraints(horizontalContainerViewsConstraints)
         self.scrollView.addConstraints(verticalContainerViewsConstraints)

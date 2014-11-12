@@ -11,7 +11,7 @@ import UIKit
 class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var currentActivities:[PFObject] = []
-    
+    var currentLikedAcitivitiesIdStrings:[String] = []
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -144,10 +144,18 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         cell.writeACommentLabel.text = "write a comment"
         cell.likeCountLabel.text = "4 likes"
 
-        if indexPath.row == 1{
+        var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
+        cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
+        
+
+        if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
+            println("contained \(currentActivity.objectId)")
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
         }
-        
+        else{
+            cell.likeButton.image = UIImage(named: "likeButton-icon")
+        }
+
         return cell
     }
     /*
@@ -181,7 +189,21 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.currentActivities = objects as [PFObject]
-                        self.activityTableView.reloadData()
+                        var relation = PFUser.currentUser().relationForKey("likedActivity")
+                        relation.query().findObjectsInBackgroundWithBlock{
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            if error == nil {
+                                for object in objects{
+                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
+                                }
+                                self.activityTableView.reloadData()
+                            }
+                            else {
+                                // Log details of the failure
+                                NSLog("Error: %@ %@", error, error.userInfo!)
+                            }
+                    }
+
                     } else {
                         // Log details of the failure
                         NSLog("Error: %@ %@", error, error.userInfo!)
@@ -195,7 +217,26 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
 
-    
+    func likeButtonTapped(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.activityTableView.indexPathForRowAtPoint(sender.locationInView(self.activityTableView)) as NSIndexPath!
+
+        var likedActivity = self.currentActivities[currentIndexPath.row]
+        
+        var user = PFUser.currentUser()
+        var relation = user.relationForKey("likedActivity")
+        
+        var likedActivityQuery = relation.query()
+//        if likedActivityQuery.isEqual(likedActivity){
+//            println()
+//        }
+        relation.addObject(likedActivity)
+        user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            if error == nil{
+                self.loadActivities()
+            }
+        }
+    }
+
     func refresh(sender:UIRefreshControl){
         println("Start Refreshing")
 //        self.refreshControl.endRefreshing()

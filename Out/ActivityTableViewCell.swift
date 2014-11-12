@@ -160,6 +160,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.likeButtonArea = UIView(frame: CGRectZero)
         self.likeButtonArea.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.likeButtonArea.userInteractionEnabled = true
         self.responseBar.addSubview(self.likeButtonArea)
         
         self.likeCountLabel = UILabel(frame: CGRectZero)
@@ -173,35 +174,13 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeButton.contentMode = UIViewContentMode.ScaleAspectFit
         self.likeButton.image = UIImage(named: "likeButton-icon")
+        self.likeButton.userInteractionEnabled = true
         self.likeButton.layer.cornerRadius = 22
 //        self.likeButton.layer.borderWidth = 1
 //        self.likeButton.backgroundColor = UIColor(red: 239/255, green: 65/255, blue: 54/255, alpha: 1)
         self.likeButton.clipsToBounds = true
         self.likeButtonArea.addSubview(self.likeButton)
         
-        
-        
-        //        "paperSidePadding": 12,
-        //        "paperTopPadding":12,
-        //        "paperBottomPadding":10,
-        //        "smallHorizontalPadding":6,
-        //        "mediumHorizontalPadding":10,
-        
-        
-        
-        
-        //        "reverseTimeLabel":reverseTimeLabel,
-        //        "avatarImageView":avatarImageView,
-        //        "aliasLabel":aliasLabel,
-        //        "actionLabel":actionLabel,
-        //        "contentCanvas":contentCanvas,
-        //        "responseBar":responseBar,
-        //        "heroImageView":heroImageView,
-        //        "contentType":contentType,
-        //        "contentTypeIconImageView":contentTypeIconImageView,
-        //        "narrativeTitleLabel":narrativeTitleLabel,
-        //        "narrativeContentLabel":narrativeContentLabel,
-
         
         // paperView constraints
         var paperViewsDictionary = ["paperView":paperView]
@@ -366,7 +345,6 @@ class ActivityTableViewCell: UITableViewCell {
 
         
     }
-    
     
     
     override func awakeFromNib() {

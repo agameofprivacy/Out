@@ -273,6 +273,41 @@
             </objects>
             <point key="canvasLocation" x="4872" y="392"/>
         </scene>
+        <!--Activity Detail Navigation Controller-->
+        <scene sceneID="A7p-qx-ukk">
+            <objects>
+                <navigationController title="Activity Detail Navigation Controller" id="yEn-38-BAM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kcj-jQ-mUd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rzX-Lm-dOc" kind="relationship" relationship="rootViewController" id="UN8-CZ-LWb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sMB-Bj-YL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4179" y="1154"/>
+        </scene>
+        <!--Activity Detail View-->
+        <scene sceneID="8nu-Pt-ZH4">
+            <objects>
+                <viewController title="Activity Detail View" id="rzX-Lm-dOc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="suw-zY-CO8"/>
+                        <viewControllerLayoutGuide type="bottom" id="J1u-Jc-YaM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PHT-JF-YC3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Cts-qg-wNu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MlL-1e-Bv3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4872" y="1154"/>
+        </scene>
         <!--Help-->
         <scene sceneID="WOD-Nb-9gf">
             <objects>
@@ -351,6 +386,7 @@
                     <connections>
                         <segue destination="cLg-we-Bdf" kind="presentation" identifier="showNotifications" id="RVD-R7-m84"/>
                         <segue destination="joT-MC-BPw" kind="presentation" identifier="showCompose" id="0Xr-MD-KFe"/>
+                        <segue destination="yEn-38-BAM" kind="show" identifier="showActivityDetail" id="MXg-cu-8S7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ot-x9-Svn" userLabel="First Responder" sceneMemberID="firstResponder"/>
