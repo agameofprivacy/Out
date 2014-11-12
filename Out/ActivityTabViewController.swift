@@ -140,16 +140,33 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
 
         
         cell.narrativeContentLabel.text = currentNarrativeContentString
+        
+        var queryLikes = PFQuery(className: "_User")
+        queryLikes.whereKey("likedActivity", equalTo: currentActivity)
+        queryLikes.findObjectsInBackgroundWithBlock{
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                var count = objects.count
+                if count > 1{
+                    cell.likeCountLabel.text = "\(count) likes"
+                }
+                else{
+                    cell.likeCountLabel.text = "\(count) like"
+                }
+            }
+            else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
         cell.commentsCountLabel.text = "2 comments"
         cell.writeACommentLabel.text = "write a comment"
-        cell.likeCountLabel.text = "4 likes"
 
         var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
         cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
         
 
         if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
-            println("contained \(currentActivity.objectId)")
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
         }
         else{
@@ -224,7 +241,9 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
         var user = PFUser.currentUser()
         var relation = user.relationForKey("likedActivity")
-        
+        var currentLikeButton = sender.view as UIImageView
+        currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
+        currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
         var likedActivityQuery = relation.query()
 //        if likedActivityQuery.isEqual(likedActivity){
 //            println()
@@ -232,7 +251,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         relation.addObject(likedActivity)
         user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
             if error == nil{
-                self.loadActivities()
+//                self.loadActivities()
             }
         }
     }
