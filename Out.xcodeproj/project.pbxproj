@@ -48,6 +48,7 @@
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
+		2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8592C01A14082600272769 /* ActivityDetailViewController.swift */; };
 		2C93EE4F1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */; };
 		2C93EE511A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE501A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift */; };
 		2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CA60A1A059D0900BC4D93 /* CreateAccountViewController.swift */; };
@@ -169,6 +170,7 @@
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		2C8592C01A14082600272769 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardCurrentChallengesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
+				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
 				2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */,
 				2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
@@ -614,6 +617,7 @@
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
 				2C93EE4F1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift in Sources */,
+				2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */,
 				2CA435FF19F48C1000DC1C6E /* BoolPickerTableViewCell.swift in Sources */,
 				2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */,
 				2C3A7C001A117EB700FC4516 /* MyProfileViewController.swift in Sources */,

@@ -292,7 +292,7 @@
         <!--Activity Detail View-->
         <scene sceneID="8nu-Pt-ZH4">
             <objects>
-                <viewController title="Activity Detail View" id="rzX-Lm-dOc" sceneMemberID="viewController">
+                <viewController title="Activity Detail View" id="rzX-Lm-dOc" customClass="ActivityDetailViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="suw-zY-CO8"/>
                         <viewControllerLayoutGuide type="bottom" id="J1u-Jc-YaM"/>
@@ -302,7 +302,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Cts-qg-wNu"/>
+                    <navigationItem key="navigationItem" title="Detail" id="Cts-qg-wNu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MlL-1e-Bv3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

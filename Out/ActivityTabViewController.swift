@@ -162,12 +162,35 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
-        cell.commentsCountLabel.text = "2 comments"
+        
+        var queryComments = PFQuery(className: "Comment")
+        queryComments.whereKey("activity", equalTo: currentActivity)
+        queryComments.findObjectsInBackgroundWithBlock{
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                var count = objects.count
+                if count > 1{
+                    cell.commentsCountLabel.text = "\(count) comments"
+                }
+                else if count == 1{
+                    cell.commentsCountLabel.text = "\(count) comment"
+                }
+                else{
+                    cell.commentsCountLabel.text = "No comment"
+                }
+            }
+            else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+
         cell.writeACommentLabel.text = "write a comment"
 
         var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
         cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
-        
+        var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
+        cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
 
         if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
@@ -245,11 +268,33 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         var user = PFUser.currentUser()
         var relation = user.relationForKey("likedActivity")
         var currentLikeButton = sender.view as UIImageView
+        var currentLikeCount = 0
+        var currentLikeCountLabel = sender.view?.superview?.subviews[0] as UILabel
+        var currentLikeCountText:String = currentLikeCountLabel.text!
+        if currentLikeCountText == ""{
+            currentLikeCount = 0
+        }
+        else{
+            currentLikeCount = currentLikeCountText.componentsSeparatedByString(" ")[0].toInt()!
+            println(currentLikeCount)
+        }
         if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
             currentLikeButton.image = UIImage(named: "likeButton-icon")
+            --currentLikeCount
+            if currentLikeCount > 1{
+                currentLikeCountLabel.text = "\(currentLikeCount) likes"
+            }
+            else if currentLikeCount == 1{
+                currentLikeCountLabel.text = "\(currentLikeCount) like"
+            }
+            else{
+                currentLikeCountLabel.text = ""
+            }
+
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.removeObject(likedActivity)
+            self.currentLikedAcitivitiesIdStrings = self.currentLikedAcitivitiesIdStrings.filter{$0 != likedActivity.objectId}
             user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
                 }
@@ -257,6 +302,16 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else{
             currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
+            ++currentLikeCount
+            if currentLikeCount > 1{
+                currentLikeCountLabel.text = "\(currentLikeCount) likes"
+            }
+            else if currentLikeCount == 1{
+                currentLikeCountLabel.text = "\(currentLikeCount) like"
+            }
+            else{
+                currentLikeCountLabel.text = ""
+            }
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.addObject(likedActivity)
@@ -268,6 +323,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
 
+    func commentButtonTapped(sender:UITapGestureRecognizer){
+        self.performSegueWithIdentifier("showActivityDetail", sender: self)
+    }
+    
     func refresh(sender:UIRefreshControl){
         self.refreshControl.endRefreshing()
     }
