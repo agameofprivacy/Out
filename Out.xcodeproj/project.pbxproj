@@ -406,8 +406,8 @@
 			isa = PBXGroup;
 			children = (
 				2C93EE4E1A1158A3009E6147 /* DashboardCurrentChallengesCollectionViewCell.swift */,
-				2C6AFF591A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift */,
 				2C93EE501A1158C0009E6147 /* DashboardWhatsNewCollectionViewCell.swift */,
+				2C6AFF591A12CE570006C7A9 /* DashboardTriviaCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
 			sourceTree = "<group>";

@@ -229,7 +229,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.currentChallengesLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.currentChallengesLabel.text = "Challenges on Deck"
         self.currentChallengesLabel.textAlignment = NSTextAlignment.Left
-        self.currentChallengesLabel.font = regularFont?.fontWithSize(15.0)
+        self.currentChallengesLabel.font = regularFont?.fontWithSize(16.0)
         self.currentChallengesLabel.numberOfLines = 1
         self.currentChallengesView.addSubview(self.currentChallengesLabel)
         
@@ -245,6 +245,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.currentChallengesPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
         self.currentChallengesPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
         self.currentChallengesPageControl.userInteractionEnabled = false
+        self.currentChallengesPageControl.numberOfPages = 0
         self.currentChallengesView.addSubview(self.currentChallengesPageControl)
         
         
@@ -268,7 +269,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var verticalLeftCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentChallengesLabel]-2-[currentChallengesHeaderSeparator(1)]-10-[currentChallengesCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
         
-        var verticalRightCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentChallengesPageControl]-2-[currentChallengesHeaderSeparator(1)]-10-[currentChallengesCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
+        var verticalRightCurrentChallengesConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[currentChallengesPageControl(18)]-2-[currentChallengesHeaderSeparator(1)]-10-[currentChallengesCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: currentChallengesMetricsDictionary, views: currentChallengesViewViewsDictionary)
         
         self.currentChallengesView.addConstraints(horizontalCurrentChallengesConstraints)
         self.currentChallengesView.addConstraints(verticalLeftCurrentChallengesConstraints)
@@ -280,7 +281,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.whatsNewLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.whatsNewLabel.text = "What's New"
         self.whatsNewLabel.textAlignment = NSTextAlignment.Left
-        self.whatsNewLabel.font = regularFont?.fontWithSize(15.0)
+        self.whatsNewLabel.font = regularFont?.fontWithSize(16.0)
         self.whatsNewLabel.numberOfLines = 1
         self.whatsNewView.addSubview(self.whatsNewLabel)
         
@@ -296,6 +297,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.whatsNewPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
         self.whatsNewPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
         self.whatsNewPageControl.userInteractionEnabled = false
+        self.whatsNewPageControl.numberOfPages = 0
         self.whatsNewView.addSubview(whatsNewPageControl)
         
         self.whatsNewCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.whatsNewLayout)
@@ -318,7 +320,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var verticalLeftWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewLabel]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
         
-        var verticalRightWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewPageControl]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
+        var verticalRightWhatsNewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[whatsNewPageControl(18)]-2-[whatsNewHeaderSeparator(1)]-15-[whatsNewCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: whatsNewMetricsDictionary, views: whatsNewViewsDictionary)
         
         self.whatsNewView.addConstraints(horizontalWhatsNewConstraints)
         self.whatsNewView.addConstraints(verticalLeftWhatsNewConstraints)
@@ -331,7 +333,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.triviaLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.triviaLabel.text = "Trivia"
         self.triviaLabel.textAlignment = NSTextAlignment.Left
-        self.triviaLabel.font = regularFont?.fontWithSize(15.0)
+        self.triviaLabel.font = regularFont?.fontWithSize(16.0)
         self.triviaLabel.numberOfLines = 1
         self.triviaView.addSubview(self.triviaLabel)
         
@@ -347,6 +349,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.triviaPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
         self.triviaPageControl.pageIndicatorTintColor = UIColor(red:0.7, green: 0.7, blue:0.7, alpha: 1)
         self.triviaPageControl.userInteractionEnabled = false
+        self.triviaPageControl.numberOfPages = 0
         self.triviaView.addSubview(self.triviaPageControl)
         
         self.triviaCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: triviaLayout)
@@ -369,7 +372,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var verticalLeftTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[triviaLabel]-2-[triviaHeaderSeparator(1)]-10-[triviaCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
         
-        var verticalRightTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[triviaPageControl]-2-[triviaHeaderSeparator(1)]-10-[triviaCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
+        var verticalRightTriviaConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[triviaPageControl(18)]-2-[triviaHeaderSeparator(1)]-10-[triviaCollectionView(150)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: triviaMetricsDictionary, views: triviaViewsDictionary)
         
         self.triviaView.addConstraints(horizontalTriviaConstraints)
         self.triviaView.addConstraints(verticalLeftTriviaConstraints)
@@ -402,12 +405,15 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.currentChallengesCollectionView{
+            self.currentChallengesPageControl.numberOfPages = 3
             return 3
         }
         else if collectionView == self.whatsNewCollectionView{
+            self.whatsNewPageControl.numberOfPages = 3
             return 3
         }
         else{
+            self.triviaPageControl.numberOfPages = 3
             return 3
         }
     }
