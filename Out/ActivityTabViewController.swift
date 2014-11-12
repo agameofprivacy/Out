@@ -46,7 +46,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     ]
 
     var activityTableView:TPKeyboardAvoidingTableView!
-//    var refreshControl:UIRefreshControl!
+    var refreshControl:UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -71,10 +71,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         self.activityTableView.dataSource = self
         self.activityTableView.rowHeight = UITableViewAutomaticDimension
         self.activityTableView.estimatedRowHeight = 100
-//        self.refreshControl = UIRefreshControl()
-//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
-//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-//        self.activityTableView.addSubview(refreshControl)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.activityTableView.addSubview(refreshControl)
 
         self.view.addSubview(self.activityTableView)
         loadActivities()
@@ -150,8 +150,11 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                 if count > 1{
                     cell.likeCountLabel.text = "\(count) likes"
                 }
-                else{
+                else if count == 1{
                     cell.likeCountLabel.text = "\(count) like"
+                }
+                else{
+                    cell.likeCountLabel.text = ""
                 }
             }
             else {
@@ -242,24 +245,31 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         var user = PFUser.currentUser()
         var relation = user.relationForKey("likedActivity")
         var currentLikeButton = sender.view as UIImageView
-        currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
-        currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
-        var likedActivityQuery = relation.query()
-//        if likedActivityQuery.isEqual(likedActivity){
-//            println()
-//        }
-        relation.addObject(likedActivity)
-        user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
-            if error == nil{
-//                self.loadActivities()
+        if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
+            currentLikeButton.image = UIImage(named: "likeButton-icon")
+            currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
+            var likedActivityQuery = relation.query()
+            relation.removeObject(likedActivity)
+            user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                if error == nil{
+                }
             }
         }
+        else{
+            currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
+            currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
+            var likedActivityQuery = relation.query()
+            relation.addObject(likedActivity)
+            user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                if error == nil{
+                }
+            }
+        }
+
     }
 
     func refresh(sender:UIRefreshControl){
-        println("Start Refreshing")
-//        self.refreshControl.endRefreshing()
-        println("Refreshing Ended")
+        self.refreshControl.endRefreshing()
     }
     
     func notificationButtonTapped(sender:UIBarButtonItem){
