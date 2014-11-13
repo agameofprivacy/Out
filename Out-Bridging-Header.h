@@ -12,3 +12,4 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "UICountingLabel.h"
 #import "PNChart.h"
+#import "SLKTextViewController.h"

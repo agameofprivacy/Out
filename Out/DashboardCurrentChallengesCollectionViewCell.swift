@@ -77,7 +77,7 @@ class DashboardCurrentChallengesCollectionViewCell: UICollectionViewCell {
         
         var viewsDictionary = ["tagLabel":self.tagLabel,"challengeTitleLabel":self.challengeTitleLabel, "challengeTitleSeparator":self.challengeTitleSeparator, "currentStepTitleLabel":self.currentStepTitleLabel,"currentStepBlurbLabel":self.currentStepBlurbLabel]
         
-        var metricsDictionary = ["cardSideInset": 15, "cardTopInset":15, "cardBottomInset":15]
+        var metricsDictionary = ["cardSideInset": 10, "cardTopInset":15, "cardBottomInset":15]
         
         var horizontalTagsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[tagLabel]->=cardSideInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         

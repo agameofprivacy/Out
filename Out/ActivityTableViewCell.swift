@@ -53,7 +53,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        contentView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
         
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -62,6 +62,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.paperView.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.paperView.layer.shadowOpacity = 0.1
         self.paperView.layer.shadowRadius = 1
+        self.paperView.layer.cornerRadius = 5
 
         contentView.addSubview(self.paperView)
         
@@ -142,11 +143,13 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.commentsButtonArea = UIView(frame: CGRectZero)
         self.commentsButtonArea.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.commentsButtonArea.userInteractionEnabled = true
         self.responseBar.addSubview(self.commentsButtonArea)
         
         self.commentsCountLabel = UILabel(frame: CGRectZero)
         self.commentsCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.commentsCountLabel.numberOfLines = 1
+        self.commentsCountLabel.text = "No comments"
         self.commentsCountLabel.font = titleFont?.fontWithSize(16.0)
         self.commentsCountLabel.textAlignment = NSTextAlignment.Left
         self.commentsButtonArea.addSubview(self.commentsCountLabel)
@@ -186,7 +189,7 @@ class ActivityTableViewCell: UITableViewCell {
         var paperViewsDictionary = ["paperView":paperView]
         var paperMetricsDictionary = ["largeVerticalPadding":12]
         
-        var horizontalPaperViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[paperView]-0-|", options: NSLayoutFormatOptions(0), metrics: paperMetricsDictionary, views: paperViewsDictionary)
+        var horizontalPaperViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[paperView]-7.5-|", options: NSLayoutFormatOptions(0), metrics: paperMetricsDictionary, views: paperViewsDictionary)
         
         var verticalPaperViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[paperView]-largeVerticalPadding-|", options: NSLayoutFormatOptions(0), metrics: paperMetricsDictionary, views: paperViewsDictionary)
         
@@ -317,7 +320,7 @@ class ActivityTableViewCell: UITableViewCell {
             "shortVerticalPadding":0
         ]
         
-        var horizontalCommentButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[commentsCountLabel]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: commentButtonMetricsDictionary, views: commentButtonViewsDictionary)
+        var horizontalCommentButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-4-[commentsCountLabel]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: commentButtonMetricsDictionary, views: commentButtonViewsDictionary)
         
         var verticalCommentButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[commentsCountLabel]-shortVerticalPadding-[writeACommentLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: commentButtonMetricsDictionary, views: commentButtonViewsDictionary)
         

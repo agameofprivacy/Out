@@ -115,11 +115,11 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.scrollView.addSubview(self.triviaView)
         
         var containerViewsDictionary = ["profileProgressView":self.profileProgressView, "currentChallengesView":self.currentChallengesView, "whatsNewView":self.whatsNewView, "triviaView":self.triviaView]
-        var containerMetricsDictionary = ["sideMargin": 15, "topMargin":30, "bottomMargin":30]
+        var containerMetricsDictionary = ["sideMargin": 12, "topMargin":30, "bottomMargin":30]
         
         var horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
-        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[whatsNewView]->=25-[currentChallengesView]->=25-[triviaView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[profileProgressView]->=35-[whatsNewView]->=20-[currentChallengesView]->=20-[triviaView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
         self.scrollView.addConstraints(horizontalContainerViewsConstraints)
         self.scrollView.addConstraints(verticalContainerViewsConstraints)
@@ -145,7 +145,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.profileProgressView.addSubview(self.myProgressView)
         
         var profileProgressSubcontainersViewsDictionary = ["myProfileView":self.myProfileView, "profileProgressSeparator":self.profileProgressSeparator, "myProgressView":self.myProgressView]
-        var profileProgressSubcontainersMetricsDictionary = ["sideMargin":15]
+        var profileProgressSubcontainersMetricsDictionary = ["sideMargin":21]
         
         var horizontalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[myProfileView]->=sideMargin-[profileProgressSeparator(1)]->=sideMargin-[myProgressView]-0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
         

@@ -10,9 +10,19 @@ import UIKit
 
 class ActivityDetailViewController: UIViewController {
 
+    var parentVC:ActivityTabViewController!
+    
+    var activityCardView:UIView!
+    var activityHeroImageView:UIImageView!
+    var activityTitle:UILabel!
+    var activityAlias:UILabel!
+    var activityAvatar:UIImageView!
+    
+    var activityCommentsTableView:SLKTextViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println(self.parentVC)
         // Do any additional setup after loading the view.
         
     }

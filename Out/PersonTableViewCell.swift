@@ -65,6 +65,9 @@ class PersonTableViewCell: UITableViewCell {
     
     override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+        
         self.layoutMargins = UIEdgeInsetsZero
         self.separatorInset = UIEdgeInsetsZero
         self.userAvatar = UIImageView(frame: CGRectZero)
@@ -108,9 +111,9 @@ class PersonTableViewCell: UITableViewCell {
 
         var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-28-[userAlias]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-29-[userAlias]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22-[userOrientationAge]-2-[userLocation]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22.5-[userOrientationAge]-2-[userLocation]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         
         contentView.addConstraints(horizontalConstraints)

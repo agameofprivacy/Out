@@ -79,7 +79,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationItem.rightBarButtonItem = addButton
 
         
-        self.view.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
         
         
         self.followingTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)

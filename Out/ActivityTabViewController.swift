@@ -12,6 +12,8 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
 
     var currentActivities:[PFObject] = []
     var currentLikedAcitivitiesIdStrings:[String] = []
+    var currentActivity:PFObject!
+    
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -46,7 +48,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     ]
 
     var activityTableView:TPKeyboardAvoidingTableView!
-    var refreshControl:UIRefreshControl!
+//    var refreshControl:UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -63,22 +65,27 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
         
         self.activityTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.activityTableView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
+        self.activityTableView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
         self.activityTableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
         self.activityTableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
         self.activityTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityTableView.delegate = self
         self.activityTableView.dataSource = self
-        self.activityTableView.rowHeight = UITableViewAutomaticDimension
-        self.activityTableView.estimatedRowHeight = 100
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.activityTableView.addSubview(refreshControl)
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+//        self.activityTableView.addSubview(refreshControl)
 
         self.view.addSubview(self.activityTableView)
         loadActivities()
 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showActivityDetail"{
+            let newVC: ActivityDetailViewController = segue.destinationViewController as ActivityDetailViewController
+            newVC.parentVC = self
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,6 +100,12 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
         
+        var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
+        cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
+        
+        var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
+        cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
+
         var currentActivity = self.currentActivities[indexPath.row]
         var currentChallenge = currentActivity["challenge"] as PFObject
         var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
@@ -106,9 +119,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         var currentActivityImageString:String
         if (currentChallenge["narrativeImages"] as [String]).count > 0{
             currentActivityImageString = (currentChallenge["narrativeImages"] as [String])[currentChallengeTrackNumber] as String
+            cell.heroImageView.image = UIImage(named: currentActivityImageString)
         }
         else{
-            currentActivityImageString = ""
+            cell.heroImageView.image = nil
         }
 
         
@@ -117,7 +131,6 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         cell.avatarImageView.backgroundColor = self.colorDictionary[currentUserColor]
         cell.aliasLabel.text = currentUser.username
         cell.actionLabel.text = currentAction
-        cell.heroImageView.image = UIImage(named: currentActivityImageString)
 //        cell.contentTypeIconImageView.image = UIImage(named: "web-icon")
         
         var currentNarrativeTitleString:String
@@ -176,7 +189,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                     cell.commentsCountLabel.text = "\(count) comment"
                 }
                 else{
-                    cell.commentsCountLabel.text = "No comment"
+                    cell.commentsCountLabel.text = "No comments"
                 }
             }
             else {
@@ -187,10 +200,6 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
 
         cell.writeACommentLabel.text = "write a comment"
 
-        var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
-        cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
-        var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
-        cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
 
         if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
@@ -260,6 +269,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
 
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 360
+    }
+    
     func likeButtonTapped(sender:UITapGestureRecognizer){
         var currentIndexPath = self.activityTableView.indexPathForRowAtPoint(sender.locationInView(self.activityTableView)) as NSIndexPath!
 
@@ -276,7 +289,6 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         }
         else{
             currentLikeCount = currentLikeCountText.componentsSeparatedByString(" ")[0].toInt()!
-            println(currentLikeCount)
         }
         if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
             currentLikeButton.image = UIImage(named: "likeButton-icon")
@@ -322,14 +334,15 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         }
 
     }
+    
 
     func commentButtonTapped(sender:UITapGestureRecognizer){
         self.performSegueWithIdentifier("showActivityDetail", sender: self)
     }
     
-    func refresh(sender:UIRefreshControl){
-        self.refreshControl.endRefreshing()
-    }
+//    func refresh(sender:UIRefreshControl){
+//        self.refreshControl.endRefreshing()
+//    }
     
     func notificationButtonTapped(sender:UIBarButtonItem){
         self.performSegueWithIdentifier("showNotifications", sender: self)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ujj-EG-4nN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
@@ -273,22 +273,6 @@
             </objects>
             <point key="canvasLocation" x="4872" y="392"/>
         </scene>
-        <!--Activity Detail Navigation Controller-->
-        <scene sceneID="A7p-qx-ukk">
-            <objects>
-                <navigationController title="Activity Detail Navigation Controller" id="yEn-38-BAM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kcj-jQ-mUd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="rzX-Lm-dOc" kind="relationship" relationship="rootViewController" id="UN8-CZ-LWb"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sMB-Bj-YL7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4179" y="1154"/>
-        </scene>
         <!--Activity Detail View-->
         <scene sceneID="8nu-Pt-ZH4">
             <objects>
@@ -386,7 +370,7 @@
                     <connections>
                         <segue destination="cLg-we-Bdf" kind="presentation" identifier="showNotifications" id="RVD-R7-m84"/>
                         <segue destination="joT-MC-BPw" kind="presentation" identifier="showCompose" id="0Xr-MD-KFe"/>
-                        <segue destination="yEn-38-BAM" kind="show" identifier="showActivityDetail" id="MXg-cu-8S7"/>
+                        <segue destination="rzX-Lm-dOc" kind="show" identifier="showActivityDetail" id="u0q-G8-sKJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ot-x9-Svn" userLabel="First Responder" sceneMemberID="firstResponder"/>
