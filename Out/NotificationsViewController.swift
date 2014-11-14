@@ -10,6 +10,7 @@ import UIKit
 
 class NotificationsViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Notifications"

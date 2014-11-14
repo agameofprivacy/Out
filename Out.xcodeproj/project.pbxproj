@@ -27,6 +27,7 @@
 		2C2CF71F1A156E2600B8C60E /* SLKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7151A156E2600B8C60E /* SLKTextView.m */; };
 		2C2CF7201A156E2600B8C60E /* SLKTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7171A156E2600B8C60E /* SLKTextViewController.m */; };
 		2C2CF7211A156E2600B8C60E /* SLKTypingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7191A156E2600B8C60E /* SLKTypingIndicatorView.m */; };
+		2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
 		2C3A7BFE1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7BFD1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.m */; };
@@ -88,6 +89,13 @@
 		2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EA75119F0A2DE00703038 /* MediaAvailabilityTableViewCell.swift */; };
 		2CB1710519F2C7860086C95F /* GallerySelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */; };
 		2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */; };
+		2CB7E4151A15A3D700D55CF8 /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4061A15A3D700D55CF8 /* DateTools.bundle */; };
+		2CB7E4161A15A3D700D55CF8 /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E40A1A15A3D700D55CF8 /* DTError.m */; };
+		2CB7E4171A15A3D700D55CF8 /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E40C1A15A3D700D55CF8 /* DTTimePeriod.m */; };
+		2CB7E4181A15A3D700D55CF8 /* DTTimePeriodChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E40E1A15A3D700D55CF8 /* DTTimePeriodChain.m */; };
+		2CB7E4191A15A3D700D55CF8 /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4101A15A3D700D55CF8 /* DTTimePeriodCollection.m */; };
+		2CB7E41A1A15A3D700D55CF8 /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4121A15A3D700D55CF8 /* DTTimePeriodGroup.m */; };
+		2CB7E41B1A15A3D700D55CF8 /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4141A15A3D700D55CF8 /* NSDate+DateTools.m */; };
 		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
 		2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */; };
@@ -145,6 +153,7 @@
 		2C2CF7171A156E2600B8C60E /* SLKTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextViewController.m; sourceTree = "<group>"; };
 		2C2CF7181A156E2600B8C60E /* SLKTypingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTypingIndicatorView.h; sourceTree = "<group>"; };
 		2C2CF7191A156E2600B8C60E /* SLKTypingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTypingIndicatorView.m; sourceTree = "<group>"; };
+		2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
 		2C3A7BFC1A117A3700FC4516 /* DashboardCurrentChallengesCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardCurrentChallengesCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -221,6 +230,21 @@
 		2CA435FA19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchWebViewTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FC19F48BE700DC1C6E /* HeroImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroImageTableViewCell.swift; sourceTree = "<group>"; };
 		2CA435FE19F48C1000DC1C6E /* BoolPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolPickerTableViewCell.swift; sourceTree = "<group>"; };
+		2CB7E4061A15A3D700D55CF8 /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
+		2CB7E4071A15A3D700D55CF8 /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
+		2CB7E4081A15A3D700D55CF8 /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
+		2CB7E4091A15A3D700D55CF8 /* DTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTError.h; sourceTree = "<group>"; };
+		2CB7E40A1A15A3D700D55CF8 /* DTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTError.m; sourceTree = "<group>"; };
+		2CB7E40B1A15A3D700D55CF8 /* DTTimePeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriod.h; sourceTree = "<group>"; };
+		2CB7E40C1A15A3D700D55CF8 /* DTTimePeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriod.m; sourceTree = "<group>"; };
+		2CB7E40D1A15A3D700D55CF8 /* DTTimePeriodChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodChain.h; sourceTree = "<group>"; };
+		2CB7E40E1A15A3D700D55CF8 /* DTTimePeriodChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodChain.m; sourceTree = "<group>"; };
+		2CB7E40F1A15A3D700D55CF8 /* DTTimePeriodCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodCollection.h; sourceTree = "<group>"; };
+		2CB7E4101A15A3D700D55CF8 /* DTTimePeriodCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodCollection.m; sourceTree = "<group>"; };
+		2CB7E4111A15A3D700D55CF8 /* DTTimePeriodGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodGroup.h; sourceTree = "<group>"; };
+		2CB7E4121A15A3D700D55CF8 /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
+		2CB7E4131A15A3D700D55CF8 /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
+		2CB7E4141A15A3D700D55CF8 /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		2CD5302719FB42E500D38896 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -431,6 +455,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CB7E4051A15A3D700D55CF8 /* DateTools */,
 				2C2CF7061A156E2600B8C60E /* SlackTextViewController */,
 				2C5C56B61A106E6900B8EBC7 /* PNChart */,
 				2C5C563C1A106A2200B8EBC7 /* UICountingLabel */,
@@ -507,6 +532,7 @@
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
+				2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */,
 				2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */,
 				2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
@@ -553,6 +579,28 @@
 				2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */,
 			);
 			name = ChallengeGallery;
+			sourceTree = "<group>";
+		};
+		2CB7E4051A15A3D700D55CF8 /* DateTools */ = {
+			isa = PBXGroup;
+			children = (
+				2CB7E4061A15A3D700D55CF8 /* DateTools.bundle */,
+				2CB7E4071A15A3D700D55CF8 /* DateTools.h */,
+				2CB7E4081A15A3D700D55CF8 /* DTConstants.h */,
+				2CB7E4091A15A3D700D55CF8 /* DTError.h */,
+				2CB7E40A1A15A3D700D55CF8 /* DTError.m */,
+				2CB7E40B1A15A3D700D55CF8 /* DTTimePeriod.h */,
+				2CB7E40C1A15A3D700D55CF8 /* DTTimePeriod.m */,
+				2CB7E40D1A15A3D700D55CF8 /* DTTimePeriodChain.h */,
+				2CB7E40E1A15A3D700D55CF8 /* DTTimePeriodChain.m */,
+				2CB7E40F1A15A3D700D55CF8 /* DTTimePeriodCollection.h */,
+				2CB7E4101A15A3D700D55CF8 /* DTTimePeriodCollection.m */,
+				2CB7E4111A15A3D700D55CF8 /* DTTimePeriodGroup.h */,
+				2CB7E4121A15A3D700D55CF8 /* DTTimePeriodGroup.m */,
+				2CB7E4131A15A3D700D55CF8 /* NSDate+DateTools.h */,
+				2CB7E4141A15A3D700D55CF8 /* NSDate+DateTools.m */,
+			);
+			path = DateTools;
 			sourceTree = "<group>";
 		};
 		2CD5302419FB42E500D38896 /* TPKeyboardAvoiding */ = {
@@ -654,6 +702,7 @@
 				2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */,
 				2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */,
 				2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */,
+				2CB7E4151A15A3D700D55CF8 /* DateTools.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,11 +750,15 @@
 				2CB170FB19F2C7860086C95F /* DashboardViewController.swift in Sources */,
 				2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */,
 				2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */,
+				2CB7E4191A15A3D700D55CF8 /* DTTimePeriodCollection.m in Sources */,
+				2CB7E41A1A15A3D700D55CF8 /* DTTimePeriodGroup.m in Sources */,
 				2C5C56B11A106E6200B8EBC7 /* PNLineChart.m in Sources */,
+				2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */,
 				2CA435FB19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift in Sources */,
 				2C2CF7211A156E2600B8C60E /* SLKTypingIndicatorView.m in Sources */,
 				2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */,
 				2CA435FD19F48BE700DC1C6E /* HeroImageTableViewCell.swift in Sources */,
+				2CB7E4161A15A3D700D55CF8 /* DTError.m in Sources */,
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
@@ -714,6 +767,7 @@
 				2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */,
 				2C2CF71C1A156E2600B8C60E /* UIView+SLKAdditions.m in Sources */,
 				2C5C56AD1A106E6200B8EBC7 /* PNBarChart.m in Sources */,
+				2CB7E4171A15A3D700D55CF8 /* DTTimePeriod.m in Sources */,
 				2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */,
 				2C2CF71B1A156E2600B8C60E /* UITextView+SLKAdditions.m in Sources */,
@@ -743,6 +797,8 @@
 				2C5C56B21A106E6200B8EBC7 /* PNLineChartData.m in Sources */,
 				2C6AFF581A12CAF90006C7A9 /* DashboardTriviaCollectionViewFlowLayout.m in Sources */,
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
+				2CB7E4181A15A3D700D55CF8 /* DTTimePeriodChain.m in Sources */,
+				2CB7E41B1A15A3D700D55CF8 /* NSDate+DateTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

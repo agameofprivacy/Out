@@ -22,6 +22,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     var segmentedControlView:UIView!
     var segmentedControl:UISegmentedControl!
     
+    var mentorAppointment:UIButton!
+    var mentorChat:UIButton!
+    var mentorMore:UIButton!
     var mentorAvatar:UIImageView!
     var mentorRole:UILabel!
     var mentorAlias:UILabel!
@@ -125,6 +128,23 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorCellOverlay.addGestureRecognizer(toMentorDetailTapRecognizer)
         self.view.addSubview(self.mentorCellOverlay)
         
+        self.mentorAppointment = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.mentorAppointment.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mentorAppointment.tintColor = UIColor.blackColor()
+        self.mentorAppointment.setImage(UIImage(named: "calendar-icon"), forState: UIControlState.Normal)
+        self.mentorCellOverlay.addSubview(self.mentorAppointment)
+        
+        self.mentorChat = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.mentorChat.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mentorChat.tintColor = UIColor.blackColor()
+        self.mentorChat.setImage(UIImage(named: "chatBubble-icon"), forState: UIControlState.Normal)
+        self.mentorCellOverlay.addSubview(self.mentorChat)
+        
+        self.mentorMore = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.mentorMore.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mentorMore.setImage(UIImage(named: "more-icon"), forState: UIControlState.Normal)
+        self.mentorMore.tintColor = UIColor.blackColor()
+        self.mentorCellOverlay.addSubview(self.mentorMore)
         
         self.mentorAvatar = UIImageView(frame: CGRectZero)
         self.mentorAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -177,13 +197,21 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorButton.contentMode = UIViewContentMode.ScaleAspectFit
         
         
-        var mentorCellViewsDictionary = ["mentorAvatar":mentorAvatar, "mentorRole":mentorRole, "mentorAlias":mentorAlias, "mentorOrganization":mentorOrganization, "mentorLocation":mentorLocation, "mentorButton":mentorButton]
+        var mentorCellViewsDictionary = ["mentorAvatar":mentorAvatar, "mentorRole":mentorRole, "mentorAlias":mentorAlias, "mentorOrganization":mentorOrganization, "mentorLocation":mentorLocation, "mentorButton":mentorButton, "mentorAppointment":self.mentorAppointment, "mentorChat":self.mentorChat, "mentorMore":self.mentorMore]
+        
         var mentorCellMetricsDictionary = ["sideMargin":15, "topMargin":64 + 16, "bottomMargin": 18]
         
-        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=26-[mentorAppointment(36)]-32-[mentorChat(36)]-31-[mentorMore(36)]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
         
 
         var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAvatar(50)]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+        
+        var appointmentVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAppointment(36)]-20-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+
+        var chatVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorChat(36)]-19-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+
+        var moreVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorMore(36)]-20-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+
         
         var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-82-[mentorRole]-3-[mentorAlias]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
         
@@ -191,7 +219,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorCellOverlay.addConstraints(topHorizontalConstraints)
         self.mentorCellOverlay.addConstraints(avatarVerticalConstraints)
         self.mentorCellOverlay.addConstraints(leftVerticalConstraints)
-        
+        self.mentorCellOverlay.addConstraints(appointmentVerticalConstraints)
+        self.mentorCellOverlay.addConstraints(chatVerticalConstraints)
+        self.mentorCellOverlay.addConstraints(moreVerticalConstraints)
 
         
         self.segmentedControlView = UIView(frame: CGRectZero)

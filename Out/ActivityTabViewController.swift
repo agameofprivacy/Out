@@ -84,7 +84,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showActivityDetail"{
             let newVC: ActivityDetailViewController = segue.destinationViewController as ActivityDetailViewController
-            newVC.parentVC = self
+            newVC.currentActivity = self.currentActivity
         }
     }
 
@@ -107,6 +107,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
 
         var currentActivity = self.currentActivities[indexPath.row]
+        var activityCreatedTime = currentActivity.createdAt
         var currentChallenge = currentActivity["challenge"] as PFObject
         var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
         var currentUser = currentActivity["ownerUser"] as PFUser
@@ -125,8 +126,8 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
             cell.heroImageView.image = nil
         }
 
-        
-        cell.reverseTimeLabel.text = "2h ago"
+        var activityCreatedTimeLabel = activityCreatedTime.shortTimeAgoSinceNow()
+        cell.reverseTimeLabel.text = "\(activityCreatedTimeLabel)"
         cell.avatarImageView.image = UIImage(named: "\(avatarString)-icon")
         cell.avatarImageView.backgroundColor = self.colorDictionary[currentUserColor]
         cell.aliasLabel.text = currentUser.username
@@ -270,7 +271,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 360
+        return 400
     }
     
     func likeButtonTapped(sender:UITapGestureRecognizer){
@@ -337,6 +338,11 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     
 
     func commentButtonTapped(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.activityTableView.indexPathForRowAtPoint(sender.locationInView(self.activityTableView)) as NSIndexPath!
+        
+        var toCommentActivity = self.currentActivities[currentIndexPath.row]
+        self.currentActivity = toCommentActivity
+
         self.performSegueWithIdentifier("showActivityDetail", sender: self)
     }
     
