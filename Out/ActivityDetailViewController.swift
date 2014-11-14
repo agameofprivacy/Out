@@ -111,7 +111,9 @@ class ActivityDetailViewController: SLKTextViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewWillDisappear(animated: Bool) {
+        self.textView.resignFirstResponder()
+    }
     override func didPressRightButton(sender: AnyObject!) {
         self.textView.refreshFirstResponder()
         

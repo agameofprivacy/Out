@@ -48,7 +48,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     ]
 
     var activityTableView:TPKeyboardAvoidingTableView!
-//    var refreshControl:UIRefreshControl!
+    var refreshControl:UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -71,10 +71,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         self.activityTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityTableView.delegate = self
         self.activityTableView.dataSource = self
-//        self.refreshControl = UIRefreshControl()
-//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
-//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-//        self.activityTableView.addSubview(refreshControl)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.activityTableView.addSubview(refreshControl)
 
         self.view.addSubview(self.activityTableView)
         loadActivities()
@@ -88,6 +88,10 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        self.activityTableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -346,9 +350,9 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         self.performSegueWithIdentifier("showActivityDetail", sender: self)
     }
     
-//    func refresh(sender:UIRefreshControl){
-//        self.refreshControl.endRefreshing()
-//    }
+    func refresh(sender:UIRefreshControl){
+        self.refreshControl.endRefreshing()
+    }
     
     func notificationButtonTapped(sender:UIBarButtonItem){
         self.performSegueWithIdentifier("showNotifications", sender: self)
