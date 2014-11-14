@@ -41,7 +41,7 @@ class CreateAccountViewController: UIViewController {
         aliasTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         aliasTextField.keyboardType = UIKeyboardType.Default
         aliasTextField.autocorrectionType = UITextAutocorrectionType.No
-        aliasTextField.keyboardAppearance = UIKeyboardAppearance.Dark
+//        aliasTextField.keyboardAppearance = UIKeyboardAppearance.Dark
         aliasTextField.placeholder = "alias"
         aliasTextField.borderStyle = UITextBorderStyle.RoundedRect
         aliasTextField.autocapitalizationType = UITextAutocapitalizationType.None
@@ -50,7 +50,7 @@ class CreateAccountViewController: UIViewController {
         passwordTextField = UITextField(frame: CGRectZero)
         passwordTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         passwordTextField.keyboardType = UIKeyboardType.NumberPad
-        passwordTextField.keyboardAppearance = UIKeyboardAppearance.Dark
+//        passwordTextField.keyboardAppearance = UIKeyboardAppearance.Dark
         passwordTextField.placeholder = "passcode"
         passwordTextField.borderStyle = UITextBorderStyle.RoundedRect
         passwordTextField.secureTextEntry = true
@@ -59,7 +59,7 @@ class CreateAccountViewController: UIViewController {
         passwordConfirmTextField = UITextField(frame: CGRectZero)
         passwordConfirmTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
         passwordConfirmTextField.keyboardType = UIKeyboardType.NumberPad
-        passwordConfirmTextField.keyboardAppearance = UIKeyboardAppearance.Dark
+//        passwordConfirmTextField.keyboardAppearance = UIKeyboardAppearance.Dark
         passwordConfirmTextField.placeholder = "confirm passcode"
         passwordConfirmTextField.borderStyle = UITextBorderStyle.RoundedRect
         passwordConfirmTextField.secureTextEntry = true

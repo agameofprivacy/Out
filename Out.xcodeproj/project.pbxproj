@@ -96,6 +96,12 @@
 		2CB7E4191A15A3D700D55CF8 /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4101A15A3D700D55CF8 /* DTTimePeriodCollection.m */; };
 		2CB7E41A1A15A3D700D55CF8 /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4121A15A3D700D55CF8 /* DTTimePeriodGroup.m */; };
 		2CB7E41B1A15A3D700D55CF8 /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB7E4141A15A3D700D55CF8 /* NSDate+DateTools.m */; };
+		2CB7E41E1A15C3D700D55CF8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E41D1A15C3D700D55CF8 /* AssetsLibrary.framework */; };
+		2CB7E4201A15C3DF00D55CF8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E41F1A15C3DF00D55CF8 /* CoreText.framework */; };
+		2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */; };
+		2CB7E4281A15C40400D55CF8 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */; };
+		2CB7E4291A15C40400D55CF8 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */; };
+		2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */; };
 		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
 		2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */; };
@@ -245,6 +251,12 @@
 		2CB7E4121A15A3D700D55CF8 /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
 		2CB7E4131A15A3D700D55CF8 /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
 		2CB7E4141A15A3D700D55CF8 /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
+		2CB7E41D1A15C3D700D55CF8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		2CB7E41F1A15C3DF00D55CF8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		2CD5302719FB42E500D38896 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -263,7 +275,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */,
+				2CB7E4201A15C3DF00D55CF8 /* CoreText.framework in Frameworks */,
+				2CB7E41E1A15C3D700D55CF8 /* AssetsLibrary.framework in Frameworks */,
 				2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */,
+				2CB7E4281A15C40400D55CF8 /* HockeySDK.framework in Frameworks */,
 				2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */,
 				2C1C23B819E87B8A006975DA /* Security.framework in Frameworks */,
 				2C1C23B619E87B82006975DA /* QuartzCore.framework in Frameworks */,
@@ -404,12 +420,16 @@
 		2C5D996019E4A9FB00133F59 = {
 			isa = PBXGroup;
 			children = (
+				2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */,
+				2CB7E41F1A15C3DF00D55CF8 /* CoreText.framework */,
+				2CB7E41D1A15C3D700D55CF8 /* AssetsLibrary.framework */,
 				2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */,
 				2C1C23B919E87B91006975DA /* StoreKit.framework */,
 				2C1C23B719E87B8A006975DA /* Security.framework */,
 				2C1C23B519E87B82006975DA /* QuartzCore.framework */,
 				2C1C23B319E87B7C006975DA /* MobileCoreServices.framework */,
 				2C1C23B119E87B75006975DA /* libz.dylib */,
+				2CB7E4231A15C40400D55CF8 /* HockeySDK.embeddedframework */,
 				2C1C23AF19E87B6B006975DA /* CoreLocation.framework */,
 				2C1C23AD19E87B62006975DA /* CoreGraphics.framework */,
 				2C1C23AB19E87B5B006975DA /* CFNetwork.framework */,
@@ -603,6 +623,25 @@
 			path = DateTools;
 			sourceTree = "<group>";
 		};
+		2CB7E4231A15C40400D55CF8 /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */,
+				2CB7E4251A15C40400D55CF8 /* Resources */,
+			);
+			name = HockeySDK.embeddedframework;
+			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			sourceTree = "<group>";
+		};
+		2CB7E4251A15C40400D55CF8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */,
+				2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		2CD5302419FB42E500D38896 /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +667,7 @@
 				2C5D996519E4A9FB00133F59 /* Sources */,
 				2C5D996619E4A9FB00133F59 /* Frameworks */,
 				2C5D996719E4A9FB00133F59 /* Resources */,
+				2CB7E41C1A15C36E00D55CF8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -700,9 +740,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */,
+				2CB7E4291A15C40400D55CF8 /* HockeySDK.xcconfig in Resources */,
 				2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */,
 				2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */,
 				2CB7E4151A15A3D700D55CF8 /* DateTools.bundle in Resources */,
+				2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +756,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2CB7E41C1A15C36E00D55CF8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2C5D996519E4A9FB00133F59 /* Sources */ = {
@@ -930,6 +988,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Out",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -953,6 +1012,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Out",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

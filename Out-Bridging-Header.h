@@ -14,3 +14,4 @@
 #import "PNChart.h"
 #import "SLKTextViewController.h"
 #import "DateTools.h"
+#import <HockeySDK/HockeySDK.h>
