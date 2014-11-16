@@ -188,10 +188,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else{
             cell.commentsCountLabel.text = "No comments"
         }
-        
-
-        cell.writeACommentLabel.text = "write a comment"
-
 
         if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
@@ -233,7 +229,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
+                        self.currentActivities.removeAll(keepCapacity: true)
                         self.currentActivities = objects as [PFObject]
+                        var index = 0
                         for activity in self.currentActivities{
                             var queryLikes = PFQuery(className: "_User")
                             queryLikes.whereKey("likedActivity", equalTo: activity)
@@ -241,7 +239,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 if error == nil {
                                     var count = objects.count
-                                    self.currentActivitiesLikeCount.append(count)
+                                    if self.currentActivitiesLikeCount.count > index{
+                                        self.currentActivitiesLikeCount[index] = count
+                                    }
+                                    else{
+                                        self.currentActivitiesLikeCount.append(count)
+                                    }
                                 }
                                 else {
                                     // Log details of the failure
@@ -254,13 +257,19 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 if error == nil {
                                     var count = objects.count
-                                    self.currentActivitiesCommentCount.append(count)
+                                    if self.currentActivitiesCommentCount.count > index{
+                                        self.currentActivitiesCommentCount[index] = count
+                                    }
+                                    else{
+                                        self.currentActivitiesCommentCount.append(count)
+                                    }
                                 }
                                 else {
                                     // Log details of the failure
                                     NSLog("Error: %@ %@", error, error.userInfo!)
                                 }
                             }
+                            ++index
                         }
                         var relation = PFUser.currentUser().relationForKey("likedActivity")
                         relation.query().findObjectsInBackgroundWithBlock{
@@ -275,7 +284,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 // Log details of the failure
                                 NSLog("Error: %@ %@", error, error.userInfo!)
                             }
-                    }
+                        }
 
                     } else {
                         // Log details of the failure

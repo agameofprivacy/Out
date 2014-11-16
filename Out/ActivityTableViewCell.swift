@@ -159,6 +159,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.writeACommentLabel.numberOfLines = 1
         self.writeACommentLabel.font = valueFont?.fontWithSize(16.0)
         self.writeACommentLabel.textAlignment = NSTextAlignment.Left
+        self.writeACommentLabel.text = "write a comment"
         self.commentsButtonArea.addSubview(self.writeACommentLabel)
         
         self.likeButtonArea = UIView(frame: CGRectZero)
