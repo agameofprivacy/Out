@@ -32,13 +32,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.dataSource = self
         currentChallengesCardsCollectionView.pagingEnabled = true
         currentChallengesCardsCollectionView.alwaysBounceHorizontal = true
-        layout.itemSize = CGSizeMake(self.view.frame.size.width - 15.0, self.view.frame.size.height - 150)
+        layout.itemSize = CGSizeMake(self.view.frame.size.width - 15.0, self.view.frame.size.height - 160)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
         currentChallengesCardsCollectionView.showsHorizontalScrollIndicator = false
         currentChallengesCardsCollectionView.registerClass(ChallengesTabCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
         
-        cardNumberPageControl = UIPageControl(frame: CGRectMake(self.view.frame.origin.x + 40, self.view.bounds.size.height - 71.0, self.view.frame.size.width - 80.0, 18.0))
+        cardNumberPageControl = UIPageControl(frame: CGRectMake(self.view.frame.origin.x + 40, self.view.bounds.size.height - 74.0, self.view.frame.size.width - 80.0, 18.0))
         cardNumberPageControl.hidesForSinglePage = true
         cardNumberPageControl.backgroundColor = UIColor.clearColor()
         cardNumberPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)

@@ -46,7 +46,7 @@
     
     CGFloat pageMarginX =(canvasSize.width - columnCount * self.itemSize.width - (columnCount > 1 ? (columnCount - 1) * self.minimumLineSpacing : 0)) / 2.0f;
 
-    CGFloat pageMarginY = (canvasSize.height - rowCount * self.itemSize.height - (rowCount > 1 ? (rowCount - 1) * self.minimumInteritemSpacing : 0)) / 3.0f;
+    CGFloat pageMarginY = 12;
     
     NSUInteger page = indexPath.row / (rowCount * columnCount);
     

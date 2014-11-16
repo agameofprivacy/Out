@@ -33,7 +33,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
 
         self.backgroundColor = UIColor.clearColor()
 
-        self.galleryCollectionView = UICollectionView(frame: CGRectMake(frame.origin.x, frame.origin.y, UIScreen.mainScreen().bounds.width - 74, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
+        self.galleryCollectionView = UICollectionView(frame: CGRectMake(frame.origin.x, frame.origin.y, UIScreen.mainScreen().bounds.width - 55, UIScreen.mainScreen().bounds.height - 331), collectionViewLayout:layout)
         
         self.galleryCollectionView.registerClass(GallerySelectCollectionViewCell.self, forCellWithReuseIdentifier: "GallerySelectCollectionViewCell")
 
