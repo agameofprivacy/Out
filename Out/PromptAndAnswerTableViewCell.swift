@@ -75,9 +75,6 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         self.textView2.userInteractionEnabled = true
         contentView.addSubview(textView2)
         
-//        self.addDoneToolBarToKeyboard(self.textView1)
-//        self.addDoneToolBarToKeyboard(self.textView2)
-        
         var viewsDictionary = ["prompt1":prompt1, "prompt2":prompt2, "textView1":textView1, "textView2":textView2]
         var metricsDictionary = ["promptBottomMargin":promptBottomMargin, "textFieldBottomMargin":textFieldBottomMargin]
         
@@ -102,18 +99,5 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         
         return ["answer1":textEntry1, "answer2":textEntry2]
     }
-    
-//    func addDoneToolBarToKeyboard(currentTextView:UITextView){
-//        var doneToolBar:UIToolbar = UIToolbar(frame: CGRectMake(0, 0, self.bounds.width, 44))
-//        doneToolBar.barStyle = UIBarStyle.Default
-//
-//        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed:")
-//        var flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
-//        doneButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
-//        var toolBarItems = [flexibleSpace, doneButton]
-//        doneToolBar.setItems(toolBarItems, animated: false)
-//        currentTextView.inputAccessoryView = doneToolBar
-//    }
-        
     
 }

@@ -33,8 +33,6 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         imageImageView.contentMode = UIViewContentMode.ScaleAspectFill
         imageImageView.clipsToBounds = true
         imageImageView.layer.cornerRadius = 5
-//        imageImageView.layer.borderWidth = 1
-//        imageImageView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1).CGColor
         contentView.addSubview(imageImageView)
         
         titleLabel = UILabel(frame: CGRectZero)

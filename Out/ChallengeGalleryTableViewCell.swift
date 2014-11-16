@@ -16,7 +16,7 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
     let introLabel:UILabel!
     let cardContainerView:UIView!
     
-    let cardInsetH =  8
+    let cardInsetH =  7.5
     let cardInsetV =  4
     let labelInsetH = 18
     let labelInsetTop = 24

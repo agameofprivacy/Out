@@ -113,6 +113,7 @@ class CreateAccountViewController: UIViewController {
                         followerFollowingObject["ownerUser"] = PFUser.currentUser()
                         followerFollowingObject["requestsFromUsers"] = []
                         followerFollowingObject["followingUsers"] = []
+                        followerFollowingObject["followers"] = []
                         followerFollowingObject.saveInBackground()
                         self.performSegueWithIdentifier("AccountCreated", sender: nil)
                     } else {

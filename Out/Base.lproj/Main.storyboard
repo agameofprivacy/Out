@@ -346,7 +346,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="POk-YR-H6o" kind="relationship" relationship="rootViewController" id="hWs-A3-VZ2"/>
+                        <segue destination="ykm-qL-SSa" kind="relationship" relationship="rootViewController" id="eR6-a6-fCr"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBc-tO-qdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,28 +354,50 @@
             <point key="canvasLocation" x="1109" y="1434"/>
         </scene>
         <!--Activity-->
-        <scene sceneID="IQS-Eu-M73">
+        <scene sceneID="SGU-QX-No3">
             <objects>
-                <viewController title="Activity" id="POk-YR-H6o" customClass="ActivityTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="haR-Py-ec4"/>
-                        <viewControllerLayoutGuide type="bottom" id="alW-bZ-oBQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YwO-0s-O7L">
+                <tableViewController title="Activity" id="ykm-qL-SSa" customClass="ActivityTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lJJ-NR-vJi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="BXS-Er-mDw"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Kc3-iU-Xhp">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kc3-iU-Xhp" id="hLg-ep-ICa">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ykm-qL-SSa" id="5uh-NE-h4i"/>
+                            <outlet property="delegate" destination="ykm-qL-SSa" id="fNm-T7-OUM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="kq0-8O-a6r"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Tsv-f6-uLj">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle">
+                            <fragment content="Pull to Refresh">
+                                <attributes>
+                                    <font key="NSFont" metaFont="smallSystem"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <connections>
+                            <action selector="refreshActivityFeed:" destination="ykm-qL-SSa" eventType="valueChanged" id="se4-kq-zhs"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
-                        <segue destination="cLg-we-Bdf" kind="presentation" identifier="showNotifications" id="RVD-R7-m84"/>
-                        <segue destination="joT-MC-BPw" kind="presentation" identifier="showCompose" id="0Xr-MD-KFe"/>
-                        <segue destination="rzX-Lm-dOc" kind="show" identifier="showActivityDetail" id="u0q-G8-sKJ"/>
+                        <segue destination="cLg-we-Bdf" kind="presentation" identifier="showNotifications" id="aHM-fS-0pw"/>
+                        <segue destination="joT-MC-BPw" kind="presentation" identifier="showCompose" id="dUN-w7-Y6p"/>
+                        <segue destination="rzX-Lm-dOc" kind="show" identifier="showActivityDetail" id="5OW-Mf-9V3"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Ot-x9-Svn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ik0-Qr-pcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="1434"/>
+            <point key="canvasLocation" x="1859" y="1434"/>
         </scene>
         <!--People-->
         <scene sceneID="YXt-cp-vBa">

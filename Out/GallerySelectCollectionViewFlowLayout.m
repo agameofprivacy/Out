@@ -32,8 +32,6 @@
         contentSize.height = canvasSize.height;
     }
 
-//    NSLog(@"Content width is %f", contentSize.width);
-//    NSLog(@"Content height is %f", contentSize.height);
     return contentSize;
 }
 
@@ -41,7 +39,6 @@
 {
     CGSize canvasSize = self.collectionView.frame.size;
     
-    //    NSUInteger rowCount = (canvasSize.height - self.itemSize.height) / (self.itemSize.height + self.minimumInteritemSpacing) + 1;
     NSUInteger rowCount = 1;
     NSUInteger columnCount = (canvasSize.width - self.itemSize.width) / (self.itemSize.width + self.minimumLineSpacing) + 1;
     
@@ -65,11 +62,6 @@
     {
         cellFrame.origin.x += page * canvasSize.width;
     }
-    
-//    NSLog(@"Cell Frame width is %f", cellFrame.size.width);
-//    NSLog(@"Cell Frame height is %f", cellFrame.size.height);
-//    NSLog(@"Cell Frame x origin is %f", cellFrame.origin.x);
-//    NSLog(@"Cell Frame y origin is %f", cellFrame.origin.y);
     
     return cellFrame;
 }

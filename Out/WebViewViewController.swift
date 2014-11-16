@@ -21,6 +21,7 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
     
     override func loadView() {
         super.loadView()
+
         webView = WKWebView()
 //        webView.setTranslatesAutoresizingMaskIntoConstraints(false)
         webView.navigationDelegate = self
@@ -42,14 +43,9 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         self.navigationItem.title = "Loading..."
         
         self.view = webView
-
-//        var viewsDictionary = ["webView":webView]
-//        var metricsDictionary = ["bottomMargin":bottomMargin]
-//
-//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[webView]-bottomMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        self.view.addConstraints(verticalConstraints)
     }
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

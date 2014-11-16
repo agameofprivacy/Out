@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ActivityTabViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 
     var currentActivities:[PFObject] = []
     var currentLikedAcitivitiesIdStrings:[String] = []
     var currentActivity:PFObject!
-    
+    var currentActivitiesLikeCount:[Int] = []
+    var currentActivitiesCommentCount:[Int] = []
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -47,8 +48,9 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         "cat":UIImage(named: "cat-icon")
     ]
 
-    var activityTableView:TPKeyboardAvoidingTableView!
-    var refreshControl:UIRefreshControl!
+    
+//    var activityTableView:TPKeyboardAvoidingTableView!
+//    var refreshControl:UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -64,23 +66,31 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         self.navigationItem.leftBarButtonItem = notificationButton
         
         
-        self.activityTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.activityTableView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
-        self.activityTableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
-        self.activityTableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
-        self.activityTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.activityTableView.delegate = self
-        self.activityTableView.dataSource = self
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.activityTableView.addSubview(refreshControl)
+//        self.tableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
+        self.tableView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
+        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
+        
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+//        self.activityTableView.addSubview(refreshControl)
 
-        self.view.addSubview(self.activityTableView)
+
         loadActivities()
 
     }
     
+    @IBAction func refreshActivityFeed(sender: UIRefreshControl) {
+        sender.beginRefreshing()
+        self.loadActivities()
+        sender.endRefreshing()
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showActivityDetail"{
             let newVC: ActivityDetailViewController = segue.destinationViewController as ActivityDetailViewController
@@ -89,7 +99,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.activityTableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,11 +107,11 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.currentActivities.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
         
         var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
@@ -159,49 +169,26 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.narrativeContentLabel.text = currentNarrativeContentString
         
-        var queryLikes = PFQuery(className: "_User")
-        queryLikes.whereKey("likedActivity", equalTo: currentActivity)
-        queryLikes.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var count = objects.count
-                if count > 1{
-                    cell.likeCountLabel.text = "\(count) likes"
-                }
-                else if count == 1{
-                    cell.likeCountLabel.text = "\(count) like"
-                }
-                else{
-                    cell.likeCountLabel.text = ""
-                }
-            }
-            else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
+        if self.currentActivitiesLikeCount[indexPath.row] > 1{
+            cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) likes"
+        }
+        else if self.currentActivitiesLikeCount[indexPath.row] == 1{
+            cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) like"
+        }
+        else{
+            cell.likeCountLabel.text = ""
         }
         
-        var queryComments = PFQuery(className: "Comment")
-        queryComments.whereKey("activity", equalTo: currentActivity)
-        queryComments.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var count = objects.count
-                if count > 1{
-                    cell.commentsCountLabel.text = "\(count) comments"
-                }
-                else if count == 1{
-                    cell.commentsCountLabel.text = "\(count) comment"
-                }
-                else{
-                    cell.commentsCountLabel.text = "No comments"
-                }
-            }
-            else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-            }
+        if self.currentActivitiesCommentCount[indexPath.row] > 1{
+            cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comments"
         }
+        else if self.currentActivitiesCommentCount[indexPath.row] == 1{
+            cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comment"
+        }
+        else{
+            cell.commentsCountLabel.text = "No comments"
+        }
+        
 
         cell.writeACommentLabel.text = "write a comment"
 
@@ -237,6 +224,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                 var activityQuery = PFQuery(className: "Activity")
                 var currentUserFollowerFollowingObject = objects[0] as PFObject
                 var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as [PFUser]
+                currentUserFollowingUsers.append(PFUser.currentUser())
                 activityQuery.whereKey("ownerUser", containedIn: currentUserFollowingUsers)
                 activityQuery.includeKey("challenge")
                 activityQuery.includeKey("userChallengeData")
@@ -246,6 +234,34 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.currentActivities = objects as [PFObject]
+                        for activity in self.currentActivities{
+                            var queryLikes = PFQuery(className: "_User")
+                            queryLikes.whereKey("likedActivity", equalTo: activity)
+                            queryLikes.findObjectsInBackgroundWithBlock{
+                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                if error == nil {
+                                    var count = objects.count
+                                    self.currentActivitiesLikeCount.append(count)
+                                }
+                                else {
+                                    // Log details of the failure
+                                    NSLog("Error: %@ %@", error, error.userInfo!)
+                                }
+                            }
+                            var queryComments = PFQuery(className: "Comment")
+                            queryComments.whereKey("activity", equalTo: activity)
+                            queryComments.findObjectsInBackgroundWithBlock{
+                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                if error == nil {
+                                    var count = objects.count
+                                    self.currentActivitiesCommentCount.append(count)
+                                }
+                                else {
+                                    // Log details of the failure
+                                    NSLog("Error: %@ %@", error, error.userInfo!)
+                                }
+                            }
+                        }
                         var relation = PFUser.currentUser().relationForKey("likedActivity")
                         relation.query().findObjectsInBackgroundWithBlock{
                             (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -253,7 +269,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
                                 for object in objects{
                                     self.currentLikedAcitivitiesIdStrings.append(object.objectId)
                                 }
-                                self.activityTableView.reloadData()
+                                self.tableView.reloadData()
                             }
                             else {
                                 // Log details of the failure
@@ -274,12 +290,12 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
 
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 400
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 500
     }
     
     func likeButtonTapped(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.activityTableView.indexPathForRowAtPoint(sender.locationInView(self.activityTableView)) as NSIndexPath!
+        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
 
         var likedActivity = self.currentActivities[currentIndexPath.row]
         
@@ -342,7 +358,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
     
 
     func commentButtonTapped(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.activityTableView.indexPathForRowAtPoint(sender.locationInView(self.activityTableView)) as NSIndexPath!
+        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
         
         var toCommentActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toCommentActivity
@@ -350,10 +366,7 @@ class ActivityTabViewController: UIViewController, UITableViewDelegate, UITableV
         self.performSegueWithIdentifier("showActivityDetail", sender: self)
     }
     
-    func refresh(sender:UIRefreshControl){
-        self.refreshControl.endRefreshing()
-    }
-    
+
     func notificationButtonTapped(sender:UIBarButtonItem){
         self.performSegueWithIdentifier("showNotifications", sender: self)
     }
