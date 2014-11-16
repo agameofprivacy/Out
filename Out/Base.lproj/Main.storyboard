@@ -377,14 +377,7 @@
                     <navigationItem key="navigationItem" id="kq0-8O-a6r"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Tsv-f6-uLj">
                         <autoresizingMask key="autoresizingMask"/>
-                        <attributedString key="attributedTitle">
-                            <fragment content="Pull to Refresh">
-                                <attributes>
-                                    <font key="NSFont" metaFont="smallSystem"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
+                        <attributedString key="attributedTitle"/>
                         <connections>
                             <action selector="refreshActivityFeed:" destination="ykm-qL-SSa" eventType="valueChanged" id="se4-kq-zhs"/>
                         </connections>

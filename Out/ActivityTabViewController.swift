@@ -15,6 +15,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var currentActivity:PFObject!
     var currentActivitiesLikeCount:[Int] = []
     var currentActivitiesCommentCount:[Int] = []
+    var likeCount:Int = 0
+    var commentCount:Int = 0
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -89,7 +91,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     @IBAction func refreshActivityFeed(sender: UIRefreshControl) {
         sender.beginRefreshing()
         self.loadActivities()
-        sender.endRefreshing()
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showActivityDetail"{
@@ -169,26 +170,35 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         cell.narrativeContentLabel.text = currentNarrativeContentString
         
-        if self.currentActivitiesLikeCount[indexPath.row] > 1{
-            cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) likes"
-        }
-        else if self.currentActivitiesLikeCount[indexPath.row] == 1{
-            cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) like"
-        }
-        else{
+        if self.currentActivitiesLikeCount.count == 0{
             cell.likeCountLabel.text = ""
         }
-        
-        if self.currentActivitiesCommentCount[indexPath.row] > 1{
-            cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comments"
-        }
-        else if self.currentActivitiesCommentCount[indexPath.row] == 1{
-            cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comment"
-        }
         else{
+            if self.currentActivitiesLikeCount[indexPath.row] > 1{
+                cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) likes"
+            }
+            else if self.currentActivitiesLikeCount[indexPath.row] == 1{
+                cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) like"
+            }
+            else{
+                cell.likeCountLabel.text = ""
+            }
+        }
+        if self.currentActivitiesCommentCount.count == 0{
             cell.commentsCountLabel.text = "No comments"
         }
-
+        else{
+            if self.currentActivitiesCommentCount[indexPath.row] > 1{
+                cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comments"
+            }
+            else if self.currentActivitiesCommentCount[indexPath.row] == 1{
+                cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comment"
+            }
+            else{
+                cell.commentsCountLabel.text = "No comments"
+            }
+        }
+        
         if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
         }
@@ -210,7 +220,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     
     func loadActivities(){
-        
         var followingQuery = PFQuery(className: "FollowerFollowing")
         followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
         followingQuery.findObjectsInBackgroundWithBlock {
@@ -229,9 +238,24 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
-                        self.currentActivities.removeAll(keepCapacity: true)
                         self.currentActivities = objects as [PFObject]
-                        var index = 0
+                        self.currentActivitiesCommentCount = Array(count: self.currentActivities.count, repeatedValue: 0)
+                        self.currentActivitiesLikeCount = Array(count: self.currentActivities.count, repeatedValue: 0)
+                        self.likeCount = 0
+                        self.commentCount = 0
+                        var relation = PFUser.currentUser().relationForKey("likedActivity")
+                        relation.query().findObjectsInBackgroundWithBlock{
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            if error == nil {
+                                for object in objects{
+                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
+                                }
+                            }
+                            else {
+                                // Log details of the failure
+                                NSLog("Error: %@ %@", error, error.userInfo!)
+                            }
+                        }
                         for activity in self.currentActivities{
                             var queryLikes = PFQuery(className: "_User")
                             queryLikes.whereKey("likedActivity", equalTo: activity)
@@ -239,12 +263,22 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 if error == nil {
                                     var count = objects.count
-                                    if self.currentActivitiesLikeCount.count > index{
-                                        self.currentActivitiesLikeCount[index] = count
-                                    }
-                                    else{
-                                        self.currentActivitiesLikeCount.append(count)
-                                    }
+//                                    if self.currentActivitiesLikeCount.count > index{
+////                                        println("likeCount for activity number \(index) is \(count)")
+//                                        println(find(self.currentActivities, activity))
+                                        self.currentActivitiesLikeCount[find(self.currentActivities, activity)!] = count
+                                        ++self.likeCount
+                                        if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
+                                            self.tableView.reloadData()
+                                            self.refreshControl?.endRefreshing()
+                                        }
+
+//                                    }
+//                                    else{
+////                                        println("likeCount for activity number \(index) is \(count)")
+//                                        println(find(self.currentActivities, activity))
+//                                        self.currentActivitiesLikeCount.append(count)
+//                                    }
                                 }
                                 else {
                                     // Log details of the failure
@@ -257,32 +291,27 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 if error == nil {
                                     var count = objects.count
-                                    if self.currentActivitiesCommentCount.count > index{
-                                        self.currentActivitiesCommentCount[index] = count
-                                    }
-                                    else{
-                                        self.currentActivitiesCommentCount.append(count)
-                                    }
+//                                    if self.currentActivitiesCommentCount.count > index{
+//                                        println(find(self.currentActivities, activity))
+//                                        println("commentCount for activity number \(index) is \(count)")
+                                        self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
+                                        ++self.commentCount
+                                        if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
+                                            self.tableView.reloadData()
+                                            self.refreshControl?.endRefreshing()
+                                        }
+
+//                                    }
+//                                    else{
+////                                        println("commentCount for activity number \(index) is \(count)")
+//                                        println(find(self.currentActivities, activity))                                        
+//                                        self.currentActivitiesCommentCount.append(count)
+//                                    }
                                 }
                                 else {
                                     // Log details of the failure
                                     NSLog("Error: %@ %@", error, error.userInfo!)
                                 }
-                            }
-                            ++index
-                        }
-                        var relation = PFUser.currentUser().relationForKey("likedActivity")
-                        relation.query().findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
-                            if error == nil {
-                                for object in objects{
-                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
-                                }
-                                self.tableView.reloadData()
-                            }
-                            else {
-                                // Log details of the failure
-                                NSLog("Error: %@ %@", error, error.userInfo!)
                             }
                         }
 
