@@ -356,7 +356,7 @@
         <!--Activity-->
         <scene sceneID="SGU-QX-No3">
             <objects>
-                <tableViewController title="Activity" id="ykm-qL-SSa" customClass="ActivityTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Activity" hidesBottomBarWhenPushed="YES" id="ykm-qL-SSa" customClass="ActivityTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lJJ-NR-vJi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
