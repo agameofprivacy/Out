@@ -1,14 +1,14 @@
 //
-//  DashboardTriviaCollectionViewFlowLayout.m
+//  DashboardWhatsNewCollectionViewFlowLayout.m
 //  Out
 //
 //  Created by Eddie Chen on 11/11/14.
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 
-#import "DashboardTriviaCollectionViewFlowLayout.h"
+#import "DashboardAnnouncementsCollectionViewFlowLayout.h"
 
-@implementation DashboardTriviaCollectionViewFlowLayout
+@implementation DashboardAnnouncementsCollectionViewFlowLayout
 - (CGSize)collectionViewContentSize
 {
     // Only support single section for now.
@@ -34,6 +34,10 @@
     CGSize canvasSize = self.collectionView.frame.size;
     
     NSUInteger rowCount = 1;
+//    NSLog(@"Superview width: %f", self.collectionView.superview.superview.bounds.size.width);
+//    NSLog(@"Canvas size: %f", canvasSize.width);
+//    NSLog(@"ItemSize width: %f", self.itemSize.width);
+//    NSLog(@"minimumLineSpacing: %f", self.minimumLineSpacing);
     NSUInteger columnCount = (canvasSize.width - self.itemSize.width) / (self.itemSize.width + self.minimumLineSpacing) + 1;
     
     CGFloat pageMarginX =(canvasSize.width - columnCount * self.itemSize.width - (columnCount > 1 ? (columnCount - 1) * self.minimumLineSpacing : 0)) / 2.0f;
@@ -87,4 +91,6 @@
     
     return attrs;
 }
+
+
 @end

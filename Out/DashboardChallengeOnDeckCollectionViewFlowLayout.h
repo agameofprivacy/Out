@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DashboardCurrentChallengesCollectionViewFlowLayout : UICollectionViewFlowLayout
+@interface DashboardChallengeOnDeckCollectionViewFlowLayout : UICollectionViewFlowLayout
 
 @end

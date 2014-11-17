@@ -13,7 +13,7 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "My Profile"
+        self.navigationItem.title = "Profile"
         
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()

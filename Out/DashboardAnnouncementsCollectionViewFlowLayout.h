@@ -1,5 +1,5 @@
 //
-//  DashboardTriviaCollectionViewFlowLayout.h
+//  DashboardWhatsNewCollectionViewFlowLayout.h
 //  Out
 //
 //  Created by Eddie Chen on 11/11/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DashboardTriviaCollectionViewFlowLayout : UICollectionViewFlowLayout
+@interface DashboardAnnouncementsCollectionViewFlowLayout : UICollectionViewFlowLayout
 
 @end

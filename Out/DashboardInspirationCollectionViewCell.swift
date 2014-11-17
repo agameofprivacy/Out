@@ -1,14 +1,14 @@
 //
-//  DashboardCurrentChallengesCollectionViewCell.swift
+//  DashboardTriviaCollectionViewCell.swift
 //  Out
 //
-//  Created by Eddie Chen on 11/10/14.
+//  Created by Eddie Chen on 11/11/14.
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 
 import UIKit
 
-class DashboardCurrentChallengesCollectionViewCell: UICollectionViewCell {
+class DashboardInspirationCollectionViewCell: UICollectionViewCell {
     
     var tagLabel:UILabel!
     var challengeTitleLabel:UILabel!
@@ -27,14 +27,14 @@ class DashboardCurrentChallengesCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 5
-//        self.layer.borderWidth = 1
-//        self.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+        //        self.layer.borderWidth = 1
+        //        self.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.blackColor().CGColor
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowOpacity = 0.1
         self.layer.shadowRadius = 1
-
+        
         self.backgroundColor = UIColor.whiteColor()
         
         self.tagLabel = UILabel(frame: CGRectZero)
@@ -84,9 +84,9 @@ class DashboardCurrentChallengesCollectionViewCell: UICollectionViewCell {
         var horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardSideInset-[challengeTitleSeparator]-cardSideInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-cardSideInset-[challengeTitleLabel]-cardSideInset-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-
+        
         var verticalTagConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-cardTopInset-[tagLabel(25)]-10-[challengeTitleLabel]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-
+        
         var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[challengeTitleLabel]-4-[challengeTitleSeparator(1)]-4-[currentStepTitleLabel]-[currentStepBlurbLabel]->=cardBottomInset-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
         self.contentView.addConstraints(horizontalTagsConstraints)
@@ -94,6 +94,7 @@ class DashboardCurrentChallengesCollectionViewCell: UICollectionViewCell {
         self.contentView.addConstraints(horizontalConstraints)
         self.contentView.addConstraints(verticalTagConstraints)
         self.contentView.addConstraints(verticalConstraints)
-
+        
     }
+
 }

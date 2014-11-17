@@ -1,14 +1,15 @@
 //
-//  DashboardWhatsNewCollectionViewFlowLayout.m
+//  DashboardCurrentChallengesCollectionViewFlowLayout.m
 //  Out
 //
-//  Created by Eddie Chen on 11/11/14.
+//  Created by Eddie Chen on 11/10/14.
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 
-#import "DashboardWhatsNewCollectionViewFlowLayout.h"
+#import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 
-@implementation DashboardWhatsNewCollectionViewFlowLayout
+@implementation DashboardChallengeOnDeckCollectionViewFlowLayout
+
 - (CGSize)collectionViewContentSize
 {
     // Only support single section for now.

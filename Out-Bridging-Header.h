@@ -5,9 +5,9 @@
 #import <Parse/Parse.h>
 #import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "GallerySelectCollectionViewFlowLayout.h"
-#import "DashboardCurrentChallengesCollectionViewFlowLayout.h"
-#import "DashboardWhatsNewCollectionViewFlowLayout.h"
-#import "DashboardTriviaCollectionViewFlowLayout.h"
+#import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
+#import "DashboardAnnouncementsCollectionViewFlowLayout.h"
+#import "DashboardInspirationCollectionViewFlowLayout.h"
 #import "TPKeyboardAvoidingTableView.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "UICountingLabel.h"

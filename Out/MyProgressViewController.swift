@@ -13,7 +13,7 @@ class MyProgressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = "My Records"
+        self.navigationItem.title = "Records"
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton

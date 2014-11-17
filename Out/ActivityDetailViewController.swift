@@ -168,7 +168,9 @@ class ActivityDetailViewController: SLKTextViewController {
         cell.transform = self.tableView.transform
         return cell
     }
-    
+    override func viewDidDisappear(animated: Bool) {
+        self.parentVC.loadActivities()
+    }
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }

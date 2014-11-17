@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
+class DashboardAnnouncementsCollectionViewCell: UICollectionViewCell {
     
     var avatarImageView:UIImageView!
     var aliasLabel:UILabel!
@@ -40,7 +40,7 @@ class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
         self.aliasLabel = UILabel(frame: CGRectZero)
         self.aliasLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.aliasLabel.textAlignment = NSTextAlignment.Left
-        self.aliasLabel.font = regularFont?.fontWithSize(14.0)
+        self.aliasLabel.font = titleFont?.fontWithSize(14.0)
         self.contentView.addSubview(self.aliasLabel)
         
         self.roleLabel = UILabel(frame: CGRectZero)
@@ -54,7 +54,7 @@ class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
         self.alertCountView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.alertCountView.layer.cornerRadius = 18
         self.alertCountView.clipsToBounds = true
-        self.alertCountView.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+        self.alertCountView.backgroundColor = UIColor.blackColor()
         self.contentView.addSubview(self.alertCountView)
         
         self.alertCountLabel = UILabel(frame: CGRectZero)
@@ -67,7 +67,7 @@ class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
         self.alertTypeLabel = UILabel(frame: CGRectZero)
         self.alertTypeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.alertTypeLabel.textAlignment = NSTextAlignment.Left
-        self.alertTypeLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        self.alertTypeLabel.textColor = UIColor.blackColor()
         self.alertTypeLabel.font = regularFont?.fontWithSize(14.0)
         self.contentView.addSubview(self.alertTypeLabel)
         
@@ -81,17 +81,17 @@ class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
         
         var metricsDictionary = ["inBetweenPadding":18]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[avatarImageView(50)]-inBetweenPadding-[aliasLabel]-<=40-[alertCountView(36)]-[alertTypeLabel]->=inBetweenPadding-[alertSeparator(1)]->=10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[avatarImageView(50)]-inBetweenPadding-[aliasLabel]->=0-[alertCountView(36)]-[alertTypeLabel]-inBetweenPadding-[alertSeparator(1)]-5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalAvatarConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-2-[avatarImageView(50)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalAvatarConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[avatarImageView(50)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalAliasConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[aliasLabel]-2-[roleLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalAliasConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[aliasLabel]-2-[roleLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalAlertCountViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-9-[alertCountView(36)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalAlertCountViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-7-[alertCountView(36)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalAlertTypeConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-17-[alertTypeLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalAlertTypeConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[alertTypeLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalAlertSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-9-[alertSeparator(36)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalAlertSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[alertSeparator(50)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         // layout alertCountView
         
@@ -104,7 +104,6 @@ class DashboardWhatsNewCollectionViewCell: UICollectionViewCell {
         
         self.alertCountView.addConstraints(horizontalAlertCountViewConstraints)
         self.alertCountView.addConstraints(verticalAlertCountViewViewConstraints)
-
         
         self.contentView.addConstraints(horizontalConstraints)
         self.contentView.addConstraints(verticalAvatarConstraints)

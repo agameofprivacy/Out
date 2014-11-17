@@ -96,6 +96,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         if segue.identifier == "showActivityDetail"{
             let newVC: ActivityDetailViewController = segue.destinationViewController as ActivityDetailViewController
             newVC.currentActivity = self.currentActivity
+            newVC.parentVC = self
         }
     }
 

@@ -1,15 +1,14 @@
 //
-//  DashboardCurrentChallengesCollectionViewFlowLayout.m
+//  DashboardTriviaCollectionViewFlowLayout.m
 //  Out
 //
-//  Created by Eddie Chen on 11/10/14.
+//  Created by Eddie Chen on 11/11/14.
 //  Copyright (c) 2014 Coming Out App. All rights reserved.
 //
 
-#import "DashboardCurrentChallengesCollectionViewFlowLayout.h"
+#import "DashboardInspirationCollectionViewFlowLayout.h"
 
-@implementation DashboardCurrentChallengesCollectionViewFlowLayout
-
+@implementation DashboardInspirationCollectionViewFlowLayout
 - (CGSize)collectionViewContentSize
 {
     // Only support single section for now.
@@ -88,6 +87,4 @@
     
     return attrs;
 }
-
-
 @end
