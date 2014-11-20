@@ -15,6 +15,14 @@ class CreateAccountViewController: UIViewController {
     var aliasTextField:UITextField!
     var passwordTextField:UITextField!
     var passwordConfirmTextField:UITextField!
+    var ageTextField:UITextField!
+    var genderIdentityTextField:UITextField!
+    var sexualOrientationTextField:UITextField!
+    var avatarTextField:UITextField!
+    var colorTextField:UITextField!
+    var ethnicityTextField:UITextField!
+    var cityTextField:UITextField!
+    
     var createAccountButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
     
     override func viewDidLoad() {
@@ -89,7 +97,7 @@ class CreateAccountViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-//        aliasTextField.becomeFirstResponder()
+        aliasTextField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,15 +138,5 @@ class CreateAccountViewController: UIViewController {
             self.createAccountButton.enabled = true
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

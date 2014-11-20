@@ -131,18 +131,18 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorAppointment = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.mentorAppointment.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorAppointment.tintColor = UIColor.blackColor()
-        self.mentorAppointment.setImage(UIImage(named: "calendar-icon"), forState: UIControlState.Normal)
+//        self.mentorAppointment.setImage(UIImage(named: "calendar-icon"), forState: UIControlState.Normal)
         self.mentorCellOverlay.addSubview(self.mentorAppointment)
         
         self.mentorChat = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.mentorChat.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorChat.tintColor = UIColor.blackColor()
-        self.mentorChat.setImage(UIImage(named: "chatBubble-icon"), forState: UIControlState.Normal)
+//        self.mentorChat.setImage(UIImage(named: "chatBubble-icon"), forState: UIControlState.Normal)
         self.mentorCellOverlay.addSubview(self.mentorChat)
         
         self.mentorMore = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.mentorMore.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorMore.setImage(UIImage(named: "more-icon"), forState: UIControlState.Normal)
+//        self.mentorMore.setImage(UIImage(named: "more-icon"), forState: UIControlState.Normal)
         self.mentorMore.tintColor = UIColor.blackColor()
         self.mentorCellOverlay.addSubview(self.mentorMore)
         
@@ -244,13 +244,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         var viewsDictionary = ["mentorCellOverlay":mentorCellOverlay, "segmentedControlView":segmentedControlView]
         var metricsDiciontary = ["margin":0]
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-margin-[mentorCellOverlay(144)]-0-[segmentedControlView(50)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDiciontary, views: viewsDictionary)
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-margin-[mentorCellOverlay(144)]-0-[segmentedControlView(44)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDiciontary, views: viewsDictionary)
         var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[mentorCellOverlay]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
         self.view.addConstraints(verticalConstraints)
         self.view.addConstraints(horizontalConstraints)
         
         var segmentsViewsDictionary = ["segmentedControl":segmentedControl]
-        var segmentsMetricsDictionary = ["margin":12]
+        var segmentsMetricsDictionary = ["margin":7.5]
         
         var segmentsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControl]-margin-|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
         var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl]-10-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)

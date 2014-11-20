@@ -62,7 +62,7 @@ class PersonFollowTableViewCell: UITableViewCell {
         super.init(frame: frame)
     }
     
-    override init?(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.layoutMargins = UIEdgeInsetsZero

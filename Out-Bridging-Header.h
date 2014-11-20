@@ -15,3 +15,4 @@
 #import "SLKTextViewController.h"
 #import "DateTools.h"
 #import <HockeySDK/HockeySDK.h>
+#import "ICETutorialController.h"
