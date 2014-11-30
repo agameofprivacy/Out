@@ -104,7 +104,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followerTableView.contentInset = UIEdgeInsets(top: 194.0, left: 0, bottom:0, right: 0)
+        self.followerTableView.contentInset = UIEdgeInsets(top: 194.0, left: 0, bottom:49, right: 0)
         self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.followerTableView.backgroundColor = UIColor.whiteColor()
@@ -370,10 +370,19 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if segment.selectedSegmentIndex == 0{
             self.followerTableView.hidden = false
             self.followingTableView.hidden = true
+//            if (self.followerTableView.numberOfRowsInSection(0) > 0){
+//                self.followerTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+//            }
+//            else if(self.followerTableView.numberOfRowsInSection(1) > 0){
+//                self.followerTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+//            }
         }
         else{
             self.followerTableView.hidden = true
             self.followingTableView.hidden = false
+//            if (self.followingTableView.numberOfRowsInSection(0) > 0){
+//                self.followingTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+//            }
         }
     }
     

@@ -58,6 +58,7 @@
 		2C6FFAEC1A19B3160043F912 /* ICETutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAE71A19B3160043F912 /* ICETutorialController.m */; };
 		2C6FFAED1A19B3160043F912 /* ICETutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAE91A19B3160043F912 /* ICETutorialPage.m */; };
 		2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */; };
+		2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
@@ -218,6 +219,8 @@
 		2C6FFAE91A19B3160043F912 /* ICETutorialPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialPage.m; sourceTree = "<group>"; };
 		2C6FFAEA1A19B3160043F912 /* ICETutorialStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICETutorialStyle.h; sourceTree = "<group>"; };
 		2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialStyle.m; sourceTree = "<group>"; };
+		2C7020381A2B815A00873041 /* COSTouchVisualizerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSTouchVisualizerWindow.h; sourceTree = "<group>"; };
+		2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
@@ -487,6 +490,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C70203B1A2B815D00873041 /* COSTouchVisualizer */,
 				2C6FFAE51A19B3160043F912 /* ICETutorial */,
 				2CB7E4051A15A3D700D55CF8 /* DateTools */,
 				2C2CF7061A156E2600B8C60E /* SlackTextViewController */,
@@ -549,6 +553,15 @@
 				2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */,
 			);
 			path = ICETutorial;
+			sourceTree = "<group>";
+		};
+		2C70203B1A2B815D00873041 /* COSTouchVisualizer */ = {
+			isa = PBXGroup;
+			children = (
+				2C7020381A2B815A00873041 /* COSTouchVisualizerWindow.h */,
+				2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */,
+			);
+			name = COSTouchVisualizer;
 			sourceTree = "<group>";
 		};
 		2C8C20D219E9ACD4009E84C7 /* DashboardTab */ = {
@@ -819,6 +832,7 @@
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
 				2C93EE4F1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift in Sources */,
 				2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */,
+				2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */,
 				2CA435FF19F48C1000DC1C6E /* BoolPickerTableViewCell.swift in Sources */,
 				2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */,
 				2C3A7C001A117EB700FC4516 /* MyProfileViewController.swift in Sources */,

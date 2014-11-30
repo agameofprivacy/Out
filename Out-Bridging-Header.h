@@ -16,3 +16,4 @@
 #import "DateTools.h"
 #import <HockeySDK/HockeySDK.h>
 #import "ICETutorialController.h"
+#import "COSTouchVisualizerWindow.h"
