@@ -69,7 +69,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         
 //        self.tableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.tableView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
         self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -115,7 +115,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
-        
+
         var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
         cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
         

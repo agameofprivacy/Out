@@ -31,7 +31,7 @@ class DashboardChallengeOnDeckCollectionViewCell: UICollectionViewCell {
 //        self.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.blackColor().CGColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.layer.shadowOpacity = 0.1
         self.layer.shadowRadius = 1
 

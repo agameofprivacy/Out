@@ -13,7 +13,7 @@ class UIStyleController: NSObject {
         var navigationBarAppearance:UINavigationBar = UINavigationBar.appearance()
 //        var navFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
 //        navigationBarAppearance.titleTextAttributes = NSDictionary(objectsAndKeys: navFont!, NSFontAttributeName)
-//        var window:UIWindow = UIWindow.appearance()
-//        window.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        var window:UIWindow = UIWindow.appearance()
+        window.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
     }
 }

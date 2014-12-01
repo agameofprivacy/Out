@@ -26,7 +26,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengesTableView.dataSource = self
         self.challengesTableView.delegate = self
         self.challengesTableView.alwaysBounceVertical = true
-        self.challengesTableView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        self.challengesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.challengesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.challengesTableView.rowHeight = UITableViewAutomaticDimension
         self.challengesTableView.estimatedRowHeight = 150
@@ -40,7 +40,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        self.activityIndicator.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        self.activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(self.activityIndicator)
         
         // Do any additional setup after loading the view.
@@ -78,6 +78,8 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
 
         let cell:ChallengeGalleryTableViewCell = self.challengesTableView.dequeueReusableCellWithIdentifier("ChallengeGalleryTableViewCell") as ChallengeGalleryTableViewCell
         cell.titleLabel.text = challengeObject["title"] as String?
+        cell.layer.borderWidth = 0.75
+        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
         var reasonType:String = challengeObject["reason"]![0] as String
         var reasonText:String = challengeObject["reason"]![1] as String
         cell.reasonLabel.text = "\(reasonType): \(reasonText)"

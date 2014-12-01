@@ -33,7 +33,7 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.cardContainerView = UIView(frame: CGRectZero)
         self.cardContainerView.setTranslatesAutoresizingMaskIntoConstraints(false)

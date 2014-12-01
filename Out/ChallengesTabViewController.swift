@@ -34,7 +34,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.alwaysBounceHorizontal = true
         layout.itemSize = CGSizeMake(self.view.frame.size.width - 15.0, self.view.frame.size.height - 160)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         currentChallengesCardsCollectionView.showsHorizontalScrollIndicator = false
         currentChallengesCardsCollectionView.registerClass(ChallengesTabCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
         
@@ -51,7 +51,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(activityIndicator)
         loadCurrentChallenges()
         
@@ -81,8 +81,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengesTabCollectionViewCell
         // Configure the cell
         cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 0
-        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.3).CGColor
+        cell.layer.borderWidth = 0.75
+        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
 
         var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as PFObject
         var currentChallengeData = self.currentChallengesObjects[indexPath.item] as PFObject

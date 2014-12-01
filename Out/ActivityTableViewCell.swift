@@ -53,16 +53,18 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        contentView.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.paperView.backgroundColor = UIColor.whiteColor()
         self.paperView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.paperView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.paperView.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.paperView.layer.shadowOpacity = 0.1
         self.paperView.layer.shadowRadius = 1
         self.paperView.layer.cornerRadius = 5
+        self.paperView.layer.borderWidth = 0.75
+        self.paperView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
 
         contentView.addSubview(self.paperView)
         
