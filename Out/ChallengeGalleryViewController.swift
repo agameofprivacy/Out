@@ -78,8 +78,6 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
 
         let cell:ChallengeGalleryTableViewCell = self.challengesTableView.dequeueReusableCellWithIdentifier("ChallengeGalleryTableViewCell") as ChallengeGalleryTableViewCell
         cell.titleLabel.text = challengeObject["title"] as String?
-        cell.layer.borderWidth = 0.75
-        cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
         var reasonType:String = challengeObject["reason"]![0] as String
         var reasonText:String = challengeObject["reason"]![1] as String
         cell.reasonLabel.text = "\(reasonType): \(reasonText)"

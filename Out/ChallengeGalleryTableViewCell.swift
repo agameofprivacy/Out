@@ -41,11 +41,13 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
         self.cardContainerView.backgroundColor = UIColor.whiteColor()
 
         self.cardContainerView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.cardContainerView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.cardContainerView.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.cardContainerView.layer.shadowOpacity = 0.1
         self.cardContainerView.layer.shadowRadius = 1
         self.cardContainerView.layer.cornerRadius = 5
-        
+        self.cardContainerView.layer.borderWidth = 0.75
+        self.cardContainerView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
+
         self.titleLabel = UILabel(frame: CGRectZero)
         self.titleLabel.numberOfLines = 0
         self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
