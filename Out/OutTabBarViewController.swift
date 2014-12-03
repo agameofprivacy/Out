@@ -14,7 +14,7 @@ class OutTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         // Do any additional setup after loading the view.
         UITabBar.appearance().tintColor = UIColor.blackColor()
         for var index = 0; index <  self.tabBar.items?.count; ++index{

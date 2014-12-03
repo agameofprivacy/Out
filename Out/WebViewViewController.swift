@@ -9,10 +9,10 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController, WKNavigationDelegate {
+class WebViewViewController: UIViewController, UIWebViewDelegate {
 
     
-    var webView:WKWebView!
+    var webView:UIWebView!
     var toolBar:UIToolbar!
     var navBar:UINavigationBar!
     var url:NSURL!
@@ -22,10 +22,9 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
     override func loadView() {
         super.loadView()
 
-        webView = WKWebView()
-//        webView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        webView.navigationDelegate = self
-        
+        webView = UIWebView(frame: self.view.frame)
+        webView.delegate = self
+        webView.scalesPageToFit = true
         var closeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneWithView")
         closeButton.enabled = true
         closeButton.tintColor = UIColor.blackColor()
@@ -41,11 +40,9 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         var flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
         self.toolbarItems = [backButton,flexibleSpace,reloadButton]
         self.navigationItem.title = "Loading..."
-        
         self.view = webView
     }
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +50,8 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
         self.webView!.loadRequest(req)
     }
     
-    func webView(webView: WKWebView!, didFinishNavigation navigation: WKNavigation!) {
-        self.navigationItem.title = self.webView.title
+    func webViewDidFinishLoad(webView: UIWebView) {
+        self.navigationItem.title = self.webView.stringByEvaluatingJavaScriptFromString("document.title")
     }
     
     func doneWithView(){

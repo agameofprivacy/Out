@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if visWindow == nil { visWindow = COSTouchVisualizerWindow(frame: UIScreen.mainScreen().bounds) }
         visWindow?.backgroundColor = UIColor.clearColor()
         visWindow?.fillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
-        visWindow?.strokeColor = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1)
+        visWindow?.strokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
         visWindow?.touchAlpha = 0.75
         
-        visWindow?.rippleFillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
-        visWindow?.rippleStrokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
-        visWindow?.rippleAlpha = 0.1
+        visWindow?.rippleFillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
+        visWindow?.rippleStrokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
+        visWindow?.rippleAlpha = 0.05
         
         return visWindow
     }
