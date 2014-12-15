@@ -97,12 +97,6 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        if self.currentChallengesObjects.count == 0{
-            self.noChallengeView.hidden = false
-        }
-        else{
-            self.noChallengeView.hidden = true
-        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

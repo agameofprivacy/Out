@@ -103,7 +103,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.noActivityView.hidden = true
         self.view.addSubview(self.noActivityView)
 
-
+        self.refreshControl?.beginRefreshing()
         loadActivities()
 
     }
