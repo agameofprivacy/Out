@@ -149,9 +149,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
         
         if currentCellType == "gallerySelect"{
+            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
+
             
             self.canvasTableView.alwaysBounceVertical = false
-            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
 
             var itemTitles:[String] = ["","","","",""]
             var itemImages:[String] = ["","","","",""]

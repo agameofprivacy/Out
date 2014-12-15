@@ -234,11 +234,12 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         self.recordSubLabel.textAlignment = NSTextAlignment.Left
         self.recordView.addSubview(self.recordSubLabel)
-
+        
         
         var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.4, color: self.colorDictionary["casualGreen"],description: "")]
         self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 50, 50), items: items)
         self.myProgressPieChart.strokeChart()
+        
         self.recordView.addSubview(self.myProgressPieChart)
 
         
@@ -534,6 +535,13 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         PFUser.logOut()
         var currentUser = PFUser.currentUser()
         self.performSegueWithIdentifier("LoggedOut", sender: nil)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "LoggedOut"){
+            var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as LoginViewController
+            vc.showTutorial = false
+            vc.scrollViewHidden = false
+        }
     }
     
     func myProfileTapped(){

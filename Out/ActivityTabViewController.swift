@@ -17,6 +17,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var currentActivitiesCommentCount:[Int] = []
     var likeCount:Int = 0
     var commentCount:Int = 0
+    var noActivityView:UIView!
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -75,13 +76,32 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
 //        self.refreshControl = UIRefreshControl()
 //        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
 //        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
 //        self.activityTableView.addSubview(refreshControl)
+        self.noActivityView = UIView(frame: self.tableView.frame)
+        self.noActivityView.center = self.tableView.center
+        
+        var noActivityViewTitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5, self.noActivityView.frame.width, 32))
+        noActivityViewTitle.text = "No Activity"
+        noActivityViewTitle.textAlignment = NSTextAlignment.Center
+        noActivityViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noActivityViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noActivityView.addSubview(noActivityViewTitle)
+        
+        var noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
+        noActivityViewSubtitle.text = "take on some challenges or follow others\nin People to see their activities"
+        noActivityViewSubtitle.textAlignment = NSTextAlignment.Center
+        noActivityViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noActivityViewSubtitle.numberOfLines = 2
+        noActivityViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noActivityView.addSubview(noActivityViewSubtitle)
+        
+        self.noActivityView.hidden = true
+        self.view.addSubview(self.noActivityView)
 
 
         loadActivities()
@@ -240,6 +260,14 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.currentActivities = objects as [PFObject]
+                        if self.currentActivities.count == 0{
+                            self.noActivityView.hidden = false
+                            self.refreshControl?.endRefreshing()
+                        }
+                        else{
+                            self.noActivityView.hidden = true
+                        }
+
                         self.currentActivitiesCommentCount = Array(count: self.currentActivities.count, repeatedValue: 0)
                         self.currentActivitiesLikeCount = Array(count: self.currentActivities.count, repeatedValue: 0)
                         self.likeCount = 0
@@ -255,6 +283,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                             else {
                                 // Log details of the failure
                                 NSLog("Error: %@ %@", error, error.userInfo!)
+                                self.refreshControl?.endRefreshing()
                             }
                         }
                         for activity in self.currentActivities{
@@ -284,6 +313,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 else {
                                     // Log details of the failure
                                     NSLog("Error: %@ %@", error, error.userInfo!)
+                                    self.refreshControl?.endRefreshing()
+
                                 }
                             }
                             var queryComments = PFQuery(className: "Comment")
@@ -312,6 +343,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 else {
                                     // Log details of the failure
                                     NSLog("Error: %@ %@", error, error.userInfo!)
+                                    self.refreshControl?.endRefreshing()
+
                                 }
                             }
                         }
@@ -319,18 +352,22 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     } else {
                         // Log details of the failure
                         NSLog("Error: %@ %@", error, error.userInfo!)
+                        self.refreshControl?.endRefreshing()
+
                     }
                 }
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
+                self.refreshControl?.endRefreshing()
+
             }
         }
         
     }
 
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 500
+        return 600
     }
     
     func likeButtonTapped(sender:UITapGestureRecognizer){

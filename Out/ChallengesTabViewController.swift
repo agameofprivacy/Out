@@ -23,6 +23,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengesObjects:[AnyObject] = []
     var stepFullUserDataDictionary:[String:String] = [:]
+    var noChallengeView:UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
@@ -53,6 +54,38 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(activityIndicator)
+
+        
+        self.noChallengeView = UIView(frame: self.currentChallengesCardsCollectionView.frame)
+        self.noChallengeView.center = self.view.center
+        
+        var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
+//        noChallengeViewTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noChallengeViewTitle.text = "No Current Challenge"
+        noChallengeViewTitle.textAlignment = NSTextAlignment.Center
+        noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noChallengeViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noChallengeView.addSubview(noChallengeViewTitle)
+        var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
+//        noChallengeViewSubtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noChallengeViewSubtitle.text = "tap '+' to add a challenge"
+        noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
+        noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noChallengeViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noChallengeView.addSubview(noChallengeViewSubtitle)
+        
+//        var viewsDictionary = ["noChallengeViewTitle":noChallengeViewTitle, "noChallengeViewSubtitle":noChallengeViewSubtitle]
+//        var metricsDictionary = ["shortVertical":2]
+//        
+//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[noChallengeViewTitle]-shortVertical-[noChallengeViewSubtitle]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+//        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[noChallengeViewTitle]-20-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+//        
+//        self.noChallengeView.addConstraints(horizontalConstraints)
+//        self.noChallengeView.addConstraints(verticalConstraints)
+        
+        self.noChallengeView.hidden = true
+        self.view.addSubview(self.noChallengeView)
+        
         loadCurrentChallenges()
         
     }
@@ -64,7 +97,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-
+        if self.currentChallengesObjects.count == 0{
+            self.noChallengeView.hidden = false
+        }
+        else{
+            self.noChallengeView.hidden = true
+        }
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -136,6 +174,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 self.cardNumberPageControl.numberOfPages = self.currentChallengesObjects.count
                 self.currentChallengesCardsCollectionView.reloadData()
                 self.activityIndicator.stopAnimating()
+                if self.currentChallengesObjects.count == 0{
+                    self.noChallengeView.hidden = false
+                }
+                else{
+                    self.noChallengeView.hidden = true
+                }
                 self.currentChallengesCardsCollectionView.hidden = false
             } else {
                 // Log details of the failure

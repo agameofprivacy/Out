@@ -57,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setupView];
     
@@ -89,30 +89,32 @@
     [self.overlayTitle setTextAlignment:NSTextAlignmentCenter];
 
     // PageControl configuration.
-    [self.pageControl setNumberOfPages:[self numberOfPages]];
-    [self.pageControl setCurrentPage:0];
-    [self.pageControl addTarget:self
-                         action:@selector(didClickOnPageControl:)
-               forControlEvents:UIControlEventValueChanged];
+//    [self.pageControl setNumberOfPages:[self numberOfPages]];
+//    [self.pageControl setCurrentPage:0];
+//    [self.pageControl addTarget:self
+//                         action:@selector(didClickOnPageControl:)
+//               forControlEvents:UIControlEventValueChanged];
     
     // UIButtons.
-    [self.leftButton setBackgroundColor:[UIColor darkGrayColor]];
-    [self.rightButton setBackgroundColor:[UIColor darkGrayColor]];
-    [self.leftButton setTitle:@"Button 1" forState:UIControlStateNormal];
-    [self.rightButton setTitle:@"Button 2" forState:UIControlStateNormal];
+    [self.leftButton setBackgroundColor:[UIColor clearColor]];
+    [self.rightButton setBackgroundColor:[UIColor clearColor]];
+    [self.leftButton setTitle:@"Login" forState:UIControlStateNormal];
+    [self.rightButton setTitle:@"Signup" forState:UIControlStateNormal];
+    [self.leftButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [self.leftButton addTarget:self
                         action:@selector(didClickOnButton1:)
               forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton addTarget:self
                          action:@selector(didClickOnButton2:)
                forControlEvents:UIControlEventTouchUpInside];
-
+    self.rightButton.enabled = NO;
     [self.view addSubview:self.frontLayerView];
     [self.view addSubview:self.backLayerView];
     [self.view addSubview:self.gradientView];
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.overlayTitle];
-    [self.view addSubview:self.pageControl];
+//    [self.view addSubview:self.pageControl];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
     
@@ -130,7 +132,7 @@
     // Overlay title.
     [self.overlayTitle setTranslatesAutoresizingMaskIntoConstraints:NO];
     [constraints addObject:@"V:|-116-[_overlayTitle(==50)]"];
-    [constraints addObject:@"H:|-54-[_overlayTitle(==212)]-|"];
+    [constraints addObject:@"H:|->=81-[_overlayTitle(==212)]"];
     
     // Buttons.
     [self.leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -140,14 +142,14 @@
     [constraints addObject:@"H:|-20-[_leftButton(==_rightButton)]-20-[_rightButton(>=130)]-20-|"];
 
     // PageControl.
-    [self.pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [constraints addObject:@"V:[_pageControl(==32)]-60-|"];
-    [constraints addObject:@"H:|-140-[_pageControl(==40)]"];
+//    [self.pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [constraints addObject:@"V:[_pageControl(==32)]-60-|"];
+//    [constraints addObject:@"H:|-168-[_pageControl(==40)]"];
 
     // GradientView.
     [self.gradientView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [constraints addObject:@"V:[_gradientView(==200)]-0-|"];
-    [constraints addObject:@"H:|-0-[_gradientView(==320)]-0-|"];
+    [constraints addObject:@"H:|-0-[_gradientView(==375)]-0-|"];
     
     // Set constraints.
     for (NSString *string in constraints) {
@@ -266,7 +268,7 @@
 // Setup the Title Label.
 - (void)setOverlayTitle {
     // ...or change by an UIImageView if you need it.
-    [self.overlayTitle setText:@"Welcome"];
+    [self.overlayTitle setText:@""];
 }
 
 // Setup the Title/Subtitle style/text.
@@ -342,8 +344,8 @@
 // Preset the origin state.
 - (void)setOriginLayersState {
     self.currentState = ScrollingStateAuto;
-    [self.backLayerView setBackgroundColor:[UIColor blackColor]];
-    [self.frontLayerView setBackgroundColor:[UIColor blackColor]];
+    [self.backLayerView setBackgroundColor:[UIColor whiteColor]];
+    [self.frontLayerView setBackgroundColor:[UIColor whiteColor]];
     [self setLayersPicturesWithIndex:0];
 }
 

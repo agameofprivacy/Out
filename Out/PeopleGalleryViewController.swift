@@ -14,6 +14,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     var people:[AnyObject] = []
     var followRequestsFrom:[AnyObject] = []
     var currentFollowerFollowingObject:PFObject!
+    var noPeopleView:UIView!
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -87,6 +88,37 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
 //        self.view.addConstraints(horizontalConstraints)
 //        self.view.addConstraints(verticalConstraints)
         
+        self.noPeopleView = UIView(frame: self.peopleTableView.frame)
+        self.noPeopleView.center = self.view.center
+        
+        var noPeopleViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noPeopleView.frame.height / 5, self.noPeopleView.frame.width, 32))
+        //        noChallengeViewTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noPeopleViewTitle.text = "You've Followed Them All"
+        noPeopleViewTitle.textAlignment = NSTextAlignment.Center
+        noPeopleViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noPeopleViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noPeopleView.addSubview(noPeopleViewTitle)
+        var noPeopleViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noPeopleView.frame.height / 5 + 31, self.noPeopleView.frame.width, 30))
+        //        noChallengeViewSubtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noPeopleViewSubtitle.text = "you're quite a follower indeed"
+        noPeopleViewSubtitle.textAlignment = NSTextAlignment.Center
+        noPeopleViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noPeopleViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noPeopleView.addSubview(noPeopleViewSubtitle)
+        
+        //        var viewsDictionary = ["noChallengeViewTitle":noChallengeViewTitle, "noChallengeViewSubtitle":noChallengeViewSubtitle]
+        //        var metricsDictionary = ["shortVertical":2]
+        //
+        //        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[noChallengeViewTitle]-shortVertical-[noChallengeViewSubtitle]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        //        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[noChallengeViewTitle]-20-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        //
+        //        self.noChallengeView.addConstraints(horizontalConstraints)
+        //        self.noChallengeView.addConstraints(verticalConstraints)
+        
+        self.noPeopleView.hidden = true
+        self.view.addSubview(self.noPeopleView)
+
+        
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -138,7 +170,14 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                 self.people = objects
                 self.peopleTableView.reloadData()
                 //                self.activityIndicator.stopAnimating()
-                self.peopleTableView.hidden = false
+                if self.people.count == 0{
+                    self.peopleTableView.hidden = true
+                    self.noPeopleView.hidden = false
+                }
+                else{
+                    self.peopleTableView.hidden = false
+                    self.noPeopleView.hidden = true
+                }
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)

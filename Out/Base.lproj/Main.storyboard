@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6724" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
     </dependencies>
     <scenes>
         <!--Dashboard-->
@@ -24,6 +24,7 @@
                                 <segue destination="xGb-D8-E3Q" kind="presentation" identifier="LoggedOut" modalTransitionStyle="flipHorizontal" id="R4G-IP-Ih2"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Feedback" id="bHc-w7-aXY"/>
                     </navigationItem>
                     <connections>
                         <segue destination="MpG-Yh-tdj" kind="presentation" identifier="showMyProfile" id="aVY-DS-L3s"/>
@@ -623,8 +624,10 @@
         <!--Navigation Controller-->
         <scene sceneID="IWI-Pt-cjJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xGb-D8-E3Q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="xGb-D8-E3Q" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZW-Un-B8l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -19,6 +19,8 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     
     var challengeTabVC:ChallengesTabViewController!
     
+    var noChallengeView:UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,27 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(self.activityIndicator)
         
+        
+        self.noChallengeView = UIView(frame: self.challengesTableView.frame)
+        self.noChallengeView.center = self.challengesTableView.center
+        
+        var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
+        noChallengeViewTitle.text = "No Available Challenge"
+        noChallengeViewTitle.textAlignment = NSTextAlignment.Center
+        noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noChallengeViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noChallengeView.addSubview(noChallengeViewTitle)
+        
+        var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
+        noChallengeViewSubtitle.text = "you're such an overachiever!"
+        noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
+        noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noChallengeViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noChallengeView.addSubview(noChallengeViewSubtitle)
+        
+        self.noChallengeView.hidden = true
+        self.view.addSubview(self.noChallengeView)
+
         // Do any additional setup after loading the view.
     }
     
@@ -110,6 +133,10 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+            self.noChallengeView.hidden = true
+    }
+    
     func loadAvailableChallenges(){
         self.challengesTableView.hidden = true
         self.activityIndicator.startAnimating()
@@ -145,6 +172,12 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                         self.challengesTableView!.reloadData()
                         self.activityIndicator.stopAnimating()
                         self.challengesTableView.hidden = false
+                        if self.challengeModelsObjects.count == 0{
+                            self.noChallengeView.hidden = false
+                        }
+                        else{
+                            self.noChallengeView.hidden = true
+                        }
                     } else {
                         // Log details of the failure
                         NSLog("Error: %@ %@", error, error.userInfo!)

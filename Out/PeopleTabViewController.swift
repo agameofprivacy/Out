@@ -22,6 +22,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     var segmentedControlView:UIView!
     var segmentedControl:UISegmentedControl!
     
+    var noFollowerView:UIView!
+    var noFollowingView:UIView!
+    
     var mentorAppointment:UIButton!
     var mentorChat:UIButton!
     var mentorMore:UIButton!
@@ -257,6 +260,62 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsVerticalConstraints)
+        
+        self.noFollowerView = UIView(frame: self.followerTableView.frame)
+        self.noFollowerView.backgroundColor = UIColor.whiteColor()
+        self.noFollowerView.center = self.view.center
+        
+        var noFollowerViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5, self.noFollowerView.frame.width, 32))
+        //        noChallengeViewTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noFollowerViewTitle.text = "No Followers"
+        noFollowerViewTitle.textAlignment = NSTextAlignment.Center
+        noFollowerViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noFollowerViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noFollowerView.addSubview(noFollowerViewTitle)
+        var noFollowerViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5 + 31, self.noFollowerView.frame.width, 60))
+        //        noChallengeViewSubtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noFollowerViewSubtitle.text = "you will receive a follow request\nif someone follows you"
+        noFollowerViewSubtitle.textAlignment = NSTextAlignment.Center
+        noFollowerViewSubtitle.numberOfLines = 2
+        noFollowerViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noFollowerViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noFollowerView.addSubview(noFollowerViewSubtitle)
+        
+        self.noFollowerView.hidden = true
+        self.followerTableView.addSubview(self.noFollowerView)
+
+        self.noFollowingView = UIView(frame: self.followingTableView.frame)
+        self.noFollowingView.center = self.view.center
+        self.noFollowingView.backgroundColor = UIColor.whiteColor()
+        
+        var noFollowingViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5, self.noFollowingView.frame.width, 32))
+        //        noChallengeViewTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noFollowingViewTitle.text = "Not Following Anyone"
+        noFollowingViewTitle.textAlignment = NSTextAlignment.Center
+        noFollowingViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
+        noFollowingViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noFollowingView.addSubview(noFollowingViewTitle)
+        var noFollowingViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5 + 31, self.noFollowingView.frame.width, 30))
+        //        noChallengeViewSubtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        noFollowingViewSubtitle.text = "tap '+' to add people"
+        noFollowingViewSubtitle.textAlignment = NSTextAlignment.Center
+        noFollowingViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        noFollowingViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.noFollowingView.addSubview(noFollowingViewSubtitle)
+        
+        //        var viewsDictionary = ["noChallengeViewTitle":noChallengeViewTitle, "noChallengeViewSubtitle":noChallengeViewSubtitle]
+        //        var metricsDictionary = ["shortVertical":2]
+        //
+        //        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[noChallengeViewTitle]-shortVertical-[noChallengeViewSubtitle]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        //        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[noChallengeViewTitle]-20-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        //
+        //        self.noChallengeView.addConstraints(horizontalConstraints)
+        //        self.noChallengeView.addConstraints(verticalConstraints)
+        
+        self.noFollowingView.hidden = true
+        self.followingTableView.addSubview(self.noFollowingView)
+
+        
         self.loadPeople()
 
         
@@ -370,6 +429,12 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if segment.selectedSegmentIndex == 0{
             self.followerTableView.hidden = false
             self.followingTableView.hidden = true
+            if self.followers.count == 0 && self.followingRequestedFrom.count == 0{
+                self.noFollowerView.hidden = false
+            }
+            else{
+                self.noFollowerView.hidden = true
+            }
 //            if (self.followerTableView.numberOfRowsInSection(0) > 0){
 //                self.followerTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
 //            }
@@ -383,6 +448,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //            if (self.followingTableView.numberOfRowsInSection(0) > 0){
 //                self.followingTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
 //            }
+            if self.following.count == 0{
+                self.noFollowingView.hidden = false
+            }
+            else{
+                self.noFollowingView.hidden = true
+            }
+
         }
     }
     
@@ -444,6 +516,20 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as [PFUser]
                 self.following = self.followerFollowingObject["followingUsers"] as [PFUser]
                 self.followers = self.followerFollowingObject["followers"] as [PFUser]
+                if self.following.count == 0{
+                    self.noFollowingView.hidden = false
+                }
+                else{
+                    self.noFollowingView.hidden = true
+                }
+                if self.followers.count == 0 && self.followingRequestedFrom.count == 0{
+                    self.noFollowerView.hidden = false
+                }
+                else{
+                    self.noFollowerView.hidden = true
+                }
+
+
                 // Causes long running operation warning
                 self.followerTableView.reloadData()
                 self.followingTableView.reloadData()
