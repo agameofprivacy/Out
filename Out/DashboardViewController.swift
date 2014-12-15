@@ -557,14 +557,40 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         return 3
     }
     
+    func scrollViewDidEndDecelerating(scrollView: UICollectionView) {
+        var currentPage:CGFloat = self.announcementsCollectionView.contentOffset.x / self.announcementsCollectionView.frame.size.width
+        self.announcementsPageControl.currentPage = Int(ceil(Float(currentPage)))
+    }
+
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardAnnouncementsCollectionViewCell", forIndexPath: indexPath) as DashboardAnnouncementsCollectionViewCell
-        cell.avatarImageView.image = self.avatarImageDictionary["rabbit"]!
-        cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]
-        cell.aliasLabel.text = "ogdog7"
-        cell.roleLabel.text = "mentor"
-        cell.alertCountLabel.text = "3"
-        cell.alertTypeLabel.text = "new messages"
+        if indexPath.item == 0{
+            cell.avatarImageView.image = self.avatarImageDictionary["elephant"]!
+            cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]
+            cell.aliasLabel.text = "eleph34"
+            cell.roleLabel.text = "mentor"
+            cell.alertCountLabel.text = "3"
+            cell.alertTypeLabel.text = "new messages"
+        }
+        else if indexPath.item == 1{
+            cell.avatarImageView.image = self.avatarImageDictionary["rabbit"]!
+            cell.avatarImageView.backgroundColor = self.colorDictionary["pink"]
+            cell.aliasLabel.text = "rabbit21"
+            cell.roleLabel.text = "follower"
+            cell.alertCountLabel.text = "2"
+            cell.alertTypeLabel.text = "new following"
+
+        }
+        else if indexPath.item == 2{
+            cell.avatarImageView.image = self.avatarImageDictionary["elephant"]!
+            cell.avatarImageView.backgroundColor = self.colorDictionary["casualGreen"]
+            cell.aliasLabel.text = "birdie98"
+            cell.roleLabel.text = "following"
+            cell.alertCountLabel.text = "4"
+            cell.alertTypeLabel.text = "new likes"
+            
+        }
         return cell
     }
 

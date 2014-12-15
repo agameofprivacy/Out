@@ -16,6 +16,11 @@ class ComposeViewController: UIViewController {
         var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
         cancelButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = cancelButton
+        var postButton = UIBarButtonItem(title: "Post", style: UIBarButtonItemStyle.Plain, target: self, action: "postButtonTapped")
+        postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName), forState: UIControlState.Normal)
+        postButton.tintColor = UIColor.blackColor()
+        self.navigationItem.rightBarButtonItem = postButton
+
         // Do any additional setup after loading the view.
     }
 
@@ -37,5 +42,9 @@ class ComposeViewController: UIViewController {
 
     func cancelButtonTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func postButtonTapped(){
+        println("posted!")
     }
 }

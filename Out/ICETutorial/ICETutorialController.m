@@ -100,8 +100,8 @@
     [self.rightButton setBackgroundColor:[UIColor clearColor]];
     [self.leftButton setTitle:@"Login" forState:UIControlStateNormal];
     [self.rightButton setTitle:@"Signup" forState:UIControlStateNormal];
-    [self.leftButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.rightButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.leftButton addTarget:self
                         action:@selector(didClickOnButton1:)
               forControlEvents:UIControlEventTouchUpInside];

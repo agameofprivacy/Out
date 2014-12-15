@@ -397,7 +397,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
 
     func mentorCellTapped(sender:UIGestureRecognizer){
-        println("mentorButtonTapped!")
+        self.performSegueWithIdentifier("viewMentor", sender: self)
     }
     
     func valueChanged(segment:UISegmentedControl){

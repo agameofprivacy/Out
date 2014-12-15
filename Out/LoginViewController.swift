@@ -189,6 +189,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
         self.containerScrollView.hidden = false
+        self.aliasTextField.becomeFirstResponder()
     }
 
     func tutorialController(tutorialController: ICETutorialController!, didClickOnRightButton sender: UIButton!) {

@@ -307,10 +307,46 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Help" id="uR0-aV-yhf"/>
+                    <connections>
+                        <segue destination="nBd-Xq-kza" kind="presentation" identifier="chatHelp" id="Cyo-Ae-PQh"/>
+                        <segue destination="nIh-H9-GPJ" kind="presentation" identifier="talkHelp" id="Mlw-hS-dYb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BvZ-by-EL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1921" y="3450"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="r6A-sp-riK">
+            <objects>
+                <navigationController id="nBd-Xq-kza" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rEp-jc-dV0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Pqf-ZR-i2j" kind="relationship" relationship="rootViewController" id="mKK-cE-wC1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OUZ-Xr-u4z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3169" y="4548"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Oqa-w5-odQ">
+            <objects>
+                <navigationController id="nIh-H9-GPJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hni-q6-RL6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EKW-zJ-CgV" kind="relationship" relationship="rootViewController" id="DTe-ZT-EHp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jA7-2J-Frh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3169" y="5382"/>
         </scene>
         <!--Out Tab Bar View Controller-->
         <scene sceneID="zRy-sR-0iz">
@@ -428,6 +464,7 @@
                     <navigationItem key="navigationItem" id="11s-2Z-msZ"/>
                     <connections>
                         <segue destination="jLH-dJ-9fL" kind="presentation" identifier="presentPeopleGallery" id="yo0-za-uib"/>
+                        <segue destination="sN2-27-oP9" kind="show" identifier="viewMentor" id="2nl-2X-VdT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="341-CU-dgy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -464,10 +501,104 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VKg-kB-Jrx"/>
+                    <connections>
+                        <segue destination="Mzn-8h-MDR" kind="presentation" identifier="filterPeople" id="sNk-L9-5iO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N0a-ZH-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3456" y="2458"/>
+            <point key="canvasLocation" x="3395" y="2550"/>
+        </scene>
+        <!--People Filter View Controller-->
+        <scene sceneID="f0Z-g8-826">
+            <objects>
+                <viewController id="Oin-ah-6d4" customClass="PeopleFilterViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5F9-SW-IKj"/>
+                        <viewControllerLayoutGuide type="bottom" id="qbp-e0-gxA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TmK-ha-3uW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SnS-fw-Lp2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1BG-R6-RB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4847" y="3675"/>
+        </scene>
+        <!--Mentor View Controller-->
+        <scene sceneID="oE1-5x-7H8">
+            <objects>
+                <viewController id="sN2-27-oP9" customClass="MentorViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wdV-DH-flB"/>
+                        <viewControllerLayoutGuide type="bottom" id="LGs-YO-54C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zGA-4y-UkC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIo-pI-e56" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2664" y="3450"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MzU-I4-q4e">
+            <objects>
+                <navigationController id="Mzn-8h-MDR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SVo-JG-Cow">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Oin-ah-6d4" kind="relationship" relationship="rootViewController" id="gd7-HI-ETW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4UZ-Fz-BhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3971" y="3675"/>
+        </scene>
+        <!--Help Chat View Controller-->
+        <scene sceneID="wQN-LL-GtA">
+            <objects>
+                <viewController id="Pqf-ZR-i2j" customClass="HelpChatViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i1G-UJ-uga"/>
+                        <viewControllerLayoutGuide type="bottom" id="d3V-Kr-YKR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Se-uL-wOz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="y2S-bs-ti4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVW-AF-3pN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4218" y="4657"/>
+        </scene>
+        <!--Help Talk View Controller-->
+        <scene sceneID="HAP-4I-U9I">
+            <objects>
+                <viewController id="EKW-zJ-CgV" customClass="HelpTalkViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="htc-3q-geY"/>
+                        <viewControllerLayoutGuide type="bottom" id="8O0-iL-RLm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GC6-xT-JuI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ewX-Gs-P6Q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFR-xp-u3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4218" y="5457"/>
         </scene>
         <!--Help-->
         <scene sceneID="Qwj-ko-ZxG">

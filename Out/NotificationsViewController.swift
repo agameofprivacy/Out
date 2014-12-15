@@ -17,6 +17,9 @@ class NotificationsViewController: UIViewController {
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
+        var clearAllButton = UIBarButtonItem(title: "Clear All", style: UIBarButtonItemStyle.Plain, target: self, action: "clearAllButtonTapped")
+        clearAllButton.tintColor = UIColor.blackColor()
+        self.navigationItem.rightBarButtonItem = clearAllButton
         // Do any additional setup after loading the view.
     }
 
@@ -38,6 +41,9 @@ class NotificationsViewController: UIViewController {
     
     func closeButtonTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func clearAllButtonTapped(){
+        println("Cleared!")
     }
 
 }

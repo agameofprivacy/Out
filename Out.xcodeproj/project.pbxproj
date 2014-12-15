@@ -52,6 +52,9 @@
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
+		2C65C54E1A3F447200B5458F /* HelpChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */; };
+		2C65C5501A3F447D00B5458F /* HelpTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */; };
+		2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C5511A3F551300B5458F /* MentorViewController.swift */; };
 		2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */; };
 		2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */; };
 		2C6AFF5A1A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF591A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift */; };
@@ -59,6 +62,7 @@
 		2C6FFAED1A19B3160043F912 /* ICETutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAE91A19B3160043F912 /* ICETutorialPage.m */; };
 		2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */; };
 		2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */; };
+		2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
@@ -208,6 +212,9 @@
 		2C5D997E19E4A9FB00133F59 /* OutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
+		2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpChatViewController.swift; sourceTree = "<group>"; };
+		2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTalkViewController.swift; sourceTree = "<group>"; };
+		2C65C5511A3F551300B5458F /* MentorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentorViewController.swift; sourceTree = "<group>"; };
 		2C6AFF511A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardAnnouncementsCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardAnnouncementsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C6AFF561A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardInspirationCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -221,6 +228,7 @@
 		2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialStyle.m; sourceTree = "<group>"; };
 		2C7020381A2B815A00873041 /* COSTouchVisualizerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSTouchVisualizerWindow.h; sourceTree = "<group>"; };
 		2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
+		2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleFilterViewController.swift; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +397,7 @@
 			children = (
 				2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */,
 				2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */,
+				2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */,
 			);
 			name = PeopleGallery;
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 			children = (
 				2C9CA60D1A05AE4E00BC4D93 /* PeopleTabViewController.swift */,
 				2C9CA6161A05B58200BC4D93 /* PersonTableViewCell.swift */,
+				2C65C5511A3F551300B5458F /* MentorViewController.swift */,
 				2C470F531A06F62F008EADB4 /* PeopleGallery */,
 			);
 			name = PeopleTab;
@@ -603,6 +613,8 @@
 			isa = PBXGroup;
 			children = (
 				2C9CA6121A05AF2D00BC4D93 /* HelpTabViewController.swift */,
+				2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */,
+				2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */,
 			);
 			name = HelpTab;
 			sourceTree = "<group>";
@@ -818,6 +830,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */,
+				2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */,
 				2C2CF71E1A156E2600B8C60E /* SLKTextInputbar.m in Sources */,
 				2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */,
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
@@ -846,6 +859,7 @@
 				2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */,
 				2CA435F519F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift in Sources */,
 				2C5C56AC1A106E6200B8EBC7 /* PNBar.m in Sources */,
+				2C65C54E1A3F447200B5458F /* HelpChatViewController.swift in Sources */,
 				2CB170FB19F2C7860086C95F /* DashboardViewController.swift in Sources */,
 				2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */,
 				2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */,
@@ -901,6 +915,8 @@
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
 				2CB7E4181A15A3D700D55CF8 /* DTTimePeriodChain.m in Sources */,
 				2CB7E41B1A15A3D700D55CF8 /* NSDate+DateTools.m in Sources */,
+				2C65C5501A3F447D00B5458F /* HelpTalkViewController.swift in Sources */,
+				2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

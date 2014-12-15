@@ -190,7 +190,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func presentFilterView(sender:UIBarButtonItem){
-        println("Present Filter")
+        performSegueWithIdentifier("filterPeople", sender: self)
     }
     
     func followButtonTapped(sender:UIButton){

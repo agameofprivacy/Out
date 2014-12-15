@@ -70,6 +70,7 @@ class HelpTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.title = "Help"
         // Do any additional setup after loading the view.
         
@@ -113,11 +114,14 @@ class HelpTabViewController: UIViewController {
         self.chatPromptLabel.text = "Chat with someone."
         self.chatView.addSubview(self.chatPromptLabel)
         
+        var chatButtonTapRecognizer = UITapGestureRecognizer(target: self, action: "chatButtonTapped")
+        
         self.chatButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.chatButton.setTitle("Chat", forState: UIControlState.Normal)
         self.chatButton.layer.cornerRadius = 5
         self.chatButton.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
         self.chatButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.chatButton.addGestureRecognizer(chatButtonTapRecognizer)
         self.chatView.addSubview(self.chatButton)
         
         self.chatRequirementsLabel = UILabel(frame: CGRectZero)
@@ -140,11 +144,14 @@ class HelpTabViewController: UIViewController {
         self.talkPromptLabel.text = "Talk to someone"
         self.talkView.addSubview(self.talkPromptLabel)
         
+        var talkButtonTapRecognizer = UITapGestureRecognizer(target: self, action: "talkButtonTapped")
+        
         self.talkButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         self.talkButton.setTitle("Talk", forState: UIControlState.Normal)
         self.talkButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
         self.talkButton.layer.cornerRadius = 5
         self.talkButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.talkButton.addGestureRecognizer(talkButtonTapRecognizer)
         self.talkView.addSubview(self.talkButton)
         
         self.talkRequirementsLabel = UILabel(frame: CGRectZero)
@@ -169,7 +176,8 @@ class HelpTabViewController: UIViewController {
         
         self.servicePartnerLogoImageView = UIImageView(frame: CGRectZero)
         self.servicePartnerLogoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.servicePartnerLogoImageView.image = UIImage(named: "partnerLogo")
+        self.servicePartnerLogoImageView.image = UIImage(named: "partner-logo")
+        self.servicePartnerLogoImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.servicePartnerView.addSubview(self.servicePartnerLogoImageView)
         
         
@@ -178,11 +186,17 @@ class HelpTabViewController: UIViewController {
         
         var rootHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[helpPromptView]-sideMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: rootMetricsDictionary, views: rootViewsDictionary)
         
-        var rootVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMarginMin-[helpPromptView]-40-[chatView]-[talkView]->=50-[servicePartnerView]->=bottomMarginMin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+        var rootVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMarginMin-[helpPromptView]-40-[chatView]-[talkView]->=50-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+        
+        var rootBottomVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[servicePartnerView]->=bottomMarginMin-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+        
+        var rootBottomHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[servicePartnerView]-sideMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: rootMetricsDictionary, views: rootViewsDictionary)
+
         
         self.view.addConstraints(rootHorizontalConstraints)
+        self.view.addConstraints(rootBottomHorizontalConstraints)
         self.view.addConstraints(rootVerticalConstraints)
-        
+        self.view.addConstraints(rootBottomVerticalConstraints)
         
         var helpPromptViewViewsDictionary = ["topPromptLabel":self.topPromptLabel, "followUpPromptLabel":self.followUpPromptLabel, "infoParagraphLabel":self.infoParagraphLabel]
         var helpPromptViewMetricsDictionary = ["mediumVerticalMargin":10, "largeVerticalMargin": 20]
@@ -206,7 +220,7 @@ class HelpTabViewController: UIViewController {
         
         
         var talkViewViewsDictionary = ["talkPromptLabel":self.talkPromptLabel, "talkButton":self.talkButton, "talkRequirementsLabel":self.talkRequirementsLabel]
-        var talkViewMetricsDictionary = ["shortVerticalMargin":4]
+        var talkViewMetricsDictionary = ["shortVerticalMargin":8]
         
         var talkViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[talkPromptLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: talkViewMetricsDictionary, views: talkViewViewsDictionary)
         var talkViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[talkPromptLabel]-shortVerticalMargin-[talkButton(44)]-shortVerticalMargin-[talkRequirementsLabel]-0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: talkViewMetricsDictionary, views: talkViewViewsDictionary)
@@ -218,9 +232,9 @@ class HelpTabViewController: UIViewController {
         var servicePartnerViewViewsDictionary = ["servicePartnerInfoLabel":self.servicePartnerInfoLabel, "servicePartnerLogoImageView":self.servicePartnerLogoImageView]
         var servicePartnerViewMetricsDictionary = ["shortHorizontalMargin":4]
 
-        var servicePartnerViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=0-[servicePartnerInfoLabel(<=150)]-shortHorizontalMargin-[servicePartnerLogoImageView(<=100)]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
+        var servicePartnerViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-55-[servicePartnerInfoLabel]-shortHorizontalMargin-[servicePartnerLogoImageView(<=100)]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
         
-        var servicePartnerViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[servicePartnerInfoLabel]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
+        var servicePartnerViewVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[servicePartnerInfoLabel]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: servicePartnerViewMetricsDictionary, views: servicePartnerViewViewsDictionary)
         
         self.servicePartnerView.addConstraints(servicePartnerViewHorizontalConstraints)
         self.servicePartnerView.addConstraints(servicePartnerViewVerticalConstraints)
@@ -231,7 +245,14 @@ class HelpTabViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func talkButtonTapped(){
+        self.performSegueWithIdentifier("talkHelp", sender: self)
+    }
 
+    func chatButtonTapped(){
+        self.performSegueWithIdentifier("chatHelp", sender: self)
+    }
+    
     /*
     // MARK: - Navigation
 
