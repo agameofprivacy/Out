@@ -455,9 +455,10 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationContentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.inspirationContentLabel.textAlignment = NSTextAlignment.Left
         self.inspirationContentLabel.textColor = UIColor.blackColor()
-        self.inspirationContentLabel.font = self.regularFont?.fontWithSize(14.0)
+//        self.inspirationContentLabel.font = self.regularFont?.fontWithSize(14.0)
+        self.inspirationContentLabel.font = UIFont(name: "HelveticaNeue-LightItalic", size: 15.0)
         self.inspirationContentLabel.numberOfLines = 0
-        self.inspirationContentLabel.text = "And it hit me: we've come so far, so fast, that ever so many others could begin shedding old habits too. After all, freedom isn't just an external concept, framed by our laws. It's a gift of the spirit that we must give ourselves, in this case by going towards brighter shades of 'out'. Bottom line: If you want to change the future, start living as if you're already there."
+        self.inspirationContentLabel.text = "If you want to change the future, start living as if you're already there."
         self.inspirationCard.addSubview(self.inspirationContentLabel)
         
         self.inspirationAuthorAvatarImageView = UIImageView(frame: CGRectZero)
@@ -469,7 +470,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationAuthorAvatarImageView.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.inspirationAuthorAvatarImageView.layer.shadowOpacity = 0.1
         self.inspirationAuthorAvatarImageView.layer.shadowRadius = 1
-        self.inspirationAuthorAvatarImageView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.075).CGColor
+        self.inspirationAuthorAvatarImageView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).CGColor
         self.inspirationAuthorAvatarImageView.layer.borderWidth = 0.75
         self.inspirationCard.addSubview(self.inspirationAuthorAvatarImageView)
         
@@ -487,7 +488,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationAuthorRoleLabel.textColor = UIColor.blackColor()
         self.inspirationAuthorRoleLabel.font = self.regularFont?.fontWithSize(14.0)
         self.inspirationAuthorRoleLabel.preferredMaxLayoutWidth = self.view.bounds.width - 90
-        self.inspirationAuthorRoleLabel.text = "Professor of Electrical Engineering\nEmerita, University of Michigan"
+        self.inspirationAuthorRoleLabel.text = "Professor at University of Michigan"
         self.inspirationAuthorRoleLabel.numberOfLines = 0
         self.inspirationCard.addSubview(self.inspirationAuthorRoleLabel)
         
@@ -506,22 +507,24 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var inspirationCardMetricsDictionary = ["shortVerticalMargin":8]
         
-        var horizontalInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationContentLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+//        var horizontalInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationContentLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var horizontalInspirationCardBylineConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationAuthorAvatarImageView(60)]-14-[inspirationAuthorNameLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        var horizontalInspirationCardBylineConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationAuthorAvatarImageView(60)]-14-[inspirationContentLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
         var horizontalInspirationCardReadMoreButtonConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationReadMoreButton]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var verticalLeftInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[inspirationAuthorAvatarImageView(60)]-20-[inspirationContentLabel]-20-[inspirationReadMoreButton(40)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        var verticalLeftInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[inspirationAuthorAvatarImageView(60)]->=20-[inspirationReadMoreButton(40)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var verticalLeftSecondInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[inspirationAuthorNameLabel]-4-[inspirationAuthorRoleLabel]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        var verticalLeftSecondInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[inspirationContentLabel]-12-[inspirationAuthorNameLabel]-0-[inspirationAuthorRoleLabel]", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
+        var verticalLeftThirdInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[inspirationAuthorRoleLabel]->=24-[inspirationReadMoreButton(40)]", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
         self.inspirationCard.addConstraints(horizontalInspirationCardReadMoreButtonConstraints)
-        self.inspirationCard.addConstraints(horizontalInspirationCardConstraints)
+//        self.inspirationCard.addConstraints(horizontalInspirationCardConstraints)
         self.inspirationCard.addConstraints(horizontalInspirationCardBylineConstraints)
         self.inspirationCard.addConstraints(verticalLeftInspirationCardConstraints)
         self.inspirationCard.addConstraints(verticalLeftSecondInspirationCardConstraints)
+        self.inspirationCard.addConstraints(verticalLeftThirdInspirationCardConstraints)
         
     }
 
@@ -583,11 +586,11 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
         }
         else if indexPath.item == 2{
-            cell.avatarImageView.image = self.avatarImageDictionary["elephant"]!
-            cell.avatarImageView.backgroundColor = self.colorDictionary["casualGreen"]
+            cell.avatarImageView.image = self.avatarImageDictionary["bird"]!
+            cell.avatarImageView.backgroundColor = self.colorDictionary["lightBlue"]
             cell.aliasLabel.text = "birdie98"
             cell.roleLabel.text = "following"
-            cell.alertCountLabel.text = "4"
+            cell.alertCountLabel.text = "9"
             cell.alertTypeLabel.text = "new likes"
             
         }

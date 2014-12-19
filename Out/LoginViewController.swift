@@ -32,12 +32,12 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         if (showTutorial){
             // Init the pages texts, and pictures.
 
-            var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 6.0)
-            var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 6.0)
-            var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 6.0)
-            var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 6.0)
-            var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 6.0)
-            var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 2.0)
+            var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
+            var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
+            var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 4.0)
+            var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
+            var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
+            var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
 
             // Set the common style for SubTitles and Description (can be overrided on each page).
             var titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
@@ -218,12 +218,12 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     func viewTutorial(sender:UITapGestureRecognizer){
         // Init the pages texts, and pictures.
         
-        var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 6.0)
-        var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 6.0)
-        var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 6.0)
-        var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 6.0)
-        var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 6.0)
-        var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 2.0)
+        var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
+        var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
+        var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 4.0)
+        var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
+        var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
+        var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
         
         // Set the common style for SubTitles and Description (can be overrided on each page).
         var titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()

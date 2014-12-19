@@ -194,7 +194,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         
         var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-82-[mentorRole]-3-[mentorAlias]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-        var rightVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-86-[mentorOrganization]-3-[mentorLocation]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+        var rightVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-87-[mentorOrganization]-3-[mentorLocation]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
 
 
         self.mentorCellOverlay.addConstraints(topHorizontalConstraints)
