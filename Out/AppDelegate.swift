@@ -11,21 +11,23 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDelegate {
     
-    var visWindow: COSTouchVisualizerWindow?
-    var window: COSTouchVisualizerWindow? {
-        if visWindow == nil { visWindow = COSTouchVisualizerWindow(frame: UIScreen.mainScreen().bounds) }
-        visWindow?.backgroundColor = UIColor.clearColor()
-        visWindow?.fillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
-        visWindow?.strokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
-        visWindow?.touchAlpha = 0.75
-        
-        visWindow?.rippleFillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
-        visWindow?.rippleStrokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
-        visWindow?.rippleAlpha = 0.05
-        return visWindow
-    }
+//    var visWindow: COSTouchVisualizerWindow?
+//    var window: COSTouchVisualizerWindow? {
+//        if visWindow == nil { visWindow = COSTouchVisualizerWindow(frame: UIScreen.mainScreen().bounds) }
+//        visWindow?.backgroundColor = UIColor.clearColor()
+//        visWindow?.fillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
+//        visWindow?.strokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 1)
+//        visWindow?.touchAlpha = 0.75
+//        
+//        visWindow?.rippleFillColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
+//        visWindow?.rippleStrokeColor = UIColor(red: 0.65, green: 0.65, blue: 0.65, alpha: 0.3)
+//        visWindow?.rippleAlpha = 0.05
+//        return visWindow
+//    }
     
-
+    // Added for normal operation without COSTouchVisualizer
+    var window: UIWindow?
+    
 
     
 
@@ -37,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("7dec739280c7d95ffcb010852c78a6d4")
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
-        
+        self.window?.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
 //        // Override point for customization after application launch.
 //        self.window!.backgroundColor = UIColor.whiteColor()
 //        

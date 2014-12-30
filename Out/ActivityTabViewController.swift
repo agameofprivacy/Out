@@ -124,6 +124,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.reloadData()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -256,6 +261,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
+//                activityQuery.limit = 15
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {

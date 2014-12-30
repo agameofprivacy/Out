@@ -140,7 +140,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentCellType = currentCellTypes[indexPath.row]
         var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
-        
         if self.countofCellTypeDictionary[currentCellType] == nil{
             self.countofCellTypeDictionary.updateValue([indexPath.row], forKey: currentCellType)
         }

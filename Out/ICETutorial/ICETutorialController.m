@@ -101,14 +101,14 @@
     [self.leftButton setTitle:@"Login" forState:UIControlStateNormal];
     [self.rightButton setTitle:@"Signup" forState:UIControlStateNormal];
     [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.rightButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.leftButton addTarget:self
                         action:@selector(didClickOnButton1:)
               forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton addTarget:self
                          action:@selector(didClickOnButton2:)
                forControlEvents:UIControlEventTouchUpInside];
-    self.rightButton.enabled = NO;
+//    self.rightButton.enabled = NO;
     [self.view addSubview:self.frontLayerView];
     [self.view addSubview:self.backLayerView];
     [self.view addSubview:self.gradientView];
