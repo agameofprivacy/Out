@@ -635,12 +635,28 @@
                     <navigationItem key="navigationItem" id="HxT-FK-gGJ"/>
                     <connections>
                         <segue destination="ujj-EG-4nN" kind="presentation" identifier="LoggedIn" modalTransitionStyle="flipHorizontal" id="27d-c0-TyZ"/>
-                        <segue destination="TBt-ss-Dgd" kind="show" identifier="CreateAccount" id="e5y-IV-8RG"/>
+                        <segue destination="PAs-k0-zWc" kind="presentation" identifier="signup" id="kMt-O6-Wt1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZI-qH-gn1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1921" y="-1908"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zt3-Rg-MId">
+            <objects>
+                <navigationController id="PAs-k0-zWc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T5O-Xb-Ivy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TBt-ss-Dgd" kind="relationship" relationship="rootViewController" id="NVF-vO-3bS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DWu-Cq-iaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2448" y="-2698"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="DWC-gG-Ips">
@@ -655,13 +671,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Mh7-fl-Cyj"/>
                     <connections>
                         <segue destination="ujj-EG-4nN" kind="presentation" identifier="AccountCreated" modalTransitionStyle="flipHorizontal" id="Sok-aU-O8u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72A-0f-OPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2655" y="-1908"/>
+            <point key="canvasLocation" x="3295" y="-1964"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CNr-wI-8UN">
@@ -770,7 +787,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDN-TR-uwk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="-1908"/>
+            <point key="canvasLocation" x="1045" y="-1908"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0vB-jh-SJD">

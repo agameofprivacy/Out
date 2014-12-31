@@ -17,3 +17,4 @@
 #import <HockeySDK/HockeySDK.h>
 #import "ICETutorialController.h"
 #import "COSTouchVisualizerWindow.h"
+#import "XLForm.h"

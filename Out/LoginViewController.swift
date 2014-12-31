@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         logoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         logoImageView.image = UIImage(named: "out_logo.png")
         logoImageView.userInteractionEnabled = true
-        var viewTutorial = UITapGestureRecognizer(target: self, action: "viewTutorial:")
+        var viewTutorial = UITapGestureRecognizer(target: self, action: "viewTutorial")
         logoImageView.addGestureRecognizer(viewTutorial)
         containerScrollView.addSubview(logoImageView)
         
@@ -186,14 +186,20 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     func tutorialController(tutorialController: ICETutorialController!, didClickOnLeftButton sender: UIButton!) {
 //        self.navigationController?.popViewControllerAnimated(true)
 //        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.containerScrollView.hidden = false
         self.dismissViewControllerAnimated(true, completion: nil)
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
-        self.containerScrollView.hidden = false
         self.aliasTextField.becomeFirstResponder()
     }
 
+    
     func tutorialController(tutorialController: ICETutorialController!, didClickOnRightButton sender: UIButton!) {
-        println("right button clicked")
+        self.containerScrollView.hidden = true
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("signup", sender: self)
+        self.containerScrollView.hidden = false
+        self.aliasTextField.resignFirstResponder()
+        println("signup!")
     }
 
     
@@ -215,7 +221,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         }
     }
     
-    func viewTutorial(sender:UITapGestureRecognizer){
+    func viewTutorial(){
         // Init the pages texts, and pictures.
         
         var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
