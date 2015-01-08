@@ -8,20 +8,23 @@
 
 import UIKit
 
+// Controller for compose view
 class ComposeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // UINavigationBar init and layout
         self.navigationItem.title = "Compose"
+        
         var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
         cancelButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = cancelButton
+        
         var postButton = UIBarButtonItem(title: "Post", style: UIBarButtonItemStyle.Plain, target: self, action: "postButtonTapped")
         postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName), forState: UIControlState.Normal)
         postButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = postButton
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,21 +32,12 @@ class ComposeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // Dismiss modal compose view if Cancel button tapped
     func cancelButtonTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+    // Post composition if Post button tapped
     func postButtonTapped(){
         println("posted!")
     }

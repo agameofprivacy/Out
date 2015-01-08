@@ -57,7 +57,6 @@
 		2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C5511A3F551300B5458F /* MentorViewController.swift */; };
 		2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */; };
 		2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */; };
-		2C6AFF5A1A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF591A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift */; };
 		2C6FFAEC1A19B3160043F912 /* ICETutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAE71A19B3160043F912 /* ICETutorialController.m */; };
 		2C6FFAED1A19B3160043F912 /* ICETutorialPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAE91A19B3160043F912 /* ICETutorialPage.m */; };
 		2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */; };
@@ -67,7 +66,6 @@
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
 		2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8592C01A14082600272769 /* ActivityDetailViewController.swift */; };
-		2C93EE4F1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE4E1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift */; };
 		2C93EE511A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */; };
 		2C9BE6951A5327E300980C0D /* XLFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BE64E1A5327E300980C0D /* XLFormBaseCell.m */; };
 		2C9BE6961A5327E300980C0D /* XLFormButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BE6501A5327E300980C0D /* XLFormButtonCell.m */; };
@@ -250,7 +248,6 @@
 		2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardAnnouncementsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C6AFF561A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardInspirationCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardInspirationCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		2C6AFF591A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardInspirationCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C6FFAE61A19B3160043F912 /* ICETutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICETutorialController.h; sourceTree = "<group>"; };
 		2C6FFAE71A19B3160043F912 /* ICETutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICETutorialController.m; sourceTree = "<group>"; };
 		2C6FFAE81A19B3160043F912 /* ICETutorialPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICETutorialPage.h; sourceTree = "<group>"; };
@@ -266,7 +263,6 @@
 		2C8592C01A14082600272769 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		2C93EE4E1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardChallengeOnDeckCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardAnnouncementsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C9BE64D1A5327E300980C0D /* XLFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormBaseCell.h; sourceTree = "<group>"; };
 		2C9BE64E1A5327E300980C0D /* XLFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormBaseCell.m; sourceTree = "<group>"; };
@@ -643,9 +639,7 @@
 		2C6AFF551A128D7B0006C7A9 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				2C93EE4E1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift */,
 				2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */,
-				2C6AFF591A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
 			sourceTree = "<group>";
@@ -979,7 +973,6 @@
 				TargetAttributes = {
 					2C5D996819E4A9FB00133F59 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = 3DZ3S2K7LU;
 					};
 					2C5D997D19E4A9FB00133F59 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -1060,7 +1053,6 @@
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
 				2C2CF71A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
-				2C6AFF5A1A12CE570006C7A9 /* DashboardInspirationCollectionViewCell.swift in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
 				2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */,
 				2C9BE6971A5327E300980C0D /* XLFormCheckCell.m in Sources */,
@@ -1069,7 +1061,6 @@
 				2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */,
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
-				2C93EE4F1A1158A3009E6147 /* DashboardChallengeOnDeckCollectionViewCell.swift in Sources */,
 				2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */,
 				2C9BE6AD1A5327E300980C0D /* XLFormRightDetailCell.m in Sources */,
 				2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */,
@@ -1303,7 +1294,7 @@
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1327,7 +1318,7 @@
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

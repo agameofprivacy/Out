@@ -24,7 +24,6 @@ class MentorViewController: UIViewController {
         reportButton.tintColor = UIColor.redColor()
         self.navigationItem.rightBarButtonItem = reportButton
 
-        
         self.containerScrollView = UIScrollView(frame: CGRectMake(0, 175, 375, 392))
         self.view.addSubview(containerScrollView)
         self.containerScrollView.contentSize = CGSize(width: 375, height: 365)
@@ -38,25 +37,14 @@ class MentorViewController: UIViewController {
         self.bottomPlaceholderImageView.image = UIImage(named: "help_chat_bottom_placeholder")
         self.view.addSubview(self.bottomPlaceholderImageView)
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // Present report mentor view if Report button tapped
     func reportButtonTapped(){
         println("report button tapped")
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

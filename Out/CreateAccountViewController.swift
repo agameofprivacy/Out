@@ -8,21 +8,33 @@
 
 import UIKit
 
+// Controller for signup view
 class CreateAccountViewController: XLFormViewController {
-
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-
     override func viewDidLoad() {
+        super.viewDidLoad()
 
+        // Initialize and place close and confirm buttons
+        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
+        closeButton.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = closeButton
+        
+        var confirmButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.Plain, target: self, action: "confirmButtonTapped:")
+        confirmButton.tintColor = UIColor.blackColor()
+        confirmButton.enabled = false
+        self.navigationItem.rightBarButtonItem = confirmButton
+        
+        
+        // Initiate XLForm objects
         let form = XLFormDescriptor(title:"Signup")
         var section:XLFormSectionDescriptor
         var row: XLFormRowDescriptor
         
-        // First section
+        // Alias & password section
         section = XLFormSectionDescriptor.formSectionWithTitle("Login (Required)") as XLFormSectionDescriptor
         form.addFormSection(section)
         
@@ -50,6 +62,7 @@ class CreateAccountViewController: XLFormViewController {
         row.required = true
         section.addFormRow(row)
         
+        // Background section
         section = XLFormSectionDescriptor.formSectionWithTitle("Background (Optional)") as XLFormSectionDescriptor
         form.addFormSection(section)
         
@@ -182,7 +195,6 @@ class CreateAccountViewController: XLFormViewController {
         ]
         section.addFormRow(row)
 
-        
         row = XLFormRowDescriptor(tag: "City", rowType: XLFormRowDescriptorTypeText, title: "City")
         var paddingView6 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
@@ -191,19 +203,11 @@ class CreateAccountViewController: XLFormViewController {
         section.addFormRow(row)
 
         
-        
         self.form = form
-        super.viewDidLoad()
-        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
-        closeButton.tintColor = UIColor.blackColor()
-        self.navigationItem.leftBarButtonItem = closeButton
-        var confirmButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.Plain, target: self, action: "confirmButtonTapped:")
-        confirmButton.tintColor = UIColor.blackColor()
-        confirmButton.enabled = false
-        self.navigationItem.rightBarButtonItem = confirmButton
-
     }
     
+    
+    // Detect password match to enable Confirm button
     override func textFieldDidEndEditing(textField: UITextField) {
         
         let nullObject = NSNull()
@@ -219,23 +223,24 @@ class CreateAccountViewController: XLFormViewController {
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-//        aliasTextField.becomeFirstResponder()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
+    // Dismiss modal signup view if Close button tapped
     func closeButtonTapped(sender: UIBarButtonItem){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // Initiate account creation if Confirm button tapped
     func confirmButtonTapped(sender:UIBarButtonItem){
         let nullObject = NSNull()
+
         var values = self.form.formValues()
         var user = PFUser()
+
         user.username = values["Alias"] as String
         user.password = values["Password"] as String
         user["age"] = values["Age"] as Int

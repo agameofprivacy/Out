@@ -15,7 +15,6 @@ class HelpTabViewController: UIViewController {
     var followUpPromptLabel:UILabel!
     var infoParagraphLabel:UILabel!
     
-    
     var chatView:UIView!
     var chatPromptLabel:UILabel!
     var chatButton:UIButton!
@@ -245,22 +244,14 @@ class HelpTabViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Present talk help view if Talk button tapped
     func talkButtonTapped(){
         self.performSegueWithIdentifier("talkHelp", sender: self)
     }
-
+    
+    // Present chat help view if Chat button tapped
     func chatButtonTapped(){
         self.performSegueWithIdentifier("chatHelp", sender: self)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

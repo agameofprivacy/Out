@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Controller for challenge gallery view, loads and displays challenges available for current user
 class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var challengesTableView:UITableView!
@@ -23,7 +24,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.challengesTableView = UITableView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height), style: UITableViewStyle.Plain)
         self.challengesTableView.dataSource = self
         self.challengesTableView.delegate = self
@@ -45,6 +46,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(self.activityIndicator)
         
+        // noChallengeView init and layout
         
         self.noChallengeView = UIView(frame: self.challengesTableView.frame)
         self.noChallengeView.center = self.challengesTableView.center
@@ -65,8 +67,6 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         
         self.noChallengeView.hidden = true
         self.view.addSubview(self.noChallengeView)
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,6 +79,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         // Dispose of any resources that can be recreated.
     }
     
+    // Prepare for pick filters segue, pass currently selected filters to be marked in destination vc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickFilters"{
             let FilterVC:ChallengeFilterTableViewController = segue.destinationViewController.childViewControllers[0] as ChallengeFilterTableViewController
@@ -86,7 +87,6 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
 
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -109,6 +109,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         return cell
     }
     
+    // Add challenge to user's current challenges on Parse if challenge tapped, then reload available challenges in current view
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as PFObject
@@ -137,30 +138,38 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
             self.noChallengeView.hidden = true
     }
     
+    // Load available challenges from Parse
     func loadAvailableChallenges(){
+
         self.challengesTableView.hidden = true
         self.activityIndicator.startAnimating()
         self.challengeModelsObjects.removeAll(keepCapacity: true)
         self.currentChallengesStrings.removeAll(keepCapacity: true)
+        
         var query = PFQuery(className:"Challenge")
+        // Apply filters if count of filter strings is greater than 0
         if filters.count > 0{
             query.whereKey("tags", containedIn: filters)
         }
+        
+        // Query challenges already current to the user
         var currentChallengesQuery = PFQuery(className: "UserChallengeData")
         currentChallengesQuery.whereKey("username", equalTo: PFUser.currentUser())
+
         currentChallengesQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                // The find succeeded.
+                // Found user's current challenges, add challenge title to currentChallengesStrings
                 for object in objects{
                     self.currentChallengesStrings += [(object["title"] as String)]
                 }
                 query.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
-                        // The find succeeded.
+                        // Found challenges that satisfy filter selection
                         self.challengeModelsObjects = objects
                         var indexForToRemove:[Int] = []
+                        // Remove challenges that are already current to user
                         if self.challengeModelsObjects.count > 0{
                             for (index,challenge) in enumerate(self.challengeModelsObjects){
                                 if contains(self.currentChallengesStrings, challenge["title"] as String){
@@ -190,16 +199,19 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    // Dismiss challenge gallery view if Close button tapped
     @IBAction func closeBarButtonItemTapped(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
+    // Present filter view if Filter button tapped
     @IBAction func filterBarButtonItemTapped(sender: UIBarButtonItem) {
         performSegueWithIdentifier("PickFilters", sender: self)
     }
 
 }
 
+// Helper Array extension to remove objects in array
 extension Array {
     mutating func removeObjectAtIndexes(indexes: [Int]) {
         var indexSet = NSMutableIndexSet()

@@ -8,13 +8,14 @@
 
 import UIKit
 
+// Collect Step Data protocol
 protocol CollectStepData {
-
+    
     func collectData() -> [String:String]
     
 }
 
-
+// Controller for challenges tab view
 class ChallengesTabViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, PresentNewView{
     
     var currentChallengesCardsCollectionView: UICollectionView!
@@ -24,10 +25,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     var currentChallengesObjects:[AnyObject] = []
     var stepFullUserDataDictionary:[String:String] = [:]
     var noChallengeView:UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
         
+        // Current challenges cards collection view init and layout
+        currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
         currentChallengesCardsCollectionView.collectionViewLayout = layout
         currentChallengesCardsCollectionView.delegate = self
         currentChallengesCardsCollectionView.dataSource = self
@@ -39,6 +43,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.showsHorizontalScrollIndicator = false
         currentChallengesCardsCollectionView.registerClass(ChallengesTabCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
         
+        // Card number page control init and layout
         cardNumberPageControl = UIPageControl(frame: CGRectMake(self.view.frame.origin.x + 40, self.view.bounds.size.height - 74.0, self.view.frame.size.width - 80.0, 18.0))
         cardNumberPageControl.hidesForSinglePage = true
         cardNumberPageControl.backgroundColor = UIColor.clearColor()
@@ -48,6 +53,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         self.view.addSubview(currentChallengesCardsCollectionView)
         self.view.addSubview(cardNumberPageControl)
         
+        // Activity indicator init and layout
         activityIndicator = UIActivityIndicatorView(frame: self.currentChallengesCardsCollectionView.frame)
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -55,67 +61,52 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(activityIndicator)
 
-        
+        // No challenge view init and layout
         self.noChallengeView = UIView(frame: self.currentChallengesCardsCollectionView.frame)
         self.noChallengeView.center = self.view.center
-        
         var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
-//        noChallengeViewTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
         noChallengeViewTitle.text = "No Current Challenge"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
-//        noChallengeViewSubtitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
         noChallengeViewSubtitle.text = "tap '+' to add a challenge"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noChallengeViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         self.noChallengeView.addSubview(noChallengeViewSubtitle)
         
-//        var viewsDictionary = ["noChallengeViewTitle":noChallengeViewTitle, "noChallengeViewSubtitle":noChallengeViewSubtitle]
-//        var metricsDictionary = ["shortVertical":2]
-//        
-//        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[noChallengeViewTitle]-shortVertical-[noChallengeViewSubtitle]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
-//        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[noChallengeViewTitle]-20-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
-//        
-//        self.noChallengeView.addConstraints(horizontalConstraints)
-//        self.noChallengeView.addConstraints(verticalConstraints)
-        
         self.noChallengeView.hidden = true
         self.view.addSubview(self.noChallengeView)
         
         loadCurrentChallenges()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-    }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        //#warning Incomplete method implementation -- Return the number of sections
         return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //#warning Incomplete method implementation -- Return the number of items in the section
         return currentChallengesObjects.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengesTabCollectionViewCell
-        // Configure the cell
+
         cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 0.75
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
 
+        // Load current challenge data
         var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as PFObject
         var currentChallengeData = self.currentChallengesObjects[indexPath.item] as PFObject
         var currentCellContentArray:[[String]] = challengeModel["stepContent"] as [[String]]
@@ -126,14 +117,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
         
-        // Check for currentStepCount correctness.
+        // Check currentStepCount to display correct text for challenge subtitle
         var currentStepCount = currentChallengeData["currentStepCount"] as Int
         if currentStepCount == 0{
             var reason = challengeModel["reason"] as [String]
             var subtitleString = reason[0] + ": " + reason[1]
             cell.subtitleLabel.text = subtitleString
-            
-            // galleryselect lockup bug here caused by reloadData
             cell.canvasTableView.reloadData()
         }
         else{
@@ -147,14 +136,19 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         return cell
     }
     
+    // Update card number page control when scrolling on collection view ends
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         var currentPage:CGFloat = self.currentChallengesCardsCollectionView.contentOffset.x / self.currentChallengesCardsCollectionView.frame.size.width
         self.cardNumberPageControl.currentPage = Int(ceil(Float(currentPage)))
     }
     
+    // Load and display current challenges from Parse
     func loadCurrentChallenges(){
+        // Hide cards and display activity indicator
         self.currentChallengesCardsCollectionView.hidden = true
         self.activityIndicator.startAnimating()
+        
+        // Parse query for current user's current challenges
         var queryIsCurrentIsCurrentUser = PFQuery(className:"UserChallengeData")
         queryIsCurrentIsCurrentUser.whereKey("isCurrent", equalTo:true)
         queryIsCurrentIsCurrentUser.whereKey("username", equalTo: PFUser.currentUser())
@@ -181,10 +175,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             }
         }
     }
-    @IBAction func addChallengeBarButtonItemTapped(sender: UIBarButtonItem) {
-
-    }
     
+    // Prepare for add challenge segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addChallenge"{
             var modalVC = segue.destinationViewController as UINavigationController
@@ -193,62 +185,70 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         }
     }
 
-    
+    // When next step button is tapped, collect current user input and load cells from next step
     func nextStepButtonTapped(sender:UIButton!){
+
         var cells = self.currentChallengesCardsCollectionView.visibleCells()
         var currentCell = cells[0] as ChallengesTabCollectionViewCell
-        
+
+        // Loop through sections of current cell canvas
         for var section:Int = 0; section < currentCell.canvasTableView.numberOfSections(); section++ {
+            // Loop through cells of current section
             for var row:Int = 0; row < currentCell.canvasTableView.numberOfRowsInSection(section); row++ {
+                
                 var cellPath:NSIndexPath = NSIndexPath(forRow: row, inSection: section)
+
                 if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is GallerySelectTableViewCell{
                     var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as GallerySelectTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
-                    self.stepFullUserDataDictionary.removeValueForKey("")
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PromptAndAnswerTableViewCell{
                     var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PromptAndAnswerTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
-                    self.stepFullUserDataDictionary.removeValueForKey("")
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PickerViewTableViewCell{
                     var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PickerViewTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
-                    self.stepFullUserDataDictionary.removeValueForKey("")
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is TextFieldInputTableViewCell{
                     var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as TextFieldInputTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
-                    self.stepFullUserDataDictionary.removeValueForKey("")
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is BoolPickerTableViewCell{
                     var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as BoolPickerTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
-                    self.stepFullUserDataDictionary.removeValueForKey("")
                 }
+                // Clean up collected data
+                self.stepFullUserDataDictionary.removeValueForKey("")
             }
         }
+        
         var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
         var itemNumber = indexPath.item
         var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as PFObject
         var currentStepCount = currentChallengeObject["currentStepCount"] as Int
         var currentChallengeModel = currentChallengeObject["challenge"] as PFObject
+        
         if currentStepCount > 0{
+            
             if stepFullUserDataDictionary["challengeTrack"] != nil{
+                // Store collected step user data to PFObject
                 currentChallengeObject["challengeTrackNumber"] = stepFullUserDataDictionary["challengeTrack"]
             }
+            
             var dictionary:[String] = []
             for (key, value) in stepFullUserDataDictionary{
                 dictionary.append(key)
                 dictionary.append(value)
             }
+
+            // Filter out dictionary items with empty values
             dictionary.filter{$0 != ""}
             var stepContent:[[String]] = currentChallengeObject["stepContent"] as [[String]]
-    //        stepContent[currentStepCount].removeAll(keepCapacity: false)
-    //        stepContent[currentStepCount] = dictionary
             stepContent.append(dictionary)
             currentChallengeObject["stepContent"] = stepContent
         }
+        // If there is more steps in current challenge, update current step count and step title information on card
         if currentStepCount < currentChallengeModel["stepTitle"].count{
             currentChallengeObject["currentStepCount"] = ++currentStepCount
             currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
@@ -263,12 +263,13 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 }
             }
         }
+        // Else update challenge on Parse as completed and timestamp said completion, once step updated, reload current challenge cards and create new Activity on Parse
         else{
             let date = NSDate()
-//            let calendar = NSCalendar.currentCalendar()
-//            let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
-//            let hour = components.hour
-//            let minutes = components.minute
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+            let hour = components.hour
+            let minutes = components.minute
             
             currentChallengeObject["isCurrent"] = false
             currentChallengeObject["completedDate"] = date
@@ -288,10 +289,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         }
     }
 
+    // Return current challenges objects
     func returnCurrentChallengesObjects() -> [AnyObject]{
         return self.currentChallengesObjects
     }
 
+    // Process array of arrays into dictionary format
     func contentDictionary(raw:[[String]]) -> [[String:String]]{
         var arrayCount = 0
         var contentDictionary:[[String:String]] = []
@@ -310,6 +313,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         return contentDictionary
     }
     
+    // Protocol implementation for PresentNewView
     func presentWebView(url: NSURL) {
         var webView = WebViewViewController()
         webView.url = url
@@ -320,5 +324,5 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     
 }
 
-
+// Helper function for contentDictionary()
 func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {     for (k, v) in right {         left.updateValue(v, forKey: k)     } }

@@ -8,13 +8,15 @@
 
 import UIKit
 
+// Controller for profile view
 class MyProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // UINavigationBar init
         self.navigationItem.title = "Profile"
-        
+
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
@@ -26,17 +28,8 @@ class MyProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
+    // Dismiss modal profile view if Close button tapped
     func closeButtonTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -39,7 +39,6 @@ class ActivityTableViewCell: UITableViewCell {
     var likeButton:UIImageView!
     
     
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -184,8 +183,6 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton.image = UIImage(named: "likeButton-icon")
         self.likeButton.userInteractionEnabled = true
         self.likeButton.layer.cornerRadius = 22
-//        self.likeButton.layer.borderWidth = 1
-//        self.likeButton.backgroundColor = UIColor(red: 239/255, green: 65/255, blue: 54/255, alpha: 1)
         self.likeButton.clipsToBounds = true
         self.likeButtonArea.addSubview(self.likeButton)
         
@@ -201,6 +198,7 @@ class ActivityTableViewCell: UITableViewCell {
         contentView.addConstraints(horizontalPaperViewConstraints)
         contentView.addConstraints(verticalPaperViewConstraints)
         
+        
         // paperView internal constraints
         var paperInternalViewsDictionary =
         [
@@ -212,6 +210,7 @@ class ActivityTableViewCell: UITableViewCell {
                     "responseBarSeparator":responseBarSeparator,
                     "responseBar":responseBar
         ]
+        
         var paperInternalMetricsDictionary =
         [
                     "paperSidePadding": 12,
@@ -241,7 +240,6 @@ class ActivityTableViewCell: UITableViewCell {
         var verticalSecondColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-secondColumnTopPadding-[aliasLabel]->=4-[actionLabel]-[contentCanvas]-paperTopPadding-[responseBarSeparator(1)]-mediumVerticalPadding-[responseBar]-paperBottomPadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
         var verticalThirdColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-thirdColumnTopPadding-[reverseTimeLabel]->=6-[actionLabel]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
-        
 
         self.paperView.addConstraints(horizontalSecondRowPaperInternalViewConstraints)
         self.paperView.addConstraints(horizontalThirdRowPaperInternalViewConstraints)
@@ -285,6 +283,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.contentCanvas.addConstraints(verticalContentCanvasViewConstraints)
         self.contentCanvas.addConstraints(horizontalnarrativeContentCanvasViewConstraints)
 
+        
         // responseBar constraints
         var responseBarViewsDictionary =
         [
@@ -313,6 +312,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.responseBar.addConstraints(verticalResponseBarLeftConstraints)
         self.responseBar.addConstraints(verticalResponseBarRightConstraints)
         
+        
         // Comment Button Area Constraints
         var commentButtonViewsDictionary =
         [
@@ -332,6 +332,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.commentsButtonArea.addConstraints(horizontalCommentButtonAreaConstraints)
         self.commentsButtonArea.addConstraints(verticalCommentButtonAreaConstraints)
         
+        
         // Like Button Area Constraints
         var likeButtonViewsDictionary =
         [
@@ -350,8 +351,6 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.likeButtonArea.addConstraints(horizontalLikeButtonAreaConstraints)
         self.likeButtonArea.addConstraints(verticalLikeButtonAreaConstraints)
-
-        
     }
     
     

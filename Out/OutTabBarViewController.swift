@@ -8,32 +8,45 @@
 
 import UIKit
 
+// Controller for application UITabBar
+
 class OutTabBarViewController: UITabBarController {
     
-    let tintColor = UIColor(red: 0.34375, green: 0.3359375, blue: 0.8359375, alpha: 1.0)
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+    
         // Do any additional setup after loading the view.
-        UITabBar.appearance().tintColor = UIColor.blackColor()
+    
+        // Set UITabBarItem through a for loop
         for var index = 0; index <  self.tabBar.items?.count; ++index{
             
+            // Instantiate UITabBarItem
             var tabItem : UITabBarItem = self.tabBar.items![index] as UITabBarItem
 
+            // Switch assets for UITabBarItem in order
             switch index{
+            
+            // Dashboard
             case 0:
                 tabItem.selectedImage = UIImage(named: "dashboardSelected")
                 tabItem.image = UIImage(named: "dashboardUnselected")
+
+            // Challenges
             case 1:
                 tabItem.selectedImage = UIImage(named: "challengesSelected")
                 tabItem.image = UIImage(named: "challengesUnselected")
+                
+            // Activity
             case 2:
                 tabItem.selectedImage = UIImage(named: "activitySelected")
                 tabItem.image = UIImage(named: "activityUnselected")
+                
+            // People
             case 3:
                 tabItem.selectedImage = UIImage(named: "peopleSelected")
                 tabItem.image = UIImage(named: "peopleUnselected")
+                
+            // Help
             case 4:
                 tabItem.selectedImage = UIImage(named: "helpSelected")
                 tabItem.image = UIImage(named: "helpUnselected")

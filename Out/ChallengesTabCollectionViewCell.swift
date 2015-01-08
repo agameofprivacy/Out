@@ -13,14 +13,12 @@ protocol PresentNewView{
     func presentWebView(url:NSURL)
 }
 
-
+// Challenges tab collection view cell view
 class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITableViewDelegate {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    // Mark: UI Elements Declarations
     
     let titleLabel:UILabel!
     let titleSeparator:UIView!
@@ -39,14 +37,17 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.whiteColor()
+        
+        // Collection view cell (card) edge styling
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.blackColor().CGColor
         self.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.layer.shadowOpacity = 0.1
         self.layer.shadowRadius = 1
-
-
         
+        // canvas table view init
         self.canvasTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
         self.canvasTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.canvasTableView.showsVerticalScrollIndicator = true
@@ -70,7 +71,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.canvasTableView.delegate = self
         self.canvasTableView.rowHeight = UITableViewAutomaticDimension
         self.canvasTableView.estimatedRowHeight = 90
-        
         contentView.addSubview(canvasTableView)
         
         activityIndicator = UIActivityIndicatorView(frame: frame)
@@ -78,8 +78,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         canvasTableView.addSubview(activityIndicator)
-        
-        self.backgroundColor = UIColor.whiteColor()
         
         self.titleLabel = UILabel(frame:CGRectZero)
         self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -93,7 +91,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.titleSeparator.backgroundColor = UIColor.blackColor()
         contentView.addSubview(titleSeparator)
         
-
         self.subtitleLabel = UILabel(frame:CGRectZero)
         self.subtitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.subtitleLabel.numberOfLines = 0
@@ -105,7 +102,6 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.nextStepButton.frame = CGRectZero
         self.nextStepButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.nextStepButton.setTitle("Next Step", forState: UIControlState.Normal)
-
         self.nextStepButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.nextStepButton.titleLabel!.font = UIFont(name: "UIFontTextStyleHeadline", size: CGFloat(30.0))
         self.nextStepButton.userInteractionEnabled = true
@@ -114,6 +110,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.nextStepButton.layer.cornerRadius = 5
         contentView.addSubview(nextStepButton)
         
+        // Card layout
         var viewsDictionary = ["canvasTableView":canvasTableView, "titleLabel":titleLabel, "titleSeparator":titleSeparator, "subtitleLabel":subtitleLabel, "nextStepButton":nextStepButton]
         var metricsDictionary = ["cardInset":cardInset, "contentWidth":(self.bounds.size.width - cardInset * 2.0), "bottomCardInset": cardInset - 6]
         
@@ -132,6 +129,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         self.addConstraints(verticalConstraints)
     }
     
+    // Table view data source method for canvas table view
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
@@ -140,6 +138,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentCellType = currentCellTypes[indexPath.row]
         var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
+        
         if self.countofCellTypeDictionary[currentCellType] == nil{
             self.countofCellTypeDictionary.updateValue([indexPath.row], forKey: currentCellType)
         }
@@ -147,16 +146,16 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             self.countofCellTypeDictionary[currentCellType]?.append(indexPath.row)
         }
         
+        // If current cell type is selection gallery
         if currentCellType == "gallerySelect"{
-            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
-
-            
             self.canvasTableView.alwaysBounceVertical = false
+            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
 
             var itemTitles:[String] = ["","","","",""]
             var itemImages:[String] = ["","","","",""]
             var itemBlurbs:[String] = ["","","","",""]
             var indexCount = 0
+            
             for (key, value) in contentDictionary[currentStepCount]{
                 var keyPairArray:[String] = key.componentsSeparatedByString("--")
                 if(keyPairArray.count == 2){
@@ -175,6 +174,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
                     }
                 }
             }
+            
             itemTitles = itemTitles.filter{$0 != ""}
             itemImages = itemImages.filter{$0 != ""}
             itemBlurbs = itemBlurbs.filter{$0 != ""}
@@ -182,13 +182,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.itemTitles = itemTitles
             cell.itemImages = itemImages
             cell.itemBlurbs = itemBlurbs
-            
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             cell.galleryCollectionView.reloadData()
 
             return cell
         }
             
+        // If current cell type is media availability
         else if currentCellType == "mediaAvailability"{
             var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
             cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle\(challengeTrackNumber)"]
@@ -198,6 +198,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             return cell
         }
             
+        // If current cell type is text block
         else if currentCellType == "textBlock"{
             var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["textBlock"]!
@@ -207,7 +208,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             return cell
         }
             
-            
+        // If current cell type is prompt and answer
         else if currentCellType == "promptAndAnswer"{
             
             var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
@@ -219,6 +220,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
             return cell
         }
+            
+        // If current cell type is challenge overview
         else if currentCellType == "challengeOverview"{
             var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
             
@@ -234,6 +237,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.stepTitles.text = stepTitles
             return cell
         }
+            
+        // If current cell type is value picker
         else if currentCellType == "valuePicker"{
             var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as PickerViewTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["valuePicker"]!
@@ -246,6 +251,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.pickerView.selectRow(2, inComponent: 0, animated: true)
             return cell
         }
+            
+        // If current cell type is fields and activator
         else if currentCellType == "fieldsAndActivator"{
             var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["fieldsAndActivator"]!
@@ -257,6 +264,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
+            
+        // If current cell type is launch web view
         else if currentCellType == "launchWebView"{
             var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["launchWebView"]!
@@ -270,6 +279,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
+
+        // If current cell type is event info
         else if currentCellType == "eventInfo"{
             var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
             cell.eventTitle.text = contentDictionary[currentStepCount]["eventTitle\(challengeTrackNumber)"]
@@ -277,6 +288,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
             return cell
         }
+            
+        // If current cell type is call number
         else if currentCellType == "callNumber"{
             var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["callNumber"]!
@@ -288,12 +301,16 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.addGestureRecognizer(tapRecognizer)
             return cell
         }
+            
+        // If current cell type is hero image
         else if currentCellType == "heroImage"{
             var cell:HeroImageTableViewCell = tableView.dequeueReusableCellWithIdentifier("HeroImageTableViewCell") as HeroImageTableViewCell
             var imageString = contentDictionary[currentStepCount]["heroImage\(challengeTrackNumber)"]
             cell.heroImage.image = UIImage(named: imageString!)
             return cell
         }
+            
+        // If current cell type is bool picker
         else if currentCellType == "boolPicker"{
             var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["boolPicker"]!
@@ -303,6 +320,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             cell.key = contentDictionary[currentStepCount]["bool\(count)Title\(challengeTrackNumber)"]
             return cell
         }
+            
+        // If current cell type is caution text
         else if currentCellType == "cautionText"{
             var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as CautionTextTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["cautionText"]!
@@ -312,6 +331,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
 
             return cell
         }
+            
+        // If current cell type is text field
         else if currentCellType == "textField"{
             var cell:TextFieldInputTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextFieldInputTableViewCell") as TextFieldInputTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["textField"]!
@@ -325,6 +346,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         return cell
     }
     
+    // Table view data source method for canvas table view
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
         var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
@@ -337,7 +359,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
     
     
-    
+    // Table view data source for canvas table view's value picker rows
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
         var currentStepCount = currentChallengeData["currentStepCount"] as Int
@@ -354,7 +376,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         }
     }
     
-            
+    // Load current challenges
     func loadCurrentChallenges(objectId:String){
         self.canvasTableView.hidden = true
         self.activityIndicator.startAnimating()
@@ -376,7 +398,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
     
 
-    
+    // Expand and collapse field rows of fieldsAndActivator
     func showHidePickerView(sender:UITapGestureRecognizer!){
 
         self.canvasTableView.beginUpdates()
@@ -384,15 +406,14 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var cell:FieldsAndActivatorTableViewCell = sender.view as FieldsAndActivatorTableViewCell
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-
         var pickerCell:PickerViewTableViewCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) as PickerViewTableViewCell
+        
         if contains(shownHiddenRows, nextIndexPath){
             var indexToRemove = find(shownHiddenRows, nextIndexPath)
             self.shownHiddenRows.removeAtIndex(indexToRemove!)
             pickerCell.pickerView.hidden = true
             cell.fieldValuePlaceholder.text = pickerCell.values[pickerCell.pickerView.selectedRowInComponent(0)]
         }
-
         else if !contains(shownHiddenRows, nextIndexPath){
             self.shownHiddenRows.append(nextIndexPath)
             pickerCell.pickerView.hidden = false
@@ -403,11 +424,13 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     }
     
     
+    // Dial number from cell using phone.app
     func dialNumber(sender:UITapGestureRecognizer!){
         var cell:CallTableViewCell = sender.view as CallTableViewCell
         UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(cell.numberLabel.text!)")!)
     }
     
+    // Launch web view with URL from cell
     func launchWebView(sender:UITapGestureRecognizer!){
         var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
         var collectionView = self.superview as UICollectionView

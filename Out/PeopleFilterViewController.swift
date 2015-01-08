@@ -14,6 +14,10 @@ class PeopleFilterViewController: UIViewController {
     var placeholderImageView:UIImageView!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // UINavigationBar init and layout
+        self.navigationItem.title = "Filter"
         
         var closeButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
         closeButton.tintColor = UIColor.blackColor()
@@ -23,9 +27,6 @@ class PeopleFilterViewController: UIViewController {
         applyButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = applyButton
 
-        self.view.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
-        self.navigationItem.title = "Filter"
-        super.viewDidLoad()
         self.containerScrollView = UIScrollView(frame: self.view.frame)
         self.view.addSubview(containerScrollView)
         self.placeholderImageView = UIImageView(frame: CGRectMake(0, 0, 375, 1225))
@@ -41,22 +42,12 @@ class PeopleFilterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
+    // Dismiss people filter view if Close button tapped
     func closeButtonTapped(sender: UIBarButtonItem){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+    // Apply people filter if Apply button tapped
     func applyButtonTapped(sender: UIBarButtonItem){
         println("apply!")
     }

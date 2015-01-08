@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Controller for activity detail view
 class ActivityDetailViewController: SLKTextViewController {
 
     var parentVC:ActivityTabViewController!
@@ -60,8 +61,6 @@ class ActivityDetailViewController: SLKTextViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         
         self.loadComments()
         
@@ -91,7 +90,6 @@ class ActivityDetailViewController: SLKTextViewController {
         self.inverted = true
 
         self.tableView.registerClass(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
-//        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.textView.placeholder = "Comment"
@@ -115,6 +113,8 @@ class ActivityDetailViewController: SLKTextViewController {
     override func viewWillDisappear(animated: Bool) {
         self.textView.resignFirstResponder()
     }
+    
+    // Store new comment if Post button tapped
     override func didPressRightButton(sender: AnyObject!) {
         self.textView.refreshFirstResponder()
         
@@ -133,8 +133,6 @@ class ActivityDetailViewController: SLKTextViewController {
         self.tableView.slk_scrollToTopAnimated(true)
         super.didPressRightButton(sender)
     }
-
-    // UITableViewDataSource Methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -144,6 +142,7 @@ class ActivityDetailViewController: SLKTextViewController {
         return self.comments.count
     }
     
+    // Table view data source method
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:CommentTableViewCell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as CommentTableViewCell
         var comment = self.comments[indexPath.row]
@@ -169,13 +168,16 @@ class ActivityDetailViewController: SLKTextViewController {
         cell.transform = self.tableView.transform
         return cell
     }
+    
     override func viewDidDisappear(animated: Bool) {
         self.parentVC.loadActivities()
     }
+    
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-
+    
+    // Query Parse for comments associated with current activity
     func loadComments(){
         var commentsQuery = PFQuery(className: "Comment")
         commentsQuery.whereKey("activity", equalTo: self.currentActivity)

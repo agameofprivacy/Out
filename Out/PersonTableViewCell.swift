@@ -95,14 +95,6 @@ class PersonTableViewCell: UITableViewCell {
         self.userLocation.font = valueFont?.fontWithSize(14.0)
         contentView.addSubview(self.userLocation)
         
-//        self.userButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-//        self.userButton.frame = CGRectZero
-//        self.userButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        self.userButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
-//        self.userButton.contentMode = UIViewContentMode.ScaleAspectFit
-//        contentView.addSubview(self.userButton)
-        
-        
         var viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation]
         var metricsDictionary = ["verticalMargin":15, "sideMargin":15]
         

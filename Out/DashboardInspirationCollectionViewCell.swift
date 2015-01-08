@@ -16,6 +16,7 @@ class DashboardInspirationCollectionViewCell: UICollectionViewCell {
     var currentStepTitleLabel:UILabel!
     var currentStepBlurbLabel:UILabel!
     
+    // UIFont init
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
     let regularFont = UIFont(name: "HelveticaNeue", size: 15.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 15.0)
