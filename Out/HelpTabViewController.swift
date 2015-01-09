@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Controller for help tab view
 class HelpTabViewController: UIViewController {
 
     var helpPromptView:UIView!

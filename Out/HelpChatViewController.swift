@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Controller for help chat view
 class HelpChatViewController: UIViewController {
 
     var containerScrollView:UIScrollView!
@@ -17,9 +18,11 @@ class HelpChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationItem.title = "Help"
-        var endButton = UIBarButtonItem(title: "End", style: UIBarButtonItemStyle.Plain, target: self, action: "endButtonTapped")
 
+        // UINavigationBar init and layout
+        self.navigationItem.title = "Help"
+
+        var endButton = UIBarButtonItem(title: "End", style: UIBarButtonItemStyle.Plain, target: self, action: "endButtonTapped")
         endButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName), forState: UIControlState.Normal)
         endButton.tintColor = UIColor.redColor()
         self.navigationItem.leftBarButtonItem = endButton

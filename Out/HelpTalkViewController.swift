@@ -8,12 +8,14 @@
 
 import UIKit
 
+// Controller for help talk view
 class HelpTalkViewController: UIViewController {
 
     var placeholderImageView:UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.placeholderImageView = UIImageView(frame: CGRectMake(0, 0, 375, 667))
         self.placeholderImageView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -28,7 +30,7 @@ class HelpTalkViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-        
+    
     func endTalkTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
