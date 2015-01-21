@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             // Initialize tutorial pages texts, and pictures.
             var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
             var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
-            var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 4.0)
+            var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
             var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
             var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
             var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
@@ -126,7 +126,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         // Constraints and layout for login view
         let viewsDictionary = ["logoImageView":logoImageView, "aliasTextField":aliasTextField, "passwordTextField":passwordTextField, "loginButton":loginButton]
         let metricsDictionary = ["longVerticalSpace": 33,"mediumVerticalSpace": 20, "shortVerticalSpace": 16]
-        let horizontalLogoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=109.5-[logoImageView(101)]->=109.5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalLogoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=137-[logoImageView(101)]->=137-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         let horizontalFormConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[aliasTextField(>=280)]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         let verticalTopConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=70-[logoImageView(101)]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         let verticalSecondConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[logoImageView(101)]-20-[aliasTextField(44)]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
@@ -197,7 +197,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         
         var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
         var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
-        var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey", pictureName: "Challenges_tutorial", duration: 4.0)
+        var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
         var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
         var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
         var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)

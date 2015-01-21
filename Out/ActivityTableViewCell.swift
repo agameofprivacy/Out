@@ -118,7 +118,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.heroImageView.layer.cornerRadius = 5
         self.heroImageView.clipsToBounds = true
         self.heroImageView.contentMode = UIViewContentMode.ScaleAspectFill
-        self.heroImageView.image = UIImage(named: "googleActivityHero")
+        self.heroImageView.image = UIImage(named: "heroPlaceholder")
         self.contentCanvas.addSubview(self.heroImageView)
         
         self.contentType = UIVisualEffectView(frame: CGRectZero)

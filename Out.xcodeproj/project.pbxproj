@@ -647,12 +647,12 @@
 		2C6FFAE51A19B3160043F912 /* ICETutorial */ = {
 			isa = PBXGroup;
 			children = (
+				2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */,
 				2C6FFAE61A19B3160043F912 /* ICETutorialController.h */,
 				2C6FFAE71A19B3160043F912 /* ICETutorialController.m */,
 				2C6FFAE81A19B3160043F912 /* ICETutorialPage.h */,
 				2C6FFAE91A19B3160043F912 /* ICETutorialPage.m */,
 				2C6FFAEA1A19B3160043F912 /* ICETutorialStyle.h */,
-				2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */,
 			);
 			path = ICETutorial;
 			sourceTree = "<group>";

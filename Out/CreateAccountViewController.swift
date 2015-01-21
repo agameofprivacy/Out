@@ -22,7 +22,7 @@ class CreateAccountViewController: XLFormViewController {
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
-        
+        self.navigationItem.title = "Signup"
         var confirmButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.Plain, target: self, action: "confirmButtonTapped:")
         confirmButton.tintColor = UIColor.blackColor()
         confirmButton.enabled = false
