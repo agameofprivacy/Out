@@ -9,7 +9,7 @@
 import UIKit
 
 // Controller for Dashboard view
-class DashboardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class DashboardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PresentNewView{
     
     var scrollView:TPKeyboardAvoidingScrollView!
     
@@ -443,7 +443,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationContentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.inspirationContentLabel.textAlignment = NSTextAlignment.Left
         self.inspirationContentLabel.textColor = UIColor.blackColor()
-        self.inspirationContentLabel.font = UIFont(name: "HelveticaNeue-LightItalic", size: 15.0)
+        self.inspirationContentLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15.0)
         self.inspirationContentLabel.numberOfLines = 0
         self.inspirationContentLabel.text = "If you want to change the future, start living as if you're already there."
         self.inspirationCard.addSubview(self.inspirationContentLabel)
@@ -479,6 +479,8 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationAuthorRoleLabel.numberOfLines = 0
         self.inspirationCard.addSubview(self.inspirationAuthorRoleLabel)
         
+        
+        var tapRecognizer = UITapGestureRecognizer(target: self, action: "presentWebView:")
         self.inspirationReadMoreButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
         self.inspirationReadMoreButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.inspirationReadMoreButton.tintColor = UIColor.blackColor()
@@ -487,8 +489,8 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationReadMoreButton.layer.cornerRadius = 5
         self.inspirationReadMoreButton.setTitle("Read Lynn's Story", forState: UIControlState.Normal)
         self.inspirationReadMoreButton.titleLabel!.font = UIFont(name: "UIFontTextStyleHeadline", size: CGFloat(30.0))
+        self.inspirationReadMoreButton.addGestureRecognizer(tapRecognizer)
         self.inspirationCard.addSubview(self.inspirationReadMoreButton)
-
         
         var inspirationCardViewsDictionary = ["inspirationContentLabel":self.inspirationContentLabel, "inspirationAuthorAvatarImageView":self.inspirationAuthorAvatarImageView, "inspirationAuthorNameLabel":self.inspirationAuthorNameLabel, "inspirationAuthorRoleLabel":self.inspirationAuthorRoleLabel, "inspirationReadMoreButton":self.inspirationReadMoreButton]
         
@@ -587,5 +589,15 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         return cell
     }
+    
+    // Protocol implementation for PresentNewView
+    func presentWebView(url: NSURL) {
+        var webView = WebViewViewController()
+        webView.url = NSURL(string: "http://ai.eecs.umich.edu/people/conway/conway.html#Reflections")
+        var newViewController = UINavigationController(rootViewController: webView)
+        newViewController.setToolbarHidden(false, animated: true)
+        self.presentViewController(newViewController, animated: true, completion: nil)
+    }
+
 
 }

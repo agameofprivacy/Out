@@ -57,7 +57,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
 
         // UINavigationBar init
-        self.navigationItem.title = "Activity"
+        self.navigationItem.title = "Activities"
         var composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped:")
         composeButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = composeButton
@@ -374,42 +374,40 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
             currentLikeButton.image = UIImage(named: "likeButton-icon")
             --currentLikeCount
-            if currentLikeCount > 1{
-                currentLikeCountLabel.text = "\(currentLikeCount) likes"
-            }
-            else if currentLikeCount == 1{
-                currentLikeCountLabel.text = "\(currentLikeCount) like"
-            }
-            else{
-                currentLikeCountLabel.text = ""
-            }
-
+            --self.currentActivitiesLikeCount[currentIndexPath.row]
+            self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.removeObject(likedActivity)
             self.currentLikedAcitivitiesIdStrings = self.currentLikedAcitivitiesIdStrings.filter{$0 != likedActivity.objectId}
             user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
+//                    self.loadActivities()
+//                    self.tableView.reloadData()
                 }
             }
         }
         else{
             currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
             ++currentLikeCount
-            if currentLikeCount > 1{
-                currentLikeCountLabel.text = "\(currentLikeCount) likes"
-            }
-            else if currentLikeCount == 1{
-                currentLikeCountLabel.text = "\(currentLikeCount) like"
-            }
-            else{
-                currentLikeCountLabel.text = ""
-            }
+//            if currentLikeCount > 1{
+//                currentLikeCountLabel.text = "\(currentLikeCount) likes"
+//            }
+//            else if currentLikeCount == 1{
+//                currentLikeCountLabel.text = "\(currentLikeCount) like"
+//            }
+//            else{
+//                currentLikeCountLabel.text = ""
+//            }
+            ++self.currentActivitiesLikeCount[currentIndexPath.row]
+            self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.addObject(likedActivity)
             user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
+//                    self.loadActivities()
+//                    self.tableView.reloadData()
                 }
             }
         }
@@ -435,4 +433,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     func composeButtonTapped(sender:UIBarButtonItem){
         self.performSegueWithIdentifier("showCompose", sender: self)
     }
+    
+    // Launch challenge preview view with URL from cell
+//    func launchChallengePreviewView(sender:UITapGestureRecognizer!){
+//        var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
+//        var collectionView = self.superview as UICollectionView
+//        var baseClass = collectionView.delegate as ChallengesTabViewController
+//        var urlFromCell = cell.fieldValue.text
+//        var urlObject = cell.launchURL
+//        baseClass.presentWebView(urlObject!)
+//    }
+
 }

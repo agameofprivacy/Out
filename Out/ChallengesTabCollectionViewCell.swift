@@ -439,6 +439,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var urlObject = cell.launchURL
         baseClass.presentWebView(urlObject!)
     }
+    
+
 }
 
 

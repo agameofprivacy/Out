@@ -371,11 +371,11 @@
             </objects>
             <point key="canvasLocation" x="165" y="376"/>
         </scene>
-        <!--Activity-->
+        <!--Activities-->
         <scene sceneID="Kg8-Bn-xYi">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kRB-pn-2ni" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activity" id="56K-sg-Ote"/>
+                    <tabBarItem key="tabBarItem" title="Activities" id="56K-sg-Ote"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QQQ-0J-mdO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
