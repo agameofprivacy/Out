@@ -40,38 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         self.window?.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
-//        // Override point for customization after application launch.
-//        self.window!.backgroundColor = UIColor.whiteColor()
-//        
-//        // Init the pages texts, and pictures.
-//        var layer1: ICETutorialPage = ICETutorialPage(title: "Picture 1", subTitle: "Champs-Elysées by night", pictureName: "tutorial_background_00.jpg", duration: 3.0)
-//        var layer2: ICETutorialPage = ICETutorialPage(title: "Picture 2", subTitle: "The Eiffel Tower with\n cloudy weather", pictureName: "tutorial_background_01.jpg", duration: 3.0)
-//        var layer3: ICETutorialPage = ICETutorialPage(title: "Picture 3", subTitle: "An other famous street of Paris", pictureName: "tutorial_background_02.jpg", duration: 3.0)
-//        var layer4: ICETutorialPage = ICETutorialPage(title: "Picture 4", subTitle: "The Eiffel Tower with a better weather", pictureName: "tutorial_background_03.jpg", duration: 3.0)
-//        var layer5: ICETutorialPage = ICETutorialPage(title: "Picture 5", subTitle: "The Louvre's Museum Pyramide", pictureName: "tutorial_background_04.jpg", duration: 3.0)
-//        
-//        // Set the common style for SubTitles and Description (can be overrided on each page).
-//        var titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
-//        titleStyle.font = UIFont(name: "Helvetica-Bold", size: 17.0)
-//        titleStyle.textColor = UIColor.whiteColor()
-//        titleStyle.linesNumber = 1
-//        titleStyle.offset = 180
-//        
-//        var subStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
-//        subStyle.font = UIFont(name: "Helvetica", size: 15.0)
-//        subStyle.textColor = UIColor.whiteColor()
-//        subStyle.linesNumber = 1
-//        subStyle.offset = 150
-//        
-//        
-//        var listPages: [ICETutorialPage] = [layer1, layer2, layer3, layer4, layer5]
-//        
-//        var controller: ICETutorialController = ICETutorialController(pages: listPages, delegate: self)
-//        ICETutorialStyle.sharedInstance().titleStyle = titleStyle
-//        ICETutorialStyle.sharedInstance().subTitleStyle = subStyle
-//        controller.startScrolling()
-//        
-//        self.window?.rootViewController = controller
         return true
 
         

@@ -114,6 +114,24 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             newVC.currentActivity = self.currentActivity
             newVC.parentVC = self
         }
+        else if segue.identifier == "showActivityContentPreview"{
+            let newVC: ActivityContentPreviewViewController = segue.destinationViewController as ActivityContentPreviewViewController
+            
+            var currentChallenge = currentActivity["challenge"] as PFObject
+            var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
+            var currentUser = currentActivity["ownerUser"] as PFUser
+            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()!
+            currentChallengeTrackNumber = currentChallengeTrackNumber - 1
+            
+            newVC.activity = self.currentActivity
+            newVC.challenge = currentChallenge
+            newVC.userChallengeData = currentUserChallengeData
+            newVC.user = currentUser
+            newVC.challengeTrackNumber = currentChallengeTrackNumber
+            
+            newVC.parentVC = self
+        }
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -140,6 +158,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
 
+        var activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
+        cell.contentCanvas.addGestureRecognizer(activityContentPreviewTapRecognizer)
+        
         var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
         cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
         
@@ -422,6 +443,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.currentActivity = toCommentActivity
 
         self.performSegueWithIdentifier("showActivityDetail", sender: self)
+    }
+    
+    func showActivityContentPreviewTapped(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        
+        var toPreviewActivity = self.currentActivities[currentIndexPath.row]
+        self.currentActivity = toPreviewActivity
+        
+        self.performSegueWithIdentifier("showActivityContentPreview", sender: self)
     }
     
     // Present notification view if Notification button tapped

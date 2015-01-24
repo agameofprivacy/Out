@@ -79,6 +79,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.avatarImageView.backgroundColor = UIColor.whiteColor()
         self.avatarImageView.image = UIImage(named: "dog-icon")
         self.paperView.addSubview(self.avatarImageView)
         

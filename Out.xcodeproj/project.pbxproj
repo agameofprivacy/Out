@@ -147,6 +147,7 @@
 		2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */; };
 		2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */; };
 		2CE865E919FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */; };
+		2CF4791B1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +385,7 @@
 		2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsAndActivatorTableViewCell.swift; sourceTree = "<group>"; };
+		2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityContentPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -815,6 +817,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
+				2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
 				2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */,
 				2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */,
@@ -1075,6 +1078,7 @@
 				2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */,
 				2C5C56AE1A106E6200B8EBC7 /* PNChartLabel.m in Sources */,
 				2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */,
+				2CF4791B1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift in Sources */,
 				2C9BE6B21A5327E300980C0D /* XLFormValidator.m in Sources */,
 				2C3A7C021A117EC900FC4516 /* MyProgressViewController.swift in Sources */,
 				2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */,
