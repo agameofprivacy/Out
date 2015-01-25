@@ -84,8 +84,10 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.activityContentWebView.scrollView.contentInset = UIEdgeInsetsMake(130, 0, 0, 0)
         self.activityContentWebView.delegate = self
         self.activityContentWebView.scalesPageToFit = true
+        self.activityContentWebView.hidden = true
         self.view.addSubview(self.activityContentWebView)
  
+        
         var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         visualEffectView.frame = CGRectMake(0, 0, self.view.frame.width, 130)
 
@@ -210,6 +212,13 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        // Update UINavigationBar title with page title once the page is loaded
+//        self.navigationItem.title = self.webView.stringByEvaluatingJavaScriptFromString("document.title")
+        self.activityContentWebView.hidden = false
+    }
+
 
 
     func shareActivityContent(){

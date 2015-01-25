@@ -19,6 +19,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var followerTableView:TPKeyboardAvoidingTableView!
     var followingTableView:TPKeyboardAvoidingTableView!
+    var followerRefreshControl:UIRefreshControl!
+    var followingRefreshControl:UIRefreshControl!
+    
     var mentorCellOverlay:UIView!
     var segmentedControlView:UIView!
     var segmentedControl:UISegmentedControl!
@@ -99,6 +102,10 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followingTableView.hidden = true
         self.view.addSubview(self.followingTableView)
 
+        self.followingRefreshControl = UIRefreshControl(frame: self.followingTableView.frame)
+        self.followingRefreshControl.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
+        self.followingTableView.addSubview(followingRefreshControl)
+
         // followerTableView init
         self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -116,6 +123,10 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerTableView.separatorInset = UIEdgeInsetsZero
         self.view.addSubview(self.followerTableView)
 
+        self.followerRefreshControl = UIRefreshControl(frame: self.followerTableView.frame)
+        self.followerRefreshControl.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
+        self.followerTableView.addSubview(followerRefreshControl)
+        
         // mentorCellOverlay init
         self.mentorCellOverlay = UIView(frame: CGRectZero)
         self.mentorCellOverlay.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -447,7 +458,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 
     // Load people data from Parse
     func loadPeople(){
-        self.followerTableView.hidden = true
+//        self.followerTableView.hidden = true
         var queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
         queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser())
         queryFollowerFollowing.includeKey("followingUsers")
@@ -475,7 +486,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 
                 self.followerTableView.reloadData()
                 self.followingTableView.reloadData()
-                self.followerTableView.hidden = false
+//                self.followerTableView.hidden = false
+                self.followerRefreshControl.endRefreshing()
+                self.followingRefreshControl.endRefreshing()
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
