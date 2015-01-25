@@ -36,6 +36,7 @@
 		2C3A7C021A117EC900FC4516 /* MyProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7C011A117EC900FC4516 /* MyProgressViewController.swift */; };
 		2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */; };
 		2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */; };
+		2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */; };
 		2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */; };
 		2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C563A1A106A1D00B8EBC7 /* UICountingLabel.m */; };
 		2C5C56AC1A106E6200B8EBC7 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C56971A106E6200B8EBC7 /* PNBar.m */; };
@@ -208,6 +209,7 @@
 		2C3A7C011A117EC900FC4516 /* MyProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProgressViewController.swift; sourceTree = "<group>"; };
 		2C470F511A06F5B7008EADB4 /* PeopleGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleGalleryViewController.swift; sourceTree = "<group>"; };
 		2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonFollowTableViewCell.swift; sourceTree = "<group>"; };
+		2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeRecordTableViewCell.swift; sourceTree = "<group>"; };
 		2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C5C56391A106A1D00B8EBC7 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 		2C5C563A1A106A1D00B8EBC7 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 				2C6AFF551A128D7B0006C7A9 /* CollectionViewCells */,
 				2C3A7BFF1A117EB700FC4516 /* MyProfileViewController.swift */,
 				2C3A7C011A117EC900FC4516 /* MyProgressViewController.swift */,
+				2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */,
 			);
 			name = DashboardTab;
 			sourceTree = "<group>";
@@ -1048,6 +1051,7 @@
 			files = (
 				2C9BE6AA1A5327E300980C0D /* NSArray+XLFormAdditions.m in Sources */,
 				2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */,
+				2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */,
 				2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */,
 				2C2CF71E1A156E2600B8C60E /* SLKTextInputbar.m in Sources */,
 				2C9BE69C1A5327E300980C0D /* XLFormPickerCell.m in Sources */,

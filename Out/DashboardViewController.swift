@@ -234,7 +234,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         // Record view init and layout
         self.recordsLabel = UILabel(frame: CGRectZero)
         self.recordsLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.recordsLabel.text = "Records"
+        self.recordsLabel.text = "Progress"
         self.recordsLabel.textAlignment = NSTextAlignment.Left
         self.recordsLabel.font = regularFont?.fontWithSize(20.0)
         if self.view.bounds.width == 320{
