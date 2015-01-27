@@ -16,18 +16,45 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     var challengesSwitch:UISegmentedControl!
     var toDoTableView:UITableView!
     var doneTableView:UITableView!
+
     var userChallengeData:[PFObject] = []
     var toDoChallenges:[PFObject] = []
     var doneChallenges:[PFObject] = []
     
-    var myProgressPieChart:PNPieChart!
+    var alertController:UIAlertController!
     
-    var colorDictionary = ["Intense":UIColor(red: 223/255, green: 48/255, blue: 97/255, alpha: 1), "Intermediate":UIColor(red: 255/255, green: 206/255, blue: 0/255, alpha: 1), "Casual":UIColor(red: 32/255, green: 220/255, blue: 129/255, alpha: 1)]
+    var myProgressPieChart:PNPieChart!
+    var myProgressPieChartItems:NSArray!
+    
+    var currentSortCategory = ""
+    
+    var colorDictionary =
+        [
+            "Intense":UIColor(red: 223/255, green: 48/255, blue: 97/255, alpha: 1),
+            "Intermediate":UIColor(red: 255/255, green: 206/255, blue: 0/255, alpha: 1),
+            "Casual":UIColor(red: 32/255, green: 220/255, blue: 129/255, alpha: 1)
+        ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.alertController = UIAlertController(title: "Sort", message: "Select a sort category.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in println("Canceled")}
+        
+        var difficultyAction = UIAlertAction(title: "Difficulty", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("difficulty")}
+        
+        var placeAction = UIAlertAction(title: "Place", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("place")}
+        
+        var peopleAction = UIAlertAction(title: "People", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("people")}
+
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(difficultyAction)
+        alertController.addAction(placeAction)
+        alertController.addAction(peopleAction)
         
         self.toDoTableView = UITableView(frame: CGRectMake(0, 298, self.view.frame.width, self.view.frame.height - 298))
         self.toDoTableView.delegate = self
@@ -78,11 +105,6 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.chartShade.layer.shadowRadius = 1
         self.chartShade.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         self.view.addSubview(self.chartShade)
-
-        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["Intermediate"],description: ""), PNPieChartDataItem(value: 0.3, color: self.colorDictionary["Intense"],description: ""),PNPieChartDataItem(value: 0.4, color: self.colorDictionary["Casual"],description: "")]
-        self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 30, 130, 130), items: items)
-        self.myProgressPieChart.strokeChart()
-        self.chartShade.addSubview(self.myProgressPieChart)
     
 //        var chartViewsDictionary = ["myProgressPieChart":self.myProgressPieChart]
 //        var chartMetricsDictionary = ["sideMargin": 7.5]
@@ -94,7 +116,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
 //        self.chartShade.addConstraints(chartVerticalConstraints)
         
         // UINavigationBar init
-        self.navigationItem.title = "Past Challenges"
+        self.navigationItem.title = "Progress"
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
@@ -167,6 +189,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
 //            }
             
         }
+        self.redrawChartToSort(self.currentSortCategory)
     }
 
     
@@ -177,7 +200,81 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // Present sort menu if Sort button tapped
     func sortButtonTapped(){
-        "sorted"
+        println("sorted")
+        self.presentViewController(self.alertController, animated: true, completion: nil)
+    }
+    
+    func redrawChartToSort(sortCategory:String){
+        switch sortCategory {
+        case "difficulty":
+            var casualChallengeCount = 0
+            var intermediateChallengeCount = 0
+            var intenseChallengeCount = 0
+            var casualValue:CGFloat = 0
+            var intermediateValue:CGFloat = 0
+            var intenseValue:CGFloat = 0
+            // if toDoTableView is shown
+            if !self.toDoTableView.hidden{
+                // Calculate toDoChallenges difficulty values
+                for challenge in self.toDoChallenges{
+                    if (challenge["difficulty"] as String) == "Casual"{
+                        casualChallengeCount++
+                    }
+                    else if (challenge["difficulty"] as String) == "Intermediate"{
+                        intermediateChallengeCount++
+                    }
+                    else if (challenge["difficulty"] as String) == "Intense"{
+                        intenseChallengeCount++
+                    }
+                }
+                casualValue = CGFloat(casualChallengeCount)/CGFloat(self.toDoChallenges.count)
+                intermediateValue = CGFloat(intermediateChallengeCount)/CGFloat(self.toDoChallenges.count)
+                intenseValue = CGFloat(intenseChallengeCount)/CGFloat(self.toDoChallenges.count)
+            }
+            // if doneTableView is shown
+            else{
+                for challenge in self.doneChallenges{
+                    if (challenge["difficulty"] as String) == "Casual"{
+                        casualChallengeCount++
+                    }
+                    else if (challenge["difficulty"] as String) == "Intermediate"{
+                        intermediateChallengeCount++
+                    }
+                    else if (challenge["difficulty"] as String) == "Intense"{
+                        intenseChallengeCount++
+                    }
+                }
+                casualValue = CGFloat(casualChallengeCount)/CGFloat(self.doneChallenges.count)
+                intermediateValue = CGFloat(intermediateChallengeCount)/CGFloat(self.doneChallenges.count)
+                intenseValue = CGFloat(intenseChallengeCount)/CGFloat(self.doneChallenges.count)
+            }
+            self.myProgressPieChartItems =
+                [
+                    PNPieChartDataItem(value: casualValue, color: self.colorDictionary["Casual"],description: ""),
+                    PNPieChartDataItem(value: intermediateValue, color: self.colorDictionary["Intermediate"],description: ""),
+                    PNPieChartDataItem(value: intenseValue, color: self.colorDictionary["Intense"],description: "")
+                ]
+            if self.currentSortCategory != ""{
+                self.myProgressPieChart.removeFromSuperview()
+            }
+            println(casualValue)
+            println(intermediateValue)
+            println(intenseValue)
+            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 30, 130, 130), items: self.myProgressPieChartItems)
+            self.chartShade.addSubview(self.myProgressPieChart)
+            self.myProgressPieChart.strokeChart()
+            self.currentSortCategory = sortCategory
+        case "place":
+            self.currentSortCategory = "place"
+            println("modify items for place")
+            println("redraw chart")
+        case "people":
+            self.currentSortCategory = "people"
+            println("modify items for people")
+            println("redraw chart")
+        default:
+            break
+        }
     }
     
     func loadChallenges(){
@@ -207,6 +304,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.toDoChallenges.removeAll(keepCapacity: false)
                         self.toDoChallenges = challenges as [PFObject]
                         self.toDoTableView.reloadData()
+                        self.redrawChartToSort("difficulty")
                     }
                 }
                 
