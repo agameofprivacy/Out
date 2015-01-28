@@ -213,9 +213,10 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.segmentedControlView.backgroundColor = UIColor.whiteColor()
         self.segmentedControlView.layer.masksToBounds = false
         self.segmentedControlView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.segmentedControlView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.segmentedControlView.layer.shadowOpacity = 0.1
+        self.segmentedControlView.layer.shadowOpacity = 0.15
+        self.segmentedControlView.layer.shadowOffset = CGSize(width: 0, height: 1)
         self.segmentedControlView.layer.shadowRadius = 1
+
         self.view.addSubview(self.segmentedControlView)
 
         self.segmentedControl = UISegmentedControl(items: ["Followers","Following"])

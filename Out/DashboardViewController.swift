@@ -117,7 +117,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
         // Dashboard container scroll view init
         self.scrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
-        self.scrollView.alwaysBounceVertical = false
+        self.scrollView.alwaysBounceVertical = true
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
 

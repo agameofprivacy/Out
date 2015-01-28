@@ -11,9 +11,18 @@ import UIKit
 class MyProgressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var chartShade:UIView!
+    var sortedByCategoryLabel:UILabel!
+    var categoryParamLabel1:UILabel!
+    var categoryParamVisualImageView1:UIImageView!
+    var categoryParamLabel2:UILabel!
+    var categoryParamVisualImageView2:UIImageView!
+    var categoryParamLabel3:UILabel!
+    var categoryParamVisualImageView3:UIImageView!
+    
     var segmentShade:UIView!
     var segmentShadeBottomSeparator:UIView!
     var challengesSwitch:UISegmentedControl!
+    
     var toDoTableView:UITableView!
     var doneTableView:UITableView!
 
@@ -32,7 +41,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         [
             "Intense":UIColor(red: 223/255, green: 48/255, blue: 97/255, alpha: 1),
             "Intermediate":UIColor(red: 255/255, green: 206/255, blue: 0/255, alpha: 1),
-            "Casual":UIColor(red: 32/255, green: 220/255, blue: 129/255, alpha: 1)
+            "Casual":UIColor(red: 32/255, green: 220/255, blue: 129/255, alpha: 1),
+            "Home":UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1),
+            "School":UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1),
+            "Work":UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1),
+            "Family":UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1),
+            "Friends":UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1),
+            "Strangers":UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 1),
         ]
     
     override func viewDidLoad() {
@@ -75,7 +90,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.segmentShade.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.segmentShade)
         
-        self.challengesSwitch = UISegmentedControl(items: ["To Do","Done"])
+        self.challengesSwitch = UISegmentedControl(items: ["Remaining","Completed"])
         self.challengesSwitch.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.challengesSwitch.tintColor = UIColor.blackColor()
         self.challengesSwitch.selectedSegmentIndex = 0
@@ -106,6 +121,48 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.chartShade.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         self.view.addSubview(self.chartShade)
     
+        self.sortedByCategoryLabel = UILabel(frame:CGRectMake(0, 15, self.view.frame.width, 30))
+        self.sortedByCategoryLabel.text = "Challenges sorted by " + self.currentSortCategory
+        self.sortedByCategoryLabel.textAlignment = NSTextAlignment.Center
+        self.sortedByCategoryLabel.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        self.sortedByCategoryLabel.hidden = true
+        self.chartShade.addSubview(self.sortedByCategoryLabel)
+        
+        self.categoryParamVisualImageView1 = UIImageView(frame: CGRectMake(self.chartShade.frame.width/2 + 20, 78, 20, 20))
+        self.categoryParamVisualImageView1.hidden = true
+        self.categoryParamVisualImageView1.layer.masksToBounds = true
+        self.categoryParamVisualImageView1.layer.cornerRadius = 6
+        self.chartShade.addSubview(self.categoryParamVisualImageView1)
+
+        self.categoryParamVisualImageView2 = UIImageView(frame: CGRectMake(self.chartShade.frame.width/2 + 20, 108, 20, 20))
+        self.categoryParamVisualImageView2.hidden = true
+        self.categoryParamVisualImageView2.layer.masksToBounds = true
+        self.categoryParamVisualImageView2.layer.cornerRadius = 6
+        self.chartShade.addSubview(self.categoryParamVisualImageView2)
+
+        self.categoryParamVisualImageView3 = UIImageView(frame: CGRectMake(self.chartShade.frame.width/2 + 20, 138, 20, 20))
+        self.categoryParamVisualImageView3.hidden = true
+        self.categoryParamVisualImageView3.layer.masksToBounds = true
+        self.categoryParamVisualImageView3.layer.cornerRadius = 6
+        self.chartShade.addSubview(self.categoryParamVisualImageView3)
+
+        
+        self.categoryParamLabel1 = UILabel(frame: CGRectMake(self.chartShade.frame.width/2 + 20 + 30 , 78, chartShade.frame.width - 30, 20))
+        self.categoryParamLabel1.hidden = true
+        self.categoryParamLabel1.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        self.chartShade.addSubview(self.categoryParamLabel1)
+
+        self.categoryParamLabel2 = UILabel(frame: CGRectMake(self.chartShade.frame.width/2 + 20 + 30 , 108, chartShade.frame.width - 30, 20))
+        self.categoryParamLabel2.hidden = true
+        self.categoryParamLabel2.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        self.chartShade.addSubview(self.categoryParamLabel2)
+
+        self.categoryParamLabel3 = UILabel(frame: CGRectMake(self.chartShade.frame.width/2 + 20 + 30 , 138, chartShade.frame.width - 30, 20))
+        self.categoryParamLabel3.hidden = true
+        self.categoryParamLabel3.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        self.chartShade.addSubview(self.categoryParamLabel3)
+
+        
 //        var chartViewsDictionary = ["myProgressPieChart":self.myProgressPieChart]
 //        var chartMetricsDictionary = ["sideMargin": 7.5]
 //        
@@ -153,15 +210,63 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         if tableView == self.toDoTableView{
             var challenge = self.toDoChallenges[indexPath.row] as PFObject
             var challengeTitleText = challenge["title"] as String
+            if self.currentSortCategory == "difficulty"{
             var challengeDifficulty = challenge["difficulty"] as String
             cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
+            }
+            else if self.currentSortCategory == "place"{
+                if contains(challenge["tags"] as [String], "Home"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
+                }
+                else if contains(challenge["tags"] as [String], "School"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
+                }
+                else if contains(challenge["tags"] as [String], "Work"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
+                }
+            }
+            else if self.currentSortCategory == "people"{
+                if contains(challenge["tags"] as [String], "Family"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
+                }
+                else if contains(challenge["tags"] as [String], "Friends"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
+                }
+                else if contains(challenge["tags"] as [String], "Strangers"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
+                }
+            }
             cell.challengeTitleLabel.text = challengeTitleText
         }
         else{
             var challenge = self.doneChallenges[indexPath.row] as PFObject
             var challengeTitleText = challenge["title"] as String
-            var challengeDifficulty = challenge["difficulty"] as String
-            cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
+            if self.currentSortCategory == "difficulty"{
+                var challengeDifficulty = challenge["difficulty"] as String
+                cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
+            }
+            else if self.currentSortCategory == "place"{
+                if contains(challenge["tags"] as [String], "Home"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
+                }
+                else if contains(challenge["tags"] as [String], "School"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
+                }
+                else if contains(challenge["tags"] as [String], "Work"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
+                }
+            }
+            else if self.currentSortCategory == "people"{
+                if contains(challenge["tags"] as [String], "Family"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
+                }
+                else if contains(challenge["tags"] as [String], "Friends"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
+                }
+                else if contains(challenge["tags"] as [String], "Strangers"){
+                    cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
+                }
+            }
             cell.challengeTitleLabel.text = challengeTitleText
         }
         return cell
@@ -200,7 +305,6 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // Present sort menu if Sort button tapped
     func sortButtonTapped(){
-        println("sorted")
         self.presentViewController(self.alertController, animated: true, completion: nil)
     }
     
@@ -257,24 +361,175 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if self.currentSortCategory != ""{
                 self.myProgressPieChart.removeFromSuperview()
             }
-            println(casualValue)
-            println(intermediateValue)
-            println(intenseValue)
-            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 30, 130, 130), items: self.myProgressPieChartItems)
+            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
             self.chartShade.addSubview(self.myProgressPieChart)
             self.myProgressPieChart.strokeChart()
             self.currentSortCategory = sortCategory
         case "place":
             self.currentSortCategory = "place"
-            println("modify items for place")
-            println("redraw chart")
+            var homeChallengeCount = 0
+            var schoolChallengeCount = 0
+            var workChallengeCount = 0
+            var homeValue:CGFloat = 0
+            var schoolValue:CGFloat = 0
+            var workValue:CGFloat = 0
+
+            // if toDoTableView is shown
+            if !self.toDoTableView.hidden{
+                // Calculate toDoChallenges difficulty values
+                for challenge in self.toDoChallenges{
+                    if contains(challenge["tags"] as [String], "Home"){
+                        homeChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "School"){
+                        schoolChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Work"){
+                        workChallengeCount++
+                    }
+                }
+                homeValue = CGFloat(homeChallengeCount)/CGFloat(self.toDoChallenges.count)
+                schoolValue = CGFloat(schoolChallengeCount)/CGFloat(self.toDoChallenges.count)
+                workValue = CGFloat(workChallengeCount)/CGFloat(self.toDoChallenges.count)
+            }
+                // if doneTableView is shown
+            else{
+                for challenge in self.doneChallenges{
+                    if contains(challenge["tags"] as [String], "Home"){
+                        homeChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "School"){
+                        schoolChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Work"){
+                        workChallengeCount++
+                    }
+                }
+                homeValue = CGFloat(homeChallengeCount)/CGFloat(self.doneChallenges.count)
+                schoolValue = CGFloat(schoolChallengeCount)/CGFloat(self.doneChallenges.count)
+                workValue = CGFloat(workChallengeCount)/CGFloat(self.doneChallenges.count)
+            }
+            self.myProgressPieChartItems =
+                [
+                    PNPieChartDataItem(value: homeValue, color: self.colorDictionary["Home"],description: ""),
+                    PNPieChartDataItem(value: schoolValue, color: self.colorDictionary["School"],description: ""),
+                    PNPieChartDataItem(value: workValue, color: self.colorDictionary["Work"],description: "")
+            ]
+            if self.currentSortCategory != ""{
+                self.myProgressPieChart.removeFromSuperview()
+            }
+            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+            self.chartShade.addSubview(self.myProgressPieChart)
+            self.myProgressPieChart.strokeChart()
+            self.currentSortCategory = sortCategory
+
         case "people":
             self.currentSortCategory = "people"
-            println("modify items for people")
-            println("redraw chart")
+            var familyChallengeCount = 0
+            var friendsChallengeCount = 0
+            var strangersChallengeCount = 0
+            var familyValue:CGFloat = 0
+            var friendsValue:CGFloat = 0
+            var strangersValue:CGFloat = 0
+            
+            // if toDoTableView is shown
+            if !self.toDoTableView.hidden{
+                // Calculate toDoChallenges difficulty values
+                for challenge in self.toDoChallenges{
+                    if contains(challenge["tags"] as [String], "Family"){
+                        familyChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Friends"){
+                        friendsChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Strangers"){
+                        strangersChallengeCount++
+                    }
+                }
+                familyValue = CGFloat(familyChallengeCount)/CGFloat(self.toDoChallenges.count)
+                friendsValue = CGFloat(friendsChallengeCount)/CGFloat(self.toDoChallenges.count)
+                strangersValue = CGFloat(strangersChallengeCount)/CGFloat(self.toDoChallenges.count)
+            }
+                // if doneTableView is shown
+            else{
+                for challenge in self.doneChallenges{
+                    if contains(challenge["tags"] as [String], "Family"){
+                        familyChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Friends"){
+                        friendsChallengeCount++
+                    }
+                    else if contains(challenge["tags"] as [String], "Strangers"){
+                        strangersChallengeCount++
+                    }
+                }
+                familyValue = CGFloat(familyChallengeCount)/CGFloat(self.doneChallenges.count)
+                friendsValue = CGFloat(friendsChallengeCount)/CGFloat(self.doneChallenges.count)
+                strangersValue = CGFloat(strangersChallengeCount)/CGFloat(self.doneChallenges.count)
+            }
+            self.myProgressPieChartItems =
+                [
+                    PNPieChartDataItem(value: familyValue, color: self.colorDictionary["Family"],description: ""),
+                    PNPieChartDataItem(value: friendsValue, color: self.colorDictionary["Friends"],description: ""),
+                    PNPieChartDataItem(value: strangersValue, color: self.colorDictionary["Strangers"],description: "")
+            ]
+            if self.currentSortCategory != ""{
+                self.myProgressPieChart.removeFromSuperview()
+            }
+            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+            self.chartShade.addSubview(self.myProgressPieChart)
+            self.myProgressPieChart.strokeChart()
+            self.currentSortCategory = sortCategory
         default:
             break
         }
+        self.toDoTableView.reloadData()
+        self.doneTableView.reloadData()
+        var sortedSwitchTitleLabel:String
+        if toDoTableView.hidden {
+            sortedSwitchTitleLabel = "Completed "
+        }
+        else{
+            sortedSwitchTitleLabel = "Remaining "
+        }
+        self.sortedByCategoryLabel.text = sortedSwitchTitleLabel + "challenges sorted by " + self.currentSortCategory
+        self.sortedByCategoryLabel.hidden = false
+        
+        var param1LabelText:String
+        var param2LabelText:String
+        var param3LabelText:String
+
+        
+        if self.currentSortCategory == "difficulty"{
+            self.categoryParamLabel1.text = "Casual"
+            self.categoryParamLabel2.text = "Intermediate"
+            self.categoryParamLabel3.text = "Intense"
+            self.categoryParamVisualImageView1.backgroundColor = self.colorDictionary["Casual"]
+            self.categoryParamVisualImageView2.backgroundColor = self.colorDictionary["Intermediate"]
+            self.categoryParamVisualImageView3.backgroundColor = self.colorDictionary["Intense"]
+        }
+        else if self.currentSortCategory == "place"{
+            self.categoryParamLabel1.text = "Home"
+            self.categoryParamLabel2.text = "School"
+            self.categoryParamLabel3.text = "Work"
+            self.categoryParamVisualImageView1.backgroundColor = self.colorDictionary["Home"]
+            self.categoryParamVisualImageView2.backgroundColor = self.colorDictionary["School"]
+            self.categoryParamVisualImageView3.backgroundColor = self.colorDictionary["Work"]
+        }
+        else if self.currentSortCategory == "people"{
+            self.categoryParamLabel1.text = "Family"
+            self.categoryParamLabel2.text = "Friends"
+            self.categoryParamLabel3.text = "Strangers"
+            self.categoryParamVisualImageView1.backgroundColor = self.colorDictionary["Family"]
+            self.categoryParamVisualImageView2.backgroundColor = self.colorDictionary["Friends"]
+            self.categoryParamVisualImageView3.backgroundColor = self.colorDictionary["Strangers"]
+        }
+        self.categoryParamLabel1.hidden = false
+        self.categoryParamLabel2.hidden = false
+        self.categoryParamLabel3.hidden = false
+        self.categoryParamVisualImageView1.hidden = false
+        self.categoryParamVisualImageView2.hidden = false
+        self.categoryParamVisualImageView3.hidden = false
     }
     
     func loadChallenges(){
