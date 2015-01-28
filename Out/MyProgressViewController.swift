@@ -18,6 +18,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     var categoryParamVisualImageView2:UIImageView!
     var categoryParamLabel3:UILabel!
     var categoryParamVisualImageView3:UIImageView!
+    var chartShadeEmptyLabel:UILabel!
     
     var segmentShade:UIView!
     var segmentShadeBottomSeparator:UIView!
@@ -55,7 +56,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
 
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.alertController = UIAlertController(title: "Sort", message: "Select a sort category.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        self.alertController = UIAlertController(title: "Select a Sort Category", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in println("Canceled")}
         
@@ -121,6 +122,12 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.chartShade.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         self.view.addSubview(self.chartShade)
     
+        self.chartShadeEmptyLabel = UILabel(frame: CGRectMake(0, 0, self.chartShade.frame.width, self.chartShade.frame.height))
+        self.chartShadeEmptyLabel.textAlignment = NSTextAlignment.Center
+        self.chartShadeEmptyLabel.text = "No Challenges"
+        self.chartShadeEmptyLabel.hidden = true
+        self.chartShade.addSubview(self.chartShadeEmptyLabel)
+        
         self.sortedByCategoryLabel = UILabel(frame:CGRectMake(0, 15, self.view.frame.width, 30))
         self.sortedByCategoryLabel.text = "Challenges sorted by " + self.currentSortCategory
         self.sortedByCategoryLabel.textAlignment = NSTextAlignment.Center
@@ -361,9 +368,27 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if self.currentSortCategory != ""{
                 self.myProgressPieChart.removeFromSuperview()
             }
-            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
-            self.chartShade.addSubview(self.myProgressPieChart)
-            self.myProgressPieChart.strokeChart()
+            if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.chartShadeEmptyLabel.hidden = true
+                self.categoryParamLabel1.hidden = false
+                self.categoryParamLabel2.hidden = false
+                self.categoryParamLabel3.hidden = false
+                self.categoryParamVisualImageView1.hidden = false
+                self.categoryParamVisualImageView2.hidden = false
+                self.categoryParamVisualImageView3.hidden = false
+                self.chartShade.addSubview(self.myProgressPieChart)
+                self.myProgressPieChart.strokeChart()
+            }
+            else{
+                self.chartShadeEmptyLabel.hidden = false
+                self.categoryParamLabel1.hidden = true
+                self.categoryParamLabel2.hidden = true
+                self.categoryParamLabel3.hidden = true
+                self.categoryParamVisualImageView1.hidden = true
+                self.categoryParamVisualImageView2.hidden = true
+                self.categoryParamVisualImageView3.hidden = true
+            }
             self.currentSortCategory = sortCategory
         case "place":
             self.currentSortCategory = "place"
@@ -418,9 +443,27 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if self.currentSortCategory != ""{
                 self.myProgressPieChart.removeFromSuperview()
             }
-            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
-            self.chartShade.addSubview(self.myProgressPieChart)
-            self.myProgressPieChart.strokeChart()
+            if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.chartShadeEmptyLabel.hidden = true
+                self.categoryParamLabel1.hidden = false
+                self.categoryParamLabel2.hidden = false
+                self.categoryParamLabel3.hidden = false
+                self.categoryParamVisualImageView1.hidden = false
+                self.categoryParamVisualImageView2.hidden = false
+                self.categoryParamVisualImageView3.hidden = false
+                self.chartShade.addSubview(self.myProgressPieChart)
+                self.myProgressPieChart.strokeChart()
+            }
+            else{
+                self.chartShadeEmptyLabel.hidden = false
+                self.categoryParamLabel1.hidden = true
+                self.categoryParamLabel2.hidden = true
+                self.categoryParamLabel3.hidden = true
+                self.categoryParamVisualImageView1.hidden = true
+                self.categoryParamVisualImageView2.hidden = true
+                self.categoryParamVisualImageView3.hidden = true
+            }
             self.currentSortCategory = sortCategory
 
         case "people":
@@ -476,9 +519,27 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if self.currentSortCategory != ""{
                 self.myProgressPieChart.removeFromSuperview()
             }
-            self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
-            self.chartShade.addSubview(self.myProgressPieChart)
-            self.myProgressPieChart.strokeChart()
+            if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.chartShadeEmptyLabel.hidden = true
+                self.categoryParamLabel1.hidden = false
+                self.categoryParamLabel2.hidden = false
+                self.categoryParamLabel3.hidden = false
+                self.categoryParamVisualImageView1.hidden = false
+                self.categoryParamVisualImageView2.hidden = false
+                self.categoryParamVisualImageView3.hidden = false
+                self.chartShade.addSubview(self.myProgressPieChart)
+                self.myProgressPieChart.strokeChart()
+            }
+            else{
+                self.chartShadeEmptyLabel.hidden = false
+                self.categoryParamLabel1.hidden = true
+                self.categoryParamLabel2.hidden = true
+                self.categoryParamLabel3.hidden = true
+                self.categoryParamVisualImageView1.hidden = true
+                self.categoryParamVisualImageView2.hidden = true
+                self.categoryParamVisualImageView3.hidden = true
+            }
             self.currentSortCategory = sortCategory
         default:
             break
@@ -524,12 +585,6 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             self.categoryParamVisualImageView2.backgroundColor = self.colorDictionary["Friends"]
             self.categoryParamVisualImageView3.backgroundColor = self.colorDictionary["Strangers"]
         }
-        self.categoryParamLabel1.hidden = false
-        self.categoryParamLabel2.hidden = false
-        self.categoryParamLabel3.hidden = false
-        self.categoryParamVisualImageView1.hidden = false
-        self.categoryParamVisualImageView2.hidden = false
-        self.categoryParamVisualImageView3.hidden = false
     }
     
     func loadChallenges(){

@@ -253,7 +253,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.recordSubLabel.textAlignment = NSTextAlignment.Left
         self.recordView.addSubview(self.recordSubLabel)
         
-        var items:NSArray = [PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.3, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.4, color: self.colorDictionary["casualGreen"],description: "")]
+        var items:NSArray = [PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.34, color: self.colorDictionary["casualGreen"],description: "")]
         self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 50, 50), items: items)
         self.myProgressPieChart.strokeChart()
         self.recordView.addSubview(self.myProgressPieChart)
