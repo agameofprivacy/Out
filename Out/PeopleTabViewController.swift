@@ -24,6 +24,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var mentorCellOverlay:UIView!
     var segmentedControlView:UIView!
+    var segmentedControlViewSeparator:UIView!
     var segmentedControl:UISegmentedControl!
     
     var noFollowerView:UIView!
@@ -93,6 +94,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followingTableView.backgroundColor = UIColor.whiteColor()
         self.followingTableView.frame = self.view.frame
         self.followingTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.followingTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.followingTableView.rowHeight = UITableViewAutomaticDimension
         self.followingTableView.estimatedRowHeight = 80
         self.followingTableView.delegate = self
@@ -115,6 +117,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerTableView.backgroundColor = UIColor.whiteColor()
         self.followerTableView.frame = self.view.frame
         self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.followerTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.followerTableView.rowHeight = UITableViewAutomaticDimension
         self.followerTableView.estimatedRowHeight = 80
         self.followerTableView.delegate = self
@@ -127,12 +130,36 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerRefreshControl.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
         self.followerTableView.addSubview(followerRefreshControl)
         
+        self.segmentedControlView = UIView(frame: CGRectZero)
+        self.segmentedControlView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControlView.backgroundColor = UIColor.whiteColor()
+        
+        self.view.addSubview(self.segmentedControlView)
+        
+        self.segmentedControl = UISegmentedControl(items: ["Followers","Following"])
+        self.segmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControl.tintColor = UIColor.blackColor()
+        self.segmentedControl.selectedSegmentIndex = 0
+        self.segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        self.segmentedControlView.addSubview(self.segmentedControl)
+        
+        self.segmentedControlViewSeparator = UIView(frame: CGRectZero)
+        self.segmentedControlViewSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControlViewSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+        self.segmentedControlView.addSubview(self.segmentedControlViewSeparator)
+
+        
         // mentorCellOverlay init
         self.mentorCellOverlay = UIView(frame: CGRectZero)
         self.mentorCellOverlay.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorCellOverlay.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         var toMentorDetailTapRecognizer = UITapGestureRecognizer(target: self, action: "mentorCellTapped:")
         self.mentorCellOverlay.addGestureRecognizer(toMentorDetailTapRecognizer)
+        self.mentorCellOverlay.layer.masksToBounds = false
+        self.mentorCellOverlay.layer.shadowColor = UIColor.blackColor().CGColor
+        self.mentorCellOverlay.layer.shadowOpacity = 0.15
+        self.mentorCellOverlay.layer.shadowOffset = CGSize(width: 0, height: 1)
+        self.mentorCellOverlay.layer.shadowRadius = 1
         self.view.addSubview(self.mentorCellOverlay)
         
         self.mentorAvatar = UIImageView(frame: CGRectZero)
@@ -208,23 +235,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorCellOverlay.addConstraints(leftVerticalConstraints)
         self.mentorCellOverlay.addConstraints(rightVerticalConstraints)
         
-        self.segmentedControlView = UIView(frame: CGRectZero)
-        self.segmentedControlView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.segmentedControlView.backgroundColor = UIColor.whiteColor()
-        self.segmentedControlView.layer.masksToBounds = false
-        self.segmentedControlView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.segmentedControlView.layer.shadowOpacity = 0.15
-        self.segmentedControlView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        self.segmentedControlView.layer.shadowRadius = 1
-
-        self.view.addSubview(self.segmentedControlView)
-
-        self.segmentedControl = UISegmentedControl(items: ["Followers","Following"])
-        self.segmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.segmentedControl.tintColor = UIColor.blackColor()
-        self.segmentedControl.selectedSegmentIndex = 0
-        self.segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        self.segmentedControlView.addSubview(self.segmentedControl)
         
         var viewsDictionary = ["mentorCellOverlay":mentorCellOverlay, "segmentedControlView":segmentedControlView]
         var metricsDiciontary = ["margin":0]
@@ -234,13 +244,17 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addConstraints(verticalConstraints)
         self.view.addConstraints(horizontalConstraints)
         
-        var segmentsViewsDictionary = ["segmentedControl":segmentedControl]
+        var segmentsViewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
         var segmentsMetricsDictionary = ["margin":7.5]
         
         var segmentsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControl]-margin-|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
-        var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl]-10-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+        
+        var segmentsSeparatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+
+        var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
         
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
+        self.segmentedControlView.addConstraints(segmentsSeparatorHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsVerticalConstraints)
         
         // No follower view init and layout

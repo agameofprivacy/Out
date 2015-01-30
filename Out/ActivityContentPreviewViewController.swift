@@ -81,7 +81,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         var URLString = (self.challenge["narrativeURLs"] as [String])[challengeTrackNumber] as String
         self.automaticallyAdjustsScrollViewInsets = false
         self.activityContentWebView = UIWebView(frame: CGRectMake(0, 64, self.view.frame.width, self.view.frame.height - 64))
-        self.activityContentWebView.scrollView.contentInset = UIEdgeInsetsMake(130, 0, 0, 0)
+        self.activityContentWebView.scrollView.contentInset = UIEdgeInsetsMake(130, 0, 49, 0)
         self.activityContentWebView.delegate = self
         self.activityContentWebView.scalesPageToFit = true
         self.activityContentWebView.hidden = true
