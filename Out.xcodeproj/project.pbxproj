@@ -139,7 +139,6 @@
 		2CB7E4201A15C3DF00D55CF8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E41F1A15C3DF00D55CF8 /* CoreText.framework */; };
 		2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */; };
 		2CB7E4281A15C40400D55CF8 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */; };
-		2CB7E4291A15C40400D55CF8 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */; };
 		2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */; };
 		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
@@ -974,7 +973,7 @@
 		2C5D996119E4A9FB00133F59 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Coming Out App";
 				TargetAttributes = {
 					2C5D996819E4A9FB00133F59 = {
@@ -1011,7 +1010,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5D997419E4A9FB00133F59 /* Main.storyboard in Resources */,
-				2CB7E4291A15C40400D55CF8 /* HockeySDK.xcconfig in Resources */,
 				2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */,
 				2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */,
 				2CB7E4151A15A3D700D55CF8 /* DateTools.bundle in Resources */,

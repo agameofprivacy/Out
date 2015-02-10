@@ -110,17 +110,17 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     // Prepare for show activity detail segue, pass tapped activity to destination vc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showActivityDetail"{
-            let newVC: ActivityDetailViewController = segue.destinationViewController as ActivityDetailViewController
+            let newVC: ActivityDetailViewController = segue.destinationViewController as! ActivityDetailViewController
             newVC.currentActivity = self.currentActivity
             newVC.parentVC = self
         }
         else if segue.identifier == "showActivityContentPreview"{
-            let newVC: ActivityContentPreviewViewController = segue.destinationViewController as ActivityContentPreviewViewController
+            let newVC: ActivityContentPreviewViewController = segue.destinationViewController as! ActivityContentPreviewViewController
             
-            var currentChallenge = currentActivity["challenge"] as PFObject
-            var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
-            var currentUser = currentActivity["ownerUser"] as PFUser
-            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()!
+            var currentChallenge = currentActivity["challenge"] as! PFObject
+            var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
+            var currentUser = currentActivity["ownerUser"] as! PFUser
+            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
             
             newVC.activity = self.currentActivity
@@ -156,7 +156,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     // Table view data source method for activities
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as ActivityTableViewCell
+        var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
 
         var activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
         cell.contentCanvas.addGestureRecognizer(activityContentPreviewTapRecognizer)
@@ -169,19 +169,19 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
         var currentActivity = self.currentActivities[indexPath.row]
         var activityCreatedTime = currentActivity.createdAt
-        var currentChallenge = currentActivity["challenge"] as PFObject
-        var currentUserChallengeData = currentActivity["userChallengeData"] as PFObject
-        var currentUser = currentActivity["ownerUser"] as PFUser
+        var currentChallenge = currentActivity["challenge"] as! PFObject
+        var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
+        var currentUser = currentActivity["ownerUser"] as! PFUser
 
-        var avatarString = currentUser["avatar"] as String
-        var currentUserColor = currentUser["color"] as String
-        var currentAction = currentChallenge["action"] as String
-        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as String).toInt()!
+        var avatarString = currentUser["avatar"] as! String
+        var currentUserColor = currentUser["color"] as! String
+        var currentAction = currentChallenge["action"] as! String
+        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
         currentChallengeTrackNumber = currentChallengeTrackNumber - 1
         var currentActivityImageString:String
         // If there's a narrative image for current challenge, load image
-        if (currentChallenge["narrativeImages"] as [String]).count > 0{
-            currentActivityImageString = (currentChallenge["narrativeImages"] as [String])[currentChallengeTrackNumber] as String
+        if (currentChallenge["narrativeImages"] as! [String]).count > 0{
+            currentActivityImageString = (currentChallenge["narrativeImages"] as! [String])[currentChallengeTrackNumber] as String
             cell.heroImageView.image = UIImage(named: currentActivityImageString)
         }
         else{
@@ -196,8 +196,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         cell.actionLabel.text = currentAction
         
         var currentNarrativeTitleString:String
-        if (currentChallenge["narrativeTitles"] as [String]).count > 0{
-            currentNarrativeTitleString = (currentChallenge["narrativeTitles"] as [String])[currentChallengeTrackNumber] as String
+        if (currentChallenge["narrativeTitles"] as! [String]).count > 0{
+            currentNarrativeTitleString = (currentChallenge["narrativeTitles"] as! [String])[currentChallengeTrackNumber] as String
         }
         else{
             currentNarrativeTitleString = ""
@@ -205,8 +205,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         cell.narrativeTitleLabel.text = currentNarrativeTitleString
 
         var currentNarrativeContentString:String
-        if (currentChallenge["narrativeTitles"] as [String]).count > 0{
-            currentNarrativeContentString = (currentChallenge["narrativeContents"] as [String])[currentChallengeTrackNumber] as String
+        if (currentChallenge["narrativeTitles"] as! [String]).count > 0{
+            currentNarrativeContentString = (currentChallenge["narrativeContents"] as! [String])[currentChallengeTrackNumber] as String
         }
         else{
             currentNarrativeContentString = ""
@@ -259,8 +259,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 // Found FollowerFollowing object for current user
-                var currentUserFollowerFollowingObject = objects[0] as PFObject
-                var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as [PFUser]
+                var currentUserFollowerFollowingObject = objects[0] as! PFObject
+                var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as! [PFUser]
                 var activityQuery = PFQuery(className: "Activity")
                 // Include current user so user's own activities also show up
                 currentUserFollowingUsers.append(PFUser.currentUser())
@@ -275,7 +275,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         // Found activities
-                        self.currentActivities = objects as [PFObject]
+                        self.currentActivities = objects as! [PFObject]
                         // If activities count is 0, show no activity view, else display activities
                         if self.currentActivities.count == 0{
                             self.noActivityView.hidden = false
@@ -380,9 +380,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         var user = PFUser.currentUser()
         var relation = user.relationForKey("likedActivity")
-        var currentLikeButton = sender.view as UIImageView
+        var currentLikeButton = sender.view as! UIImageView
         var currentLikeCount = 0
-        var currentLikeCountLabel = sender.view?.superview?.subviews[0] as UILabel
+        var currentLikeCountLabel = sender.view?.superview?.subviews[0] as! UILabel
         var currentLikeCountText:String = currentLikeCountLabel.text!
         
         if currentLikeCountText == ""{

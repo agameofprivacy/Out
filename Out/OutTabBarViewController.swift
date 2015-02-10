@@ -21,15 +21,15 @@ class OutTabBarViewController: UITabBarController {
         for var index = 0; index <  self.tabBar.items?.count; ++index{
             
             // Instantiate UITabBarItem
-            var tabItem : UITabBarItem = self.tabBar.items![index] as UITabBarItem
+            var tabItem : UITabBarItem = self.tabBar.items![index] as! UITabBarItem
 
             // Switch assets for UITabBarItem in order
             switch index{
             
             // Dashboard
             case 0:
-                tabItem.selectedImage = UIImage(named: "dashboardSelected")
-                tabItem.image = UIImage(named: "dashboardUnselected")
+                tabItem.selectedImage = UIImage(named: "activitySelected")
+                tabItem.image = UIImage(named: "activityUnselected")
 
             // Challenges
             case 1:
@@ -38,18 +38,19 @@ class OutTabBarViewController: UITabBarController {
                 
             // Activity
             case 2:
-                tabItem.selectedImage = UIImage(named: "activitySelected")
-                tabItem.image = UIImage(named: "activityUnselected")
-                
-            // People
-            case 3:
                 tabItem.selectedImage = UIImage(named: "peopleSelected")
                 tabItem.image = UIImage(named: "peopleUnselected")
                 
-            // Help
-            case 4:
+            // People
+            case 3:
                 tabItem.selectedImage = UIImage(named: "helpSelected")
                 tabItem.image = UIImage(named: "helpUnselected")
+                
+            // Help
+            case 4:
+                tabItem.selectedImage = UIImage(named: "dashboardSelected")
+                tabItem.image = UIImage(named: "dashboardUnselected")
+
             default:
                 println("no image resourced")
             }

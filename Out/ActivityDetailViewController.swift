@@ -144,14 +144,14 @@ class ActivityDetailViewController: SLKTextViewController {
     
     // Table view data source method
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:CommentTableViewCell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as CommentTableViewCell
+        var cell:CommentTableViewCell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as! CommentTableViewCell
         var comment = self.comments[indexPath.row]
-        var author = comment["author"] as PFUser
+        var author = comment["author"] as! PFUser
         var authorAlias = author.username
-        var commentContent = comment["content"] as String
-        var authorAvatarString = author["avatar"] as String
+        var commentContent = comment["content"] as! String
+        var authorAvatarString = author["avatar"] as! String
         var authorAvatar = self.avatarImageDictionary[authorAvatarString]!
-        var authorColorString = author["color"] as String
+        var authorColorString = author["color"] as! String
         var authorColor = self.colorDictionary[authorColorString]
         var timeAgoLabel = ""
         if comment.createdAt != nil{
@@ -186,7 +186,7 @@ class ActivityDetailViewController: SLKTextViewController {
         commentsQuery.findObjectsInBackgroundWithBlock{
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                self.comments = objects as [PFObject]
+                self.comments = objects as! [PFObject]
                 self.tableView.reloadData()
             }
             else {

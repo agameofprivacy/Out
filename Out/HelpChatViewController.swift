@@ -23,7 +23,7 @@ class HelpChatViewController: UIViewController {
         self.navigationItem.title = "Help"
 
         var endButton = UIBarButtonItem(title: "End", style: UIBarButtonItemStyle.Plain, target: self, action: "endButtonTapped")
-        endButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName), forState: UIControlState.Normal)
+        endButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         endButton.tintColor = UIColor.redColor()
         self.navigationItem.leftBarButtonItem = endButton
 

@@ -116,7 +116,7 @@ class HelpTabViewController: UIViewController {
         
         var chatButtonTapRecognizer = UITapGestureRecognizer(target: self, action: "chatButtonTapped")
         
-        self.chatButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.chatButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         self.chatButton.setTitle("Chat", forState: UIControlState.Normal)
         self.chatButton.layer.cornerRadius = 5
         self.chatButton.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
@@ -146,7 +146,7 @@ class HelpTabViewController: UIViewController {
         
         var talkButtonTapRecognizer = UITapGestureRecognizer(target: self, action: "talkButtonTapped")
         
-        self.talkButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.talkButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         self.talkButton.setTitle("Talk", forState: UIControlState.Normal)
         self.talkButton.backgroundColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
         self.talkButton.layer.cornerRadius = 5

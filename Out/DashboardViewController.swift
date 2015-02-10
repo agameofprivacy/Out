@@ -191,8 +191,8 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as String]!
-        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as String]
+        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as! String]!
+        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as! String]
         self.profileView.addSubview(self.avatarImageView)
         
         self.myProfileLabel = UILabel(frame: CGRectZero)
@@ -254,7 +254,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.recordView.addSubview(self.recordSubLabel)
         
         var items:NSArray = [PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.34, color: self.colorDictionary["casualGreen"],description: "")]
-        self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 50, 50), items: items)
+        self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 50, 50), items: items as [AnyObject])
         self.myProgressPieChart.strokeChart()
         self.recordView.addSubview(self.myProgressPieChart)
 
@@ -381,7 +381,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.challengeOnDeckInstruction.text = "Now would be a good time to schedule for your volunteer shift."
         self.challengeOnDeckCard.addSubview(self.challengeOnDeckInstruction)
         
-        self.challengeOnDeckChevronButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.challengeOnDeckChevronButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         self.challengeOnDeckChevronButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.challengeOnDeckChevronButton.setImage(UIImage(named:"chevron-icon"), forState: UIControlState.Normal)
         self.challengeOnDeckCard.addSubview(self.challengeOnDeckChevronButton)
@@ -481,7 +481,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         
         var tapRecognizer = UITapGestureRecognizer(target: self, action: "presentWebView:")
-        self.inspirationReadMoreButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        self.inspirationReadMoreButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         self.inspirationReadMoreButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.inspirationReadMoreButton.tintColor = UIColor.blackColor()
         self.inspirationReadMoreButton.layer.borderColor = UIColor.blackColor().CGColor
@@ -530,7 +530,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     // Prepare for Logout segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "LoggedOut"){
-            var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as LoginViewController
+            var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
             vc.showTutorial = false
             vc.scrollViewHidden = false
         }
@@ -553,14 +553,16 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     // Update announcements view pagecontrol when scrolling on view ends
-    func scrollViewDidEndDecelerating(scrollView: UICollectionView) {
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         var currentPage:CGFloat = self.announcementsCollectionView.contentOffset.x / self.announcementsCollectionView.frame.size.width
         self.announcementsPageControl.currentPage = Int(ceil(Float(currentPage)))
+
     }
 
     // Announcements view collection view delegate method
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardAnnouncementsCollectionViewCell", forIndexPath: indexPath) as DashboardAnnouncementsCollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardAnnouncementsCollectionViewCell", forIndexPath: indexPath) as! DashboardAnnouncementsCollectionViewCell
         if indexPath.item == 0{
             cell.avatarImageView.image = self.avatarImageDictionary["elephant"]!
             cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]

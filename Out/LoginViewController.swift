@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     var aliasTextField:UITextField!
     var passwordTextField:UITextField!
     var logoImageView:UIImageView!
-    var loginButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+    var loginButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
 
     // Boolean to determine whether to present tutorial automatically (on app launch)
     var showTutorial = true

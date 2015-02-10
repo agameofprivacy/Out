@@ -10,11 +10,11 @@ import UIKit
 
 class MediaAvailabilityTableViewCell: UITableViewCell {
 
-    let mediaPreview:UIImageView!
-    let mediaTitle:UILabel!
-    let mediaTimes:UILabel!
-    let mediaVenue:UILabel!
-    let mediaIntro:UILabel!
+    var mediaPreview:UIImageView!
+    var mediaTitle:UILabel!
+    var mediaTimes:UILabel!
+    var mediaVenue:UILabel!
+    var mediaIntro:UILabel!
 
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
@@ -83,11 +83,11 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
         
         let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge - 2, "longVerticalSpace": labelMarginFromCellEdge - 6, "bottomSpaceFromCellEdge":CGFloat(labelMarginFromCellEdge - 8), "mediumVerticalSpace":labelMarginFromCellEdge - 12, "shortVerticalSpace": 6]
         
-        let mediaPreviewLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[mediaPreview(==90)]-hSpaceFromCellEdge-[mediaTitle]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let mediaPreviewLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[mediaPreview(==90)]-hSpaceFromCellEdge-[mediaTitle]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary as? [NSObject : AnyObject], views: viewsDictionary)
 
-        let mediaPreview_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mediaPreview(==130)]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let mediaPreview_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[mediaPreview(==130)]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as? [NSObject : AnyObject], views: viewsDictionary)
 
-        let labels_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[mediaTitle]-mediumVerticalSpace-[mediaVenue]-shortVerticalSpace-[mediaTimes]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let labels_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[mediaTitle]-mediumVerticalSpace-[mediaVenue]-shortVerticalSpace-[mediaTimes]->=bottomSpaceFromCellEdge-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary as? [NSObject : AnyObject], views: viewsDictionary)
         
         contentView.addConstraints(labels_constraint_V)
         contentView.addConstraints(mediaPreview_constraint_V)

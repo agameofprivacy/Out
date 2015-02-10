@@ -82,7 +82,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     // Prepare for pick filters segue, pass currently selected filters to be marked in destination vc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PickFilters"{
-            let FilterVC:ChallengeFilterTableViewController = segue.destinationViewController.childViewControllers[0] as ChallengeFilterTableViewController
+            let FilterVC:ChallengeFilterTableViewController = segue.destinationViewController.childViewControllers[0] as! ChallengeFilterTableViewController
             FilterVC.filterStrings = self.filters
         }
     }
@@ -97,14 +97,14 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as PFObject
+        var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as! PFObject
 
-        let cell:ChallengeGalleryTableViewCell = self.challengesTableView.dequeueReusableCellWithIdentifier("ChallengeGalleryTableViewCell") as ChallengeGalleryTableViewCell
-        cell.titleLabel.text = challengeObject["title"] as String?
-        var reasonType:String = challengeObject["reason"]![0] as String
-        var reasonText:String = challengeObject["reason"]![1] as String
+        let cell:ChallengeGalleryTableViewCell = self.challengesTableView.dequeueReusableCellWithIdentifier("ChallengeGalleryTableViewCell") as! ChallengeGalleryTableViewCell
+        cell.titleLabel.text = challengeObject["title"] as! String?
+        var reasonType:String = challengeObject["reason"]![0] as! String
+        var reasonText:String = challengeObject["reason"]![1] as! String
         cell.reasonLabel.text = "\(reasonType): \(reasonText)"
-        cell.introLabel.text = challengeObject["blurb"] as String?
+        cell.introLabel.text = challengeObject["blurb"] as! String?
         
         return cell
     }
@@ -112,7 +112,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     // Add challenge to user's current challenges on Parse if challenge tapped, then reload available challenges in current view
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as PFObject
+        var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as! PFObject
 
         var newChallengeModel = PFObject(className: "UserChallengeData")
         newChallengeModel["alias"] = PFUser.currentUser().username
@@ -161,7 +161,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
             if error == nil {
                 // Found user's current challenges, add challenge title to currentChallengesStrings
                 for object in objects{
-                    self.currentChallengesStrings += [(object["title"] as String)]
+                    self.currentChallengesStrings += [(object["title"] as! String)]
                 }
                 query.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -172,7 +172,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                         // Remove challenges that are already current to user
                         if self.challengeModelsObjects.count > 0{
                             for (index,challenge) in enumerate(self.challengeModelsObjects){
-                                if contains(self.currentChallengesStrings, challenge["title"] as String){
+                                if contains(self.currentChallengesStrings, challenge["title"] as! String){
                                     indexForToRemove += [index]
                                 }
                             }

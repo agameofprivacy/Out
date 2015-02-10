@@ -115,14 +115,14 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     
     // Table view data source method
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as PersonFollowTableViewCell
+        var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as! PersonFollowTableViewCell
 
-        var person = self.people[indexPath.row] as PFUser
-        cell.userAvatar.backgroundColor = self.colorDictionary[person["color"] as String]
-        cell.userAvatar.image = self.avatarImageDictionary[person["avatar"] as String]!
+        var person = self.people[indexPath.row] as! PFUser
+        cell.userAvatar.backgroundColor = self.colorDictionary[person["color"] as! String]
+        cell.userAvatar.image = self.avatarImageDictionary[person["avatar"] as! String]!
         cell.userAlias.text = person.username
-        var personOrientation = person["sexualOrientation"] as String
-        var personAge = person["age"] as Int
+        var personOrientation = person["sexualOrientation"] as! String
+        var personAge = person["age"] as! Int
         cell.userOrientationAge.text = "\(personOrientation) . \(personAge)"
         cell.followButton.addTarget(self, action: "followButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
 
@@ -137,7 +137,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         objectIdArray.append(PFUser.currentUser().objectId)
 
         // Compile a PFUser array of users already sent following requests to
-        for user in PFUser.currentUser()["followingRequested"] as [PFUser]{
+        for user in PFUser.currentUser()["followingRequested"] as! [PFUser]{
             objectIdArray.append(user.objectId)
         }
         // Filter so only users who current user hasn't sent a follow request to are included
@@ -175,11 +175,11 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     
     // Send follow request to user whom current user requests to follow
     func followButtonTapped(sender:UIButton){
-        var currentCell = sender.superview?.superview as PersonFollowTableViewCell
+        var currentCell = sender.superview?.superview as! PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.peopleTableView.indexPathForCell(currentCell)!
-        var userToFollow = self.people[currentIndexPath.row] as PFUser
-        var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as [PFUser]
-        var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as [PFUser]
+        var userToFollow = self.people[currentIndexPath.row] as! PFUser
+        var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as! [PFUser]
+        var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
         currentUserFollowingRequested.append(userToFollow)
         PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
         
@@ -190,8 +190,8 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
             if error == nil {
                 // The find succeeded.
                 self.followRequestsFrom = objects
-                var currentFollowerFollowingObject = self.followRequestsFrom[0] as PFObject
-                var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as [PFUser]
+                var currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
+                var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
                 currentFollowRequestsFrom.append(PFUser.currentUser())
                 currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
                 currentFollowerFollowingObject.saveInBackground()

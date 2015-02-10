@@ -16,15 +16,12 @@ protocol PresentNewView{
 // Challenges tab collection view cell view
 class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSource, UITableViewDelegate {
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
-    let titleLabel:UILabel!
-    let titleSeparator:UIView!
-    let subtitleLabel:UILabel!
-    let canvasTableView:TPKeyboardAvoidingTableView!
-    let nextStepButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+    var titleLabel:UILabel!
+    var titleSeparator:UIView!
+    var subtitleLabel:UILabel!
+    var canvasTableView:TPKeyboardAvoidingTableView!
+    var nextStepButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
     let cardInset:CGFloat = 20
     var activityIndicator: UIActivityIndicatorView!
     var currentChallengeModel:PFObject!
@@ -34,7 +31,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var countofCellTypeDictionary:[String:[Int]] = ["":[0]]
     var shownHiddenRows:[NSIndexPath] = []
     
-    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -132,12 +132,12 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     // Table view data source method for canvas table view
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as! [[String]]
+        var currentStepCount = currentChallengeData["currentStepCount"] as! Int
         var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
         var currentCellType = currentCellTypes[indexPath.row]
-        var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
-        var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
+        var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as! String
+        var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as! TextBlockTableViewCell
         
         if self.countofCellTypeDictionary[currentCellType] == nil{
             self.countofCellTypeDictionary.updateValue([indexPath.row], forKey: currentCellType)
@@ -149,7 +149,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         // If current cell type is selection gallery
         if currentCellType == "gallerySelect"{
             self.canvasTableView.alwaysBounceVertical = false
-            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as GallerySelectTableViewCell
+            var cell:GallerySelectTableViewCell = tableView.dequeueReusableCellWithIdentifier("GallerySelectTableViewCell") as! GallerySelectTableViewCell
 
             var itemTitles:[String] = ["","","","",""]
             var itemImages:[String] = ["","","","",""]
@@ -190,7 +190,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is media availability
         else if currentCellType == "mediaAvailability"{
-            var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as MediaAvailabilityTableViewCell
+            var cell:MediaAvailabilityTableViewCell = tableView.dequeueReusableCellWithIdentifier("MediaAvailabilityTableViewCell") as! MediaAvailabilityTableViewCell
             cell.mediaTitle.text = contentDictionary[currentStepCount]["mediaTitle\(challengeTrackNumber)"]
             cell.mediaTimes.text = contentDictionary[currentStepCount]["mediaTimes\(challengeTrackNumber)"]
             cell.mediaVenue.text = contentDictionary[currentStepCount]["mediaVenue\(challengeTrackNumber)"]
@@ -200,7 +200,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is text block
         else if currentCellType == "textBlock"{
-            var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as TextBlockTableViewCell
+            var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as! TextBlockTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["textBlock"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -211,9 +211,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         // If current cell type is prompt and answer
         else if currentCellType == "promptAndAnswer"{
             
-            var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as String
+            var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as! String
             
-            var cell:PromptAndAnswerTableViewCell = tableView.dequeueReusableCellWithIdentifier("PromptAndAnswerTableViewCell") as PromptAndAnswerTableViewCell
+            var cell:PromptAndAnswerTableViewCell = tableView.dequeueReusableCellWithIdentifier("PromptAndAnswerTableViewCell") as! PromptAndAnswerTableViewCell
             
             cell.prompt1.text = contentDictionary[currentStepCount]["prompt1-\(challengeTrackNumber)"]
             cell.prompt2.text = contentDictionary[currentStepCount]["prompt2-\(challengeTrackNumber)"]
@@ -223,11 +223,11 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is challenge overview
         else if currentCellType == "challengeOverview"{
-            var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as ChallengeOverviewTableViewCell
+            var cell:ChallengeOverviewTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeOverviewTableViewCell") as! ChallengeOverviewTableViewCell
             
             cell.challengeIntro.text = contentDictionary[currentStepCount]["challengeIntro"]
             
-            var stepTitlesArray:[String] = self.currentChallengeModel["stepTitle"] as [String]
+            var stepTitlesArray:[String] = self.currentChallengeModel["stepTitle"] as! [String]
             var stepTitles = ""
             var stepCount = 1
             for stepTitle in stepTitlesArray{
@@ -240,7 +240,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is value picker
         else if currentCellType == "valuePicker"{
-            var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as PickerViewTableViewCell
+            var cell:PickerViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("PickerViewTableViewCell") as! PickerViewTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["valuePicker"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -254,7 +254,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is fields and activator
         else if currentCellType == "fieldsAndActivator"{
-            var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as FieldsAndActivatorTableViewCell
+            var cell:FieldsAndActivatorTableViewCell = tableView.dequeueReusableCellWithIdentifier("FieldsAndActivatorTableViewCell") as! FieldsAndActivatorTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["fieldsAndActivator"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -267,7 +267,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is launch web view
         else if currentCellType == "launchWebView"{
-            var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as LaunchWebViewTableViewCell
+            var cell:LaunchWebViewTableViewCell = tableView.dequeueReusableCellWithIdentifier("LaunchWebViewTableViewCell") as! LaunchWebViewTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["launchWebView"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -282,7 +282,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
 
         // If current cell type is event info
         else if currentCellType == "eventInfo"{
-            var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as EventInfoTableViewCell
+            var cell:EventInfoTableViewCell = tableView.dequeueReusableCellWithIdentifier("EventInfoTableViewCell") as! EventInfoTableViewCell
             cell.eventTitle.text = contentDictionary[currentStepCount]["eventTitle\(challengeTrackNumber)"]
             cell.eventTimes.text = contentDictionary[currentStepCount]["eventTimes\(challengeTrackNumber)"]
             cell.eventVenue.text = contentDictionary[currentStepCount]["eventVenue\(challengeTrackNumber)"]
@@ -291,7 +291,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is call number
         else if currentCellType == "callNumber"{
-            var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as CallTableViewCell
+            var cell:CallTableViewCell = tableView.dequeueReusableCellWithIdentifier("CallTableViewCell") as! CallTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["callNumber"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -304,7 +304,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is hero image
         else if currentCellType == "heroImage"{
-            var cell:HeroImageTableViewCell = tableView.dequeueReusableCellWithIdentifier("HeroImageTableViewCell") as HeroImageTableViewCell
+            var cell:HeroImageTableViewCell = tableView.dequeueReusableCellWithIdentifier("HeroImageTableViewCell") as! HeroImageTableViewCell
             var imageString = contentDictionary[currentStepCount]["heroImage\(challengeTrackNumber)"]
             cell.heroImage.image = UIImage(named: imageString!)
             return cell
@@ -312,7 +312,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is bool picker
         else if currentCellType == "boolPicker"{
-            var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as BoolPickerTableViewCell
+            var cell:BoolPickerTableViewCell = tableView.dequeueReusableCellWithIdentifier("BoolPickerTableViewCell") as! BoolPickerTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["boolPicker"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -323,7 +323,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is caution text
         else if currentCellType == "cautionText"{
-            var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as CautionTextTableViewCell
+            var cell:CautionTextTableViewCell = tableView.dequeueReusableCellWithIdentifier("CautionTextTableViewCell") as! CautionTextTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["cautionText"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -334,7 +334,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             
         // If current cell type is text field
         else if currentCellType == "textField"{
-            var cell:TextFieldInputTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextFieldInputTableViewCell") as TextFieldInputTableViewCell
+            var cell:TextFieldInputTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextFieldInputTableViewCell") as! TextFieldInputTableViewCell
             var rowNumbers:[Int] = self.countofCellTypeDictionary["textField"]!
             var count:Int = find(rowNumbers, indexPath.row)!
             ++count
@@ -348,8 +348,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     // Table view data source method for canvas table view
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        var currentStepCount = self.currentChallengeData["currentStepCount"] as Int
+        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as! [[String]]
+        var currentStepCount = self.currentChallengeData["currentStepCount"] as! Int
         if currentStepCount == 0{
             return 1
         }
@@ -361,8 +361,8 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     // Table view data source for canvas table view's value picker rows
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as [[String]]
-        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        var currentCellTypeArray:[[String]] = self.currentChallengeModel["stepCellsType"] as! [[String]]
+        var currentStepCount = currentChallengeData["currentStepCount"] as! Int
         var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
         var currentCellType = currentCellTypes[indexPath.row]
         if currentCellType == "valuePicker" && !contains(shownHiddenRows, indexPath){
@@ -386,7 +386,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.currentChallengeModel = objects[0] as PFObject
+                self.currentChallengeModel = objects[0] as! PFObject
                 self.canvasTableView.reloadData()
                 self.activityIndicator.stopAnimating()
                 self.canvasTableView.hidden = false
@@ -403,10 +403,10 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
 
         self.canvasTableView.beginUpdates()
 
-        var cell:FieldsAndActivatorTableViewCell = sender.view as FieldsAndActivatorTableViewCell
+        var cell:FieldsAndActivatorTableViewCell = sender.view as! FieldsAndActivatorTableViewCell
         var indexPath = self.canvasTableView.indexPathForCell(cell)!
         var nextIndexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-        var pickerCell:PickerViewTableViewCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) as PickerViewTableViewCell
+        var pickerCell:PickerViewTableViewCell = self.canvasTableView.cellForRowAtIndexPath(nextIndexPath) as! PickerViewTableViewCell
         
         if contains(shownHiddenRows, nextIndexPath){
             var indexToRemove = find(shownHiddenRows, nextIndexPath)
@@ -426,15 +426,15 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     
     // Dial number from cell using phone.app
     func dialNumber(sender:UITapGestureRecognizer!){
-        var cell:CallTableViewCell = sender.view as CallTableViewCell
+        var cell:CallTableViewCell = sender.view as! CallTableViewCell
         UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(cell.numberLabel.text!)")!)
     }
     
     // Launch web view with URL from cell
     func launchWebView(sender:UITapGestureRecognizer!){
-        var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell
-        var collectionView = self.superview as UICollectionView
-        var baseClass = collectionView.delegate as ChallengesTabViewController
+        var cell:LaunchWebViewTableViewCell = sender.view as! LaunchWebViewTableViewCell
+        var collectionView = self.superview as! UICollectionView
+        var baseClass = collectionView.delegate as! ChallengesTabViewController
         var urlFromCell = cell.fieldValue.text
         var urlObject = cell.launchURL
         baseClass.presentWebView(urlObject!)

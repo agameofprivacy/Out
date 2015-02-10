@@ -10,8 +10,8 @@ import UIKit
 
 class ChallengeOverviewTableViewCell: UITableViewCell {
     
-    let challengeIntro:UILabel!
-    let stepTitles:UILabel!
+    var challengeIntro:UILabel!
+    var stepTitles:UILabel!
     
     var userDataDictionary:[String:String] = ["":""]
     

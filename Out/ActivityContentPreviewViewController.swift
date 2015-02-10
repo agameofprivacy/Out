@@ -24,7 +24,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
     var activityNarrativeTitleLabel:UILabel!
     var prepoChallengeTitleLabel:UILabel!
     var challengeTitleLabel:UILabel!
-    var viewChallengeButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+    var viewChallengeButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
 
     var activityContentWebView:UIWebView!
     
@@ -78,7 +78,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.navigationItem.rightBarButtonItem = shareButton
 
         
-        var URLString = (self.challenge["narrativeURLs"] as [String])[challengeTrackNumber] as String
+        var URLString = (self.challenge["narrativeURLs"] as! [String])[challengeTrackNumber] as String
         self.automaticallyAdjustsScrollViewInsets = false
         self.activityContentWebView = UIWebView(frame: CGRectMake(0, 64, self.view.frame.width, self.view.frame.height - 64))
         self.activityContentWebView.scrollView.contentInset = UIEdgeInsetsMake(130, 0, 49, 0)
@@ -118,8 +118,8 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
-        self.avatarImageView.image = self.avatarImageDictionary[user["avatar"] as String]!
-        self.avatarImageView.backgroundColor = self.colorDictionary[user["color"] as String]
+        self.avatarImageView.image = self.avatarImageDictionary[user["avatar"] as! String]!
+        self.avatarImageView.backgroundColor = self.colorDictionary[user["color"] as! String]
         self.challengeShade.addSubview(self.avatarImageView)
 
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -133,7 +133,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.activityNarrativeActionLabel = UILabel(frame: CGRectZero)
         self.activityNarrativeActionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.activityNarrativeActionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15)
-        self.activityNarrativeActionLabel.text = (self.challenge["narrativeAction"] as String)
+        self.activityNarrativeActionLabel.text = (self.challenge["narrativeAction"] as! String)
         self.activityNarrativeActionLabel.numberOfLines = 1
         self.activityNarrativeActionLabel.textAlignment = NSTextAlignment.Left
         self.challengeShade.addSubview(self.activityNarrativeActionLabel)
@@ -141,7 +141,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.activityNarrativeTitleLabel = UILabel(frame: CGRectZero)
         self.activityNarrativeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.activityNarrativeTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
-        self.activityNarrativeTitleLabel.text = (self.challenge["narrativeTitles"] as [String])[self.challengeTrackNumber]
+        self.activityNarrativeTitleLabel.text = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
         self.activityNarrativeTitleLabel.numberOfLines = 1
         self.activityNarrativeTitleLabel.textAlignment = NSTextAlignment.Left
         self.challengeShade.addSubview(self.activityNarrativeTitleLabel)
@@ -157,7 +157,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeTitleLabel = UILabel(frame: CGRectZero)
         self.challengeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.challengeTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
-        self.challengeTitleLabel.text = (self.challenge["title"] as String)
+        self.challengeTitleLabel.text = (self.challenge["title"] as! String)
         self.challengeTitleLabel.numberOfLines = 1
         self.challengeTitleLabel.textAlignment = NSTextAlignment.Left
         self.challengeShade.addSubview(self.challengeTitleLabel)

@@ -90,8 +90,8 @@ class MyProfileViewController: UIViewController {
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 50
         self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as String]!
-        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as String]
+        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as! String]!
+        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as! String]
         self.containerView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -150,7 +150,7 @@ class MyProfileViewController: UIViewController {
         
         self.ageLabel = UILabel(frame: CGRectZero)
         self.ageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var userAge = PFUser.currentUser()["age"] as Int
+        var userAge = PFUser.currentUser()["age"] as! Int
         self.ageLabel.text = "\(userAge)"
         self.ageLabel.textAlignment = NSTextAlignment.Center
         self.ageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)

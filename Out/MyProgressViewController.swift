@@ -211,35 +211,35 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:ChallengeRecordTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeRecordTableViewCell") as ChallengeRecordTableViewCell
+        var cell:ChallengeRecordTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeRecordTableViewCell") as! ChallengeRecordTableViewCell
         
 //        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         if tableView == self.toDoTableView{
             var challenge = self.toDoChallenges[indexPath.row] as PFObject
-            var challengeTitleText = challenge["title"] as String
+            var challengeTitleText = challenge["title"] as! String
             if self.currentSortCategory == "difficulty"{
-            var challengeDifficulty = challenge["difficulty"] as String
+            var challengeDifficulty = challenge["difficulty"] as! String
             cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
             }
             else if self.currentSortCategory == "place"{
-                if contains(challenge["tags"] as [String], "Home"){
+                if contains(challenge["tags"] as! [String], "Home"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
                 }
-                else if contains(challenge["tags"] as [String], "School"){
+                else if contains(challenge["tags"] as! [String], "School"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
                 }
-                else if contains(challenge["tags"] as [String], "Work"){
+                else if contains(challenge["tags"] as! [String], "Work"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
                 }
             }
             else if self.currentSortCategory == "people"{
-                if contains(challenge["tags"] as [String], "Family"){
+                if contains(challenge["tags"] as! [String], "Family"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
                 }
-                else if contains(challenge["tags"] as [String], "Friends"){
+                else if contains(challenge["tags"] as! [String], "Friends"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
                 }
-                else if contains(challenge["tags"] as [String], "Strangers"){
+                else if contains(challenge["tags"] as! [String], "Strangers"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
                 }
             }
@@ -247,30 +247,30 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else{
             var challenge = self.doneChallenges[indexPath.row] as PFObject
-            var challengeTitleText = challenge["title"] as String
+            var challengeTitleText = challenge["title"] as! String
             if self.currentSortCategory == "difficulty"{
-                var challengeDifficulty = challenge["difficulty"] as String
+                var challengeDifficulty = challenge["difficulty"] as! String
                 cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
             }
             else if self.currentSortCategory == "place"{
-                if contains(challenge["tags"] as [String], "Home"){
+                if contains(challenge["tags"] as! [String], "Home"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
                 }
-                else if contains(challenge["tags"] as [String], "School"){
+                else if contains(challenge["tags"] as! [String], "School"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
                 }
-                else if contains(challenge["tags"] as [String], "Work"){
+                else if contains(challenge["tags"] as! [String], "Work"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
                 }
             }
             else if self.currentSortCategory == "people"{
-                if contains(challenge["tags"] as [String], "Family"){
+                if contains(challenge["tags"] as! [String], "Family"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
                 }
-                else if contains(challenge["tags"] as [String], "Friends"){
+                else if contains(challenge["tags"] as! [String], "Friends"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
                 }
-                else if contains(challenge["tags"] as [String], "Strangers"){
+                else if contains(challenge["tags"] as! [String], "Strangers"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
                 }
             }
@@ -328,13 +328,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if !self.toDoTableView.hidden{
                 // Calculate toDoChallenges difficulty values
                 for challenge in self.toDoChallenges{
-                    if (challenge["difficulty"] as String) == "Casual"{
+                    if (challenge["difficulty"] as! String) == "Casual"{
                         casualChallengeCount++
                     }
-                    else if (challenge["difficulty"] as String) == "Intermediate"{
+                    else if (challenge["difficulty"] as! String) == "Intermediate"{
                         intermediateChallengeCount++
                     }
-                    else if (challenge["difficulty"] as String) == "Intense"{
+                    else if (challenge["difficulty"] as! String) == "Intense"{
                         intenseChallengeCount++
                     }
                 }
@@ -345,13 +345,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             // if doneTableView is shown
             else{
                 for challenge in self.doneChallenges{
-                    if (challenge["difficulty"] as String) == "Casual"{
+                    if (challenge["difficulty"] as! String) == "Casual"{
                         casualChallengeCount++
                     }
-                    else if (challenge["difficulty"] as String) == "Intermediate"{
+                    else if (challenge["difficulty"] as! String) == "Intermediate"{
                         intermediateChallengeCount++
                     }
-                    else if (challenge["difficulty"] as String) == "Intense"{
+                    else if (challenge["difficulty"] as! String) == "Intense"{
                         intenseChallengeCount++
                     }
                 }
@@ -369,7 +369,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
-                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems as [AnyObject])
                 self.chartShadeEmptyLabel.hidden = true
                 self.categoryParamLabel1.hidden = false
                 self.categoryParamLabel2.hidden = false
@@ -403,13 +403,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if !self.toDoTableView.hidden{
                 // Calculate toDoChallenges difficulty values
                 for challenge in self.toDoChallenges{
-                    if contains(challenge["tags"] as [String], "Home"){
+                    if contains(challenge["tags"] as! [String], "Home"){
                         homeChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "School"){
+                    else if contains(challenge["tags"] as! [String], "School"){
                         schoolChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Work"){
+                    else if contains(challenge["tags"] as! [String], "Work"){
                         workChallengeCount++
                     }
                 }
@@ -420,13 +420,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 // if doneTableView is shown
             else{
                 for challenge in self.doneChallenges{
-                    if contains(challenge["tags"] as [String], "Home"){
+                    if contains(challenge["tags"] as! [String], "Home"){
                         homeChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "School"){
+                    else if contains(challenge["tags"] as! [String], "School"){
                         schoolChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Work"){
+                    else if contains(challenge["tags"] as! [String], "Work"){
                         workChallengeCount++
                     }
                 }
@@ -444,7 +444,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
-                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems as [AnyObject])
                 self.chartShadeEmptyLabel.hidden = true
                 self.categoryParamLabel1.hidden = false
                 self.categoryParamLabel2.hidden = false
@@ -479,13 +479,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if !self.toDoTableView.hidden{
                 // Calculate toDoChallenges difficulty values
                 for challenge in self.toDoChallenges{
-                    if contains(challenge["tags"] as [String], "Family"){
+                    if contains(challenge["tags"] as! [String], "Family"){
                         familyChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Friends"){
+                    else if contains(challenge["tags"] as! [String], "Friends"){
                         friendsChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Strangers"){
+                    else if contains(challenge["tags"] as! [String], "Strangers"){
                         strangersChallengeCount++
                     }
                 }
@@ -496,13 +496,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 // if doneTableView is shown
             else{
                 for challenge in self.doneChallenges{
-                    if contains(challenge["tags"] as [String], "Family"){
+                    if contains(challenge["tags"] as! [String], "Family"){
                         familyChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Friends"){
+                    else if contains(challenge["tags"] as! [String], "Friends"){
                         friendsChallengeCount++
                     }
-                    else if contains(challenge["tags"] as [String], "Strangers"){
+                    else if contains(challenge["tags"] as! [String], "Strangers"){
                         strangersChallengeCount++
                     }
                 }
@@ -520,7 +520,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
-                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems)
+                self.myProgressPieChart = PNPieChart(frame: CGRectMake(30, 67, 100, 100), items: self.myProgressPieChartItems as [AnyObject])
                 self.chartShadeEmptyLabel.hidden = true
                 self.categoryParamLabel1.hidden = false
                 self.categoryParamLabel2.hidden = false
@@ -598,7 +598,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if error == nil {
                 self.doneChallenges.removeAll(keepCapacity: false)
                 for challengeData in objects{
-                    self.doneChallenges.append(challengeData["challenge"] as PFObject)
+                    self.doneChallenges.append(challengeData["challenge"] as! PFObject)
                 }
                 self.doneTableView.reloadData()
                 
@@ -612,7 +612,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                     (challenges: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         self.toDoChallenges.removeAll(keepCapacity: false)
-                        self.toDoChallenges = challenges as [PFObject]
+                        self.toDoChallenges = challenges as! [PFObject]
                         self.toDoTableView.reloadData()
                         self.redrawChartToSort("difficulty")
                     }

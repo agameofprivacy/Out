@@ -30,6 +30,12 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var suggestButton = UIBarButtonItem(title: "Suggest", style: UIBarButtonItemStyle.Plain, target: self, action: "suggestChallenge")
+        suggestButton.enabled = false
+        suggestButton.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem = suggestButton
+
+        
         // Current challenges cards collection view init and layout
         currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
         currentChallengesCardsCollectionView.collectionViewLayout = layout
@@ -100,33 +106,33 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as ChallengesTabCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ChallengeCard", forIndexPath: indexPath) as! ChallengesTabCollectionViewCell
 
         cell.layer.cornerRadius = 5
         cell.layer.borderWidth = 0.75
         cell.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
 
         // Load current challenge data
-        var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as PFObject
-        var currentChallengeData = self.currentChallengesObjects[indexPath.item] as PFObject
-        var currentCellContentArray:[[String]] = challengeModel["stepContent"] as [[String]]
+        var challengeModel = self.currentChallengesObjects[indexPath.item]["challenge"] as! PFObject
+        var currentChallengeData = self.currentChallengesObjects[indexPath.item] as! PFObject
+        var currentCellContentArray:[[String]] = challengeModel["stepContent"] as! [[String]]
         var contentDictionary:[[String:String]] = self.contentDictionary(currentCellContentArray)
         cell.currentChallengeModel = challengeModel
         cell.currentChallengeData = currentChallengeData
         cell.contentDictionary = contentDictionary
-        cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as String?
+        cell.titleLabel.text = self.currentChallengesObjects[indexPath.item]["title"] as! String?
         cell.nextStepButton.addTarget(self, action: "nextStepButtonTapped:", forControlEvents: .TouchUpInside)
         
         // Check currentStepCount to display correct text for challenge subtitle
-        var currentStepCount = currentChallengeData["currentStepCount"] as Int
+        var currentStepCount = currentChallengeData["currentStepCount"] as! Int
         if currentStepCount == 0{
-            var reason = challengeModel["reason"] as [String]
+            var reason = challengeModel["reason"] as! [String]
             var subtitleString = reason[0] + ": " + reason[1]
             cell.subtitleLabel.text = subtitleString
             cell.canvasTableView.reloadData()
         }
         else{
-            var currentStepTitles:[String] = challengeModel["stepTitle"] as [String]
+            var currentStepTitles:[String] = challengeModel["stepTitle"] as! [String]
             var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
             var subtitleString = "Step \(currentStepCount): \(currentStepTitle)"
             cell.subtitleLabel.text = subtitleString
@@ -179,8 +185,8 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     // Prepare for add challenge segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addChallenge"{
-            var modalVC = segue.destinationViewController as UINavigationController
-            var challengeGalleryVC = modalVC.childViewControllers[0] as ChallengeGalleryViewController
+            var modalVC = segue.destinationViewController as! UINavigationController
+            var challengeGalleryVC = modalVC.childViewControllers[0] as! ChallengeGalleryViewController
             challengeGalleryVC.challengeTabVC = self
         }
     }
@@ -189,7 +195,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     func nextStepButtonTapped(sender:UIButton!){
 
         var cells = self.currentChallengesCardsCollectionView.visibleCells()
-        var currentCell = cells[0] as ChallengesTabCollectionViewCell
+        var currentCell = cells[0] as! ChallengesTabCollectionViewCell
 
         // Loop through sections of current cell canvas
         for var section:Int = 0; section < currentCell.canvasTableView.numberOfSections(); section++ {
@@ -199,23 +205,23 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 var cellPath:NSIndexPath = NSIndexPath(forRow: row, inSection: section)
 
                 if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is GallerySelectTableViewCell{
-                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as GallerySelectTableViewCell
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as! GallerySelectTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PromptAndAnswerTableViewCell{
-                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PromptAndAnswerTableViewCell
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as! PromptAndAnswerTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is PickerViewTableViewCell{
-                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as PickerViewTableViewCell
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as! PickerViewTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is TextFieldInputTableViewCell{
-                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as TextFieldInputTableViewCell
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as! TextFieldInputTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
                 }
                 else if currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) is BoolPickerTableViewCell{
-                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as BoolPickerTableViewCell
+                    var cell = currentCell.canvasTableView.cellForRowAtIndexPath(cellPath) as! BoolPickerTableViewCell
                     self.stepFullUserDataDictionary += cell.collectData()
                 }
                 // Clean up collected data
@@ -223,11 +229,11 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             }
         }
         
-        var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as ChallengesTabCollectionViewCell)!
+        var indexPath:NSIndexPath = self.currentChallengesCardsCollectionView.indexPathForCell(cells[0] as! ChallengesTabCollectionViewCell)!
         var itemNumber = indexPath.item
-        var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as PFObject
-        var currentStepCount = currentChallengeObject["currentStepCount"] as Int
-        var currentChallengeModel = currentChallengeObject["challenge"] as PFObject
+        var currentChallengeObject:PFObject = currentChallengesObjects[itemNumber] as! PFObject
+        var currentStepCount = currentChallengeObject["currentStepCount"] as! Int
+        var currentChallengeModel = currentChallengeObject["challenge"] as! PFObject
         
         if currentStepCount > 0{
             
@@ -244,7 +250,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
             // Filter out dictionary items with empty values
             dictionary.filter{$0 != ""}
-            var stepContent:[[String]] = currentChallengeObject["stepContent"] as [[String]]
+            var stepContent:[[String]] = currentChallengeObject["stepContent"] as! [[String]]
             stepContent.append(dictionary)
             currentChallengeObject["stepContent"] = stepContent
         }
@@ -254,7 +260,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
                 if error == nil{
                     currentCell.canvasTableView.reloadData()
-                    var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as [String]
+                    var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as! [String]
                     var currentStepTitle:String = currentStepTitles[currentStepCount - 1]
                     var subtitleString:String = "Step \(currentStepCount): \(currentStepTitle)"
                     self.stepFullUserDataDictionary.removeAll(keepCapacity:true)
@@ -321,7 +327,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         newViewController.setToolbarHidden(false, animated: true)
         self.presentViewController(newViewController, animated: true, completion: nil)
     }
-    
+    func suggestChallenge(){
+        println("suggest challenge")
+    }
 }
 
 // Helper function for contentDictionary()

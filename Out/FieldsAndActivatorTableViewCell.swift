@@ -47,9 +47,9 @@ class FieldsAndActivatorTableViewCell: UITableViewCell {
         var viewsDictionary = ["fieldTitle":fieldTitle, "fieldValuePlaceholder":fieldValuePlaceholder]
         var metricsDictionary = ["sideEdgeMargin":sideEdgeMargin, "verticalMargin":fontSize]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[fieldTitle]-[fieldValuePlaceholder]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
-        var verticalFieldTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldTitle]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
-        var verticalValuePlaceholderConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldValuePlaceholder]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[fieldTitle]-[fieldValuePlaceholder]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary as [NSObject : AnyObject], views: viewsDictionary)
+        var verticalFieldTitleConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldTitle]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary as? [NSObject : AnyObject], views: viewsDictionary)
+        var verticalValuePlaceholderConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[fieldValuePlaceholder]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary as? [NSObject : AnyObject], views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalFieldTitleConstraints)

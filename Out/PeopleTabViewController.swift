@@ -17,8 +17,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     var following:[AnyObject] = []
     var followerFollowingObject:PFObject = PFObject(className: "FollowerFollowing", dictionary: ["requestsFromUsers":[],"followers":[], "followingUsers":[]])
     
-    var followerTableView:TPKeyboardAvoidingTableView!
-    var followingTableView:TPKeyboardAvoidingTableView!
+    var followerTableView = TPKeyboardAvoidingTableView()
+    var followingTableView = TPKeyboardAvoidingTableView()
     var followerRefreshControl:UIRefreshControl!
     var followingRefreshControl:UIRefreshControl!
     
@@ -209,7 +209,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.mentorLocation.font = valueFont?.fontWithSize(14.0)
         self.mentorCellOverlay.addSubview(self.mentorLocation)
         
-        self.mentorButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        self.mentorButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         self.mentorButton.frame = CGRectZero
         self.mentorButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.mentorButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
@@ -305,7 +305,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == "presentPeopleGallery"{
-            var newVC = segue.destinationViewController as PeopleGalleryViewController
+            var newVC = segue.destinationViewController as! PeopleGalleryViewController
             newVC.currentFollowerFollowingObject = self.followerFollowingObject
         }
     }
@@ -315,6 +315,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        println(tableView)
         // followerTableView has two sections, one for follow requests and one for approved followers
         if tableView == self.followerTableView{
             return 2
@@ -346,33 +347,33 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if tableView == self.followerTableView{
             // If section is for displaying follower(s)
             if(indexPath.section == 1){
-                var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
-                var followersUsers:[PFUser] = self.followers as [PFUser]
+                var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
+                var followersUsers:[PFUser] = self.followers as! [PFUser]
                 var user = followersUsers[indexPath.row] as PFUser
-                cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
-                cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
+                cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
+                cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
                 cell.userAlias.text = user.username
-                var userOrientation = user["sexualOrientation"] as String
-                var userAge = user["age"] as Int
+                var userOrientation = user["sexualOrientation"] as! String
+                var userAge = user["age"] as! Int
                 cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-                var userCity = user["city"] as String
-                var userState = user["state"] as String
+                var userCity = user["city"] as! String
+                var userState = user["state"] as! String
                 cell.userLocation.text = "\(userCity), \(userState)"
                 return cell
             }
             // If section is for displaying follow requests
             else{
-                var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as PersonFollowTableViewCell
+                var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as! PersonFollowTableViewCell
                 var followingRequestsFromUsers:[PFUser] = self.followingRequestedFrom as [PFUser]
                 var user = followingRequestsFromUsers[indexPath.row] as PFUser
-                cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
-                cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
+                cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
+                cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
                 cell.userAlias.text = user.username
-                var userOrientation = user["sexualOrientation"] as String
-                var userAge = user["age"] as Int
+                var userOrientation = user["sexualOrientation"] as! String
+                var userAge = user["age"] as! Int
                 cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-                var userCity = user["city"] as String
-                var userState = user["state"] as String
+                var userCity = user["city"] as! String
+                var userState = user["state"] as! String
                 cell.followButton.addTarget(self, action: "acceptButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
                 cell.followButton.setTitle("Accept", forState: UIControlState.Normal)
                 return cell
@@ -380,22 +381,22 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         // Display following
         else if tableView == self.followingTableView{
-            var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
-            var followingUsers:[PFUser] = self.following as [PFUser]
+            var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
+            var followingUsers:[PFUser] = self.following as! [PFUser]
             var user = followingUsers[indexPath.row] as PFUser
-            cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as String]
-            cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as String]!
+            cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
+            cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
             cell.userAlias.text = user.username
-            var userOrientation = user["sexualOrientation"] as String
-            var userAge = user["age"] as Int
+            var userOrientation = user["sexualOrientation"] as! String
+            var userAge = user["age"] as! Int
             cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-            var userCity = user["city"] as String
-            var userState = user["state"] as String
+            var userCity = user["city"] as! String
+            var userState = user["state"] as! String
             cell.userLocation.text = "\(userCity), \(userState)"
             return cell
         }
         else{
-            return tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as PersonTableViewCell
+            return tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
         }
     }
 
@@ -435,7 +436,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Add PFUser to list of approved followers if Accept button tapped
     func acceptButtonTapped(sender:UIButton){
-        var currentCell = sender.superview?.superview as PersonFollowTableViewCell
+        var currentCell = sender.superview?.superview as! PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.followerTableView.indexPathForCell(currentCell)!
         var userToAcceptFollowRequest = self.followingRequestedFrom[currentIndexPath.row] as PFUser
         var currentUserFollowingRequestedFrom = self.followingRequestedFrom
@@ -445,8 +446,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         queryUserFollowRequestedFromFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                var userFollowRequestedFrom = objects[0] as PFObject
-                var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as [PFUser]
+                var userFollowRequestedFrom = objects[0] as! PFObject
+                var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as! [PFUser]
                 userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser())
                 userFollowRequestedFrom["followingUsers"] = userFollowRequestedFromCurrentlyfollowing
                 userFollowRequestedFrom.saveInBackground()
@@ -458,7 +459,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
 
-        var currentUserFollowers:[PFUser] = self.followerFollowingObject["followers"] as [PFUser]
+        var currentUserFollowers:[PFUser] = self.followerFollowingObject["followers"] as! [PFUser]
         currentUserFollowers.append(userToAcceptFollowRequest)
         currentUserFollowingRequestedFrom.removeAtIndex(currentIndexPath.row)
         self.followerFollowingObject["requestsFromUsers"] = currentUserFollowingRequestedFrom
@@ -482,10 +483,10 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         queryFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                self.followerFollowingObject = objects[0] as PFObject
-                self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as [PFUser]
-                self.following = self.followerFollowingObject["followingUsers"] as [PFUser]
-                self.followers = self.followerFollowingObject["followers"] as [PFUser]
+                self.followerFollowingObject = objects[0] as! PFObject
+                self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as! [PFUser]
+                self.following = self.followerFollowingObject["followingUsers"] as! [PFUser]
+                self.followers = self.followerFollowingObject["followers"] as! [PFUser]
                 if self.following.count == 0{
                     self.noFollowingView.hidden = false
                 }

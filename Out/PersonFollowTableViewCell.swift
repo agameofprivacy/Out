@@ -87,7 +87,7 @@ class PersonFollowTableViewCell: UITableViewCell {
         self.userOrientationAge.font = titleFont?.fontWithSize(14.0)
         contentView.addSubview(self.userOrientationAge)
         
-        self.followButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        self.followButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         self.followButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.followButton.layer.borderColor = UIColor.blackColor().CGColor
         self.followButton.layer.borderWidth = 1

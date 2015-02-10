@@ -60,9 +60,9 @@ class GallerySelectCollectionViewCell: UICollectionViewCell {
         var viewsDictionary = ["imageImageView":imageImageView, "titleLabel":titleLabel, "blurbLabel":blurbLabel]
         var metricsDictioanry = ["labelInsetH":labelInsetH, "labelInsetV":labelInsetV, "imageImageViewHeight":imageImageViewHeight]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[imageImageView]-10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictioanry, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[imageImageView]-10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictioanry as [NSObject : AnyObject], views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[imageImageView(<=imageImageViewHeight)]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[imageImageView(<=imageImageViewHeight)]-labelInsetV-[titleLabel]-[blurbLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictioanry as [NSObject : AnyObject], views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

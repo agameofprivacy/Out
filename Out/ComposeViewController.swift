@@ -22,7 +22,7 @@ class ComposeViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = cancelButton
         
         var postButton = UIBarButtonItem(title: "Post", style: UIBarButtonItemStyle.Plain, target: self, action: "postButtonTapped")
-        postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName), forState: UIControlState.Normal)
+        postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         postButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = postButton
     }

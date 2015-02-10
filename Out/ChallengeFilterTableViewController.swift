@@ -34,7 +34,7 @@ class ChallengeFilterTableViewController: UITableViewController {
     // Prepare for apply filters segue, pass selected filters as a string array to destination vc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ApplyFilters"{
-            let galleryVC:ChallengeGalleryViewController = segue.destinationViewController.childViewControllers[0] as ChallengeGalleryViewController
+            let galleryVC:ChallengeGalleryViewController = segue.destinationViewController.childViewControllers[0] as! ChallengeGalleryViewController
             galleryVC.filters = self.filterStrings
         }
     }
@@ -49,7 +49,7 @@ class ChallengeFilterTableViewController: UITableViewController {
 
     // Table view data source method
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChallengeFilterCell", forIndexPath: indexPath) as ChallengeFilterTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ChallengeFilterCell", forIndexPath: indexPath) as! ChallengeFilterTableViewCell
         cell.challengeFilterTitleLabel.text = challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle
         if challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected || contains(filterStrings, challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle){
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -74,8 +74,8 @@ class ChallengeFilterTableViewController: UITableViewController {
                 }
             }
         }
-        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as ChallengeGalleryViewController).filters).removeAll(keepCapacity: true)
-        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as ChallengeGalleryViewController).filters) += self.filterStrings
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as! ChallengeGalleryViewController).filters).removeAll(keepCapacity: true)
+        ((self.parentViewController?.presentingViewController?.childViewControllers[0] as! ChallengeGalleryViewController).filters) += self.filterStrings
         dismissViewControllerAnimated(true, completion: nil)
     }
     

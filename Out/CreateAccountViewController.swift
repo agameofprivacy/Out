@@ -35,7 +35,7 @@ class CreateAccountViewController: XLFormViewController {
         var row: XLFormRowDescriptor
         
         // Alias & password section
-        section = XLFormSectionDescriptor.formSectionWithTitle("Login (Required)") as XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Login (Required)") as! XLFormSectionDescriptor
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "Alias", rowType: XLFormRowDescriptorTypeAccount, title: "Alias")
@@ -63,7 +63,7 @@ class CreateAccountViewController: XLFormViewController {
         section.addFormRow(row)
         
         // Background section
-        section = XLFormSectionDescriptor.formSectionWithTitle("Background (Optional)") as XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Background (Optional)") as! XLFormSectionDescriptor
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
@@ -216,7 +216,7 @@ class CreateAccountViewController: XLFormViewController {
             self.navigationItem.rightBarButtonItem?.enabled = false
         }
         else{
-            if (values["Password"] as String == values["Verify Password"] as String){
+            if (values["Password"] as! String == values["Verify Password"] as! String){
                 self.navigationItem.rightBarButtonItem?.enabled = true
             }
         }
@@ -241,16 +241,16 @@ class CreateAccountViewController: XLFormViewController {
         var values = self.form.formValues()
         var user = PFUser()
 
-        user.username = values["Alias"] as String
-        user.password = values["Password"] as String
-        user["age"] = values["Age"] as Int
-        user["genderIdentity"] = (values["Gender Identity"] as XLFormOptionsObject).valueData()
-        user["sexualOrientation"] = (values["Sexual Orientation"] as XLFormOptionsObject).valueData()
-        user["avatar"] = (values["Avatar"] as XLFormOptionsObject).valueData()
-        user["color"] = (values["Color"] as XLFormOptionsObject).valueData()
-        user["ethnicity"] = values["Ethnicity"] as String
-        user["city"] = values["City"] as String
-        user["state"] = (values["State"] as XLFormOptionsObject).valueData()
+        user.username = values["Alias"] as! String
+        user.password = values["Password"] as! String
+        user["age"] = values["Age"] as! Int
+        user["genderIdentity"] = (values["Gender Identity"] as! XLFormOptionsObject).valueData()
+        user["sexualOrientation"] = (values["Sexual Orientation"] as! XLFormOptionsObject).valueData()
+        user["avatar"] = (values["Avatar"] as! XLFormOptionsObject).valueData()
+        user["color"] = (values["Color"] as! XLFormOptionsObject).valueData()
+        user["ethnicity"] = values["Ethnicity"] as! String
+        user["city"] = values["City"] as! String
+        user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
         user["followingRequested"] = []
         user["followingRequestsFrom"] = []
         
