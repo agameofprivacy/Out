@@ -10,14 +10,13 @@ import UIKit
 
 class ChallengeRecordTableViewCell: UITableViewCell {
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     var challengeTypeIconImageView:UIImageView!
     var challengeTitleLabel:UILabel!
     var separatorBottom:UIView!
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +24,7 @@ class ChallengeRecordTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         self.separatorBottom = UIView(frame: CGRectZero)
         self.separatorBottom.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.separatorBottom.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)

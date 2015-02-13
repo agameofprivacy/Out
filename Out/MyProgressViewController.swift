@@ -77,6 +77,9 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.toDoTableView.dataSource = self
         self.toDoTableView.registerClass(ChallengeRecordTableViewCell.self, forCellReuseIdentifier: "ChallengeRecordTableViewCell")
         self.toDoTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.toDoTableView.rowHeight = UITableViewAutomaticDimension
+        self.toDoTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.toDoTableView.estimatedRowHeight = 64
         self.view.addSubview(self.toDoTableView)
         
         self.doneTableView = UITableView(frame: CGRectMake(0, 298, self.view.frame.width, self.view.frame.height - 298))
@@ -85,6 +88,9 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.doneTableView.registerClass(ChallengeRecordTableViewCell.self, forCellReuseIdentifier: "ChallengeRecordTableViewCell")
         self.doneTableView.hidden = true
         self.doneTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.doneTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.doneTableView.estimatedRowHeight = 64
+        self.doneTableView.rowHeight = UITableViewAutomaticDimension
         self.view.addSubview(self.doneTableView)
         
         self.segmentShade = UIView(frame: CGRectMake(0, 254, self.view.frame.width, 45))
