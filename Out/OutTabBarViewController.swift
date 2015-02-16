@@ -55,7 +55,10 @@ class OutTabBarViewController: UITabBarController {
                 println("no image resourced")
             }
         }
-            
+        
+//        var activityTabBarItem:UITabBarItem = self.tabBar.items![0] as! UITabBarItem
+//        activityTabBarItem.badgeValue = "!"
+        
 
     }
 

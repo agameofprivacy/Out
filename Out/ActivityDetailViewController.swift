@@ -127,6 +127,17 @@ class ActivityDetailViewController: SLKTextViewController {
         newComment["content"] = comment
         self.comments.insert(newComment, atIndex: 0)
         newComment.saveInBackground()
+        var newCommentNotification = PFObject(className: "Notification")
+        newCommentNotification["activity"] = self.currentActivity
+        newCommentNotification["sender"] = PFUser.currentUser()
+        newCommentNotification["receiver"] = self.currentActivity["ownerUser"] as! PFUser
+        newCommentNotification["read"] = false
+        newCommentNotification["type"] = "comment"
+        newCommentNotification.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            if error == nil{
+                // Send iOS Notification
+            }
+        }
         self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
         self.tableView.endUpdates()
 

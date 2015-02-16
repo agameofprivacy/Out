@@ -101,6 +101,16 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         loadActivities()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = nil
+    }
+    
+    
+    override func viewDidDisappear(animated: Bool) {
+        (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = nil
+    }
+
+    
     // Reload activities when refresh control activated
     @IBAction func refreshActivityFeed(sender: UIRefreshControl) {
         sender.beginRefreshing()
@@ -338,9 +348,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                         ++self.commentCount
                                         if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                             self.tableView.reloadData()
+                                            (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
                                             self.refreshControl?.endRefreshing()
                                         }
-
                                 }
                                 else {
                                     // Log details of the failure
@@ -429,6 +439,19 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 if error == nil{
 //                    self.loadActivities()
 //                    self.tableView.reloadData()
+                    
+                    var newLikeNotification = PFObject(className: "Notification")
+                    newLikeNotification["sender"] = PFUser.currentUser()
+                    newLikeNotification["receiver"] = likedActivity["ownerUser"] as! PFUser
+                    newLikeNotification["activity"] = likedActivity
+                    newLikeNotification["type"] = "like"
+                    newLikeNotification["read"] = false
+                    newLikeNotification.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                        if error == nil{
+                            // Send iOS Notification
+                        }
+                    }
+
                 }
             }
         }
