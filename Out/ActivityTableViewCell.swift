@@ -80,7 +80,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.backgroundColor = UIColor.whiteColor()
-        self.avatarImageView.image = UIImage(named: "dog-icon")
+//        self.avatarImageView.image = UIImage(named: "dog-icon")
         self.paperView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -119,7 +119,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.heroImageView.layer.cornerRadius = 5
         self.heroImageView.clipsToBounds = true
         self.heroImageView.contentMode = UIViewContentMode.ScaleAspectFill
-        self.heroImageView.image = UIImage(named: "heroPlaceholder")
+//        self.heroImageView.image = UIImage(named: "heroPlaceholder")
         self.contentCanvas.addSubview(self.heroImageView)
         
         self.contentType = UIVisualEffectView(frame: CGRectZero)
@@ -181,7 +181,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton = UIImageView(frame: CGRectZero)
         self.likeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeButton.contentMode = UIViewContentMode.ScaleAspectFit
-        self.likeButton.image = UIImage(named: "likeButton-icon")
+//        self.likeButton.image = UIImage(named: "likeButton-icon")
         self.likeButton.userInteractionEnabled = true
         self.likeButton.layer.cornerRadius = 22
         self.likeButton.clipsToBounds = true

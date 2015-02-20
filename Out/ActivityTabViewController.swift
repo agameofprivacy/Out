@@ -145,12 +145,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -325,10 +325,30 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                     var count = objects.count
                                         self.currentActivitiesLikeCount[find(self.currentActivities, activity)!] = count
                                         ++self.likeCount
-                                        if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
-                                            self.tableView.reloadData()
-                                            self.refreshControl?.endRefreshing()
+                                    
+                                        // Query comment count of activities
+                                        var queryComments = PFQuery(className: "Comment")
+                                        queryComments.whereKey("activity", equalTo: activity)
+                                        queryComments.findObjectsInBackgroundWithBlock{
+                                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                                            if error == nil {
+                                                var count = objects.count
+                                                self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
+                                                ++self.commentCount
+                                                if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
+                                                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+                                                    self.refreshControl?.endRefreshing()
+                                                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                }
+                                            }
+                                            else {
+                                                // Log details of the failure
+                                                NSLog("Error: %@ %@", error, error.userInfo!)
+                                                self.refreshControl?.endRefreshing()
+                                                
+                                            }
                                         }
+
                                 }
                                 else {
                                     // Log details of the failure
@@ -337,28 +357,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 }
                             }
                             
-                            // Query comment count of activities
-                            var queryComments = PFQuery(className: "Comment")
-                            queryComments.whereKey("activity", equalTo: activity)
-                            queryComments.findObjectsInBackgroundWithBlock{
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
-                                if error == nil {
-                                    var count = objects.count
-                                        self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
-                                        ++self.commentCount
-                                        if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
-                                            self.tableView.reloadData()
-                                            (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
-                                            self.refreshControl?.endRefreshing()
-                                        }
-                                }
-                                else {
-                                    // Log details of the failure
-                                    NSLog("Error: %@ %@", error, error.userInfo!)
-                                    self.refreshControl?.endRefreshing()
-
-                                }
-                            }
                         }
 
                     } else {

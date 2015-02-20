@@ -38,6 +38,7 @@
 		2C470F551A06FAED008EADB4 /* PersonFollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */; };
 		2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */; };
 		2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */; };
+		2C54AD5E1A92AA510023BD20 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54AD5D1A92AA510023BD20 /* NotificationTableViewCell.swift */; };
 		2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C563A1A106A1D00B8EBC7 /* UICountingLabel.m */; };
 		2C5C56AC1A106E6200B8EBC7 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C56971A106E6200B8EBC7 /* PNBar.m */; };
 		2C5C56AD1A106E6200B8EBC7 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5C56991A106E6200B8EBC7 /* PNBarChart.m */; };
@@ -210,6 +211,7 @@
 		2C470F541A06FAED008EADB4 /* PersonFollowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonFollowTableViewCell.swift; sourceTree = "<group>"; };
 		2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeRecordTableViewCell.swift; sourceTree = "<group>"; };
 		2C512CA019F5A06800483A49 /* GallerySelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C54AD5D1A92AA510023BD20 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		2C5C56391A106A1D00B8EBC7 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
 		2C5C563A1A106A1D00B8EBC7 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		2C5C56961A106E6200B8EBC7 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
 				2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */,
 				2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */,
+				2C54AD5D1A92AA510023BD20 /* NotificationTableViewCell.swift */,
 				2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
 			);
@@ -1083,6 +1086,7 @@
 				2CF4791B1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift in Sources */,
 				2C9BE6B21A5327E300980C0D /* XLFormValidator.m in Sources */,
 				2C3A7C021A117EC900FC4516 /* MyProgressViewController.swift in Sources */,
+				2C54AD5E1A92AA510023BD20 /* NotificationTableViewCell.swift in Sources */,
 				2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */,
 				2CA435F519F48B6F00DC1C6E /* GetDirectionsTableViewCell.swift in Sources */,
 				2C9BE6961A5327E300980C0D /* XLFormButtonCell.m in Sources */,
