@@ -125,7 +125,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["challengeTrackNumber"] = "1"
         newChallengeModel["stepContent"] = []
 
-        newChallengeModel.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        newChallengeModel.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
                 self.challengeTabVC.loadCurrentChallenges()
             }

@@ -15,6 +15,8 @@ class NotificationTableViewCell: UITableViewCell {
     var notificationTypeLabel:UILabel!
     var senderAvatarImageView:UIImageView!
     var receiverAvatarImageView:UIImageView!
+    var timeLabel:UILabel!
+    var separatorView:UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +48,7 @@ class NotificationTableViewCell: UITableViewCell {
         contentView.addSubview(self.receiverLabel)
         
         self.senderAvatarImageView = UIImageView(frame: CGRectZero)
+        self.senderAvatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.senderAvatarImageView.layer.cornerRadius = 25
         self.senderAvatarImageView.image = UIImage(named: "bear-icon")
         self.senderAvatarImageView.backgroundColor = UIColor.grayColor()
@@ -63,16 +66,43 @@ class NotificationTableViewCell: UITableViewCell {
         self.notificationTypeLabel.text = "Notification Type"
         contentView.addSubview(self.notificationTypeLabel)
         
-        var viewsDictionary = ["senderLabel":self.senderLabel, "receiverLabel":self.receiverLabel, "senderAvatarImageView":self.senderAvatarImageView, "receiverAvatarImageView":self.receiverAvatarImageView, "notificationTypeLabel":self.notificationTypeLabel]
+        self.timeLabel = UILabel(frame: CGRectZero)
+        self.timeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.timeLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        self.timeLabel.text = "ago"
+        contentView.addSubview(self.timeLabel)
         
-        var metricsDictionary = ["sideMargin": 7.5, "verticalMargin":12.5]
+        self.separatorView = UIView(frame: CGRectZero)
+        self.separatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.separatorView.backgroundColor = UIColor(white: 0.85, alpha: 1)
+        contentView.addSubview(self.separatorView)
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[senderAvatarImageView(50)]-[senderLabel]-[notificationTypeLabel]-[receiverLabel]-sideMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[senderAvatarImageView(50)]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var viewsDictionary = ["senderLabel":self.senderLabel, "receiverLabel":self.receiverLabel, "senderAvatarImageView":self.senderAvatarImageView, "receiverAvatarImageView":self.receiverAvatarImageView, "notificationTypeLabel":self.notificationTypeLabel, "separatorView":self.separatorView, "timeLabel":self.timeLabel]
+        
+        var metricsDictionary = ["sideMargin": 7.5, "verticalMargin":18]
+        
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[senderAvatarImageView(50)]-[senderLabel]-[notificationTypeLabel]-[receiverLabel]", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separatorView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
+        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[receiverLabel]-[timeLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[senderAvatarImageView(50)]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        
+        var secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[senderAvatarImageView(50)]-verticalMargin-[separatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        
+        var thirdVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14-[timeLabel]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
+        contentView.addConstraints(secondHorizontalConstraints)
+        contentView.addConstraints(thirdHorizontalConstraints)
+        
         contentView.addConstraints(verticalConstraints)
+        contentView.addConstraints(secondVerticalConstraints)
+        contentView.addConstraints(thirdVerticalConstraints)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

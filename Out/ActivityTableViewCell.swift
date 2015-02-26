@@ -54,6 +54,9 @@ class ActivityTableViewCell: UITableViewCell {
         
         contentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
+
+
+        
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.paperView.backgroundColor = UIColor.whiteColor()
@@ -71,6 +74,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.reverseTimeLabel.numberOfLines = 1
         self.reverseTimeLabel.textAlignment = NSTextAlignment.Right
         self.reverseTimeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.reverseTimeLabel.text = "time"
         self.reverseTimeLabel.font = regularFont?.fontWithSize(15.0)
         self.paperView.addSubview(self.reverseTimeLabel)
         
@@ -80,7 +84,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.backgroundColor = UIColor.whiteColor()
-//        self.avatarImageView.image = UIImage(named: "dog-icon")
+        self.avatarImageView.image = UIImage(named: "avatarImagePlaceholder")
         self.paperView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -88,6 +92,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.aliasLabel.numberOfLines = 1
         self.aliasLabel.textAlignment = NSTextAlignment.Left
         self.aliasLabel.font = titleFont?.fontWithSize(16.0)
+        self.aliasLabel.text = "username"
         self.paperView.addSubview(self.aliasLabel)
         
         self.actionLabel = UILabel(frame: CGRectZero)
@@ -95,6 +100,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.actionLabel.numberOfLines = 0
         self.actionLabel.textAlignment = NSTextAlignment.Left
         self.actionLabel.font = titleFont?.fontWithSize(16.0)
+        self.actionLabel.text = "challenge action"
         self.actionLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 12 - 50 - 12 - 12 - 10
         if UIScreen.mainScreen().bounds.width == 320{
             self.actionLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 12 - 50 - 12 - 12 - 10
@@ -119,7 +125,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.heroImageView.layer.cornerRadius = 5
         self.heroImageView.clipsToBounds = true
         self.heroImageView.contentMode = UIViewContentMode.ScaleAspectFill
-//        self.heroImageView.image = UIImage(named: "heroPlaceholder")
+        self.heroImageView.image = UIImage(named: "heroPlaceholder")
         self.contentCanvas.addSubview(self.heroImageView)
         
         self.contentType = UIVisualEffectView(frame: CGRectZero)
@@ -135,6 +141,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeTitleLabel.numberOfLines = 0
         self.narrativeTitleLabel.font = titleFont?.fontWithSize(15.0)
         self.narrativeTitleLabel.textAlignment = NSTextAlignment.Left
+        self.narrativeTitleLabel.text = "Narrative Title"
         self.contentCanvas.addSubview(self.narrativeTitleLabel)
         
         self.narrativeContentLabel = UILabel(frame: CGRectZero)
@@ -142,6 +149,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeContentLabel.numberOfLines = 0
         self.narrativeContentLabel.preferredMaxLayoutWidth = 330
         self.narrativeContentLabel.textAlignment = NSTextAlignment.Left
+        self.narrativeContentLabel.text = "Narrative Content"
         self.narrativeContentLabel.font = valueFont?.fontWithSize(14.0)
         self.contentCanvas.addSubview(self.narrativeContentLabel)
         
@@ -175,13 +183,14 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeCountLabel.numberOfLines = 1
         self.likeCountLabel.textAlignment = NSTextAlignment.Right
+        self.likeCountLabel.text = ""
         self.likeCountLabel.font = titleFont?.fontWithSize(16.0)
         self.likeButtonArea.addSubview(self.likeCountLabel)
         
         self.likeButton = UIImageView(frame: CGRectZero)
         self.likeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeButton.contentMode = UIViewContentMode.ScaleAspectFit
-//        self.likeButton.image = UIImage(named: "likeButton-icon")
+        self.likeButton.image = UIImage(named: "likeButton-icon")
         self.likeButton.userInteractionEnabled = true
         self.likeButton.layer.cornerRadius = 22
         self.likeButton.clipsToBounds = true
@@ -352,6 +361,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.likeButtonArea.addConstraints(horizontalLikeButtonAreaConstraints)
         self.likeButtonArea.addConstraints(verticalLikeButtonAreaConstraints)
+        
     }
     
     

@@ -19,6 +19,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var likeCount:Int = 0
     var commentCount:Int = 0
     var noActivityView:UIView!
+    var processedActivities:NSMutableArray = []
     
     let colorDictionary =
     [
@@ -73,6 +74,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = 358
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // noActivityView init and layout
@@ -98,7 +100,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.view.addSubview(self.noActivityView)
 
         self.refreshControl?.beginRefreshing()
-        loadActivities()
+        loadActivitiesOnViewDidLoad()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -145,12 +147,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
 
     override func viewWillAppear(animated: Bool) {
-//        self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-//        self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -177,82 +179,30 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
         cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
 
-        var currentActivity = self.currentActivities[indexPath.row]
-        var activityCreatedTime = currentActivity.createdAt
-        var currentChallenge = currentActivity["challenge"] as! PFObject
-        var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
-        var currentUser = currentActivity["ownerUser"] as! PFUser
-
-        var avatarString = currentUser["avatar"] as! String
-        var currentUserColor = currentUser["color"] as! String
-        var currentAction = currentChallenge["action"] as! String
-        var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
-        currentChallengeTrackNumber = currentChallengeTrackNumber - 1
-        var currentActivityImageString:String
-        // If there's a narrative image for current challenge, load image
-        if (currentChallenge["narrativeImages"] as! [String]).count > 0{
-            currentActivityImageString = (currentChallenge["narrativeImages"] as! [String])[currentChallengeTrackNumber] as String
+        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
+        
+        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+        if (currentActivityImageString != ""){
             cell.heroImageView.image = UIImage(named: currentActivityImageString)
         }
         else{
             cell.heroImageView.image = nil
         }
         
-        var activityCreatedTimeLabel = activityCreatedTime.shortTimeAgoSinceNow()
-        cell.reverseTimeLabel.text = "\(activityCreatedTimeLabel)"
-        cell.avatarImageView.image = UIImage(named: "\(avatarString)-icon")
-        cell.avatarImageView.backgroundColor = self.colorDictionary[currentUserColor]
-        cell.aliasLabel.text = currentUser.username
-        cell.actionLabel.text = currentAction
+        cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
+        cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
         
-        var currentNarrativeTitleString:String
-        if (currentChallenge["narrativeTitles"] as! [String]).count > 0{
-            currentNarrativeTitleString = (currentChallenge["narrativeTitles"] as! [String])[currentChallengeTrackNumber] as String
-        }
-        else{
-            currentNarrativeTitleString = ""
-        }
-        cell.narrativeTitleLabel.text = currentNarrativeTitleString
-
-        var currentNarrativeContentString:String
-        if (currentChallenge["narrativeTitles"] as! [String]).count > 0{
-            currentNarrativeContentString = (currentChallenge["narrativeContents"] as! [String])[currentChallengeTrackNumber] as String
-        }
-        else{
-            currentNarrativeContentString = ""
-        }
-        cell.narrativeContentLabel.text = currentNarrativeContentString
+        cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
+        cell.aliasLabel.text = currentActivity["aliasLabel"]!
+        cell.actionLabel.text = currentActivity["actionLabelText"]!
         
-        if self.currentActivitiesLikeCount.count == 0{
-            cell.likeCountLabel.text = ""
-        }
-        else{
-            if self.currentActivitiesLikeCount[indexPath.row] > 1{
-                cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) likes"
-            }
-            else if self.currentActivitiesLikeCount[indexPath.row] == 1{
-                cell.likeCountLabel.text = "\(self.currentActivitiesLikeCount[indexPath.row]) like"
-            }
-            else{
-                cell.likeCountLabel.text = ""
-            }
-        }
-        if self.currentActivitiesCommentCount.count == 0{
-            cell.commentsCountLabel.text = "No comments"
-        }
-        else{
-            if self.currentActivitiesCommentCount[indexPath.row] > 1{
-                cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comments"
-            }
-            else if self.currentActivitiesCommentCount[indexPath.row] == 1{
-                cell.commentsCountLabel.text = "\(self.currentActivitiesCommentCount[indexPath.row]) comment"
-            }
-            else{
-                cell.commentsCountLabel.text = "No comments"
-            }
-        }
+        cell.narrativeTitleLabel.text = currentActivity["currentNarrativeTitleString"]!
+        cell.narrativeContentLabel.text = currentActivity["currentNarrativeContentString"]!
         
-        if contains(self.currentLikedAcitivitiesIdStrings, currentActivity.objectId){
+        cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
+        cell.commentsCountLabel.text = currentActivity["commentCountLabel"]!
+        
+        if (currentActivity["liked"] == "yes"){
             cell.likeButton.image = UIImage(named: "likeButtonFilled-icon")
         }
         else{
@@ -260,6 +210,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 358
     }
     
     func loadActivities(){
@@ -336,9 +290,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
                                                 ++self.commentCount
                                                 if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
+                                                    self.prepareDataForTableView()
                                                     (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+                                                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
                                                     self.refreshControl?.endRefreshing()
-                                                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                                                 }
                                             }
                                             else {
@@ -376,13 +331,193 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
     }
 
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 600
+    func loadActivitiesOnViewDidLoad(){
+        var followingQuery = PFQuery(className: "FollowerFollowing")
+        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        followingQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // Found FollowerFollowing object for current user
+                var currentUserFollowerFollowingObject = objects[0] as! PFObject
+                var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as! [PFUser]
+                var activityQuery = PFQuery(className: "Activity")
+                // Include current user so user's own activities also show up
+                currentUserFollowingUsers.append(PFUser.currentUser())
+                
+                activityQuery.whereKey("ownerUser", containedIn: currentUserFollowingUsers)
+                activityQuery.includeKey("challenge")
+                activityQuery.includeKey("userChallengeData")
+                activityQuery.includeKey("ownerUser")
+                activityQuery.orderByDescending("createdAt")
+                // activityQuery.limit = 15
+                activityQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        // Found activities
+                        self.currentActivities = objects as! [PFObject]
+                        // If activities count is 0, show no activity view, else display activities
+                        if self.currentActivities.count == 0{
+                            self.noActivityView.hidden = false
+                            self.refreshControl?.endRefreshing()
+                        }
+                        else{
+                            self.noActivityView.hidden = true
+                        }
+                        
+                        // Query activities liked by current user
+                        self.currentActivitiesCommentCount = Array(count: self.currentActivities.count, repeatedValue: 0)
+                        self.currentActivitiesLikeCount = Array(count: self.currentActivities.count, repeatedValue: 0)
+                        self.likeCount = 0
+                        self.commentCount = 0
+                        var relation = PFUser.currentUser().relationForKey("likedActivity")
+                        relation.query().findObjectsInBackgroundWithBlock{
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            if error == nil {
+                                for object in objects{
+                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
+                                }
+                            }
+                            else {
+                                // Log details of the failure
+                                NSLog("Error: %@ %@", error, error.userInfo!)
+                                self.refreshControl?.endRefreshing()
+                            }
+                        }
+                        
+                        // Query like count of activities
+                        for activity in self.currentActivities{
+                            var queryLikes = PFQuery(className: "_User")
+                            queryLikes.whereKey("likedActivity", equalTo: activity)
+                            queryLikes.findObjectsInBackgroundWithBlock{
+                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                if error == nil {
+                                    var count = objects.count
+                                    self.currentActivitiesLikeCount[find(self.currentActivities, activity)!] = count
+                                    ++self.likeCount
+                                    
+                                    // Query comment count of activities
+                                    var queryComments = PFQuery(className: "Comment")
+                                    queryComments.whereKey("activity", equalTo: activity)
+                                    queryComments.findObjectsInBackgroundWithBlock{
+                                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                                        if error == nil {
+                                            var count = objects.count
+                                            self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
+                                            ++self.commentCount
+                                            if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
+                                                self.prepareDataForTableView()
+                                                (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+                                                self.tableView.reloadData()
+                                                self.refreshControl?.endRefreshing()
+                                            }
+                                        }
+                                        else {
+                                            // Log details of the failure
+                                            NSLog("Error: %@ %@", error, error.userInfo!)
+                                            self.refreshControl?.endRefreshing()
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                                else {
+                                    // Log details of the failure
+                                    NSLog("Error: %@ %@", error, error.userInfo!)
+                                    self.refreshControl?.endRefreshing()
+                                }
+                            }
+                            
+                        }
+                        
+                    } else {
+                        // Log details of the failure
+                        NSLog("Error: %@ %@", error, error.userInfo!)
+                        self.refreshControl?.endRefreshing()
+                        
+                    }
+                }
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+                self.refreshControl?.endRefreshing()
+                
+            }
+        }
+        
+    }
+
+    
+    func prepareDataForTableView(){
+        var activityCount = 0
+        for activity in self.currentActivities{
+            var currentActivityCreatedTime = activity.createdAt
+            var currentActivityChallenge = activity["challenge"] as! PFObject
+            var currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
+            var currentActivityUser = activity["ownerUser"] as! PFUser
+            var currentAvatarString = currentActivityUser["avatar"] as! String
+            var currentAvatarColor = currentActivityUser["color"] as! String
+            var currentAction = currentActivityChallenge["action"] as! String
+            var currentChallengeTrackNumber = (currentActivityUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            currentChallengeTrackNumber = currentChallengeTrackNumber - 1
+            var activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
+            
+            
+            var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No Comment", "liked":"no"]
+
+            var currentActivityImageString:String
+            
+            if (currentActivityChallenge["narrativeImages"] as! [String]).count > 0{
+                currentActivityImageString = (currentActivityChallenge["narrativeImages"] as! [String])[currentChallengeTrackNumber] as String
+                currentActivityDictionary.updateValue(currentActivityImageString, forKey: "currentActivityImageString")
+            }
+            
+            var currentNarrativeTitleString:String
+            if (currentActivityChallenge["narrativeTitles"] as! [String]).count > 0{
+                currentNarrativeTitleString = (currentActivityChallenge["narrativeTitles"] as! [String])[currentChallengeTrackNumber] as String
+                currentActivityDictionary.updateValue(currentNarrativeTitleString, forKey: "currentNarrativeTitleString")
+            }
+            
+            
+            var currentNarrativeContentString:String
+            if (currentActivityChallenge["narrativeTitles"] as! [String]).count > 0{
+                currentNarrativeContentString = (currentActivityChallenge["narrativeContents"] as! [String])[currentChallengeTrackNumber] as String
+                currentActivityDictionary.updateValue(currentNarrativeContentString, forKey: "currentNarrativeContentString")
+            }
+
+
+
+            if self.currentActivitiesLikeCount.count == 0{
+            }
+            else{
+                if self.currentActivitiesLikeCount[activityCount] > 1{
+                    currentActivityDictionary.updateValue("\(self.currentActivitiesLikeCount[activityCount]) likes", forKey: "likeCountLabel")
+                }
+                else if self.currentActivitiesLikeCount[activityCount] == 1{
+                    currentActivityDictionary.updateValue("\(self.currentActivitiesLikeCount[activityCount]) like", forKey: "likeCountLabel")
+                }
+            }
+            if self.currentActivitiesCommentCount.count == 0{
+            }
+            else{
+                if self.currentActivitiesCommentCount[activityCount] > 1{
+                    currentActivityDictionary.updateValue("\(self.currentActivitiesCommentCount[activityCount]) comments", forKey: "commentCountLabel")
+                }
+                else if self.currentActivitiesCommentCount[activityCount] == 1{
+                    currentActivityDictionary.updateValue("\(self.currentActivitiesCommentCount[activityCount]) comment", forKey: "commentCountLabel")
+                }
+            }
+
+            if contains(self.currentLikedAcitivitiesIdStrings, activity.objectId){
+                currentActivityDictionary.updateValue("yes", forKey: "liked")
+            }
+
+            self.processedActivities.addObject(currentActivityDictionary)
+            ++activityCount
+        }
     }
     
     // Register current user's liking of an activity on Parse if Like button tapped
     func likeButtonTapped(sender:UITapGestureRecognizer){
-
         var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
         var likedActivity = self.currentActivities[currentIndexPath.row]
         
@@ -399,17 +534,30 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else{
             currentLikeCount = currentLikeCountText.componentsSeparatedByString(" ")[0].toInt()!
         }
-        
         if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
             currentLikeButton.image = UIImage(named: "likeButton-icon")
             --currentLikeCount
+            var currentLikeCountLabelString:String
+            if currentLikeCount > 1{
+                currentLikeCountLabelString = "\(currentLikeCount) likes"
+            }
+            else if currentLikeCount == 1{
+                currentLikeCountLabelString = "\(currentLikeCount) like"
+            }
+            else{
+                currentLikeCountLabelString = ""
+            }
             --self.currentActivitiesLikeCount[currentIndexPath.row]
+            var currentActivityDictionary = self.processedActivities[currentIndexPath.row] as! [String:String]
+            currentActivityDictionary.updateValue("no", forKey: "liked")
+            currentActivityDictionary.updateValue(currentLikeCountLabelString, forKey: "likeCountLabel")
+            self.processedActivities.replaceObjectAtIndex(currentIndexPath.row, withObject: currentActivityDictionary)
             self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.removeObject(likedActivity)
             self.currentLikedAcitivitiesIdStrings = self.currentLikedAcitivitiesIdStrings.filter{$0 != likedActivity.objectId}
-            user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            user.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                 if error == nil{
 //                    self.loadActivities()
 //                    self.tableView.reloadData()
@@ -419,21 +567,26 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else{
             currentLikeButton.image = UIImage(named: "likeButtonFilled-icon")
             ++currentLikeCount
-//            if currentLikeCount > 1{
-//                currentLikeCountLabel.text = "\(currentLikeCount) likes"
-//            }
-//            else if currentLikeCount == 1{
-//                currentLikeCountLabel.text = "\(currentLikeCount) like"
-//            }
-//            else{
-//                currentLikeCountLabel.text = ""
-//            }
+            var currentLikeCountLabelString:String
+            if currentLikeCount > 1{
+                currentLikeCountLabelString = "\(currentLikeCount) likes"
+            }
+            else if currentLikeCount == 1{
+                currentLikeCountLabelString = "\(currentLikeCount) like"
+            }
+            else{
+                currentLikeCountLabelString = ""
+            }
             ++self.currentActivitiesLikeCount[currentIndexPath.row]
+            var currentActivityDictionary = self.processedActivities[currentIndexPath.row] as! [String:String]
+            currentActivityDictionary.updateValue("yes", forKey: "liked")
+            currentActivityDictionary.updateValue(currentLikeCountLabelString, forKey: "likeCountLabel")
+            self.processedActivities.replaceObjectAtIndex(currentIndexPath.row, withObject: currentActivityDictionary)
             self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId)
             var likedActivityQuery = relation.query()
             relation.addObject(likedActivity)
-            user.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            user.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                 if error == nil{
 //                    self.loadActivities()
 //                    self.tableView.reloadData()
@@ -444,7 +597,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     newLikeNotification["activity"] = likedActivity
                     newLikeNotification["type"] = "like"
                     newLikeNotification["read"] = false
-                    newLikeNotification.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+                    newLikeNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                         if error == nil{
                             // Send iOS Notification
                         }

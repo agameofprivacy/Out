@@ -257,7 +257,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         // If there is more steps in current challenge, update current step count and step title information on card
         if currentStepCount < currentChallengeModel["stepTitle"].count{
             currentChallengeObject["currentStepCount"] = ++currentStepCount
-            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                 if error == nil{
                     currentCell.canvasTableView.reloadData()
                     var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as! [String]
@@ -279,7 +279,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             
             currentChallengeObject["isCurrent"] = false
             currentChallengeObject["completedDate"] = date
-            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                 if error == nil{
                     self.loadCurrentChallenges()
                     // Challenge Completed, show message
@@ -287,7 +287,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             }
             
             var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject, "ownerUser":PFUser.currentUser()])
-            newActivity.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+            newActivity.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
                 if error == nil{
                     // Challenge Completed, show message
                 }

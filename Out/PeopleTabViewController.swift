@@ -464,7 +464,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         currentUserFollowingRequestedFrom.removeAtIndex(currentIndexPath.row)
         self.followerFollowingObject["requestsFromUsers"] = currentUserFollowingRequestedFrom
         self.followerFollowingObject["followers"] = currentUserFollowers
-        self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
                 self.loadPeople()
                 self.followerTableView.reloadData()

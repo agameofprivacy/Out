@@ -201,14 +201,14 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
                 self.loadPeople()
                 self.peopleTableView.reloadData()
             }
         }
         
-        userToFollow.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        userToFollow.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
 
             }

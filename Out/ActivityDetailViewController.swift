@@ -64,6 +64,8 @@ class ActivityDetailViewController: SLKTextViewController {
         
         self.loadComments()
         
+        self.navigationItem.title = "Comments"
+        
         self.activityCardView = UIView(frame: CGRectZero)
         self.activityCardView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.view.addSubview(self.activityCardView)
@@ -83,7 +85,6 @@ class ActivityDetailViewController: SLKTextViewController {
         self.activityAvatar = UIImageView(frame: CGRectZero)
         self.activityAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.activityCardView.addSubview(self.activityAvatar)
-        
         
         self.bounces = true
         self.keyboardPanningEnabled = true
@@ -133,7 +134,7 @@ class ActivityDetailViewController: SLKTextViewController {
         newCommentNotification["receiver"] = self.currentActivity["ownerUser"] as! PFUser
         newCommentNotification["read"] = false
         newCommentNotification["type"] = "comment"
-        newCommentNotification.saveInBackgroundWithBlock{(succeeded: Bool!, error: NSError!) -> Void in
+        newCommentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
                 // Send iOS Notification
             }
@@ -181,7 +182,7 @@ class ActivityDetailViewController: SLKTextViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        self.parentVC.loadActivities()
+        self.parentVC.loadActivitiesOnViewDidLoad()
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
