@@ -11,6 +11,11 @@ import UIKit
 // Controller for activity tab view
 class ActivityTabViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+    let regularFont = UIFont(name: "HelveticaNeue", size: 15.0)
+    let valueFont = UIFont(name: "HelveticaNeue-Light", size: 15.0)
+ 
+    
     var currentActivities:[PFObject] = []
     var currentLikedAcitivitiesIdStrings:[String] = []
     var currentActivity:PFObject!
@@ -74,8 +79,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.estimatedRowHeight = 358
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 358
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // noActivityView init and layout
         self.noActivityView = UIView(frame: self.tableView.frame)
@@ -212,8 +217,39 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         return cell
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 358
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 388
+//    }
+
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
+        var actionLabelText: String = currentActivity["actionLabelText"]!
+        var narrativeContentLabelText: String = currentActivity["currentNarrativeContentString"]!
+        var result:CGFloat = 0.0
+        var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
+        var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
+        var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.titleFont!.fontWithSize(16.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+
+        
+        var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.valueFont!.fontWithSize(14.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+
+        var actionLabelHeight = actionLabelRect.size.height
+        var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
+        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+        var imageHeight:CGFloat = 140 + 4 + 8
+        if (currentActivityImageString == ""){
+            imageHeight = 0
+        }
+        
+        var marginHeight:CGFloat = 22 + 19.5 + 18 + 16 + 1 + 8 + 46 + 10 + 20 + 4
+        println("action label: \(actionLabelHeight)")
+        println("narrative content: \(narrativeContentLabelHeight)")
+        result = actionLabelHeight + narrativeContentLabelHeight + marginHeight + imageHeight
+        return CGFloat(result)
     }
     
     func loadActivities(){
@@ -462,7 +498,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             var activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
             
             
-            var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No Comment", "liked":"no"]
+            var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
 
             var currentActivityImageString:String
             

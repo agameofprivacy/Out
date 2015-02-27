@@ -105,7 +105,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         // Check for notification read status
         if ((self.notifications[indexPath.row] as PFObject)["read"] as! Bool){
-            println("Notification read")
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
         }
         else{
