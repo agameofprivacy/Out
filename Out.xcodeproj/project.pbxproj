@@ -821,13 +821,13 @@
 			isa = PBXGroup;
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
+				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
 				2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
 				2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */,
 				2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */,
 				2C54AD5D1A92AA510023BD20 /* NotificationTableViewCell.swift */,
 				2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */,
-				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
 			);
 			name = ActivityTab;
 			sourceTree = "<group>";
@@ -981,6 +981,7 @@
 				TargetAttributes = {
 					2C5D996819E4A9FB00133F59 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 3DZ3S2K7LU;
 					};
 					2C5D997D19E4A9FB00133F59 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -1228,6 +1229,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHUN-WEI CHEN (4LV8F2Q7NB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1271,6 +1273,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHUN-WEI CHEN (4LV8F2Q7NB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1295,7 +1298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHUN-WEI CHEN (4LV8F2Q7NB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1307,7 +1310,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a343b259-3f7f-4757-a964-bac186ba5153";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1319,7 +1322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHUN-WEI CHEN (4LV8F2Q7NB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1331,7 +1334,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a343b259-3f7f-4757-a964-bac186ba5153";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -109,6 +109,11 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.contentCanvas = UIView(frame: CGRectZero)
         self.contentCanvas.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.contentCanvas.backgroundColor = UIColor(white: 0.975, alpha: 1)
+        self.contentCanvas.layer.cornerRadius = 5
+        self.contentCanvas.clipsToBounds = true
+        self.contentCanvas.layer.borderWidth = 0.75
+        self.contentCanvas.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
         self.paperView.addSubview(self.contentCanvas)
         
         var responseBarSeparator = UIView(frame: CGRectZero)
@@ -139,7 +144,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeTitleLabel = UILabel(frame: CGRectZero)
         self.narrativeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.narrativeTitleLabel.numberOfLines = 0
-        self.narrativeTitleLabel.font = titleFont?.fontWithSize(15.0)
+        self.narrativeTitleLabel.font = titleFont?.fontWithSize(14.0)
         self.narrativeTitleLabel.textAlignment = NSTextAlignment.Left
         self.narrativeTitleLabel.text = "Narrative Title"
         self.contentCanvas.addSubview(self.narrativeTitleLabel)
@@ -147,10 +152,10 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeContentLabel = UILabel(frame: CGRectZero)
         self.narrativeContentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.narrativeContentLabel.numberOfLines = 0
-        self.narrativeContentLabel.preferredMaxLayoutWidth = 330
+        self.narrativeContentLabel.preferredMaxLayoutWidth = 308
         self.narrativeContentLabel.textAlignment = NSTextAlignment.Left
         self.narrativeContentLabel.text = "Narrative Content"
-        self.narrativeContentLabel.font = valueFont?.fontWithSize(14.0)
+        self.narrativeContentLabel.font = valueFont?.fontWithSize(13.0)
         self.contentCanvas.addSubview(self.narrativeContentLabel)
         
         self.commentsButtonArea = UIView(frame: CGRectZero)
@@ -237,7 +242,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         var horizontalSecondRowPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-paperSidePadding-[avatarImageView(50)]-paperSidePadding-[aliasLabel]-[reverseTimeLabel]-paperSidePadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
         
-        var horizontalThirdRowPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-paperSidePadding-[avatarImageView(50)]-paperSidePadding-[actionLabel]-paperSidePadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
+        var horizontalThirdRowPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[avatarImageView(50)]-paperSidePadding-[actionLabel]-paperSidePadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
         var horizontalFourthRowPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-paperSidePadding-[contentCanvas]-paperSidePadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
@@ -247,9 +252,9 @@ class ActivityTableViewCell: UITableViewCell {
         
         var verticalLeftPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-paperTopPadding-[avatarImageView(50)]->=longVerticalPadding-[contentCanvas]-paperTopPadding-[responseBarSeparator(1)]-mediumVerticalPadding-[responseBar]-paperBottomPadding-|", options:NSLayoutFormatOptions.AlignAllLeft, metrics:paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
         
-        var verticalSecondColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-secondColumnTopPadding-[aliasLabel]->=4-[actionLabel]-[contentCanvas]-paperTopPadding-[responseBarSeparator(1)]-mediumVerticalPadding-[responseBar]-paperBottomPadding-|", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
+        var verticalSecondColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-secondColumnTopPadding-[aliasLabel]->=4-[actionLabel]->=longVerticalPadding-[contentCanvas]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
-        var verticalThirdColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-thirdColumnTopPadding-[reverseTimeLabel]->=6-[actionLabel]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
+        var verticalThirdColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-thirdColumnTopPadding-[reverseTimeLabel]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
         self.paperView.addConstraints(horizontalSecondRowPaperInternalViewConstraints)
         self.paperView.addConstraints(horizontalThirdRowPaperInternalViewConstraints)
@@ -275,18 +280,18 @@ class ActivityTableViewCell: UITableViewCell {
         var contentCanvasMetricsDictionary =
         [
             "smallHorizontalPadding":6,
-            "mediumVerticalPadding":8,
+            "mediumVerticalPadding":12,
             "largeVerticalPadding":12,
             "shortVerticalPadding":4
         ]
         
         var horizontalContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImageView]-0-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
 
-        var horizontalnarrativeTitleContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[narrativeTitleLabel]-0-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
+        var horizontalnarrativeTitleContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-mediumVerticalPadding-[narrativeTitleLabel]-mediumVerticalPadding-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
         
-        var horizontalnarrativeContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-mediumVerticalPadding-[narrativeContentLabel]-mediumVerticalPadding-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
+        var horizontalnarrativeContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-mediumVerticalPadding-[narrativeContentLabel]-16-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
 
-        var verticalContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImageView(<=140)]-mediumVerticalPadding-[narrativeTitleLabel]-shortVerticalPadding-[narrativeContentLabel]-0-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
+        var verticalContentCanvasViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImageView(<=110)]-mediumVerticalPadding-[narrativeTitleLabel]-shortVerticalPadding-[narrativeContentLabel]-mediumVerticalPadding-|", options:NSLayoutFormatOptions(0), metrics: contentCanvasMetricsDictionary, views: contentCanvasViewsDictionary)
 
         self.contentCanvas.addConstraints(horizontalContentCanvasViewConstraints)
         self.contentCanvas.addConstraints(horizontalnarrativeTitleContentCanvasViewConstraints)

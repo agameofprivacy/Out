@@ -217,40 +217,76 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         return cell
     }
     
-//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 388
-//    }
-
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
-        var actionLabelText: String = currentActivity["actionLabelText"]!
-        var narrativeContentLabelText: String = currentActivity["currentNarrativeContentString"]!
-        var result:CGFloat = 0.0
-        var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
-        var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
-        var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-            object: self.titleFont!.fontWithSize(16.0),
-            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-
-        
-        var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-            object: self.valueFont!.fontWithSize(14.0),
-            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-
-        var actionLabelHeight = actionLabelRect.size.height
-        var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
-        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
-        var imageHeight:CGFloat = 140 + 4 + 8
-        if (currentActivityImageString == ""){
-            imageHeight = 0
-        }
-        
-        var marginHeight:CGFloat = 22 + 19.5 + 18 + 16 + 1 + 8 + 46 + 10 + 20 + 4
-        println("action label: \(actionLabelHeight)")
-        println("narrative content: \(narrativeContentLabelHeight)")
-        result = actionLabelHeight + narrativeContentLabelHeight + marginHeight + imageHeight
-        return CGFloat(result)
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 380
     }
+
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
+//        var actionLabelText:String = currentActivity["actionLabelText"]!
+//        var aliasLabelText:String = currentActivity["aliasLabel"]!
+//        var narrativeTitleLabelText:String = currentActivity["currentNarrativeTitleString"]!
+//        var narrativeContentLabelText:String = currentActivity["currentNarrativeContentString"]!
+//        var commentsCountLabelText:String = currentActivity["commentCountLabel"]!
+//        var writeACommentLabelText:String = "write a comment"
+//        
+//        
+//        var result:CGFloat = 0.0
+//        var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
+//        var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
+//        var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
+//        var aliasMaxSize:CGSize = CGSize(width: CGFloat(240), height: CGFloat(MAXFLOAT))
+//        var commentCountMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+//        var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+//
+//        
+//        var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.titleFont!.fontWithSize(16.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//
+//        
+//        var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.valueFont!.fontWithSize(14.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//
+//        var narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.titleFont!.fontWithSize(15.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//        
+//        var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.titleFont!.fontWithSize(16.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//
+//        var commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.titleFont!.fontWithSize(16.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//    
+//        var writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+//            object: self.valueFont!.fontWithSize(16.0),
+//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+//        
+//        
+//        var actionLabelHeight = actionLabelRect.size.height
+//        var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
+//        var narrativeTitleLabelHeight = narrativeTitleLabelRect.size.height
+//        var aliasLabelHeight = aliasLabelRect.size.height
+//        var commentCountLabelHeight = commentCountLabelRect.size.height
+//        var writeACommentLabelHeight = writeACommentLabelRect.size.height
+//        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+//        var imageHeight:CGFloat = 110 + 9.5 + 2 + 11.9
+//        if (currentActivityImageString == ""){
+//            imageHeight = 0
+//        }
+//        
+////        println("alias label: \(aliasLabelHeight)")
+////        println("action content: \(actionLabelHeight)")
+////        println("narrative title: \(narrativeTitleLabelHeight)")
+////        println("narrative content: \(narrativeContentLabelHeight)")
+////        println("comment count: \(commentCountLabelHeight)")
+////        println("write comment: \(writeACommentLabelHeight)")
+//        result = 22 + aliasLabelHeight + 4 + actionLabelHeight + imageHeight + 8 + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 16 + 1 + 8 + 46 + 10
+//        return CGFloat(result)
+//    }
     
     func loadActivities(){
         var followingQuery = PFQuery(className: "FollowerFollowing")
@@ -270,7 +306,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                // activityQuery.limit = 15
+                 activityQuery.limit = 15
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
@@ -385,7 +421,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                // activityQuery.limit = 15
+                 activityQuery.limit = 15
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
