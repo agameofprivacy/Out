@@ -79,6 +79,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
+
 //        self.tableView.estimatedRowHeight = 358
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -167,12 +168,22 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Return the count of rows from the count of current activities
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0{
         return self.currentActivities.count
+        }
+        else{
+            return 1
+        }
+    }
+    
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
     
     // Table view data source method for activities
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        if indexPath.section == 0{
         var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
 
         var activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
@@ -215,6 +226,13 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
 
         return cell
+        }
+        else
+        {
+            var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
+            cell.textLabel?.text = "Load More..."
+            return cell
+        }
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
