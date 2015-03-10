@@ -195,10 +195,9 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton = UIImageView(frame: CGRectZero)
         self.likeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeButton.contentMode = UIViewContentMode.ScaleAspectFit
-        self.likeButton.image = UIImage(named: "likeButton-icon")
-        self.likeButton.userInteractionEnabled = true
-        self.likeButton.layer.cornerRadius = 22
         self.likeButton.clipsToBounds = true
+        self.likeButton.image = UIImage(named: "likeButtonPlaceholder")
+        self.likeButton.userInteractionEnabled = true
         self.likeButtonArea.addSubview(self.likeButton)
         
         

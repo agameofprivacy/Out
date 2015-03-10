@@ -3,7 +3,6 @@
 //
 
 #import <Parse/Parse.h>
-#import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 #import "DashboardAnnouncementsCollectionViewFlowLayout.h"
@@ -18,3 +17,4 @@
 #import "ICETutorialController.h"
 #import "COSTouchVisualizerWindow.h"
 #import "XLForm.h"
+#import "ChallengeCardsCollectionViewFlowLayout.h"

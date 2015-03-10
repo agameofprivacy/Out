@@ -522,14 +522,16 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
     // Initiate logout process if Logout button tapped
     @IBAction func logoutBarButtonItemTapped(sender: UIBarButtonItem) {
-        PFUser.logOut()
-        var currentUser = PFUser.currentUser()
+//        var currentUser = PFUser.currentUser()
         self.performSegueWithIdentifier("LoggedOut", sender: nil)
     }
 
     // Prepare for Logout segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "LoggedOut"){
+            PFInstallation.currentInstallation().removeObjectForKey("currentUser")
+            PFInstallation.currentInstallation().saveInBackground()
+            PFUser.logOut()
             var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
             vc.showTutorial = false
             vc.scrollViewHidden = false

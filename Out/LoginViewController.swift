@@ -181,6 +181,8 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             (user: PFUser!, error: NSError!) -> Void in
             if user != nil {
                 // Do stuff after successful login.
+                PFInstallation.currentInstallation()["currentUser"] = PFUser.currentUser()
+                PFInstallation.currentInstallation().saveInBackground()
                 self.performSegueWithIdentifier("LoggedIn", sender: nil)
             } else {
                 // The login failed. Check error to see why.

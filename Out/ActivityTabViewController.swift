@@ -75,12 +75,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         // UITableView init
         self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
-        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 12, 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
-//        self.tableView.estimatedRowHeight = 358
+//        self.tableView.estimatedRowHeight = 420
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // noActivityView init and layout
@@ -203,6 +203,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
         else{
             cell.heroImageView.image = nil
+            cell.contentCanvas.backgroundColor = UIColor.clearColor()
+            cell.contentCanvas.layer.borderWidth = 0
         }
         
         cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
@@ -235,76 +237,92 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 380
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        if indexPath.section == 0{
+//            return 425
+//        }
+//        else{
+//            return 64
+//        }
+//    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath == NSIndexPath(forRow: 0, inSection: 1){
+            loadMoreActivities()
+        }
     }
 
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
-//        var actionLabelText:String = currentActivity["actionLabelText"]!
-//        var aliasLabelText:String = currentActivity["aliasLabel"]!
-//        var narrativeTitleLabelText:String = currentActivity["currentNarrativeTitleString"]!
-//        var narrativeContentLabelText:String = currentActivity["currentNarrativeContentString"]!
-//        var commentsCountLabelText:String = currentActivity["commentCountLabel"]!
-//        var writeACommentLabelText:String = "write a comment"
-//        
-//        
-//        var result:CGFloat = 0.0
-//        var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
-//        var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
-//        var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
-//        var aliasMaxSize:CGSize = CGSize(width: CGFloat(240), height: CGFloat(MAXFLOAT))
-//        var commentCountMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
-//        var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
-//
-//        
-//        var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.titleFont!.fontWithSize(16.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//
-//        
-//        var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.valueFont!.fontWithSize(14.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//
-//        var narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.titleFont!.fontWithSize(15.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//        
-//        var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.titleFont!.fontWithSize(16.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//
-//        var commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.titleFont!.fontWithSize(16.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//    
-//        var writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-//            object: self.valueFont!.fontWithSize(16.0),
-//            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
-//        
-//        
-//        var actionLabelHeight = actionLabelRect.size.height
-//        var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
-//        var narrativeTitleLabelHeight = narrativeTitleLabelRect.size.height
-//        var aliasLabelHeight = aliasLabelRect.size.height
-//        var commentCountLabelHeight = commentCountLabelRect.size.height
-//        var writeACommentLabelHeight = writeACommentLabelRect.size.height
-//        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
-//        var imageHeight:CGFloat = 110 + 9.5 + 2 + 11.9
-//        if (currentActivityImageString == ""){
-//            imageHeight = 0
-//        }
-//        
-////        println("alias label: \(aliasLabelHeight)")
-////        println("action content: \(actionLabelHeight)")
-////        println("narrative title: \(narrativeTitleLabelHeight)")
-////        println("narrative content: \(narrativeContentLabelHeight)")
-////        println("comment count: \(commentCountLabelHeight)")
-////        println("write comment: \(writeACommentLabelHeight)")
-//        result = 22 + aliasLabelHeight + 4 + actionLabelHeight + imageHeight + 8 + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 16 + 1 + 8 + 46 + 10
-//        return CGFloat(result)
-//    }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0{
+        var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
+        var actionLabelText:String = currentActivity["actionLabelText"]!
+        var aliasLabelText:String = currentActivity["aliasLabel"]!
+        var narrativeTitleLabelText:String = currentActivity["currentNarrativeTitleString"]!
+        var narrativeContentLabelText:String = currentActivity["currentNarrativeContentString"]!
+        var commentsCountLabelText:String = currentActivity["commentCountLabel"]!
+        var writeACommentLabelText:String = "write a comment"
+        
+        
+        var result:CGFloat = 0.0
+        var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
+        var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
+        var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
+        var aliasMaxSize:CGSize = CGSize(width: CGFloat(240), height: CGFloat(MAXFLOAT))
+        var commentCountMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+        var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+
+        
+        var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.titleFont!.fontWithSize(16.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+
+        
+        var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.valueFont!.fontWithSize(14.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+
+        var narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.titleFont!.fontWithSize(15.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+        
+        var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.titleFont!.fontWithSize(16.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+
+        var commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.titleFont!.fontWithSize(16.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+    
+        var writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+            object: self.valueFont!.fontWithSize(16.0),
+            forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+        
+        
+        var actionLabelHeight = actionLabelRect.size.height
+        var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
+        var narrativeTitleLabelHeight = narrativeTitleLabelRect.size.height
+        var aliasLabelHeight = aliasLabelRect.size.height
+        var commentCountLabelHeight = commentCountLabelRect.size.height
+        var writeACommentLabelHeight = writeACommentLabelRect.size.height
+        var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+        var imageHeight:CGFloat = 110 + 9.5 + 2 + 11.9 + 14
+        if (currentActivityImageString == ""){
+            imageHeight = 0
+        }
+        
+//        println("alias label: \(aliasLabelHeight)")
+//        println("action content: \(actionLabelHeight)")
+//        println("narrative title: \(narrativeTitleLabelHeight)")
+//        println("narrative content: \(narrativeContentLabelHeight)")
+//        println("comment count: \(commentCountLabelHeight)")
+//        println("write comment: \(writeACommentLabelHeight)")
+        result = 22 + aliasLabelHeight + 4 + actionLabelHeight + imageHeight + 8 + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 16 + 1 + 8 + 46 + 10
+            return CGFloat(result)
+        }
+        else{
+            return 44
+        }
+    }
     
     func loadActivities(){
         var followingQuery = PFQuery(className: "FollowerFollowing")
@@ -324,10 +342,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                 activityQuery.limit = 15
+                activityQuery.limit = 20
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
+
                         // Found activities
                         self.currentActivities = objects as! [PFObject]
                         // If activities count is 0, show no activity view, else display activities
@@ -439,7 +458,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                 activityQuery.limit = 15
+                activityQuery.limit = 20
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
@@ -536,8 +555,13 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
     }
 
+    func loadMoreActivities(){
+     println("load more activities")
+    }
+    
     
     func prepareDataForTableView(){
+        self.processedActivities.removeAllObjects()
         var activityCount = 0
         for activity in self.currentActivities{
             var currentActivityCreatedTime = activity.createdAt
