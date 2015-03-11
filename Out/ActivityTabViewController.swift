@@ -200,11 +200,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
         if (currentActivityImageString != ""){
             cell.heroImageView.image = UIImage(named: currentActivityImageString)
+            cell.contentCanvas.backgroundColor = UIColor(white: 0.975, alpha: 1)
+            cell.contentCanvas.layer.borderWidth = 0.75
+            cell.contentCanvas.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
         }
         else{
             cell.heroImageView.image = nil
             cell.contentCanvas.backgroundColor = UIColor.clearColor()
             cell.contentCanvas.layer.borderWidth = 0
+            cell.contentCanvas.userInteractionEnabled = false
         }
         
         cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
