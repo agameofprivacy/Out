@@ -26,7 +26,7 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
         webView = UIWebView(frame: self.view.frame)
         webView.delegate = self
         webView.scalesPageToFit = true
-        
+        webView.backgroundColor = UIColor(white: 0.90, alpha: 1)
         // Initialize closeButton
         var closeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneWithView")
         closeButton.enabled = true

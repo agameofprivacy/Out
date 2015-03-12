@@ -43,9 +43,6 @@ class ActivityTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -109,7 +106,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         self.contentCanvas = UIView(frame: CGRectZero)
         self.contentCanvas.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.contentCanvas.backgroundColor = UIColor(white: 0.975, alpha: 1)
+        self.contentCanvas.backgroundColor = UIColor(white: 0.96, alpha: 1)
         self.contentCanvas.layer.cornerRadius = 5
         self.contentCanvas.clipsToBounds = true
         self.contentCanvas.layer.borderWidth = 0.75
@@ -200,7 +197,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton.userInteractionEnabled = true
         self.likeButtonArea.addSubview(self.likeButton)
         
-        
+
         // paperView constraints
         var paperViewsDictionary = ["paperView":paperView]
         var paperMetricsDictionary = ["largeVerticalPadding":12]

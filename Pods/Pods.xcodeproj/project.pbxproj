@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6CB1B9429826A46BBF0EA860 /* Pods-Out-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F49DFFE60D1D27AD7D2CC8 /* Pods-Out-dummy.m */; };
+		B7AA9D4A38C979DFE4F13667 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199AF561BAAD7401C75A3226 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		065BC9125CC129998198FA84 /* 20141105082802353_add_unread_fields_to_models.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141105082802353_add_unread_fields_to_models.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141105082802353_add_unread_fields_to_models.sql"; sourceTree = "<group>"; };
+		0C4646EF1877FE0613DDD89A /* Pods-Out-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Out-environment.h"; sourceTree = "<group>"; };
+		10886D2B07827AB348B0CE5A /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LayerKit.framework; sourceTree = "<group>"; };
+		17A34F2F111DE1FF56B81B2E /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		199AF561BAAD7401C75A3226 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1C1C40A3C5347616C07713BD /* 20150207191203003_create_block_list.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20150207191203003_create_block_list.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20150207191203003_create_block_list.sql"; sourceTree = "<group>"; };
+		220924E6122300CEBE575F5F /* 20141006140917614_add-client_id.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "20141006140917614_add-client_id.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141006140917614_add-client_id.sql"; sourceTree = "<group>"; };
+		26A25B61A8790BC80EC3EE43 /* 20140708154438053_change_insert_trigger_on_messages.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140708154438053_change_insert_trigger_on_messages.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140708154438053_change_insert_trigger_on_messages.sql"; sourceTree = "<group>"; };
+		26D7317C0D84A27651107EA5 /* Pods-Out-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Out-acknowledgements.plist"; sourceTree = "<group>"; };
+		2BB71B5AAB2DE8912C926772 /* 20141002091849299_correct-track_inserts_of_events_delete.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "20141002091849299_correct-track_inserts_of_events_delete.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141002091849299_correct-track_inserts_of_events_delete.sql"; sourceTree = "<group>"; };
+		31FA8A3C27C6613291B1905C /* 20141002175510495_track_streams_and_stream_members_with_deleted_at_column.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141002175510495_track_streams_and_stream_members_with_deleted_at_column.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141002175510495_track_streams_and_stream_members_with_deleted_at_column.sql"; sourceTree = "<group>"; };
+		320A2311DBD8F25265223BE5 /* 20150131122302694_add_indexes_for_unread.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20150131122302694_add_indexes_for_unread.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20150131122302694_add_indexes_for_unread.sql"; sourceTree = "<group>"; };
+		33224871FD9CAE5A94645BA6 /* 20141009125004707_min-max-synced-seq.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "20141009125004707_min-max-synced-seq.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141009125004707_min-max-synced-seq.sql"; sourceTree = "<group>"; };
+		4BA49C7F7AA2973CAEBCAC49 /* Pods-Out-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Out-resources.sh"; sourceTree = "<group>"; };
+		4C1471D1BAB9618B54BFABDE /* Pods-Out.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Out.release.xcconfig"; sourceTree = "<group>"; };
+		4C2B899AE5287E9A153FB625 /* 20140628114921198_remove_creator_id_from_tombstone_wipe_for_ordering.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140628114921198_remove_creator_id_from_tombstone_wipe_for_ordering.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140628114921198_remove_creator_id_from_tombstone_wipe_for_ordering.sql"; sourceTree = "<group>"; };
+		4CCF1A970156A629EBC0EB1A /* layer-client-messaging-schema.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "layer-client-messaging-schema.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/layer-client-messaging-schema.sql"; sourceTree = "<group>"; };
+		5DEA4A0AE4AD9B4FFC0B6ECA /* Pods-Out.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Out.debug.xcconfig"; sourceTree = "<group>"; };
+		5E79AA594C130CC08027CFEC /* layer-client-messaging-schema.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = "layer-client-messaging-schema.bundle"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle"; sourceTree = "<group>"; };
+		68A7D81379E0B97E94C93FAE /* libPods-Out.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Out.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		697963D1FDBAD3523E8B89A4 /* 20140628105322170_drop_and_clean_case_indent_dates_uniques.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140628105322170_drop_and_clean_case_indent_dates_uniques.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140628105322170_drop_and_clean_case_indent_dates_uniques.sql"; sourceTree = "<group>"; };
+		6ED5C71131112C6D88C97752 /* 20141006202908488_add_tombstone_duplicate_events_by_client_id.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141006202908488_add_tombstone_duplicate_events_by_client_id.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141006202908488_add_tombstone_duplicate_events_by_client_id.sql"; sourceTree = "<group>"; };
+		724791B7DB40743D21F2D75E /* 20140701114842931_add_timestamps_back_to_messages.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140701114842931_add_timestamps_back_to_messages.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140701114842931_add_timestamps_back_to_messages.sql"; sourceTree = "<group>"; };
+		824D9B04737682E71AD47D9B /* 20140715104949748_drop_message_index_table_add_message_index_column.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140715104949748_drop_message_index_table_add_message_index_column.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140715104949748_drop_message_index_table_add_message_index_column.sql"; sourceTree = "<group>"; };
+		8473DA633D5BCB26F3F1E0FB /* 20141007110138268_client-id-indices.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "20141007110138268_client-id-indices.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141007110138268_client-id-indices.sql"; sourceTree = "<group>"; };
+		896DA61A98A69C3A1912C13D /* 20141009125010758_indices.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141009125010758_indices.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141009125010758_indices.sql"; sourceTree = "<group>"; };
+		8A09965FF0A78E09B5318786 /* 20140706185141044_add_object_identifiers.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140706185141044_add_object_identifiers.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140706185141044_add_object_identifiers.sql"; sourceTree = "<group>"; };
+		8B2CFB9DDB4DB4F429EBDD86 /* 20140701144934637_adjust_constraints_of_receipts_table.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140701144934637_adjust_constraints_of_receipts_table.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140701144934637_adjust_constraints_of_receipts_table.sql"; sourceTree = "<group>"; };
+		9984DFA3545BE34B5353997D /* 20150210133608257_adding_version_to_message_parts.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20150210133608257_adding_version_to_message_parts.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20150210133608257_adding_version_to_message_parts.sql"; sourceTree = "<group>"; };
+		A10350E4928B2C442042A54F /* 20140717013309255_drop_is_draft_from_messages.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140717013309255_drop_is_draft_from_messages.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140717013309255_drop_is_draft_from_messages.sql"; sourceTree = "<group>"; };
+		A2056E83E9557599B28350EF /* 20140709095453868_drop_track_sending_of_messages.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140709095453868_drop_track_sending_of_messages.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140709095453868_drop_track_sending_of_messages.sql"; sourceTree = "<group>"; };
+		A91E9B9FB1735617A99B1F96 /* 20140707175635814_add_is_draft_to_messages.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140707175635814_add_is_draft_to_messages.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140707175635814_add_is_draft_to_messages.sql"; sourceTree = "<group>"; };
+		B1745406A68A5086A8C090BF /* 20140820112730372_add_unique_constraint_to_message_recipient_status.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140820112730372_add_unique_constraint_to_message_recipient_status.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140820112730372_add_unique_constraint_to_message_recipient_status.sql"; sourceTree = "<group>"; };
+		B1F49DFFE60D1D27AD7D2CC8 /* Pods-Out-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Out-dummy.m"; sourceTree = "<group>"; };
+		B5CE39F2DD2BD7C02CCAAFCE /* 20141027152445461_fix_invalid_identifier_types.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141027152445461_fix_invalid_identifier_types.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141027152445461_fix_invalid_identifier_types.sql"; sourceTree = "<group>"; };
+		C3B512DE0307C91286F0A94D /* 20140707082435390_drop_tombstone_trigger.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140707082435390_drop_tombstone_trigger.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140707082435390_drop_tombstone_trigger.sql"; sourceTree = "<group>"; };
+		CB3DBC3D2CDF344C88FD2B6B /* 20140701095427050_add_trigger_for_messaging_receipts.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140701095427050_add_trigger_for_messaging_receipts.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140701095427050_add_trigger_for_messaging_receipts.sql"; sourceTree = "<group>"; };
+		CFC9A13F0769E4BFB5F40F5A /* 20141002175255465_making_version_a_required_field.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141002175255465_making_version_a_required_field.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141002175255465_making_version_a_required_field.sql"; sourceTree = "<group>"; };
+		D1AC6917EB61B7F02475C462 /* 20140717021208447_restore-lost-triggers.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "20140717021208447_restore-lost-triggers.sql"; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140717021208447_restore-lost-triggers.sql"; sourceTree = "<group>"; };
+		D4852CAE4CF9E83B80D9E827 /* 20140919115201707_create_synced_changes_table_and_decouple_models.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140919115201707_create_synced_changes_table_and_decouple_models.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140919115201707_create_synced_changes_table_and_decouple_models.sql"; sourceTree = "<group>"; };
+		D6C5CF241D2E8F4ED8169A31 /* 20141124205020533_external_content.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141124205020533_external_content.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141124205020533_external_content.sql"; sourceTree = "<group>"; };
+		D99EEDB7253D77C0C79E87D1 /* Pods-Out-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Out-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DDEB5DA06C3EA159061F480D /* 20150202170209118_flatten_transfer_flags_into_single_transfer_status_integer.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20150202170209118_flatten_transfer_flags_into_single_transfer_status_integer.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20150202170209118_flatten_transfer_flags_into_single_transfer_status_integer.sql"; sourceTree = "<group>"; };
+		E6E17C813FD0550A03FC7A17 /* 20140806143305965_add_created_at_to_conversations.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140806143305965_add_created_at_to_conversations.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140806143305965_add_created_at_to_conversations.sql"; sourceTree = "<group>"; };
+		F0CECA28FD1197458DE2B0B0 /* 20141110114425514_remote_keyed_values.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20141110114425514_remote_keyed_values.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20141110114425514_remote_keyed_values.sql"; sourceTree = "<group>"; };
+		F2D159A77E8F31CCA6D13104 /* 20140708092626927_adjust_triggers_for_drafting.sql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = 20140708092626927_adjust_triggers_for_drafting.sql; path = "LayerKit.framework/Versions/A/Resources/layer-client-messaging-schema.bundle/20140708092626927_adjust_triggers_for_drafting.sql"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B620BDF32AF3B40ED9CE88B9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7AA9D4A38C979DFE4F13667 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09BB6B69C381235FDABDED20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CB143CC6453D9402B82BD83 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EFF82601C46FDB2A7E06AAB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DCBEA1B916179E1DBF12BEF2 /* LayerKit */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3CB143CC6453D9402B82BD83 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				199AF561BAAD7401C75A3226 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		4C6C3FECCCE1534F3CE4CC51 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				697963D1FDBAD3523E8B89A4 /* 20140628105322170_drop_and_clean_case_indent_dates_uniques.sql */,
+				4C2B899AE5287E9A153FB625 /* 20140628114921198_remove_creator_id_from_tombstone_wipe_for_ordering.sql */,
+				CB3DBC3D2CDF344C88FD2B6B /* 20140701095427050_add_trigger_for_messaging_receipts.sql */,
+				724791B7DB40743D21F2D75E /* 20140701114842931_add_timestamps_back_to_messages.sql */,
+				8B2CFB9DDB4DB4F429EBDD86 /* 20140701144934637_adjust_constraints_of_receipts_table.sql */,
+				8A09965FF0A78E09B5318786 /* 20140706185141044_add_object_identifiers.sql */,
+				C3B512DE0307C91286F0A94D /* 20140707082435390_drop_tombstone_trigger.sql */,
+				A91E9B9FB1735617A99B1F96 /* 20140707175635814_add_is_draft_to_messages.sql */,
+				F2D159A77E8F31CCA6D13104 /* 20140708092626927_adjust_triggers_for_drafting.sql */,
+				26A25B61A8790BC80EC3EE43 /* 20140708154438053_change_insert_trigger_on_messages.sql */,
+				A2056E83E9557599B28350EF /* 20140709095453868_drop_track_sending_of_messages.sql */,
+				824D9B04737682E71AD47D9B /* 20140715104949748_drop_message_index_table_add_message_index_column.sql */,
+				A10350E4928B2C442042A54F /* 20140717013309255_drop_is_draft_from_messages.sql */,
+				D1AC6917EB61B7F02475C462 /* 20140717021208447_restore-lost-triggers.sql */,
+				E6E17C813FD0550A03FC7A17 /* 20140806143305965_add_created_at_to_conversations.sql */,
+				B1745406A68A5086A8C090BF /* 20140820112730372_add_unique_constraint_to_message_recipient_status.sql */,
+				D4852CAE4CF9E83B80D9E827 /* 20140919115201707_create_synced_changes_table_and_decouple_models.sql */,
+				2BB71B5AAB2DE8912C926772 /* 20141002091849299_correct-track_inserts_of_events_delete.sql */,
+				CFC9A13F0769E4BFB5F40F5A /* 20141002175255465_making_version_a_required_field.sql */,
+				31FA8A3C27C6613291B1905C /* 20141002175510495_track_streams_and_stream_members_with_deleted_at_column.sql */,
+				220924E6122300CEBE575F5F /* 20141006140917614_add-client_id.sql */,
+				6ED5C71131112C6D88C97752 /* 20141006202908488_add_tombstone_duplicate_events_by_client_id.sql */,
+				8473DA633D5BCB26F3F1E0FB /* 20141007110138268_client-id-indices.sql */,
+				33224871FD9CAE5A94645BA6 /* 20141009125004707_min-max-synced-seq.sql */,
+				896DA61A98A69C3A1912C13D /* 20141009125010758_indices.sql */,
+				B5CE39F2DD2BD7C02CCAAFCE /* 20141027152445461_fix_invalid_identifier_types.sql */,
+				065BC9125CC129998198FA84 /* 20141105082802353_add_unread_fields_to_models.sql */,
+				F0CECA28FD1197458DE2B0B0 /* 20141110114425514_remote_keyed_values.sql */,
+				D6C5CF241D2E8F4ED8169A31 /* 20141124205020533_external_content.sql */,
+				320A2311DBD8F25265223BE5 /* 20150131122302694_add_indexes_for_unread.sql */,
+				DDEB5DA06C3EA159061F480D /* 20150202170209118_flatten_transfer_flags_into_single_transfer_status_integer.sql */,
+				1C1C40A3C5347616C07713BD /* 20150207191203003_create_block_list.sql */,
+				9984DFA3545BE34B5353997D /* 20150210133608257_adding_version_to_message_parts.sql */,
+				5E79AA594C130CC08027CFEC /* layer-client-messaging-schema.bundle */,
+				4CCF1A970156A629EBC0EB1A /* layer-client-messaging-schema.sql */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6E6806747A134C08E46AD48F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68A7D81379E0B97E94C93FAE /* libPods-Out.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF1E44B5D15036B08506D430 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10886D2B07827AB348B0CE5A /* LayerKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B18199EBF11FEE8797FC1763 = {
+			isa = PBXGroup;
+			children = (
+				17A34F2F111DE1FF56B81B2E /* Podfile */,
+				09BB6B69C381235FDABDED20 /* Frameworks */,
+				2EFF82601C46FDB2A7E06AAB /* Pods */,
+				6E6806747A134C08E46AD48F /* Products */,
+				FF655384C8CF3C5147D6B17F /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D38380D34A701EB233460CD8 /* Pods-Out */ = {
+			isa = PBXGroup;
+			children = (
+				D99EEDB7253D77C0C79E87D1 /* Pods-Out-acknowledgements.markdown */,
+				26D7317C0D84A27651107EA5 /* Pods-Out-acknowledgements.plist */,
+				B1F49DFFE60D1D27AD7D2CC8 /* Pods-Out-dummy.m */,
+				0C4646EF1877FE0613DDD89A /* Pods-Out-environment.h */,
+				4BA49C7F7AA2973CAEBCAC49 /* Pods-Out-resources.sh */,
+				5DEA4A0AE4AD9B4FFC0B6ECA /* Pods-Out.debug.xcconfig */,
+				4C1471D1BAB9618B54BFABDE /* Pods-Out.release.xcconfig */,
+			);
+			name = "Pods-Out";
+			path = "Target Support Files/Pods-Out";
+			sourceTree = "<group>";
+		};
+		DCBEA1B916179E1DBF12BEF2 /* LayerKit */ = {
+			isa = PBXGroup;
+			children = (
+				AF1E44B5D15036B08506D430 /* Frameworks */,
+				4C6C3FECCCE1534F3CE4CC51 /* Resources */,
+			);
+			path = LayerKit;
+			sourceTree = "<group>";
+		};
+		FF655384C8CF3C5147D6B17F /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D38380D34A701EB233460CD8 /* Pods-Out */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		604BA97669F5C2D50D7ADF03 /* Pods-Out */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B5C4B49417D970621F61D83 /* Build configuration list for PBXNativeTarget "Pods-Out" */;
+			buildPhases = (
+				48863D515CCD2C627DB20683 /* Sources */,
+				B620BDF32AF3B40ED9CE88B9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Out";
+			productName = "Pods-Out";
+			productReference = 68A7D81379E0B97E94C93FAE /* libPods-Out.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4A545692E40D8078A47FD661 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 9243E545EB0471080FDCAAD0 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B18199EBF11FEE8797FC1763;
+			productRefGroup = 6E6806747A134C08E46AD48F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				604BA97669F5C2D50D7ADF03 /* Pods-Out */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		48863D515CCD2C627DB20683 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB1B9429826A46BBF0EA860 /* Pods-Out-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		03607DBE6BCD1370C878B64E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DEA4A0AE4AD9B4FFC0B6ECA /* Pods-Out.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6F1EAC2D902A21C3F023A14E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C1471D1BAB9618B54BFABDE /* Pods-Out.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A4D5DF1B6ACA4179C2AB96BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		AEA21F7CA7700BBD54E119FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9243E545EB0471080FDCAAD0 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4D5DF1B6ACA4179C2AB96BA /* Debug */,
+				AEA21F7CA7700BBD54E119FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B5C4B49417D970621F61D83 /* Build configuration list for PBXNativeTarget "Pods-Out" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03607DBE6BCD1370C878B64E /* Debug */,
+				6F1EAC2D902A21C3F023A14E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4A545692E40D8078A47FD661 /* Project object */;
+}

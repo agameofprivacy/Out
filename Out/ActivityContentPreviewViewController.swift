@@ -25,6 +25,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
     var prepoChallengeTitleLabel:UILabel!
     var challengeTitleLabel:UILabel!
     var viewChallengeButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    var actionTextView:UITextView!
 
     var activityContentWebView:UIWebView!
     
@@ -67,7 +68,18 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         "cat":UIImage(named: "cat-icon")
     ]
 
+    override func shouldAutorotate() -> Bool {
+        if (UIDevice.currentDevice().orientation.rawValue == UIInterfaceOrientation.LandscapeLeft.rawValue || UIDevice.currentDevice().orientation.rawValue == UIInterfaceOrientation.LandscapeRight.rawValue || UIDevice.currentDevice().orientation.rawValue == UIInterfaceOrientation.Portrait.rawValue){
+            return true
+        }
+        else{
+            return false
+        }
+    }
     
+    override func supportedInterfaceOrientations() -> Int {
+        return UIInterfaceOrientation.LandscapeLeft.rawValue | UIInterfaceOrientation.LandscapeRight.rawValue | UIInterfaceOrientation.Portrait.rawValue
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Activity"
@@ -85,6 +97,8 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.activityContentWebView.delegate = self
         self.activityContentWebView.scalesPageToFit = true
         self.activityContentWebView.hidden = true
+        self.activityContentWebView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+
         self.view.addSubview(self.activityContentWebView)
  
         
@@ -173,26 +187,59 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.viewChallengeButton.layer.cornerRadius = 5
         self.challengeShade.addSubview(viewChallengeButton)
 
+        self.actionTextView = UITextView(frame: CGRectZero)
+        self.actionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.actionTextView.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+
+        var narrativeActionString = (self.challenge["narrativeAction"] as! String)
+        var narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
+        var challengeTitleString = (self.challenge["title"] as! String)
+        var prepositionBeforeChallengeString = " in "
+
+        var actionString = self.user.username + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString
+        
+        var actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
+        var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        textViewParagraphStyle.lineSpacing = 5
+        actionTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (actionString as NSString).rangeOfString(actionString))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (actionString as NSString).rangeOfString(actionString))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(self.user.username))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(narrativeTitleString))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(challengeTitleString))
+
+        
+        var textViewTappedGestureRecognizer = UITapGestureRecognizer(target: self, action: "textViewTapped:")
+        
+        self.actionTextView.attributedText = actionTextViewAttributedString
+        var actionTextViewHeight = self.actionTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 77.5, CGFloat(MAXFLOAT))).height
+        self.actionTextView.backgroundColor = UIColor.clearColor()
+        self.actionTextView.editable = false
+        self.actionTextView.scrollEnabled = false
+        self.actionTextView.selectable = false
         
         
-        var challengeShadeViewsDictionary = ["avatarImageView":avatarImageView, "aliasLabel":aliasLabel, "activityNarrativeTitleLabel":activityNarrativeTitleLabel, "activityNarrativeActionLabel":activityNarrativeActionLabel, "prepoChallengeTitleLabel":prepoChallengeTitleLabel, "challengeTitleLabel":challengeTitleLabel, "viewChallengeButton":viewChallengeButton]
-        var challengeShadeMetricsDictionary = ["largeVerticalPadding":12]
+        self.actionTextView.addGestureRecognizer(textViewTappedGestureRecognizer)
+        self.challengeShade.addSubview(actionTextView)
+
         
-        var horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[aliasLabel]", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        var challengeShadeViewsDictionary =
+        [
+            "avatarImageView":avatarImageView,
+            "viewChallengeButton":viewChallengeButton,
+            "actionTextView":self.actionTextView
+        ]
         
-        var secondHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[aliasLabel]-[activityNarrativeActionLabel]-[activityNarrativeTitleLabel]->=7.5-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        var challengeShadeMetricsDictionary = ["largeVerticalPadding":12, "actionTextViewHeight":actionTextViewHeight]
         
-        var thirdHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[prepoChallengeTitleLabel]-[challengeTitleLabel]->=7.5-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        var horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[actionTextView]-7.5-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
         var fourthHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[viewChallengeButton]-7.5-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
 
         var verticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-16.5-[avatarImageView(50)]->=7.5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
-        var secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-21.5-[aliasLabel]-2-[prepoChallengeTitleLabel]", options: NSLayoutFormatOptions.AlignAllLeft, metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        var secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14.5-[actionTextView(actionTextViewHeight)]->=5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
         self.challengeShade.addConstraints(horizontalShadeViewConstraints)
-        self.challengeShade.addConstraints(secondHorizontalShadeViewConstraints)
-        self.challengeShade.addConstraints(thirdHorizontalShadeViewConstraints)
         self.challengeShade.addConstraints(fourthHorizontalShadeViewConstraints)
         self.challengeShade.addConstraints(verticalShadeViewConstraints)
         self.challengeShade.addConstraints(secondVerticalShadeViewConstraints)
@@ -223,6 +270,47 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
 
     func shareActivityContent(){
         println("share activity")
+    }
+    
+    func textViewTapped(recognizer:UITapGestureRecognizer){
+        var textView:UITextView = recognizer.view as! UITextView
+        // Location of the tap in text-container coordinates
+        
+        var layoutManager:NSLayoutManager = textView.layoutManager
+        var location:CGPoint = recognizer.locationInView(textView)
+        location.x -= textView.textContainerInset.left;
+        location.y -= textView.textContainerInset.top;
+
+        // Find the character that's been tapped on
+        
+        var characterIndex:Int
+        characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        var userAliasCharacterRange = count(self.user.username)
+        var activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + count(self.challenge["narrativeAction"] as! String)
+        var activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber])
+        var activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + count(" in ")
+        var activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
+
+        
+        if (characterIndex < count(self.user.username)) {
+            
+            // Handle as required...
+            println("username tapped")
+            
+        }
+        else if (characterIndex >= activityNarrativeTitleRangeStart && characterIndex <= activityNarrativeTitleRangeEnd) {
+            
+            // Handle as required...
+            println("narrative title tapped")
+        }
+        else if (characterIndex >= activityChallengeTitleRangeStart && characterIndex <= activityChallengeTitleRangeEnd) {
+            
+            // Handle as required...
+            println("challenge title tapped")
+        }
+
+
     }
     /*
     // MARK: - Navigation
