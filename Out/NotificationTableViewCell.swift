@@ -37,13 +37,13 @@ class NotificationTableViewCell: UITableViewCell {
         self.senderLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.senderLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         self.senderLabel.text = "Sender"
-        contentView.addSubview(self.senderLabel)
+//        contentView.addSubview(self.senderLabel)
         
         self.receiverLabel = UILabel(frame: CGRectZero)
         self.receiverLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.receiverLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         self.receiverLabel.text = "Receiver"
-        contentView.addSubview(self.receiverLabel)
+//        contentView.addSubview(self.receiverLabel)
         
         self.senderAvatarImageView = UIImageView(frame: CGRectZero)
         self.senderAvatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -56,11 +56,11 @@ class NotificationTableViewCell: UITableViewCell {
         self.notificationTypeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.notificationTypeLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14.0)
         self.notificationTypeLabel.text = "Notification Type"
-        contentView.addSubview(self.notificationTypeLabel)
+//        contentView.addSubview(self.notificationTypeLabel)
         
         self.timeLabel = UILabel(frame: CGRectZero)
         self.timeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.timeLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14.0)
+        self.timeLabel.font = UIFont(name: "HelveticaNeue", size: 14.0)
         self.timeLabel.text = "ago"
         contentView.addSubview(self.timeLabel)
         
@@ -72,6 +72,10 @@ class NotificationTableViewCell: UITableViewCell {
         self.notificationTextView = UITextView()
         self.notificationTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.notificationTextView.font = UIFont(name: "HelveticaNeue-Light", size: 15.0)
+        self.notificationTextView.editable = false
+        self.notificationTextView.scrollEnabled = false
+        self.notificationTextView.selectable = false
+        self.notificationTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eleifend nibh erat, sed interdum mi scelerisque at. Pellentesque non quam lectus. Maecenas quis purus sit amet ex malesuada iaculis nec at nulla. Nunc elementum suscipit porta. Fusce commodo egestas aliquam. Aliquam erat volutpat. In convallis elit in bibendum aliquet. Nullam eu efficitur quam. Praesent et nunc sit amet turpis accumsan ultrices. Suspendisse ut turpis metus. Donec fringilla vehicula odio at sodales. Cras lobortis laoreet purus, eget dapibus erat varius in. Proin nunc eros, vestibulum cursus consequat sed, iaculis nec sem. Donec eget sapien et enim accumsan tincidunt."
         contentView.addSubview(self.notificationTextView)
         
         self.selectionStyle = UITableViewCellSelectionStyle.None
@@ -81,24 +85,22 @@ class NotificationTableViewCell: UITableViewCell {
         
         var metricsDictionary = ["sideMargin": 7.5, "verticalMargin":14]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[senderAvatarImageView(32)]-[notificationTextView]-sideMargin-|", options: NSLayoutFormatOptions(0 ), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[senderAvatarImageView(32)]-[notificationTextView]-15-|", options: NSLayoutFormatOptions(0 ), metrics: metricsDictionary, views: viewsDictionary)
         
         var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separatorView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[timeLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:[timeLabel]-15-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[senderAvatarImageView(32)]->=verticalMargin-[separatorView(1)]|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[senderAvatarImageView(32)]->=verticalMargin-[separatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[senderAvatarImageView(32)]-", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var thirdVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-18-[timeLabel]-0-[notificationTextView(200)]->=verticalMargin-[separatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var thirdVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[timeLabel]-4-[notificationTextView]->=verticalMargin-[separatorView(1)]|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(secondHorizontalConstraints)
         contentView.addConstraints(thirdHorizontalConstraints)
         
         contentView.addConstraints(verticalConstraints)
-        contentView.addConstraints(secondVerticalConstraints)
         contentView.addConstraints(thirdVerticalConstraints)
     }
 
