@@ -134,6 +134,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil{
                 self.notifications = objects as! [PFObject]
+                for notification in self.notifications{
+                    
+                }
                 self.notificationsTableView.reloadData()
             }
             else{

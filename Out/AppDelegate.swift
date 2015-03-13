@@ -34,6 +34,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UIStyleController.applyStyle()
+        
+//        var appID:NSUUID  = NSUUID(UUIDString: "2b505222-c8f2-11e4-9b75-eae81f0006da")!
+//        self.layerClient = LYRClient(appID: appID)
+//        [self.layerClient connectWithCompletion:^(BOOL success, NSError *error) {
+//        if (!success) {
+//        NSLog(@"Failed to connect to Layer: %@", error);
+//        } else {
+//        // For the purposes of this Quick Start project, let's authenticate as a user named 'Device'.  Alternatively, you can authenticate as a user named 'Simulator' if you're running on a Simulator.
+//        NSString *userIDString = @"Device";
+//        // Once connected, authenticate user.
+//        // Check Authenticate step for authenticateLayerWithUserID source
+//        [self authenticateLayerWithUserID:userIDString completion:^(BOOL success, NSError *error) {
+//        if (!success) {
+//        NSLog(@"Failed Authenticating Layer Client with error:%@", error);
+//        }
+//        }];
+//        }
+//        }];
+
+        
         Parse.setApplicationId("BIV65YI6yH4JPzMDiMro4aHLX0THLJEq40X3XTfR", clientKey: "DjwDcyZzLPOkWl5GSLKeZwLzA8YWdKYE9nM2ZfmC")
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         BITHockeyManager.sharedHockeyManager().configureWithIdentifier("7dec739280c7d95ffcb010852c78a6d4")
@@ -46,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         var settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
+        
         
         return true
 
