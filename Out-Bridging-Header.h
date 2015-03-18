@@ -18,3 +18,4 @@
 #import "COSTouchVisualizerWindow.h"
 #import "XLForm.h"
 #import "ChallengeCardsCollectionViewFlowLayout.h"
+#import "BBBadgeBarButtonItem.h"

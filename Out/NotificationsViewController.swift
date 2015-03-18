@@ -117,6 +117,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        var activityToBeRead = self.notifications[indexPath.row] as PFObject
+        activityToBeRead["read"] = true
+        activityToBeRead.saveInBackgroundWithBlock(nil)
+    }
+    
     // Dismiss notifications modal
     func closeButtonTapped(){
         self.dismissViewControllerAnimated(true, completion: nil)

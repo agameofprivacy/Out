@@ -32,6 +32,7 @@
 		2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
+		2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C37DFEA1AB9FB33002367C9 /* BBBadgeBarButtonItem.m */; };
 		2C3A7BFE1A117A3700FC4516 /* DashboardChallengeOnDeckCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7BFD1A117A3700FC4516 /* DashboardChallengeOnDeckCollectionViewFlowLayout.m */; };
 		2C3A7C001A117EB700FC4516 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7BFF1A117EB700FC4516 /* MyProfileViewController.swift */; };
 		2C3A7C021A117EC900FC4516 /* MyProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A7C011A117EC900FC4516 /* MyProgressViewController.swift */; };
@@ -205,6 +206,8 @@
 		2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
+		2C37DFE91AB9FB33002367C9 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
+		2C37DFEA1AB9FB33002367C9 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		2C3A7BFC1A117A3700FC4516 /* DashboardChallengeOnDeckCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardChallengeOnDeckCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C3A7BFD1A117A3700FC4516 /* DashboardChallengeOnDeckCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardChallengeOnDeckCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C3A7BFF1A117EB700FC4516 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
@@ -493,6 +496,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		2C37DFE81AB9FB33002367C9 /* BBBadgeBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				2C37DFE91AB9FB33002367C9 /* BBBadgeBarButtonItem.h */,
+				2C37DFEA1AB9FB33002367C9 /* BBBadgeBarButtonItem.m */,
+			);
+			path = BBBadgeBarButtonItem;
+			sourceTree = "<group>";
+		};
 		2C470F531A06F62F008EADB4 /* PeopleGallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -600,6 +612,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C37DFE81AB9FB33002367C9 /* BBBadgeBarButtonItem */,
 				2C9BE64B1A5327E300980C0D /* XL */,
 				2C70203B1A2B815D00873041 /* COSTouchVisualizer */,
 				2C6FFAE51A19B3160043F912 /* ICETutorial */,
@@ -1064,6 +1077,7 @@
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
 				2C2CF71A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m in Sources */,
+				2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
 				2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */,

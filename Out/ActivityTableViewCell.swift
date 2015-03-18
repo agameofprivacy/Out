@@ -64,7 +64,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.paperView.layer.cornerRadius = 5
         self.paperView.layer.borderWidth = 0.75
         self.paperView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.25).CGColor
-
+        self.paperView.opaque = true
         contentView.addSubview(self.paperView)
         
         self.reverseTimeLabel = UILabel(frame: CGRectZero)
@@ -73,6 +73,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.reverseTimeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.reverseTimeLabel.text = "time"
         self.reverseTimeLabel.font = regularFont?.fontWithSize(15.0)
+        self.reverseTimeLabel.opaque = true
         self.paperView.addSubview(self.reverseTimeLabel)
         
         self.avatarImageView = UIImageView(frame: CGRectZero)
@@ -82,6 +83,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.backgroundColor = UIColor.whiteColor()
         self.avatarImageView.image = UIImage(named: "avatarImagePlaceholder")
+        self.avatarImageView.opaque = true
         self.paperView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -90,6 +92,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.aliasLabel.textAlignment = NSTextAlignment.Left
         self.aliasLabel.font = titleFont?.fontWithSize(16.0)
         self.aliasLabel.text = "username"
+        self.aliasLabel.opaque = true
         self.paperView.addSubview(self.aliasLabel)
         
         self.actionLabel = UILabel(frame: CGRectZero)
@@ -102,6 +105,7 @@ class ActivityTableViewCell: UITableViewCell {
         if UIScreen.mainScreen().bounds.width == 320{
             self.actionLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 12 - 50 - 12 - 12 - 10
         }
+        self.actionLabel.opaque = true
         self.paperView.addSubview(self.actionLabel)
         
         self.contentCanvas = UIView(frame: CGRectZero)
@@ -116,10 +120,12 @@ class ActivityTableViewCell: UITableViewCell {
         var responseBarSeparator = UIView(frame: CGRectZero)
         responseBarSeparator.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         responseBarSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        responseBarSeparator.opaque = true
         self.paperView.addSubview(responseBarSeparator)
         
         self.responseBar = UIView(frame: CGRectZero)
         self.responseBar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.responseBar.opaque = true
         self.paperView.addSubview(self.responseBar)
         
         self.heroImageView = UIImageView(frame: CGRectZero)
@@ -128,14 +134,17 @@ class ActivityTableViewCell: UITableViewCell {
         self.heroImageView.clipsToBounds = true
         self.heroImageView.contentMode = UIViewContentMode.ScaleAspectFill
         self.heroImageView.image = UIImage(named: "heroPlaceholder")
+        self.heroImageView.opaque = true
         self.contentCanvas.addSubview(self.heroImageView)
         
         self.contentType = UIVisualEffectView(frame: CGRectZero)
         self.contentType.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.contentType.opaque = true
         self.contentCanvas.addSubview(self.contentType)
         
         self.contentTypeIconImageView = UIImageView(frame: CGRectZero)
         self.contentTypeIconImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.contentTypeIconImageView.opaque = true
         self.contentType.addSubview(self.contentTypeIconImageView)
         
         self.narrativeTitleLabel = UILabel(frame: CGRectZero)
@@ -144,6 +153,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeTitleLabel.font = titleFont?.fontWithSize(14.0)
         self.narrativeTitleLabel.textAlignment = NSTextAlignment.Left
         self.narrativeTitleLabel.text = "Narrative Title"
+        self.narrativeTitleLabel.opaque = true
         self.contentCanvas.addSubview(self.narrativeTitleLabel)
         
         self.narrativeContentLabel = UILabel(frame: CGRectZero)
@@ -153,11 +163,13 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeContentLabel.textAlignment = NSTextAlignment.Left
         self.narrativeContentLabel.text = "Narrative Content"
         self.narrativeContentLabel.font = valueFont?.fontWithSize(13.0)
+        self.narrativeContentLabel.opaque = true
         self.contentCanvas.addSubview(self.narrativeContentLabel)
         
         self.commentsButtonArea = UIView(frame: CGRectZero)
         self.commentsButtonArea.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.commentsButtonArea.userInteractionEnabled = true
+        self.commentsButtonArea.opaque = true
         self.responseBar.addSubview(self.commentsButtonArea)
         
         self.commentsCountLabel = UILabel(frame: CGRectZero)
@@ -166,6 +178,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.commentsCountLabel.text = "No comments"
         self.commentsCountLabel.font = titleFont?.fontWithSize(16.0)
         self.commentsCountLabel.textAlignment = NSTextAlignment.Left
+        self.commentsCountLabel.opaque = true
         self.commentsButtonArea.addSubview(self.commentsCountLabel)
         
         self.writeACommentLabel = UILabel(frame: CGRectZero)
@@ -174,11 +187,13 @@ class ActivityTableViewCell: UITableViewCell {
         self.writeACommentLabel.font = valueFont?.fontWithSize(16.0)
         self.writeACommentLabel.textAlignment = NSTextAlignment.Left
         self.writeACommentLabel.text = "write a comment"
+        self.writeACommentLabel.opaque = true
         self.commentsButtonArea.addSubview(self.writeACommentLabel)
         
         self.likeButtonArea = UIView(frame: CGRectZero)
         self.likeButtonArea.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.likeButtonArea.userInteractionEnabled = true
+        self.likeButtonArea.opaque = true
         self.responseBar.addSubview(self.likeButtonArea)
         
         self.likeCountLabel = UILabel(frame: CGRectZero)
@@ -187,6 +202,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeCountLabel.textAlignment = NSTextAlignment.Right
         self.likeCountLabel.text = ""
         self.likeCountLabel.font = titleFont?.fontWithSize(16.0)
+        self.likeCountLabel.opaque = true
         self.likeButtonArea.addSubview(self.likeCountLabel)
         
         self.likeButton = UIImageView(frame: CGRectZero)
@@ -195,8 +211,9 @@ class ActivityTableViewCell: UITableViewCell {
         self.likeButton.clipsToBounds = true
         self.likeButton.image = UIImage(named: "likeButtonPlaceholder")
         self.likeButton.userInteractionEnabled = true
+        self.likeButton.opaque = true
         self.likeButtonArea.addSubview(self.likeButton)
-        
+//        self.contentCanvas.hidden = true
 
         // paperView constraints
         var paperViewsDictionary = ["paperView":paperView]

@@ -25,6 +25,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var commentCount:Int = 0
     var noActivityView:UIView!
     var processedActivities:NSMutableArray = []
+    var notifications:[PFObject] = []
     
     let colorDictionary =
     [
@@ -72,6 +73,19 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         notificationButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = notificationButton
         
+        var customNotificationButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        customNotificationButton.addTarget(self, action: "notificationButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        customNotificationButton.setImage(UIImage(named: "notification-icon"), forState: UIControlState.Normal)
+        customNotificationButton.tintColor = UIColor.blackColor()
+        
+        var badgeableNotificationBarButton = BBBadgeBarButtonItem(customUIButton: customNotificationButton)
+        badgeableNotificationBarButton.badgeOriginX = 10
+        badgeableNotificationBarButton.badgeValue = "\(self.notifications.count)"
+        badgeableNotificationBarButton.shouldAnimateBadge = true
+        badgeableNotificationBarButton.shouldHideBadgeAtZero = true
+        self.navigationItem.leftBarButtonItem = badgeableNotificationBarButton
+        
+        
         // UITableView init
         self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
@@ -82,7 +96,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.dataSource = self
 
 //        self.tableView.estimatedRowHeight = 420
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.rowHeight = 430
         
         // noActivityView init and layout
         self.noActivityView = UIView(frame: self.tableView.frame)
@@ -108,6 +122,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
         self.refreshControl?.beginRefreshing()
         loadActivitiesOnViewDidLoad()
+        loadNotifications()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -124,6 +139,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     @IBAction func refreshActivityFeed(sender: UIRefreshControl) {
         sender.beginRefreshing()
         self.loadActivities()
+        self.loadNotifications()
     }
     
     // Prepare for show activity detail segue, pass tapped activity to destination vc
@@ -246,7 +262,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 
                 var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
                 cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
-
                 return cell
             }
         
@@ -425,7 +440,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 50
+                activityQuery.limit = 15
+
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
@@ -483,7 +499,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 ++self.commentCount
                                                 if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                     self.prepareDataForTableView()
-                                                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+//                                                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
                                                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
                                                     self.refreshControl?.endRefreshing()
                                                 }
@@ -541,7 +557,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 50
+                activityQuery.limit = 25
+
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
@@ -598,7 +615,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                             ++self.commentCount
                                             if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                 self.prepareDataForTableView()
-                                                (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+//                                                (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
                                                 self.tableView.reloadData()
                                                 self.refreshControl?.endRefreshing()
                                             }
@@ -832,8 +849,32 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Present compose view if Compose button tapped
     func composeButtonTapped(sender:UIBarButtonItem){
-        self.performSegueWithIdentifier("showCompose", sender: self)
+//        self.performSegueWithIdentifier("showCompose", sender: self)
+        (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\((self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue.toInt()! + 1)"
     }
+    
+    func loadNotifications(){
+        var notificationQuery = PFQuery(className: "Notification")
+        notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser())
+        notificationQuery.whereKey("read", equalTo: false)
+        notificationQuery.includeKey("sender")
+        notificationQuery.includeKey("receiver")
+        notificationQuery.includeKey("activity")
+        notificationQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil{
+                self.notifications = objects as! [PFObject]
+                for notification in self.notifications{
+                    
+                }
+                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
+            }
+            else{
+                println("didn't find any notifications")
+            }
+        }
+    }
+
     
     // Launch challenge preview view with URL from cell
 //    func launchChallengePreviewView(sender:UITapGestureRecognizer!){
