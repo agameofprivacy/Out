@@ -12,7 +12,8 @@ import UIKit
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     var notificationsTableView:TPKeyboardAvoidingTableView!
-    var notifications:[PFObject] = []
+    var unreadNotifications:[PFObject] = []
+    var readNotifications:[PFObject] = []
     
     let colorDictionary =
     [
@@ -52,7 +53,6 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         
         
-        
         // UINavigationBar init and layout
         self.navigationItem.title = "Notifications"
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
@@ -63,6 +63,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         self.notificationsTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.notificationsTableView.registerClass(NotificationTableViewCell.self, forCellReuseIdentifier: "notificationCell")
         self.notificationsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.notificationsTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
 
         self.notificationsTableView.delegate = self
         self.notificationsTableView.dataSource = self
@@ -72,7 +73,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         
-        loadNotifications()
+        loadAdditionalNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,69 +82,118 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.notifications.count
+        if section == 0{
+            return self.unreadNotifications.count
+        }
+        else{
+            return self.readNotifications.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         var cell:NotificationTableViewCell = self.notificationsTableView.dequeueReusableCellWithIdentifier("notificationCell") as! NotificationTableViewCell
-        var sender:PFUser = (self.notifications[indexPath.row] as PFObject)["sender"] as! PFUser
-        
-        cell.senderLabel.text = sender.username
-        cell.senderAvatarImageView.image = self.avatarImageDictionary[sender["avatar"] as! String]!
-        cell.senderAvatarImageView.backgroundColor = self.colorDictionary[sender["color"] as! String]
-        
-        var receiver:PFUser = (self.notifications[indexPath.row] as PFObject)["receiver"] as! PFUser
-        cell.receiverLabel.text = receiver.username
-        
-        // Check for notification type
-        if ((self.notifications[indexPath.row] as PFObject)["type"] as! String) == "comment"{
-            cell.notificationTypeLabel.text = "Commented"
+        var notification:PFObject
+
+        if (indexPath.section == 0){
+            notification = self.unreadNotifications[indexPath.row] as PFObject
         }
         else{
-            cell.notificationTypeLabel.text = "Liked"
+            notification = self.readNotifications[indexPath.row] as PFObject
         }
         
+        var sender = notification["sender"] as! PFUser
+        var receiver = notification["receiver"] as! PFUser
+        var challenge = (notification["activity"] as! PFObject)["challenge"] as! PFObject
+        var notificationCreatedTime = notification.createdAt
+        var notificationTimeLabel = notificationCreatedTime.timeAgoSinceNow()
+        
+        
+        var challengeTitleString = challenge["title"] as! String
+        var narrativeActionString:String
+        if notification["type"] as! String == "comment"{
+            narrativeActionString = " commented on "
+        }
+        else{
+            narrativeActionString = " liked "
+        }
+        var notificationString = sender.username + narrativeActionString + "your activity " + challengeTitleString + "."
+        
+        var notificationTextViewAttributedString = NSMutableAttributedString(string: notificationString)
+        var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        textViewParagraphStyle.lineSpacing = 0
+
+//        notificationTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (notificationString as NSString).rangeOfString(notificationString))
+        
+        notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (notificationString as NSString).rangeOfString(notificationString))
+
+        notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (notificationString as NSString).rangeOfString(sender.username))
+        notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (notificationString as NSString).rangeOfString(challengeTitleString))
+
+        cell.notificationTextView.attributedText = notificationTextViewAttributedString
+        cell.senderAvatarImageView.image = self.avatarImageDictionary[sender["avatar"] as! String]!
+        cell.senderAvatarImageView.backgroundColor = self.colorDictionary[sender["color"] as! String]
+        cell.timeLabel.text = notificationTimeLabel
+
         // Check for notification read status
-        if ((self.notifications[indexPath.row] as PFObject)["read"] as! Bool){
+        if (indexPath.section == 1){
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
         }
         else{
             cell.backgroundColor = UIColor(white: 1, alpha: 1)
         }
-
-        var notificationCreatedTime = self.notifications[indexPath.row].createdAt
-        var notificationTimeLabel = notificationCreatedTime.shortTimeAgoSinceNow()
-        cell.timeLabel.text = notificationTimeLabel
+        
+        var notificationCellTappedGestureReconizer = UITapGestureRecognizer(target: self, action: "notificationCellTapped:")
+        
         return cell
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        var activityToBeRead = self.notifications[indexPath.row] as PFObject
-        activityToBeRead["read"] = true
-        activityToBeRead.saveInBackgroundWithBlock(nil)
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
     }
+
+//    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        var activityToBeRead = self.notifications[indexPath.row] as PFObject
+//        activityToBeRead["read"] = true
+//        activityToBeRead.saveInBackgroundWithBlock(nil)
+//    }
     
     // Dismiss notifications modal
     func closeButtonTapped(){
+        for activity in self.unreadNotifications{
+            activity["read"] = true
+            activity.saveInBackgroundWithBlock(nil)
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func loadNotifications(){
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0{
+            println("View notified activity: \(indexPath.row)")
+        }
+        else{
+            println("View notified activity: \(indexPath.row)")
+        }
+    }
+    
+    func notificationCellTapped(tappedGestureRecognizer:UITapGestureRecognizer){
+        
+    }
+    
+    func loadAdditionalNotifications(){
         var notificationQuery = PFQuery(className: "Notification")
         notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser())
+        notificationQuery.whereKey("read", equalTo: true)
         notificationQuery.includeKey("sender")
         notificationQuery.includeKey("receiver")
-        notificationQuery.includeKey("activity")
+        notificationQuery.includeKey("activity.challenge")
         notificationQuery.orderByDescending("createdAt")
-        notificationQuery.orderByAscending("read")
+        notificationQuery.limit = 15
         notificationQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil{
-                self.notifications = objects as! [PFObject]
-                for notification in self.notifications{
-                    
-                }
-                self.notificationsTableView.reloadData()
+                self.readNotifications.extend(objects as! [PFObject])
+                self.notificationsTableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             }
             else{
                 println("didn't find any notifications")

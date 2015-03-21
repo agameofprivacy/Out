@@ -83,6 +83,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         badgeableNotificationBarButton.badgeValue = "\(self.notifications.count)"
         badgeableNotificationBarButton.shouldAnimateBadge = true
         badgeableNotificationBarButton.shouldHideBadgeAtZero = true
+        badgeableNotificationBarButton.enabled = false
         self.navigationItem.leftBarButtonItem = badgeableNotificationBarButton
         
         
@@ -166,11 +167,16 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             
             newVC.parentVC = self
         }
+        else if segue.identifier == "showNotifications"{
+            let newVC:NotificationsViewController = segue.destinationViewController.childViewControllers[0] as! NotificationsViewController
+            newVC.unreadNotifications = self.notifications
+        }
 
     }
 
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
+        self.loadNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -849,8 +855,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Present compose view if Compose button tapped
     func composeButtonTapped(sender:UIBarButtonItem){
-//        self.performSegueWithIdentifier("showCompose", sender: self)
-        (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\((self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue.toInt()! + 1)"
+        self.performSegueWithIdentifier("showCompose", sender: self)
     }
     
     func loadNotifications(){
@@ -859,7 +864,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         notificationQuery.whereKey("read", equalTo: false)
         notificationQuery.includeKey("sender")
         notificationQuery.includeKey("receiver")
-        notificationQuery.includeKey("activity")
+        notificationQuery.includeKey("activity.challenge")
         notificationQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil{
@@ -867,6 +872,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 for notification in self.notifications{
                     
                 }
+                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
                 (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
             }
             else{
