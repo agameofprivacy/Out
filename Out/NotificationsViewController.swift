@@ -176,9 +176,30 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section{
+        case 0:
+            if self.unreadNotifications.count != 0{
+                return "Unread"
+            }
+            else{
+                return nil
+            }
+        default:
+            if self.readNotifications.count != 0{
+                return  "Read"
+            }
+            else{
+                return nil
+            }
+        }
+    }
+    
+    
     func notificationCellTapped(tappedGestureRecognizer:UITapGestureRecognizer){
         
     }
+    
     
     func loadAdditionalNotifications(){
         var notificationQuery = PFQuery(className: "Notification")

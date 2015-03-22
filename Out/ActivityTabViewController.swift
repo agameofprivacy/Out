@@ -83,8 +83,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         badgeableNotificationBarButton.badgeValue = "\(self.notifications.count)"
         badgeableNotificationBarButton.shouldAnimateBadge = true
         badgeableNotificationBarButton.shouldHideBadgeAtZero = true
-        badgeableNotificationBarButton.enabled = false
         self.navigationItem.leftBarButtonItem = badgeableNotificationBarButton
+        self.navigationItem.leftBarButtonItem?.enabled = false
         
         
         // UITableView init
@@ -122,8 +122,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.view.addSubview(self.noActivityView)
 
         self.refreshControl?.beginRefreshing()
-        loadActivitiesOnViewDidLoad()
         loadNotifications()
+
+        loadActivitiesOnViewDidLoad()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -191,12 +192,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Return the count of rows from the count of current activities
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
-        return self.currentActivities.count
-        }
-        else{
-            return 1
-        }
+        return self.processedActivities.count
     }
     
     
@@ -302,7 +298,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             loadMoreActivities()
         }
     }
-
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{
             var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
@@ -506,8 +502,13 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                     self.prepareDataForTableView()
 //                                                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+                                                    (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
+                                                    (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
+
                                                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+
                                                     self.refreshControl?.endRefreshing()
+                                                    
                                                 }
                                             }
                                             else {
@@ -622,6 +623,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                             if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                 self.prepareDataForTableView()
 //                                                (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
+                                                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
+                                                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
                                                 self.tableView.reloadData()
                                                 self.refreshControl?.endRefreshing()
                                             }
@@ -872,8 +875,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 for notification in self.notifications{
                     
                 }
-                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
-                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
             }
             else{
                 println("didn't find any notifications")

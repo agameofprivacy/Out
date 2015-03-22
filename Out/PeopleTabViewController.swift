@@ -399,6 +399,40 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             return tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
         }
     }
+    
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == self.followerTableView{
+            switch section{
+            case 0:
+                if self.followingRequestedFrom.isEmpty{
+                    println("it's empty")
+                    return nil
+                }
+                else{
+                    return "Follow Requests"
+                }
+            default:
+                if self.followers.isEmpty || self.followingRequestedFrom.isEmpty{
+                    println("it's empty2")
+                    return nil
+                }
+                else{
+                    return  "Followers"
+                }
+            }
+        }
+        else{
+            if self.following.isEmpty{
+                    println("it's empty3")
+                return nil
+            }
+            else{
+                return "Following"
+            }
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
