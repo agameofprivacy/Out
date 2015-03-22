@@ -250,7 +250,7 @@ class CreateAccountViewController: XLFormViewController {
         user["color"] = (values["Color"] as! XLFormOptionsObject).valueData()
         user["ethnicity"] = values["Ethnicity"] as! String
         user["city"] = values["City"] as! String
-        user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
+//        user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
         user["followingRequested"] = []
         user["followingRequestsFrom"] = []
         
@@ -263,7 +263,7 @@ class CreateAccountViewController: XLFormViewController {
                 followerFollowingObject["requestsFromUsers"] = []
                 followerFollowingObject["followingUsers"] = []
                 followerFollowingObject["followers"] = []
-                followerFollowingObject.saveInBackground()
+                followerFollowingObject.saveInBackgroundWithBlock(nil)
                 self.performSegueWithIdentifier("AccountCreated", sender: nil)
             } else {
                 // Show the errorString somewhere and let the user try again.

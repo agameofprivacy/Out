@@ -89,18 +89,18 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // followingTableView init
         self.followingTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followingTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followingTableView.contentInset = UIEdgeInsets(top: 130.0, left: 0, bottom:0, right: 0)
+        self.followingTableView.contentInset = UIEdgeInsets(top: 124.0, left: 0, bottom:0, right: 0)
         self.followingTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followingTableView.backgroundColor = UIColor.whiteColor()
         self.followingTableView.frame = self.view.frame
-        self.followingTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.followingTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.followingTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.followingTableView.rowHeight = UITableViewAutomaticDimension
         self.followingTableView.estimatedRowHeight = 80
         self.followingTableView.delegate = self
         self.followingTableView.dataSource = self
-        self.followingTableView.layoutMargins = UIEdgeInsetsZero
-        self.followingTableView.separatorInset = UIEdgeInsetsZero
+//        self.followingTableView.layoutMargins = UIEdgeInsetsZero
+//        self.followingTableView.separatorInset = UIEdgeInsetsZero
         self.followingTableView.hidden = true
         self.view.addSubview(self.followingTableView)
 
@@ -111,19 +111,19 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // followerTableView init
         self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followerTableView.contentInset = UIEdgeInsets(top: 194.0, left: 0, bottom:49, right: 0)
+        self.followerTableView.contentInset = UIEdgeInsets(top: 188.0, left: 0, bottom:49, right: 0)
         self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.followerTableView.backgroundColor = UIColor.whiteColor()
         self.followerTableView.frame = self.view.frame
-        self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.followerTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.followerTableView.rowHeight = UITableViewAutomaticDimension
         self.followerTableView.estimatedRowHeight = 80
         self.followerTableView.delegate = self
         self.followerTableView.dataSource = self
-        self.followerTableView.layoutMargins = UIEdgeInsetsZero
-        self.followerTableView.separatorInset = UIEdgeInsetsZero
+//        self.followerTableView.layoutMargins = UIEdgeInsetsZero
+//        self.followerTableView.separatorInset = UIEdgeInsetsZero
         self.view.addSubview(self.followerTableView)
 
         self.followerRefreshControl = UIRefreshControl(frame: self.followerTableView.frame)
@@ -406,7 +406,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             switch section{
             case 0:
                 if self.followingRequestedFrom.isEmpty{
-                    println("it's empty")
                     return nil
                 }
                 else{
@@ -414,7 +413,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             default:
                 if self.followers.isEmpty || self.followingRequestedFrom.isEmpty{
-                    println("it's empty2")
                     return nil
                 }
                 else{
@@ -423,13 +421,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
         else{
-            if self.following.isEmpty{
-                    println("it's empty3")
-                return nil
-            }
-            else{
-                return "Following"
-            }
+            return nil
         }
     }
 
