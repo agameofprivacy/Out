@@ -122,8 +122,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.view.addSubview(self.noActivityView)
 
         self.refreshControl?.beginRefreshing()
-        loadNotifications()
-
         loadActivitiesOnViewDidLoad()
     }
     
@@ -192,13 +190,19 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Return the count of rows from the count of current activities
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.processedActivities.count
+        if (section == 0){
+            return self.processedActivities.count
+        }
+        else{
+            return 1
+        }
     }
     
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
+    
     
     // Table view data source method for activities
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -501,9 +505,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 ++self.commentCount
                                                 if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                     self.prepareDataForTableView()
-//                                                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
-                                                    (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
-                                                    (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
+                                                    self.loadNotifications()
 
                                                     self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
 
@@ -564,7 +566,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 25
+                activityQuery.limit = 15
 
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -622,9 +624,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                             ++self.commentCount
                                             if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
                                                 self.prepareDataForTableView()
-//                                                (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "3"
-                                                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
-                                                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
                                                 self.tableView.reloadData()
                                                 self.refreshControl?.endRefreshing()
                                             }
@@ -832,6 +831,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath == NSIndexPath(forRow: 0, inSection: 1){
+            self.loadMoreActivities()
+        }
+    }
+    
     // Perform segue to show activity detail if comment button tapped
     func commentButtonTapped(sender:UITapGestureRecognizer){
         var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
@@ -873,14 +878,22 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             if error == nil{
                 self.notifications = objects as! [PFObject]
                 for notification in self.notifications{
-                    
                 }
+                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
+                (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
+//                if self.notifications.count != 0 {
+//                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = "\(self.notifications.count)"
+//                }
+//                else{
+//                    (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = nil
+//                }
             }
             else{
                 println("didn't find any notifications")
             }
         }
     }
+    
 
     
     // Launch challenge preview view with URL from cell

@@ -492,8 +492,18 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerFollowingObject["followers"] = currentUserFollowers
         self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
-                self.loadPeople()
-                self.followerTableView.reloadData()
+                var followRequestApprovedNotification = PFObject(className: "Notification")
+                followRequestApprovedNotification["sender"] = PFUser.currentUser()
+                followRequestApprovedNotification["receiver"] = userToAcceptFollowRequest
+                followRequestApprovedNotification["read"] = false
+                followRequestApprovedNotification["type"] = "followRequestApproved"
+                followRequestApprovedNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                    if error == nil{
+                        // Send iOS Notification
+                        self.loadPeople()
+                        self.followerTableView.reloadData()
+                    }
+                }
             }
         }
     }

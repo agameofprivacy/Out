@@ -194,7 +194,27 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                 var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
                 currentFollowRequestsFrom.append(PFUser.currentUser())
                 currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
-                currentFollowerFollowingObject.saveInBackground()
+                currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                    if error == nil{
+                        var followRequestSentNotification = PFObject(className: "Notification")
+                        followRequestSentNotification["sender"] = PFUser.currentUser()
+                        followRequestSentNotification["receiver"] = userToFollow
+                        followRequestSentNotification["read"] = false
+                        followRequestSentNotification["type"] = "followRequestSent"
+                        followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                            if error == nil{
+                                // Send iOS Notification
+                                println("Follow request sent")
+                            }
+                        }
+
+                    }
+                    else{
+                        // Log details of the failure
+                        NSLog("Error: %@ %@", error, error.userInfo!)
+                    }
+                
+                }
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)

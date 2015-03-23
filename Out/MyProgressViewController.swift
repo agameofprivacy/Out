@@ -371,7 +371,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                     PNPieChartDataItem(value: intermediateValue, color: self.colorDictionary["Intermediate"],description: ""),
                     PNPieChartDataItem(value: intenseValue, color: self.colorDictionary["Intense"],description: "")
                 ]
-            if self.currentSortCategory != ""{
+            if self.currentSortCategory != "" && self.myProgressPieChart != nil{
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
@@ -446,7 +446,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                     PNPieChartDataItem(value: schoolValue, color: self.colorDictionary["School"],description: ""),
                     PNPieChartDataItem(value: workValue, color: self.colorDictionary["Work"],description: "")
             ]
-            if self.currentSortCategory != ""{
+            if self.currentSortCategory != "" && self.myProgressPieChart != nil{
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
@@ -522,7 +522,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                     PNPieChartDataItem(value: friendsValue, color: self.colorDictionary["Friends"],description: ""),
                     PNPieChartDataItem(value: strangersValue, color: self.colorDictionary["Strangers"],description: "")
             ]
-            if self.currentSortCategory != ""{
+            if self.currentSortCategory != "" && self.myProgressPieChart != nil{
                 self.myProgressPieChart.removeFromSuperview()
             }
             if (!self.toDoTableView.hidden && self.toDoChallenges.count > 0) || (!self.doneTableView.hidden && self.doneChallenges.count > 0){
