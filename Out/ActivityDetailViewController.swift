@@ -182,7 +182,7 @@ class ActivityDetailViewController: SLKTextViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        self.parentVC.loadActivitiesOnViewDidLoad()
+//        self.parentVC.loadActivities("new")
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

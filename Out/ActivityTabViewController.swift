@@ -26,6 +26,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var noActivityView:UIView!
     var processedActivities:NSMutableArray = []
     var notifications:[PFObject] = []
+    var moreActivities:Bool = false
     
     let colorDictionary =
     [
@@ -122,7 +123,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.view.addSubview(self.noActivityView)
 
         self.refreshControl?.beginRefreshing()
-        loadActivitiesOnViewDidLoad()
+        loadActivities("old")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -138,7 +139,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     // Reload activities when refresh control activated
     @IBAction func refreshActivityFeed(sender: UIRefreshControl) {
         sender.beginRefreshing()
-        self.loadActivities()
+        self.loadActivities("new")
         self.loadNotifications()
     }
     
@@ -170,6 +171,23 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             let newVC:NotificationsViewController = segue.destinationViewController.childViewControllers[0] as! NotificationsViewController
             newVC.unreadNotifications = self.notifications
         }
+        else if segue.identifier == "showActivityExpanded"{
+            let newVC:ActivityExpandedTableViewController = segue.destinationViewController as! ActivityExpandedTableViewController
+            
+            var currentChallenge = currentActivity["challenge"] as! PFObject
+            var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
+            var currentUser = currentActivity["ownerUser"] as! PFUser
+            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            currentChallengeTrackNumber = currentChallengeTrackNumber - 1
+            
+            newVC.parentVC = self
+            newVC.activity = self.currentActivity
+            newVC.challenge = currentChallenge
+            newVC.userChallengeData = currentUserChallengeData
+            newVC.user = currentUser
+            newVC.challengeTrackNumber = currentChallengeTrackNumber
+
+        }
 
     }
 
@@ -194,7 +212,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             return self.processedActivities.count
         }
         else{
-            return 1
+            if self.moreActivities{
+                return 1
+            }else{
+                return 0
+            }
         }
     }
     
@@ -428,7 +450,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
     }
     
-    func loadActivities(){
+    func loadActivities(context:String){
         var followingQuery = PFQuery(className: "FollowerFollowing")
         followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
         followingQuery.findObjectsInBackgroundWithBlock {
@@ -446,15 +468,39 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 15
-
+                activityQuery.limit = 10
+                if context == "old"{
+                    if !self.currentActivities.isEmpty{
+                        activityQuery.whereKey("createdAt", lessThan: (self.currentActivities.last as PFObject!).createdAt)
+                    }
+                }
+                else if context == "new"{
+                    if !self.currentActivities.isEmpty{
+                        activityQuery.whereKey("createdAt", greaterThan: (self.currentActivities.first as PFObject!).createdAt)
+                    }
+                }
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
 
                         // Found activities
-                        self.currentActivities = objects as! [PFObject]
+                        var currentActivitiesFound = objects as! [PFObject]
+                        var currentLikedAcitivitiesFoundIdStrings:[String] = []
+                        if context == "old"{
+                            if objects.count == 10{
+                                self.moreActivities = true
+                            }
+                            else{
+                                self.moreActivities = false
+                            }
+                        }
                         // If activities count is 0, show no activity view, else display activities
+                        if context == "old"{
+                            self.currentActivities.extend(currentActivitiesFound)
+                        }
+                        else if context == "new"{
+                            self.currentActivities.splice(currentActivitiesFound, atIndex: 0)
+                        }
                         if self.currentActivities.count == 0{
                             self.noActivityView.hidden = false
                             self.refreshControl?.endRefreshing()
@@ -462,18 +508,21 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         else{
                             self.noActivityView.hidden = true
                         }
-
+                        if currentActivitiesFound.isEmpty{
+                            println("no more activities")
+                            self.refreshControl?.endRefreshing()
+                        }
                         // Query activities liked by current user
-                        self.currentActivitiesCommentCount = Array(count: self.currentActivities.count, repeatedValue: 0)
-                        self.currentActivitiesLikeCount = Array(count: self.currentActivities.count, repeatedValue: 0)
-                        self.likeCount = 0
-                        self.commentCount = 0
+                        var currentActivitiesFoundCommentCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
+                        var currentActivitiesFoundLikeCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
+                        var likeCountFound = 0
+                        var commentCountFound = 0
                         var relation = PFUser.currentUser().relationForKey("likedActivity")
                         relation.query().findObjectsInBackgroundWithBlock{
                             (objects: [AnyObject]!, error: NSError!) -> Void in
                             if error == nil {
                                 for object in objects{
-                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
+                                    currentLikedAcitivitiesFoundIdStrings.append(object.objectId)
                                 }
                             }
                             else {
@@ -484,15 +533,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         }
                         
                         // Query like count of activities
-                        for activity in self.currentActivities{
+                        for activity in currentActivitiesFound{
                             var queryLikes = PFQuery(className: "_User")
                             queryLikes.whereKey("likedActivity", equalTo: activity)
                             queryLikes.findObjectsInBackgroundWithBlock{
                                 (objects: [AnyObject]!, error: NSError!) -> Void in
                                 if error == nil {
                                     var count = objects.count
-                                        self.currentActivitiesLikeCount[find(self.currentActivities, activity)!] = count
-                                        ++self.likeCount
+                                        currentActivitiesFoundLikeCount[find(currentActivitiesFound, activity)!] = count
+                                        ++likeCountFound
                                     
                                         // Query comment count of activities
                                         var queryComments = PFQuery(className: "Comment")
@@ -501,13 +550,18 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                             (objects: [AnyObject]!, error: NSError!) -> Void in
                                             if error == nil {
                                                 var count = objects.count
-                                                self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
-                                                ++self.commentCount
-                                                if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
-                                                    self.prepareDataForTableView()
+                                                currentActivitiesFoundCommentCount[find(currentActivitiesFound, activity)!] = count
+                                                ++commentCountFound
+                                                if likeCountFound == currentActivitiesFound.count && commentCountFound == currentActivitiesFound.count{
+                                                    self.prepareDataForTableView(currentActivitiesFound, currentActivitiesFoundCommentCount: currentActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: currentActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
                                                     self.loadNotifications()
-
-                                                    self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+                                                    if self.tableView.numberOfRowsInSection(0) != 0{
+//                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+                                                        self.tableView.reloadData()
+                                                    }
+                                                    else{
+                                                        self.tableView.reloadData()
+                                                    }
 
                                                     self.refreshControl?.endRefreshing()
                                                     
@@ -548,130 +602,17 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
     }
 
-    func loadActivitiesOnViewDidLoad(){
-        var followingQuery = PFQuery(className: "FollowerFollowing")
-        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
-        followingQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                // Found FollowerFollowing object for current user
-                var currentUserFollowerFollowingObject = objects[0] as! PFObject
-                var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as! [PFUser]
-                var activityQuery = PFQuery(className: "Activity")
-                // Include current user so user's own activities also show up
-                currentUserFollowingUsers.append(PFUser.currentUser())
-                
-                activityQuery.whereKey("ownerUser", containedIn: currentUserFollowingUsers)
-                activityQuery.includeKey("challenge")
-                activityQuery.includeKey("userChallengeData")
-                activityQuery.includeKey("ownerUser")
-                activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 15
-
-                activityQuery.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil {
-                        // Found activities
-                        self.currentActivities = objects as! [PFObject]
-                        // If activities count is 0, show no activity view, else display activities
-                        if self.currentActivities.count == 0{
-                            self.noActivityView.hidden = false
-                            self.refreshControl?.endRefreshing()
-                        }
-                        else{
-                            self.noActivityView.hidden = true
-                        }
-                        
-                        // Query activities liked by current user
-                        self.currentActivitiesCommentCount = Array(count: self.currentActivities.count, repeatedValue: 0)
-                        self.currentActivitiesLikeCount = Array(count: self.currentActivities.count, repeatedValue: 0)
-                        self.likeCount = 0
-                        self.commentCount = 0
-                        var relation = PFUser.currentUser().relationForKey("likedActivity")
-                        relation.query().findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
-                            if error == nil {
-                                for object in objects{
-                                    self.currentLikedAcitivitiesIdStrings.append(object.objectId)
-                                }
-                            }
-                            else {
-                                // Log details of the failure
-                                NSLog("Error: %@ %@", error, error.userInfo!)
-                                self.refreshControl?.endRefreshing()
-                            }
-                        }
-                        
-                        // Query like count of activities
-                        for activity in self.currentActivities{
-                            var queryLikes = PFQuery(className: "_User")
-                            queryLikes.whereKey("likedActivity", equalTo: activity)
-                            queryLikes.findObjectsInBackgroundWithBlock{
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
-                                if error == nil {
-                                    var count = objects.count
-                                    self.currentActivitiesLikeCount[find(self.currentActivities, activity)!] = count
-                                    ++self.likeCount
-                                    
-                                    // Query comment count of activities
-                                    var queryComments = PFQuery(className: "Comment")
-                                    queryComments.whereKey("activity", equalTo: activity)
-                                    queryComments.findObjectsInBackgroundWithBlock{
-                                        (objects: [AnyObject]!, error: NSError!) -> Void in
-                                        if error == nil {
-                                            var count = objects.count
-                                            self.currentActivitiesCommentCount[find(self.currentActivities, activity)!] = count
-                                            ++self.commentCount
-                                            if self.likeCount == self.currentActivities.count && self.commentCount == self.currentActivities.count{
-                                                self.prepareDataForTableView()
-                                                self.tableView.reloadData()
-                                                self.refreshControl?.endRefreshing()
-                                            }
-                                        }
-                                        else {
-                                            // Log details of the failure
-                                            NSLog("Error: %@ %@", error, error.userInfo!)
-                                            self.refreshControl?.endRefreshing()
-                                            
-                                        }
-                                    }
-                                    
-                                }
-                                else {
-                                    // Log details of the failure
-                                    NSLog("Error: %@ %@", error, error.userInfo!)
-                                    self.refreshControl?.endRefreshing()
-                                }
-                            }
-                            
-                        }
-                        
-                    } else {
-                        // Log details of the failure
-                        NSLog("Error: %@ %@", error, error.userInfo!)
-                        self.refreshControl?.endRefreshing()
-                        
-                    }
-                }
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
-                self.refreshControl?.endRefreshing()
-                
-            }
-        }
-        
-    }
 
     func loadMoreActivities(){
      println("load more activities")
+        self.loadActivities("old")
     }
     
     
-    func prepareDataForTableView(){
-        self.processedActivities.removeAllObjects()
+    func prepareDataForTableView(activitiesToAppend:[PFObject], currentActivitiesFoundCommentCount:[Int], currentActivitiesFoundLikeCount:[Int], currentLikedAcitivitiesFoundIdStrings:[String], context:String){
+//        self.processedActivities.removeAllObjects()
         var activityCount = 0
-        for activity in self.currentActivities{
+        for activity in activitiesToAppend{
             var currentActivityCreatedTime = activity.createdAt
             var currentActivityChallenge = activity["challenge"] as! PFObject
             var currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
@@ -708,32 +649,40 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
 
 
-            if self.currentActivitiesLikeCount.count == 0{
+            if currentActivitiesFoundLikeCount.count == 0{
             }
             else{
-                if self.currentActivitiesLikeCount[activityCount] > 1{
-                    currentActivityDictionary.updateValue("\(self.currentActivitiesLikeCount[activityCount]) likes", forKey: "likeCountLabel")
+                if currentActivitiesFoundLikeCount[activityCount] > 1{
+                    currentActivityDictionary.updateValue("\(currentActivitiesFoundLikeCount[activityCount]) likes", forKey: "likeCountLabel")
                 }
-                else if self.currentActivitiesLikeCount[activityCount] == 1{
-                    currentActivityDictionary.updateValue("\(self.currentActivitiesLikeCount[activityCount]) like", forKey: "likeCountLabel")
+                else if currentActivitiesFoundLikeCount[activityCount] == 1{
+                    currentActivityDictionary.updateValue("\(currentActivitiesFoundLikeCount[activityCount]) like", forKey: "likeCountLabel")
                 }
             }
-            if self.currentActivitiesCommentCount.count == 0{
+            if currentActivitiesFoundCommentCount.count == 0{
             }
             else{
-                if self.currentActivitiesCommentCount[activityCount] > 1{
-                    currentActivityDictionary.updateValue("\(self.currentActivitiesCommentCount[activityCount]) comments", forKey: "commentCountLabel")
+                if currentActivitiesFoundCommentCount[activityCount] > 1{
+                    currentActivityDictionary.updateValue("\(currentActivitiesFoundCommentCount[activityCount]) comments", forKey: "commentCountLabel")
                 }
-                else if self.currentActivitiesCommentCount[activityCount] == 1{
-                    currentActivityDictionary.updateValue("\(self.currentActivitiesCommentCount[activityCount]) comment", forKey: "commentCountLabel")
+                else if currentActivitiesFoundCommentCount[activityCount] == 1{
+                    currentActivityDictionary.updateValue("\(currentActivitiesFoundCommentCount[activityCount]) comment", forKey: "commentCountLabel")
                 }
             }
 
-            if contains(self.currentLikedAcitivitiesIdStrings, activity.objectId){
+            if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId){
                 currentActivityDictionary.updateValue("yes", forKey: "liked")
             }
-
-            self.processedActivities.addObject(currentActivityDictionary)
+            if context == "old"{
+                self.processedActivities.addObject(currentActivityDictionary)
+                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
+            }
+            else if context == "new"{
+                self.processedActivities.insertObject(currentActivityDictionary, atIndex: 0)
+                self.currentActivitiesLikeCount.splice(currentActivitiesFoundLikeCount, atIndex: 0)
+                self.currentActivitiesCommentCount.splice(currentActivitiesFoundCommentCount, atIndex: 0)
+            }
             ++activityCount
         }
     }
@@ -831,12 +780,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath == NSIndexPath(forRow: 0, inSection: 1){
-            self.loadMoreActivities()
-        }
-    }
-    
     // Perform segue to show activity detail if comment button tapped
     func commentButtonTapped(sender:UITapGestureRecognizer){
         var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
@@ -844,7 +787,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         var toCommentActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toCommentActivity
 
-        self.performSegueWithIdentifier("showActivityDetail", sender: self)
+        self.performSegueWithIdentifier("showActivityExpanded", sender: self)
     }
     
     func showActivityContentPreviewTapped(sender:UITapGestureRecognizer){

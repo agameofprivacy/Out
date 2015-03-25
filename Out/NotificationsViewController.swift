@@ -232,15 +232,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             notificationQuery.whereKey("createdAt", lessThan: (self.readNotifications.last as PFObject!).createdAt)
         }
         notificationQuery.orderByDescending("createdAt")
-        notificationQuery.limit = 20
+        notificationQuery.limit = 15
         notificationQuery.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil{
-                if objects.count >= 20{
+                if objects.count >= 15{
                     self.readNotifications.extend(objects as! [PFObject])
                     self.notificationsTableView.reloadData()
                 }
                 else{
+                    self.readNotifications.extend(objects as! [PFObject])
+                    self.notificationsTableView.reloadData()
                     (self.notificationsTableView.cellForRowAtIndexPath(NSIndexPath(forRow: self.readNotifications.count, inSection: 1)))!.textLabel?.text = "No More Notifications"
                 }
             }

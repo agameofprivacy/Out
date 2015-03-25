@@ -143,6 +143,7 @@
 		2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */; };
 		2CB7E4281A15C40400D55CF8 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */; };
 		2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */; };
+		2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */; };
 		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
 		2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */; };
@@ -382,6 +383,7 @@
 		2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityExpandedTableViewController.swift; sourceTree = "<group>"; };
 		2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
 		2CD5302719FB42E500D38896 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
+				2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */,
 				2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */,
 				2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
@@ -1128,6 +1131,7 @@
 				2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */,
 				2CB7E4161A15A3D700D55CF8 /* DTError.m in Sources */,
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
+				2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
 				2C9BE6A21A5327E300980C0D /* XLFormTextFieldCell.m in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
