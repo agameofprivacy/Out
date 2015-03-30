@@ -87,10 +87,22 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath == NSIndexPath(forRow: tableView.numberOfRowsInSection(1) - 1, inSection: 1){
+            return 64
+        }else{
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath == NSIndexPath(forRow: self.readNotifications.count, inSection: 1){
             var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
-            cell.textLabel?.text = "Load More..."
+            cell.textLabel?.text = "tap to load more notifications"
+            cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+            cell.textLabel?.textAlignment = NSTextAlignment.Center
+            cell.backgroundColor = UIColor.clearColor()
             var notificationLoadMoreCellTappedGestureReconizer = UITapGestureRecognizer(target: self, action: "loadAdditionalNotifications")
             cell.addGestureRecognizer(notificationLoadMoreCellTappedGestureReconizer)
             return cell

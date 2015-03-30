@@ -14,10 +14,10 @@
 //   limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import "SLKTextView.h"
 
-/** @name UITextView additional features used for SlackTextViewController. */
-@interface UITextView (SLKAdditions)
+/** @name SLKTextView additional features used for SlackTextViewController. */
+@interface SLKTextView (SLKAdditions)
 
 /**
  Scrolls to the very end of the content size, animated.
@@ -68,6 +68,6 @@
  
  @param description A simple description associated with the Undo or Redo command.
  */
-- (void)prepareForUndo:(NSString *)description;
+- (void)slk_prepareForUndo:(NSString *)description;
 
 @end

@@ -29,7 +29,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     var expandedViewSegmentedControl:UISegmentedControl!
     
     var detailsTableView:TPKeyboardAvoidingTableView!
-    var commentsTableView:TPKeyboardAvoidingTableView!
+    var commentsTableView:CommentsViewController!
     var moreTableView:TPKeyboardAvoidingTableView!
     
     let colorDictionary =
@@ -68,7 +68,6 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -79,27 +78,30 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.navigationItem.title = "Activity"
 
         self.detailsTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.detailsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.detailsTableView.rowHeight = UITableViewAutomaticDimension
 //        self.detailsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.detailsTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        self.detailsTableView.contentInset = UIEdgeInsets(top: 213.5, left: 0, bottom: 0, right: 0)
+        self.detailsTableView.backgroundColor = UIColor.clearColor()
+        self.detailsTableView.delegate = self
+        self.detailsTableView.dataSource = self
+        self.detailsTableView.contentInset.top = 127
         self.view.addSubview(self.detailsTableView)
         
-        self.commentsTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.commentsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.commentsTableView.rowHeight = UITableViewAutomaticDimension
-//        self.commentsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.commentsTableView.backgroundColor = UIColor(white: 0.85, alpha: 1)
-        self.commentsTableView.contentInset = UIEdgeInsets(top: 213.5, left: 0, bottom: 0, right: 0)
-        self.view.addSubview(self.commentsTableView)
+        self.commentsTableView = CommentsViewController(tableViewStyle: UITableViewStyle.Plain)
+        self.commentsTableView.activity = self.activity
+        self.commentsTableView.view.frame = CGRectMake(0, 0, 375, 617.5)
+        self.commentsTableView.tableView.registerClass(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
+        self.commentsTableView.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.commentsTableView.tableView.contentInset.bottom = 191
+        self.view.addSubview(self.commentsTableView.view)
+
         
         self.moreTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
-        self.moreTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.moreTableView.rowHeight = UITableViewAutomaticDimension
-//        self.moreTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.moreTableView.backgroundColor = UIColor(white: 0.75, alpha: 1)
-        self.moreTableView.contentInset = UIEdgeInsets(top: 213.5, left: 0, bottom: 0, right: 0)
+        self.moreTableView.backgroundColor = UIColor.clearColor()
+        self.moreTableView.contentInset.top = 191
+        self.moreTableView.contentInset.bottom = 49.5
+        self.moreTableView.delegate = self
+        self.moreTableView.dataSource = self
+
         self.view.addSubview(self.moreTableView)
         
         self.activityHeader = UIView(frame: CGRectZero)
@@ -207,10 +209,19 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         switch self.selectedSegment{
         case "Details":
             self.expandedViewSegmentedControl.selectedSegmentIndex = 0
+            self.detailsTableView.hidden = false
+            self.commentsTableView.view.hidden = true
+            self.moreTableView.hidden = true
         case "Comments":
             self.expandedViewSegmentedControl.selectedSegmentIndex = 1
+            self.detailsTableView.hidden = true
+            self.commentsTableView.view.hidden = false
+            self.moreTableView.hidden = true
         default:
             self.expandedViewSegmentedControl.selectedSegmentIndex = 2
+            self.detailsTableView.hidden = true
+            self.commentsTableView.view.hidden = true
+            self.moreTableView.hidden = false
         }
         
         self.expandedViewSegmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
@@ -248,9 +259,6 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         if tableView == self.detailsTableView{
             return 1
         }
-        else if tableView == self.commentsTableView{
-            return 1
-        }
         else{
             return 1
         }
@@ -261,27 +269,37 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         // Return the number of rows in the section.
 
         if tableView == self.detailsTableView{
-            return 25
-        }
-        else if tableView == self.commentsTableView{
-            return 55
+            return 4
         }
         else{
-            return 5
+            return 3
         }
     }
-    
+
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return UITableViewAutomaticDimension
+        if tableView == self.detailsTableView{
+            return 120
+        }
+        else{
+            return 64
+        }
     }
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Configure the cell...
-        let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.whiteColor()
-        return cell
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "defaultCell")
+        if tableView == self.detailsTableView{
+            cell.textLabel?.text = "Step \(indexPath.row + 1) Detail"
+            cell.backgroundColor = UIColor.whiteColor()
+            return cell
+        }
+        else{
+            cell.textLabel?.text = "Activity Option \(indexPath.row + 1)"
+            cell.backgroundColor = UIColor.whiteColor()
+            return cell
+        }
     }
 
     func valueChanged(segment:UISegmentedControl){
@@ -289,17 +307,17 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         case 0:
             self.selectedSegment = "Details"
             self.detailsTableView.hidden = false
-            self.commentsTableView.hidden = true
+            self.commentsTableView.view.hidden = true
             self.moreTableView.hidden = true
         case 1:
             self.selectedSegment = "Comments"
             self.detailsTableView.hidden = true
-            self.commentsTableView.hidden = false
+            self.commentsTableView.view.hidden = false
             self.moreTableView.hidden = true
         default:
             self.selectedSegment = "More"
             self.detailsTableView.hidden = true
-            self.commentsTableView.hidden = true
+            self.commentsTableView.view.hidden = true
             self.moreTableView.hidden = false
         }
     }
@@ -359,6 +377,9 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         //        self.navigationItem.title = self.webView.stringByEvaluatingJavaScriptFromString("document.title")
 //        self.activityContentWebView.hidden = false
     }
+    // Store new comment if Post button tapped
+
+
 
 
 }

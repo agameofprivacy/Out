@@ -19,13 +19,14 @@
 #import "SLKTypingIndicatorView.h"
 #import "SLKTextView.h"
 
+#import "SLKTextView+SLKAdditions.h"
 #import "UIScrollView+SLKAdditions.h"
-#import "UITextView+SLKAdditions.h"
 #import "UIView+SLKAdditions.h"
 
-/** UIKeyboard notification replacement, posting reliably only when showing/hiding the
- keyboard (not when resizing keyboard, or with inputAccessoryView reloads, etc.)
- Use these APIs with your own risk (still a work in progress). */
+/**
+ UIKeyboard notification replacement, posting reliably only when showing/hiding the keyboard (not when resizing keyboard, or with inputAccessoryView reloads, etc).
+ Only triggered when using SLKTextViewController's text view.
+ */
 extern NSString *const SLKKeyboardWillShowNotification;
 extern NSString *const SLKKeyboardDidShowNotification;
 extern NSString *const SLKKeyboardWillHideNotification;
@@ -39,7 +40,7 @@ typedef NS_ENUM(NSUInteger, SLKKeyboardStatus) {
 };
 
 /** @name A drop-in UIViewController subclass with a growing text input view and other useful messaging features. */
-NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 
 /** The main table view managed by the controller object. Created by default initializing with -init or initWithNibName:bundle: */
 @property (nonatomic, readonly) UITableView *tableView;
@@ -47,26 +48,31 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 /** The main collection view managed by the controller object. Not nil if the controller is initialised with -initWithCollectionViewLayout: */
 @property (nonatomic, readonly) UICollectionView *collectionView;
 
+/** The main scroll view managed by the controller object. Not nil if the controller is initialised with -initWithScrollView: */
+@property (nonatomic, readonly) UIScrollView *scrollView;
+
 /** The bottom toolbar containing a text view and buttons. */
 @property (nonatomic, readonly) SLKTextInputbar *textInputbar;
 
 /** The typing indicator used to display user names horizontally. */
 @property (nonatomic, readonly) SLKTypingIndicatorView *typingIndicatorView;
 
-/** The single tap gesture used to dismiss the keyboard */
+/** A single tap gesture used to dismiss the keyboard. */
 @property (nonatomic, readonly) UIGestureRecognizer *singleTapGesture;
+
+/** A vertical pan gesture used for bringing the keyboard from the bottom. */
+@property (nonatomic, readonly) UIPanGestureRecognizer *verticalPanGesture;
 
 /** YES if control's animation should have bouncy effects. Default is YES. */
 @property (nonatomic, assign) BOOL bounces;
 
 /** YES if text view's content can be cleaned with a shake gesture. Default is NO. */
 @property (nonatomic, assign) BOOL shakeToClearEnabled;
-@property (nonatomic, assign) BOOL undoShakingEnabled DEPRECATED_MSG_ATTRIBUTE("Use -shakeToClearEnabled instead");
 
 /** YES if keyboard can be dismissed gradually with a vertical panning gesture. Default is YES. */
 @property (nonatomic, assign, getter = isKeyboardPanningEnabled) BOOL keyboardPanningEnabled;
 
-/** YES if an external keyboard has been detected (this value only changes when the text view becomes first responder). */
+/** YES if an external keyboard has been detected (this value updates only when the text view becomes first responder). */
 @property (nonatomic, readonly) BOOL isExternalKeyboardDetected;
 
 /** YES if after right button press, the text view is cleared out. Default is YES. */
@@ -97,6 +103,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 @property (nonatomic, readonly) UIButton *rightButton;
 
 
+#pragma mark - Initialization
 ///------------------------------------------------
 /// @name Initialization
 ///------------------------------------------------
@@ -108,7 +115,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
  @param style A constant that specifies the style of main table view that the controller object is to manage (UITableViewStylePlain or UITableViewStyleGrouped).
  @return An initialized SLKTextViewController object or nil if the object could not be created.
  */
-- (instancetype)initWithTableViewStyle:(UITableViewStyle)style;
+- (instancetype)initWithTableViewStyle:(UITableViewStyle)style NS_DESIGNATED_INITIALIZER;
 
 /**
  Initializes a collection view controller and configures the collection view with the provided layout.
@@ -117,12 +124,28 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
  @param layout The layout object to associate with the collection view. The layout controls how the collection view presents its cells and supplementary views.
  @return An initialized SLKTextViewController object or nil if the object could not be created.
  */
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
+
+/**
+ Initializes a text view controller to manage an arbitraty scroll view. The caller is responsible for configuration of the scroll view, including wiring the delegate.
+
+ @param a UISCrollView to be used as the main content area.
+ @return An initialized SLKTextViewController object or nil if the object could not be created.
+ */
+- (instancetype)initWithScrollView:(UIScrollView *)scrollView NS_DESIGNATED_INITIALIZER;
+
+/**
+ Initializes either a table or collection view controller.
+ You must override either +tableViewStyleForCoder: or +collectionViewLayoutForCoder: to define witch view to be layed out.
+ 
+ @param decoder An unarchiver object.
+ @return An initialized SLKTextViewController object or nil if the object could not be created.
+ */
+- (instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns the tableView style to be configured when using Interface Builder. Default is UITableViewStylePlain.
  You must override this method if you want to configure a tableView.
- You should not override -initWithCoder:
  
  @param decoder An unarchiver object.
  @return The tableView style to be used in the new instantiated tableView.
@@ -132,7 +155,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 /**
  Returns the tableView style to be configured when using Interface Builder. Default is nil.
  You must override this method if you want to configure a collectionView.
- You should not override -initWithCoder:
  
  @param decoder An unarchiver object.
  @return The collectionView style to be used in the new instantiated collectionView.
@@ -140,6 +162,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 + (UICollectionViewLayout *)collectionViewLayoutForCoder:(NSCoder *)decoder;
 
 
+#pragma mark - Keyboard Handling
 ///------------------------------------------------
 /// @name Keyboard Handling
 ///------------------------------------------------
@@ -167,8 +190,9 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 - (void)didChangeKeyboardStatus:(SLKKeyboardStatus)status;
 
 
+#pragma mark - Interaction Notifications
 ///------------------------------------------------
-/// @name Text Typing Notifications
+/// @name Interaction Notifications
 ///------------------------------------------------
 
 /**
@@ -209,14 +233,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
  */
 - (BOOL)canPressRightButton;
 
-/**
- Notifies the view controller when the user has pasted an image inside of the text view.
- You can override this method to perform additional tasks associated with image pasting.
- 
- @param image The image that has been pasted. Only JPG or PNG are supported.
- */
-- (void)didPasteImage:(UIImage *)image DEPRECATED_MSG_ATTRIBUTE("Use -didPasteMediaContent: instead");
-
 /** 
  Notifies the view controller when the user has pasted a supported media content (images and/or videos).
  You can override this method to perform additional tasks associated with image/video pasting. You don't need to call super since this method doesn't do anything.
@@ -252,7 +268,14 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
  */
 - (void)didPressEscapeKey:(id)sender NS_REQUIRES_SUPER;
 
+/**
+ Notifies the view controller when the user has pressed the arrow key with an external keyboard.
+ You can override this method to perform additional tasks. You MUST call super at some point in your implementation.
+ */
+- (void)didPressArrowKey:(id)sender NS_REQUIRES_SUPER;
 
+
+#pragma mark - Text Edition
 ///------------------------------------------------
 /// @name Text Edition
 ///------------------------------------------------
@@ -285,6 +308,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 - (void)didCancelTextEditing:(id)sender NS_REQUIRES_SUPER;
 
 
+#pragma mark - Text Auto-Completion
 ///------------------------------------------------
 /// @name Text Auto-Completion
 ///------------------------------------------------
@@ -298,7 +322,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 /** The range of the found prefix in the text view content. */
 @property (nonatomic, readonly) NSRange foundPrefixRange;
 
-/** The recently found word at the textView caret position. */
+/** The recently found word at the text view's caret position. */
 @property (nonatomic, readonly) NSString *foundWord;
 
 /** YES if the autocompletion mode is active. */
@@ -332,7 +356,7 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 - (CGFloat)heightForAutoCompletionView;
 
 /**
- Returns the maximum height for the autocompletion view. Default is 140.0.
+ Returns the maximum height for the autocompletion view. Default is 140 pts.
  You can override this method to return a custom max height.
 
  @return The autocompletion view's max height.
@@ -345,13 +369,23 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 - (void)cancelAutoCompletion;
 
 /** 
- Accepts the autocompletion, replacing the detected key and word with a new string.
+ Accepts the autocompletion, replacing the detected word with a new string, keeping the prefix.
+ This method is an abstraction of -acceptAutoCompletionWithString:keepPrefix:
  
  @param string The string to be used for replacing autocompletion placeholders.
  */
 - (void)acceptAutoCompletionWithString:(NSString *)string;
 
+/**
+ Accepts the autocompletion, replacing the detected word with a new string, and optionally replacing the prefix too.
+ 
+ @param string The string to be used for replacing autocompletion placeholders.
+ @param keepPrefix YES if the prefix shouldn't be replaced.
+ */
+- (void)acceptAutoCompletionWithString:(NSString *)string keepPrefix:(BOOL)keepPrefix;
 
+
+#pragma mark - Text Caching
 ///------------------------------------------------
 /// @name Text Caching
 ///------------------------------------------------
@@ -378,6 +412,21 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface SLKTextViewController : UIViewController 
 + (void)clearAllCachedText;
 
 
+#pragma mark - Customization
+///------------------------------------------------
+/// @name Customization
+///------------------------------------------------
+
+/**
+ Registers a class for customizing the behavior and appearance of the text view.
+ You need to call this method inside of any initialization method.
+ 
+ @param textViewClass A SLKTextView subclass.
+ */
+- (void)registerClassForTextView:(Class)textViewClass;
+
+
+#pragma mark - Delegate Methods Requiring Super
 ///------------------------------------------------
 /// @name Delegate Methods Requiring Super
 ///------------------------------------------------

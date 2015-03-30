@@ -14,25 +14,19 @@
 //   limitations under the License.
 //
 
-#import "UITextView+SLKAdditions.h"
+#import "SLKTextView+SLKAdditions.h"
 
-@implementation UITextView (SLKAdditions)
+@implementation SLKTextView (SLKAdditions)
 
 - (void)slk_scrollToCaretPositonAnimated:(BOOL)animated
 {
-    if (!animated)
-    {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.0];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        
+    if (animated) {
         [self scrollRangeToVisible:self.selectedRange];
-        
-        [UIView commitAnimations];
     }
     else {
-        [self scrollRangeToVisible:self.selectedRange];
+        [UIView performWithoutAnimation:^{
+            [self scrollRangeToVisible:self.selectedRange];
+        }];
     }
 }
 
@@ -41,19 +35,13 @@
     CGRect rect = [self caretRectForPosition:self.selectedTextRange.end];
     rect.size.height += self.textContainerInset.bottom;
     
-    if (!animated)
-    {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.0];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        
+    if (animated) {
         [self scrollRectToVisible:rect animated:animated];
-        
-        [UIView commitAnimations];
     }
     else {
-        [self scrollRectToVisible:rect animated:animated];
+        [UIView performWithoutAnimation:^{
+            [self scrollRectToVisible:rect animated:NO];
+        }];
     }
 }
 
@@ -61,19 +49,8 @@
 {
     [self slk_insertTextAtCaretRange:@"\n"];
     
-    BOOL animated = YES;
-    SEL expandingSelector = NSSelectorFromString(@"isExpanding");
-    
-    if ([self respondsToSelector:expandingSelector]) {
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        BOOL isExpanding = (BOOL)[self performSelector:expandingSelector withObject:nil];
-#pragma clang diagnostic pop
-        
-        // if the text view cannot expand anymore, scrolling to bottom are not animated to fix a UITextView issue scrolling twice.
-        animated = !isExpanding;
-    }
+    // if the text view cannot expand anymore, scrolling to bottom are not animated to fix a UITextView issue scrolling twice.
+    BOOL animated = !self.isExpanding;
     
     //Detected break. Should scroll to bottom if needed.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0125 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -95,7 +72,7 @@
     }
     
     // Registers for undo management
-    [self prepareForUndo:@"Text appending"];
+    [self slk_prepareForUndo:@"Text appending"];
     
     // Append the new string at the caret position
     if (range.length == 0)
@@ -130,8 +107,9 @@
     NSString *text = self.text;
     NSInteger location = range.location;
     
-    if (text.length == 0) {
-        *rangePointer = NSMakeRange(0.0, 0.0);
+    // Aborts in case minimum requieres are not fufilled
+    if (text.length == 0 || location < 0 || (range.location+range.length) > text.length) {
+        *rangePointer = NSMakeRange(0, 0);
         return nil;
     }
     
@@ -167,8 +145,12 @@
     return word;
 }
 
-- (void)prepareForUndo:(NSString *)description
+- (void)slk_prepareForUndo:(NSString *)description
 {
+    if (!self.undoManagerEnabled) {
+        return;
+    }
+    
     [[self.undoManager prepareWithInvocationTarget:self] setText:self.text];
     [self.undoManager setActionName:description];
 }

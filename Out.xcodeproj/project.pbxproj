@@ -21,14 +21,6 @@
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */; };
 		2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */; };
-		2C2CF71A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF70A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m */; };
-		2C2CF71B1A156E2600B8C60E /* UITextView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF70C1A156E2600B8C60E /* UITextView+SLKAdditions.m */; };
-		2C2CF71C1A156E2600B8C60E /* UIView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF70E1A156E2600B8C60E /* UIView+SLKAdditions.m */; };
-		2C2CF71D1A156E2600B8C60E /* SLKInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7111A156E2600B8C60E /* SLKInputAccessoryView.m */; };
-		2C2CF71E1A156E2600B8C60E /* SLKTextInputbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7131A156E2600B8C60E /* SLKTextInputbar.m */; };
-		2C2CF71F1A156E2600B8C60E /* SLKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7151A156E2600B8C60E /* SLKTextView.m */; };
-		2C2CF7201A156E2600B8C60E /* SLKTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7171A156E2600B8C60E /* SLKTextViewController.m */; };
-		2C2CF7211A156E2600B8C60E /* SLKTypingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7191A156E2600B8C60E /* SLKTypingIndicatorView.m */; };
 		2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
@@ -147,6 +139,15 @@
 		2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */; };
 		2CB7E4281A15C40400D55CF8 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */; };
 		2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */; };
+		2CBCC8E31AC9D2CC00E992D9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8E21AC9D2CC00E992D9 /* CommentsViewController.swift */; };
+		2CBCC8F71AC9F87F00E992D9 /* SLKTextView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8E61AC9F87F00E992D9 /* SLKTextView+SLKAdditions.m */; };
+		2CBCC8F81AC9F87F00E992D9 /* UIScrollView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8E91AC9F87F00E992D9 /* UIScrollView+SLKAdditions.m */; };
+		2CBCC8F91AC9F87F00E992D9 /* UIView+SLKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8EB1AC9F87F00E992D9 /* UIView+SLKAdditions.m */; };
+		2CBCC8FA1AC9F87F00E992D9 /* SLKInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8EE1AC9F87F00E992D9 /* SLKInputAccessoryView.m */; };
+		2CBCC8FB1AC9F87F00E992D9 /* SLKTextInputbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8F01AC9F87F00E992D9 /* SLKTextInputbar.m */; };
+		2CBCC8FC1AC9F87F00E992D9 /* SLKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8F21AC9F87F00E992D9 /* SLKTextView.m */; };
+		2CBCC8FD1AC9F87F00E992D9 /* SLKTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8F41AC9F87F00E992D9 /* SLKTextViewController.m */; };
+		2CBCC8FE1AC9F87F00E992D9 /* SLKTypingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBCC8F61AC9F87F00E992D9 /* SLKTypingIndicatorView.m */; };
 		2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */; };
 		2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */; };
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
@@ -191,23 +192,6 @@
 		2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
 		2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleController.swift; sourceTree = "<group>"; };
-		2C2CF7081A156E2600B8C60E /* SLKUIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKUIConstants.h; sourceTree = "<group>"; };
-		2C2CF7091A156E2600B8C60E /* UIScrollView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SLKAdditions.h"; sourceTree = "<group>"; };
-		2C2CF70A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SLKAdditions.m"; sourceTree = "<group>"; };
-		2C2CF70B1A156E2600B8C60E /* UITextView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+SLKAdditions.h"; sourceTree = "<group>"; };
-		2C2CF70C1A156E2600B8C60E /* UITextView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+SLKAdditions.m"; sourceTree = "<group>"; };
-		2C2CF70D1A156E2600B8C60E /* UIView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SLKAdditions.h"; sourceTree = "<group>"; };
-		2C2CF70E1A156E2600B8C60E /* UIView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SLKAdditions.m"; sourceTree = "<group>"; };
-		2C2CF7101A156E2600B8C60E /* SLKInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKInputAccessoryView.h; sourceTree = "<group>"; };
-		2C2CF7111A156E2600B8C60E /* SLKInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKInputAccessoryView.m; sourceTree = "<group>"; };
-		2C2CF7121A156E2600B8C60E /* SLKTextInputbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextInputbar.h; sourceTree = "<group>"; };
-		2C2CF7131A156E2600B8C60E /* SLKTextInputbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextInputbar.m; sourceTree = "<group>"; };
-		2C2CF7141A156E2600B8C60E /* SLKTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextView.h; sourceTree = "<group>"; };
-		2C2CF7151A156E2600B8C60E /* SLKTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextView.m; sourceTree = "<group>"; };
-		2C2CF7161A156E2600B8C60E /* SLKTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextViewController.h; sourceTree = "<group>"; };
-		2C2CF7171A156E2600B8C60E /* SLKTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextViewController.m; sourceTree = "<group>"; };
-		2C2CF7181A156E2600B8C60E /* SLKTypingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTypingIndicatorView.h; sourceTree = "<group>"; };
-		2C2CF7191A156E2600B8C60E /* SLKTypingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTypingIndicatorView.m; sourceTree = "<group>"; };
 		2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
@@ -392,6 +376,24 @@
 		2CB7E4241A15C40400D55CF8 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
 		2CB7E4261A15C40400D55CF8 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
 		2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		2CBCC8E21AC9D2CC00E992D9 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		2CBCC8E51AC9F87F00E992D9 /* SLKTextView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SLKTextView+SLKAdditions.h"; sourceTree = "<group>"; };
+		2CBCC8E61AC9F87F00E992D9 /* SLKTextView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SLKTextView+SLKAdditions.m"; sourceTree = "<group>"; };
+		2CBCC8E71AC9F87F00E992D9 /* SLKUIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKUIConstants.h; sourceTree = "<group>"; };
+		2CBCC8E81AC9F87F00E992D9 /* UIScrollView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SLKAdditions.h"; sourceTree = "<group>"; };
+		2CBCC8E91AC9F87F00E992D9 /* UIScrollView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SLKAdditions.m"; sourceTree = "<group>"; };
+		2CBCC8EA1AC9F87F00E992D9 /* UIView+SLKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SLKAdditions.h"; sourceTree = "<group>"; };
+		2CBCC8EB1AC9F87F00E992D9 /* UIView+SLKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SLKAdditions.m"; sourceTree = "<group>"; };
+		2CBCC8ED1AC9F87F00E992D9 /* SLKInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKInputAccessoryView.h; sourceTree = "<group>"; };
+		2CBCC8EE1AC9F87F00E992D9 /* SLKInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKInputAccessoryView.m; sourceTree = "<group>"; };
+		2CBCC8EF1AC9F87F00E992D9 /* SLKTextInputbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextInputbar.h; sourceTree = "<group>"; };
+		2CBCC8F01AC9F87F00E992D9 /* SLKTextInputbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextInputbar.m; sourceTree = "<group>"; };
+		2CBCC8F11AC9F87F00E992D9 /* SLKTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextView.h; sourceTree = "<group>"; };
+		2CBCC8F21AC9F87F00E992D9 /* SLKTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextView.m; sourceTree = "<group>"; };
+		2CBCC8F31AC9F87F00E992D9 /* SLKTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTextViewController.h; sourceTree = "<group>"; };
+		2CBCC8F41AC9F87F00E992D9 /* SLKTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTextViewController.m; sourceTree = "<group>"; };
+		2CBCC8F51AC9F87F00E992D9 /* SLKTypingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLKTypingIndicatorView.h; sourceTree = "<group>"; };
+		2CBCC8F61AC9F87F00E992D9 /* SLKTypingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLKTypingIndicatorView.m; sourceTree = "<group>"; };
 		2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityExpandedTableViewController.swift; sourceTree = "<group>"; };
 		2CD5302519FB42E500D38896 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
 		2CD5302619FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
@@ -470,41 +472,10 @@
 		2C2CF7061A156E2600B8C60E /* SlackTextViewController */ = {
 			isa = PBXGroup;
 			children = (
-				2C2CF7071A156E2600B8C60E /* Additions */,
-				2C2CF70F1A156E2600B8C60E /* Classes */,
+				2CBCC8E41AC9F87F00E992D9 /* Additions */,
+				2CBCC8EC1AC9F87F00E992D9 /* Classes */,
 			);
 			path = SlackTextViewController;
-			sourceTree = "<group>";
-		};
-		2C2CF7071A156E2600B8C60E /* Additions */ = {
-			isa = PBXGroup;
-			children = (
-				2C2CF7081A156E2600B8C60E /* SLKUIConstants.h */,
-				2C2CF7091A156E2600B8C60E /* UIScrollView+SLKAdditions.h */,
-				2C2CF70A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m */,
-				2C2CF70B1A156E2600B8C60E /* UITextView+SLKAdditions.h */,
-				2C2CF70C1A156E2600B8C60E /* UITextView+SLKAdditions.m */,
-				2C2CF70D1A156E2600B8C60E /* UIView+SLKAdditions.h */,
-				2C2CF70E1A156E2600B8C60E /* UIView+SLKAdditions.m */,
-			);
-			path = Additions;
-			sourceTree = "<group>";
-		};
-		2C2CF70F1A156E2600B8C60E /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				2C2CF7101A156E2600B8C60E /* SLKInputAccessoryView.h */,
-				2C2CF7111A156E2600B8C60E /* SLKInputAccessoryView.m */,
-				2C2CF7121A156E2600B8C60E /* SLKTextInputbar.h */,
-				2C2CF7131A156E2600B8C60E /* SLKTextInputbar.m */,
-				2C2CF7141A156E2600B8C60E /* SLKTextView.h */,
-				2C2CF7151A156E2600B8C60E /* SLKTextView.m */,
-				2C2CF7161A156E2600B8C60E /* SLKTextViewController.h */,
-				2C2CF7171A156E2600B8C60E /* SLKTextViewController.m */,
-				2C2CF7181A156E2600B8C60E /* SLKTypingIndicatorView.h */,
-				2C2CF7191A156E2600B8C60E /* SLKTypingIndicatorView.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		2C37DFE81AB9FB33002367C9 /* BBBadgeBarButtonItem */ = {
@@ -858,11 +829,12 @@
 			children = (
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
+				2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */,
 				2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */,
+				2CBCC8E21AC9D2CC00E992D9 /* CommentsViewController.swift */,
 				2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */,
 				2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */,
 				2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */,
-				2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */,
 				2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
 				2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */,
@@ -955,6 +927,37 @@
 				2CB7E4271A15C40400D55CF8 /* HockeySDKResources.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2CBCC8E41AC9F87F00E992D9 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				2CBCC8E51AC9F87F00E992D9 /* SLKTextView+SLKAdditions.h */,
+				2CBCC8E61AC9F87F00E992D9 /* SLKTextView+SLKAdditions.m */,
+				2CBCC8E71AC9F87F00E992D9 /* SLKUIConstants.h */,
+				2CBCC8E81AC9F87F00E992D9 /* UIScrollView+SLKAdditions.h */,
+				2CBCC8E91AC9F87F00E992D9 /* UIScrollView+SLKAdditions.m */,
+				2CBCC8EA1AC9F87F00E992D9 /* UIView+SLKAdditions.h */,
+				2CBCC8EB1AC9F87F00E992D9 /* UIView+SLKAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		2CBCC8EC1AC9F87F00E992D9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2CBCC8ED1AC9F87F00E992D9 /* SLKInputAccessoryView.h */,
+				2CBCC8EE1AC9F87F00E992D9 /* SLKInputAccessoryView.m */,
+				2CBCC8EF1AC9F87F00E992D9 /* SLKTextInputbar.h */,
+				2CBCC8F01AC9F87F00E992D9 /* SLKTextInputbar.m */,
+				2CBCC8F11AC9F87F00E992D9 /* SLKTextView.h */,
+				2CBCC8F21AC9F87F00E992D9 /* SLKTextView.m */,
+				2CBCC8F31AC9F87F00E992D9 /* SLKTextViewController.h */,
+				2CBCC8F41AC9F87F00E992D9 /* SLKTextViewController.m */,
+				2CBCC8F51AC9F87F00E992D9 /* SLKTypingIndicatorView.h */,
+				2CBCC8F61AC9F87F00E992D9 /* SLKTypingIndicatorView.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		2CD5302419FB42E500D38896 /* TPKeyboardAvoiding */ = {
@@ -1099,13 +1102,12 @@
 				2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */,
 				2C8CA1161AC5A20E00CD930C /* CBAutoScrollLabel.m in Sources */,
 				2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */,
-				2C2CF71E1A156E2600B8C60E /* SLKTextInputbar.m in Sources */,
 				2C9BE69C1A5327E300980C0D /* XLFormPickerCell.m in Sources */,
 				2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */,
+				2CBCC8FB1AC9F87F00E992D9 /* SLKTextInputbar.m in Sources */,
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
 				2C8C3EFB1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift in Sources */,
-				2C2CF71A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m in Sources */,
 				2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
@@ -1125,9 +1127,9 @@
 				2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */,
 				2C3A7C001A117EB700FC4516 /* MyProfileViewController.swift in Sources */,
 				2C9BE69E1A5327E300980C0D /* XLFormSelectorCell.m in Sources */,
-				2C2CF71F1A156E2600B8C60E /* SLKTextView.m in Sources */,
+				2CBCC8FC1AC9F87F00E992D9 /* SLKTextView.m in Sources */,
+				2CBCC8FD1AC9F87F00E992D9 /* SLKTextViewController.m in Sources */,
 				2CB170F919F2C7860086C95F /* LoginViewController.swift in Sources */,
-				2C2CF7201A156E2600B8C60E /* SLKTextViewController.m in Sources */,
 				2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */,
 				2C5C56AE1A106E6200B8EBC7 /* PNChartLabel.m in Sources */,
 				2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */,
@@ -1151,14 +1153,15 @@
 				2C5C56B11A106E6200B8EBC7 /* PNLineChart.m in Sources */,
 				2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */,
 				2CA435FB19F48BC500DC1C6E /* LaunchWebViewTableViewCell.swift in Sources */,
-				2C2CF7211A156E2600B8C60E /* SLKTypingIndicatorView.m in Sources */,
 				2C512CA119F5A06800483A49 /* GallerySelectCollectionViewCell.swift in Sources */,
 				2CA435FD19F48BE700DC1C6E /* HeroImageTableViewCell.swift in Sources */,
 				2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */,
 				2CB7E4161A15A3D700D55CF8 /* DTError.m in Sources */,
+				2CBCC8F71AC9F87F00E992D9 /* SLKTextView+SLKAdditions.m in Sources */,
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
 				2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
+				2CBCC8FA1AC9F87F00E992D9 /* SLKInputAccessoryView.m in Sources */,
 				2C9BE6A21A5327E300980C0D /* XLFormTextFieldCell.m in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
 				2C9BE6A81A5327E300980C0D /* XLFormRowDescriptor.m in Sources */,
@@ -1167,13 +1170,12 @@
 				2C9BE6B01A5327E300980C0D /* XLFormRegexValidator.m in Sources */,
 				2C9CA6101A05AECF00BC4D93 /* ActivityTabViewController.swift in Sources */,
 				2CB170FD19F2C7860086C95F /* ChallengeFilterTableViewController.swift in Sources */,
-				2C2CF71C1A156E2600B8C60E /* UIView+SLKAdditions.m in Sources */,
 				2C5C56AD1A106E6200B8EBC7 /* PNBarChart.m in Sources */,
 				2CB7E4171A15A3D700D55CF8 /* DTTimePeriod.m in Sources */,
 				2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */,
-				2C2CF71B1A156E2600B8C60E /* UITextView+SLKAdditions.m in Sources */,
 				2C9BE6A61A5327E300980C0D /* XLFormViewController.m in Sources */,
+				2CBCC8FE1AC9F87F00E992D9 /* SLKTypingIndicatorView.m in Sources */,
 				2C9BE6A91A5327E300980C0D /* XLFormSectionDescriptor.m in Sources */,
 				2CB170FE19F2C7860086C95F /* ChallengeFilterTableViewCell.swift in Sources */,
 				2C9BE6AE1A5327E300980C0D /* XLFormRightImageButton.m in Sources */,
@@ -1186,6 +1188,7 @@
 				2CA435F719F48B8100DC1C6E /* CallTableViewCell.swift in Sources */,
 				2C9D633A1A09441A00E7E069 /* ActivityTableViewCell.swift in Sources */,
 				2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */,
+				2CBCC8F81AC9F87F00E992D9 /* UIScrollView+SLKAdditions.m in Sources */,
 				2C9BE6981A5327E300980C0D /* XLFormDateCell.m in Sources */,
 				2C5C56B51A106E6200B8EBC7 /* PNPieChartDataItem.m in Sources */,
 				2C9BE6AB1A5327E300980C0D /* NSObject+XLFormAdditions.m in Sources */,
@@ -1199,7 +1202,6 @@
 				2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				2C5C56AF1A106E6200B8EBC7 /* PNCircleChart.m in Sources */,
 				2CB1710219F2C7860086C95F /* ChallengesTabViewController.swift in Sources */,
-				2C2CF71D1A156E2600B8C60E /* SLKInputAccessoryView.m in Sources */,
 				2CB1710319F2C7860086C95F /* ChallengesTabCollectionViewCell.swift in Sources */,
 				2CB1710419F2C7860086C95F /* MediaAvailabilityTableViewCell.swift in Sources */,
 				2CB1710519F2C7860086C95F /* GallerySelectTableViewCell.swift in Sources */,
@@ -1216,8 +1218,10 @@
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
 				2CB7E4181A15A3D700D55CF8 /* DTTimePeriodChain.m in Sources */,
 				2CB7E41B1A15A3D700D55CF8 /* NSDate+DateTools.m in Sources */,
+				2CBCC8E31AC9D2CC00E992D9 /* CommentsViewController.swift in Sources */,
 				2C65C5501A3F447D00B5458F /* HelpTalkViewController.swift in Sources */,
 				2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */,
+				2CBCC8F91AC9F87F00E992D9 /* UIView+SLKAdditions.m in Sources */,
 				2C9BE6A31A5327E300980C0D /* XLFormTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

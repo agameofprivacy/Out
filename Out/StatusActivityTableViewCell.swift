@@ -28,7 +28,7 @@ class StatusActivityTableViewCell: UITableViewCell {
     var writeACommentLabel:UILabel!
     
     var likeButtonArea:UIView!
-//    var likeCountLabel:UILabel!
+    var likeCountLabel:UILabel!
     var likeButton:UIImageView!
     
     
@@ -50,9 +50,10 @@ class StatusActivityTableViewCell: UITableViewCell {
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.paperView.backgroundColor = UIColor.whiteColor()
-        self.paperView.layer.shadowColor = UIColor(white: 0.9, alpha: 1).CGColor
+        self.paperView.layer.shadowColor = UIColor(white: 0, alpha: 1).CGColor
         self.paperView.layer.shadowOffset = CGSize(width: 0, height: 1)
-//        self.paperView.layer.shadowOpacity = 1.0
+//        self.paperView.layer.shadowOpacity = 0.1
+//        self.paperView.layer.shadowPath = UIBezierPath(rect: self.paperView.bounds).CGPath
         self.paperView.layer.shadowRadius = 1
         self.paperView.layer.cornerRadius = 5
         self.paperView.layer.borderWidth = 0.75
@@ -132,13 +133,13 @@ class StatusActivityTableViewCell: UITableViewCell {
         self.likeButtonArea.userInteractionEnabled = true
         self.responseBar.addSubview(self.likeButtonArea)
         
-//        self.likeCountLabel = UILabel(frame: CGRectZero)
-//        self.likeCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        self.likeCountLabel.numberOfLines = 1
-//        self.likeCountLabel.textAlignment = NSTextAlignment.Right
-//        self.likeCountLabel.text = ""
-//        self.likeCountLabel.font = titleFont?.fontWithSize(16.0)
-//        self.likeButtonArea.addSubview(self.likeCountLabel)
+        self.likeCountLabel = UILabel(frame: CGRectZero)
+        self.likeCountLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.likeCountLabel.numberOfLines = 1
+        self.likeCountLabel.textAlignment = NSTextAlignment.Right
+        self.likeCountLabel.text = ""
+        self.likeCountLabel.font = titleFont?.fontWithSize(16.0)
+        self.likeButtonArea.addSubview(self.likeCountLabel)
         
         self.likeButton = UIImageView(frame: CGRectZero)
         self.likeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -261,7 +262,7 @@ class StatusActivityTableViewCell: UITableViewCell {
         // Like Button Area Constraints
         var likeButtonViewsDictionary =
         [
-//            "likeCountLabel":likeCountLabel,
+            "likeCountLabel":self.likeCountLabel,
             "likeButton":likeButton
         ]
         
@@ -270,7 +271,7 @@ class StatusActivityTableViewCell: UITableViewCell {
             "shortVerticalPadding":2
         ]
         
-        var horizontalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[likeButton(44)]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
+        var horizontalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[likeCountLabel]-6-[likeButton(44)]|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
         
         var verticalLikeButtonAreaConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=2-[likeButton(44)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: likeButtonMetricsDictionary, views: likeButtonViewsDictionary)
         

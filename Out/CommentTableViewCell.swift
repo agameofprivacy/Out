@@ -69,7 +69,7 @@ class CommentTableViewCell: UITableViewCell {
         
         
         var viewsDictionary = ["avatarImageView":self.avatarImageView, "aliasLabel":self.aliasLabel, "commentLabel":self.commentLabel, "timeAgoLabel":self.timeAgoLabel, "separator":self.separator]
-        var metricsDictionary = ["sideMargin":12, "inBetweenMargin":15]
+        var metricsDictionary = ["sideMargin":7.5, "inBetweenMargin":15]
         
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[avatarImageView(50)]-inBetweenMargin-[aliasLabel]-[timeAgoLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 

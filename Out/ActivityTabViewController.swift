@@ -92,7 +92,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
         self.tableView.registerClass(StatusActivityTableViewCell.self, forCellReuseIdentifier: "StatusActivityTableViewCell")
-        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 12, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 30, 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -186,7 +186,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             newVC.userChallengeData = currentUserChallengeData
             newVC.user = currentUser
             newVC.challengeTrackNumber = currentChallengeTrackNumber
-            println(sender)
             newVC.selectedSegment = self.selectedSegment
 
         }
@@ -251,7 +250,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.narrativeTitleLabel.text = currentActivity["currentNarrativeTitleString"]!
                 cell.narrativeContentLabel.text = currentActivity["currentNarrativeContentString"]!
                 
-//                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
+                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
                 cell.commentsCountLabel.text = currentActivity["commentCountLabel"]!
                 
                 if (currentActivity["liked"] == "yes"){
@@ -265,7 +264,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 
                 var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
                 cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
-
                 return cell
             }
             else{
@@ -278,7 +276,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
                 
-//                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
+                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
                 cell.commentsCountLabel.text = currentActivity["commentCountLabel"]!
                 
                 if (currentActivity["liked"] == "yes"){
@@ -299,7 +297,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else
         {
             var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
-            cell.textLabel?.text = "Load More..."
+            cell.textLabel?.text = "tap to load more activities"
+            cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
+            cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
+            cell.textLabel?.textAlignment = NSTextAlignment.Center
+            cell.backgroundColor = UIColor.clearColor()
             return cell
         }
     }
@@ -470,7 +472,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 10
+                activityQuery.limit = 20
                 if context == "old"{
                     if !self.currentActivities.isEmpty{
                         activityQuery.whereKey("createdAt", lessThan: (self.currentActivities.last as PFObject!).createdAt)
@@ -489,7 +491,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         var currentActivitiesFound = objects as! [PFObject]
                         var currentLikedAcitivitiesFoundIdStrings:[String] = []
                         if context == "old"{
-                            if objects.count == 10{
+                            if objects.count == 20{
                                 self.moreActivities = true
                             }
                             else{
