@@ -19,3 +19,4 @@
 #import "XLForm.h"
 #import "ChallengeCardsCollectionViewFlowLayout.h"
 #import "BBBadgeBarButtonItem.h"
+#import "CBAutoScrollLabel.h"

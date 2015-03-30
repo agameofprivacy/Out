@@ -15,7 +15,6 @@ class UIStyleController: NSObject {
         
         // UINavigationBar Appearance Object
         var navigationBarAppearance:UINavigationBar = UINavigationBar.appearance()
-        
         // Modify UINavigationBar title styles
 //        var navFont = UIFont(name: "HelveticaNeue-Light", size: 19.5)
 //        navigationBarAppearance.titleTextAttributes = NSDictionary(objectsAndKeys: navFont!, NSFontAttributeName)

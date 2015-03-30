@@ -79,7 +79,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         // UINavigationBar init and layout
-        self.navigationItem.title = "People"
+        self.navigationItem.title = "Friends"
 
         var addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPeople:")
         addButton.enabled = true

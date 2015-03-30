@@ -70,6 +70,10 @@
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
 		2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8592C01A14082600272769 /* ActivityDetailViewController.swift */; };
+		2C8C3EF71AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */; };
+		2C8C3EF91AC5DB74007E5B05 /* WebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */; };
+		2C8C3EFB1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */; };
+		2C8CA1161AC5A20E00CD930C /* CBAutoScrollLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8CA1151AC5A20E00CD930C /* CBAutoScrollLabel.m */; };
 		2C93EE511A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */; };
 		2C9BE6951A5327E300980C0D /* XLFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BE64E1A5327E300980C0D /* XLFormBaseCell.m */; };
 		2C9BE6961A5327E300980C0D /* XLFormButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9BE6501A5327E300980C0D /* XLFormButtonCell.m */; };
@@ -273,6 +277,11 @@
 		2C8592C01A14082600272769 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		2C8C20CE19E9AAE1009E84C7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2C8C20D019E9ACCE009E84C7 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityExpandedBlurbTableViewCell.swift; sourceTree = "<group>"; };
+		2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewTableViewCell.swift; sourceTree = "<group>"; };
+		2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewTableViewCell.swift; sourceTree = "<group>"; };
+		2C8CA1141AC5A20E00CD930C /* CBAutoScrollLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAutoScrollLabel.h; sourceTree = "<group>"; };
+		2C8CA1151AC5A20E00CD930C /* CBAutoScrollLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAutoScrollLabel.m; sourceTree = "<group>"; };
 		2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardAnnouncementsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C9BE64D1A5327E300980C0D /* XLFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormBaseCell.h; sourceTree = "<group>"; };
 		2C9BE64E1A5327E300980C0D /* XLFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormBaseCell.m; sourceTree = "<group>"; };
@@ -614,6 +623,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C8CA1131AC5A20E00CD930C /* CBAutoScrollLabel */,
 				2C37DFE81AB9FB33002367C9 /* BBBadgeBarButtonItem */,
 				2C9BE64B1A5327E300980C0D /* XL */,
 				2C70203B1A2B815D00873041 /* COSTouchVisualizer */,
@@ -699,6 +709,15 @@
 				2C4F87EB1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift */,
 			);
 			name = DashboardTab;
+			sourceTree = "<group>";
+		};
+		2C8CA1131AC5A20E00CD930C /* CBAutoScrollLabel */ = {
+			isa = PBXGroup;
+			children = (
+				2C8CA1141AC5A20E00CD930C /* CBAutoScrollLabel.h */,
+				2C8CA1151AC5A20E00CD930C /* CBAutoScrollLabel.m */,
+			);
+			path = CBAutoScrollLabel;
 			sourceTree = "<group>";
 		};
 		2C9BE64B1A5327E300980C0D /* XL */ = {
@@ -840,6 +859,9 @@
 				2C9CA60F1A05AECF00BC4D93 /* ActivityTabViewController.swift */,
 				2C9D63391A09441A00E7E069 /* ActivityTableViewCell.swift */,
 				2CBDF49A1AC34F2200637937 /* ActivityExpandedTableViewController.swift */,
+				2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */,
+				2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */,
+				2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */,
 				2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */,
 				2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */,
 				2C8592C01A14082600272769 /* ActivityDetailViewController.swift */,
@@ -1071,14 +1093,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C9BE6AA1A5327E300980C0D /* NSArray+XLFormAdditions.m in Sources */,
+				2C8C3EF91AC5DB74007E5B05 /* WebViewTableViewCell.swift in Sources */,
 				2C5C563B1A106A1D00B8EBC7 /* UICountingLabel.m in Sources */,
+				2C8C3EF71AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift in Sources */,
 				2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */,
+				2C8CA1161AC5A20E00CD930C /* CBAutoScrollLabel.m in Sources */,
 				2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */,
 				2C2CF71E1A156E2600B8C60E /* SLKTextInputbar.m in Sources */,
 				2C9BE69C1A5327E300980C0D /* XLFormPickerCell.m in Sources */,
 				2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */,
 				2C5C56B01A106E6200B8EBC7 /* PNColor.m in Sources */,
 				2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */,
+				2C8C3EFB1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift in Sources */,
 				2C2CF71A1A156E2600B8C60E /* UIScrollView+SLKAdditions.m in Sources */,
 				2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,

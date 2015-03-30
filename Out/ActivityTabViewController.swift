@@ -27,7 +27,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var processedActivities:NSMutableArray = []
     var notifications:[PFObject] = []
     var moreActivities:Bool = false
-    
+    var selectedSegment = "Details"
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -65,7 +65,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
 
         // UINavigationBar init
-        self.navigationItem.title = "Activities"
+        // self.navigationItem.title = "Activities"
         var composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped:")
         composeButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = composeButton
@@ -108,7 +108,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         noActivityViewTitle.text = "No Activity"
         noActivityViewTitle.textAlignment = NSTextAlignment.Center
         noActivityViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noActivityViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noActivityViewTitle.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
         self.noActivityView.addSubview(noActivityViewTitle)
         
         var noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
@@ -116,7 +116,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         noActivityViewSubtitle.textAlignment = NSTextAlignment.Center
         noActivityViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noActivityViewSubtitle.numberOfLines = 2
-        noActivityViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noActivityViewSubtitle.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
         self.noActivityView.addSubview(noActivityViewSubtitle)
         
         self.noActivityView.hidden = true
@@ -186,6 +186,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             newVC.userChallengeData = currentUserChallengeData
             newVC.user = currentUser
             newVC.challengeTrackNumber = currentChallengeTrackNumber
+            println(sender)
+            newVC.selectedSegment = self.selectedSegment
 
         }
 
@@ -249,7 +251,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.narrativeTitleLabel.text = currentActivity["currentNarrativeTitleString"]!
                 cell.narrativeContentLabel.text = currentActivity["currentNarrativeContentString"]!
                 
-                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
+//                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
                 cell.commentsCountLabel.text = currentActivity["commentCountLabel"]!
                 
                 if (currentActivity["liked"] == "yes"){
@@ -276,7 +278,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
                 
-                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
+//                cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
                 cell.commentsCountLabel.text = currentActivity["commentCountLabel"]!
                 
                 if (currentActivity["liked"] == "yes"){
@@ -786,7 +788,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         var toCommentActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toCommentActivity
-
+        self.selectedSegment = "Comments"
         self.performSegueWithIdentifier("showActivityExpanded", sender: self)
     }
     
@@ -795,8 +797,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         var toPreviewActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toPreviewActivity
-        
-        self.performSegueWithIdentifier("showActivityContentPreview", sender: self)
+        self.selectedSegment = "Details"
+        self.performSegueWithIdentifier("showActivityExpanded", sender: self)
     }
     
     // Present notification view if Notification button tapped
