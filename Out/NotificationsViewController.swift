@@ -14,6 +14,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     var notificationsTableView:TPKeyboardAvoidingTableView!
     var unreadNotifications:[PFObject] = []
     var readNotifications:[PFObject] = []
+    var noMoreActivities:Bool = false
     
     let colorDictionary =
     [
@@ -98,11 +99,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath == NSIndexPath(forRow: self.readNotifications.count, inSection: 1){
             var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
-            cell.textLabel?.text = "tap to load more notifications"
+            if !noMoreActivities{
+                cell.textLabel?.text = "tap to load more notifications"
+            }
+            else{
+                cell.textLabel?.text = "no more notifications"
+            }
             cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
             cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
             cell.textLabel?.textAlignment = NSTextAlignment.Center
             cell.backgroundColor = UIColor.clearColor()
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             var notificationLoadMoreCellTappedGestureReconizer = UITapGestureRecognizer(target: self, action: "loadAdditionalNotifications")
             cell.addGestureRecognizer(notificationLoadMoreCellTappedGestureReconizer)
             return cell
@@ -255,7 +262,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 else{
                     self.readNotifications.extend(objects as! [PFObject])
                     self.notificationsTableView.reloadData()
-                    (self.notificationsTableView.cellForRowAtIndexPath(NSIndexPath(forRow: self.readNotifications.count, inSection: 1)))!.textLabel?.text = "No More Notifications"
+                    self.noMoreActivities = true
                 }
             }
             else{

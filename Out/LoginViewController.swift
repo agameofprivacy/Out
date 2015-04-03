@@ -82,7 +82,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         // Initialize logoImage UIImageView
         logoImageView = UIImageView(frame: CGRectZero)
         logoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        logoImageView.image = UIImage(named: "out_logo.png")
+        logoImageView.image = UIImage(named: "out_logo_png")
         logoImageView.userInteractionEnabled = true
         var viewTutorial = UITapGestureRecognizer(target: self, action: "viewTutorial")
         logoImageView.addGestureRecognizer(viewTutorial)

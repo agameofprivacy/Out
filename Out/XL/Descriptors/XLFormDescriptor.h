@@ -2,7 +2,7 @@
 //  XLFormDescriptor.h
 //  XLForm ( https://github.com/xmartlabs/XLForm )
 //
-//  Copyright (c) 2014 Xmartlabs ( http://xmartlabs.com )
+//  Copyright (c) 2015 Xmartlabs ( http://xmartlabs.com )
 //
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,6 +37,14 @@ typedef NS_ENUM(NSInteger, XLFormErrorCode)
     XLFormErrorCodeRequired = -1000
 };
 
+typedef NS_OPTIONS(NSUInteger, XLFormRowNavigationOptions) {
+    XLFormRowNavigationOptionNone                               = 0,
+    XLFormRowNavigationOptionEnabled                            = 1 << 0,
+    XLFormRowNavigationOptionStopDisableRow                     = 1 << 1,
+    XLFormRowNavigationOptionSkipCanNotBecomeFirstResponderRow  = 1 << 2,
+    XLFormRowNavigationOptionStopInlineRow                      = 1 << 3,
+};
+
 @class XLFormSectionDescriptor;
 
 @interface XLFormDescriptor : NSObject
@@ -45,12 +53,14 @@ typedef NS_ENUM(NSInteger, XLFormErrorCode)
 @property (readonly) NSString * title;
 @property (nonatomic) BOOL assignFirstResponderOnShow;
 @property (nonatomic) BOOL addAsteriskToRequiredRowsTitle;
+@property (getter=isDisabled) BOOL disabled;
+@property (nonatomic) XLFormRowNavigationOptions rowNavigationOptions;
 
 @property (weak) id<XLFormDescriptorDelegate> delegate;
 
 -(id)initWithTitle:(NSString *)title;
-+(XLFormDescriptor *)formDescriptor;
-+(XLFormDescriptor *)formDescriptorWithTitle:(NSString *)title;
++(id)formDescriptor;
++(id)formDescriptorWithTitle:(NSString *)title;
 
 -(void)addFormSection:(XLFormSectionDescriptor *)formSection;
 -(void)addFormSection:(XLFormSectionDescriptor *)formSection atIndex:(NSUInteger)index;
@@ -70,7 +80,6 @@ typedef NS_ENUM(NSInteger, XLFormErrorCode)
 -(XLFormRowDescriptor *)formRowWithHash:(NSUInteger)hash;
 -(XLFormSectionDescriptor *)formSectionAtIndex:(NSUInteger)index;
 
-
 -(NSIndexPath *)indexPathOfFormRow:(XLFormRowDescriptor *)formRow;
 
 -(NSDictionary *)formValues;
@@ -78,5 +87,8 @@ typedef NS_ENUM(NSInteger, XLFormErrorCode)
 
 -(NSArray *)localValidationErrors:(XLFormViewController *)formViewController;
 - (void)setFirstResponder:(XLFormViewController *)formViewController;
+
+-(XLFormRowDescriptor *)nextRowDescriptorForRow:(XLFormRowDescriptor *)currentRow;
+-(XLFormRowDescriptor *)previousRowDescriptorForRow:(XLFormRowDescriptor *)currentRow;
 
 @end

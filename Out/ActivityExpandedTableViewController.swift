@@ -84,14 +84,22 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.detailsTableView.delegate = self
         self.detailsTableView.dataSource = self
         self.detailsTableView.contentInset.top = 127
+        self.detailsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.detailsTableView.registerClass(StepTitleTableViewCell.self, forCellReuseIdentifier: "StepTitleTableViewCell")
+        self.detailsTableView.registerClass(StepBlurbTableViewCell.self, forCellReuseIdentifier: "StepBlurbTableViewCell")
+        self.detailsTableView.registerClass(StepMediaTableViewCell.self, forCellReuseIdentifier: "StepMediaTableViewCell")
+        self.detailsTableView.rowHeight = UITableViewAutomaticDimension
+        self.detailsTableView.estimatedRowHeight = 64
+        self.detailsTableView.hidden = true
         self.view.addSubview(self.detailsTableView)
         
         self.commentsTableView = CommentsViewController(tableViewStyle: UITableViewStyle.Plain)
         self.commentsTableView.activity = self.activity
-        self.commentsTableView.view.frame = CGRectMake(0, 0, 375, 617.5)
+        self.commentsTableView.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height - 49.5)
         self.commentsTableView.tableView.registerClass(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
         self.commentsTableView.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.commentsTableView.tableView.contentInset.bottom = 191
+        self.commentsTableView.view.hidden = true
         self.view.addSubview(self.commentsTableView.view)
 
         
@@ -101,6 +109,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.moreTableView.contentInset.bottom = 49.5
         self.moreTableView.delegate = self
         self.moreTableView.dataSource = self
+        self.moreTableView.hidden = true
 
         self.view.addSubview(self.moreTableView)
         
@@ -201,28 +210,11 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.activityHeader.addConstraints(verticalShadeViewConstraints)
         self.activityHeader.addConstraints(secondVerticalShadeViewConstraints)
         
-        self.expandedViewSegmentedControl = UISegmentedControl(items: ["Details","Comments","More"])
+        self.expandedViewSegmentedControl = UISegmentedControl(items: ["Challenge","Comments","More"])
         self.expandedViewSegmentedControl.frame = CGRectZero
         self.expandedViewSegmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.expandedViewSegmentedControl.tintColor = UIColor.blackColor()
 
-        switch self.selectedSegment{
-        case "Details":
-            self.expandedViewSegmentedControl.selectedSegmentIndex = 0
-            self.detailsTableView.hidden = false
-            self.commentsTableView.view.hidden = true
-            self.moreTableView.hidden = true
-        case "Comments":
-            self.expandedViewSegmentedControl.selectedSegmentIndex = 1
-            self.detailsTableView.hidden = true
-            self.commentsTableView.view.hidden = false
-            self.moreTableView.hidden = true
-        default:
-            self.expandedViewSegmentedControl.selectedSegmentIndex = 2
-            self.detailsTableView.hidden = true
-            self.commentsTableView.view.hidden = true
-            self.moreTableView.hidden = false
-        }
         
         self.expandedViewSegmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
         segmentedControlView.addSubview(self.expandedViewSegmentedControl)
@@ -244,6 +236,49 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         segmentedControlView.addConstraints(verticalConstraints)
         
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -1000), forBarMetrics: UIBarMetrics.Default)
+        
+        switch self.selectedSegment{
+        case "Details":
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 0
+//            self.detailsTableView.hidden = true
+//            self.commentsTableView.view.hidden = true
+//            self.moreTableView.hidden = true
+        case "Comments":
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 1
+//            self.detailsTableView.hidden = true
+            self.commentsTableView.view.hidden = false
+//            self.moreTableView.hidden = true
+        default:
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 2
+//            self.detailsTableView.hidden = true
+//            self.commentsTableView.view.hidden = true
+//            self.moreTableView.hidden = true
+        }
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        var comboActivityHeaderSegmentedControlViewHeight = 64 + self.activityHeader.frame.height + self.segmentedControlView.frame.height
+        self.detailsTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
+        self.moreTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
+//        self.commentsTableView.tableView.contentInset.bottom = comboActivityHeaderSegmentedControlViewHeight + 64
+        switch self.selectedSegment{
+        case "Details":
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 0
+            self.detailsTableView.hidden = false
+            self.commentsTableView.view.hidden = true
+            self.moreTableView.hidden = true
+        case "Comments":
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 1
+            self.detailsTableView.hidden = true
+            self.commentsTableView.view.hidden = false
+            self.moreTableView.hidden = true
+        default:
+            self.expandedViewSegmentedControl.selectedSegmentIndex = 2
+            self.detailsTableView.hidden = true
+            self.commentsTableView.view.hidden = true
+            self.moreTableView.hidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -257,19 +292,53 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         if tableView == self.detailsTableView{
-            return 1
+            return (self.challenge["stepTitle"] as! [String]).count
         }
         else{
             return 1
         }
     }
+    
+//    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if tableView == self.detailsTableView{
+//            var stepTitleHeaderView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 40))
+//            stepTitleHeaderView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+//            var stepTitleLabel = UILabel(frame: CGRectZero)
+//            stepTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+//            var stepTitleText = (self.challenge["stepTitle"] as! [String])[section] as String
+//            stepTitleLabel.text = "Step \(section + 1): \(stepTitleText)"
+////            stepTitleLabel.textAlignment = NSTextAlignment.Center
+//            stepTitleHeaderView.addSubview(stepTitleLabel)
+//            
+//            var viewsDictionary = ["stepTitleLabel":stepTitleLabel]
+//            var metricsDictionary = ["verticalMargin":6]
+//            
+//            var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[stepTitleLabel]-verticalMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//            
+//            var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[stepTitleLabel]-7.5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//            
+////            var horizontalCenterConstraint = NSLayoutConstraint(item: stepTitleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: stepTitleHeaderView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+//            
+//            stepTitleHeaderView.addConstraints(verticalConstraints)
+//            stepTitleHeaderView.addConstraints(horizontalConstraints)
+////            stepTitleHeaderView.addConstraint(horizontalCenterConstraint)
+//            
+//            return stepTitleHeaderView
+//        }
+//        var stepTitleHeaderView = UIView(frame: CGRectZero)
+//        stepTitleHeaderView.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        
+//        
+//        return stepTitleHeaderView
+//    }
+    
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
 
         if tableView == self.detailsTableView{
-            return 4
+            return 3
         }
         else{
             return 3
@@ -279,25 +348,52 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if tableView == self.detailsTableView{
-            return 120
+            return UITableViewAutomaticDimension
         }
         else{
             return 64
         }
     }
     
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
+    
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Configure the cell...
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "defaultCell")
+        
         if tableView == self.detailsTableView{
-            cell.textLabel?.text = "Step \(indexPath.row + 1) Detail"
+            switch indexPath.row{
+            case 0:
+                let cell = tableView.dequeueReusableCellWithIdentifier("StepTitleTableViewCell") as! StepTitleTableViewCell
+                var stepTitleText = (self.challenge["stepTitle"] as! [String])[indexPath.section] as String
+                cell.stepTitleLabel.text = "Step \(indexPath.section + 1): \(stepTitleText)"
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("StepBlurbTableViewCell") as! StepBlurbTableViewCell
+                var stepBlurbText = (self.challenge["stepSummary"] as! [String])[indexPath.section] as String
+                cell.stepBlurbLabel.text = stepBlurbText
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCellWithIdentifier("StepMediaTableViewCell") as! StepMediaTableViewCell
+                return cell
+            }
+        }else{
+        // Configure the cell...
+            let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "defaultCell")
+            switch indexPath.row{
+            case 0:
+                cell.textLabel?.text = "Completed By"
+                cell.detailTextLabel?.text = "See who else completed this challenge"
+            case 1:
+                cell.textLabel?.text = "Challenge Reviews"
+                cell.detailTextLabel?.text = "View others' feedback on this challenge"
+            default:
+                cell.textLabel?.text = "Report Activity"
+                cell.detailTextLabel?.text = "Report this activtiy for possible violation"
+            }
             cell.backgroundColor = UIColor.whiteColor()
-            return cell
-        }
-        else{
-            cell.textLabel?.text = "Activity Option \(indexPath.row + 1)"
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             return cell
         }
     }
@@ -306,6 +402,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         switch segment.selectedSegmentIndex{
         case 0:
             self.selectedSegment = "Details"
+            self.commentsTableView.textView.resignFirstResponder()
             self.detailsTableView.hidden = false
             self.commentsTableView.view.hidden = true
             self.moreTableView.hidden = true
@@ -316,6 +413,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             self.moreTableView.hidden = true
         default:
             self.selectedSegment = "More"
+            self.commentsTableView.textView.resignFirstResponder()
             self.detailsTableView.hidden = true
             self.commentsTableView.view.hidden = true
             self.moreTableView.hidden = false
@@ -370,6 +468,24 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         }
         
         
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == self.moreTableView{
+            switch indexPath.row{
+                case 0: self.performSegueWithIdentifier("showAlsoCompletedBy", sender: self)
+                case 1: self.performSegueWithIdentifier("showChallengeFeedback", sender: self)
+                default: self.performSegueWithIdentifier("showReportActivity", sender: self)
+            }
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showAlsoCompletedBy"{
+            var destinationVC = segue.destinationViewController as! AlsoCompletedByViewController
+            destinationVC.challenge = self.challenge
+        }
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {

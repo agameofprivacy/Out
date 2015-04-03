@@ -79,7 +79,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         // UINavigationBar init and layout
-        self.navigationItem.title = "Friends"
+        self.navigationItem.title = "People"
 
         var addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPeople:")
         addButton.enabled = true
@@ -266,14 +266,14 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         noFollowerViewTitle.text = "No Followers"
         noFollowerViewTitle.textAlignment = NSTextAlignment.Center
         noFollowerViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noFollowerViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noFollowerViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowerView.addSubview(noFollowerViewTitle)
         var noFollowerViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5 + 31, self.noFollowerView.frame.width, 60))
         noFollowerViewSubtitle.text = "you will receive a follow request\nif someone follows you"
         noFollowerViewSubtitle.textAlignment = NSTextAlignment.Center
         noFollowerViewSubtitle.numberOfLines = 2
         noFollowerViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-        noFollowerViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noFollowerViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowerView.addSubview(noFollowerViewSubtitle)
         
         self.noFollowerView.hidden = true
@@ -288,13 +288,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         noFollowingViewTitle.text = "Not Following Anyone"
         noFollowingViewTitle.textAlignment = NSTextAlignment.Center
         noFollowingViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noFollowingViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noFollowingViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowingView.addSubview(noFollowingViewTitle)
         var noFollowingViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5 + 31, self.noFollowingView.frame.width, 30))
         noFollowingViewSubtitle.text = "tap '+' to add people"
         noFollowingViewSubtitle.textAlignment = NSTextAlignment.Center
         noFollowingViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-        noFollowingViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noFollowingViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowingView.addSubview(noFollowingViewSubtitle)
         self.noFollowingView.hidden = true
         self.followingTableView.addSubview(self.noFollowingView)

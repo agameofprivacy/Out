@@ -30,10 +30,10 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var suggestButton = UIBarButtonItem(title: "Suggest", style: UIBarButtonItemStyle.Plain, target: self, action: "suggestChallenge")
-        suggestButton.enabled = false
-        suggestButton.tintColor = UIColor.blackColor()
-        self.navigationItem.leftBarButtonItem = suggestButton
+//        var suggestButton = UIBarButtonItem(title: "Suggest", style: UIBarButtonItemStyle.Plain, target: self, action: "suggestChallenge")
+//        suggestButton.enabled = false
+//        suggestButton.tintColor = UIColor.blackColor()
+//        self.navigationItem.leftBarButtonItem = suggestButton
 
         
         // Current challenges cards collection view init and layout
@@ -75,14 +75,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         noChallengeViewTitle.text = "No Current Challenge"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noChallengeViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
         
         noChallengeViewSubtitle.text = "tap '+' to add a challenge"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-        noChallengeViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noChallengeViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewSubtitle)
         
         self.noChallengeView.hidden = true

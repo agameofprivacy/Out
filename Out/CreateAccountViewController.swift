@@ -250,7 +250,7 @@ class CreateAccountViewController: XLFormViewController {
         user["color"] = (values["Color"] as! XLFormOptionsObject).valueData()
         user["ethnicity"] = values["Ethnicity"] as! String
         user["city"] = values["City"] as! String
-//        user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
+        user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
         user["followingRequested"] = []
         user["followingRequestsFrom"] = []
         

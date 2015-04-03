@@ -55,14 +55,14 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         noChallengeViewTitle.text = "No Available Challenge"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noChallengeViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         
         var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
         noChallengeViewSubtitle.text = "you're such an overachiever!"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-        noChallengeViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noChallengeViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewSubtitle)
         
         self.noChallengeView.hidden = true

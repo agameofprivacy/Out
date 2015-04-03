@@ -86,14 +86,14 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         noPeopleViewTitle.text = "You've Followed Them All"
         noPeopleViewTitle.textAlignment = NSTextAlignment.Center
         noPeopleViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noPeopleViewTitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noPeopleViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noPeopleView.addSubview(noPeopleViewTitle)
 
         var noPeopleViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noPeopleView.frame.height / 5 + 31, self.noPeopleView.frame.width, 30))
         noPeopleViewSubtitle.text = "you're quite a follower indeed"
         noPeopleViewSubtitle.textAlignment = NSTextAlignment.Center
         noPeopleViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
-        noPeopleViewSubtitle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        noPeopleViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noPeopleView.addSubview(noPeopleViewSubtitle)
         self.noPeopleView.hidden = true
         self.view.addSubview(self.noPeopleView)

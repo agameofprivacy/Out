@@ -108,15 +108,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         noActivityViewTitle.text = "No Activity"
         noActivityViewTitle.textAlignment = NSTextAlignment.Center
         noActivityViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
-        noActivityViewTitle.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+        noActivityViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noActivityView.addSubview(noActivityViewTitle)
         
         var noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
-        noActivityViewSubtitle.text = "take on some challenges or follow others\nin People to see their activities"
+        noActivityViewSubtitle.text = "take on some challenges or follow others\nin Friends to see their activities"
         noActivityViewSubtitle.textAlignment = NSTextAlignment.Center
         noActivityViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noActivityViewSubtitle.numberOfLines = 2
-        noActivityViewSubtitle.textColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+        noActivityViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noActivityView.addSubview(noActivityViewSubtitle)
         
         self.noActivityView.hidden = true
@@ -187,7 +187,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             newVC.user = currentUser
             newVC.challengeTrackNumber = currentChallengeTrackNumber
             newVC.selectedSegment = self.selectedSegment
-
         }
 
     }
@@ -302,6 +301,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
             cell.textLabel?.textAlignment = NSTextAlignment.Center
             cell.backgroundColor = UIColor.clearColor()
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             return cell
         }
     }

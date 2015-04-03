@@ -118,7 +118,7 @@ class MyProfileViewController: UIViewController {
         self.genderIdentityLabel.textAlignment = NSTextAlignment.Center
         self.genderIdentityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.genderIdentityLabel.numberOfLines = 1
-        self.genderIdentityLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.genderIdentityLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.containerView.addSubview(self.genderIdentityLabel)
 
         self.sexualOrientationTitleLabel = UILabel(frame: CGRectZero)
@@ -136,7 +136,7 @@ class MyProfileViewController: UIViewController {
         self.sexualOrientationLabel.textAlignment = NSTextAlignment.Center
         self.sexualOrientationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.sexualOrientationLabel.numberOfLines = 1
-        self.sexualOrientationLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.sexualOrientationLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.containerView.addSubview(self.sexualOrientationLabel)
 
         self.ageTitleLabel = UILabel(frame: CGRectZero)
@@ -155,7 +155,7 @@ class MyProfileViewController: UIViewController {
         self.ageLabel.textAlignment = NSTextAlignment.Center
         self.ageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.ageLabel.numberOfLines = 1
-        self.ageLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.ageLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.containerView.addSubview(self.ageLabel)
 
         self.ethnicityTitleLabel = UILabel(frame: CGRectZero)
@@ -173,7 +173,7 @@ class MyProfileViewController: UIViewController {
         self.ethnicityLabel.textAlignment = NSTextAlignment.Center
         self.ethnicityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.ethnicityLabel.numberOfLines = 1
-        self.ethnicityLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.ethnicityLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.containerView.addSubview(self.ethnicityLabel)
 
         self.locationTitleLabel = UILabel(frame: CGRectZero)
@@ -191,7 +191,7 @@ class MyProfileViewController: UIViewController {
         self.locationLabel.textAlignment = NSTextAlignment.Center
         self.locationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.locationLabel.numberOfLines = 1
-        self.locationLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        self.locationLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.containerView.addSubview(self.locationLabel)
 
         

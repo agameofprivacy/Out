@@ -110,8 +110,6 @@ class CommentsViewController: SLKTextViewController {
     }
     */
     override func didPressRightButton(sender: AnyObject!) {
-        println("pressed superclass")
-
         self.textView.refreshFirstResponder()
         var comment:String = self.textView.text
         self.tableView.beginUpdates()
@@ -136,7 +134,7 @@ class CommentsViewController: SLKTextViewController {
         self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
         self.tableView.endUpdates()
         
-        self.tableView.slk_scrollToTopAnimated(true)
+        self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         super.didPressRightButton(sender)
     }
     
