@@ -58,6 +58,7 @@ class CommentsViewController: SLKTextViewController {
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.scrollsToTop = true
         self.bounces = true
         self.keyboardPanningEnabled = true
         self.inverted = true

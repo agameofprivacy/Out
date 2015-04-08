@@ -71,7 +71,8 @@ class CreateAccountViewController: XLFormViewController {
             [
                 XLFormOptionsObject(value: "man", displayText: "Man"),
                 XLFormOptionsObject(value: "woman", displayText: "Woman"),
-                XLFormOptionsObject(value: "transgender", displayText: "Transgender"),
+                XLFormOptionsObject(value: "trans-man", displayText: "Trans-man"),
+                XLFormOptionsObject(value: "trans-woman", displayText: "Trans-woman"),
                 XLFormOptionsObject(value: "genderQueer", displayText: "Genderqueer"),
                 XLFormOptionsObject(value: "nonBinary", displayText: "Non-Binary")
             ]
@@ -138,6 +139,20 @@ class CreateAccountViewController: XLFormViewController {
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
+        row = XLFormRowDescriptor(tag: "Religion", rowType: XLFormRowDescriptorTypeSelectorPickerViewInline, title: "Religion")
+        row.selectorOptions =
+            [
+                XLFormOptionsObject(value: "Protestant", displayText: "Protestant"),
+                XLFormOptionsObject(value: "Catholic", displayText: "Catholic"),
+                XLFormOptionsObject(value: "Jewish", displayText: "Jewish"),
+                XLFormOptionsObject(value: "Buddhist", displayText: "Buddhist"),
+                XLFormOptionsObject(value: "Agnostic", displayText: "Agnostic"),
+                XLFormOptionsObject(value: "Atheist", displayText: "Atheist")
+            ]
+        section.addFormRow(row)
+        
+
+        
         row = XLFormRowDescriptor(tag: "State", rowType: XLFormRowDescriptorTypeSelectorPickerViewInline, title: "State")
         row.selectorOptions =
             [
@@ -202,7 +217,6 @@ class CreateAccountViewController: XLFormViewController {
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
-        
         self.form = form
     }
     
@@ -250,6 +264,7 @@ class CreateAccountViewController: XLFormViewController {
         user["color"] = (values["Color"] as! XLFormOptionsObject).valueData()
         user["ethnicity"] = values["Ethnicity"] as! String
         user["city"] = values["City"] as! String
+        user["religion"] = (values["Religion"] as! XLFormOptionsObject).valueData()
         user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
         user["followingRequested"] = []
         user["followingRequestsFrom"] = []

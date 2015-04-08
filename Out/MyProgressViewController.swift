@@ -58,7 +58,9 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.alertController = UIAlertController(title: "Select a Sort Category", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in println("Canceled")}
+        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in
+//            println("Canceled")
+        }
         
         var difficultyAction = UIAlertAction(title: "Difficulty", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("difficulty")}
         

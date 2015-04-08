@@ -261,6 +261,9 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         var comboActivityHeaderSegmentedControlViewHeight = 64 + self.activityHeader.frame.height + self.segmentedControlView.frame.height
         self.detailsTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
         self.moreTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
+        self.detailsTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+        self.moreTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+
 //        self.commentsTableView.tableView.contentInset.bottom = comboActivityHeaderSegmentedControlViewHeight + 64
         switch self.selectedSegment{
         case "Details":

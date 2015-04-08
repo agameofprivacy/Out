@@ -16,6 +16,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     var followRequestsFrom:[AnyObject] = []
     var currentFollowerFollowingObject:PFObject!
     var noPeopleView:UIView!
+    var filterDictionary:[String:[String]] = Dictionary(minimumCapacity: 0)
     
     let colorDictionary =
     [
@@ -97,11 +98,12 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         self.noPeopleView.addSubview(noPeopleViewSubtitle)
         self.noPeopleView.hidden = true
         self.view.addSubview(self.noPeopleView)
+        self.loadPeople()
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        self.loadPeople()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -142,6 +144,38 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         }
         // Filter so only users who current user hasn't sent a follow request to are included
         queryPeople.whereKey("objectId", notContainedIn:objectIdArray)
+        if !self.filterDictionary.isEmpty{
+            for (filterName, values) in self.filterDictionary{
+                switch filterName{
+                case "Maximum Age":
+                    println("Maximum Age: \(values[0])")
+                    queryPeople.whereKey("age", lessThanOrEqualTo: values[0].toInt())
+                case "Minimum Age":
+                    println("Minimum Age: \(values[0])")
+                    queryPeople.whereKey("age", greaterThanOrEqualTo: values[0].toInt())
+                case "Gender Identity":
+                    println("Gender Identity: \(values[0])")
+                    queryPeople.whereKey("genderIdentity", equalTo: values[0])
+                case "Sexual Orientation":
+                    println("Sexual Orientation: \(values[0])")
+                    queryPeople.whereKey("sexualOrientation", equalTo: values[0])
+                case "State":
+                    println("State: \(values)")
+                    queryPeople.whereKey("state", equalTo: values[0])
+                case "City":
+                    println("City: \(values)")
+                    queryPeople.whereKey("city", equalTo: values[0])
+                case "Religion":
+                    println("Religion: \(values)")
+                    queryPeople.whereKey("religion", equalTo: values[0])
+                case "Ethnicity":
+                    println("Ethnicity: \(values)")
+                    queryPeople.whereKey("ethnicity", equalTo: values[0])
+                default:
+                    println("nothing")
+                }
+            }
+        }
         queryPeople.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {

@@ -89,12 +89,12 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // followingTableView init
         self.followingTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followingTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followingTableView.contentInset = UIEdgeInsets(top: 124.0, left: 0, bottom:0, right: 0)
         self.followingTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followingTableView.backgroundColor = UIColor.whiteColor()
         self.followingTableView.frame = self.view.frame
         self.followingTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.followingTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
+        self.followingTableView.contentInset.top = 44.5
         self.followingTableView.rowHeight = UITableViewAutomaticDimension
         self.followingTableView.estimatedRowHeight = 80
         self.followingTableView.delegate = self
@@ -111,10 +111,11 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // followerTableView init
         self.followerTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
         self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followerTableView.contentInset = UIEdgeInsets(top: 188.0, left: 0, bottom:49, right: 0)
         self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.followerTableView.backgroundColor = UIColor.whiteColor()
+        self.followerTableView.contentInset.top = 44.5 + 64
+        self.followerTableView.contentInset.bottom = 49
         self.followerTableView.frame = self.view.frame
         self.followerTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.followerTableView.separatorColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
@@ -150,97 +151,97 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 
         
         // mentorCellOverlay init
-        self.mentorCellOverlay = UIView(frame: CGRectZero)
-        self.mentorCellOverlay.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorCellOverlay.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        var toMentorDetailTapRecognizer = UITapGestureRecognizer(target: self, action: "mentorCellTapped:")
-        self.mentorCellOverlay.addGestureRecognizer(toMentorDetailTapRecognizer)
-        self.mentorCellOverlay.layer.masksToBounds = false
-        self.mentorCellOverlay.layer.shadowColor = UIColor.blackColor().CGColor
-        self.mentorCellOverlay.layer.shadowOpacity = 0.15
-        self.mentorCellOverlay.layer.shadowOffset = CGSize(width: 0, height: 1)
-        self.mentorCellOverlay.layer.shadowRadius = 1
-        self.view.addSubview(self.mentorCellOverlay)
+//        self.mentorCellOverlay = UIView(frame: CGRectZero)
+//        self.mentorCellOverlay.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorCellOverlay.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//        var toMentorDetailTapRecognizer = UITapGestureRecognizer(target: self, action: "mentorCellTapped:")
+//        self.mentorCellOverlay.addGestureRecognizer(toMentorDetailTapRecognizer)
+//        self.mentorCellOverlay.layer.masksToBounds = false
+//        self.mentorCellOverlay.layer.shadowColor = UIColor.blackColor().CGColor
+//        self.mentorCellOverlay.layer.shadowOpacity = 0.15
+//        self.mentorCellOverlay.layer.shadowOffset = CGSize(width: 0, height: 1)
+//        self.mentorCellOverlay.layer.shadowRadius = 1
+//        self.view.addSubview(self.mentorCellOverlay)
+//        
+//        self.mentorAvatar = UIImageView(frame: CGRectZero)
+//        self.mentorAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorAvatar.backgroundColor = UIColor(red: 26/255, green: 188/255, blue: 156/255, alpha: 1)
+//        self.mentorAvatar.layer.cornerRadius = 25
+//        self.mentorAvatar.clipsToBounds = true
+//        self.mentorAvatar.image = UIImage(named: "elephant-icon")
+//        self.mentorAvatar.contentMode = UIViewContentMode.ScaleAspectFit
+//        self.mentorCellOverlay.addSubview(self.mentorAvatar)
+//        
+//        self.mentorRole = UILabel(frame: CGRectZero)
+//        self.mentorRole.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorRole.textAlignment = NSTextAlignment.Left
+//        self.mentorRole.font = titleFont?.fontWithSize(17.0)
+//        self.mentorRole.preferredMaxLayoutWidth = 50
+//        self.mentorRole.numberOfLines = 1
+//        self.mentorRole.text = "mentor"
+//        self.mentorCellOverlay.addSubview(self.mentorRole)
+//
+//        self.mentorAlias = UILabel(frame: CGRectZero)
+//        self.mentorAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorAlias.textAlignment = NSTextAlignment.Left
+//        self.mentorAlias.font = regularFont
+//        self.mentorAlias.preferredMaxLayoutWidth = 50
+//        self.mentorAlias.numberOfLines = 1
+//        self.mentorAlias.text = "eleph34"
+//        self.mentorCellOverlay.addSubview(self.mentorAlias)
+//        
+//        self.mentorOrganization = UILabel(frame: CGRectZero)
+//        self.mentorOrganization.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorOrganization.textAlignment = NSTextAlignment.Right
+//        self.mentorOrganization.font = titleFont?.fontWithSize(14.0)
+//        self.mentorOrganization.preferredMaxLayoutWidth = 200
+//        self.mentorOrganization.numberOfLines = 1
+//        self.mentorOrganization.text = "The Trevor Project"
+//        self.mentorOrganization.font = titleFont?.fontWithSize(14.0)
+//        self.mentorCellOverlay.addSubview(self.mentorOrganization)
+//
+//        self.mentorLocation = UILabel(frame: CGRectZero)
+//        self.mentorLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorLocation.textAlignment = NSTextAlignment.Right
+//        self.mentorLocation.font = regularFont
+//        self.mentorLocation.preferredMaxLayoutWidth = 200
+//        self.mentorLocation.numberOfLines = 1
+//        self.mentorLocation.text = "New York, NY"
+//        self.mentorLocation.font = valueFont?.fontWithSize(14.0)
+//        self.mentorCellOverlay.addSubview(self.mentorLocation)
+//        
+//        self.mentorButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+//        self.mentorButton.frame = CGRectZero
+//        self.mentorButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        self.mentorButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
+//        self.mentorButton.contentMode = UIViewContentMode.ScaleAspectFit
+//        
+//        
+//        var mentorCellViewsDictionary = ["mentorAvatar":mentorAvatar, "mentorRole":mentorRole, "mentorAlias":mentorAlias, "mentorOrganization":mentorOrganization, "mentorLocation":mentorLocation, "mentorButton":mentorButton]
+//        
+//        var mentorCellMetricsDictionary = ["sideMargin":15, "topMargin":64 + 16, "bottomMargin": 18]
+//        
+//        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=26-[mentorOrganization]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+//        
+//
+//        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAvatar(50)]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+//        
+//        
+//        var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-82-[mentorRole]-3-[mentorAlias]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+//        var rightVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-87-[mentorOrganization]-3-[mentorLocation]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+//
+//
+//        self.mentorCellOverlay.addConstraints(topHorizontalConstraints)
+//        self.mentorCellOverlay.addConstraints(avatarVerticalConstraints)
+//        self.mentorCellOverlay.addConstraints(leftVerticalConstraints)
+//        self.mentorCellOverlay.addConstraints(rightVerticalConstraints)
         
-        self.mentorAvatar = UIImageView(frame: CGRectZero)
-        self.mentorAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorAvatar.backgroundColor = UIColor(red: 26/255, green: 188/255, blue: 156/255, alpha: 1)
-        self.mentorAvatar.layer.cornerRadius = 25
-        self.mentorAvatar.clipsToBounds = true
-        self.mentorAvatar.image = UIImage(named: "elephant-icon")
-        self.mentorAvatar.contentMode = UIViewContentMode.ScaleAspectFit
-        self.mentorCellOverlay.addSubview(self.mentorAvatar)
         
-        self.mentorRole = UILabel(frame: CGRectZero)
-        self.mentorRole.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorRole.textAlignment = NSTextAlignment.Left
-        self.mentorRole.font = titleFont?.fontWithSize(17.0)
-        self.mentorRole.preferredMaxLayoutWidth = 50
-        self.mentorRole.numberOfLines = 1
-        self.mentorRole.text = "mentor"
-        self.mentorCellOverlay.addSubview(self.mentorRole)
-
-        self.mentorAlias = UILabel(frame: CGRectZero)
-        self.mentorAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorAlias.textAlignment = NSTextAlignment.Left
-        self.mentorAlias.font = regularFont
-        self.mentorAlias.preferredMaxLayoutWidth = 50
-        self.mentorAlias.numberOfLines = 1
-        self.mentorAlias.text = "eleph34"
-        self.mentorCellOverlay.addSubview(self.mentorAlias)
-        
-        self.mentorOrganization = UILabel(frame: CGRectZero)
-        self.mentorOrganization.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorOrganization.textAlignment = NSTextAlignment.Right
-        self.mentorOrganization.font = titleFont?.fontWithSize(14.0)
-        self.mentorOrganization.preferredMaxLayoutWidth = 200
-        self.mentorOrganization.numberOfLines = 1
-        self.mentorOrganization.text = "The Trevor Project"
-        self.mentorOrganization.font = titleFont?.fontWithSize(14.0)
-        self.mentorCellOverlay.addSubview(self.mentorOrganization)
-
-        self.mentorLocation = UILabel(frame: CGRectZero)
-        self.mentorLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorLocation.textAlignment = NSTextAlignment.Right
-        self.mentorLocation.font = regularFont
-        self.mentorLocation.preferredMaxLayoutWidth = 200
-        self.mentorLocation.numberOfLines = 1
-        self.mentorLocation.text = "New York, NY"
-        self.mentorLocation.font = valueFont?.fontWithSize(14.0)
-        self.mentorCellOverlay.addSubview(self.mentorLocation)
-        
-        self.mentorButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        self.mentorButton.frame = CGRectZero
-        self.mentorButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.mentorButton.setImage(UIImage(named: "rightChevron-icon"), forState: UIControlState.Normal)
-        self.mentorButton.contentMode = UIViewContentMode.ScaleAspectFit
-        
-        
-        var mentorCellViewsDictionary = ["mentorAvatar":mentorAvatar, "mentorRole":mentorRole, "mentorAlias":mentorAlias, "mentorOrganization":mentorOrganization, "mentorLocation":mentorLocation, "mentorButton":mentorButton]
-        
-        var mentorCellMetricsDictionary = ["sideMargin":15, "topMargin":64 + 16, "bottomMargin": 18]
-        
-        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=26-[mentorOrganization]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-        
-
-        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAvatar(50)]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-        
-        
-        var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-82-[mentorRole]-3-[mentorAlias]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-        var rightVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-87-[mentorOrganization]-3-[mentorLocation]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
-
-
-        self.mentorCellOverlay.addConstraints(topHorizontalConstraints)
-        self.mentorCellOverlay.addConstraints(avatarVerticalConstraints)
-        self.mentorCellOverlay.addConstraints(leftVerticalConstraints)
-        self.mentorCellOverlay.addConstraints(rightVerticalConstraints)
-        
-        
-        var viewsDictionary = ["mentorCellOverlay":mentorCellOverlay, "segmentedControlView":segmentedControlView]
+        var viewsDictionary = ["segmentedControlView":segmentedControlView]
         var metricsDiciontary = ["margin":0]
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-margin-[mentorCellOverlay(144)]-0-[segmentedControlView(44)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDiciontary, views: viewsDictionary)
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[mentorCellOverlay]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[segmentedControlView(44.5)]", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDiciontary, views: viewsDictionary)
+        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControlView]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
         self.view.addConstraints(verticalConstraints)
         self.view.addConstraints(horizontalConstraints)
         
@@ -251,7 +252,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         var segmentsSeparatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
 
-        var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+        var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
         
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsSeparatorHorizontalConstraints)
@@ -315,7 +316,6 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        println(tableView)
         // followerTableView has two sections, one for follow requests and one for approved followers
         if tableView == self.followerTableView{
             return 2
