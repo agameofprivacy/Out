@@ -17,7 +17,8 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     var currentFollowerFollowingObject:PFObject!
     var noPeopleView:UIView!
     var filterDictionary:[String:[String]] = Dictionary(minimumCapacity: 0)
-    
+    let regularFont = UIFont(name: "HelveticaNeue", size: 15.0)
+
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -129,6 +130,116 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         cell.followButton.addTarget(self, action: "followButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
 
         return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.filterDictionary.count > 0{
+            var filterLabelText = ""
+            for (filterName, values) in self.filterDictionary{
+                switch filterName{
+                case "Maximum Age":
+                    println("Maximum Age: \(values[0])")
+                    filterLabelText += "Maximum Age: \(values[0])"
+                case "Minimum Age":
+                    println("Minimum Age: \(values[0])")
+                    filterLabelText += "Minimum Age: \(values[0])"
+                case "Gender Identity":
+                    println("Gender Identity: \(values[0])")
+                    filterLabelText += "Gender Identity: \(values[0])"
+                case "Sexual Orientation":
+                    println("Sexual Orientation: \(values[0])")
+                    filterLabelText += "Sexual Orientation: \(values[0])"
+                case "State":
+                    println("State: \(values)")
+                    filterLabelText += "State: \(values)"
+                case "City":
+                    println("City: \(values)")
+                    filterLabelText += "City: \(values)"
+                case "Religion":
+                    println("Religion: \(values)")
+                    filterLabelText += "Religion: \(values)"
+                case "Ethnicity":
+                    println("Ethnicity: \(values)")
+                    filterLabelText += "Ethnicity: \(values)"
+                default:
+                    println("nothing")
+                }
+                filterLabelText += ", "
+            }
+            var filterMaxSize:CGSize = CGSize(width: CGFloat(360), height: CGFloat(MAXFLOAT))
+            var filterLabelRect:CGRect = filterLabelText.boundingRectWithSize(filterMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                object: self.regularFont!.fontWithSize(16.0),
+                forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+            return filterLabelRect.size.height + 16
+        }
+        else{
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        println("header")
+        var headerView = UIView()
+        var filterLabel = UILabel(frame: CGRectZero)
+        filterLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        filterLabel.font = self.regularFont
+        filterLabel.numberOfLines = 0
+        
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "filterHeaderTapped")
+        headerView.addGestureRecognizer(tapGestureRecognizer)
+        headerView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        headerView.addSubview(filterLabel)
+        var viewsDictionary = ["filterLabel":filterLabel]
+        var metricsDictionary = ["verticalMargin": 8]
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[filterLabel]-7.5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[filterLabel]-verticalMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        headerView.addConstraints(horizontalConstraints)
+        headerView.addConstraints(verticalConstraints)
+        if self.filterDictionary.count > 0{
+            println("return header")
+            var filterLabelText = ""
+            var counter = 0
+            for (filterName, values) in self.filterDictionary{
+                switch filterName{
+                case "Maximum Age":
+                    println("Maximum Age: \(values[0])")
+                    filterLabelText += "Maximum Age: \(values[0])"
+                case "Minimum Age":
+                    println("Minimum Age: \(values[0])")
+                    filterLabelText += "Minimum Age: \(values[0])"
+                case "Gender Identity":
+                    println("Gender Identity: \(values[0])")
+                    filterLabelText += "Gender Identity: \(values[0])"
+                case "Sexual Orientation":
+                    println("Sexual Orientation: \(values[0])")
+                    filterLabelText += "Sexual Orientation: \(values[0])"
+                case "State":
+                    println("State: \(values)")
+                    filterLabelText += "State: \(values)"
+                case "City":
+                    println("City: \(values)")
+                    filterLabelText += "City: \(values)"
+                case "Religion":
+                    println("Religion: \(values)")
+                    filterLabelText += "Religion: \(values)"
+                case "Ethnicity":
+                    println("Ethnicity: \(values)")
+                    filterLabelText += "Ethnicity: \(values)"
+                default:
+                    println("nothing")
+                }
+                if (counter < self.filterDictionary.count - 1){
+                    filterLabelText += ",  "
+                    ++counter
+                }
+                else{
+                    filterLabelText += "."
+                }
+            }
+            filterLabel.text = filterLabelText
+            return headerView
+        }
+        return nil
     }
     
     // Load people data from Parse
@@ -273,4 +384,9 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
 
     }
     
+    
+    func filterHeaderTapped(){
+        self.filterDictionary.removeAll(keepCapacity: false)
+        self.loadPeople()
+    }
 }
