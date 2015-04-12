@@ -60,7 +60,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         self.navigationItem.leftBarButtonItem = closeButton
         
         
-        self.notificationsTableView = TPKeyboardAvoidingTableView(frame: self.view.frame)
+        self.notificationsTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
+        self.notificationsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.notificationsTableView.registerClass(NotificationTableViewCell.self, forCellReuseIdentifier: "notificationCell")
         self.notificationsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.notificationsTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -71,6 +72,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         self.notificationsTableView.estimatedRowHeight = 100
         self.view.addSubview(self.notificationsTableView)
         
+        var viewsDictionary = ["notificationsTableView":self.notificationsTableView]
+        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[notificationsTableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[notificationsTableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
+        self.view.addConstraints(horizontalConstraints)
+        self.view.addConstraints(verticalConstraints)
         loadAdditionalNotifications()
     }
 

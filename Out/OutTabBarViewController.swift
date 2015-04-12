@@ -67,7 +67,15 @@ class OutTabBarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
+//    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+////        println(item.)
+//        if(find(tabBar.items as! [UITabBarItem], item) == 0) && tabBar.selectedItem == item{
+//            println("scroll!")
+//            println(self.childViewControllers[0].childViewControllers)
+//            (self.childViewControllers[0].childViewControllers[0] as! ActivityTabViewController).tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+//        }
+//    }
+    
     /*
     // MARK: - Navigation
 

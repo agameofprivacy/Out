@@ -27,7 +27,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     var processedActivities:NSMutableArray = []
     var notifications:[PFObject] = []
     var moreActivities:Bool = false
-    var selectedSegment = "Details"
+    var selectedSegment = "About"
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -92,7 +92,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
         self.tableView.registerClass(StatusActivityTableViewCell.self, forCellReuseIdentifier: "StatusActivityTableViewCell")
-        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 30, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(12, 0, 0, 0)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -121,7 +121,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         self.noActivityView.hidden = true
         self.view.addSubview(self.noActivityView)
-
+        
         self.refreshControl?.beginRefreshing()
         loadActivities("old")
     }
@@ -329,6 +329,23 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
     }
     
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        if indexPath.section == 0{
+//            var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
+//
+//            var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+//            if (currentActivityImageString == ""){
+//                return 155
+//            }
+//            else{
+//                return 500
+//            }
+//        }
+//        else{
+//            return 64
+//        }
+//    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{
             var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
@@ -345,12 +362,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         
                 var result:CGFloat = 0.0
-                var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
-                var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
-                var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(320), height: CGFloat(MAXFLOAT))
-                var aliasMaxSize:CGSize = CGSize(width: CGFloat(240), height: CGFloat(MAXFLOAT))
-                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
-                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+                var actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
+                var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 67), height: CGFloat(MAXFLOAT))
+                var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 55), height: CGFloat(MAXFLOAT))
+                var aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
+                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
         
         
                 var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
@@ -359,11 +376,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         
                 var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-                    object: self.valueFont!.fontWithSize(14.0),
+                    object: self.valueFont!.fontWithSize(13.0),
                     forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
         
                 var narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
-                    object: self.titleFont!.fontWithSize(15.0),
+                    object: self.titleFont!.fontWithSize(14.0),
                     forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
         
                 var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
@@ -386,7 +403,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 var commentCountLabelHeight = commentCountLabelRect.size.height
                 var writeACommentLabelHeight = writeACommentLabelRect.size.height
                 var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
-                var imageHeight:CGFloat = 110 + 9.5 + 2 + 11.9 + 14
+                var imageHeight:CGFloat = 110 + 12 + 19
                 if (currentActivityImageString == ""){
                     imageHeight = 0
                 }
@@ -397,7 +414,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         //        println("narrative content: \(narrativeContentLabelHeight)")
         //        println("comment count: \(commentCountLabelHeight)")
         //        println("write comment: \(writeACommentLabelHeight)")
-                result = 22 + aliasLabelHeight + 4 + actionLabelHeight + imageHeight + 8 + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 16 + 1 + 8 + 46 + 10
+                result = 22 + aliasLabelHeight + 4 + actionLabelHeight + 12 + imageHeight + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 12 + 16 + 1 + 8 + commentCountLabelHeight + writeACommentLabelHeight + 10
 //                    println("activity card height: \(result)")
                     return CGFloat(result)
             }
@@ -410,10 +427,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 
                 
                 var result:CGFloat = 0.0
-                var actionMaxSize:CGSize = CGSize(width: CGFloat(274), height: CGFloat(MAXFLOAT))
-                var aliasMaxSize:CGSize = CGSize(width: CGFloat(240), height: CGFloat(MAXFLOAT))
-                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
-                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(290), height: CGFloat(MAXFLOAT))
+                var actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
+                var aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
+                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
                 
                 
                 var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
@@ -442,7 +459,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 //        println("action content: \(actionLabelHeight)")
                 //        println("comment count: \(commentCountLabelHeight)")
                 //        println("write comment: \(writeACommentLabelHeight)")
-                result = 22 + aliasLabelHeight + 4 + actionLabelHeight + 8 + 4 + 16 + 1 + 8 + 46 + 10 - 3
+                result = 22 + aliasLabelHeight + 4 + actionLabelHeight + 12 + 16 + 1 + 8 + commentCountLabelHeight + writeACommentLabelHeight + 10 + 5
 //                println("status height: \(result)")
                 return CGFloat(result)
 
@@ -799,7 +816,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         
         var toPreviewActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toPreviewActivity
-        self.selectedSegment = "Details"
+        self.selectedSegment = "About"
         self.performSegueWithIdentifier("showActivityExpanded", sender: self)
     }
     
@@ -840,8 +857,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             }
         }
     }
-    
-
     
     // Launch challenge preview view with URL from cell
 //    func launchChallengePreviewView(sender:UITapGestureRecognizer!){

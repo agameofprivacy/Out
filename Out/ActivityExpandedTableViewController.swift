@@ -210,7 +210,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.activityHeader.addConstraints(verticalShadeViewConstraints)
         self.activityHeader.addConstraints(secondVerticalShadeViewConstraints)
         
-        self.expandedViewSegmentedControl = UISegmentedControl(items: ["Challenge","Comments","More"])
+        self.expandedViewSegmentedControl = UISegmentedControl(items: ["About","Comments","More"])
         self.expandedViewSegmentedControl.frame = CGRectZero
         self.expandedViewSegmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.expandedViewSegmentedControl.tintColor = UIColor.blackColor()
@@ -404,7 +404,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     func valueChanged(segment:UISegmentedControl){
         switch segment.selectedSegmentIndex{
         case 0:
-            self.selectedSegment = "Details"
+            self.selectedSegment = "About"
             self.commentsTableView.textView.resignFirstResponder()
             self.detailsTableView.hidden = false
             self.commentsTableView.view.hidden = true

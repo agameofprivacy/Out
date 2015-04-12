@@ -67,10 +67,10 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         
-        self.peopleTableView = UITableView(frame: self.view.frame)
+        self.peopleTableView = UITableView(frame: CGRectZero)
+        self.peopleTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.peopleTableView.rowHeight = UITableViewAutomaticDimension
         self.peopleTableView.estimatedRowHeight = 80
-        self.peopleTableView.frame = self.view.frame
         self.peopleTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         self.peopleTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.peopleTableView.delegate = self
@@ -79,6 +79,14 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         self.peopleTableView.layoutMargins = UIEdgeInsetsZero
         self.peopleTableView.separatorInset = UIEdgeInsetsZero
         self.view.addSubview(self.peopleTableView)
+        
+        var metricsDictionary = ["zero":0]
+        var viewsDictionary = ["peopleTableView":self.peopleTableView]
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[peopleTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[peopleTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+
+        self.view.addConstraints(verticalConstraints)
+        self.view.addConstraints(horizontalConstraints)
         
         // No people view init and layout
         self.noPeopleView = UIView(frame: self.peopleTableView.frame)

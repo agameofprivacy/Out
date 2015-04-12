@@ -43,24 +43,7 @@ class PeopleFilterViewController: XLFormViewController {
 
         section = XLFormSectionDescriptor.formSectionWithTitle("Age, Identity, and Orientation") as! XLFormSectionDescriptor
         form.addFormSection(section)
-        
-        row = XLFormRowDescriptor(tag: "Maximum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Maximum Age")
-        row.selectorOptions = []
-        for (var i = 13; i <= 99; ++i){
-            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
-        }
-        row.title = "Maximum Age"
-        section.addFormRow(row)
 
-        row = XLFormRowDescriptor(tag: "Minimum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Minimum Age")
-        row.selectorOptions = []
-        for (var i = 13; i <= 99; ++i){
-            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
-        }
-        row.title = "Minimum Age"
-        section.addFormRow(row)
-
-        
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
         row.selectorOptions =
             [
@@ -82,6 +65,22 @@ class PeopleFilterViewController: XLFormViewController {
                 XLFormOptionsObject(value: "pansexual", displayText: "Pansexual"),
                 XLFormOptionsObject(value: "asexual", displayText: "Asexual")
         ]
+        section.addFormRow(row)
+        
+        row = XLFormRowDescriptor(tag: "Minimum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Minimum Age")
+        row.selectorOptions = []
+        for (var i = 13; i <= 99; ++i){
+            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
+        }
+        row.title = "Minimum Age"
+        section.addFormRow(row)
+        
+        row = XLFormRowDescriptor(tag: "Maximum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Maximum Age")
+        row.selectorOptions = []
+        for (var i = 13; i <= 99; ++i){
+            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
+        }
+        row.title = "Maximum Age"
         section.addFormRow(row)
         
         

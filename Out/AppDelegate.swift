@@ -84,6 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         PFPush.handlePush(userInfo)
     }
     
+    func applicationWillTerminate(application: UIApplication) {
+//        PFInstallation.currentInstallation().removeObjectForKey("currentUser")
+//        PFInstallation.currentInstallation().saveInBackground()
+//        PFUser.logOut()
+    }
 //    func tutorialController(tutorialController: ICETutorialController!, didClickOnLeftButton sender: UIButton!) {
 //        println("left button clicked")
 //    }
@@ -110,9 +115,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
 
 }
 

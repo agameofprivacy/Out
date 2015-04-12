@@ -159,7 +159,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.narrativeContentLabel = UILabel(frame: CGRectZero)
         self.narrativeContentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.narrativeContentLabel.numberOfLines = 0
-        self.narrativeContentLabel.preferredMaxLayoutWidth = 308
+        self.narrativeContentLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 67
         self.narrativeContentLabel.textAlignment = NSTextAlignment.Left
         self.narrativeContentLabel.text = "Narrative Content"
         self.narrativeContentLabel.font = valueFont?.fontWithSize(13.0)
@@ -265,7 +265,7 @@ class ActivityTableViewCell: UITableViewCell {
         
         var verticalLeftPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-paperTopPadding-[avatarImageView(50)]->=longVerticalPadding-[contentCanvas]-paperTopPadding-[responseBarSeparator(1)]-mediumVerticalPadding-[responseBar]-paperBottomPadding-|", options:NSLayoutFormatOptions.AlignAllLeft, metrics:paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
         
-        var verticalSecondColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-secondColumnTopPadding-[aliasLabel]->=4-[actionLabel]->=longVerticalPadding-[contentCanvas]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
+        var verticalSecondColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-secondColumnTopPadding-[aliasLabel]-4-[actionLabel]-longVerticalPadding-[contentCanvas]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 
         var verticalThirdColumnPaperInternalViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-thirdColumnTopPadding-[reverseTimeLabel]", options: NSLayoutFormatOptions(0), metrics: paperInternalMetricsDictionary, views: paperInternalViewsDictionary)
 

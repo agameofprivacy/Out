@@ -104,13 +104,13 @@ class PersonTableViewCell: UITableViewCell {
         var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]->=sideMargin-[userOrientationAge]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]->=verticalMargin-[separator(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-29-[userAlias]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22.5-[userOrientationAge]-2-[userLocation]", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
-        var secondOrientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[userLocation]->=verticalMargin-[separator(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var secondOrientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[userLocation]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         
         contentView.addConstraints(horizontalConstraints)
