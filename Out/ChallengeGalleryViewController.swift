@@ -52,14 +52,14 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.noChallengeView.center = self.challengesTableView.center
         
         var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
-        noChallengeViewTitle.text = "No Available Challenge"
+        noChallengeViewTitle.text = "No Activities Available"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         
         var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
-        noChallengeViewSubtitle.text = "you're such an overachiever!"
+        noChallengeViewSubtitle.text = "you're done with them all!"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noChallengeViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
@@ -122,7 +122,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["username"] = PFUser.currentUser()
         newChallengeModel["challenge"] = selectedChallengeObject
         newChallengeModel["currentStepCount"] = 0
-        newChallengeModel["challengeTrackNumber"] = "1"
+        newChallengeModel["challengeTrackNumber"] = "0"
         newChallengeModel["stepContent"] = []
 
         newChallengeModel.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in

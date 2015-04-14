@@ -166,7 +166,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         var actionString:String
 
         if !(self.challenge["narrativeTitles"] as! [String]).isEmpty{
-            narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
+            narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber - 1]
             actionString = self.user.username + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString + "."
         }
         else{
@@ -238,21 +238,13 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -1000), forBarMetrics: UIBarMetrics.Default)
         
         switch self.selectedSegment{
-        case "Details":
+        case "About":
             self.expandedViewSegmentedControl.selectedSegmentIndex = 0
-//            self.detailsTableView.hidden = true
-//            self.commentsTableView.view.hidden = true
-//            self.moreTableView.hidden = true
         case "Comments":
             self.expandedViewSegmentedControl.selectedSegmentIndex = 1
-//            self.detailsTableView.hidden = true
             self.commentsTableView.view.hidden = false
-//            self.moreTableView.hidden = true
         default:
             self.expandedViewSegmentedControl.selectedSegmentIndex = 2
-//            self.detailsTableView.hidden = true
-//            self.commentsTableView.view.hidden = true
-//            self.moreTableView.hidden = true
         }
 
     }
@@ -266,7 +258,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 
 //        self.commentsTableView.tableView.contentInset.bottom = comboActivityHeaderSegmentedControlViewHeight + 64
         switch self.selectedSegment{
-        case "Details":
+        case "About":
             self.expandedViewSegmentedControl.selectedSegmentIndex = 0
             self.detailsTableView.hidden = false
             self.commentsTableView.view.hidden = true
@@ -387,12 +379,12 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             switch indexPath.row{
             case 0:
                 cell.textLabel?.text = "Completed By"
-                cell.detailTextLabel?.text = "See who else completed this challenge"
+                cell.detailTextLabel?.text = "See who else completed this activity"
             case 1:
-                cell.textLabel?.text = "Challenge Reviews"
-                cell.detailTextLabel?.text = "View others' feedback on this challenge"
+                cell.textLabel?.text = "Activity Reviews"
+                cell.detailTextLabel?.text = "View others' feedback on this activity"
             default:
-                cell.textLabel?.text = "Report Activity"
+                cell.textLabel?.text = "Report Violation"
                 cell.detailTextLabel?.text = "Report this activtiy for possible violation"
             }
             cell.backgroundColor = UIColor.whiteColor()
@@ -446,11 +438,11 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 
         if self.challengeTrackNumber != 0{
             activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + count(self.challenge["narrativeAction"] as! String)
-            activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber])
+            activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber - 1])
             activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + count(" in ")
             activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
         }
-        
+        println(self.challengeTrackNumber)
         if (characterIndex < count(self.user.username)) {
             
             // Handle as required...

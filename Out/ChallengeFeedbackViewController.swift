@@ -12,7 +12,7 @@ class ChallengeFeedbackViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Challenge Reviews"
+        self.navigationItem.title = "Activity Reviews"
         // Do any additional setup after loading the view.
         
 //        var composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped")

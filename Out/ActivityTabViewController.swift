@@ -87,7 +87,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.navigationItem.leftBarButtonItem = badgeableNotificationBarButton
         self.navigationItem.leftBarButtonItem?.enabled = false
         
-        
         // UITableView init
         self.tableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
@@ -96,9 +95,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
-//        self.tableView.estimatedRowHeight = 420
-//        self.tableView.rowHeight = 430
         
         // noActivityView init and layout
         self.noActivityView = UIView(frame: self.tableView.frame)
@@ -178,7 +174,6 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
             var currentUser = currentActivity["ownerUser"] as! PFUser
             var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
-            currentChallengeTrackNumber = currentChallengeTrackNumber - 1
             
             newVC.parentVC = self
             newVC.activity = self.currentActivity
@@ -188,12 +183,18 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             newVC.challengeTrackNumber = currentChallengeTrackNumber
             newVC.selectedSegment = self.selectedSegment
         }
+        else if segue.identifier == "showPersonDetail"{
+            let newVC:PersonDetailViewController = segue.destinationViewController as! PersonDetailViewController
+            
+            newVC.user = currentActivity["ownerUser"] as! PFUser
+        }
 
     }
 
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
         self.loadNotifications()
+        self.loadActivities("update")
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -243,7 +244,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
                 
                 cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
+                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+                var aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
+                cell.aliasLabel.addGestureRecognizer(aliastapGestureRecognizer)
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
                 
                 cell.narrativeTitleLabel.text = currentActivity["currentNarrativeTitleString"]!
@@ -272,7 +277,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
                 
                 cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
+                
+                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+                var aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
+                cell.aliasLabel.addGestureRecognizer(aliastapGestureRecognizer)
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
                 
                 cell.likeCountLabel.text = currentActivity["likeCountLabel"]!
@@ -296,7 +306,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else
         {
             var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
-            cell.textLabel?.text = "tap to load more activities"
+            cell.textLabel?.text = "loading more activities"
             cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
             cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
             cell.textLabel?.textAlignment = NSTextAlignment.Center
@@ -323,11 +333,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 //        }
 //    }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath == NSIndexPath(forRow: 0, inSection: 1){
-            loadMoreActivities()
-        }
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        if indexPath == NSIndexPath(forRow: 0, inSection: 1){
+//            loadMoreActivities()
+//        }
+//    }
     
 //    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 //        if indexPath.section == 0{
@@ -489,7 +499,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.includeKey("userChallengeData")
                 activityQuery.includeKey("ownerUser")
                 activityQuery.orderByDescending("createdAt")
-                activityQuery.limit = 20
+                activityQuery.limit = 10
                 if context == "old"{
                     if !self.currentActivities.isEmpty{
                         activityQuery.whereKey("createdAt", lessThan: (self.currentActivities.last as PFObject!).createdAt)
@@ -500,6 +510,13 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         activityQuery.whereKey("createdAt", greaterThan: (self.currentActivities.first as PFObject!).createdAt)
                     }
                 }
+                else if context == "update"{
+                    if !self.currentActivities.isEmpty{
+                        activityQuery.whereKey("createdAt", greaterThanOrEqualTo: (self.currentActivities.last as PFObject!).createdAt)
+                        activityQuery.whereKey("createdAt", lessThanOrEqualTo: (self.currentActivities.first as PFObject!).createdAt)
+                        activityQuery.limit = 1000
+                    }
+                }
                 activityQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
@@ -508,7 +525,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         var currentActivitiesFound = objects as! [PFObject]
                         var currentLikedAcitivitiesFoundIdStrings:[String] = []
                         if context == "old"{
-                            if objects.count == 20{
+                            if objects.count == 10{
                                 self.moreActivities = true
                             }
                             else{
@@ -521,6 +538,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                         }
                         else if context == "new"{
                             self.currentActivities.splice(currentActivitiesFound, atIndex: 0)
+                        }
+                        else if context == "update"{
+                            self.currentActivities = currentActivitiesFound
                         }
                         if self.currentActivities.count == 0{
                             self.noActivityView.hidden = false
@@ -577,7 +597,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                     self.prepareDataForTableView(currentActivitiesFound, currentActivitiesFoundCommentCount: currentActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: currentActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
                                                     self.loadNotifications()
                                                     if self.tableView.numberOfRowsInSection(0) != 0{
-//                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+//                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                                                         self.tableView.reloadData()
                                                     }
                                                     else{
@@ -633,6 +653,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     func prepareDataForTableView(activitiesToAppend:[PFObject], currentActivitiesFoundCommentCount:[Int], currentActivitiesFoundLikeCount:[Int], currentLikedAcitivitiesFoundIdStrings:[String], context:String){
 //        self.processedActivities.removeAllObjects()
         var activityCount = 0
+        if context == "update"{
+            self.processedActivities.removeAllObjects()
+            self.currentActivitiesLikeCount.removeAll(keepCapacity: false)
+            self.currentActivitiesCommentCount.removeAll(keepCapacity: false)
+        }
+        
         for activity in activitiesToAppend{
             var currentActivityCreatedTime = activity.createdAt
             var currentActivityChallenge = activity["challenge"] as! PFObject
@@ -703,6 +729,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 self.processedActivities.insertObject(currentActivityDictionary, atIndex: 0)
                 self.currentActivitiesLikeCount.splice(currentActivitiesFoundLikeCount, atIndex: 0)
                 self.currentActivitiesCommentCount.splice(currentActivitiesFoundCommentCount, atIndex: 0)
+            }
+            else if context == "update"{
+                self.processedActivities.addObject(currentActivityDictionary)
+                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
             }
             ++activityCount
         }
@@ -801,6 +832,14 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
     }
     
+    func showPersonDetail(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        var currentActivity = self.currentActivities[currentIndexPath.row]
+        self.currentActivity = currentActivity
+        self.performSegueWithIdentifier("showPersonDetail", sender: self)
+    }
+
+    
     // Perform segue to show activity detail if comment button tapped
     func commentButtonTapped(sender:UITapGestureRecognizer){
         var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
@@ -858,6 +897,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
     }
     
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath == NSIndexPath(forRow: 0, inSection: 1) && self.moreActivities{
+            self.loadActivities("old")
+        }
+    }
     // Launch challenge preview view with URL from cell
 //    func launchChallengePreviewView(sender:UITapGestureRecognizer!){
 //        var cell:LaunchWebViewTableViewCell = sender.view as LaunchWebViewTableViewCell

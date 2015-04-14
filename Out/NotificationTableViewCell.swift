@@ -39,7 +39,7 @@ class NotificationTableViewCell: UITableViewCell {
         
         self.timeLabel = UILabel(frame: CGRectZero)
         self.timeLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.timeLabel.font = UIFont(name: "HelveticaNeue", size: 11.0)
+        self.timeLabel.font = UIFont(name: "HelveticaNeue", size: 12.0)
         self.timeLabel.textColor = UIColor(white: 0.5, alpha: 1)
         self.timeLabel.text = "ago"
         contentView.addSubview(self.timeLabel)
@@ -57,6 +57,7 @@ class NotificationTableViewCell: UITableViewCell {
         self.notificationTextView.selectable = false
         self.notificationTextView.userInteractionEnabled = false
         self.notificationTextView.backgroundColor = UIColor.clearColor()
+        self.notificationTextView.textContainerInset = UIEdgeInsetsZero
 //        self.notificationTextView.textContainer.lineFragmentPadding = 0
 //        self.notificationTextView.textContainerInset = UIEdgeInsetsZero
         contentView.addSubview(self.notificationTextView)
@@ -76,7 +77,7 @@ class NotificationTableViewCell: UITableViewCell {
 
         var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[senderAvatarImageView(40)]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var thirdVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[notificationTextView(>=0)]-0-[timeLabel]-15-[separatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var thirdVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[notificationTextView(>=0)]-5-[timeLabel]-15-[separatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         
         contentView.addConstraints(horizontalConstraints)

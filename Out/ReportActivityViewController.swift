@@ -12,7 +12,7 @@ class ReportActivityViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Report Activity"
+        self.navigationItem.title = "Report Violation"
         // Do any additional setup after loading the view.
     }
 

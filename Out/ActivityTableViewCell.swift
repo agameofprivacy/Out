@@ -84,6 +84,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.avatarImageView.backgroundColor = UIColor.whiteColor()
         self.avatarImageView.image = UIImage(named: "avatarImagePlaceholder")
         self.avatarImageView.opaque = true
+        self.avatarImageView.userInteractionEnabled = true
         self.paperView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -93,6 +94,7 @@ class ActivityTableViewCell: UITableViewCell {
         self.aliasLabel.font = titleFont?.fontWithSize(16.0)
         self.aliasLabel.text = "username"
         self.aliasLabel.opaque = true
+        self.aliasLabel.userInteractionEnabled = true
         self.paperView.addSubview(self.aliasLabel)
         
         self.actionLabel = UILabel(frame: CGRectZero)

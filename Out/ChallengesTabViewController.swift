@@ -72,14 +72,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         self.noChallengeView.center = self.view.center
         var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
         
-        noChallengeViewTitle.text = "No Current Challenge"
+        noChallengeViewTitle.text = "No Current Activity"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
         
-        noChallengeViewSubtitle.text = "tap '+' to add a challenge"
+        noChallengeViewSubtitle.text = "tap '+' to add an activity"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noChallengeViewSubtitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
@@ -240,6 +240,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             if stepFullUserDataDictionary["challengeTrack"] != nil{
                 // Store collected step user data to PFObject
                 currentChallengeObject["challengeTrackNumber"] = stepFullUserDataDictionary["challengeTrack"]
+            }
+            else{
+                currentChallengeObject["challengeTrackNumber"] = "0"
             }
             
             var dictionary:[String] = []

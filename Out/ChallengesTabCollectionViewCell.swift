@@ -137,6 +137,9 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var currentCellTypes:[String] = currentCellTypeArray[currentStepCount]
         var currentCellType = currentCellTypes[indexPath.row]
         var challengeTrackNumber = currentChallengeData["challengeTrackNumber"] as! String
+        if challengeTrackNumber == "0"{
+            challengeTrackNumber = "\(challengeTrackNumber.toInt()! + 1)"
+        }
         var cell:TextBlockTableViewCell = tableView.dequeueReusableCellWithIdentifier("TextBlockTableViewCell") as! TextBlockTableViewCell
         
         if self.countofCellTypeDictionary[currentCellType] == nil{

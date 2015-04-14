@@ -76,6 +76,7 @@ class StatusActivityTableViewCell: UITableViewCell {
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.backgroundColor = UIColor.whiteColor()
         self.avatarImageView.image = UIImage(named: "avatarImagePlaceholder")
+        self.avatarImageView.userInteractionEnabled = true
         self.paperView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
@@ -84,6 +85,7 @@ class StatusActivityTableViewCell: UITableViewCell {
         self.aliasLabel.textAlignment = NSTextAlignment.Left
         self.aliasLabel.font = titleFont?.fontWithSize(16.0)
         self.aliasLabel.text = "username"
+        self.aliasLabel.userInteractionEnabled = true
         self.paperView.addSubview(self.aliasLabel)
         
         self.actionLabel = UILabel(frame: CGRectZero)
