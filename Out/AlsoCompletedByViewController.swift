@@ -13,6 +13,7 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
     var tableView:TPKeyboardAvoidingTableView!
     var completedByPeople:[PFUser] = []
     var challenge:PFObject!
+    var user:PFUser!
     
     let colorDictionary =
     [
@@ -92,6 +93,8 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
         var userCity = user["city"] as! String
         var userState = user["state"] as! String
         cell.userLocation.text = "\(userCity), \(userState)"
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+        cell.addGestureRecognizer(tapGestureRecognizer)
         return cell
     }
     
@@ -131,5 +134,18 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPersonDetail"{
+            var newVC = segue.destinationViewController as! PersonDetailViewController
+            newVC.user = self.user
+        }
+    }
+    
+    func showPersonDetail(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        self.user = self.completedByPeople[currentIndexPath.row]
+        self.performSegueWithIdentifier("showPersonDetail", sender: self)
+    }
 
 }

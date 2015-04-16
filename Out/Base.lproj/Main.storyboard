@@ -606,6 +606,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="20f-PE-RYf" kind="show" identifier="showPersonDetail" id="dCs-o4-4Ss"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ay1-A4-ITN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -739,6 +742,25 @@
             </objects>
             <point key="canvasLocation" x="4218" y="5457"/>
         </scene>
+        <!--Help Resources Tab View Controller-->
+        <scene sceneID="XAc-dT-EHc">
+            <objects>
+                <viewController id="yeu-0t-Wk4" customClass="HelpResourcesTabViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Seb-Ad-QeC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zeo-pu-rns"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eRJ-ck-6Vy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0dg-KU-H5F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oC2-GI-J9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="292" y="3469"/>
+        </scene>
         <!--Help-->
         <scene sceneID="Qwj-ko-ZxG">
             <objects>
@@ -751,7 +773,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="xhF-qa-U5N" kind="relationship" relationship="rootViewController" id="jFT-aK-5ip"/>
+                        <segue destination="yeu-0t-Wk4" kind="relationship" relationship="rootViewController" id="g7t-NQ-2tL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Usm-tT-qUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -968,7 +990,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="27d-c0-TyZ"/>
-        <segue reference="UjT-E2-Rcp"/>
+        <segue reference="dCs-o4-4Ss"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

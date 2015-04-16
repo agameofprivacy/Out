@@ -163,6 +163,7 @@
 		2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302819FB42E500D38896 /* TPKeyboardAvoidingScrollView.m */; };
 		2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */; };
 		2CD5303019FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5302C19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		2CD596591ADF6A5F0010930A /* HelpResourcesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */; };
 		2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */; };
 		2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */; };
 		2CE865E919FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */; };
@@ -424,6 +425,7 @@
 		2CD5302A19FB42E500D38896 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		2CD5302B19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		2CD5302C19FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpResourcesTabViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsAndActivatorTableViewCell.swift; sourceTree = "<group>"; };
@@ -880,6 +882,7 @@
 		2C9CA6141A05AF3300BC4D93 /* HelpTab */ = {
 			isa = PBXGroup;
 			children = (
+				2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */,
 				2C9CA6121A05AF2D00BC4D93 /* HelpTabViewController.swift */,
 				2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */,
 				2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */,
@@ -1201,6 +1204,7 @@
 				2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */,
 				2C0D547D1ACB00910045B929 /* NSObject+XLFormAdditions.m in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
+				2CD596591ADF6A5F0010930A /* HelpResourcesTabViewController.swift in Sources */,
 				2CBCC8FA1AC9F87F00E992D9 /* SLKInputAccessoryView.m in Sources */,
 				2C0D546A1ACB00910045B929 /* XLFormDateCell.m in Sources */,
 				2CA435EB19F48A2C00DC1C6E /* ChallengeOverviewTableViewCell.swift in Sources */,
