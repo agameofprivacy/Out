@@ -13,7 +13,11 @@ class PeopleFilterViewController: XLFormViewController {
 //    var tableView:TPKeyboardAvoidingTableView!
 //    var filterCategories:[String] = ["Gender Identity", "Sexual Orientation"]
 //    var filterDictionary:[String:[String]] = ["Gender Identity":["Man", "Woman", "Trans-man", "Trans-woman", "Genderqueer", "Non-binary"], "Sexual Orientation":["Lesbian", "Gay", "Bisexual", "Pansexual", "Asexual"]]
+
+    var genderArray = ["Agender", "Androgyne", "Bigender", "Boi", "Butch", "Cisgender", "Female", "Femme", "FTM", "Genderfluid", "Genderqueer", "Gender non-conforming", "Intersex", "Male", "Man", "MTF", "Pangender", "Queer", "Third Gender", "Transgender", "Trans", "Trans man", "Trans woman", "Two spirit", "Woman", "No label", "Other"]
     
+    var sexualOrientationArray = ["Asexual", "Bisexual", "Demisexual", "Gay", "Gray-Asexual", "Lesbian", "Pansexual", "Polysexual", "Pomosexual", "Queer", "Straight", "No label", "Other"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,26 +49,17 @@ class PeopleFilterViewController: XLFormViewController {
         form.addFormSection(section)
 
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
-        row.selectorOptions =
-            [
-                XLFormOptionsObject(value: "Man", displayText: "Man"),
-                XLFormOptionsObject(value: "Woman", displayText: "Woman"),
-                XLFormOptionsObject(value: "Trans-man", displayText: "Trans-man"),
-                XLFormOptionsObject(value: "Trans-woman", displayText: "Trans-woman"),
-                XLFormOptionsObject(value: "Genderqueer", displayText: "Genderqueer"),
-                XLFormOptionsObject(value: "Non-Binary", displayText: "Non-Binary")
-        ]
+        row.selectorOptions = []
+        for gender in self.genderArray{
+            row.selectorOptions.append(XLFormOptionsObject(value: gender, displayText: gender))
+        }
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Sexual Orientation", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Sexual Orientation")
-        row.selectorOptions =
-            [
-                XLFormOptionsObject(value: "Lesbian", displayText: "Lesbian"),
-                XLFormOptionsObject(value: "Gay", displayText: "Gay"),
-                XLFormOptionsObject(value: "Bisexual", displayText: "Bisexual"),
-                XLFormOptionsObject(value: "Pansexual", displayText: "Pansexual"),
-                XLFormOptionsObject(value: "Asexual", displayText: "Asexual")
-        ]
+        row.selectorOptions = []
+        for sexualOrientation in self.sexualOrientationArray{
+            row.selectorOptions.append(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
+        }
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Minimum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Minimum Age")

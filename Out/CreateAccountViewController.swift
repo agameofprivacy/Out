@@ -14,7 +14,7 @@ class CreateAccountViewController: XLFormViewController {
     
     var genderArray = ["Agender", "Androgyne", "Bigender", "Boi", "Butch", "Cisgender", "Female", "Femme", "FTM", "Genderfluid", "Genderqueer", "Gender non-conforming", "Intersex", "Male", "Man", "MTF", "Pangender", "Queer", "Third Gender", "Transgender", "Trans", "Trans man", "Trans woman", "Two spirit", "Woman", "No label", "Other"]
     
-    var sexualOrientationArray = ["Asexual", "Bisexual", "Demisexual", "Gay", "Gay-Asexual", "Lesbian", "Pansexual", "Polysexual", "Pomosexual", "Queer", "Straight", "No label", "Other"]
+    var sexualOrientationArray = ["Asexual", "Bisexual", "Demisexual", "Gay", "Gray-Asexual", "Lesbian", "Pansexual", "Polysexual", "Pomosexual", "Queer", "Straight", "No label", "Other"]
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
