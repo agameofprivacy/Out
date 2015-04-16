@@ -338,7 +338,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
         currentUserFollowingRequested.append(userToFollow)
         PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-        
+        PFUser.currentUser().saveInBackground()
         var queryFollowRequests = PFQuery(className:"FollowerFollowing")
         queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
         queryFollowRequests.findObjectsInBackgroundWithBlock{

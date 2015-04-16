@@ -619,6 +619,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
             currentUserFollowingRequested.append(userToFollow)
             PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
+            PFUser.currentUser().saveInBackground()
             
             var queryFollowRequests = PFQuery(className:"FollowerFollowing")
             queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
@@ -634,6 +635,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
                         if error == nil{
                             self.loadFollowerFollowing()
+                            if (self.parentViewController?.childViewControllers[0].isKindOfClass(PeopleGalleryViewController) != nil){
+                                var peopleGallery = self.parentViewController?.childViewControllers[0] as! PeopleGalleryViewController
+                                peopleGallery.loadPeople()
+                            }
 //                            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
                             var followRequestSentNotification = PFObject(className: "Notification")
                             followRequestSentNotification["sender"] = PFUser.currentUser()
