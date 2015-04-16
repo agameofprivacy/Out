@@ -194,7 +194,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
         self.loadNotifications()
-        self.loadActivities("update")
+//        self.loadActivities("update")
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -596,12 +596,24 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 if likeCountFound == currentActivitiesFound.count && commentCountFound == currentActivitiesFound.count{
                                                     self.prepareDataForTableView(currentActivitiesFound, currentActivitiesFoundCommentCount: currentActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: currentActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
                                                     self.loadNotifications()
-                                                    if self.tableView.numberOfRowsInSection(0) != 0{
+                                                     println(self.tableView.numberOfRowsInSection(0))
+                                                    if self.tableView.numberOfRowsInSection(0) == 0{
+
 //                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                                                         self.tableView.reloadData()
                                                     }
                                                     else{
-                                                        self.tableView.reloadData()
+                                                        if context == "update"{
+                                                            self.tableView.reloadRowsAtIndexPaths(self.tableView.indexPathsForVisibleRows()!, withRowAnimation: UITableViewRowAnimation.None)
+                                                        }
+                                                        else if context == "old"{
+//                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                            self.tableView.reloadData()
+                                                        }
+                                                        else if context == "new"{
+//                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                            self.tableView.reloadData()
+                                                        }
                                                     }
 
                                                     self.refreshControl?.endRefreshing()

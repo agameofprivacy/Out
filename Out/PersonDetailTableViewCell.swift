@@ -13,7 +13,7 @@ class PersonDetailTableViewCell: UITableViewCell {
     var avatarImageView:UIImageView!
     var aliasLabel:UILabel!
     var basicsLabel:UILabel!
-    var aboutTextView:UITextView!
+    var aboutTextView:UILabel!
     var followButton:UIButton!
     var messageButton:UIButton!
     var separatorView:UIView!
@@ -88,26 +88,24 @@ class PersonDetailTableViewCell: UITableViewCell {
         self.basicsLabel.textAlignment = NSTextAlignment.Center
         contentView.addSubview(self.basicsLabel)
         
-        self.aboutTextView = UITextView(frame: CGRectZero)
+        self.aboutTextView = UILabel(frame: CGRectZero)
         self.aboutTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.aboutTextView.text = "user advance stats"
         self.aboutTextView.backgroundColor = UIColor.clearColor()
-        self.aboutTextView.editable = false
-        self.aboutTextView.scrollEnabled = false
-        self.aboutTextView.selectable = false
-        self.aboutTextView.textAlignment = NSTextAlignment.Center
-        self.aboutTextView.textContainerInset = UIEdgeInsetsZero
+        self.aboutTextView.textAlignment = NSTextAlignment.Left
         self.aboutTextView.font = self.valueFont?.fontWithSize(14)
+        self.aboutTextView.numberOfLines = 0
         contentView.addSubview(self.aboutTextView)
         
         self.followButton = UIButton(frame: CGRectZero)
         self.followButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.followButton.setTitle("Follow", forState: UIControlState.Normal)
+        self.followButton.setTitle("Checking...", forState: UIControlState.Normal)
         self.followButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.followButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16)
         self.followButton.layer.borderWidth = 1
         self.followButton.layer.borderColor = UIColor.blackColor().CGColor
         self.followButton.layer.cornerRadius = 8
+        self.followButton.enabled = false
         contentView.addSubview(self.followButton)
         
         self.messageButton = UIButton(frame: CGRectZero)
@@ -124,9 +122,9 @@ class PersonDetailTableViewCell: UITableViewCell {
         self.separatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.separatorView.backgroundColor = UIColor(white: 0.85, alpha: 1)
         contentView.addSubview(self.separatorView)
-        var aboutTextViewHeight = self.aboutTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 15, CGFloat(MAXFLOAT))).height
+//        var aboutTextViewHeight = self.aboutTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 15, CGFloat(MAXFLOAT))).height
         
-        var metricsDictionary = ["sideMargin":7.5, "buttonMargin":(UIScreen.mainScreen().bounds.width - 304)/2, "aboutTextViewHeight":aboutTextViewHeight]
+        var metricsDictionary = ["sideMargin":15, "buttonMargin":(UIScreen.mainScreen().bounds.width - 278)/2]
         var viewsDictionary = ["avatarImageView":self.avatarImageView, "basicsLabel":self.basicsLabel, "aboutTextView":self.aboutTextView, "followButton":self.followButton, "messageButton":self.messageButton, "separatorView":self.separatorView]
         
         
@@ -134,13 +132,15 @@ class PersonDetailTableViewCell: UITableViewCell {
         var avatarImageViewCenterConstraint = NSLayoutConstraint(item: self.avatarImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
         var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[basicsLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-buttonMargin-[followButton(140)]-24-[messageButton(140)]-buttonMargin-|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: metricsDictionary, views: viewsDictionary)
+        var aboutTextViewHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[aboutTextView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+
+        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-buttonMargin-[followButton(130)]-18-[messageButton(130)]-buttonMargin-|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: metricsDictionary, views: viewsDictionary)
         
         var fourthHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separatorView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[avatarImageView(80)]-8-[basicsLabel]-6-[aboutTextView(aboutTextViewHeight)]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        var topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[avatarImageView(80)]-12-[basicsLabel]-10-[aboutTextView]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
         
-        var secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView(aboutTextViewHeight)]-22-[followButton(36)]-24-[separatorView(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[followButton(36)]-24-[separatorView(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         
 //        var fourthVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[followButton(36)]-30-[separatorView(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
@@ -149,6 +149,7 @@ class PersonDetailTableViewCell: UITableViewCell {
         self.contentView.addConstraint(avatarImageViewCenterConstraint)
         self.contentView.addConstraints(topHorizontalConstraints)
         self.contentView.addConstraints(secondHorizontalConstraints)
+        self.contentView.addConstraints(aboutTextViewHorizontalConstraints)
         self.contentView.addConstraints(thirdHorizontalConstraints)
         self.contentView.addConstraints(fourthHorizontalConstraints)
         self.contentView.addConstraints(topVerticalConstraints)

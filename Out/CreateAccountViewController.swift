@@ -11,6 +11,11 @@ import UIKit
 // Controller for signup view
 class CreateAccountViewController: XLFormViewController {
 
+    
+    var genderArray = ["Agender", "Androgyne", "Bigender", "Boi", "Butch", "Cisgender", "Female", "Femme", "FTM", "Genderfluid", "Genderqueer", "Gender non-conforming", "Intersex", "Male", "Man", "MTF", "Pangender", "Queer", "Third Gender", "Transgender", "Trans", "Trans man", "Trans woman", "Two spirit", "Woman", "No label", "Other"]
+    
+    var sexualOrientationArray = ["Asexual", "Bisexual", "Demisexual", "Gay", "Gay-Asexual", "Lesbian", "Pansexual", "Polysexual", "Pomosexual", "Queer", "Straight", "No label", "Other"]
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -67,26 +72,17 @@ class CreateAccountViewController: XLFormViewController {
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
-        row.selectorOptions =
-            [
-                XLFormOptionsObject(value: "man", displayText: "Man"),
-                XLFormOptionsObject(value: "woman", displayText: "Woman"),
-                XLFormOptionsObject(value: "trans-man", displayText: "Trans-man"),
-                XLFormOptionsObject(value: "trans-woman", displayText: "Trans-woman"),
-                XLFormOptionsObject(value: "genderQueer", displayText: "Genderqueer"),
-                XLFormOptionsObject(value: "nonBinary", displayText: "Non-Binary")
-            ]
+        row.selectorOptions = []
+        for gender in self.genderArray{
+            row.selectorOptions.append(XLFormOptionsObject(value: gender, displayText: gender))
+        }
         section.addFormRow(row)
 
         row = XLFormRowDescriptor(tag: "Sexual Orientation", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Sexual Orientation")
-        row.selectorOptions =
-            [
-                XLFormOptionsObject(value: "lesbian", displayText: "Lesbian"),
-                XLFormOptionsObject(value: "gay", displayText: "Gay"),
-                XLFormOptionsObject(value: "bisexual", displayText: "Bisexual"),
-                XLFormOptionsObject(value: "pansexual", displayText: "Pansexual"),
-                XLFormOptionsObject(value: "asexual", displayText: "Asexual")
-            ]
+        row.selectorOptions = []
+        for sexualOrientation in self.sexualOrientationArray{
+            row.selectorOptions.append(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
+        }
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Avatar", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Avatar")
@@ -217,6 +213,14 @@ class CreateAccountViewController: XLFormViewController {
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
+        row = XLFormRowDescriptor(tag: "Bio", rowType: XLFormRowDescriptorTypeText, title: "Bio")
+        var paddingView7 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
+        row.cellConfig.setObject(paddingView6, forKey: "textField.rightView")
+        row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
+        section.addFormRow(row)
+
+        
         self.form = form
     }
     
@@ -266,6 +270,7 @@ class CreateAccountViewController: XLFormViewController {
         user["city"] = values["City"] as! String
         user["religion"] = (values["Religion"] as! XLFormOptionsObject).valueData()
         user["state"] = (values["State"] as! XLFormOptionsObject).valueData()
+        user["shortBio"] = values["Bio"] as! String
         user["followingRequested"] = []
         user["followingRequestsFrom"] = []
         

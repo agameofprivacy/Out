@@ -17,7 +17,11 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
     var processedActivities:NSMutableArray = []
     var currentActivitiesLikeCount:[Int] = []
     var currentActivitiesCommentCount:[Int] = []
-
+    var currentUserFollowingId:[String] = []
+    var currentUserFollowerId:[String] = []
+    var followingRequestedId:[String] = []
+    var followStatusChecked:Bool = false
+    
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -94,6 +98,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         // Do any additional setup after loading the view.
         
         self.loadActivities("old")
+        self.loadFollowerFollowing()
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,14 +124,35 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         if indexPath == NSIndexPath(forRow: 0, inSection: 0){
             var age = self.user["age"] as! Int
             var basicStatsString = "\(age)" + " · " + (self.user["sexualOrientation"] as! String) + " · " + (self.user["genderIdentity"] as! String)
-            var advanceStatsString = (self.user["ethnicity"] as! String) + " · " + (self.user["religion"] as! String) + " · " + (self.user["city"] as! String) + " " + (self.user["state"] as! String)
+//            var advanceStatsString = (self.user["ethnicity"] as! String) + " · " + (self.user["religion"] as! String) + " · " + (self.user["city"] as! String) + " " + (self.user["state"] as! String)
+            
+            var advanceStatsString = self.user["shortBio"] as! String
+            
             var cell = tableView.dequeueReusableCellWithIdentifier("PersonDetailTableViewCell") as! PersonDetailTableViewCell
+            
+            
             
             cell.basicsLabel.text = basicStatsString
             cell.aboutTextView.text = advanceStatsString
             cell.avatarImageView.image = cell.avatarImageDictionary[self.user["avatar"] as! String]!
             cell.avatarImageView.backgroundColor = cell.colorDictionary[self.user["color"] as! String]
-            
+            if self.followStatusChecked{
+                if contains(self.currentUserFollowingId, self.user.objectId){
+                    cell.followButton.setTitle("Unfollow", forState: UIControlState.Normal)
+                }
+                else if contains(self.followingRequestedId, PFUser.currentUser().objectId){
+                    cell.followButton.setTitle("Requested", forState: UIControlState.Normal)
+                }
+//                else if contains(self.currentUserFollowerId, self.user.objectId){
+//                    cell.followButton.setTitle("Follow", forState: UIControlState.Normal)
+//                }
+                else{
+                    cell.followButton.setTitle("Follow", forState: UIControlState.Normal)                
+                }
+                cell.followButton.enabled = true
+            }
+            var followButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "followButtonTapped:")
+            cell.followButton.addGestureRecognizer(followButtonTapGestureRecognizer)
             return cell
         }
         else if indexPath.section == 1{
@@ -136,7 +162,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 cell.detailTextLabel!.text = self.aboutArray[indexPath.row][1]
                 return cell
             }
-            else if indexPath.row < self.aboutArray.count + self.userActivities.count{
+            else if indexPath.row < self.aboutArray.count + self.userActivities.count && self.processedActivities.count > 0{
                 var currentActivity = self.processedActivities[indexPath.row - self.aboutArray.count] as! [String:String!]
                 
                 var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
@@ -182,7 +208,6 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     
                     cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
                     cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
-                    
                     cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
                     
 //                    var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
@@ -291,7 +316,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.aboutArray.count, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         default:
             println("More")
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.tableView.numberOfRowsInSection(1) - 1, inSection: 1), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.tableView.numberOfRowsInSection(1) - 1, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         }
     }
 
@@ -539,6 +564,109 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
             }
             ++activityCount
+        }
+    }
+    
+    func loadFollowerFollowing(){
+        var followingQuery = PFQuery(className: "FollowerFollowing")
+        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
+//        followingQuery.includeKey("followers")
+//        followingQuery.includeKey("followingUsers")
+        followingQuery.findObjectsInBackgroundWithBlock{
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                for object in objects{
+                    for user in object["followers"] as! [PFUser]{
+                        self.currentUserFollowerId.append(user.objectId)
+                    }
+                    for user in object["followingUsers"] as! [PFUser]{
+                        self.currentUserFollowingId.append(user.objectId)
+                    }
+                    
+                    var followingRequestQuery = PFQuery(className: "FollowerFollowing")
+                    followingRequestQuery.whereKey("ownerUser", equalTo: self.user)
+                    followingRequestQuery.findObjectsInBackgroundWithBlock{
+                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        if error == nil{
+                            for object in objects{
+                                for user in object["requestsFromUsers"] as! [PFUser]{
+                                    self.followingRequestedId.append(user.objectId)
+                                }
+                                println(self.followingRequestedId)
+                                self.followStatusChecked = true
+                                self.tableView.reloadData()
+                            }
+                        }
+                        else{
+                        
+                        }
+                    }
+
+//                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                }
+            }
+            else{
+            }
+        }
+    }
+    
+    func followButtonTapped(sender:UITapGestureRecognizer){
+        var followButton = sender.view as! UIButton
+        if followButton.titleLabel?.text == "Follow"{
+            println("Follow")
+            var userToFollow = self.user
+            var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as! [PFUser]
+            var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
+            currentUserFollowingRequested.append(userToFollow)
+            PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
+            
+            var queryFollowRequests = PFQuery(className:"FollowerFollowing")
+            queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
+            queryFollowRequests.findObjectsInBackgroundWithBlock{
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    // The find succeeded.
+                    var followRequestsFrom = objects
+                    var currentFollowerFollowingObject = followRequestsFrom[0] as! PFObject
+                    var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
+                    currentFollowRequestsFrom.append(PFUser.currentUser())
+                    currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
+                    currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                        if error == nil{
+                            self.loadFollowerFollowing()
+//                            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                            var followRequestSentNotification = PFObject(className: "Notification")
+                            followRequestSentNotification["sender"] = PFUser.currentUser()
+                            followRequestSentNotification["receiver"] = userToFollow
+                            followRequestSentNotification["read"] = false
+                            followRequestSentNotification["type"] = "followRequestSent"
+                            followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                                if error == nil{
+                                    // Send iOS Notification
+                                    println("Follow request sent")
+                                }
+                            }
+                            
+                        }
+                        else{
+                            // Log details of the failure
+                            NSLog("Error: %@ %@", error, error.userInfo!)
+                        }
+                        
+                    }
+                }
+                else {
+                    // Log details of the failure
+                    NSLog("Error: %@ %@", error, error.userInfo!)
+                }
+            }
+
+        }
+        else if followButton.titleLabel?.text == "Unfollow"{
+            println("Unfollow")
+        }
+        else if followButton.titleLabel?.text == "Requested"{
+            println("Requested")
         }
     }
 }

@@ -47,23 +47,23 @@ class PeopleFilterViewController: XLFormViewController {
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
         row.selectorOptions =
             [
-                XLFormOptionsObject(value: "man", displayText: "Man"),
-                XLFormOptionsObject(value: "woman", displayText: "Woman"),
-                XLFormOptionsObject(value: "trans-man", displayText: "Trans-man"),
-                XLFormOptionsObject(value: "trans-woman", displayText: "Trans-woman"),
-                XLFormOptionsObject(value: "genderQueer", displayText: "Genderqueer"),
-                XLFormOptionsObject(value: "nonBinary", displayText: "Non-Binary")
+                XLFormOptionsObject(value: "Man", displayText: "Man"),
+                XLFormOptionsObject(value: "Woman", displayText: "Woman"),
+                XLFormOptionsObject(value: "Trans-man", displayText: "Trans-man"),
+                XLFormOptionsObject(value: "Trans-woman", displayText: "Trans-woman"),
+                XLFormOptionsObject(value: "Genderqueer", displayText: "Genderqueer"),
+                XLFormOptionsObject(value: "Non-Binary", displayText: "Non-Binary")
         ]
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Sexual Orientation", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Sexual Orientation")
         row.selectorOptions =
             [
-                XLFormOptionsObject(value: "lesbian", displayText: "Lesbian"),
-                XLFormOptionsObject(value: "gay", displayText: "Gay"),
-                XLFormOptionsObject(value: "bisexual", displayText: "Bisexual"),
-                XLFormOptionsObject(value: "pansexual", displayText: "Pansexual"),
-                XLFormOptionsObject(value: "asexual", displayText: "Asexual")
+                XLFormOptionsObject(value: "Lesbian", displayText: "Lesbian"),
+                XLFormOptionsObject(value: "Gay", displayText: "Gay"),
+                XLFormOptionsObject(value: "Bisexual", displayText: "Bisexual"),
+                XLFormOptionsObject(value: "Pansexual", displayText: "Pansexual"),
+                XLFormOptionsObject(value: "Asexual", displayText: "Asexual")
         ]
         section.addFormRow(row)
         

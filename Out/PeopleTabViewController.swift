@@ -13,8 +13,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var followingRequestedFrom:[PFUser] = []
     var followingUsers:[PFUser] = []
-    var followers:[AnyObject] = []
-    var following:[AnyObject] = []
+    var followers:[PFUser] = []
+    var following:[PFUser] = []
     var followerFollowingObject:PFObject = PFObject(className: "FollowerFollowing", dictionary: ["requestsFromUsers":[],"followers":[], "followingUsers":[]])
     var user:PFUser!
     var followerTableView = TPKeyboardAvoidingTableView()
@@ -274,7 +274,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.segmentedControlView.addConstraints(segmentsVerticalConstraints)
         
         // No follower view init and layout
-        self.noFollowerView = UIView(frame: self.followerTableView.frame)
+        self.noFollowerView = UIView(frame: self.view.frame)
         self.noFollowerView.backgroundColor = UIColor.whiteColor()
         self.noFollowerView.center = self.view.center
         
@@ -296,7 +296,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerTableView.addSubview(self.noFollowerView)
 
         // No following view init and layout
-        self.noFollowingView = UIView(frame: self.followingTableView.frame)
+        self.noFollowingView = UIView(frame: self.view.frame)
         self.noFollowingView.center = self.view.center
         self.noFollowingView.backgroundColor = UIColor.whiteColor()
         
@@ -365,7 +365,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             // If section is for displaying follower(s)
             if(indexPath.section == 1){
                 var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
-                var followersUsers:[PFUser] = self.followers as! [PFUser]
+                var followersUsers:[PFUser] = self.followers
                 var user = followersUsers[indexPath.row] as PFUser
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
@@ -403,7 +403,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // Display following
         else if tableView == self.followingTableView{
             var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
-            var followingUsers:[PFUser] = self.following as! [PFUser]
+            var followingUsers:[PFUser] = self.following
             var user = followingUsers[indexPath.row] as PFUser
             cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
             cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
@@ -578,13 +578,17 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     func showPersonDetail(sender:UITapGestureRecognizer){
         if self.segmentedControl.selectedSegmentIndex == 0{
             var currentIndexPath = self.followerTableView.indexPathForRowAtPoint(sender.locationInView(self.followerTableView)) as NSIndexPath!
-            self.user = self.followers[currentIndexPath.row] as! PFUser
+            if currentIndexPath.section == 1{
+                self.user = self.followers[currentIndexPath.row]
+            }
+            else{
+                self.user = self.followingRequestedFrom[currentIndexPath.row]
+            }
             self.performSegueWithIdentifier("showPersonDetail", sender: self)
-
         }
         else{
             var currentIndexPath = self.followingTableView.indexPathForRowAtPoint(sender.locationInView(self.followingTableView)) as NSIndexPath!
-            self.user = self.following[currentIndexPath.row] as! PFUser
+            self.user = self.following[currentIndexPath.row]
             self.performSegueWithIdentifier("showPersonDetail", sender: self)
 
 

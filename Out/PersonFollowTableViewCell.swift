@@ -67,6 +67,7 @@ class PersonFollowTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userAvatar = UIImageView(frame: CGRectZero)
         self.userAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAvatar.userInteractionEnabled = true
         self.userAvatar.layer.cornerRadius = 25
         self.userAvatar.clipsToBounds = true
         self.userAvatar.contentMode = UIViewContentMode.ScaleAspectFit

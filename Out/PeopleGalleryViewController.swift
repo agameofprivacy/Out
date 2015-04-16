@@ -12,12 +12,13 @@ import UIKit
 class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var peopleTableView:UITableView!
-    var people:[AnyObject] = []
+    var people:[PFUser] = []
     var followRequestsFrom:[AnyObject] = []
     var currentFollowerFollowingObject:PFObject!
     var noPeopleView:UIView!
     var filterDictionary:[String:[String]] = Dictionary(minimumCapacity: 0)
     let regularFont = UIFont(name: "HelveticaNeue", size: 15.0)
+    var user:PFUser!
 
     let colorDictionary =
     [
@@ -128,7 +129,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as! PersonFollowTableViewCell
 
-        var person = self.people[indexPath.row] as! PFUser
+        var person = self.people[indexPath.row]
         cell.userAvatar.backgroundColor = self.colorDictionary[person["color"] as! String]
         cell.userAvatar.image = self.avatarImageDictionary[person["avatar"] as! String]!
         cell.userAlias.text = person.username
@@ -136,6 +137,8 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         var personAge = person["age"] as! Int
         cell.userOrientationAge.text = "\(personOrientation) . \(personAge)"
         cell.followButton.addTarget(self, action: "followButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+        cell.userAvatar.addGestureRecognizer(tapGestureRecognizer)
 
         return cell
     }
@@ -241,7 +244,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                     ++counter
                 }
                 else{
-                    filterLabelText += "."
+//                    filterLabelText += "."
                 }
             }
             filterLabel.text = filterLabelText
@@ -299,7 +302,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.people = objects
+                self.people = objects as! [PFUser]
                 self.peopleTableView.reloadData()
                 if self.people.count == 0{
                     self.peopleTableView.hidden = true
@@ -330,7 +333,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
     func followButtonTapped(sender:UIButton){
         var currentCell = sender.superview?.superview as! PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.peopleTableView.indexPathForCell(currentCell)!
-        var userToFollow = self.people[currentIndexPath.row] as! PFUser
+        var userToFollow = self.people[currentIndexPath.row]
         var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as! [PFUser]
         var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
         currentUserFollowingRequested.append(userToFollow)
@@ -392,6 +395,18 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
 
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPersonDetail"{
+            var newVC = segue.destinationViewController as! PersonDetailViewController
+            newVC.user = self.user
+        }
+    }
+    
+    func showPersonDetail(sender:UITapGestureRecognizer){
+        var currentIndexPath = self.peopleTableView.indexPathForRowAtPoint(sender.locationInView(self.peopleTableView)) as NSIndexPath!
+        self.user = self.people[currentIndexPath.row]
+        self.performSegueWithIdentifier("showPersonDetail", sender: self)
+    }
     
     func filterHeaderTapped(){
         self.filterDictionary.removeAll(keepCapacity: false)

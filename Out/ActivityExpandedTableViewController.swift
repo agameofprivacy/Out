@@ -95,6 +95,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         
         self.commentsTableView = CommentsViewController(tableViewStyle: UITableViewStyle.Plain)
         self.commentsTableView.activity = self.activity
+        self.commentsTableView.parentVC = self
         self.commentsTableView.view.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height - 49.5)
         self.commentsTableView.tableView.registerClass(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
         self.commentsTableView.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -481,6 +482,10 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             var destinationVC = segue.destinationViewController as! AlsoCompletedByViewController
             destinationVC.challenge = self.challenge
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+//        self.parentVC.loadActivities("update")
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {

@@ -12,7 +12,7 @@ class CommentsViewController: SLKTextViewController {
 
     var comments:[PFObject] = []
     var activity:PFObject!
-    
+    var parentVC:ActivityExpandedTableViewController!
     let colorDictionary =
     [
         "orange":UIColor(red: 255/255, green: 97/255, blue: 27/255, alpha: 1),
@@ -130,6 +130,7 @@ class CommentsViewController: SLKTextViewController {
         newCommentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
             if error == nil{
                 // Send iOS Notification
+                self.parentVC.parentVC.loadActivities("update")
             }
         }
         self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)

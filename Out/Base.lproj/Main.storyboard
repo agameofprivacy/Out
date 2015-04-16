@@ -544,6 +544,7 @@
                     <navigationItem key="navigationItem" id="VKg-kB-Jrx"/>
                     <connections>
                         <segue destination="Mzn-8h-MDR" kind="presentation" identifier="filterPeople" id="sNk-L9-5iO"/>
+                        <segue destination="20f-PE-RYf" kind="show" identifier="showPersonDetail" id="UjT-E2-Rcp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N0a-ZH-vpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -967,7 +968,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="27d-c0-TyZ"/>
-        <segue reference="cTL-br-QIc"/>
+        <segue reference="UjT-E2-Rcp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
