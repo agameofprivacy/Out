@@ -101,14 +101,14 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.noActivityView.center = self.tableView.center
         
         var noActivityViewTitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5, self.noActivityView.frame.width, 32))
-        noActivityViewTitle.text = "No Activity"
+        noActivityViewTitle.text = "No Activities"
         noActivityViewTitle.textAlignment = NSTextAlignment.Center
         noActivityViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noActivityViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noActivityView.addSubview(noActivityViewTitle)
         
         var noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
-        noActivityViewSubtitle.text = "take on some challenges or follow others\nin Friends to see their activities"
+        noActivityViewSubtitle.text = "Do some activities or follow\nothers to see their activities"
         noActivityViewSubtitle.textAlignment = NSTextAlignment.Center
         noActivityViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         noActivityViewSubtitle.numberOfLines = 2

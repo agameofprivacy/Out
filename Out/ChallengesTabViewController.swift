@@ -72,7 +72,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         self.noChallengeView.center = self.view.center
         var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
         
-        noChallengeViewTitle.text = "No Current Activity"
+        noChallengeViewTitle.text = "No Activity"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)

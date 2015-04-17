@@ -350,59 +350,65 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-                PFUser.currentUser().saveInBackground()
-                var queryFollowRequests = PFQuery(className:"FollowerFollowing")
-                queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
-                queryFollowRequests.findObjectsInBackgroundWithBlock{
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil {
-                        // The find succeeded.
-                        self.followRequestsFrom = objects
-                        var currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
-                        var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
-                        currentFollowRequestsFrom.append(PFUser.currentUser())
-                        currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
-                        currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
-                            if error == nil{
-                                var followRequestSentNotification = PFObject(className: "Notification")
-                                followRequestSentNotification["sender"] = PFUser.currentUser()
-                                followRequestSentNotification["receiver"] = userToFollow
-                                followRequestSentNotification["read"] = false
-                                followRequestSentNotification["type"] = "followRequestSent"
-                                followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                    if error == nil{
+                        var queryFollowRequests = PFQuery(className:"FollowerFollowing")
+                        queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
+                        queryFollowRequests.findObjectsInBackgroundWithBlock{
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            if error == nil {
+                                // The find succeeded.
+                                self.loadPeople()
+                                self.peopleTableView.reloadData()
+                                self.followRequestsFrom = objects
+                                var currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
+                                var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
+                                currentFollowRequestsFrom.append(PFUser.currentUser())
+                                currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
+                                currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
                                     if error == nil{
-                                        // Send iOS Notification
-                                        println("Follow request sent")
+                                        var followRequestSentNotification = PFObject(className: "Notification")
+                                        followRequestSentNotification["sender"] = PFUser.currentUser()
+                                        followRequestSentNotification["receiver"] = userToFollow
+                                        followRequestSentNotification["read"] = false
+                                        followRequestSentNotification["type"] = "followRequestSent"
+                                        followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                                            if error == nil{
+                                                // Send iOS Notification
+                                                println("Follow request sent")
+                                            }
+                                        }
+                                        
                                     }
+                                    else{
+                                        // Log details of the failure
+                                        NSLog("Error: %@ %@", error, error.userInfo!)
+                                    }
+                                    
                                 }
-                                
-                            }
-                            else{
+                            } else {
                                 // Log details of the failure
                                 NSLog("Error: %@ %@", error, error.userInfo!)
                             }
-                            
                         }
-                    } else {
-                        // Log details of the failure
-                        NSLog("Error: %@ %@", error, error.userInfo!)
-                    }
-                }
-                
-                PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
-                    if error == nil{
-                        self.loadPeople()
-                        self.peopleTableView.reloadData()
-                    }
-                }
-                
-                userToFollow.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
-                    if error == nil{
                         
+//                        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+//                            if error == nil{
+//                            }
+//                        }
+//                        
+//                        userToFollow.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+//                            if error == nil{
+//                                
+//                            }
+//                            else{
+//                            }
+//                        }
                     }
                     else{
                     }
                 }
+
                 
 
             }

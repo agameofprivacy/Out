@@ -52,7 +52,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.noChallengeView.center = self.challengesTableView.center
         
         var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
-        noChallengeViewTitle.text = "No Activities Available"
+        noChallengeViewTitle.text = "No More Activities"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)

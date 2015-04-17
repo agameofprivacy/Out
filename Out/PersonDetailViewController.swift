@@ -622,50 +622,54 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 (object: AnyObject!, error: NSError!) -> Void in
                 if error == nil {
                     PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-                    PFUser.currentUser().saveInBackground()
-                    
-                    var queryFollowRequests = PFQuery(className:"FollowerFollowing")
-                    queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
-                    queryFollowRequests.findObjectsInBackgroundWithBlock{
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
-                        if error == nil {
-                            // The find succeeded.
-                            var followRequestsFrom = objects
-                            var currentFollowerFollowingObject = followRequestsFrom[0] as! PFObject
-                            var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
-                            currentFollowRequestsFrom.append(PFUser.currentUser())
-                            currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
-                            currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
-                                if error == nil{
-                                    self.loadFollowerFollowing()
-                                    if (self.parentViewController?.childViewControllers[0].isKindOfClass(PeopleGalleryViewController) != nil){
-                                        var peopleGallery = self.parentViewController?.childViewControllers[0] as! PeopleGalleryViewController
-                                        peopleGallery.loadPeople()
-                                    }
-                                    //                            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                                    var followRequestSentNotification = PFObject(className: "Notification")
-                                    followRequestSentNotification["sender"] = PFUser.currentUser()
-                                    followRequestSentNotification["receiver"] = userToFollow
-                                    followRequestSentNotification["read"] = false
-                                    followRequestSentNotification["type"] = "followRequestSent"
-                                    followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                    PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                        if error == nil{
+                            var queryFollowRequests = PFQuery(className:"FollowerFollowing")
+                            queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
+                            queryFollowRequests.findObjectsInBackgroundWithBlock{
+                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                if error == nil {
+                                    // The find succeeded.
+                                    var followRequestsFrom = objects
+                                    var currentFollowerFollowingObject = followRequestsFrom[0] as! PFObject
+                                    var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
+                                    currentFollowRequestsFrom.append(PFUser.currentUser())
+                                    currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
+                                    currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
                                         if error == nil{
-                                            // Send iOS Notification
-                                            println("Follow request sent")
+                                            self.loadFollowerFollowing()
+                                            if (self.parentViewController?.childViewControllers[0].isKindOfClass(PeopleGalleryViewController) != nil){
+                                                var peopleGallery = self.parentViewController?.childViewControllers[0] as! PeopleGalleryViewController
+                                                peopleGallery.loadPeople()
+                                            }
+                                            //                            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                                            var followRequestSentNotification = PFObject(className: "Notification")
+                                            followRequestSentNotification["sender"] = PFUser.currentUser()
+                                            followRequestSentNotification["receiver"] = userToFollow
+                                            followRequestSentNotification["read"] = false
+                                            followRequestSentNotification["type"] = "followRequestSent"
+                                            followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                                                if error == nil{
+                                                    // Send iOS Notification
+                                                    println("Follow request sent")
+                                                }
+                                            }
+                                            
                                         }
+                                        else{
+                                            // Log details of the failure
+                                            NSLog("Error: %@ %@", error, error.userInfo!)
+                                        }
+                                        
                                     }
-                                    
                                 }
-                                else{
+                                else {
                                     // Log details of the failure
                                     NSLog("Error: %@ %@", error, error.userInfo!)
                                 }
-                                
                             }
                         }
-                        else {
-                            // Log details of the failure
-                            NSLog("Error: %@ %@", error, error.userInfo!)
+                        else{
                         }
                     }
                     
