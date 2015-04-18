@@ -10,13 +10,12 @@ import UIKit
 
 class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    var emergencyServiceProviderTitleLabel:UILabel!
-    var emergencyServiceProviderDescriptionLabel:UILabel!
-    var emergencyActionView:UIView!
-    var emergencyCallButton:UIButton!
-    var emergencyMessageButton:UIButton!
-    var organizations:[PFObject] = []
+
+    var organizations:[String:[PFObject]] = NSDictionary() as! [String:[PFObject]]
+    var otherOrganizationsNearby:[PFObject] = []
+    var organizationsArrayKey:[String] = []
     var emergencyServiceProvider:PFObject!
+    var backgroundParameterArray:[String] = ["ethnicity", "religion"]
 //    var locationManager:CLLocationManager!
     
     var resourcesTableView:TPKeyboardAvoidingTableView!
@@ -26,149 +25,142 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.navigationItem.title = "Help"
         // Do any additional setup after loading the view.
         
-//        self.locationManager = CLLocationManager()
-//        self.locationManager.delegate = self
-//        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        var refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "updateLocation")
+        self.navigationItem.rightBarButtonItem = refreshButton
         
-        self.emergencyServiceProviderTitleLabel = UILabel(frame: CGRectZero)
-        self.emergencyServiceProviderTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.emergencyServiceProviderTitleLabel.text = "The Trevor Project"
-        self.emergencyServiceProviderTitleLabel.numberOfLines = 0
-        self.view.addSubview(self.emergencyServiceProviderTitleLabel)
-        
-        self.emergencyServiceProviderDescriptionLabel = UILabel(frame: CGRectZero)
-        self.emergencyServiceProviderDescriptionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.emergencyServiceProviderDescriptionLabel.text = "Trevor Lifeline is a crisis hotline offered by The Trevor Project that lets lesbian, gay, bisexual, transgender, and questioning youth talk to trained volunteers when they’re in need."
-        self.emergencyServiceProviderDescriptionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 13.0)
-        self.emergencyServiceProviderDescriptionLabel.numberOfLines = 0
-        self.view.addSubview(self.emergencyServiceProviderDescriptionLabel)
-
-        
-        
-        self.emergencyActionView = UIView(frame:CGRectZero)
-        self.emergencyActionView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.emergencyActionView.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        self.view.addSubview(self.emergencyActionView)
-        
-        self.emergencyCallButton = UIButton(frame: CGRectZero)
-        self.emergencyCallButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.emergencyCallButton.setTitle("Call", forState: UIControlState.Normal)
-        self.emergencyCallButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16.0)
-        self.emergencyCallButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        self.emergencyCallButton.layer.borderWidth = 1
-        self.emergencyCallButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.emergencyCallButton.layer.cornerRadius = 8
-        self.emergencyActionView.addSubview(self.emergencyCallButton)
-        
-        self.emergencyMessageButton = UIButton(frame: CGRectZero)
-        self.emergencyMessageButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.emergencyMessageButton.setTitle("Message", forState: UIControlState.Normal)
-        self.emergencyMessageButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        self.emergencyMessageButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16.0)
-        self.emergencyMessageButton.layer.borderWidth = 1
-        self.emergencyMessageButton.layer.borderColor = UIColor.blackColor().CGColor
-        self.emergencyMessageButton.layer.cornerRadius = 8
-        self.emergencyActionView.addSubview(self.emergencyMessageButton)
         
         self.resourcesTableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
         self.resourcesTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.resourcesTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         self.resourcesTableView.delegate = self
         self.resourcesTableView.dataSource = self
         self.resourcesTableView.rowHeight = UITableViewAutomaticDimension
+        self.resourcesTableView.registerClass(CrisisHelpTableViewCell.self, forCellReuseIdentifier: "CrisisHelpTableViewCell")
+        self.resourcesTableView.registerClass(ResourceTableViewCell.self, forCellReuseIdentifier: "ResourceTableViewCell")
+        self.resourcesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.view.addSubview(self.resourcesTableView)
         
         var metricsDictionary = ["sideMargin":15, "buttonsSideMargin":(UIScreen.mainScreen().bounds.width - (130 * 2 + 18))/2]
-        var viewsDictionary = ["emergencyServiceProviderTitleLabel":self.emergencyServiceProviderTitleLabel, "emergencyServiceProviderDescriptionLabel":self.emergencyServiceProviderDescriptionLabel, "emergencyActionView":self.emergencyActionView, "emergencyCallButton":self.emergencyCallButton, "emergencyMessageButton":self.emergencyMessageButton, "resourcesTableView":self.resourcesTableView]
+        var viewsDictionary = ["resourcesTableView":self.resourcesTableView]
         
-        var providerLabelCenterXConstraint = NSLayoutConstraint(item: self.emergencyServiceProviderTitleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
-        self.view.addConstraint(providerLabelCenterXConstraint)
-        
-        var topHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[emergencyServiceProviderTitleLabel]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        self.view.addConstraints(topHorizontalConstraints)
-        
-        var secondHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[emergencyServiceProviderDescriptionLabel]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        self.view.addConstraints(secondHorizontalConstraints)
-        
-        var buttonsHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-buttonsSideMargin-[emergencyCallButton(130)]-18-[emergencyMessageButton(130)]-buttonsSideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        self.emergencyActionView.addConstraints(buttonsHorizontalConstraints)
-        
-        var callButtonVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[emergencyCallButton(36)]-15-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        self.emergencyActionView.addConstraints(callButtonVerticalConstraints)
-
-        var messageButtonVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[emergencyMessageButton(36)]-15-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        self.emergencyActionView.addConstraints(messageButtonVerticalConstraints)
-
-//        var buttonsConstraint = NSLayoutConstraint(item: self.emergencyCallButton, attribute: NSLayoutAttribute., relatedBy: NSLayoutRelation.Equal, toItem: self.emergencyMessageButton, attribute: NSLayoutAttribute.CenterXWithinMargins, multiplier: 1.0, constant: 0)
-//        self.emergencyActionView.addConstraint(buttonsConstraint)
         
         var tableViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[resourcesTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var emergencyActionViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[emergencyActionView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-84-[emergencyServiceProviderTitleLabel]-4-[emergencyServiceProviderDescriptionLabel]-15-[emergencyActionView]-15-[resourcesTableView]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[resourcesTableView]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
 
-        self.view.addConstraints(emergencyActionViewHorizontalConstraints)
         self.view.addConstraints(tableViewHorizontalConstraints)
         self.view.addConstraints(verticalConstraints)
         
-        PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
-            if error == nil {
-                // do something with the new geoPoint
-                println(geoPoint.description)
-                var emergencyServiceProviderQuery = PFQuery(className: "Organization")
-                emergencyServiceProviderQuery.whereKey("city", equalTo: PFUser.currentUser()["city"])
-                emergencyServiceProviderQuery.whereKey("state", equalTo: PFUser.currentUser()["state"])
-                emergencyServiceProviderQuery.whereKey("type", equalTo: "crisis-handling")
-                emergencyServiceProviderQuery.limit = 1
-                emergencyServiceProviderQuery.findObjectsInBackgroundWithBlock{
-                    (objects:[AnyObject]!, error:NSError!) -> Void in
-                    if error == nil{
-                        if objects.count > 0{
-                            self.emergencyServiceProvider = objects[0] as! PFObject
-                            self.emergencyServiceProviderDescriptionLabel.text = self.emergencyServiceProvider["description"] as? String
-                            self.emergencyServiceProviderTitleLabel.text = self.emergencyServiceProvider["name"] as? String
-                            println(self.emergencyServiceProvider.description)
-                        }
-                        var query = PFQuery(className: "Organization")
-                        query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: 2.5)
-                        query.whereKey("type", equalTo: "community")
-                        query.orderByAscending("location")
-                        query.findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
-                            if error == nil{
-                                self.organizations = objects as! [PFObject]
-                                self.resourcesTableView.reloadData()
-                            }
-                            else{
-                                
-                            }
-                        }
-
-                    }
-                    else{
-                    
-                    }
-                }
-            }
-        }
+        self.updateLocation()
 
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+            return 1 + self.organizationsArrayKey.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var organization = self.organizations[indexPath.row]
-        var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "default")
-        cell.textLabel?.text = organization["name"] as? String
-        return cell
+        if indexPath.section == 0{
+            var cell = tableView.dequeueReusableCellWithIdentifier("CrisisHelpTableViewCell") as! CrisisHelpTableViewCell
+            cell.logoImageView.image = UIImage(named: self.emergencyServiceProvider["logoImage"] as! String)
+            cell.descriptionLabel.text = self.emergencyServiceProvider["description"] as? String
+            var callButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "call")
+            cell.callButton.addGestureRecognizer(callButtonTapGestureRecognizer)
+            return cell
+        }
+        else if indexPath.section == tableView.numberOfSections() - 1{
+            var organization = self.otherOrganizationsNearby[indexPath.row]
+            var cell = tableView.dequeueReusableCellWithIdentifier("ResourceTableViewCell") as! ResourceTableViewCell
+            cell.logoImageView.image = UIImage(named: organization["logoImage"] as! String)
+            cell.descriptionLabel.text = organization["description"] as? String
+            return cell
+        }
+        else{
+            var key = self.organizationsArrayKey[indexPath.section - 1]
+            var organization = (self.organizations[key] as [PFObject]!)[indexPath.row]
+            var cell = tableView.dequeueReusableCellWithIdentifier("ResourceTableViewCell") as! ResourceTableViewCell
+            cell.logoImageView.image = UIImage(named: organization["logoImage"] as! String)
+            cell.descriptionLabel.text = organization["description"] as? String
+            return cell
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section{
+        case 0: return nil
+        case 1: return "Relevant Resources"
+        case 2: return "Other Resources"
+        default: return nil
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.organizations.count
+        if section == 0{
+            if self.emergencyServiceProvider != nil{
+                return 1
+            }
+            else{
+                return 0
+            }
+        }
+        else if section == tableView.numberOfSections() - 1{
+            return self.otherOrganizationsNearby.count
+        }
+        else{
+            var key = self.organizationsArrayKey[section - 1]
+            return (self.organizations[key] as [PFObject]!).count
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 || section == 2{
+            var headerView = UIView()
+            headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+            var separator = UIView(frame: CGRectZero)
+            separator.setTranslatesAutoresizingMaskIntoConstraints(false)
+            separator.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
+            headerView.addSubview(separator)
+            var titleLabel = UILabel(frame: CGRectZero)
+            titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+            titleLabel.textAlignment = NSTextAlignment.Center
+            titleLabel.font = UIFont(name: "HelveticaNeue-CondensedBold", size: 13.0)
+            switch section{
+            case 0: titleLabel.text = nil
+            case 1: titleLabel.text = "RELEVANT RESOURCES"
+            case 2: titleLabel.text = "OTHER RESOURCES"
+            default: return nil
+            }
+            
+            headerView.addSubview(titleLabel)
+            
+            var metricsDictionary = ["sideMargin":7.5, "barWidth":(UIScreen.mainScreen().bounds.width - 7.5 * 4 - 100)/2]
+            var viewsDictionary = ["titleLabel":titleLabel, "separator":separator]
+            
+            var centerHConstraint = NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+            headerView.addConstraint(centerHConstraint)
+            
+            var centerYConstraint = NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
+            headerView.addConstraint(centerYConstraint)
+            
+            var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            headerView.addConstraints(horizontalConstraints)
+            var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[separator(0.75)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            headerView.addConstraints(verticalConstraints)
+
+            return headerView
+        }
+        else{
+            return nil
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section{
+        case 0: return 0
+        case 1: return 26
+        case 2: return 26
+        default: return 0
+        }
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -181,6 +173,11 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     }
     
 
+    func call(){
+        var phoneNumber = self.emergencyServiceProvider["phoneNumber"] as! String
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(phoneNumber)")!)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -190,5 +187,70 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         // Pass the selected object to the new view controller.
     }
     */
+    func updateLocation(){
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                var emergencyServiceProviderQuery = PFQuery(className: "Organization")
+                //                emergencyServiceProviderQuery.whereKey("city", equalTo: PFUser.currentUser()["city"])
+                //                emergencyServiceProviderQuery.whereKey("state", equalTo: PFUser.currentUser()["state"])
+                emergencyServiceProviderQuery.whereKey("type", equalTo: "crisis-handling")
+                emergencyServiceProviderQuery.limit = 1
+                emergencyServiceProviderQuery.findObjectsInBackgroundWithBlock{
+                    (objects:[AnyObject]!, error:NSError!) -> Void in
+                    if error == nil{
+                        if objects.count > 0{
+                            self.emergencyServiceProvider = objects[0] as! PFObject
+                            //                            self.emergencyServiceProviderDescriptionLabel.text = self.emergencyServiceProvider["description"] as? String
+                            //                            self.emergencyServiceProviderTitleLabel.text = self.emergencyServiceProvider["name"] as? String
+                        }
+                        var query = PFQuery(className: "Organization")
+                        query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: 10.0)
+                        query.whereKey("type", equalTo: "community")
+                        query.orderByAscending("location")
+                        query.findObjectsInBackgroundWithBlock{
+                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            if error == nil{
+                                self.organizations.removeAll(keepCapacity: false)
+                                self.organizationsArrayKey.removeAll(keepCapacity: false)
+                                self.otherOrganizationsNearby.removeAll(keepCapacity: false)
+                                for object in objects{
+                                    var weight = 0
+                                    for parameter in self.backgroundParameterArray{
+                                        if contains(object["tags"] as! [String], PFUser.currentUser()[parameter] as! String){
+                                            ++weight
+                                            var currentValue:[PFObject] = []
+                                            if !contains(self.organizationsArrayKey, parameter){
+                                                self.organizationsArrayKey.append(parameter)
+                                            }
+                                            else{
+                                                currentValue = self.organizations[parameter] as [PFObject]!
+                                            }
+                                            currentValue.append(object as! PFObject)
+                                            self.organizations.updateValue(currentValue, forKey: parameter)
+                                        }
+                                    }
+                                    println(weight)
+                                    if weight == 0{
+                                        self.otherOrganizationsNearby.append(object as! PFObject)
+                                    }
+                                    
+                                }
+                                self.resourcesTableView.reloadData()
+                            }
+                            else{
+                                
+                            }
+                        }
+                        
+                    }
+                    else{
+                        
+                    }
+                }
+            }
+        }
 
+    }
 }

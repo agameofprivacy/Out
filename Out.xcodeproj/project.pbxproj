@@ -166,6 +166,8 @@
 		2CD596591ADF6A5F0010930A /* HelpResourcesTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */; };
 		2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */; };
 		2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */; };
+		2CE673211AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE673201AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift */; };
+		2CE673231AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE673221AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift */; };
 		2CE865E919FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */; };
 		2CF4791B1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */; };
 /* End PBXBuildFile section */
@@ -428,6 +430,8 @@
 		2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpResourcesTabViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1919F5617700D87841 /* ChallengeGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryViewController.swift; sourceTree = "<group>"; };
 		2CDA9D1B19F5655200D87841 /* ChallengeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		2CE673201AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrisisHelpTableViewCell.swift; sourceTree = "<group>"; };
+		2CE673221AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
 		2CE865E819FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldsAndActivatorTableViewCell.swift; sourceTree = "<group>"; };
 		2CF4791A1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityContentPreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -883,6 +887,8 @@
 			isa = PBXGroup;
 			children = (
 				2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */,
+				2CE673201AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift */,
+				2CE673221AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift */,
 				2C9CA6121A05AF2D00BC4D93 /* HelpTabViewController.swift */,
 				2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */,
 				2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */,
@@ -1151,6 +1157,7 @@
 				2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */,
 				2C0D54781ACB00910045B929 /* XLFormViewController.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
+				2CE673211AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
 				2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */,
 				2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */,
@@ -1159,6 +1166,7 @@
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
 				2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */,
 				2C0D547C1ACB00910045B929 /* NSArray+XLFormAdditions.m in Sources */,
+				2CE673231AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift in Sources */,
 				2C67340E1ADACFFB00A31424 /* PersonDetailTableViewCell.swift in Sources */,
 				2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */,
 				2CA435FF19F48C1000DC1C6E /* BoolPickerTableViewCell.swift in Sources */,
