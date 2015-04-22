@@ -99,6 +99,7 @@
 		2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */; };
 		2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
+		2C8093711AE5C61700AC7437 /* ResourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
 		2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */; };
 		2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8592C01A14082600272769 /* ActivityDetailViewController.swift */; };
@@ -346,6 +347,7 @@
 		2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
 		2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleFilterViewController.swift; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
+		2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDetailViewController.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		2C85027F1A11A43F00F35DAB /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		2C8592C01A14082600272769 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 			children = (
 				2CD596581ADF6A5F0010930A /* HelpResourcesTabViewController.swift */,
 				2CE673201AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift */,
+				2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */,
 				2CE673221AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift */,
 				2C9CA6121A05AF2D00BC4D93 /* HelpTabViewController.swift */,
 				2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */,
@@ -1227,6 +1230,7 @@
 				2C0D54771ACB00910045B929 /* XLFormOptionsViewController.m in Sources */,
 				2C0D54831ACB00910045B929 /* XLFormRegexValidator.m in Sources */,
 				2CD5302D19FB42E500D38896 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				2C8093711AE5C61700AC7437 /* ResourceDetailViewController.swift in Sources */,
 				2C0D546B1ACB00910045B929 /* XLFormDatePickerCell.m in Sources */,
 				2CD5302F19FB42E500D38896 /* TPKeyboardAvoidingTableView.m in Sources */,
 				2CBCC8FE1AC9F87F00E992D9 /* SLKTypingIndicatorView.m in Sources */,

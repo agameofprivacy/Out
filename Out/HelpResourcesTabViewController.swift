@@ -20,13 +20,20 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     
     var resourcesTableView:TPKeyboardAvoidingTableView!
     
+    var selectedResourceItem:PFObject!
+    
+    var currentGeoPoint:PFGeoPoint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Help"
+        self.navigationItem.title = "Resources"
         // Do any additional setup after loading the view.
         
-        var refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "updateLocation")
-        self.navigationItem.rightBarButtonItem = refreshButton
+        var searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "updateLocation")
+        self.navigationItem.rightBarButtonItem = searchButton
+        
+        var mapButton = UIBarButtonItem(image: UIImage(named: "mapIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showOnMap")
+        self.navigationItem.leftBarButtonItem = mapButton
         
         
         self.resourcesTableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
@@ -37,6 +44,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.resourcesTableView.registerClass(CrisisHelpTableViewCell.self, forCellReuseIdentifier: "CrisisHelpTableViewCell")
         self.resourcesTableView.registerClass(ResourceTableViewCell.self, forCellReuseIdentifier: "ResourceTableViewCell")
         self.resourcesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.resourcesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(self.resourcesTableView)
         
         var metricsDictionary = ["sideMargin":15, "buttonsSideMargin":(UIScreen.mainScreen().bounds.width - (130 * 2 + 18))/2]
@@ -144,7 +152,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             
             var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
             headerView.addConstraints(horizontalConstraints)
-            var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[separator(0.75)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[titleLabel]-6-[separator(0.75)]-6-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
             headerView.addConstraints(verticalConstraints)
 
             return headerView
@@ -157,8 +165,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section{
         case 0: return 0
-        case 1: return 26
-        case 2: return 26
+        case 1: return 38
+        case 2: return 38
         default: return 0
         }
     }
@@ -172,25 +180,47 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == tableView.numberOfSections() - 1{
+            self.selectedResourceItem = self.otherOrganizationsNearby[indexPath.row]
+            self.performSegueWithIdentifier("showResourceDetail", sender: self)
+        }
+        else if indexPath.section != 0 {
+            var key = self.organizationsArrayKey[indexPath.section - 1]
+            self.selectedResourceItem = (self.organizations[key] as [PFObject]!)[indexPath.row]
+            self.performSegueWithIdentifier("showResourceDetail", sender: self)
+        }
+        else if indexPath.section == 0{
+            self.selectedResourceItem = self.emergencyServiceProvider
+            println("showEmergencyDetail")
+        }
+    }
+    
+    
     func call(){
         var phoneNumber = self.emergencyServiceProvider["phoneNumber"] as! String
         UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(phoneNumber)")!)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showResourceDetail"{
+            var newVC = segue.destinationViewController as! ResourceDetailViewController
+            newVC.resourceItem = self.selectedResourceItem
+            newVC.currentGeoPoint = self.currentGeoPoint
+        }
+        
     }
-    */
+    
+    func showOnMap(){
+        println("show on map")
+    }
+
+
     func updateLocation(){
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
             if error == nil {
+                self.currentGeoPoint = geoPoint
                 // do something with the new geoPoint
                 var emergencyServiceProviderQuery = PFQuery(className: "Organization")
                 //                emergencyServiceProviderQuery.whereKey("city", equalTo: PFUser.currentUser()["city"])

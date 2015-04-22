@@ -69,8 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         
         
         return true
-
-        
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
@@ -742,6 +742,24 @@
             </objects>
             <point key="canvasLocation" x="4218" y="5457"/>
         </scene>
+        <!--Resource Detail View Controller-->
+        <scene sceneID="2NB-2K-GZ8">
+            <objects>
+                <viewController id="JxY-UL-P0E" customClass="ResourceDetailViewController" customModule="Out" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vlz-es-XEy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wt9-Mg-BrX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KaU-SO-ox3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F1f-CK-hKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-358" y="3469"/>
+        </scene>
         <!--Help Resources Tab View Controller-->
         <scene sceneID="XAc-dT-EHc">
             <objects>
@@ -756,16 +774,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="0dg-KU-H5F"/>
+                    <connections>
+                        <segue destination="JxY-UL-P0E" kind="show" identifier="showResourceDetail" id="6cG-a3-Asb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oC2-GI-J9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="292" y="3469"/>
         </scene>
-        <!--Help-->
+        <!--Resources-->
         <scene sceneID="Qwj-ko-ZxG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wpT-2B-Svu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Help" id="Tb8-bY-Q5E"/>
+                    <tabBarItem key="tabBarItem" title="Resources" id="Tb8-bY-Q5E"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="38r-N6-VIW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

@@ -73,7 +73,7 @@ class ResourceTableViewCell: UITableViewCell {
 //        self.paperView.addSubview(self.messageButton)
 //        var buttonWidth = (UIScreen.mainScreen().bounds.width - 20 * 3 - 15)/2
         
-        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":12]
+        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6]
         var viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "descriptionLabel":self.descriptionLabel]
         
         var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
