@@ -28,12 +28,13 @@ class ResourceDetailViewController: UIViewController {
         
         self.mapView = MKMapView(frame: CGRectZero)
         self.mapView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mapView.showsUserLocation = true
         self.view.addSubview(self.mapView)
 
         var resourceItemGeoPoint = self.resourceItem["location"] as! PFGeoPoint
         var mapWidth:CLLocationDistance = 1000
         var mapHeight:CLLocationDistance = 1000
-        self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: resourceItemGeoPoint.latitude, longitude: resourceItemGeoPoint.longitude), mapWidth, mapHeight), animated: true)
+        self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: resourceItemGeoPoint.latitude, longitude: resourceItemGeoPoint.longitude), mapWidth, mapHeight), animated: false)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2DMake(resourceItemGeoPoint.latitude, resourceItemGeoPoint.longitude)

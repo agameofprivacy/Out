@@ -52,6 +52,17 @@
 		2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23B919E87B91006975DA /* StoreKit.framework */; };
 		2C1C23BC19E87BA0006975DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1C23BB19E87BA0006975DA /* SystemConfiguration.framework */; };
 		2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */; };
+		2C2697141AE744D900FD98CA /* CCHCenterOfMassMapClusterer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2696FC1AE744D900FD98CA /* CCHCenterOfMassMapClusterer.m */; };
+		2C2697151AE744D900FD98CA /* CCHFadeInOutMapAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2696FE1AE744D900FD98CA /* CCHFadeInOutMapAnimator.m */; };
+		2C2697161AE744D900FD98CA /* CCHMapClusterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697011AE744D900FD98CA /* CCHMapClusterAnnotation.m */; };
+		2C2697171AE744D900FD98CA /* CCHMapClusterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697031AE744D900FD98CA /* CCHMapClusterController.m */; };
+		2C2697181AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697051AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.m */; };
+		2C2697191AE744D900FD98CA /* CCHMapClusterControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697081AE744D900FD98CA /* CCHMapClusterControllerUtils.m */; };
+		2C26971A1AE744D900FD98CA /* CCHMapClusterOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26970B1AE744D900FD98CA /* CCHMapClusterOperation.m */; };
+		2C26971B1AE744D900FD98CA /* CCHMapTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26970D1AE744D900FD98CA /* CCHMapTree.m */; };
+		2C26971C1AE744D900FD98CA /* CCHMapTreeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C26970F1AE744D900FD98CA /* CCHMapTreeUtils.m */; };
+		2C26971D1AE744D900FD98CA /* CCHMapViewDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697111AE744D900FD98CA /* CCHMapViewDelegateProxy.m */; };
+		2C26971E1AE744D900FD98CA /* CCHNearCenterMapClusterer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2697131AE744D900FD98CA /* CCHNearCenterMapClusterer.m */; };
 		2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */; };
 		2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
@@ -274,6 +285,31 @@
 		2C1CD0BD1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusActivityTableViewCell.swift; sourceTree = "<group>"; };
 		2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
+		2C2696FB1AE744D900FD98CA /* CCHCenterOfMassMapClusterer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHCenterOfMassMapClusterer.h; sourceTree = "<group>"; };
+		2C2696FC1AE744D900FD98CA /* CCHCenterOfMassMapClusterer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHCenterOfMassMapClusterer.m; sourceTree = "<group>"; };
+		2C2696FD1AE744D900FD98CA /* CCHFadeInOutMapAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHFadeInOutMapAnimator.h; sourceTree = "<group>"; };
+		2C2696FE1AE744D900FD98CA /* CCHFadeInOutMapAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHFadeInOutMapAnimator.m; sourceTree = "<group>"; };
+		2C2696FF1AE744D900FD98CA /* CCHMapAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapAnimator.h; sourceTree = "<group>"; };
+		2C2697001AE744D900FD98CA /* CCHMapClusterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterAnnotation.h; sourceTree = "<group>"; };
+		2C2697011AE744D900FD98CA /* CCHMapClusterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapClusterAnnotation.m; sourceTree = "<group>"; };
+		2C2697021AE744D900FD98CA /* CCHMapClusterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterController.h; sourceTree = "<group>"; };
+		2C2697031AE744D900FD98CA /* CCHMapClusterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapClusterController.m; sourceTree = "<group>"; };
+		2C2697041AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterControllerDebugPolygon.h; sourceTree = "<group>"; };
+		2C2697051AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapClusterControllerDebugPolygon.m; sourceTree = "<group>"; };
+		2C2697061AE744D900FD98CA /* CCHMapClusterControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterControllerDelegate.h; sourceTree = "<group>"; };
+		2C2697071AE744D900FD98CA /* CCHMapClusterControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterControllerUtils.h; sourceTree = "<group>"; };
+		2C2697081AE744D900FD98CA /* CCHMapClusterControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapClusterControllerUtils.m; sourceTree = "<group>"; };
+		2C2697091AE744D900FD98CA /* CCHMapClusterer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterer.h; sourceTree = "<group>"; };
+		2C26970A1AE744D900FD98CA /* CCHMapClusterOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapClusterOperation.h; sourceTree = "<group>"; };
+		2C26970B1AE744D900FD98CA /* CCHMapClusterOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapClusterOperation.m; sourceTree = "<group>"; };
+		2C26970C1AE744D900FD98CA /* CCHMapTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapTree.h; sourceTree = "<group>"; };
+		2C26970D1AE744D900FD98CA /* CCHMapTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapTree.m; sourceTree = "<group>"; };
+		2C26970E1AE744D900FD98CA /* CCHMapTreeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapTreeUtils.h; sourceTree = "<group>"; };
+		2C26970F1AE744D900FD98CA /* CCHMapTreeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapTreeUtils.m; sourceTree = "<group>"; };
+		2C2697101AE744D900FD98CA /* CCHMapViewDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHMapViewDelegateProxy.h; sourceTree = "<group>"; };
+		2C2697111AE744D900FD98CA /* CCHMapViewDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHMapViewDelegateProxy.m; sourceTree = "<group>"; };
+		2C2697121AE744D900FD98CA /* CCHNearCenterMapClusterer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHNearCenterMapClusterer.h; sourceTree = "<group>"; };
+		2C2697131AE744D900FD98CA /* CCHNearCenterMapClusterer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCHNearCenterMapClusterer.m; sourceTree = "<group>"; };
 		2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleController.swift; sourceTree = "<group>"; };
 		2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -622,6 +658,38 @@
 			name = "Canvas TableViewCells";
 			sourceTree = "<group>";
 		};
+		2C2696FA1AE744D900FD98CA /* CCHMapClusterController */ = {
+			isa = PBXGroup;
+			children = (
+				2C2696FB1AE744D900FD98CA /* CCHCenterOfMassMapClusterer.h */,
+				2C2696FC1AE744D900FD98CA /* CCHCenterOfMassMapClusterer.m */,
+				2C2696FD1AE744D900FD98CA /* CCHFadeInOutMapAnimator.h */,
+				2C2696FE1AE744D900FD98CA /* CCHFadeInOutMapAnimator.m */,
+				2C2696FF1AE744D900FD98CA /* CCHMapAnimator.h */,
+				2C2697001AE744D900FD98CA /* CCHMapClusterAnnotation.h */,
+				2C2697011AE744D900FD98CA /* CCHMapClusterAnnotation.m */,
+				2C2697021AE744D900FD98CA /* CCHMapClusterController.h */,
+				2C2697031AE744D900FD98CA /* CCHMapClusterController.m */,
+				2C2697041AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.h */,
+				2C2697051AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.m */,
+				2C2697061AE744D900FD98CA /* CCHMapClusterControllerDelegate.h */,
+				2C2697071AE744D900FD98CA /* CCHMapClusterControllerUtils.h */,
+				2C2697081AE744D900FD98CA /* CCHMapClusterControllerUtils.m */,
+				2C2697091AE744D900FD98CA /* CCHMapClusterer.h */,
+				2C26970A1AE744D900FD98CA /* CCHMapClusterOperation.h */,
+				2C26970B1AE744D900FD98CA /* CCHMapClusterOperation.m */,
+				2C26970C1AE744D900FD98CA /* CCHMapTree.h */,
+				2C26970D1AE744D900FD98CA /* CCHMapTree.m */,
+				2C26970E1AE744D900FD98CA /* CCHMapTreeUtils.h */,
+				2C26970F1AE744D900FD98CA /* CCHMapTreeUtils.m */,
+				2C2697101AE744D900FD98CA /* CCHMapViewDelegateProxy.h */,
+				2C2697111AE744D900FD98CA /* CCHMapViewDelegateProxy.m */,
+				2C2697121AE744D900FD98CA /* CCHNearCenterMapClusterer.h */,
+				2C2697131AE744D900FD98CA /* CCHNearCenterMapClusterer.m */,
+			);
+			path = CCHMapClusterController;
+			sourceTree = "<group>";
+		};
 		2C2CF7061A156E2600B8C60E /* SlackTextViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +815,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C2696FA1AE744D900FD98CA /* CCHMapClusterController */,
 				2C0D541B1ACB00910045B929 /* XL */,
 				2C8CA1131AC5A20E00CD930C /* CBAutoScrollLabel */,
 				2C37DFE81AB9FB33002367C9 /* BBBadgeBarButtonItem */,
@@ -1144,6 +1213,7 @@
 				2C0D547E1ACB00910045B929 /* UIView+XLFormAdditions.m in Sources */,
 				2C8C3EF71AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift in Sources */,
 				2C4F87EC1A7488B000D10E1B /* ChallengeRecordTableViewCell.swift in Sources */,
+				2C2697161AE744D900FD98CA /* CCHMapClusterAnnotation.m in Sources */,
 				2C8CA1161AC5A20E00CD930C /* CBAutoScrollLabel.m in Sources */,
 				2C0D54721ACB00910045B929 /* XLFormStepCounterCell.m in Sources */,
 				2CCD6C6A1ACF40CD00143FB9 /* ComposeChallengeReviewViewController.swift in Sources */,
@@ -1157,15 +1227,19 @@
 				2C0D54791ACB00910045B929 /* XLFormDescriptor.m in Sources */,
 				2C8C3EFB1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift in Sources */,
 				2C5C8CAA1ACC738D000E8650 /* StepTitleTableViewCell.swift in Sources */,
+				2C26971B1AE744D900FD98CA /* CCHMapTree.m in Sources */,
 				2C37DFEB1AB9FB33002367C9 /* BBBadgeBarButtonItem.m in Sources */,
 				2C0D54781ACB00910045B929 /* XLFormViewController.m in Sources */,
 				2CA2264819F5DF800018266F /* GallerySelectCollectionViewFlowLayout.m in Sources */,
 				2CE673211AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift in Sources */,
+				2C26971D1AE744D900FD98CA /* CCHMapViewDelegateProxy.m in Sources */,
 				2CA435F319F48B5600DC1C6E /* EventInfoTableViewCell.swift in Sources */,
 				2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */,
 				2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */,
 				2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */,
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
+				2C2697191AE744D900FD98CA /* CCHMapClusterControllerUtils.m in Sources */,
+				2C26971C1AE744D900FD98CA /* CCHMapTreeUtils.m in Sources */,
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,
 				2C8592C11A14082600272769 /* ActivityDetailViewController.swift in Sources */,
 				2C0D547C1ACB00910045B929 /* NSArray+XLFormAdditions.m in Sources */,
@@ -1213,6 +1287,7 @@
 				2CA435F919F48B9C00DC1C6E /* TextFieldInputTableViewCell.swift in Sources */,
 				2C0D546F1ACB00910045B929 /* XLFormSegmentedCell.m in Sources */,
 				2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */,
+				2C2697151AE744D900FD98CA /* CCHFadeInOutMapAnimator.m in Sources */,
 				2C0D547D1ACB00910045B929 /* NSObject+XLFormAdditions.m in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
 				2CD596591ADF6A5F0010930A /* HelpResourcesTabViewController.swift in Sources */,
@@ -1239,11 +1314,13 @@
 				2CE865E919FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift in Sources */,
 				2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */,
 				2C9CA6171A05B58200BC4D93 /* PersonTableViewCell.swift in Sources */,
+				2C2697171AE744D900FD98CA /* CCHMapClusterController.m in Sources */,
 				2CD5303019FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				2C6E1BA91ACC9BDF009E9BAA /* ChallengeFeedbackViewController.swift in Sources */,
 				2C0D54811ACB00910045B929 /* XLFormRowNavigationAccessoryView.m in Sources */,
 				2C5C56B41A106E6200B8EBC7 /* PNPieChart.m in Sources */,
 				2CA435F719F48B8100DC1C6E /* CallTableViewCell.swift in Sources */,
+				2C2697141AE744D900FD98CA /* CCHCenterOfMassMapClusterer.m in Sources */,
 				2C9D633A1A09441A00E7E069 /* ActivityTableViewCell.swift in Sources */,
 				2C0D54681ACB00910045B929 /* XLFormButtonCell.m in Sources */,
 				2CA435ED19F48A8A00DC1C6E /* PromptAndAnswerTableViewCell.swift in Sources */,
@@ -1252,9 +1329,11 @@
 				2CB1710119F2C7860086C95F /* ChallengeCardsCollectionViewFlowLayout.m in Sources */,
 				2C93EE511A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift in Sources */,
 				2C5C56B31A106E6200B8EBC7 /* PNLineChartDataItem.m in Sources */,
+				2C26971A1AE744D900FD98CA /* CCHMapClusterOperation.m in Sources */,
 				2CD5302E19FB42E500D38896 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				2C0D54821ACB00910045B929 /* XLFormTextView.m in Sources */,
 				2C0D546C1ACB00910045B929 /* XLFormInlineSelectorCell.m in Sources */,
+				2C26971E1AE744D900FD98CA /* CCHNearCenterMapClusterer.m in Sources */,
 				2C5C56AF1A106E6200B8EBC7 /* PNCircleChart.m in Sources */,
 				2C0D54761ACB00910045B929 /* XLFormOptionsObject.m in Sources */,
 				2CB1710219F2C7860086C95F /* ChallengesTabViewController.swift in Sources */,
@@ -1270,6 +1349,7 @@
 				2C0D54801ACB00910045B929 /* XLFormRightImageButton.m in Sources */,
 				2C6FFAEC1A19B3160043F912 /* ICETutorialController.m in Sources */,
 				2C5C56B21A106E6200B8EBC7 /* PNLineChartData.m in Sources */,
+				2C2697181AE744D900FD98CA /* CCHMapClusterControllerDebugPolygon.m in Sources */,
 				2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */,
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
 				2CB7E4181A15A3D700D55CF8 /* DTTimePeriodChain.m in Sources */,

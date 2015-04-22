@@ -23,7 +23,7 @@ class ResourceTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = nil
+        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -78,7 +78,7 @@ class ResourceTableViewCell: UITableViewCell {
         
         var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-largeVerticalPadding-[paperView]-largeVerticalPadding-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[paperView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(paperHorizontalConstraints)
         contentView.addConstraints(paperVerticalConstraints)
@@ -87,7 +87,7 @@ class ResourceTableViewCell: UITableViewCell {
         
         var descriptionLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[logoImageView(105)]-10-[descriptionLabel]-30-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[logoImageView(105)]-10-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(logoImageHorizontalConstraints)
         contentView.addConstraints(descriptionLabelHorizontalConstraints)
