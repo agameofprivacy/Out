@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate{
 
 
     var organizations:[String:[PFObject]] = NSDictionary() as! [String:[PFObject]]
@@ -23,6 +23,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     var mapHeight:CLLocationDistance = 5000
 //    var locationManager:CLLocationManager!
     
+    var resourcesTableViewController:UITableViewController = UITableViewController()
     var resourcesTableView:TPKeyboardAvoidingTableView!
     
     var selectedResourceItem:PFObject!
@@ -45,7 +46,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         var mapButton = UIBarButtonItem(image: UIImage(named: "mapIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showOnMap")
         self.navigationItem.leftBarButtonItem = mapButton
         
-        
+        self.addChildViewController(self.resourcesTableViewController)
+
         self.resourcesTableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
         self.resourcesTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.resourcesTableView.delegate = self
@@ -55,11 +57,11 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.resourcesTableView.registerClass(ResourceTableViewCell.self, forCellReuseIdentifier: "ResourceTableViewCell")
         self.resourcesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.resourcesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.resourcesTableViewController.tableView = self.resourcesTableView
+        self.resourcesTableViewController.refreshControl = UIRefreshControl()
+        self.resourcesTableViewController.refreshControl!.addTarget(self, action: "updateLocation", forControlEvents: UIControlEvents.ValueChanged)
+        self.resourcesTableViewController.refreshControl?.attributedTitle = NSAttributedString(string: "update location")
         self.view.addSubview(self.resourcesTableView)
-        
-        self.updateLocationRefreshControl = UIRefreshControl()
-        self.updateLocationRefreshControl.addTarget(self, action: "updateLocation", forControlEvents: UIControlEvents.ValueChanged)
-        self.resourcesTableView.addSubview(self.updateLocationRefreshControl)
         
         var metricsDictionary = ["sideMargin":15, "buttonsSideMargin":(UIScreen.mainScreen().bounds.width - (130 * 2 + 18))/2]
         var viewsDictionary = ["resourcesTableView":self.resourcesTableView]
@@ -76,6 +78,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.mapView.hidden = true
         self.mapView.showsUserLocation = true
         self.view.addSubview(self.mapView)
+        
+//        self.mapClusterController = CCHMapClusterController(mapView: self.mapView)
 
         
         self.updateLocation()
@@ -147,7 +151,6 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 || section == 2 || section == 0{
             var headerView = UIView()
             headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
             var separator = UIView(frame: CGRectZero)
@@ -166,9 +169,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 else{
                     titleLabel.text = nil
                 }
-            case 1: titleLabel.text = "RELEVANT RESOURCES"
-            case 2: titleLabel.text = "OTHER RESOURCES"
-            default: return nil
+            case tableView.numberOfSections() - 1: titleLabel.text = "OTHER RESOURCES"
+            default: titleLabel.text = self.organizationsArrayKey[section - 1]
             }
             
             headerView.addSubview(titleLabel)
@@ -188,10 +190,6 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             headerView.addConstraints(verticalConstraints)
 
             return headerView
-        }
-        else{
-            return nil
-        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -284,7 +282,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
 
 
     func updateLocation(){
-        self.updateLocationRefreshControl.beginRefreshing()
+        self.resourcesTableViewController.refreshControl!.beginRefreshing()
         PFGeoPoint.geoPointForCurrentLocationInBackground {
             (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
             if error == nil {
@@ -305,7 +303,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                             var annotation = MKPointAnnotation()
                             annotation.coordinate = CLLocationCoordinate2DMake((self.emergencyServiceProvider["location"] as! PFGeoPoint).latitude, (self.emergencyServiceProvider["location"] as! PFGeoPoint).longitude)
                             annotation.title = self.emergencyServiceProvider["name"] as! String
-                            annotation.subtitle = self.emergencyServiceProvider["type"] as! String
+                            annotation.subtitle = self.emergencyServiceProvider["streetAddress"] as! String
                             self.annotations.append(annotation)
                         }
                         var query = PFQuery(className: "Organization")
@@ -318,6 +316,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                 self.organizations.removeAll(keepCapacity: false)
                                 self.organizationsArrayKey.removeAll(keepCapacity: false)
                                 self.otherOrganizationsNearby.removeAll(keepCapacity: false)
+                                // process objects to store in order of weight and associate parameters contributing to weight with object
                                 for object in objects{
                                     var weight = 0
                                     for parameter in self.backgroundParameterArray{
@@ -341,12 +340,11 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                     var annotation = MKPointAnnotation()
                                     annotation.coordinate = CLLocationCoordinate2DMake((object["location"] as! PFGeoPoint).latitude, (object["location"] as! PFGeoPoint).longitude)
                                     annotation.title = object["name"] as! String
-                                    annotation.subtitle = object["type"] as! String
+                                    annotation.subtitle = object["streetAddress"] as! String
                                     self.annotations.append(annotation)
                                 }
                                 self.resourcesTableView.reloadData()
                                 self.mapView.addAnnotations(self.annotations)
-//                                self.mapClusterController = CCHMapClusterController(mapView: self.mapView)
 //                                self.mapClusterController.addAnnotations(self.annotations, withCompletionHandler: nil)
 //                                println(self.annotations.last?.description)
 //                                self.mapClusterController.selectAnnotation(self.annotations.last, andZoomToRegionWithLatitudinalMeters: 500, longitudinalMeters: 500)
@@ -357,8 +355,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                             let pm = placemarks as! [CLPlacemark]
                                             var placemark:CLPlacemark = pm[0]
                                             self.currentAddressDictionary = placemark.addressDictionary
-//                                            println(self.currentAddressDictionary)
-                                            self.updateLocationRefreshControl.endRefreshing()
+                                            println(self.currentAddressDictionary)
+                                            self.resourcesTableViewController.refreshControl!.endRefreshing()
 //                                            if self.otherOrganizationsNearby.count > 0{
 //                                                self.resourcesTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 1 + self.organizationsArrayKey.count + 1)), withRowAnimation: UITableViewRowAnimation.None)
 //                                            }
@@ -381,9 +379,18 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             }
             else{
                 println("can't find location")
-                self.updateLocationRefreshControl.endRefreshing()
+                self.resourcesTableViewController.refreshControl!.endRefreshing()
             }
         }
 
     }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        println(view)
+    }
+    
+//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+//        <#code#>
+//    }
+    
 }

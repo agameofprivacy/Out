@@ -17,10 +17,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     var following:[PFUser] = []
     var followerFollowingObject:PFObject = PFObject(className: "FollowerFollowing", dictionary: ["requestsFromUsers":[],"followers":[], "followingUsers":[]])
     var user:PFUser!
+    
+    var FollowingTableViewController:UITableViewController = UITableViewController()
+    var FollowerTableViewController:UITableViewController = UITableViewController()
+
+    
     var followerTableView = TPKeyboardAvoidingTableView()
     var followingTableView = TPKeyboardAvoidingTableView()
-    var followerRefreshControl:UIRefreshControl!
-    var followingRefreshControl:UIRefreshControl!
     
     var mentorCellOverlay:UIView!
     var segmentedControlView:UIView!
@@ -77,7 +80,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.addChildViewController(self.FollowingTableViewController)
+        self.addChildViewController(self.FollowerTableViewController)
         // UINavigationBar init and layout
         self.navigationItem.title = "People"
 
@@ -85,6 +90,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         addButton.enabled = true
         addButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = addButton
+        
+        var chatButton = UIBarButtonItem(image: UIImage(named: "chatIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showPeerChat")
+        self.navigationItem.leftBarButtonItem = chatButton
         
         // followingTableView init
         self.followingTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
@@ -103,10 +111,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        self.followingTableView.separatorInset = UIEdgeInsetsZero
         self.followingTableView.hidden = true
         self.view.addSubview(self.followingTableView)
-
-        self.followingRefreshControl = UIRefreshControl(frame: self.followingTableView.frame)
-        self.followingRefreshControl.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
-        self.followingTableView.addSubview(followingRefreshControl)
+        self.FollowingTableViewController.tableView = self.followingTableView
+        self.FollowingTableViewController.refreshControl = UIRefreshControl()
+        self.FollowingTableViewController.refreshControl!.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
 
         // followerTableView init
         self.followerTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
@@ -128,9 +135,9 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        self.followerTableView.separatorInset = UIEdgeInsetsZero
         self.view.addSubview(self.followerTableView)
 
-        self.followerRefreshControl = UIRefreshControl(frame: self.followerTableView.frame)
-        self.followerRefreshControl.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
-        self.followerTableView.addSubview(followerRefreshControl)
+        self.FollowerTableViewController.tableView = self.followerTableView
+        self.FollowerTableViewController.refreshControl = UIRefreshControl()
+        self.FollowerTableViewController.refreshControl!.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
         
         self.segmentedControlView = UIView(frame: CGRectZero)
         self.segmentedControlView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -562,8 +569,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.followerTableView.reloadData()
                 self.followingTableView.reloadData()
 //                self.followerTableView.hidden = false
-                self.followerRefreshControl.endRefreshing()
-                self.followingRefreshControl.endRefreshing()
+                self.FollowerTableViewController.refreshControl!.endRefreshing()
+                self.FollowingTableViewController.refreshControl!.endRefreshing()
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
@@ -595,5 +602,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         println("")
     }
-
+    
+    func showPeerChat(){
+        self.performSegueWithIdentifier("showPeerChat", sender: nil)
+    }
 }

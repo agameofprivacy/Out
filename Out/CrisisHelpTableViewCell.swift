@@ -23,7 +23,8 @@ class CrisisHelpTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = nil
+        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)

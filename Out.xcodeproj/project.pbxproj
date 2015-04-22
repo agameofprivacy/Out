@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0D0A7B1AE7562700CFB3A7 /* PeerChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D0A7A1AE7562700CFB3A7 /* PeerChatTableViewController.swift */; };
 		2C0D54671ACB00910045B929 /* XLFormBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D541E1ACB00910045B929 /* XLFormBaseCell.m */; };
 		2C0D54681ACB00910045B929 /* XLFormButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D54201ACB00910045B929 /* XLFormButtonCell.m */; };
 		2C0D54691ACB00910045B929 /* XLFormCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0D54221ACB00910045B929 /* XLFormCheckCell.m */; };
@@ -198,6 +199,7 @@
 		2C04D0C119E5BF060091B626 /* OutTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTabBarViewController.swift; sourceTree = "<group>"; };
 		2C0ABBB419EF284A00259B29 /* ChallengesTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabViewController.swift; sourceTree = "<group>"; };
 		2C0ABBB619EF445000259B29 /* ChallengesTabCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTabCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C0D0A7A1AE7562700CFB3A7 /* PeerChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerChatTableViewController.swift; sourceTree = "<group>"; };
 		2C0D541D1ACB00910045B929 /* XLFormBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormBaseCell.h; sourceTree = "<group>"; };
 		2C0D541E1ACB00910045B929 /* XLFormBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLFormBaseCell.m; sourceTree = "<group>"; };
 		2C0D541F1ACB00910045B929 /* XLFormButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLFormButtonCell.h; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9CA60D1A05AE4E00BC4D93 /* PeopleTabViewController.swift */,
+				2C0D0A7A1AE7562700CFB3A7 /* PeerChatTableViewController.swift */,
 				2C67340B1AD9CEED00A31424 /* PersonDetailViewController.swift */,
 				2C67340D1ADACFFB00A31424 /* PersonDetailTableViewCell.swift */,
 				2C9CA6161A05B58200BC4D93 /* PersonTableViewCell.swift */,
@@ -1315,6 +1318,7 @@
 				2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */,
 				2C9CA6171A05B58200BC4D93 /* PersonTableViewCell.swift in Sources */,
 				2C2697171AE744D900FD98CA /* CCHMapClusterController.m in Sources */,
+				2C0D0A7B1AE7562700CFB3A7 /* PeerChatTableViewController.swift in Sources */,
 				2CD5303019FB42E500D38896 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				2C6E1BA91ACC9BDF009E9BAA /* ChallengeFeedbackViewController.swift in Sources */,
 				2C0D54811ACB00910045B929 /* XLFormRowNavigationAccessoryView.m in Sources */,
