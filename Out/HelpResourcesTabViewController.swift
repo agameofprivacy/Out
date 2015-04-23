@@ -15,7 +15,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     var relevantOrganizationsAttributes:[String:[String]] = NSDictionary() as! [String : [String]]
     var otherOrganizationsNearby:[PFObject] = []
     var emergencyServiceProvider:PFObject!
-    var backgroundParameterArray:[String] = ["ethnicity", "religion"]
+    var backgroundParameterArray:[String] = ["ethnicity", "religion", "genderIdentity", "sexualOrientation"]
     var updateLocationRefreshControl:UIRefreshControl!
     
     var mapView:MKMapView!
