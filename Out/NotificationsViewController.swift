@@ -77,7 +77,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[notificationsTableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
-        loadAdditionalNotifications()
+//        loadAdditionalNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -267,11 +267,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             if error == nil{
                 if objects.count >= 15{
                     self.readNotifications.extend(objects as! [PFObject])
-                    self.notificationsTableView.reloadData()
+                    UIView.setAnimationsEnabled(false)
+                    self.notificationsTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)
+                    UIView.setAnimationsEnabled(true)
                 }
                 else{
                     self.readNotifications.extend(objects as! [PFObject])
-                    self.notificationsTableView.reloadData()
+                    UIView.setAnimationsEnabled(false)
+                    self.notificationsTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)
+                    UIView.setAnimationsEnabled(true)
                     self.noMoreActivities = true
                 }
             }

@@ -78,6 +78,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.mapView = MKMapView(frame: self.view.frame)
         self.mapView.hidden = true
         self.mapView.showsUserLocation = true
+        self.mapView.delegate = self
         self.view.addSubview(self.mapView)
         
 //        self.mapClusterController = CCHMapClusterController(mapView: self.mapView)
@@ -334,7 +335,6 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                             let pm = placemarks as! [CLPlacemark]
                                             var placemark:CLPlacemark = pm[0]
                                             self.currentAddressDictionary = placemark.addressDictionary
-                                            println(self.currentAddressDictionary)
                                             self.resourcesTableViewController.refreshControl!.endRefreshing()
                                             self.resourcesTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 3)), withRowAnimation: UITableViewRowAnimation.None)
                                         }
@@ -360,11 +360,37 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        println(view)
+        var latitude = view.annotation.coordinate.latitude
+        var longitude = view.annotation.coordinate.longitude
+        var resourceQuery = PFQuery(className: "Organization")
+        resourceQuery.whereKey("location", equalTo: PFGeoPoint(latitude: latitude, longitude: longitude))
+        resourceQuery.findObjectsInBackgroundWithBlock{
+            (objects, error) -> Void in
+            if (error==nil){
+                self.selectedResourceItem = objects[0] as! PFObject
+                self.performSegueWithIdentifier("showResourceDetail", sender: self)
+            }
+            else{
+                println("organization lookup failed")
+            }
+        }
+
     }
     
-//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-//        <#code#>
-//    }
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        if annotation.isKindOfClass(MKUserLocation){
+            return nil
+        }
+        else{
+            var pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
+            pinView.animatesDrop = true
+            pinView.pinColor = MKPinAnnotationColor.Red
+            pinView.enabled = true
+            pinView.canShowCallout = true
+            
+            pinView.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            return pinView
+        }
+    }
     
 }
