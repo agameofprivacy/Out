@@ -531,7 +531,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                     if error == nil{
                         // Send iOS Notification
                         self.loadPeople()
-                        self.followerTableView.reloadData()
+//                        self.followerTableView.reloadRowsAtIndexPaths(self.followerTableView.indexPathsForVisibleRows()!, withRowAnimation: UITableViewRowAnimation.None)
                     }
                 }
             }
@@ -566,9 +566,8 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.noFollowerView.hidden = true
                 }
 
-                self.followerTableView.reloadData()
-                self.followingTableView.reloadData()
-//                self.followerTableView.hidden = false
+                self.followerTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)
+                self.followingTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 1)), withRowAnimation: UITableViewRowAnimation.None)
                 self.FollowerTableViewController.refreshControl!.endRefreshing()
                 self.FollowingTableViewController.refreshControl!.endRefreshing()
             } else {

@@ -306,7 +306,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else
         {
             var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
-            cell.textLabel?.text = "loading more activities"
+            cell.textLabel?.text = "loading..."
             cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
             cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
             cell.textLabel?.textAlignment = NSTextAlignment.Center
@@ -476,7 +476,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             }
         }
         else{
-            return 64
+            return 44
         }
 
     }

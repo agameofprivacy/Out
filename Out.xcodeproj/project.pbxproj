@@ -100,6 +100,7 @@
 		2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C5511A3F551300B5458F /* MentorViewController.swift */; };
 		2C67340C1AD9CEED00A31424 /* PersonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67340B1AD9CEED00A31424 /* PersonDetailViewController.swift */; };
 		2C67340E1ADACFFB00A31424 /* PersonDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C67340D1ADACFFB00A31424 /* PersonDetailTableViewCell.swift */; };
+		2C693B321AE8746C00F3BFD6 /* RelevantResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C693B311AE8746C00F3BFD6 /* RelevantResourceTableViewCell.swift */; };
 		2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */; };
 		2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */; };
 		2C6E1BA71ACC9BD1009E9BAA /* AlsoCompletedByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E1BA61ACC9BD1009E9BAA /* AlsoCompletedByViewController.swift */; };
@@ -368,6 +369,7 @@
 		2C65C5511A3F551300B5458F /* MentorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentorViewController.swift; sourceTree = "<group>"; };
 		2C67340B1AD9CEED00A31424 /* PersonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailViewController.swift; sourceTree = "<group>"; };
 		2C67340D1ADACFFB00A31424 /* PersonDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailTableViewCell.swift; sourceTree = "<group>"; };
+		2C693B311AE8746C00F3BFD6 /* RelevantResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelevantResourceTableViewCell.swift; sourceTree = "<group>"; };
 		2C6AFF511A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardAnnouncementsCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardAnnouncementsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C6AFF561A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardInspirationCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -964,6 +966,7 @@
 				2CE673201AE1974700BC1BF3 /* CrisisHelpTableViewCell.swift */,
 				2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */,
 				2CE673221AE1BC0B00BC1BF3 /* ResourceTableViewCell.swift */,
+				2C693B311AE8746C00F3BFD6 /* RelevantResourceTableViewCell.swift */,
 				2C9CA6121A05AF2D00BC4D93 /* HelpTabViewController.swift */,
 				2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */,
 				2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */,
@@ -1291,6 +1294,7 @@
 				2C0D546F1ACB00910045B929 /* XLFormSegmentedCell.m in Sources */,
 				2CBDF49B1AC34F2200637937 /* ActivityExpandedTableViewController.swift in Sources */,
 				2C2697151AE744D900FD98CA /* CCHFadeInOutMapAnimator.m in Sources */,
+				2C693B321AE8746C00F3BFD6 /* RelevantResourceTableViewCell.swift in Sources */,
 				2C0D547D1ACB00910045B929 /* NSObject+XLFormAdditions.m in Sources */,
 				2C9CA6131A05AF2D00BC4D93 /* HelpTabViewController.swift in Sources */,
 				2CD596591ADF6A5F0010930A /* HelpResourcesTabViewController.swift in Sources */,

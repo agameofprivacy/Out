@@ -305,7 +305,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                     if error == nil {
                         // The find succeeded.
                         self.people = objects as! [PFUser]
-                        self.peopleTableView.reloadData()
+                        self.peopleTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                         if self.people.count == 0{
                             self.peopleTableView.hidden = true
                             self.noPeopleView.hidden = false
@@ -359,7 +359,6 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                             if error == nil {
                                 // The find succeeded.
                                 self.loadPeople()
-                                self.peopleTableView.reloadData()
                                 self.followRequestsFrom = objects
                                 var currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
                                 var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
@@ -390,20 +389,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                                 // Log details of the failure
                                 NSLog("Error: %@ %@", error, error.userInfo!)
                             }
-                        }
-                        
-//                        PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
-//                            if error == nil{
-//                            }
-//                        }
-//                        
-//                        userToFollow.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
-//                            if error == nil{
-//                                
-//                            }
-//                            else{
-//                            }
-//                        }
+                        }                        
                     }
                     else{
                     }
