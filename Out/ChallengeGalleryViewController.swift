@@ -178,7 +178,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                             }
                             self.challengeModelsObjects.removeObjectAtIndexes(indexForToRemove)
                         }
-                        self.challengesTableView!.reloadData()
+                        self.challengesTableView!.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                         self.activityIndicator.stopAnimating()
                         self.challengesTableView.hidden = false
                         if self.challengeModelsObjects.count == 0{
