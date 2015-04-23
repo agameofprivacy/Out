@@ -222,7 +222,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0{
             self.selectedResourceItem = self.emergencyServiceProvider
-            println("showEmergencyDetail")
+            self.performSegueWithIdentifier("showResourceDetail", sender: self)
         }
         else if indexPath.section == tableView.numberOfSections() - 1{
             self.selectedResourceItem = self.otherOrganizationsNearby[indexPath.row]
@@ -271,7 +271,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
             if error == nil {
                 self.currentGeoPoint = geoPoint
-                self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: self.currentGeoPoint.latitude, longitude: self.currentGeoPoint.longitude), self.mapWidth, self.mapHeight), animated: false)
+                self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: self.currentGeoPoint.latitude, longitude: self.currentGeoPoint.longitude), self.mapWidth, self.mapHeight), animated: true)
 
                 // do something with the new geoPoint
                 var emergencyServiceProviderQuery = PFQuery(className: "Organization")
