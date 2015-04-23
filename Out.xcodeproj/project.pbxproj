@@ -113,6 +113,7 @@
 		2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */; };
 		2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */; };
 		2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */; };
+		2C70BB0B1AE8ADAF0048BDCA /* LayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C8093711AE5C61700AC7437 /* ResourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
@@ -390,6 +391,7 @@
 		2C7020381A2B815A00873041 /* COSTouchVisualizerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSTouchVisualizerWindow.h; sourceTree = "<group>"; };
 		2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
 		2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleFilterViewController.swift; sourceTree = "<group>"; };
+		2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LayerKit.framework; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDetailViewController.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				2C1C23AA19E87B54006975DA /* AudioToolbox.framework in Frameworks */,
 				2C1C23A719E87B16006975DA /* Bolts.framework in Frameworks */,
 				2C1C23A819E87B16006975DA /* Parse.framework in Frameworks */,
+				2C70BB0B1AE8ADAF0048BDCA /* LayerKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,6 +803,7 @@
 		2C5D996B19E4A9FB00133F59 /* Out */ = {
 			isa = PBXGroup;
 			children = (
+				2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */,
 				2C1C23A519E87B16006975DA /* Bolts.framework */,
 				2C1C23A619E87B16006975DA /* Parse.framework */,
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
@@ -1516,6 +1520,7 @@
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";
@@ -1541,6 +1546,7 @@
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Out-Bridging-Header.h";

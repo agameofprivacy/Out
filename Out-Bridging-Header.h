@@ -3,6 +3,7 @@
 //
 
 #import <Parse/Parse.h>
+#import <LayerKit/LayerKit.h>
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 #import "DashboardAnnouncementsCollectionViewFlowLayout.h"

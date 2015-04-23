@@ -113,7 +113,7 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
                 if newCompletedByPeople != self.completedByPeople{
                     self.completedByPeople = newCompletedByPeople
                 }
-                self.tableView.reloadData()
+                self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
             }else{
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
