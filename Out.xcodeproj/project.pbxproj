@@ -96,6 +96,8 @@
 		2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997519E4A9FB00133F59 /* Images.xcassets */; };
 		2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */; };
 		2C5D998519E4A9FB00133F59 /* OutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D998419E4A9FB00133F59 /* OutTests.swift */; };
+		2C5DC8EA1AE9FF8F0085C2EA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5DC8E91AE9FF8F0085C2EA /* Accounts.framework */; };
+		2C5DC8EC1AE9FF950085C2EA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5DC8EB1AE9FF950085C2EA /* Social.framework */; };
 		2C65C54E1A3F447200B5458F /* HelpChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */; };
 		2C65C5501A3F447D00B5458F /* HelpTalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */; };
 		2C65C5521A3F551300B5458F /* MentorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C65C5511A3F551300B5458F /* MentorViewController.swift */; };
@@ -369,6 +371,8 @@
 		2C5D997E19E4A9FB00133F59 /* OutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D998319E4A9FB00133F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5D998419E4A9FB00133F59 /* OutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutTests.swift; sourceTree = "<group>"; };
+		2C5DC8E91AE9FF8F0085C2EA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		2C5DC8EB1AE9FF950085C2EA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2C65C54D1A3F447200B5458F /* HelpChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpChatViewController.swift; sourceTree = "<group>"; };
 		2C65C54F1A3F447D00B5458F /* HelpTalkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpTalkViewController.swift; sourceTree = "<group>"; };
 		2C65C5511A3F551300B5458F /* MentorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentorViewController.swift; sourceTree = "<group>"; };
@@ -491,6 +495,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5DC8EC1AE9FF950085C2EA /* Social.framework in Frameworks */,
+				2C5DC8EA1AE9FF8F0085C2EA /* Accounts.framework in Frameworks */,
 				2C4FE2371AE9FE900009B1A6 /* libsqlite3.dylib in Frameworks */,
 				2CB7E4221A15C3E900D55CF8 /* QuickLook.framework in Frameworks */,
 				2CB7E4201A15C3DF00D55CF8 /* CoreText.framework in Frameworks */,
@@ -773,6 +779,8 @@
 		2C5D996019E4A9FB00133F59 = {
 			isa = PBXGroup;
 			children = (
+				2C5DC8EB1AE9FF950085C2EA /* Social.framework */,
+				2C5DC8E91AE9FF8F0085C2EA /* Accounts.framework */,
 				2C4FE2361AE9FE900009B1A6 /* libsqlite3.dylib */,
 				2CB7E4211A15C3E900D55CF8 /* QuickLook.framework */,
 				2CB7E41F1A15C3DF00D55CF8 /* CoreText.framework */,
