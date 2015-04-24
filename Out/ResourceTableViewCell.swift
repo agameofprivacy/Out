@@ -23,7 +23,7 @@ class ResourceTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.backgroundColor = nil
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
         self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -78,7 +78,7 @@ class ResourceTableViewCell: UITableViewCell {
         
         var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-12-[paperView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(paperHorizontalConstraints)
         contentView.addConstraints(paperVerticalConstraints)

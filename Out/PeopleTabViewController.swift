@@ -500,18 +500,18 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         var queryUserFollowRequestedFromFollowerFollowing = PFQuery(className: "FollowerFollowing")
         queryUserFollowRequestedFromFollowerFollowing.whereKey("ownerUser", equalTo:currentUserFollowingRequestedFrom[currentIndexPath.row])
         queryUserFollowRequestedFromFollowerFollowing.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
-                var userFollowRequestedFrom = objects[0] as! PFObject
+                var userFollowRequestedFrom = (objects as! [PFObject])[0]
                 var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as! [PFUser]
-                userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser())
+                userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser()!)
                 userFollowRequestedFrom["followingUsers"] = userFollowRequestedFromCurrentlyfollowing
-                userFollowRequestedFrom.saveInBackground()
+                userFollowRequestedFrom.saveInBackgroundWithBlock(nil)
                 self.followerTableView.reloadData()
                 self.followerTableView.hidden = false
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
 
@@ -520,14 +520,14 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         currentUserFollowingRequestedFrom.removeAtIndex(currentIndexPath.row)
         self.followerFollowingObject["requestsFromUsers"] = currentUserFollowingRequestedFrom
         self.followerFollowingObject["followers"] = currentUserFollowers
-        self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+        self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
             if error == nil{
                 var followRequestApprovedNotification = PFObject(className: "Notification")
                 followRequestApprovedNotification["sender"] = PFUser.currentUser()
                 followRequestApprovedNotification["receiver"] = userToAcceptFollowRequest
                 followRequestApprovedNotification["read"] = false
                 followRequestApprovedNotification["type"] = "followRequestApproved"
-                followRequestApprovedNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                followRequestApprovedNotification.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                     if error == nil{
                         // Send iOS Notification
                         self.loadPeople()
@@ -542,14 +542,14 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     func loadPeople(){
 //        self.followerTableView.hidden = true
         var queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
-        queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
         queryFollowerFollowing.includeKey("followingUsers")
         queryFollowerFollowing.includeKey("followers")
         queryFollowerFollowing.includeKey("requestsFromUsers")
         queryFollowerFollowing.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
-                self.followerFollowingObject = objects[0] as! PFObject
+                self.followerFollowingObject = (objects as! [PFObject])[0]
                 self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as! [PFUser]
                 self.following = self.followerFollowingObject["followingUsers"] as! [PFUser]
                 self.followers = self.followerFollowingObject["followers"] as! [PFUser]
@@ -572,7 +572,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.FollowingTableViewController.refreshControl!.endRefreshing()
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }

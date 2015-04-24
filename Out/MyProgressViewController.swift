@@ -598,14 +598,14 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     func loadChallenges(){
 
         var queryUserData = PFQuery(className: "UserChallengeData")
-        queryUserData.whereKey("username", equalTo: PFUser.currentUser())
+        queryUserData.whereKey("username", equalTo: PFUser.currentUser()!)
         queryUserData.whereKey("isCurrent", equalTo: false)
         queryUserData.includeKey("challenge")
         queryUserData.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 self.doneChallenges.removeAll(keepCapacity: false)
-                for challengeData in objects{
+                for challengeData in objects as! [PFObject]{
                     self.doneChallenges.append(challengeData["challenge"] as! PFObject)
                 }
                 self.doneTableView.reloadData()
@@ -613,11 +613,11 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 var queryToDoChallenges = PFQuery(className: "Challenge")
                 var doneChallengesObjectIdArray:[String] = []
                 for challenge in self.doneChallenges{
-                    doneChallengesObjectIdArray.append(challenge.objectId)
+                    doneChallengesObjectIdArray.append(challenge.objectId!)
                 }
                 queryToDoChallenges.whereKey("objectId", notContainedIn: doneChallengesObjectIdArray)
                 queryToDoChallenges.findObjectsInBackgroundWithBlock{
-                    (challenges: [AnyObject]!, error: NSError!) -> Void in
+                    (challenges, error) -> Void in
                     if error == nil {
                         self.toDoChallenges.removeAll(keepCapacity: false)
                         self.toDoChallenges = challenges as! [PFObject]

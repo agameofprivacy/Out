@@ -104,10 +104,10 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
         userChallengeDataQuery.whereKey("challenge", equalTo: self.challenge)
         userChallengeDataQuery.includeKey("username")
         userChallengeDataQuery.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil{
                 var newCompletedByPeople:[PFUser] = []
-                for object in objects{
+                for object in objects as! [PFObject]{
                     newCompletedByPeople.append(object["username"] as! PFUser)
                 }
                 if newCompletedByPeople != self.completedByPeople{
@@ -116,7 +116,7 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
                 self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
             }else{
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }

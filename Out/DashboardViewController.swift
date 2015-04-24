@@ -112,7 +112,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         super.viewDidLoad()
         
         // Dashboard UINavigationBar init
-        self.navigationItem.title = "Dashboard"
+        self.navigationItem.title = "Me"
         self.navigationItem.rightBarButtonItem = nil
 
         // Dashboard container scroll view init
@@ -191,8 +191,8 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as! String]!
-        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as! String]
+        self.avatarImageView.image = self.avatarImageDictionary[(PFUser.currentUser()!)["avatar"] as! String]!
+        self.avatarImageView.backgroundColor = self.colorDictionary[(PFUser.currentUser()!)["color"] as! String]
         self.profileView.addSubview(self.avatarImageView)
         
         self.myProfileLabel = UILabel(frame: CGRectZero)
@@ -208,7 +208,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
         self.currentUserLabel = UILabel(frame: CGRectZero)
         self.currentUserLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.currentUserLabel.text = PFUser.currentUser().username
+        self.currentUserLabel.text = PFUser.currentUser()!.username
         self.currentUserLabel.font = regularFont?.fontWithSize(13.0)
         if self.view.bounds.width == 320{
             self.currentUserLabel.font = regularFont?.fontWithSize(11.0)
@@ -530,7 +530,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "LoggedOut"){
             PFInstallation.currentInstallation().removeObjectForKey("currentUser")
-            PFInstallation.currentInstallation().saveInBackground()
+            PFInstallation.currentInstallation().saveInBackgroundWithBlock(nil)
             PFUser.logOut()
             var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
             vc.showTutorial = false

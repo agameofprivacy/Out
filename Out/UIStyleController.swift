@@ -22,7 +22,7 @@ class UIStyleController: NSObject {
 
         // UIWindow Appearance Object
         var window:UIWindow = UIWindow.appearance()
-        window.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        window.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         
         // Set UITabBar tint color
         UITabBar.appearance().tintColor = UIColor.blackColor()

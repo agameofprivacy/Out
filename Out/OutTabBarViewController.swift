@@ -16,7 +16,7 @@ class OutTabBarViewController: UITabBarController {
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
-    
+        var animalAvatarString = ((PFUser.currentUser()!)["avatar"] as! String) + "-icon"
         // Set UITabBarItem through a for loop
         for var index = 0; index <  self.tabBar.items?.count; ++index{
             
@@ -28,19 +28,19 @@ class OutTabBarViewController: UITabBarController {
             
             // Dashboard
             case 0:
-                tabItem.selectedImage = UIImage(named: "activitySelected")
-                tabItem.image = UIImage(named: "activityUnselected")
+                tabItem.selectedImage = UIImage(named: "challengesSelected")
+                tabItem.image = UIImage(named: "challengesUnselected")
 
             // Challenges
             case 1:
-                tabItem.selectedImage = UIImage(named: "challengesSelected")
-                tabItem.image = UIImage(named: "challengesUnselected")
-                
-            // Activity
-            case 2:
                 tabItem.selectedImage = UIImage(named: "peopleSelected")
                 tabItem.image = UIImage(named: "peopleUnselected")
                 
+            // Activity
+            case 2:
+                tabItem.selectedImage = UIImage(named: "activitySelected")
+                tabItem.image = UIImage(named: "activityUnselected")
+
             // People
             case 3:
                 tabItem.selectedImage = UIImage(named: "helpSelected")
@@ -48,8 +48,8 @@ class OutTabBarViewController: UITabBarController {
                 
             // Help
             case 4:
-                tabItem.selectedImage = UIImage(named: "dashboardSelected")
-                tabItem.image = UIImage(named: "dashboardUnselected")
+                tabItem.selectedImage = UIImage(named: animalAvatarString)
+                tabItem.image = UIImage(named: animalAvatarString)
 
             default:
                 println("no image resourced")

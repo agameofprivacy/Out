@@ -45,7 +45,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         currentChallengesCardsCollectionView.alwaysBounceHorizontal = true
         layout.itemSize = CGSizeMake(self.view.frame.size.width - 15.0, self.view.frame.size.height - 160)
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        currentChallengesCardsCollectionView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         currentChallengesCardsCollectionView.showsHorizontalScrollIndicator = false
         currentChallengesCardsCollectionView.registerClass(ChallengesTabCollectionViewCell.self, forCellWithReuseIdentifier: "ChallengeCard")
         
@@ -64,7 +64,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.view.addSubview(activityIndicator)
 
         // No challenge view init and layout
@@ -157,14 +157,14 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
         // Parse query for current user's current challenges
         var queryIsCurrentIsCurrentUser = PFQuery(className:"UserChallengeData")
         queryIsCurrentIsCurrentUser.whereKey("isCurrent", equalTo:true)
-        queryIsCurrentIsCurrentUser.whereKey("username", equalTo: PFUser.currentUser())
+        queryIsCurrentIsCurrentUser.whereKey("username", equalTo: PFUser.currentUser()!)
         queryIsCurrentIsCurrentUser.includeKey("challenge")
         queryIsCurrentIsCurrentUser.orderByDescending("createdAt")
         queryIsCurrentIsCurrentUser.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.currentChallengesObjects = objects
+                self.currentChallengesObjects = objects as! [PFObject]
                 self.cardNumberPageControl.numberOfPages = self.currentChallengesObjects.count
                 self.currentChallengesCardsCollectionView.reloadData()
                 self.activityIndicator.stopAnimating()
@@ -177,7 +177,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
                 self.currentChallengesCardsCollectionView.hidden = false
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -258,9 +258,9 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             currentChallengeObject["stepContent"] = stepContent
         }
         // If there is more steps in current challenge, update current step count and step title information on card
-        if currentStepCount < currentChallengeModel["stepTitle"].count{
+        if currentStepCount < currentChallengeModel["stepTitle"]!.count{
             currentChallengeObject["currentStepCount"] = ++currentStepCount
-            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                 if error == nil{
                     currentCell.canvasTableView.reloadData()
                     var currentStepTitles:[String] = currentChallengeModel["stepTitle"] as! [String]
@@ -282,15 +282,15 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             
             currentChallengeObject["isCurrent"] = false
             currentChallengeObject["completedDate"] = date
-            currentChallengeObject.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+            currentChallengeObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                 if error == nil{
                     self.loadCurrentChallenges()
                     // Challenge Completed, show message
                 }
             }
             
-            var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject, "ownerUser":PFUser.currentUser()])
-            newActivity.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+            var newActivity = PFObject(className: "Activity", dictionary: ["challenge":currentChallengeModel, "userChallengeData":currentChallengeObject, "ownerUser":PFUser.currentUser()!])
+            newActivity.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                 if error == nil{
                     // Challenge Completed, show message
                 }

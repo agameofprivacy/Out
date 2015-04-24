@@ -24,7 +24,7 @@ class WebViewTableViewCell: UITableViewCell, UIWebViewDelegate {
         self.webView.delegate = self
         self.webView.scalesPageToFit = true
         self.webView.hidden = false
-        self.webView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.webView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.webView.scrollView.scrollEnabled = false
         self.webView.scrollView.bounces = true
         contentView.addSubview(self.webView)

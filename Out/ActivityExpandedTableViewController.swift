@@ -168,11 +168,12 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 
         if !(self.challenge["narrativeTitles"] as! [String]).isEmpty{
             narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber - 1]
-            actionString = self.user.username + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString + "."
+            actionString = self.user.username!
+            actionString = actionString + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString + "."
         }
         else{
             narrativeTitleString = ""
-            actionString = self.user.username + " " + (self.challenge["action"] as! String) + "."
+            actionString = self.user.username! + " " + (self.challenge["action"] as! String) + "."
         }
 
         var actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
@@ -181,7 +182,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 
         actionTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (actionString as NSString).rangeOfString(actionString))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (actionString as NSString).rangeOfString(actionString))
-        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(self.user.username))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(self.user.username!))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(narrativeTitleString))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(challengeTitleString))
 
@@ -431,7 +432,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         var characterIndex:Int
         characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         
-        var userAliasCharacterRange = count(self.user.username)
+        var userAliasCharacterRange = count(self.user.username!)
         var activityNarrativeTitleRangeStart = -1
         var activityNarrativeTitleRangeEnd = -1
         var activityChallengeTitleRangeStart = -1
@@ -444,7 +445,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
         }
         println(self.challengeTrackNumber)
-        if (characterIndex < count(self.user.username)) {
+        if (characterIndex < count(self.user.username!)) {
             
             // Handle as required...
             println("username tapped")

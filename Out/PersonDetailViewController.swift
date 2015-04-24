@@ -137,10 +137,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             cell.avatarImageView.image = cell.avatarImageDictionary[self.user["avatar"] as! String]!
             cell.avatarImageView.backgroundColor = cell.colorDictionary[self.user["color"] as! String]
             if self.followStatusChecked{
-                if contains(self.currentUserFollowingId, self.user.objectId){
+                if contains(self.currentUserFollowingId, self.user.objectId!){
                     cell.followButton.setTitle("Unfollow", forState: UIControlState.Normal)
                 }
-                else if contains(self.followingRequestedId, PFUser.currentUser().objectId){
+                else if contains(self.followingRequestedId, PFUser.currentUser()!.objectId!){
                     cell.followButton.setTitle("Requested", forState: UIControlState.Normal)
                 }
 //                else if contains(self.currentUserFollowerId, self.user.objectId){
@@ -322,9 +322,9 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
 
     func loadActivities(context:String){
         var followingQuery = PFQuery(className: "FollowerFollowing")
-        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
         followingQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 // Found FollowerFollowing object for current user
                 var activityQuery = PFQuery(className: "Activity")
@@ -337,30 +337,30 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 activityQuery.limit = 10
                 if context == "old"{
                     if !self.userActivities.isEmpty{
-                        activityQuery.whereKey("createdAt", lessThan: (self.userActivities.last as PFObject!).createdAt)
+                        activityQuery.whereKey("createdAt", lessThan: (self.userActivities.last as PFObject!).createdAt!)
                     }
                 }
                 else if context == "new"{
                     if !self.userActivities.isEmpty{
-                        activityQuery.whereKey("createdAt", greaterThan: (self.userActivities.first as PFObject!).createdAt)
+                        activityQuery.whereKey("createdAt", greaterThan: (self.userActivities.first as PFObject!).createdAt!)
                     }
                 }
                 else if context == "update"{
                     if !self.userActivities.isEmpty{
-                        activityQuery.whereKey("createdAt", greaterThanOrEqualTo: (self.userActivities.last as PFObject!).createdAt)
-                        activityQuery.whereKey("createdAt", lessThanOrEqualTo: (self.userActivities.first as PFObject!).createdAt)
+                        activityQuery.whereKey("createdAt", greaterThanOrEqualTo: (self.userActivities.last as PFObject!).createdAt!)
+                        activityQuery.whereKey("createdAt", lessThanOrEqualTo: (self.userActivities.first as PFObject!).createdAt!)
                         activityQuery.limit = 1000
                     }
                 }
                 activityQuery.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    (objects, error) -> Void in
                     if error == nil {
                         
                         // Found activities
                         var userActivitiesFound = objects as! [PFObject]
                         var currentLikedAcitivitiesFoundIdStrings:[String] = []
                         if context == "old"{
-                            if objects.count == 10{
+                            if (objects as! [PFObject]).count == 10{
 //                                self.moreActivities = true
                             }
                             else{
@@ -393,17 +393,17 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         var userActivitiesFoundLikeCount = Array(count: userActivitiesFound.count, repeatedValue: 0)
                         var likeCountFound = 0
                         var commentCountFound = 0
-                        var relation = PFUser.currentUser().relationForKey("likedActivity")
-                        relation.query().findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                        var relation = PFUser.currentUser()!.relationForKey("likedActivity")
+                        relation.query()!.findObjectsInBackgroundWithBlock{
+                            (objects, error) -> Void in
                             if error == nil {
-                                for object in objects{
-                                    currentLikedAcitivitiesFoundIdStrings.append(object.objectId)
+                                for object in objects as! [PFObject]{
+                                    currentLikedAcitivitiesFoundIdStrings.append(object.objectId!)
                                 }
                             }
                             else {
                                 // Log details of the failure
-                                NSLog("Error: %@ %@", error, error.userInfo!)
+                                NSLog("Error: %@ %@", error!, error!.userInfo!)
 //                                self.refreshControl?.endRefreshing()
                             }
                         }
@@ -413,9 +413,9 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                             var queryLikes = PFQuery(className: "_User")
                             queryLikes.whereKey("likedActivity", equalTo: activity)
                             queryLikes.findObjectsInBackgroundWithBlock{
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                (objects, error) -> Void in
                                 if error == nil {
-                                    var count = objects.count
+                                    var count = objects!.count
                                     userActivitiesFoundLikeCount[find(userActivitiesFound, activity)!] = count
                                     ++likeCountFound
                                     
@@ -423,9 +423,9 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                     var queryComments = PFQuery(className: "Comment")
                                     queryComments.whereKey("activity", equalTo: activity)
                                     queryComments.findObjectsInBackgroundWithBlock{
-                                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                                        (objects, error) -> Void in
                                         if error == nil {
-                                            var count = objects.count
+                                            var count = objects!.count
                                             userActivitiesFoundCommentCount[find(userActivitiesFound, activity)!] = count
                                             ++commentCountFound
                                             if likeCountFound == userActivitiesFound.count && commentCountFound == userActivitiesFound.count{
@@ -445,7 +445,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                         }
                                         else {
                                             // Log details of the failure
-                                            NSLog("Error: %@ %@", error, error.userInfo!)
+                                            NSLog("Error: %@ %@", error!, error!.userInfo!)
 //                                            self.refreshControl?.endRefreshing()
                                             
                                         }
@@ -454,7 +454,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                 }
                                 else {
                                     // Log details of the failure
-                                    NSLog("Error: %@ %@", error, error.userInfo!)
+                                    NSLog("Error: %@ %@", error!, error!.userInfo!)
 //                                    self.refreshControl?.endRefreshing()
                                 }
                             }
@@ -463,14 +463,14 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error, error.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo!)
 //                        self.refreshControl?.endRefreshing()
                         
                     }
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
 //                self.refreshControl?.endRefreshing()
                 
             }
@@ -497,7 +497,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             var currentAction = currentActivityChallenge["action"] as! String
             var currentChallengeTrackNumber = (currentActivityUserChallengeData["challengeTrackNumber"] as! String).toInt()!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
-            var activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
+            var activityCreatedTimeLabel = currentActivityCreatedTime!.shortTimeAgoSinceNow()
             
             
             var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
@@ -545,7 +545,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
             
-            if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId){
+            if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId!){
                 currentActivityDictionary.updateValue("yes", forKey: "liked")
             }
             if context == "old"{
@@ -569,28 +569,28 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
     
     func loadFollowerFollowing(){
         var followingQuery = PFQuery(className: "FollowerFollowing")
-        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser())
+        followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
 //        followingQuery.includeKey("followers")
 //        followingQuery.includeKey("followingUsers")
         followingQuery.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
-                for object in objects{
+                for object in objects as! [PFObject]{
                     for user in object["followers"] as! [PFUser]{
-                        self.currentUserFollowerId.append(user.objectId)
+                        self.currentUserFollowerId.append(user.objectId!)
                     }
                     for user in object["followingUsers"] as! [PFUser]{
-                        self.currentUserFollowingId.append(user.objectId)
+                        self.currentUserFollowingId.append(user.objectId!)
                     }
                     
                     var followingRequestQuery = PFQuery(className: "FollowerFollowing")
                     followingRequestQuery.whereKey("ownerUser", equalTo: self.user)
                     followingRequestQuery.findObjectsInBackgroundWithBlock{
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        (objects, error) -> Void in
                         if error == nil{
-                            for object in objects{
+                            for object in objects as! [PFObject]{
                                 for user in object["requestsFromUsers"] as! [PFUser]{
-                                    self.followingRequestedId.append(user.objectId)
+                                    self.followingRequestedId.append(user.objectId!)
                                 }
                                 println(self.followingRequestedId)
                                 self.followStatusChecked = true
@@ -615,27 +615,27 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         if followButton.titleLabel?.text == "Follow"{
             println("Follow")
             var userToFollow = self.user
-            var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as! [PFUser]
+            var currentUserFollowingRequested:[PFUser] = (PFUser.currentUser()!)["followingRequested"] as! [PFUser]
             var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
             currentUserFollowingRequested.append(userToFollow)
-            PFUser.currentUser().fetchInBackgroundWithBlock{
-                (object: AnyObject!, error: NSError!) -> Void in
+            PFUser.currentUser()!.fetchInBackgroundWithBlock{
+                (object, error) -> Void in
                 if error == nil {
-                    PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-                    PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                    (PFUser.currentUser()!)["followingRequested"] = currentUserFollowingRequested
+                    (PFUser.currentUser()!).saveInBackgroundWithBlock{(succeeded, error) -> Void in
                         if error == nil{
                             var queryFollowRequests = PFQuery(className:"FollowerFollowing")
                             queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
                             queryFollowRequests.findObjectsInBackgroundWithBlock{
-                                (objects: [AnyObject]!, error: NSError!) -> Void in
+                                (objects, error) -> Void in
                                 if error == nil {
                                     // The find succeeded.
-                                    var followRequestsFrom = objects
-                                    var currentFollowerFollowingObject = followRequestsFrom[0] as! PFObject
+                                    var followRequestsFrom = objects as! [PFObject]
+                                    var currentFollowerFollowingObject = followRequestsFrom[0] as PFObject
                                     var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
-                                    currentFollowRequestsFrom.append(PFUser.currentUser())
+                                    currentFollowRequestsFrom.append(PFUser.currentUser()!)
                                     currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
-                                    currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                                    currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                                         if error == nil{
                                             self.loadFollowerFollowing()
                                             if (self.parentViewController?.childViewControllers[0].isKindOfClass(PeopleGalleryViewController) != nil){
@@ -648,7 +648,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                             followRequestSentNotification["receiver"] = userToFollow
                                             followRequestSentNotification["read"] = false
                                             followRequestSentNotification["type"] = "followRequestSent"
-                                            followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                                            followRequestSentNotification.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                                                 if error == nil{
                                                     // Send iOS Notification
                                                     println("Follow request sent")
@@ -658,14 +658,14 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                         }
                                         else{
                                             // Log details of the failure
-                                            NSLog("Error: %@ %@", error, error.userInfo!)
+                                            NSLog("Error: %@ %@", error!, error!.userInfo!)
                                         }
                                         
                                     }
                                 }
                                 else {
                                     // Log details of the failure
-                                    NSLog("Error: %@ %@", error, error.userInfo!)
+                                    NSLog("Error: %@ %@", error!, error!.userInfo!)
                                 }
                             }
                         }

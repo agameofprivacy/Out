@@ -42,7 +42,7 @@ class StatusActivityTableViewCell: UITableViewCell {
         
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        contentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        contentView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         
         
         
@@ -154,7 +154,7 @@ class StatusActivityTableViewCell: UITableViewCell {
 
         // paperView constraints
         var paperViewsDictionary = ["paperView":paperView]
-        var paperMetricsDictionary = ["largeVerticalPadding":12]
+        var paperMetricsDictionary = ["largeVerticalPadding":8]
         
         var horizontalPaperViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[paperView]-7.5-|", options: NSLayoutFormatOptions(0), metrics: paperMetricsDictionary, views: paperViewsDictionary)
         

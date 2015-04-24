@@ -90,13 +90,13 @@ class MyProfileViewController: UIViewController {
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 50
         self.avatarImageView.clipsToBounds = true
-        self.avatarImageView.image = self.avatarImageDictionary[PFUser.currentUser()["avatar"] as! String]!
-        self.avatarImageView.backgroundColor = self.colorDictionary[PFUser.currentUser()["color"] as! String]
+        self.avatarImageView.image = self.avatarImageDictionary[(PFUser.currentUser()!)["avatar"] as! String]!
+        self.avatarImageView.backgroundColor = self.colorDictionary[(PFUser.currentUser()!)["color"] as! String]
         self.containerView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
         self.aliasLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.aliasLabel.text = PFUser.currentUser().username
+        self.aliasLabel.text = PFUser.currentUser()!.username
         self.aliasLabel.textAlignment = NSTextAlignment.Center
         self.aliasLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.aliasLabel.numberOfLines = 1
@@ -114,7 +114,7 @@ class MyProfileViewController: UIViewController {
 
         self.genderIdentityLabel = UILabel(frame: CGRectZero)
         self.genderIdentityLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.genderIdentityLabel.text = PFUser.currentUser()["genderIdentity"] as? String
+        self.genderIdentityLabel.text = PFUser.currentUser()!["genderIdentity"] as? String
         self.genderIdentityLabel.textAlignment = NSTextAlignment.Center
         self.genderIdentityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.genderIdentityLabel.numberOfLines = 1
@@ -132,7 +132,7 @@ class MyProfileViewController: UIViewController {
         
         self.sexualOrientationLabel = UILabel(frame: CGRectZero)
         self.sexualOrientationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.sexualOrientationLabel.text = PFUser.currentUser()["sexualOrientation"] as? String
+        self.sexualOrientationLabel.text = PFUser.currentUser()!["sexualOrientation"] as? String
         self.sexualOrientationLabel.textAlignment = NSTextAlignment.Center
         self.sexualOrientationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.sexualOrientationLabel.numberOfLines = 1
@@ -150,7 +150,7 @@ class MyProfileViewController: UIViewController {
         
         self.ageLabel = UILabel(frame: CGRectZero)
         self.ageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var userAge = PFUser.currentUser()["age"] as! Int
+        var userAge = PFUser.currentUser()!["age"] as! Int
         self.ageLabel.text = "\(userAge)"
         self.ageLabel.textAlignment = NSTextAlignment.Center
         self.ageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -169,7 +169,7 @@ class MyProfileViewController: UIViewController {
         
         self.ethnicityLabel = UILabel(frame: CGRectZero)
         self.ethnicityLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.ethnicityLabel.text = (PFUser.currentUser()["ethnicity"] as? String)?.lowercaseString
+        self.ethnicityLabel.text = (PFUser.currentUser()!["ethnicity"] as? String)?.lowercaseString
         self.ethnicityLabel.textAlignment = NSTextAlignment.Center
         self.ethnicityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.ethnicityLabel.numberOfLines = 1
@@ -187,7 +187,7 @@ class MyProfileViewController: UIViewController {
         
         self.locationLabel = UILabel(frame: CGRectZero)
         self.locationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.locationLabel.text = (PFUser.currentUser()["city"] as? String)!.lowercaseString + ", " + (PFUser.currentUser()["state"] as? String)!.lowercaseString
+        self.locationLabel.text = ((PFUser.currentUser()!)["city"] as? String)!.lowercaseString + ", " + ((PFUser.currentUser()!)["state"] as? String)!.lowercaseString
         self.locationLabel.textAlignment = NSTextAlignment.Center
         self.locationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         self.locationLabel.numberOfLines = 1

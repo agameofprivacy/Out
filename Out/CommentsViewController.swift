@@ -120,14 +120,14 @@ class CommentsViewController: SLKTextViewController {
         newComment["author"] = PFUser.currentUser()
         newComment["content"] = comment
         self.comments.insert(newComment, atIndex: 0)
-        newComment.saveInBackground()
+        newComment.saveInBackgroundWithBlock(nil)
         var newCommentNotification = PFObject(className: "Notification")
         newCommentNotification["activity"] = self.activity
         newCommentNotification["sender"] = PFUser.currentUser()
         newCommentNotification["receiver"] = self.activity["ownerUser"] as! PFUser
         newCommentNotification["read"] = false
         newCommentNotification["type"] = "comment"
-        newCommentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+        newCommentNotification.saveInBackgroundWithBlock{(succeeded, error) -> Void in
             if error == nil{
                 // Send iOS Notification
                 self.parentVC.parentVC.loadActivities("update")
@@ -152,7 +152,7 @@ class CommentsViewController: SLKTextViewController {
         var authorColor = self.colorDictionary[authorColorString]
         var timeAgoLabel = ""
         if comment.createdAt != nil{
-            timeAgoLabel = comment.createdAt.timeAgoSinceNow()
+            timeAgoLabel = comment.createdAt!.timeAgoSinceNow()
         }
         else{
             timeAgoLabel = "just now"
@@ -175,14 +175,14 @@ class CommentsViewController: SLKTextViewController {
         commentsQuery.includeKey("author")
         commentsQuery.orderByDescending("createdAt")
         commentsQuery.findObjectsInBackgroundWithBlock{
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 self.comments = objects as! [PFObject]
                 self.tableView.reloadData()
             }
             else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }

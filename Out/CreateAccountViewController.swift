@@ -275,7 +275,7 @@ class CreateAccountViewController: XLFormViewController {
         user["followingRequestsFrom"] = []
         
         user.signUpInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError!) -> Void in
+            (succeeded, error) -> Void in
             if error == nil {
                 // Hooray! Let them use the app now.
                 var followerFollowingObject = PFObject(className: "FollowerFollowing")

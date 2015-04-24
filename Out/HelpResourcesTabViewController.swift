@@ -56,8 +56,10 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.resourcesTableView.registerClass(CrisisHelpTableViewCell.self, forCellReuseIdentifier: "CrisisHelpTableViewCell")
         self.resourcesTableView.registerClass(ResourceTableViewCell.self, forCellReuseIdentifier: "ResourceTableViewCell")
         self.resourcesTableView.registerClass(RelevantResourceTableViewCell.self, forCellReuseIdentifier: "RelevantResourceTableViewCell")
-        self.resourcesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.resourcesTableView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.resourcesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+//        self.resourcesTableView.sectionFooterHeight = 6
+        self.resourcesTableView.contentInset.bottom = 6
         self.resourcesTableViewController.tableView = self.resourcesTableView
         self.resourcesTableViewController.refreshControl = UIRefreshControl()
         self.resourcesTableViewController.refreshControl!.addTarget(self, action: "updateLocation", forControlEvents: UIControlEvents.ValueChanged)
@@ -114,9 +116,9 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             cell.logoImageView.image = UIImage(named: organization["logoImage"] as! String)
             cell.descriptionLabel.text = organization["description"] as? String
             var keysString:String = "Relevance: "
-            var objectId:String = organization.objectId
+            var objectId:String = organization.objectId!
             for key in (self.relevantOrganizationsAttributes[objectId]! as [String]){
-                keysString += (PFUser.currentUser()[key] as? String)! + "  "
+                keysString += ((PFUser.currentUser()!)[key] as? String)! + "  "
             }
             cell.keyLabel.text = keysString
             return cell
@@ -143,7 +145,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             var headerView = UIView()
-            headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+            headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 0.97)
             var separator = UIView(frame: CGRectZero)
             separator.setTranslatesAutoresizingMaskIntoConstraints(false)
             separator.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
@@ -182,6 +184,10 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
 
             return headerView
     }
+    
+//    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return UIView()
+//    }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section{
@@ -268,7 +274,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.resourcesTableViewController.refreshControl!.beginRefreshing()
 //        self.resourcesTableViewController.refreshControl?.attributedTitle = NSAttributedString(string: "updating location")
         PFGeoPoint.geoPointForCurrentLocationInBackground {
-            (geoPoint: PFGeoPoint!, error: NSError!) -> Void in
+            (geoPoint, error) -> Void in
             if error == nil {
                 self.currentGeoPoint = geoPoint
                 self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: self.currentGeoPoint.latitude, longitude: self.currentGeoPoint.longitude), self.mapWidth, self.mapHeight), animated: true)
@@ -280,10 +286,10 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 emergencyServiceProviderQuery.whereKey("type", equalTo: "crisis-handling")
                 emergencyServiceProviderQuery.limit = 1
                 emergencyServiceProviderQuery.findObjectsInBackgroundWithBlock{
-                    (objects:[AnyObject]!, error:NSError!) -> Void in
+                    (objects, error) -> Void in
                     if error == nil{
-                        if objects.count > 0{
-                            self.emergencyServiceProvider = objects[0] as! PFObject
+                        if (objects as! [PFObject]).count > 0{
+                            self.emergencyServiceProvider = (objects as! [PFObject])[0]
                             var annotation = MKPointAnnotation()
                             annotation.coordinate = CLLocationCoordinate2DMake((self.emergencyServiceProvider["location"] as! PFGeoPoint).latitude, (self.emergencyServiceProvider["location"] as! PFGeoPoint).longitude)
                             annotation.title = self.emergencyServiceProvider["name"] as! String
@@ -291,32 +297,32 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                             self.annotations.append(annotation)
                         }
                         var query = PFQuery(className: "Organization")
-                        query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: 10.0)
+                        query.whereKey("location", nearGeoPoint: geoPoint!, withinMiles: 10.0)
                         query.whereKey("type", equalTo: "community")
                         query.orderByAscending("location")
                         query.findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            (objects, error) -> Void in
                             if error == nil{
                                 self.relevantOrganizations.removeAll(keepCapacity: false)
                                 self.relevantOrganizationsAttributes.removeAll(keepCapacity: false)
                                 self.otherOrganizationsNearby.removeAll(keepCapacity: false)
                                 // process objects to store in order of weight and associate parameters contributing to weight with object
-                                for object in objects{
+                                for object in objects as! [PFObject]{
                                     var weight = 0
                                     var relevance:[String] = []
                                     for parameter in self.backgroundParameterArray{
-                                        if contains(object["tags"] as! [String], PFUser.currentUser()[parameter] as! String){
+                                        if contains(object["tags"] as! [String], (PFUser.currentUser()!)[parameter] as! String){
                                             ++weight
                                             relevance.append(parameter)
                                         }
                                     }
 //                                    println(weight)
                                     if weight == 0{
-                                        self.otherOrganizationsNearby.append(object as! PFObject)
+                                        self.otherOrganizationsNearby.append(object as PFObject)
                                     }
                                     else{
-                                        self.relevantOrganizations.append(object as! PFObject)
-                                        self.relevantOrganizationsAttributes.updateValue(relevance, forKey: (object as! PFObject).objectId)
+                                        self.relevantOrganizations.append(object as PFObject)
+                                        self.relevantOrganizationsAttributes.updateValue(relevance, forKey: (object as PFObject).objectId!)
                                     }
                                     var annotation = MKPointAnnotation()
                                     annotation.coordinate = CLLocationCoordinate2DMake((object["location"] as! PFGeoPoint).latitude, (object["location"] as! PFGeoPoint).longitude)
@@ -367,7 +373,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         resourceQuery.findObjectsInBackgroundWithBlock{
             (objects, error) -> Void in
             if (error==nil){
-                self.selectedResourceItem = objects[0] as! PFObject
+                self.selectedResourceItem = (objects as! [PFObject])[0]
                 self.performSegueWithIdentifier("showResourceDetail", sender: self)
             }
             else{

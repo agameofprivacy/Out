@@ -29,7 +29,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengesTableView.dataSource = self
         self.challengesTableView.delegate = self
         self.challengesTableView.alwaysBounceVertical = true
-        self.challengesTableView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.challengesTableView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.challengesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.challengesTableView.rowHeight = UITableViewAutomaticDimension
         self.challengesTableView.estimatedRowHeight = 150
@@ -43,7 +43,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.activityIndicator.center = self.view.center
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        self.activityIndicator.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.activityIndicator.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         self.view.addSubview(self.activityIndicator)
         
         // noChallengeView init and layout
@@ -115,7 +115,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as! PFObject
 
         var newChallengeModel = PFObject(className: "UserChallengeData")
-        newChallengeModel["alias"] = PFUser.currentUser().username
+        newChallengeModel["alias"] = PFUser.currentUser()!.username
         newChallengeModel["title"] = selectedChallengeObject["title"]
         newChallengeModel["version"] = selectedChallengeObject["version"]
         newChallengeModel["isCurrent"] = true
@@ -125,7 +125,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         newChallengeModel["challengeTrackNumber"] = "0"
         newChallengeModel["stepContent"] = []
 
-        newChallengeModel.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+        newChallengeModel.saveInBackgroundWithBlock{(succeeded, error) -> Void in
             if error == nil{
                 self.challengeTabVC.loadCurrentChallenges()
             }
@@ -154,20 +154,20 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         
         // Query challenges already current to the user
         var currentChallengesQuery = PFQuery(className: "UserChallengeData")
-        currentChallengesQuery.whereKey("username", equalTo: PFUser.currentUser())
+        currentChallengesQuery.whereKey("username", equalTo: PFUser.currentUser()!)
 
         currentChallengesQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 // Found user's current challenges, add challenge title to currentChallengesStrings
-                for object in objects{
+                for object in objects as! [PFObject]{
                     self.currentChallengesStrings += [(object["title"] as! String)]
                 }
                 query.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    (objects, error) -> Void in
                     if error == nil {
                         // Found challenges that satisfy filter selection
-                        self.challengeModelsObjects = objects
+                        self.challengeModelsObjects = objects!
                         var indexForToRemove:[Int] = []
                         // Remove challenges that are already current to user
                         if self.challengeModelsObjects.count > 0{
@@ -189,12 +189,12 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                         }
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error, error.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo!)
                     }
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }

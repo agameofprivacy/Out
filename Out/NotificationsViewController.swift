@@ -139,7 +139,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         var receiver = notification["receiver"] as! PFUser
 
         var notificationCreatedTime = notification.createdAt
-        var notificationTimeLabel = notificationCreatedTime.timeAgoSinceNow()
+        var notificationTimeLabel = notificationCreatedTime!.timeAgoSinceNow()
         var notificationType = notification["type"] as! String
 
         var notificationString:String = ""
@@ -154,13 +154,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             else{
                 narrativeActionString = " liked "
             }
-            notificationString = sender.username + narrativeActionString + "your activity " + challengeTitleString + "."
+            notificationString = sender.username! + narrativeActionString + "your activity " + challengeTitleString + "."
         }
         else if notificationType == "followRequestSent"{
-            notificationString = sender.username + " sent you a follow request."
+            notificationString = sender.username! + " sent you a follow request."
         }
         else if notificationType == "followRequestApproved"{
-            notificationString = sender.username + " approved your follow request."
+            notificationString = sender.username! + " approved your follow request."
         }
         else{
             notificationString = ""
@@ -174,7 +174,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (notificationString as NSString).rangeOfString(notificationString))
 
-        notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (notificationString as NSString).rangeOfString(sender.username))
+        notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (notificationString as NSString).rangeOfString(sender.username!))
         
         if notificationType == "comment" || notificationType == "like"{
             notificationTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (notificationString as NSString).rangeOfString(challengeTitleString))
@@ -252,20 +252,20 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func loadAdditionalNotifications(){
         var notificationQuery = PFQuery(className: "Notification")
-        notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser())
+        notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser()!)
         notificationQuery.whereKey("read", equalTo: true)
         notificationQuery.includeKey("sender")
         notificationQuery.includeKey("receiver")
         notificationQuery.includeKey("activity.challenge")
         if !self.readNotifications.isEmpty{
-            notificationQuery.whereKey("createdAt", lessThan: (self.readNotifications.last as PFObject!).createdAt)
+            notificationQuery.whereKey("createdAt", lessThan: (self.readNotifications.last as PFObject!).createdAt!)
         }
         notificationQuery.orderByDescending("createdAt")
         notificationQuery.limit = 15
         notificationQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil{
-                if objects.count >= 15{
+                if objects!.count >= 15{
                     self.readNotifications.extend(objects as! [PFObject])
                     UIView.setAnimationsEnabled(false)
                     self.notificationsTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)

@@ -386,16 +386,16 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
         var queryCurrentChallenge = PFQuery(className:"Challenge")
         queryCurrentChallenge.whereKey("objectId", equalTo:objectId)
         queryCurrentChallenge.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects, error) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.currentChallengeModel = objects[0] as! PFObject
+                self.currentChallengeModel = (objects as! [PFObject])[0]
                 self.canvasTableView.reloadData()
                 self.activityIndicator.stopAnimating()
                 self.canvasTableView.hidden = false
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }

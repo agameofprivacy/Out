@@ -23,7 +23,7 @@ class CrisisHelpTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.backgroundColor = nil
 
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
@@ -73,12 +73,12 @@ class CrisisHelpTableViewCell: UITableViewCell {
         self.messageButton.layer.cornerRadius = 8
         self.paperView.addSubview(self.messageButton)
         var buttonWidth = (UIScreen.mainScreen().bounds.width - 20 * 3 - 15)/2
-        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":12, "buttonWidth":buttonWidth]
+        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6, "buttonWidth":buttonWidth]
         var viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "descriptionLabel":self.descriptionLabel, "callButton":self.callButton, "messageButton":self.messageButton]
         
         var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-largeVerticalPadding-[paperView]-largeVerticalPadding-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(paperHorizontalConstraints)
         contentView.addConstraints(paperVerticalConstraints)

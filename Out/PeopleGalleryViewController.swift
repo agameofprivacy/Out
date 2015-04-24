@@ -258,12 +258,12 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         self.peopleTableView.hidden = true
         var queryPeople = PFQuery(className:"_User")
         var objectIdArray:[String] = []
-        objectIdArray.append(PFUser.currentUser().objectId)
-        PFUser.currentUser().fetchInBackgroundWithBlock{
-            (object: AnyObject!, error: NSError!) -> Void in
+        objectIdArray.append((PFUser.currentUser()!).objectId!)
+        PFUser.currentUser()!.fetchInBackgroundWithBlock{
+            (object, error) -> Void in
             if error == nil {
-                for user in PFUser.currentUser()["followingRequested"] as! [PFUser]{
-                    objectIdArray.append(user.objectId)
+                for user in (PFUser.currentUser()!)["followingRequested"] as! [PFUser]{
+                    objectIdArray.append(user.objectId!)
                 }
                 println(objectIdArray)
                 // Filter so only users who current user hasn't sent a follow request to are included
@@ -273,10 +273,11 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                         switch filterName{
                         case "Maximum Age":
                             println("Maximum Age: \(values[0])")
-                            queryPeople.whereKey("age", lessThanOrEqualTo: values[0].toInt())
+                            queryPeople.whereKey("age", lessThanOrEqualTo: values[0]
+                                .toInt()!)
                         case "Minimum Age":
                             println("Minimum Age: \(values[0])")
-                            queryPeople.whereKey("age", greaterThanOrEqualTo: values[0].toInt())
+                            queryPeople.whereKey("age", greaterThanOrEqualTo: values[0].toInt()!)
                         case "Gender Identity":
                             println("Gender Identity: \(values[0])")
                             queryPeople.whereKey("genderIdentity", equalTo: values[0])
@@ -301,7 +302,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                     }
                 }
                 queryPeople.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    (objects, error) -> Void in
                     if error == nil {
                         // The find succeeded.
                         self.people = objects as! [PFUser]
@@ -316,7 +317,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                         }
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error, error.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo!)
                     }
                 }
             }
@@ -343,35 +344,35 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         var currentCell = sender.superview?.superview as! PersonFollowTableViewCell
         var currentIndexPath:NSIndexPath = self.peopleTableView.indexPathForCell(currentCell)!
         var userToFollow = self.people[currentIndexPath.row]
-        var currentUserFollowingRequested:[PFUser] = PFUser.currentUser()["followingRequested"] as! [PFUser]
+        var currentUserFollowingRequested:[PFUser] = (PFUser.currentUser()!)["followingRequested"] as! [PFUser]
         var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
         currentUserFollowingRequested.append(userToFollow)
-        PFUser.currentUser().fetchInBackgroundWithBlock{
-            (object: AnyObject!, error: NSError!) -> Void in
+        PFUser.currentUser()!.fetchInBackgroundWithBlock{
+            (object, error) -> Void in
             if error == nil {
-                PFUser.currentUser()["followingRequested"] = currentUserFollowingRequested
-                PFUser.currentUser().saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                (PFUser.currentUser()!)["followingRequested"] = currentUserFollowingRequested
+                PFUser.currentUser()!.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                     if error == nil{
                         var queryFollowRequests = PFQuery(className:"FollowerFollowing")
                         queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
                         queryFollowRequests.findObjectsInBackgroundWithBlock{
-                            (objects: [AnyObject]!, error: NSError!) -> Void in
+                            (objects, error) -> Void in
                             if error == nil {
                                 // The find succeeded.
                                 self.loadPeople()
-                                self.followRequestsFrom = objects
+                                self.followRequestsFrom = objects as! [PFObject]
                                 var currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
                                 var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
-                                currentFollowRequestsFrom.append(PFUser.currentUser())
+                                currentFollowRequestsFrom.append(PFUser.currentUser()!)
                                 currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
-                                currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded: Bool, error:NSError!) -> Void in
+                                currentFollowerFollowingObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                                     if error == nil{
                                         var followRequestSentNotification = PFObject(className: "Notification")
                                         followRequestSentNotification["sender"] = PFUser.currentUser()
                                         followRequestSentNotification["receiver"] = userToFollow
                                         followRequestSentNotification["read"] = false
                                         followRequestSentNotification["type"] = "followRequestSent"
-                                        followRequestSentNotification.saveInBackgroundWithBlock{(succeeded: Bool, error: NSError!) -> Void in
+                                        followRequestSentNotification.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                                             if error == nil{
                                                 // Send iOS Notification
                                                 println("Follow request sent")
@@ -381,13 +382,13 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                                     }
                                     else{
                                         // Log details of the failure
-                                        NSLog("Error: %@ %@", error, error.userInfo!)
+                                        NSLog("Error: %@ %@", error!, error!.userInfo!)
                                     }
                                     
                                 }
                             } else {
                                 // Log details of the failure
-                                NSLog("Error: %@ %@", error, error.userInfo!)
+                                NSLog("Error: %@ %@", error!, error!.userInfo!)
                             }
                         }                        
                     }

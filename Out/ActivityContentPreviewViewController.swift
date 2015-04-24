@@ -98,7 +98,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.activityContentWebView.delegate = self
         self.activityContentWebView.scalesPageToFit = true
         self.activityContentWebView.hidden = true
-        self.activityContentWebView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        self.activityContentWebView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
 
         self.view.addSubview(self.activityContentWebView)
  
@@ -197,14 +197,14 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         var challengeTitleString = (self.challenge["title"] as! String)
         var prepositionBeforeChallengeString = " in "
 
-        var actionString = self.user.username + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString
-        
+        var actionString = self.user.username!
+        actionString = actionString + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString
         var actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
         var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
         textViewParagraphStyle.lineSpacing = 5
         actionTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (actionString as NSString).rangeOfString(actionString))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (actionString as NSString).rangeOfString(actionString))
-        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(self.user.username))
+        actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(self.user.username!))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(narrativeTitleString))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(challengeTitleString))
 
@@ -287,14 +287,14 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         var characterIndex:Int
         characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         
-        var userAliasCharacterRange = count(self.user.username)
+        var userAliasCharacterRange = count(self.user.username!)
         var activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + count(self.challenge["narrativeAction"] as! String)
         var activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber])
         var activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + count(" in ")
         var activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
 
         
-        if (characterIndex < count(self.user.username)) {
+        if (characterIndex < count(self.user.username!)) {
             
             // Handle as required...
             println("username tapped")

@@ -185,11 +185,11 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.aliasTextField.enabled = false
         self.passwordTextField.enabled = false
         PFUser.logInWithUsernameInBackground(self.aliasTextField.text, password:self.passwordTextField.text) {
-            (user: PFUser!, error: NSError!) -> Void in
+            (user, error) -> Void in
             if user != nil {
                 // Do stuff after successful login.
                 PFInstallation.currentInstallation()["currentUser"] = PFUser.currentUser()
-                PFInstallation.currentInstallation().saveInBackground()
+                PFInstallation.currentInstallation().saveInBackgroundWithBlock(nil)
                 self.performSegueWithIdentifier("LoggedIn", sender: nil)
             } else {
                 // The login failed. Check error to see why.
