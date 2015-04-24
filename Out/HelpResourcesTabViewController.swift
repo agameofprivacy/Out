@@ -8,6 +8,9 @@
 
 import UIKit
 import MapKit
+import CCHMapClusterController
+import TPKeyboardAvoiding
+
 class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate{
 
 

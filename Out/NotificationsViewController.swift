@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 // Controller for notifications view
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{

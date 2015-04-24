@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SlackTextViewController
 
 // Controller for activity detail view
 class ActivityDetailViewController: SLKTextViewController {

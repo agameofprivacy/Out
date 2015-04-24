@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BBBadgeBarButtonItem
 
 // Controller for activity tab view
 class ActivityTabViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {

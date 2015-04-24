@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import TPKeyboardAvoiding
+
 class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     

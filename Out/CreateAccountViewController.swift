@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XLForm
 
 // Controller for signup view
 class CreateAccountViewController: XLFormViewController {
@@ -259,8 +260,8 @@ class CreateAccountViewController: XLFormViewController {
         var values = self.form.formValues()
         var user = PFUser()
 
-        user.username = values["Alias"] as! String
-        user.password = values["Password"] as! String
+        user.username = values["Alias"] as? String
+        user.password = values["Password"] as? String
         user["age"] = values["Age"] as! Int
         user["genderIdentity"] = (values["Gender Identity"] as! XLFormOptionsObject).valueData()
         user["sexualOrientation"] = (values["Sexual Orientation"] as! XLFormOptionsObject).valueData()

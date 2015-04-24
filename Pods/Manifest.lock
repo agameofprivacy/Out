@@ -1,0 +1,53 @@
+PODS:
+  - AutoScrollLabel (0.4.1)
+  - BBBadgeBarButtonItem (1.1)
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
+  - CCHMapClusterController (1.6.6)
+  - COSTouchVisualizer (1.0.6)
+  - DateTools (1.5.0)
+  - ICETutorial (1.1.1)
+  - LayerKit (0.12.0)
+  - Parse (1.7.1):
+    - Bolts (~> 1.1)
+  - SlackTextViewController (1.5):
+    - SlackTextViewController/Additions (= 1.5)
+  - SlackTextViewController/Additions (1.5)
+  - TPKeyboardAvoiding (1.2.6)
+  - UICountingLabel (1.2.0)
+  - XLForm (2.2.0)
+
+DEPENDENCIES:
+  - AutoScrollLabel
+  - BBBadgeBarButtonItem
+  - CCHMapClusterController
+  - COSTouchVisualizer
+  - DateTools
+  - ICETutorial
+  - LayerKit
+  - Parse
+  - SlackTextViewController
+  - TPKeyboardAvoiding
+  - UICountingLabel
+  - XLForm
+
+SPEC CHECKSUMS:
+  AutoScrollLabel: afe272014f82c707c9203f1383f3fe4e32443fa2
+  BBBadgeBarButtonItem: 958744e7c429e467b14af983040dbaae105b3355
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
+  CCHMapClusterController: 982db41114b42a575798366371bd9908e0f9ec8b
+  COSTouchVisualizer: a398089327a6c02897823614d7447ccc97198997
+  DateTools: b93a2c2017747329c6077c7d7e8a75106e23d0d7
+  ICETutorial: 6cb15e46066afc359357f048d1b5fca444d69c83
+  LayerKit: 980c640d69241b574a2a0847788dd992acb0cd89
+  Parse: fa8ec29de6d82035635986c11946299fb1b38316
+  SlackTextViewController: 4a1797ac2f3616dbd37435fc62da655e61399cdd
+  TPKeyboardAvoiding: ee4dd35e3bb7bb64bfbda47e7cc9ba872ff10f77
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+  XLForm: 799e61ef230f519914e722bf032b19a597223c19
+
+COCOAPODS: 0.36.4

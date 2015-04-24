@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 

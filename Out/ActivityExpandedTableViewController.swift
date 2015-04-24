@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TPKeyboardAvoiding
 
 class ActivityExpandedTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate {
 

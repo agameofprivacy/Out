@@ -1,24 +1,28 @@
 //
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
+#ifndef Out_Bridging_Header_h
+#define Out_Bridging_Header_h
 
 #import <Parse/Parse.h>
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 #import "DashboardAnnouncementsCollectionViewFlowLayout.h"
 #import "DashboardInspirationCollectionViewFlowLayout.h"
-#import "TPKeyboardAvoidingTableView.h"
-#import "TPKeyboardAvoidingScrollView.h"
-#import "UICountingLabel.h"
+#import "TPKeyboardAvoiding/TPKeyboardAvoidingTableView.h"
+#import "TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h"
+#import "UICountingLabel/UICountingLabel.h"
 #import "PNChart.h"
-#import "SLKTextViewController.h"
-#import "DateTools.h"
+#import "SlackTextViewController/SLKTextViewController.h"
+#import "DateTools/DateTools.h"
 #import <HockeySDK/HockeySDK.h>
 #import <LayerKit/LayerKit.h>
-#import "ICETutorialController.h"
-#import "COSTouchVisualizerWindow.h"
-#import "XLForm.h"
+#import "ICETutorial/ICETutorialController.h"
+#import "COSTouchVisualizer/COSTouchVisualizerWindow.h"
 #import "ChallengeCardsCollectionViewFlowLayout.h"
-#import "BBBadgeBarButtonItem.h"
-#import "CBAutoScrollLabel.h"
-#import "CCHMapClusterController.h"
+#import "BBBadgeBarButtonItem/BBBadgeBarButtonItem.h"
+#import "XLForm/XLForm.h"
+#import "AutoScrollLabel/CBAutoScrollLabel.h"
+#import "CCHMapClusterController/CCHMapClusterController.h"
+
+#endif

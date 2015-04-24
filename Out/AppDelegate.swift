@@ -8,6 +8,9 @@
 
 import UIKit
 import LayerKit
+import Parse
+import ICETutorial
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDelegate {

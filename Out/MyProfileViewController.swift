@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TPKeyboardAvoiding
 // Controller for profile view
 class MyProfileViewController: UIViewController {
 
