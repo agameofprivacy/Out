@@ -3,7 +3,6 @@
 //
 
 #import <Parse/Parse.h>
-#import <LayerKit/LayerKit.h>
 #import "GallerySelectCollectionViewFlowLayout.h"
 #import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 #import "DashboardAnnouncementsCollectionViewFlowLayout.h"
@@ -15,6 +14,7 @@
 #import "SLKTextViewController.h"
 #import "DateTools.h"
 #import <HockeySDK/HockeySDK.h>
+#import <LayerKit/LayerKit.h>
 #import "ICETutorialController.h"
 #import "COSTouchVisualizerWindow.h"
 #import "XLForm.h"

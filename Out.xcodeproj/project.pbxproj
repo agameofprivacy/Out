@@ -108,6 +108,8 @@
 		2C693B361AE8932F00F3BFD6 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C693B351AE8932F00F3BFD6 /* EventTableViewCell.swift */; };
 		2C6AFF531A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */; };
 		2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */; };
+		2C6B85CC1AEA840F003D7F86 /* LayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6B85C91AEA840F003D7F86 /* LayerKit.framework */; };
+		2C6B85CD1AEA840F003D7F86 /* layer-client-messaging-schema.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B85CB1AEA840F003D7F86 /* layer-client-messaging-schema.bundle */; };
 		2C6E1BA71ACC9BD1009E9BAA /* AlsoCompletedByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E1BA61ACC9BD1009E9BAA /* AlsoCompletedByViewController.swift */; };
 		2C6E1BA91ACC9BDF009E9BAA /* ChallengeFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E1BA81ACC9BDF009E9BAA /* ChallengeFeedbackViewController.swift */; };
 		2C6E1BAB1ACC9BE8009E9BAA /* ReportActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E1BAA1ACC9BE8009E9BAA /* ReportActivityViewController.swift */; };
@@ -116,7 +118,6 @@
 		2C6FFAEE1A19B3160043F912 /* ICETutorialStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FFAEB1A19B3160043F912 /* ICETutorialStyle.m */; };
 		2C70203A1A2B815A00873041 /* COSTouchVisualizerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */; };
 		2C70773C1A3F299A003D6367 /* PeopleFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */; };
-		2C70BB0B1AE8ADAF0048BDCA /* LayerKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */; };
 		2C7E803B19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */; };
 		2C8093711AE5C61700AC7437 /* ResourceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */; };
 		2C85027E1A11A43400F35DAB /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */; };
@@ -385,6 +386,8 @@
 		2C6AFF521A128D4C0006C7A9 /* DashboardAnnouncementsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardAnnouncementsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		2C6AFF561A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardInspirationCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		2C6AFF571A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardInspirationCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		2C6B85C91AEA840F003D7F86 /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LayerKit.framework; sourceTree = "<group>"; };
+		2C6B85CB1AEA840F003D7F86 /* layer-client-messaging-schema.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "layer-client-messaging-schema.bundle"; sourceTree = "<group>"; };
 		2C6E1BA61ACC9BD1009E9BAA /* AlsoCompletedByViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlsoCompletedByViewController.swift; sourceTree = "<group>"; };
 		2C6E1BA81ACC9BDF009E9BAA /* ChallengeFeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeFeedbackViewController.swift; sourceTree = "<group>"; };
 		2C6E1BAA1ACC9BE8009E9BAA /* ReportActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportActivityViewController.swift; sourceTree = "<group>"; };
@@ -397,7 +400,6 @@
 		2C7020381A2B815A00873041 /* COSTouchVisualizerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COSTouchVisualizerWindow.h; sourceTree = "<group>"; };
 		2C7020391A2B815A00873041 /* COSTouchVisualizerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COSTouchVisualizerWindow.m; sourceTree = "<group>"; };
 		2C70773B1A3F299A003D6367 /* PeopleFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleFilterViewController.swift; sourceTree = "<group>"; };
-		2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LayerKit.framework; sourceTree = "<group>"; };
 		2C7E803A19FBFC6E00F1FC4B /* PickerViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C8093701AE5C61700AC7437 /* ResourceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDetailViewController.swift; sourceTree = "<group>"; };
 		2C85027D1A11A43400F35DAB /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				2C1C23BA19E87B92006975DA /* StoreKit.framework in Frameworks */,
 				2C4FE2351AE9F6230009B1A6 /* Parse.framework in Frameworks */,
 				2C1C23B819E87B8A006975DA /* Security.framework in Frameworks */,
+				2C6B85CC1AEA840F003D7F86 /* LayerKit.framework in Frameworks */,
 				2C1C23B619E87B82006975DA /* QuartzCore.framework in Frameworks */,
 				2C1C23B419E87B7C006975DA /* MobileCoreServices.framework in Frameworks */,
 				2C1C23B219E87B75006975DA /* libz.dylib in Frameworks */,
@@ -513,7 +516,6 @@
 				2C1C23AE19E87B62006975DA /* CoreGraphics.framework in Frameworks */,
 				2C1C23AC19E87B5B006975DA /* CFNetwork.framework in Frameworks */,
 				2C1C23AA19E87B54006975DA /* AudioToolbox.framework in Frameworks */,
-				2C70BB0B1AE8ADAF0048BDCA /* LayerKit.framework in Frameworks */,
 				2C4FE2341AE9F6230009B1A6 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,9 +817,9 @@
 		2C5D996B19E4A9FB00133F59 /* Out */ = {
 			isa = PBXGroup;
 			children = (
+				2C6B85C81AEA840F003D7F86 /* LayerKit.embeddedframework */,
 				2C4FE2321AE9F6230009B1A6 /* Bolts.framework */,
 				2C4FE2331AE9F6230009B1A6 /* Parse.framework */,
-				2C70BB0A1AE8ADAF0048BDCA /* LayerKit.framework */,
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
@@ -891,6 +893,23 @@
 				2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */,
 			);
 			name = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		2C6B85C81AEA840F003D7F86 /* LayerKit.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				2C6B85C91AEA840F003D7F86 /* LayerKit.framework */,
+				2C6B85CA1AEA840F003D7F86 /* Resources */,
+			);
+			path = LayerKit.embeddedframework;
+			sourceTree = "<group>";
+		};
+		2C6B85CA1AEA840F003D7F86 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C6B85CB1AEA840F003D7F86 /* layer-client-messaging-schema.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		2C6FFAE51A19B3160043F912 /* ICETutorial */ = {
@@ -1202,6 +1221,7 @@
 				2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */,
 				2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */,
 				2CB7E4151A15A3D700D55CF8 /* DateTools.bundle in Resources */,
+				2C6B85CD1AEA840F003D7F86 /* layer-client-messaging-schema.bundle in Resources */,
 				2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1528,6 +1548,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Out",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/Out/LayerKit.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -1554,6 +1575,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Out",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/Out/LayerKit.embeddedframework",
 				);
 				INFOPLIST_FILE = Out/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

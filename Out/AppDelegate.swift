@@ -29,15 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
     // Added for normal operation without COSTouchVisualizer
     var window: UIWindow?
     
-//    var layerClient:LYRClient!
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UIStyleController.applyStyle()
-//        var appID:NSUUID = NSUUID(UUIDString: "2b505222-c8f2-11e4-9b75-eae81f0006da")!
-//        self.layerClient = LYRClient(appID: appID)
-        Parse.enableLocalDatastore()
+//        Parse.enableLocalDatastore()
         Parse.setApplicationId("BIV65YI6yH4JPzMDiMro4aHLX0THLJEq40X3XTfR", clientKey: "DjwDcyZzLPOkWl5GSLKeZwLzA8YWdKYE9nM2ZfmC")
 
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)

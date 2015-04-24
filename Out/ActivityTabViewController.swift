@@ -912,6 +912,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath == NSIndexPath(forRow: 0, inSection: 1) && self.moreActivities{
+            println("load old")
             self.loadActivities("old")
         }
     }
