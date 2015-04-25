@@ -14,7 +14,7 @@
 #import "UICountingLabel/UICountingLabel.h"
 #import "PNChart.h"
 #import "SlackTextViewController/SLKTextViewController.h"
-#import "DateTools/DateTools.h"
+#import "DateTools.h"
 #import <HockeySDK/HockeySDK.h>
 #import <LayerKit/LayerKit.h>
 #import "ICETutorial/ICETutorialController.h"
