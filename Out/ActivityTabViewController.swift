@@ -573,7 +573,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                 self.refreshControl?.endRefreshing()
                             }
                         }
-                        
+
                         // Query like count of activities
                         for activity in currentActivitiesFound{
                             var queryLikes = PFQuery(className: "_User")
@@ -595,10 +595,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                 currentActivitiesFoundCommentCount[find(currentActivitiesFound, activity)!] = count
                                                 ++commentCountFound
                                                 if likeCountFound == currentActivitiesFound.count && commentCountFound == currentActivitiesFound.count{
+
                                                     self.prepareDataForTableView(currentActivitiesFound, currentActivitiesFoundCommentCount: currentActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: currentActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
+//                                                    println(self.processedActivities)
                                                     self.loadNotifications()
-                                                     println(self.tableView.numberOfRowsInSection(0))
-                                                    if self.tableView.numberOfRowsInSection(0) == 0{
+                                                    if self.processedActivities.count == 0{
 
 //                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                                                         self.tableView.reloadData()
@@ -609,6 +610,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                         }
                                                         else if context == "old"{
 //                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                            println("reload old")
+//                                                            println(self.processedActivities)
                                                             self.tableView.reloadData()
                                                         }
                                                         else if context == "new"{
@@ -616,7 +619,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                             self.tableView.reloadData()
                                                         }
                                                     }
-
+                                                    println("hello")
                                                     self.refreshControl?.endRefreshing()
                                                     
                                                 }
@@ -671,9 +674,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             self.currentActivitiesLikeCount.removeAll(keepCapacity: false)
             self.currentActivitiesCommentCount.removeAll(keepCapacity: false)
         }
-        
+
         for activity in activitiesToAppend{
-            var currentActivityCreatedTime = activity.createdAt
+            var currentActivityCreatedTime = activity.createdAt!
             var currentActivityChallenge = activity["challenge"] as! PFObject
             var currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
             var currentActivityUser = activity["ownerUser"] as! PFUser
@@ -682,10 +685,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             var currentAction = currentActivityChallenge["action"] as! String
             var currentChallengeTrackNumber = (currentActivityUserChallengeData["challengeTrackNumber"] as! String).toInt()!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
-            var activityCreatedTimeLabel = currentActivityCreatedTime!.shortTimeAgoSinceNow()
+            var activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
+
             
-            
-            var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
+            var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username!, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
 
             var currentActivityImageString:String
             
@@ -707,11 +710,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 currentActivityDictionary.updateValue(currentNarrativeContentString, forKey: "currentNarrativeContentString")
             }
 
-
-
-            if currentActivitiesFoundLikeCount.count == 0{
-            }
-            else{
+            if currentActivitiesFoundLikeCount.count != 0{
                 if currentActivitiesFoundLikeCount[activityCount] > 1{
                     currentActivityDictionary.updateValue("\(currentActivitiesFoundLikeCount[activityCount]) likes", forKey: "likeCountLabel")
                 }
@@ -719,9 +718,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     currentActivityDictionary.updateValue("\(currentActivitiesFoundLikeCount[activityCount]) like", forKey: "likeCountLabel")
                 }
             }
-            if currentActivitiesFoundCommentCount.count == 0{
-            }
-            else{
+            
+            if currentActivitiesFoundCommentCount.count != 0{
                 if currentActivitiesFoundCommentCount[activityCount] > 1{
                     currentActivityDictionary.updateValue("\(currentActivitiesFoundCommentCount[activityCount]) comments", forKey: "commentCountLabel")
                 }
@@ -733,6 +731,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId!){
                 currentActivityDictionary.updateValue("yes", forKey: "liked")
             }
+            
             if context == "old"{
                 self.processedActivities.addObject(currentActivityDictionary)
                 self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
@@ -749,7 +748,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
             }
             ++activityCount
+            
         }
+
     }
     
     // Register current user's liking of an activity on Parse if Like button tapped

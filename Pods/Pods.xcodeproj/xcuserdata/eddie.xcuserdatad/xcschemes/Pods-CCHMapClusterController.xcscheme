@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BEFDD79BD5A9A3FD4EDA6C1B"
+               BlueprintIdentifier = "87F6F3B0E7F629F9AFFAA943"
                BuildableName = "CCHMapClusterController.framework"
                BlueprintName = "Pods-CCHMapClusterController"
                ReferencedContainer = "container:Pods.xcodeproj">

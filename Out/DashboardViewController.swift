@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-import PNChart
+
 
 // Controller for Dashboard view
 class DashboardViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, PresentNewView{

@@ -48,12 +48,6 @@
 #define COCOAPODS_VERSION_MINOR_COSTouchVisualizer 0
 #define COCOAPODS_VERSION_PATCH_COSTouchVisualizer 6
 
-// DateTools
-#define COCOAPODS_POD_AVAILABLE_DateTools
-#define COCOAPODS_VERSION_MAJOR_DateTools 1
-#define COCOAPODS_VERSION_MINOR_DateTools 5
-#define COCOAPODS_VERSION_PATCH_DateTools 0
-
 // ICETutorial
 #define COCOAPODS_POD_AVAILABLE_ICETutorial
 #define COCOAPODS_VERSION_MAJOR_ICETutorial 1

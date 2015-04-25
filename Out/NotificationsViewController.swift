@@ -139,8 +139,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         var sender = notification["sender"] as! PFUser
         var receiver = notification["receiver"] as! PFUser
 
-        var notificationCreatedTime = notification.createdAt
-        var notificationTimeLabel = notificationCreatedTime!.timeAgoSinceNow()
+        var notificationCreatedTime = notification.createdAt!
+        var notificationTimeLabel = notificationCreatedTime.timeAgoSinceNow()
         var notificationType = notification["type"] as! String
 
         var notificationString:String = ""

@@ -34,6 +34,13 @@
 		2C24FB201AEABA9C003D9688 /* PNScatterChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C24FB111AEABA9C003D9688 /* PNScatterChartData.m */; };
 		2C24FB211AEABA9C003D9688 /* PNScatterChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C24FB131AEABA9C003D9688 /* PNScatterChartDataItem.m */; };
 		2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */; };
+		2C2C1E461AEB5E07004253BA /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C2C1E371AEB5E07004253BA /* DateTools.bundle */; };
+		2C2C1E471AEB5E07004253BA /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E3B1AEB5E07004253BA /* DTError.m */; };
+		2C2C1E481AEB5E07004253BA /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E3D1AEB5E07004253BA /* DTTimePeriod.m */; };
+		2C2C1E491AEB5E07004253BA /* DTTimePeriodChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E3F1AEB5E07004253BA /* DTTimePeriodChain.m */; };
+		2C2C1E4A1AEB5E07004253BA /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E411AEB5E07004253BA /* DTTimePeriodCollection.m */; };
+		2C2C1E4B1AEB5E07004253BA /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E431AEB5E07004253BA /* DTTimePeriodGroup.m */; };
+		2C2C1E4C1AEB5E07004253BA /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C1E451AEB5E07004253BA /* NSDate+DateTools.m */; };
 		2C2CF7231A15824000B8C60E /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */; };
 		2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3366E01A008752009198EA /* WebViewViewController.swift */; };
 		2C35C49F19F3557000551707 /* CautionTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */; };
@@ -188,6 +195,21 @@
 		2C26941719F1B7DE0088AFD1 /* TextBlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBlockTableViewCell.swift; sourceTree = "<group>"; };
 		2C26941919F1C9170088AFD1 /* GallerySelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySelectTableViewCell.swift; sourceTree = "<group>"; };
 		2C280D7C1A18EF0D0066BE1F /* UIStyleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStyleController.swift; sourceTree = "<group>"; };
+		2C2C1E371AEB5E07004253BA /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
+		2C2C1E381AEB5E07004253BA /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
+		2C2C1E391AEB5E07004253BA /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
+		2C2C1E3A1AEB5E07004253BA /* DTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTError.h; sourceTree = "<group>"; };
+		2C2C1E3B1AEB5E07004253BA /* DTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTError.m; sourceTree = "<group>"; };
+		2C2C1E3C1AEB5E07004253BA /* DTTimePeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriod.h; sourceTree = "<group>"; };
+		2C2C1E3D1AEB5E07004253BA /* DTTimePeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriod.m; sourceTree = "<group>"; };
+		2C2C1E3E1AEB5E07004253BA /* DTTimePeriodChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodChain.h; sourceTree = "<group>"; };
+		2C2C1E3F1AEB5E07004253BA /* DTTimePeriodChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodChain.m; sourceTree = "<group>"; };
+		2C2C1E401AEB5E07004253BA /* DTTimePeriodCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodCollection.h; sourceTree = "<group>"; };
+		2C2C1E411AEB5E07004253BA /* DTTimePeriodCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodCollection.m; sourceTree = "<group>"; };
+		2C2C1E421AEB5E07004253BA /* DTTimePeriodGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodGroup.h; sourceTree = "<group>"; };
+		2C2C1E431AEB5E07004253BA /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
+		2C2C1E441AEB5E07004253BA /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
+		2C2C1E451AEB5E07004253BA /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		2C2CF7221A15824000B8C60E /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		2C3366E01A008752009198EA /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		2C35C49E19F3557000551707 /* CautionTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CautionTextTableViewCell.swift; sourceTree = "<group>"; };
@@ -390,6 +412,28 @@
 			name = "Canvas TableViewCells";
 			sourceTree = "<group>";
 		};
+		2C2C1E361AEB5E07004253BA /* DateTools */ = {
+			isa = PBXGroup;
+			children = (
+				2C2C1E371AEB5E07004253BA /* DateTools.bundle */,
+				2C2C1E381AEB5E07004253BA /* DateTools.h */,
+				2C2C1E391AEB5E07004253BA /* DTConstants.h */,
+				2C2C1E3A1AEB5E07004253BA /* DTError.h */,
+				2C2C1E3B1AEB5E07004253BA /* DTError.m */,
+				2C2C1E3C1AEB5E07004253BA /* DTTimePeriod.h */,
+				2C2C1E3D1AEB5E07004253BA /* DTTimePeriod.m */,
+				2C2C1E3E1AEB5E07004253BA /* DTTimePeriodChain.h */,
+				2C2C1E3F1AEB5E07004253BA /* DTTimePeriodChain.m */,
+				2C2C1E401AEB5E07004253BA /* DTTimePeriodCollection.h */,
+				2C2C1E411AEB5E07004253BA /* DTTimePeriodCollection.m */,
+				2C2C1E421AEB5E07004253BA /* DTTimePeriodGroup.h */,
+				2C2C1E431AEB5E07004253BA /* DTTimePeriodGroup.m */,
+				2C2C1E441AEB5E07004253BA /* NSDate+DateTools.h */,
+				2C2C1E451AEB5E07004253BA /* NSDate+DateTools.m */,
+			);
+			path = DateTools;
+			sourceTree = "<group>";
+		};
 		2C470F531A06F62F008EADB4 /* PeopleGallery */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +506,7 @@
 		2C5D996C19E4A9FB00133F59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C2C1E361AEB5E07004253BA /* DateTools */,
 				2C24FAF51AEABA9C003D9688 /* PNChart */,
 				2C5D996D19E4A9FB00133F59 /* Info.plist */,
 			);
@@ -728,6 +773,7 @@
 				2C5D997919E4A9FB00133F59 /* LaunchScreen.xib in Resources */,
 				2C5D997619E4A9FB00133F59 /* Images.xcassets in Resources */,
 				2CB7E42A1A15C40400D55CF8 /* HockeySDKResources.bundle in Resources */,
+				2C2C1E461AEB5E07004253BA /* DateTools.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,10 +882,13 @@
 				2C470F521A06F5B7008EADB4 /* PeopleGalleryViewController.swift in Sources */,
 				2C3A7C001A117EB700FC4516 /* MyProfileViewController.swift in Sources */,
 				2CB170F919F2C7860086C95F /* LoginViewController.swift in Sources */,
+				2C2C1E481AEB5E07004253BA /* DTTimePeriod.m in Sources */,
 				2C280D7D1A18EF0D0066BE1F /* UIStyleController.swift in Sources */,
 				2C8502801A11A43F00F35DAB /* ComposeViewController.swift in Sources */,
 				2CF4791B1A73FD0000CD88FF /* ActivityContentPreviewViewController.swift in Sources */,
+				2C2C1E4A1AEB5E07004253BA /* DTTimePeriodCollection.m in Sources */,
 				2C24FB1B1AEABA9C003D9688 /* PNLineChartData.m in Sources */,
+				2C2C1E471AEB5E07004253BA /* DTError.m in Sources */,
 				2C3A7C021A117EC900FC4516 /* MyProgressViewController.swift in Sources */,
 				2C54AD5E1A92AA510023BD20 /* NotificationTableViewCell.swift in Sources */,
 				2CB170FA19F2C7860086C95F /* OutTabBarViewController.swift in Sources */,
@@ -873,6 +922,7 @@
 				2C8093711AE5C61700AC7437 /* ResourceDetailViewController.swift in Sources */,
 				2CB170FE19F2C7860086C95F /* ChallengeFilterTableViewCell.swift in Sources */,
 				2CA435F119F48B1A00DC1C6E /* DateTimePickerTableViewCell.swift in Sources */,
+				2C2C1E4C1AEB5E07004253BA /* NSDate+DateTools.m in Sources */,
 				2CE865E919FD71E000D3FD99 /* FieldsAndActivatorTableViewCell.swift in Sources */,
 				2CDA9D1C19F5655200D87841 /* ChallengeGalleryTableViewCell.swift in Sources */,
 				2C9CA6171A05B58200BC4D93 /* PersonTableViewCell.swift in Sources */,
@@ -894,7 +944,9 @@
 				2C3A7BFE1A117A3700FC4516 /* DashboardChallengeOnDeckCollectionViewFlowLayout.m in Sources */,
 				2C6AFF581A12CAF90006C7A9 /* DashboardInspirationCollectionViewFlowLayout.m in Sources */,
 				2CB1710619F2C7860086C95F /* TextBlockTableViewCell.swift in Sources */,
+				2C2C1E4B1AEB5E07004253BA /* DTTimePeriodGroup.m in Sources */,
 				2CBCC8E31AC9D2CC00E992D9 /* CommentsViewController.swift in Sources */,
+				2C2C1E491AEB5E07004253BA /* DTTimePeriodChain.m in Sources */,
 				2C5C8CAE1ACC7998000E8650 /* StepMediaTableViewCell.swift in Sources */,
 				2C65C5501A3F447D00B5458F /* HelpTalkViewController.swift in Sources */,
 				2C24FB151AEABA9C003D9688 /* PNBarChart.m in Sources */,

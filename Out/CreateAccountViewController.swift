@@ -217,7 +217,7 @@ class CreateAccountViewController: XLFormViewController {
         row = XLFormRowDescriptor(tag: "Bio", rowType: XLFormRowDescriptorTypeText, title: "Bio")
         var paddingView7 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
-        row.cellConfig.setObject(paddingView6, forKey: "textField.rightView")
+        row.cellConfig.setObject(paddingView7, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 

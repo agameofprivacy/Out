@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DA6F0533A212F23B295287B6"
+               BlueprintIdentifier = "E3D833D1B0230770199266AB"
                BuildableName = "AutoScrollLabel.framework"
                BlueprintName = "Pods-AutoScrollLabel"
                ReferencedContainer = "container:Pods.xcodeproj">
