@@ -12,7 +12,7 @@ import UIKit
 
 class OutTabBarViewController: UITabBarController {
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     
         // Do any additional setup after loading the view.
@@ -43,8 +43,8 @@ class OutTabBarViewController: UITabBarController {
 
             // People
             case 3:
-                tabItem.selectedImage = UIImage(named: "helpSelected")
-                tabItem.image = UIImage(named: "helpUnselected")
+//                tabItem.selectedImage = UIImage(named: "helpSelected")
+//                tabItem.image = UIImage(named: "helpUnselected")
                 
             // Help
             case 4:
