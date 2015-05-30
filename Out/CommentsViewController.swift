@@ -8,7 +8,7 @@
 
 import UIKit
 import SlackTextViewController
-
+import Parse
 class CommentsViewController: SLKTextViewController {
 
     var comments:[PFObject] = []

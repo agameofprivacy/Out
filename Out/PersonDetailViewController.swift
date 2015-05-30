@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-
+import Parse
 class PersonDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var user: PFUser!

@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-
+import Parse
 protocol PresentNewView{
 
     func presentWebView(url:NSURL)

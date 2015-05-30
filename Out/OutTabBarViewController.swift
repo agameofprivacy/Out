@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 // Controller for application UITabBar
 
 class OutTabBarViewController: UITabBarController {

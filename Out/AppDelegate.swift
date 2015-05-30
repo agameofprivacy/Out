@@ -11,9 +11,8 @@ import LayerKit
 import Parse
 import ICETutorial
 
-
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAlertViewDelegate, ICETutorialControllerDelegate {
     
 //    var visWindow: COSTouchVisualizerWindow?
 //    var window: COSTouchVisualizerWindow? {
@@ -31,8 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
     
     // Added for normal operation without COSTouchVisualizer
     var window: UIWindow?
-    
-    
+    var layerClient: LYRClient!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -52,9 +50,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
+//        if isValidAppID() {
+//            
+//            // Show a usage the first time the app is launched
+//            showFirstTimeMessage()
+//            
+//            // Initializes a LYRClient object
+//            let appID = NSUUID(UUIDString: LQSLayerAppIDString)
+//            layerClient = LYRClient(appID: appID)
+////            layerClient.delegate = self
+//            
+//            var controller:LoginViewController = LoginViewController()
+//            controller.layerClient = self.layerClient
+//            
+//            self.window?.rootViewController = UINavigationController(rootViewController: controller)
+//            // Connect to Layer
+//            // See "Quick Start - Connect" for more details
+//            // https://developer.layer.com/docs/quick-start/ios#connect
+//            
+////          
+//            
+////            // Request an authentication nonce from Layer
+////            layerClient.requestAuthenticationNonceWithCompletion({ (nonce, error) -> Void in
+////                println("Authentifcation nonce \(nonce)")
+////                if (nonce != nil){
+////                    var user = PFUser.currentUser()!
+////                    var userID = user.objectId!
+////
+////                    PFCloud.callFunctionInBackground("generateToken", withParameters: ["nonce":nonce, "userID":userID]){(token, error) -> Void in
+////                        if (error != nil){
+////                            // Send the Identity Token to Layer to authenticate the user
+////                            self.layerClient.authenticateWithIdentityToken(token as! String, completion: {(authenticatedUserID, error) -> Void in
+////                                if (error != nil){
+////                                    println("Parse User authenticated with Layer Identity Token")
+////                                }
+////                                else{
+////                                    println("Parse User failed to authenticate with token with error: \(error)")
+////                                }
+////                            })
+////                        }
+////                        else{
+////                            println("Parse Cloud function failed to be called to generate token with error: \(error)")
+////                        }
+////                    }
+////                }
+////            })
+//
+//            
+////            LayerAuthenticationHelper(layerClient: layerClient).authenticateWithLayer { error in
+////                if let error = error {
+////                    println("Failed to connect to Layer: \(error.localizedDescription)")
+////                } else {
+//////                    let navigationController = self.window?.rootViewController as! UINavigationController
+//////                    (navigationController.topViewController as ChatViewController).layerClient = self.layerClient
+////                    println("layer authentication success")
+////                    // Register for push
+//////                    self.registerApplicationForPushNotifications(application)
+////                }
+////            }
+//        }
+
         
         return true
     }
+    
+    // MARK: - Push Notification Methods
+    
+//    func registerApplicationForPushNotifications(application: UIApplication) {
+//        // Set up push notifications
+//        // For more information about Push, check out:
+//        // https://developer.layer.com/docs/guides/ios#push-notification
+//        
+//        // Checking if app is running iOS 8
+//        if application.respondsToSelector("registerForRemoteNotifications") {
+//            // Register device for iOS8
+//            let notificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+//            application.registerUserNotificationSettings(notificationSettings)
+//            application.registerForRemoteNotifications()
+//        } else {
+//            // Register device for iOS7
+//            application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
+//        }
+//    }
+
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         var currentInstallation:PFInstallation = PFInstallation.currentInstallation()
@@ -98,6 +176,100 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ICETutorialControllerDele
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    // MARK: - LYRClientDelegate
+    
+    func layerClient(client: LYRClient!, didReceiveAuthenticationChallengeWithNonce nonce: String!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didAuthenticateAsUserID userID: String!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFailOperationWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFailSynchronizationWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFinishContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFinishSynchronizationWithChanges changes: [AnyObject]!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didLoseConnectionWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, objectsDidChange changes: [AnyObject]!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, willAttemptToConnect attemptNumber: UInt, afterDelay delayInterval: NSTimeInterval, maximumNumberOfAttempts attemptLimit: UInt) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, willBeginContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!, withProgress progress: LYRProgress!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidConnect(client: LYRClient!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidDeauthenticate(client: LYRClient!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidDisconnect(client: LYRClient!) {
+        println(__FUNCTION__)
+    }
 
+    
+    
+//    func isValidAppID() -> Bool {
+//        if LQSLayerAppIDString == "LAYER_APP_ID" {
+//            let alert = UIAlertView(
+//                title: "\u{1F625}", //"😥"
+//                message: "To correctly use this project you need to replace LAYER_APP_ID in AppDelegate.m (line 11) with your App ID from developer.layer.com.",
+//                delegate: self,
+//                cancelButtonTitle: nil)
+//            
+//            alert.addButtonWithTitle("OK")
+//            alert.show()
+//            return false
+//        }
+//        return true
+//    }
+
+    
+    func showFirstTimeMessage() {
+        let LQSApplicationHasLaunchedOnceDefaultsKey = "applicationHasLaunchedOnce"
+        
+        if !NSUserDefaults.standardUserDefaults().boolForKey(LQSApplicationHasLaunchedOnceDefaultsKey) {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: LQSApplicationHasLaunchedOnceDefaultsKey)
+            
+            // This is the first launch ever
+            
+            UIAlertView(
+                title: "Hello!",
+                message: "This is a very simple example of a chat app using Layer. Launch this app on a Simulator and a Device to start a 1:1 conversation. If you shake the Device the navbar color will change on both the Simulator and Device.",
+                delegate: nil,
+                cancelButtonTitle: "Got It!").show()
+        }
+    }
+
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        if alertView.buttonTitleAtIndex(buttonIndex) == "OK" {
+            abort()
+        }
+    }
+
+    
 }
 

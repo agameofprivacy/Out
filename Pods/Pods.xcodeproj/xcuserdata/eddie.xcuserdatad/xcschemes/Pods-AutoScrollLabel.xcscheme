@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EF093000EF04B02C13A50E43"
+               BlueprintIdentifier = "685AAE9E77D20FB5803287F1"
                BuildableName = "AutoScrollLabel.framework"
                BlueprintName = "Pods-AutoScrollLabel"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 // Controller for challenge gallery view, loads and displays challenges available for current user
 class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

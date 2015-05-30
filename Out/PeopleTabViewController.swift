@@ -8,6 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import Parse
 // Controller for people tab view, displays mentor, following, and follower information
 class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-
+import Parse
 // Controller for notifications view
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 

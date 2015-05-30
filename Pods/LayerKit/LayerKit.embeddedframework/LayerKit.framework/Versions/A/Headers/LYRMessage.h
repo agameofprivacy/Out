@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LYRQuery.h"
 #import "LYRConstants.h"
+#import "LYRActor.h"
 
 @class LYRConversation;
 
@@ -20,13 +21,16 @@ typedef NS_ENUM(NSInteger, LYRRecipientStatus) {
     LYRRecipientStatusInvalid   = -1,
     
     /// @abstract The message has been transported to Layer and is awaiting synchronization by the recipient's devices.
-	LYRRecipientStatusSent      = 0,
+    LYRRecipientStatusPending   = 0,
+    
+    /// @abstract The message has been transported to Layer and is awaiting synchronization by the recipient's devices.
+    LYRRecipientStatusSent      = 1,
 	
     /// @abstract The message has been synchronized to at least one device for a recipient but has not been marked as read.
-	LYRRecipientStatusDelivered = 1,
+    LYRRecipientStatusDelivered = 2,
 	
     /// @abstract The message has been marked as read by one of the recipient's devices.
-	LYRRecipientStatusRead      = 2
+    LYRRecipientStatusRead      = 3
 };
 
 ///------------------
@@ -107,10 +111,10 @@ extern NSString *const LYRMessageOptionsPushNotificationSoundNameKey;
 @property (nonatomic, readonly) NSDate *receivedAt LYR_QUERYABLE_PROPERTY LYR_QUERYABLE_FROM(LYRConversation);
 
 /**
- @abstract The user ID of the user who sent the message.
- @discussion The `sentByUserID` property is queryable via the `LYRPredicateOperatorIsEqualTo`, `LYRPredicateOperatorIsNotEqualTo`, `LYRPredicateOperatorIsIn`, and `LYRPredicateOperatorIsNotIn` operators.
+ @abstract The sender who sent the message.
+ @discussion The `sender` can be an authenticated user or from a platform, specificed by the sender's properties `userID` and `name`.  They are mutually exclusive.  Both properties are queryable from `LYRMessage`.
  */
-@property (nonatomic, readonly) NSString *sentByUserID LYR_QUERYABLE_PROPERTY;
+@property (nonatomic, readonly) LYRActor *sender;
 
 ///----------------------
 /// @name Marking as Read
@@ -164,6 +168,9 @@ extern NSString *const LYRMessagePushNotificationAlertMessageKey __deprecated;
 extern NSString *const LYRMessagePushNotificationSoundNameKey __deprecated;
 
 @interface LYRMessage (Deprecated_Nonfunctional)
+
+// Deprecated.  Use `LYRActor` property `userID` instead.
+@property (nonatomic, readonly) NSString *sentByUserID __deprecated;
 
 // Deprecated. Use `LYRClient newMessageWithParts:options:error:` with `LYRConversation sendMessage:error:` instead.
 + (instancetype)messageWithConversation:(LYRConversation *)conversation parts:(NSArray *)messageParts __deprecated;

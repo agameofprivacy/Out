@@ -8,7 +8,7 @@
 
 import UIKit
 import BBBadgeBarButtonItem
-
+import Parse
 // Controller for activity tab view
 class ActivityTabViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -610,7 +610,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                         }
                                                         else if context == "old"{
 //                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
-                                                            println("reload old")
+//                                                            println("reload old")
 //                                                            println(self.processedActivities)
                                                             self.tableView.reloadData()
                                                         }
@@ -619,7 +619,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                                                             self.tableView.reloadData()
                                                         }
                                                     }
-                                                    println("hello")
+//                                                    println("hello")
                                                     self.refreshControl?.endRefreshing()
                                                     
                                                 }

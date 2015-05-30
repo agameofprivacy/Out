@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import TPKeyboardAvoiding
-
+import Parse
 class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     

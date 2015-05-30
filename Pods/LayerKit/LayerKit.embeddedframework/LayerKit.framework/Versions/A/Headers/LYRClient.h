@@ -404,6 +404,7 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 
 /**
  @abstract Creates and returns a new message with the given set of message parts.
+ @discussion This method will allow a maximum of 1000 parts per message.
  @param messageParts An array of `LYRMessagePart` objects specifying the content of the message. Cannot be `nil` or empty.
  @param options A dictionary of options to apply to the message.
  @return A new message that is ready to be sent.

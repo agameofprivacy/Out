@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 // Controller for people gallery view, displays people avaialable to be followed by current user
 class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 

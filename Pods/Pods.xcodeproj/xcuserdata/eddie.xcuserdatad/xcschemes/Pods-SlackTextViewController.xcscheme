@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "71953596426C08AC8A3ABCC7"
+               BlueprintIdentifier = "4572726891063810F2A8EB48"
                BuildableName = "SlackTextViewController.framework"
                BlueprintName = "Pods-SlackTextViewController"
                ReferencedContainer = "container:Pods.xcodeproj">

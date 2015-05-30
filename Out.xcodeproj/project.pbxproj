@@ -84,6 +84,7 @@
 		2C8C3EF71AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */; };
 		2C8C3EF91AC5DB74007E5B05 /* WebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */; };
 		2C8C3EFB1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */; };
+		2C93D1FB1B1A12CC004EABE9 /* LayerAuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93D1FA1B1A12CC004EABE9 /* LayerAuthenticationHelper.swift */; };
 		2C93EE511A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */; };
 		2C9CA60B1A059D0900BC4D93 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CA60A1A059D0900BC4D93 /* CreateAccountViewController.swift */; };
 		2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9CA60D1A05AE4E00BC4D93 /* PeopleTabViewController.swift */; };
@@ -263,6 +264,7 @@
 		2C8C3EF61AC5C78F007E5B05 /* ActivityExpandedBlurbTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityExpandedBlurbTableViewCell.swift; sourceTree = "<group>"; };
 		2C8C3EF81AC5DB74007E5B05 /* WebViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewTableViewCell.swift; sourceTree = "<group>"; };
 		2C8C3EFA1AC5EB4B007E5B05 /* CommentsViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewTableViewCell.swift; sourceTree = "<group>"; };
+		2C93D1FA1B1A12CC004EABE9 /* LayerAuthenticationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayerAuthenticationHelper.swift; sourceTree = "<group>"; };
 		2C93EE501A1158C0009E6147 /* DashboardAnnouncementsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardAnnouncementsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C9CA60A1A059D0900BC4D93 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		2C9CA60D1A05AE4E00BC4D93 /* PeopleTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleTabViewController.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5D996E19E4A9FB00133F59 /* AppDelegate.swift */,
+				2C93D1FA1B1A12CC004EABE9 /* LayerAuthenticationHelper.swift */,
 				2C5D997519E4A9FB00133F59 /* Images.xcassets */,
 				2C5D997719E4A9FB00133F59 /* LaunchScreen.xib */,
 				2C5D997219E4A9FB00133F59 /* Main.storyboard */,
@@ -871,6 +874,7 @@
 				2C1CD0BE1AB0CF8E00A4359D /* StatusActivityTableViewCell.swift in Sources */,
 				2C9CA60E1A05AE4E00BC4D93 /* PeopleTabViewController.swift in Sources */,
 				2CDA9D1A19F5617700D87841 /* ChallengeGalleryViewController.swift in Sources */,
+				2C93D1FB1B1A12CC004EABE9 /* LayerAuthenticationHelper.swift in Sources */,
 				2CB170F819F2C7860086C95F /* AppDelegate.swift in Sources */,
 				2C24FB1E1AEABA9C003D9688 /* PNPieChartDataItem.m in Sources */,
 				2C3366E11A008752009198EA /* WebViewViewController.swift in Sources */,

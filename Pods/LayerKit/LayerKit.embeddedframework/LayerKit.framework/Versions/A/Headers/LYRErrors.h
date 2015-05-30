@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, LYRError) {
     LYRErrorMessagePartContentAlreadyAvailable      = 1007,
     LYRErrorMessagePartContentAlreadyPurged         = 1008,
     LYRErrorMessagePartContentInlined               = 1009,
+    LYRErrorConversationAlreadyDeleted              = 1010,
+    LYRErrorUserNotAParticipantInConversation       = 1011, 
     
     // Validation Errors
     LYRErrorInvalidKey                              = 2000,

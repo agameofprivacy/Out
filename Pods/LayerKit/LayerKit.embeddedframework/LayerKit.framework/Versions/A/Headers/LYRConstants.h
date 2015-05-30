@@ -45,9 +45,9 @@ typedef NS_ENUM(NSUInteger, LYRDeletionMode) {
 ///---------------------
 
 typedef NS_ENUM(NSInteger, LYRObjectChangeType) {
-	LYRObjectChangeTypeCreate,
-	LYRObjectChangeTypeUpdate,
-	LYRObjectChangeTypeDelete
+	LYRObjectChangeTypeCreate   = 0,
+	LYRObjectChangeTypeUpdate   = 1,
+	LYRObjectChangeTypeDelete   = 2
 };
 
 /**

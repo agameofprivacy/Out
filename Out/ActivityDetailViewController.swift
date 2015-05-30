@@ -8,7 +8,7 @@
 
 import UIKit
 import SlackTextViewController
-
+import Parse
 // Controller for activity detail view
 class ActivityDetailViewController: SLKTextViewController {
 

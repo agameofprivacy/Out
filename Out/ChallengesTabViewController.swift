@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 // Collect Step Data protocol
 protocol CollectStepData {
     

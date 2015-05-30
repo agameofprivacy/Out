@@ -8,7 +8,7 @@
 
 import UIKit
 import XLForm
-
+import Parse
 // Controller for signup view
 class CreateAccountViewController: XLFormViewController {
 

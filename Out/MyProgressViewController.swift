@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 class MyProgressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var chartShade:UIView!

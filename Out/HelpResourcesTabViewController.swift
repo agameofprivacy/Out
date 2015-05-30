@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CCHMapClusterController
 import TPKeyboardAvoiding
-
+import Parse
 class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate{
 
 

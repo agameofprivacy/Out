@@ -8,6 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import Parse
 // Controller for profile view
 class MyProfileViewController: UIViewController {
 

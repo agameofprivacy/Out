@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate {
 
     var parentVC:ActivityTabViewController!

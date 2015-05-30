@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-
+import Parse
 class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView:TPKeyboardAvoidingTableView!

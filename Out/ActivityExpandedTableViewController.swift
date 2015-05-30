@@ -8,7 +8,7 @@
 
 import UIKit
 import TPKeyboardAvoiding
-
+import Parse
 class ActivityExpandedTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate {
 
     var parentVC:ActivityTabViewController!
