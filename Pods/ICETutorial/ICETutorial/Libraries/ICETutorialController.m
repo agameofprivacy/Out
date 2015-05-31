@@ -57,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setupView];
     
@@ -74,7 +74,7 @@
     [self.backLayerView setFrame:self.view.bounds];
     
     // Decoration.
-    [self.gradientView setImage:[UIImage imageNamed:@"background-gradient.png"]];
+    [self.gradientView setImage:0];
     
     // ScrollView configuration.
     [self.scrollView setFrame:self.view.bounds];
@@ -96,10 +96,12 @@
                forControlEvents:UIControlEventValueChanged];
     
     // UIButtons.
-    [self.leftButton setBackgroundColor:[UIColor darkGrayColor]];
-    [self.rightButton setBackgroundColor:[UIColor darkGrayColor]];
-    [self.leftButton setTitle:@"Button 1" forState:UIControlStateNormal];
-    [self.rightButton setTitle:@"Button 2" forState:UIControlStateNormal];
+    [self.leftButton setBackgroundColor:[UIColor clearColor]];
+    [self.rightButton setBackgroundColor:[UIColor clearColor]];
+    [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.leftButton setTitle:@"Login" forState:UIControlStateNormal];
+    [self.rightButton setTitle:@"Signup" forState:UIControlStateNormal];
     [self.leftButton addTarget:self
                         action:@selector(didClickOnButton1:)
               forControlEvents:UIControlEventTouchUpInside];
@@ -112,7 +114,7 @@
     [self.view addSubview:self.gradientView];
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.overlayTitle];
-    [self.view addSubview:self.pageControl];
+//    [self.view addSubview:self.pageControl];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
     
@@ -124,7 +126,7 @@
     [self.frontLayerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	[self.backLayerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_overlayTitle, _leftButton, _rightButton, _pageControl, _gradientView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_overlayTitle, _leftButton, _rightButton, _gradientView);
     NSMutableArray *constraints = [NSMutableArray array];
     
     // Overlay title.
@@ -139,10 +141,10 @@
     [constraints addObject:@"V:[_rightButton(==36)]-20-|"];
     [constraints addObject:@"H:|-20-[_leftButton(==_rightButton)]-20-[_rightButton(>=130)]-20-|"];
 
-    // PageControl.
-    [self.pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [constraints addObject:@"V:[_pageControl(==32)]-60-|"];
-    [constraints addObject:@"H:|-140-[_pageControl(==40)]"];
+//    // PageControl.
+//    [self.pageControl setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [constraints addObject:@"V:[_pageControl(==32)]-60-|"];
+//    [constraints addObject:@"H:|[_pageControl]|"];
 
     // GradientView.
     [self.gradientView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -266,7 +268,7 @@
 // Setup the Title Label.
 - (void)setOverlayTitle {
     // ...or change by an UIImageView if you need it.
-    [self.overlayTitle setText:@"Welcome"];
+    [self.overlayTitle setText:@""];
 }
 
 // Setup the Title/Subtitle style/text.
@@ -342,8 +344,8 @@
 // Preset the origin state.
 - (void)setOriginLayersState {
     self.currentState = ScrollingStateAuto;
-    [self.backLayerView setBackgroundColor:[UIColor blackColor]];
-    [self.frontLayerView setBackgroundColor:[UIColor blackColor]];
+    [self.backLayerView setBackgroundColor:[UIColor whiteColor]];
+    [self.frontLayerView setBackgroundColor:[UIColor whiteColor]];
     [self setLayersPicturesWithIndex:0];
 }
 

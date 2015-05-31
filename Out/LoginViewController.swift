@@ -96,8 +96,9 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
                 controller = ICETutorialController(pages: listPages, delegate: self)
                 ICETutorialStyle.sharedInstance().titleStyle = titleStyle
                 ICETutorialStyle.sharedInstance().subTitleStyle = subStyle
+
+                controller.autoScrollEnabled = true
                 controller.startScrolling()
-                
                 // present ICETutorial view
                 self.presentViewController(controller, animated: false, completion: nil)
             }
@@ -282,9 +283,15 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         controller = ICETutorialController(pages: listPages, delegate: self)
         ICETutorialStyle.sharedInstance().titleStyle = titleStyle
         ICETutorialStyle.sharedInstance().subTitleStyle = subStyle
+
         controller.startScrolling()
+        controller.autoScrollEnabled = true
         
         self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func tutorialControllerDidReachLastPage(tutorialController: ICETutorialController!) {
+        tutorialController.startScrolling()
     }
     
     func loginLayer(){
