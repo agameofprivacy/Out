@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "67E2CEE57AB5316FDA8A0CCF"
+               BlueprintIdentifier = "9AA443F11ABB99EF15F3731D"
                BuildableName = "UICountingLabel.framework"
                BlueprintName = "Pods-UICountingLabel"
                ReferencedContainer = "container:Pods.xcodeproj">

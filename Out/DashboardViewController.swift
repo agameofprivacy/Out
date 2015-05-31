@@ -525,7 +525,6 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     // Initiate logout process if Logout button tapped
     @IBAction func logoutBarButtonItemTapped(sender: UIBarButtonItem) {
 //        var currentUser = PFUser.currentUser()
-        self.performSegueWithIdentifier("LoggedOut", sender: nil)
     }
 
     // Prepare for Logout segue
@@ -533,10 +532,19 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         if (segue.identifier == "LoggedOut"){
             PFInstallation.currentInstallation().removeObjectForKey("currentUser")
             PFInstallation.currentInstallation().saveInBackgroundWithBlock(nil)
-            PFUser.logOut()
             var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
             vc.showTutorial = false
             vc.scrollViewHidden = false
+            PFUser.logOut()
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            println(appDelegate.layerClient.description)
+            appDelegate.layerClient.deauthenticateWithCompletion { (success, error) -> Void in
+                if (error == nil) {
+                    println("Successfully deauthenticated \(success)")
+                } else {
+                    println("Failed to deauthenticate: \(error)")
+                }
+            }
         }
     }
     

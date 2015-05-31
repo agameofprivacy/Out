@@ -32,7 +32,6 @@ typealias IdentityTokenCompletionBlock  = (String?, NSError?) -> Void
 // Controller for the login screen as well as ICETutorial pages
 class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     
-    var layerClient:LYRClient!
     
     // Container TPKeyboardAvoidingScrollView for login view
     var containerScrollView:TPKeyboardAvoidingScrollView!
@@ -53,10 +52,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     var scrollViewHidden = true
     
     override func viewDidLoad() {
-        if(PFInstallation.currentInstallation()["currentUser"] != nil){
-            let appID = NSUUID(UUIDString: LQSLayerAppIDString)
-            layerClient = LYRClient(appID: appID)
-
+        if((PFUser.currentUser()) != nil){
             self.loginLayer()
         }
         else{
@@ -69,7 +65,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             containerScrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
             self.containerScrollView.hidden = scrollViewHidden
             self.view.backgroundColor = UIColor.whiteColor()
-
+            println("showTutorial IS \(showTutorial)")
             if (showTutorial){
 
                 // Initialize tutorial pages texts, and pictures.
@@ -242,7 +238,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.passwordTextField.enabled = false
         PFUser.logInWithUsernameInBackground(self.aliasTextField.text, password:self.passwordTextField.text) {
             (user, error) -> Void in
-            if user != nil {
+            if (error == nil) {
                 // Do stuff after successful login.
                 PFInstallation.currentInstallation()["currentUser"] = PFUser.currentUser()
                 PFInstallation.currentInstallation().saveInBackgroundWithBlock(nil)
@@ -296,36 +292,55 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         // Connect to Layer
         // See "Quick Start - Connect" for more details
         // https://developer.layer.com/docs/quick-start/ios#connect
-        
-        self.layerClient.connectWithCompletion { (success, error) -> Void in
-            if (!success){
-                println("Failed to connect to Layer: \(error)")
+        if ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient == nil){
+            let appID = NSUUID(UUIDString: LQSLayerAppIDString)
+            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient = LYRClient(appID: appID)
+        }
+        if !(UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.isConnected{
+            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.connectWithCompletion { (success, error) -> Void in
+                if (!success){
+                    println("Failed to connect to Layer: \(error)")
+                }
+                else{
+                    var user:PFUser = PFUser.currentUser()!
+                    var userID:NSString = user.objectId!
+                    self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
+                        if (error == nil){
+                            self.performSegueWithIdentifier("LoggedIn", sender: nil)
+                        }
+                        else{
+                            println("Failed Authenticating Layer Client with error: \(error)")
+                        }
+                    })
+                }
             }
-            else{
-                var user:PFUser = PFUser.currentUser()!
-                var userID:NSString = user.objectId!
-                self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
-                    if (error == nil){
-                        self.performSegueWithIdentifier("LoggedIn", sender: nil)
-                    }
-                    else{
-                        println("Failed Authenticating Layer Client with error: \(error)")
-                    }
-                })
-            }
+        }
+        else{
+            var user:PFUser = PFUser.currentUser()!
+            var userID:NSString = user.objectId!
+            self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
+                if (error == nil){
+                    self.performSegueWithIdentifier("LoggedIn", sender: nil)
+                }
+                else{
+                    println("Failed Authenticating Layer Client with error: \(error)")
+                }
+            })
         }
     }
     
     func authenticateLayerWithUserID(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
         // Check to see if the layerClient is already authenticated.
-        if let authenticatedUserID = layerClient.authenticatedUserID {
+        let authenticatedUserID = (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID
+        println(authenticatedUserID)
+        if authenticatedUserID != nil{
             // If the layerClient is authenticated with the requested userID, complete the authentication process.
             if authenticatedUserID == userID {
                 println("Layer Authenticated as User \(authenticatedUserID)")
                 authenticationCompletion(error: nil)
             } else {
                 // If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
-                layerClient.deauthenticateWithCompletion { success, error in
+                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.deauthenticateWithCompletion { success, error in
                     if success {
                         self.authenticationTokenWithUserId(userID, authenticationCompletion: authenticationCompletion)
                     } else if let error = error {
@@ -343,21 +358,21 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     
     func authenticationTokenWithUserId(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
         // 1. Request an authentication Nonce from Layer
-        layerClient.requestAuthenticationNonceWithCompletion { nonce, error in
+        (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.requestAuthenticationNonceWithCompletion { nonce, error in
             if nonce == nil {
                 authenticationCompletion(error: error)
                 return
             }
             
             // 2. Acquire identity Token from Layer Identity Service
-            self.requestIdentityTokenForUserID(userID, appID: self.layerClient.appID.UUIDString, nonce: nonce) { identityToken, error in
+            self.requestIdentityTokenForUserID(userID, appID: (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.appID.UUIDString, nonce: nonce) { identityToken, error in
                 if identityToken == nil {
                     authenticationCompletion(error: error)
                     return
                 }
                 
                 // 3. Submit identity token to Layer for validation
-                self.layerClient.authenticateWithIdentityToken(identityToken) { authenticatedUserID, error in
+                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticateWithIdentityToken(identityToken) { authenticatedUserID, error in
                     if authenticatedUserID != nil {
                         println("Layer Authenticated as User: \(authenticatedUserID)")
                         authenticationCompletion(error: nil)
