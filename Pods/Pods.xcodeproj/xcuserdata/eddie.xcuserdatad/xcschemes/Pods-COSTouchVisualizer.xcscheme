@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F4AB7D025687F8E0F67A7BED"
+               BlueprintIdentifier = "19F914F65C50902908969894"
                BuildableName = "COSTouchVisualizer.framework"
                BlueprintName = "Pods-COSTouchVisualizer"
                ReferencedContainer = "container:Pods.xcodeproj">

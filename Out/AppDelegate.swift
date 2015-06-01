@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UIStyleController.applyStyle()
-//        Parse.enableLocalDatastore()
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("BIV65YI6yH4JPzMDiMro4aHLX0THLJEq40X3XTfR", clientKey: "DjwDcyZzLPOkWl5GSLKeZwLzA8YWdKYE9nM2ZfmC")
 
         PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)

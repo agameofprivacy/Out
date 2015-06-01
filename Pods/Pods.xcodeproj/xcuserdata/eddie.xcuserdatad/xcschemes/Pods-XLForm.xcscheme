@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09698A0BB0E07AD67F127F0A"
+               BlueprintIdentifier = "E783D41A50BD991C0A5ABB66"
                BuildableName = "XLForm.framework"
                BlueprintName = "Pods-XLForm"
                ReferencedContainer = "container:Pods.xcodeproj">

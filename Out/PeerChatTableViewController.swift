@@ -8,12 +8,18 @@
 
 import UIKit
 
-class PeerChatTableViewController: UITableViewController {
+class PeerChatTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource, LYRClientDelegate {
 
+    var conversations:NSOrderedSet = NSOrderedSet(array: [])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Chat"
+        var updateConversations = UIRefreshControl()
+        self.refreshControl = updateConversations
+        self.refreshControl?.addTarget(self, action: "tableViewRefreshed", forControlEvents: UIControlEvents.ValueChanged)
+        
+        self.navigationItem.title = "Conversations"
 
         var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeChat")
         self.navigationItem.leftBarButtonItem = closeButton
@@ -22,9 +28,15 @@ class PeerChatTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = newChatButton
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        self.loadConversations()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,13 +49,43 @@ class PeerChatTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return self.conversations.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Plain")
+        cell.textLabel?.text = "Conversation"
+        cell.detailTextLabel?.text = "\((self.conversations.objectAtIndex(indexPath.row) as! LYRConversation).participants)"
+        return cell
+    }
+    
+    func tableViewRefreshed(){
+        self.refreshControl?.beginRefreshing()
+        self.loadConversations()
+    }
+    
+    func loadConversations(){
+        let query = LYRQuery(`queryableClass`: LYRConversation.self)
+        query.resultType = LYRQueryResultType.Objects
+        var error:NSError?
+        self.conversations = ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.executeQuery(query, error: &error))
+        if let error = error {
+            println("Query failed with error \(error.localizedDescription)")
+        }
+        else{
+            println("Query contains \(conversations.count) conversations")
+        }
+        for conversation in self.conversations{
+            println(conversation.description)
+        }
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
 
     /*
@@ -101,12 +143,68 @@ class PeerChatTableViewController: UITableViewController {
     }
     */
     
+    
     func closeChat(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func newChat(){
         println("Start New Chat")
+        self.performSegueWithIdentifier("showNewChatViewController", sender: self)
+    }
+    
+    // MARK: - LYRClientDelegate
+    
+    func layerClient(client: LYRClient!, didReceiveAuthenticationChallengeWithNonce nonce: String!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didAuthenticateAsUserID userID: String!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFailOperationWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFailSynchronizationWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFinishContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didFinishSynchronizationWithChanges changes: [AnyObject]!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, didLoseConnectionWithError error: NSError!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, objectsDidChange changes: [AnyObject]!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, willAttemptToConnect attemptNumber: UInt, afterDelay delayInterval: NSTimeInterval, maximumNumberOfAttempts attemptLimit: UInt) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClient(client: LYRClient!, willBeginContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!, withProgress progress: LYRProgress!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidConnect(client: LYRClient!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidDeauthenticate(client: LYRClient!) {
+        println(__FUNCTION__)
+    }
+    
+    func layerClientDidDisconnect(client: LYRClient!) {
+        println(__FUNCTION__)
     }
 
 }
