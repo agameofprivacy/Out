@@ -73,14 +73,14 @@ class PeerChatTableViewController: UITableViewController, LYRClientDelegate {
     func loadConversations(){
         let query = LYRQuery(`queryableClass`: LYRConversation.self)
         query.resultType = LYRQueryResultType.Objects
-        let error:NSError?
-        self.conversations = ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.executeQuery(query))
-        if let error = error {
-            print("Query failed with error \(error.localizedDescription)")
-        }
-        else{
-            print("Query contains \(conversations.count) conversations")
-        }
+//        let error:NSError?
+//        self.conversations = ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.executeQuery(query))
+//        if let error = error {
+//            print("Query failed with error \(error.localizedDescription)")
+//        }
+//        else{
+//            print("Query contains \(conversations.count) conversations")
+//        }
         for conversation in self.conversations{
             print(conversation.description)
         }

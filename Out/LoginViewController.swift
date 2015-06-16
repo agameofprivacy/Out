@@ -297,42 +297,43 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         
         // Connect to Layer
         // See "Quick Start - Connect" for more details
-        // https://developer.layer.com/docs/quick-start/ios#connect
-        if ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient == nil){
-            let appID = NSUUID(UUIDString: LQSLayerAppIDString)
-            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient = LYRClient(appID: appID)
-        }
-        if !(UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.isConnected{
-            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.connectWithCompletion { (success, error) -> Void in
-                if (!success){
-                    print("Failed to connect to Layer: \(error)")
-                }
-                else{
-                    let user:PFUser = PFUser.currentUser()!
-                    let userID:NSString = user.objectId!
-                    self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
-                        if (error == nil){
-                            self.performSegueWithIdentifier("LoggedIn", sender: nil)
-                        }
-                        else{
-                            print("Failed Authenticating Layer Client with error: \(error)")
-                        }
-                    })
-                }
-            }
-        }
-        else{
-            let user:PFUser = PFUser.currentUser()!
-            let userID:NSString = user.objectId!
-            self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
-                if (error == nil){
-                    self.performSegueWithIdentifier("LoggedIn", sender: nil)
-                }
-                else{
-                    print("Failed Authenticating Layer Client with error: \(error)")
-                }
-            })
-        }
+//        // https://developer.layer.com/docs/quick-start/ios#connect
+//        if ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient == nil){
+//            let appID = NSUUID(UUIDString: LQSLayerAppIDString)
+//            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient = LYRClient(appID: appID)
+//        }
+//        if !(UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.isConnected{
+//            (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.connectWithCompletion { (success, error) -> Void in
+//                if (!success){
+//                    print("Failed to connect to Layer: \(error)")
+//                }
+//                else{
+//                    let user:PFUser = PFUser.currentUser()!
+//                    let userID:NSString = user.objectId!
+//                    self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
+//                        if (error == nil){
+//                            self.performSegueWithIdentifier("LoggedIn", sender: nil)
+//                        }
+//                        else{
+//                            print("Failed Authenticating Layer Client with error: \(error)")
+//                        }
+//                    })
+//                }
+//            }
+//        }
+//        else{
+//            let user:PFUser = PFUser.currentUser()!
+//            let userID:NSString = user.objectId!
+//            self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
+//                if (error == nil){
+//                    self.performSegueWithIdentifier("LoggedIn", sender: nil)
+//                }
+//                else{
+//                    print("Failed Authenticating Layer Client with error: \(error)")
+//                }
+//            })
+//        }
+        self.performSegueWithIdentifier("LoggedIn", sender: nil)
     }
     
     func authenticateLayerWithUserID(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
@@ -416,21 +417,21 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             }
             
             // Deserialize the response
-            let responseObject = NSJSONSerialization.JSONObjectWithData(data!, options: [])
-            if responseObject["error"] == nil {
-                let identityToken = responseObject["identity_token"] as! String
-                tokenCompletion(identityToken, nil)
-            } else {
-                let domain = "layer-identity-provider.herokuapp.com"
-                let code = responseObject["status"]!!.integerValue
-                let userInfo = [
-                    NSLocalizedDescriptionKey: "Layer Identity Provider Returned an Error.",
-                    NSLocalizedRecoverySuggestionErrorKey: "There may be a problem with your APPID."
-                ]
-                
-                let error = NSError(domain: domain, code: code, userInfo: userInfo)
-                tokenCompletion(nil, error)
-            }
+//            let responseObject = NSJSONSerialization.JSONObjectWithData(data!, options: [])
+//            if responseObject["error"] == nil {
+//                let identityToken = responseObject["identity_token"] as! String
+//                tokenCompletion(identityToken, nil)
+//            } else {
+//                let domain = "layer-identity-provider.herokuapp.com"
+//                let code = responseObject["status"]!!.integerValue
+//                let userInfo = [
+//                    NSLocalizedDescriptionKey: "Layer Identity Provider Returned an Error.",
+//                    NSLocalizedRecoverySuggestionErrorKey: "There may be a problem with your APPID."
+//                ]
+//                
+//                let error = NSError(domain: domain, code: code, userInfo: userInfo)
+//                tokenCompletion(nil, error)
+//            }
         }
         dataTask!.resume()
     }

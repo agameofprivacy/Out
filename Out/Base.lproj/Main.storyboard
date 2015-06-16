@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xGb-D8-E3Q">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
     </dependencies>
     <scenes>
         <!--Me-->
@@ -15,6 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="gHQ-4z-CFY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Me" id="Xqf-XI-z72">
@@ -46,6 +48,7 @@
                     <view key="view" contentMode="scaleToFill" id="nbI-dj-TGG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Activity" id="hPJ-Uo-xzR">
@@ -73,6 +76,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ruT-Du-cKb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="nkc-a2-kWE" kind="relationship" relationship="rootViewController" id="rlH-Bc-IqA"/>
@@ -93,6 +97,7 @@
                     <view key="view" contentMode="scaleToFill" id="Pz7-fD-EmG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="iqe-cp-RF7"/>
@@ -112,6 +117,7 @@
                     <view key="view" contentMode="scaleToFill" id="p7y-rO-wZp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CGW-08-Fx6"/>
@@ -127,6 +133,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9c-Hy-of4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Mw2-qt-fbD" kind="relationship" relationship="rootViewController" id="or6-hI-8r0"/>
@@ -143,6 +150,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0u9-mx-DWG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="JUM-1N-qWW" kind="relationship" relationship="rootViewController" id="y4b-cu-YL7"/>
@@ -163,6 +171,7 @@
                     <view key="view" contentMode="scaleToFill" id="oBU-ZJ-OJq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="HTc-8h-PIg"/>
@@ -178,6 +187,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B1M-jo-Gbj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="cGl-bT-5W6" kind="relationship" relationship="rootViewController" id="Zzu-Ii-uqx"/>
@@ -198,6 +208,7 @@
                     <view key="view" contentMode="scaleToFill" id="fBu-0l-KIq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Activities" id="ycy-e3-3Xn">
@@ -219,21 +230,27 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="49" sectionHeaderHeight="10" sectionFooterHeight="10" id="0m6-V8-5Xs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChallengeFilterCell" id="zIh-bf-RnQ" customClass="ChallengeFilterTableViewCell" customModule="Out" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="93.5" width="600" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zIh-bf-RnQ" id="FwD-tF-zOA">
+                                    <rect key="frame" x="0.0" y="0.0" width="561" height="48.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PQ-0i-iNS">
                                             <rect key="frame" x="16" y="14" width="210" height="21"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="challengeFilterTitleLabel" destination="9PQ-0i-iNS" id="ZwN-Ya-jjT"/>
                                 </connections>
@@ -264,11 +281,13 @@
                     <subviews>
                         <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kAr-Mo-6Gl">
                             <rect key="frame" x="0.0" y="20" width="370" height="44"/>
+                            <animations/>
                             <items>
                                 <navigationItem title="Filter" id="Wgw-pc-yXw"/>
                             </items>
                         </navigationBar>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
@@ -285,6 +304,7 @@
                     <view key="view" contentMode="scaleToFill" id="PHT-JF-YC3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Cts-qg-wNu"/>
@@ -304,6 +324,7 @@
                     <view key="view" contentMode="scaleToFill" id="fUc-RU-qFS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -318,13 +339,18 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="B8a-c7-UgJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="97X-VE-rgN">
+                                <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="97X-VE-rgN" id="pLc-lZ-xo1">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -352,6 +378,7 @@
                     <view key="view" contentMode="scaleToFill" id="41b-wi-kbG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -366,6 +393,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gpj-hH-2Hs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="qkO-uE-rxW" kind="relationship" relationship="rootViewController" id="8Ed-rE-5kH"/>
@@ -386,6 +414,7 @@
                     <view key="view" contentMode="scaleToFill" id="mlF-qV-qFc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Help" id="uR0-aV-yhf"/>
@@ -409,6 +438,7 @@
                     <view key="view" contentMode="scaleToFill" id="lvh-rK-gmi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -423,6 +453,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rEp-jc-dV0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Pqf-ZR-i2j" kind="relationship" relationship="rootViewController" id="mKK-cE-wC1"/>
@@ -439,6 +470,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hni-q6-RL6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="EKW-zJ-CgV" kind="relationship" relationship="rootViewController" id="DTe-ZT-EHp"/>
@@ -456,6 +488,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5dI-Nn-WCx">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
@@ -480,6 +513,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QQQ-0J-mdO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -497,13 +531,18 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lJJ-NR-vJi">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Kc3-iU-Xhp">
+                                <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kc3-iU-Xhp" id="hLg-ep-ICa">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <segue destination="Uf4-jo-pGC" kind="show" identifier="showActivityExpanded" id="YC4-EK-tLl"/>
                                 </connections>
@@ -517,6 +556,7 @@
                     <navigationItem key="navigationItem" title="Feed" id="kq0-8O-a6r"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Tsv-f6-uLj">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <attributedString key="attributedTitle"/>
                         <connections>
                             <action selector="refreshActivityFeed:" destination="ykm-qL-SSa" eventType="valueChanged" id="se4-kq-zhs"/>
@@ -543,6 +583,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8he-gj-vpx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -564,6 +605,7 @@
                     <view key="view" contentMode="scaleToFill" id="cEs-Lc-tJm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="11s-2Z-msZ"/>
@@ -584,6 +626,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="m3V-tS-vN9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="HbF-24-dW2" kind="relationship" relationship="rootViewController" id="xus-8A-fE5"/>
@@ -604,6 +647,7 @@
                     <view key="view" contentMode="scaleToFill" id="1V7-GE-fRr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VKg-kB-Jrx"/>
@@ -627,6 +671,7 @@
                     <view key="view" contentMode="scaleToFill" id="Fip-vR-q2Q">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
@@ -650,6 +695,7 @@
                     <view key="view" contentMode="scaleToFill" id="TmK-ha-3uW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="SnS-fw-Lp2"/>
@@ -669,6 +715,7 @@
                     <view key="view" contentMode="scaleToFill" id="grw-LM-w5W">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
@@ -690,6 +737,7 @@
                     <view key="view" contentMode="scaleToFill" id="gzR-RM-4yK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
@@ -707,6 +755,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZgF-8J-yCI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="eQc-ih-4uO" kind="relationship" relationship="rootViewController" id="Pzl-x8-9xn"/>
@@ -727,6 +776,7 @@
                     <view key="view" contentMode="scaleToFill" id="hJC-fw-GNu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Srj-km-uGa"/>
@@ -746,6 +796,7 @@
                     <view key="view" contentMode="scaleToFill" id="h2o-kG-8zt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -760,6 +811,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SVo-JG-Cow">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Oin-ah-6d4" kind="relationship" relationship="rootViewController" id="gd7-HI-ETW"/>
@@ -780,6 +832,7 @@
                     <view key="view" contentMode="scaleToFill" id="4Se-uL-wOz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="y2S-bs-ti4"/>
@@ -799,6 +852,7 @@
                     <view key="view" contentMode="scaleToFill" id="GC6-xT-JuI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ewX-Gs-P6Q"/>
@@ -818,6 +872,7 @@
                     <view key="view" contentMode="scaleToFill" id="KaU-SO-ox3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -836,6 +891,7 @@
                     <view key="view" contentMode="scaleToFill" id="eRJ-ck-6Vy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="0dg-KU-H5F"/>
@@ -856,6 +912,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="38r-N6-VIW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -877,6 +934,7 @@
                     <view key="view" contentMode="scaleToFill" id="uYg-Bl-mPo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="HxT-FK-gGJ"/>
@@ -896,6 +954,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="T5O-Xb-Ivy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="TBt-ss-Dgd" kind="relationship" relationship="rootViewController" id="NVF-vO-3bS"/>
@@ -916,6 +975,7 @@
                     <view key="view" contentMode="scaleToFill" id="fhG-av-TBC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Mh7-fl-Cyj"/>
@@ -934,6 +994,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="udB-zh-Qla">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="zAg-NA-Oyd" kind="relationship" relationship="rootViewController" id="FcW-1Y-xk3"/>
@@ -950,6 +1011,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bYz-NP-uGg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="Gj1-mP-Ceh" kind="relationship" relationship="rootViewController" id="fL7-9f-66P"/>
@@ -970,6 +1032,7 @@
                     <view key="view" contentMode="scaleToFill" id="SKq-bx-J2R">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="1ly-D6-wAe"/>
@@ -989,6 +1052,7 @@
                     <view key="view" contentMode="scaleToFill" id="rHx-5T-ROQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="C0e-sU-641"/>
@@ -1006,6 +1070,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FMR-yf-Gej">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1026,6 +1091,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bZW-Un-B8l">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1044,6 +1110,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dhT-7s-rHz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1063,6 +1130,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bb5-AG-pts">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

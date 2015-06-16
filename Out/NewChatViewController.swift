@@ -33,18 +33,18 @@ class NewChatViewController: UIViewController {
         // https://developer.layer.com/docs/quick-start/ios#send-a-message
         
         // If no conversations exist, create a new conversation object with a single participant
-        if conversation == nil {
-            var error: NSError?
-            do {
-                conversation = try (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.newConversationWithParticipants(NSSet(array: [LQSParticipantUserID, LQSParticipant2UserID]) as Set<NSObject>, options: nil)
-            } catch let error1 as NSError {
-                error = error1
-                conversation = nil
-            }
-            if conversation == nil {
-                print("New Conversation creation failed: \(error!.localizedDescription)")
-            }
-        }
+//        if conversation == nil {
+//            var error: NSError?
+//            do {
+//                conversation = try (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.newConversationWithParticipants(NSSet(array: [LQSParticipantUserID, LQSParticipant2UserID]) as Set<NSObject>, options: nil)
+//            } catch let error1 as NSError {
+//                error = error1
+//                conversation = nil
+//            }
+//            if conversation == nil {
+//                print("New Conversation creation failed: \(error!.localizedDescription)")
+//            }
+//        }
         let messageText = "test"
         // Creates a message part with text/plain MIME Type
         let messagePart = LYRMessagePart(text: messageText)
