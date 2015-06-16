@@ -26,11 +26,11 @@ class PeopleFilterViewController: XLFormViewController {
         // UINavigationBar init and layout
         self.navigationItem.title = "Filter"
         
-        var closeButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
+        let closeButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         
-        var applyButton = UIBarButtonItem(title: "Apply", style: UIBarButtonItemStyle.Plain, target: self, action: "applyButtonTapped:")
+        let applyButton = UIBarButtonItem(title: "Apply", style: UIBarButtonItemStyle.Plain, target: self, action: "applyButtonTapped:")
         applyButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = applyButton
         
@@ -42,7 +42,7 @@ class PeopleFilterViewController: XLFormViewController {
         
         
         // Do any additional setup after loading the view.
-        var form = XLFormDescriptor(title: "filter")
+        let form = XLFormDescriptor(title: "filter")
         var section:XLFormSectionDescriptor
         var row:XLFormRowDescriptor
 
@@ -141,7 +141,7 @@ class PeopleFilterViewController: XLFormViewController {
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "City", rowType: XLFormRowDescriptorTypeText, title: "City")
-        var paddingView6 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView6 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
         row.cellConfig.setObject(paddingView6, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
@@ -212,11 +212,11 @@ class PeopleFilterViewController: XLFormViewController {
 
     // Apply people filter if Apply button tapped
     func applyButtonTapped(sender: UIBarButtonItem){
-        var peopleGalleryVC = self.parentViewController?.presentingViewController?.childViewControllers[0] as! PeopleGalleryViewController
-        var values = self.form.formValues()
+        let peopleGalleryVC = self.parentViewController?.presentingViewController?.childViewControllers[0] as! PeopleGalleryViewController
+        let values = self.form.formValues()
         var filterDictionary:[String:[String]] = Dictionary(minimumCapacity: 0)
         for value in values{
-            var valueActual: AnyObject = value.1
+            let valueActual: AnyObject = value.1
             if valueActual.isKindOfClass(XLFormOptionsObject){
                 filterDictionary.updateValue(["\((valueActual as! XLFormOptionsObject).valueData())"], forKey: value.0 as! String)
             }

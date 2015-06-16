@@ -27,7 +27,7 @@ class RelevantResourceTableViewCell: UITableViewCell {
         self.backgroundColor = nil
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
-        self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.paperView.translatesAutoresizingMaskIntoConstraints = false
         self.paperView.backgroundColor = UIColor.whiteColor()
         self.paperView.layer.shadowColor = UIColor(white: 0, alpha: 1).CGColor
         self.paperView.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -39,7 +39,7 @@ class RelevantResourceTableViewCell: UITableViewCell {
         contentView.addSubview(self.paperView)
         
         self.logoImageView = UIImageView(frame: CGRectZero)
-        self.logoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.logoImageView.translatesAutoresizingMaskIntoConstraints = false
         self.logoImageView.layer.cornerRadius = 5
         self.logoImageView.clipsToBounds = true
         self.logoImageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -48,14 +48,14 @@ class RelevantResourceTableViewCell: UITableViewCell {
         self.paperView.addSubview(self.logoImageView)
         
         self.keyLabel = UILabel(frame: CGRectZero)
-        self.keyLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.keyLabel.translatesAutoresizingMaskIntoConstraints = false
         self.keyLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         self.keyLabel.numberOfLines = 0
         self.keyLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 55
         self.paperView.addSubview(self.keyLabel)
         
         self.descriptionLabel = UILabel(frame: CGRectZero)
-        self.descriptionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 13.0)
         self.descriptionLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 55
         self.descriptionLabel.numberOfLines = 0
@@ -82,24 +82,24 @@ class RelevantResourceTableViewCell: UITableViewCell {
         //        self.paperView.addSubview(self.messageButton)
         //        var buttonWidth = (UIScreen.mainScreen().bounds.width - 20 * 3 - 15)/2
         
-        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6]
-        var viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "keyLabel":self.keyLabel, "descriptionLabel":self.descriptionLabel]
+        let metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6]
+        let viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "keyLabel":self.keyLabel, "descriptionLabel":self.descriptionLabel]
         
-        var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(paperHorizontalConstraints)
         contentView.addConstraints(paperVerticalConstraints)
         
-        var logoImageHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoImageView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let logoImageHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoImageView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var descriptionLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let descriptionLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var keyLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[keyLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let keyLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[keyLabel]-20-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[logoImageView(105)]-10-[keyLabel]-10-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[logoImageView(105)]-10-[keyLabel]-10-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(logoImageHorizontalConstraints)
         contentView.addConstraints(descriptionLabelHorizontalConstraints)

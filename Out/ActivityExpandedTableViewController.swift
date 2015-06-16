@@ -116,31 +116,31 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.view.addSubview(self.moreTableView)
         
         self.activityHeader = UIView(frame: CGRectZero)
-        self.activityHeader.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.activityHeader.translatesAutoresizingMaskIntoConstraints = false
         self.activityHeader.backgroundColor = UIColor(white: 1, alpha: 1)
         self.view.addSubview(self.activityHeader)
 
         self.segmentedControlView = UIView(frame: CGRectZero)
-        self.segmentedControlView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControlView.backgroundColor = UIColor(white: 1, alpha: 1)
         self.view.addSubview(self.segmentedControlView)
         
-        var baseViewDictionary = ["activityHeader":self.activityHeader, "segmentedControlView":self.segmentedControlView]
-        var baseMetricsDictionary = ["topMargin":64]
+        let baseViewDictionary = ["activityHeader":self.activityHeader, "segmentedControlView":self.segmentedControlView]
+        let baseMetricsDictionary = ["topMargin":64]
         
-        var baseHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[activityHeader]|", options: NSLayoutFormatOptions(0), metrics: baseMetricsDictionary, views: baseViewDictionary)
-        var baseVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[activityHeader]-0-[segmentedControlView]", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: baseMetricsDictionary, views: baseViewDictionary)
+        let baseHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[activityHeader]|", options: NSLayoutFormatOptions(rawValue:0), metrics: baseMetricsDictionary, views: baseViewDictionary)
+        let baseVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[activityHeader]-0-[segmentedControlView]", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: baseMetricsDictionary, views: baseViewDictionary)
         
         self.view.addConstraints(baseHorizontalConstraints)
         self.view.addConstraints(baseVerticalConstraints)
 
         self.bottomSeparatorView = UIView(frame: CGRectZero)
-        self.bottomSeparatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
         self.bottomSeparatorView.backgroundColor = UIColor(white: 0.85, alpha: 1)
         self.activityHeader.addSubview(self.bottomSeparatorView)
         
         self.avatarImageView = UIImageView(frame: CGRectZero)
-        self.avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -150,21 +150,21 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.activityHeader.addSubview(self.avatarImageView)
         
         self.actionTextView = UITextView(frame: CGRectZero)
-        self.actionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.actionTextView.translatesAutoresizingMaskIntoConstraints = false
         self.actionTextView.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         self.actionTextView.backgroundColor = UIColor.clearColor()
         self.actionTextView.editable = false
         self.actionTextView.scrollEnabled = false
         self.actionTextView.selectable = false
         self.actionTextView.textAlignment = NSTextAlignment.Justified
-        var textViewTappedGestureRecognizer = UITapGestureRecognizer(target: self, action: "textViewTapped:")
+        let textViewTappedGestureRecognizer = UITapGestureRecognizer(target: self, action: "textViewTapped:")
         self.actionTextView.addGestureRecognizer(textViewTappedGestureRecognizer)
         self.activityHeader.addSubview(actionTextView)
         
-        var narrativeActionString = (self.challenge["narrativeAction"] as! String)
+        let narrativeActionString = (self.challenge["narrativeAction"] as! String)
         var narrativeTitleString:String
-        var challengeTitleString = (self.challenge["title"] as! String)
-        var prepositionBeforeChallengeString = " in "
+        let challengeTitleString = (self.challenge["title"] as! String)
+        let prepositionBeforeChallengeString = " in "
         var actionString:String
 
         if !(self.challenge["narrativeTitles"] as! [String]).isEmpty{
@@ -177,8 +177,8 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             actionString = self.user.username! + " " + (self.challenge["action"] as! String) + "."
         }
 
-        var actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
-        var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        let actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
+        let textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
         textViewParagraphStyle.lineSpacing = 2
 
         actionTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (actionString as NSString).rangeOfString(actionString))
@@ -191,22 +191,22 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         self.avatarImageView.backgroundColor = self.colorDictionary[user["color"] as! String]
         self.actionTextView.attributedText = actionTextViewAttributedString
 
-        var activityExpandedCellViewsDictionary =
+        let activityExpandedCellViewsDictionary =
         [
             "avatarImageView":self.avatarImageView,
             "actionTextView":self.actionTextView,
             "bottomSeparatorView":self.bottomSeparatorView
         ]
         
-        var activityExpandedCellMetricsDictionary = ["largeVerticalPadding":12]
+//        let activityExpandedCellMetricsDictionary = ["largeVerticalPadding":12]
         
-        var horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[actionTextView]-7.5-|", options: NSLayoutFormatOptions(0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
+        let horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[actionTextView]-7.5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
         
-        var secondHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[bottomSeparatorView]|", options: NSLayoutFormatOptions(0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
+        let secondHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[bottomSeparatorView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
         
-        var verticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-16.5-[avatarImageView(50)]->=12-[bottomSeparatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
+        let verticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-16.5-[avatarImageView(50)]->=12-[bottomSeparatorView(1)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
         
-        var secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14.5-[actionTextView]->=12-[bottomSeparatorView(1)]|", options: NSLayoutFormatOptions(0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
+        let secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14.5-[actionTextView]->=12-[bottomSeparatorView(1)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: activityExpandedCellViewsDictionary, views: activityExpandedCellViewsDictionary)
         
         self.activityHeader.addConstraints(horizontalShadeViewConstraints)
         self.activityHeader.addConstraints(secondHorizontalShadeViewConstraints)
@@ -215,24 +215,24 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         
         self.expandedViewSegmentedControl = UISegmentedControl(items: ["About","Comments","More"])
         self.expandedViewSegmentedControl.frame = CGRectZero
-        self.expandedViewSegmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.expandedViewSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.expandedViewSegmentedControl.tintColor = UIColor.blackColor()
 
         
         self.expandedViewSegmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
         segmentedControlView.addSubview(self.expandedViewSegmentedControl)
         
-        var bottomSeparator = UIView(frame: CGRectZero)
-        bottomSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let bottomSeparator = UIView(frame: CGRectZero)
+        bottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         bottomSeparator.backgroundColor = UIColor(white: 0.85, alpha: 1)
         segmentedControlView.addSubview(bottomSeparator)
         
-        var viewsDictionary = ["expandedViewSegmentedControl":self.expandedViewSegmentedControl, "bottomSeparator":bottomSeparator]
-        var metricsDictionary = ["sideMargin":7.5, "verticalMargin":8]
+        let viewsDictionary = ["expandedViewSegmentedControl":self.expandedViewSegmentedControl, "bottomSeparator":bottomSeparator]
+        let metricsDictionary = ["sideMargin":7.5, "verticalMargin":8]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[expandedViewSegmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var bottomSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[bottomSeparator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[expandedViewSegmentedControl(28)]-8-[bottomSeparator(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[expandedViewSegmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let bottomSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[bottomSeparator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[expandedViewSegmentedControl(28)]-8-[bottomSeparator(1)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         segmentedControlView.addConstraints(horizontalConstraints)
         segmentedControlView.addConstraints(bottomSeparatorConstraints)
@@ -253,7 +253,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        var comboActivityHeaderSegmentedControlViewHeight = 64 + self.activityHeader.frame.height + self.segmentedControlView.frame.height
+        let comboActivityHeaderSegmentedControlViewHeight = 64 + self.activityHeader.frame.height + self.segmentedControlView.frame.height
         self.detailsTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
         self.moreTableView.contentInset.top = comboActivityHeaderSegmentedControlViewHeight
         self.detailsTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: false)
@@ -311,9 +311,9 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
 //            var viewsDictionary = ["stepTitleLabel":stepTitleLabel]
 //            var metricsDictionary = ["verticalMargin":6]
 //            
-//            var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[stepTitleLabel]-verticalMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//            var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[stepTitleLabel]-verticalMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 //            
-//            var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[stepTitleLabel]-7.5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//            var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[stepTitleLabel]-7.5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 //            
 ////            var horizontalCenterConstraint = NSLayoutConstraint(item: stepTitleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: stepTitleHeaderView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
 //            
@@ -364,12 +364,12 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
             switch indexPath.row{
             case 0:
                 let cell = tableView.dequeueReusableCellWithIdentifier("StepTitleTableViewCell") as! StepTitleTableViewCell
-                var stepTitleText = (self.challenge["stepTitle"] as! [String])[indexPath.section] as String
+                let stepTitleText = (self.challenge["stepTitle"] as! [String])[indexPath.section] as String
                 cell.stepTitleLabel.text = "Step \(indexPath.section + 1): \(stepTitleText)"
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCellWithIdentifier("StepBlurbTableViewCell") as! StepBlurbTableViewCell
-                var stepBlurbText = (self.challenge["stepSummary"] as! [String])[indexPath.section] as String
+                let stepBlurbText = (self.challenge["stepSummary"] as! [String])[indexPath.section] as String
                 cell.stepBlurbLabel.text = stepBlurbText
                 return cell
             default:
@@ -420,10 +420,10 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     
 
     func textViewTapped(recognizer:UITapGestureRecognizer){
-        var textView:UITextView = recognizer.view as! UITextView
+        let textView:UITextView = recognizer.view as! UITextView
         // Location of the tap in text-container coordinates
         
-        var layoutManager:NSLayoutManager = textView.layoutManager
+        let layoutManager:NSLayoutManager = textView.layoutManager
         var location:CGPoint = recognizer.locationInView(textView)
         location.x -= textView.textContainerInset.left;
         location.y -= textView.textContainerInset.top;
@@ -433,35 +433,35 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
         var characterIndex:Int
         characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         
-        var userAliasCharacterRange = count(self.user.username!)
+        let userAliasCharacterRange = (self.user.username!).characters.count
         var activityNarrativeTitleRangeStart = -1
         var activityNarrativeTitleRangeEnd = -1
         var activityChallengeTitleRangeStart = -1
         var activityChallengeTitleRangeEnd = -1
 
         if self.challengeTrackNumber != 0{
-            activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + count(self.challenge["narrativeAction"] as! String)
-            activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber - 1])
-            activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + count(" in ")
-            activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
+            activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + (self.challenge["narrativeAction"] as! String).characters.count
+            activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber - 1].characters.count
+            activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + " in ".characters.count
+            activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + (self.challenge["title"] as! String).characters.count
         }
-        println(self.challengeTrackNumber)
-        if (characterIndex < count(self.user.username!)) {
+        print(self.challengeTrackNumber)
+        if (characterIndex < (self.user.username!).characters.count) {
             
             // Handle as required...
-            println("username tapped")
+            print("username tapped")
             
         }
         else if self.challengeTrackNumber != 0{
             if (characterIndex >= activityNarrativeTitleRangeStart && characterIndex <= activityNarrativeTitleRangeEnd) {
                 
                 // Handle as required...
-                println("narrative title tapped")
+                print("narrative title tapped")
             }
             else if (characterIndex >= activityChallengeTitleRangeStart && characterIndex <= activityChallengeTitleRangeEnd) {
                 
                 // Handle as required...
-                println("challenge title tapped")
+                print("challenge title tapped")
             }
         }
         
@@ -481,7 +481,7 @@ class ActivityExpandedTableViewController: UIViewController, UITableViewDataSour
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showAlsoCompletedBy"{
-            var destinationVC = segue.destinationViewController as! AlsoCompletedByViewController
+            let destinationVC = segue.destinationViewController as! AlsoCompletedByViewController
             destinationVC.challenge = self.challenge
         }
     }

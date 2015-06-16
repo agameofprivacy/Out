@@ -90,7 +90,7 @@ class CommentsViewController: SLKTextViewController {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        var footer = UIView(frame: CGRectMake(0, 0, 375, 20))
+        let footer = UIView(frame: CGRectMake(0, 0, 375, 20))
         footer.backgroundColor = UIColor.clearColor()
         return footer
     }
@@ -113,16 +113,16 @@ class CommentsViewController: SLKTextViewController {
     */
     override func didPressRightButton(sender: AnyObject!) {
         self.textView.refreshFirstResponder()
-        var comment:String = self.textView.text
+        let comment:String = self.textView.text
         self.tableView.beginUpdates()
         
-        var newComment = PFObject(className: "Comment")
+        let newComment = PFObject(className: "Comment")
         newComment["activity"] = self.activity
         newComment["author"] = PFUser.currentUser()
         newComment["content"] = comment
         self.comments.insert(newComment, atIndex: 0)
         newComment.saveInBackgroundWithBlock(nil)
-        var newCommentNotification = PFObject(className: "Notification")
+        let newCommentNotification = PFObject(className: "Notification")
         newCommentNotification["activity"] = self.activity
         newCommentNotification["sender"] = PFUser.currentUser()
         newCommentNotification["receiver"] = self.activity["ownerUser"] as! PFUser
@@ -142,15 +142,15 @@ class CommentsViewController: SLKTextViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:CommentTableViewCell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as! CommentTableViewCell
-        var comment = self.comments[indexPath.row]
-        var author = comment["author"] as! PFUser
-        var authorAlias = author.username
-        var commentContent = comment["content"] as! String
-        var authorAvatarString = author["avatar"] as! String
-        var authorAvatar = self.avatarImageDictionary[authorAvatarString]!
-        var authorColorString = author["color"] as! String
-        var authorColor = self.colorDictionary[authorColorString]
+        let cell:CommentTableViewCell = tableView.dequeueReusableCellWithIdentifier("CommentTableViewCell") as! CommentTableViewCell
+        let comment = self.comments[indexPath.row]
+        let author = comment["author"] as! PFUser
+        let authorAlias = author.username
+        let commentContent = comment["content"] as! String
+        let authorAvatarString = author["avatar"] as! String
+        let authorAvatar = self.avatarImageDictionary[authorAvatarString]!
+        let authorColorString = author["color"] as! String
+        let authorColor = self.colorDictionary[authorColorString]
         var timeAgoLabel = ""
         if comment.createdAt != nil{
             timeAgoLabel = comment.createdAt!.timeAgoSinceNow()
@@ -171,7 +171,7 @@ class CommentsViewController: SLKTextViewController {
     
     // Query Parse for comments associated with current activity
     func loadComments(){
-        var commentsQuery = PFQuery(className: "Comment")
+        let commentsQuery = PFQuery(className: "Comment")
         commentsQuery.whereKey("activity", equalTo: self.activity)
         commentsQuery.includeKey("author")
         commentsQuery.orderByDescending("createdAt")
@@ -183,7 +183,7 @@ class CommentsViewController: SLKTextViewController {
             }
             else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
             }
         }
     }

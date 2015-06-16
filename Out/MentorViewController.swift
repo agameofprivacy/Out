@@ -18,9 +18,8 @@ class MentorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Mentor"
-        var reportButton = UIBarButtonItem(title: "Report", style: UIBarButtonItemStyle.Plain, target: self, action: "reportButtonTapped")
-        
-        reportButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
+        let reportButton = UIBarButtonItem(title: "Report", style: UIBarButtonItemStyle.Plain, target: self, action: "reportButtonTapped")
+        reportButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: NSFontAttributeName, UIFont(name: "HelveticaNeue-Medium", size: 18.0)!) as? [String : AnyObject], forState: UIControlState.Normal)
         reportButton.tintColor = UIColor.redColor()
         self.navigationItem.rightBarButtonItem = reportButton
 
@@ -45,6 +44,6 @@ class MentorViewController: UIViewController {
     
     // Present report mentor view if Report button tapped
     func reportButtonTapped(){
-        println("report button tapped")
+        print("report button tapped")
     }
 }

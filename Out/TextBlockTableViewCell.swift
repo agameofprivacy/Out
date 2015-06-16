@@ -31,7 +31,7 @@ class TextBlockTableViewCell: UITableViewCell {
         
         self.textBlock = UILabel(frame: CGRectZero)
         self.textBlock.numberOfLines = 0
-        textBlock.setTranslatesAutoresizingMaskIntoConstraints(false)
+        textBlock.translatesAutoresizingMaskIntoConstraints = false
         self.textBlock.textAlignment = NSTextAlignment.Left
         self.textBlock.font = valueFont?.fontWithSize(fontSize)
         contentView.addSubview(textBlock)
@@ -40,9 +40,9 @@ class TextBlockTableViewCell: UITableViewCell {
         
         let metricsDictionary = ["hSpaceFromCellEdge": labelMarginFromCellEdge, "longVerticalSpace": (labelMarginFromCellEdge - 6) * 1, "bottomSpaceFromCellEdge":18, "shortVerticalSpace": 4]
         
-        let textBlockLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textBlock]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let textBlockLabel_constraint_H:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textBlock]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        let textBlockLabel_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[textBlock]-10-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let textBlockLabel_constraint_V:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[textBlock]-10-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(textBlockLabel_constraint_H)
         contentView.addConstraints(textBlockLabel_constraint_V)

@@ -34,28 +34,28 @@ class CommentTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
         self.avatarImageView = UIImageView(frame: CGRectZero)
-        self.avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.contentView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
-        self.aliasLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.aliasLabel.translatesAutoresizingMaskIntoConstraints = false
         self.aliasLabel.textAlignment = NSTextAlignment.Left
         self.aliasLabel.font = titleFont?.fontWithSize(14.0)
         self.aliasLabel.numberOfLines = 1
         self.contentView.addSubview(self.aliasLabel)
         
         self.timeAgoLabel = UILabel(frame: CGRectZero)
-        self.timeAgoLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.timeAgoLabel.translatesAutoresizingMaskIntoConstraints = false
         self.timeAgoLabel.textAlignment = NSTextAlignment.Right
         self.timeAgoLabel.font = regularFont?.fontWithSize(14.0)
         self.timeAgoLabel.numberOfLines = 1
         self.contentView.addSubview(self.timeAgoLabel)
 
         self.commentLabel = UILabel(frame: CGRectZero)
-        self.commentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.commentLabel.translatesAutoresizingMaskIntoConstraints = false
         self.commentLabel.textAlignment = NSTextAlignment.Left
         self.commentLabel.font = valueFont?.fontWithSize(14.0)
         self.commentLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.width - 100
@@ -63,26 +63,26 @@ class CommentTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.commentLabel)
         
         self.separator = UIView(frame: CGRectZero)
-        self.separator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.separator.translatesAutoresizingMaskIntoConstraints = false
         self.separator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.04)
         self.contentView.addSubview(self.separator)
         
         
-        var viewsDictionary = ["avatarImageView":self.avatarImageView, "aliasLabel":self.aliasLabel, "commentLabel":self.commentLabel, "timeAgoLabel":self.timeAgoLabel, "separator":self.separator]
-        var metricsDictionary = ["sideMargin":7.5, "inBetweenMargin":15]
+        let viewsDictionary = ["avatarImageView":self.avatarImageView, "aliasLabel":self.aliasLabel, "commentLabel":self.commentLabel, "timeAgoLabel":self.timeAgoLabel, "separator":self.separator]
+        let metricsDictionary = ["sideMargin":7.5, "inBetweenMargin":15]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[avatarImageView(50)]-inBetweenMargin-[aliasLabel]-[timeAgoLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[avatarImageView(50)]-inBetweenMargin-[aliasLabel]-[timeAgoLabel]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var horizontalCommentConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[avatarImageView(50)]-inBetweenMargin-[commentLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalCommentConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[avatarImageView(50)]-inBetweenMargin-[commentLabel]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 
         
-        var horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[separator]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[separator]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[avatarImageView(50)]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[avatarImageView(50)]", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalLabelsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[aliasLabel]-4-[commentLabel]->=25-[separator(1)]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalLabelsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[aliasLabel]-4-[commentLabel]->=25-[separator(1)]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalTimeAgoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[timeAgoLabel]", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalTimeAgoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[timeAgoLabel]", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         self.contentView.addConstraints(horizontalConstraints)
         self.contentView.addConstraints(horizontalCommentConstraints)

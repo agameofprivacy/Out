@@ -54,7 +54,7 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
         self.navigationItem.title = "Completed By"
         // Do any additional setup after loading the view.
         
-        var sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortPeople")
+        let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortPeople")
         sortButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = sortButton
 
@@ -84,24 +84,24 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
-        var user = self.completedByPeople[indexPath.row]
+        let user = self.completedByPeople[indexPath.row]
         cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
         cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
         cell.userAlias.text = user.username
-        var userOrientation = user["sexualOrientation"] as! String
-        var userAge = user["age"] as! Int
+        let userOrientation = user["sexualOrientation"] as! String
+        let userAge = user["age"] as! Int
         cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-        var userCity = user["city"] as! String
-        var userState = user["state"] as! String
+        let userCity = user["city"] as! String
+        let userState = user["state"] as! String
         cell.userLocation.text = "\(userCity), \(userState)"
-        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
         cell.addGestureRecognizer(tapGestureRecognizer)
         return cell
     }
     
     
     func loadCompletedByPeople(){
-        var userChallengeDataQuery = PFQuery(className: "UserChallengeData")
+        let userChallengeDataQuery = PFQuery(className: "UserChallengeData")
         userChallengeDataQuery.whereKey("challenge", equalTo: self.challenge)
         userChallengeDataQuery.includeKey("username")
         userChallengeDataQuery.findObjectsInBackgroundWithBlock{
@@ -117,14 +117,14 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
                 self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
             }else{
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
             }
         }
     }
     
     func sortPeople(){
     
-        println("sort people")
+        print("sort people")
     }
     /*
     // MARK: - Navigation
@@ -138,13 +138,13 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showPersonDetail"{
-            var newVC = segue.destinationViewController as! PersonDetailViewController
+            let newVC = segue.destinationViewController as! PersonDetailViewController
             newVC.user = self.user
         }
     }
     
     func showPersonDetail(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        let currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
         self.user = self.completedByPeople[currentIndexPath.row]
         self.performSegueWithIdentifier("showPersonDetail", sender: self)
     }

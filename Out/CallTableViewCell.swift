@@ -29,25 +29,25 @@ class CallTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.Default
         
         self.titleLabel = UILabel(frame: CGRectZero)
-        self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel.textAlignment = NSTextAlignment.Left
         self.titleLabel.font = titleFont?.fontWithSize(fontSize)
         contentView.addSubview(self.titleLabel)
         
         self.numberLabel = UILabel(frame: CGRectZero)
-        self.numberLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.numberLabel.translatesAutoresizingMaskIntoConstraints = false
         self.numberLabel.textAlignment = NSTextAlignment.Left
         self.numberLabel.font = valueFont?.fontWithSize(fontSize)
         contentView.addSubview(self.numberLabel)
         
-        var viewsDictionary = ["titleLabel":self.titleLabel, "numberLabel":self.numberLabel]
-        var metricsDictionary = ["sideEdgeMargin":8, "verticalMargin":fontSize]
+        let viewsDictionary = ["titleLabel":self.titleLabel, "numberLabel":self.numberLabel]
+        let metricsDictionary = ["sideEdgeMargin":8, "verticalMargin":fontSize]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[titleLabel]-[numberLabel]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[titleLabel]-[numberLabel]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraintsTitle:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[titleLabel]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraintsTitle:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[titleLabel]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraintsNumber:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[numberLabel]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraintsNumber:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[numberLabel]-verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraintsTitle)

@@ -10,7 +10,7 @@ import UIKit
 import BBBadgeBarButtonItem
 import Parse
 // Controller for activity tab view
-class ActivityTabViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class ActivityTabViewController: UITableViewController {
 
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
     let regularFont = UIFont(name: "HelveticaNeue", size: 15.0)
@@ -67,20 +67,20 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
         // UINavigationBar init
         // self.navigationItem.title = "Activities"
-        var composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped:")
+        let composeButton = UIBarButtonItem(image: UIImage(named: "compose-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "composeButtonTapped:")
         composeButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = composeButton
         
-        var notificationButton = UIBarButtonItem(image: UIImage(named: "notification-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "notificationButtonTapped:")
+        let notificationButton = UIBarButtonItem(image: UIImage(named: "notification-icon"), style: UIBarButtonItemStyle.Plain, target: self, action: "notificationButtonTapped:")
         notificationButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = notificationButton
         
-        var customNotificationButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
+        let customNotificationButton = UIButton(frame: CGRectMake(0, 0, 25, 25))
         customNotificationButton.addTarget(self, action: "notificationButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
         customNotificationButton.setImage(UIImage(named: "notification-icon"), forState: UIControlState.Normal)
         customNotificationButton.tintColor = UIColor.blackColor()
         
-        var badgeableNotificationBarButton = BBBadgeBarButtonItem(customUIButton: customNotificationButton)
+        let badgeableNotificationBarButton = BBBadgeBarButtonItem(customUIButton: customNotificationButton)
         badgeableNotificationBarButton.badgeOriginX = 10
         badgeableNotificationBarButton.badgeValue = "\(self.notifications.count)"
         badgeableNotificationBarButton.shouldAnimateBadge = true
@@ -101,14 +101,14 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         self.noActivityView = UIView(frame: self.tableView.frame)
         self.noActivityView.center = self.tableView.center
         
-        var noActivityViewTitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5, self.noActivityView.frame.width, 32))
+        let noActivityViewTitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5, self.noActivityView.frame.width, 32))
         noActivityViewTitle.text = "No Activities"
         noActivityViewTitle.textAlignment = NSTextAlignment.Center
         noActivityViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noActivityViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noActivityView.addSubview(noActivityViewTitle)
         
-        var noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
+        let noActivityViewSubtitle = UILabel(frame: CGRectMake(0, 1.43 * self.noActivityView.frame.height / 5 + 31, self.noActivityView.frame.width, 60))
         noActivityViewSubtitle.text = "Do some activities or follow\nothers to see their activities"
         noActivityViewSubtitle.textAlignment = NSTextAlignment.Center
         noActivityViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
@@ -124,12 +124,12 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     override func viewDidAppear(animated: Bool) {
-        (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = nil
+        (self.tabBarController!.tabBar.items![0] as UITabBarItem).badgeValue = nil
     }
     
     
     override func viewDidDisappear(animated: Bool) {
-        (self.tabBarController?.tabBar.items![0] as! UITabBarItem).badgeValue = nil
+        (self.tabBarController!.tabBar.items![0] as UITabBarItem).badgeValue = nil
     }
 
     
@@ -150,10 +150,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else if segue.identifier == "showActivityContentPreview"{
             let newVC: ActivityContentPreviewViewController = segue.destinationViewController as! ActivityContentPreviewViewController
             
-            var currentChallenge = currentActivity["challenge"] as! PFObject
-            var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
-            var currentUser = currentActivity["ownerUser"] as! PFUser
-            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            let currentChallenge = currentActivity["challenge"] as! PFObject
+            let currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
+            let currentUser = currentActivity["ownerUser"] as! PFUser
+            var currentChallengeTrackNumber = Int((currentUserChallengeData["challengeTrackNumber"] as! String))!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
             
             newVC.activity = self.currentActivity
@@ -171,10 +171,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         else if segue.identifier == "showActivityExpanded"{
             let newVC:ActivityExpandedTableViewController = segue.destinationViewController as! ActivityExpandedTableViewController
             
-            var currentChallenge = currentActivity["challenge"] as! PFObject
-            var currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
-            var currentUser = currentActivity["ownerUser"] as! PFUser
-            var currentChallengeTrackNumber = (currentUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            let currentChallenge = currentActivity["challenge"] as! PFObject
+            let currentUserChallengeData = currentActivity["userChallengeData"] as! PFObject
+            let currentUser = currentActivity["ownerUser"] as! PFUser
+            let currentChallengeTrackNumber = Int((currentUserChallengeData["challengeTrackNumber"] as! String))!
             
             newVC.parentVC = self
             newVC.activity = self.currentActivity
@@ -211,6 +211,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     // Return the count of rows from the count of current activities
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0){
+            print("number of rows called \(self.processedActivities.count)")
             return self.processedActivities.count
         }
         else{
@@ -224,7 +225,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     
@@ -233,11 +234,11 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         if indexPath.section == 0{
             var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
             
-            var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+            let currentActivityImageString:String = currentActivity["currentActivityImageString"]!
             if (currentActivityImageString != ""){
-                var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
+                let cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
                 cell.heroImageView.image = UIImage(named: currentActivityImageString)
-                var activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
+                let activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
                 cell.contentCanvas.addGestureRecognizer(activityContentPreviewTapRecognizer)
                 
                 
@@ -245,9 +246,9 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
                 
                 cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
-                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-                var aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
                 cell.aliasLabel.addGestureRecognizer(aliastapGestureRecognizer)
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
@@ -264,24 +265,24 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 else{
                     cell.likeButton.image = UIImage(named: "likeButton-icon")
                 }
-                var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
+                let likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
                 cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
                 
-                var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
+                let commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
                 cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
                 return cell
             }
             else{
-                var cell:StatusActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("StatusActivityTableViewCell") as! StatusActivityTableViewCell
+                let cell:StatusActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("StatusActivityTableViewCell") as! StatusActivityTableViewCell
 
                 cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
                 cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
                 
                 cell.avatarImageView.backgroundColor = self.colorDictionary[currentActivity["avatarImageViewBackgroundColorString"]!]
                 
-                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
-                var aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let aliastapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.aliasLabel.text = currentActivity["aliasLabel"]!
                 cell.aliasLabel.addGestureRecognizer(aliastapGestureRecognizer)
                 cell.actionLabel.text = currentActivity["actionLabelText"]!
@@ -295,10 +296,10 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 else{
                     cell.likeButton.image = UIImage(named: "likeButton-icon")
                 }
-                var likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
+                let likeButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "likeButtonTapped:")
                 cell.likeButton.addGestureRecognizer(likeButtonTapGestureRecognizer)
                 
-                var commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
+                let commentButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "commentButtonTapped:")
                 cell.commentsButtonArea.addGestureRecognizer(commentButtonTapGestureRecognizer)
                 return cell
             }
@@ -306,7 +307,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
         else
         {
-            var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
+            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
             cell.textLabel?.text = "loading..."
             cell.textLabel?.textColor = UIColor(white: 0.5, alpha: 1)
             cell.textLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 14)
@@ -361,117 +362,117 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         if indexPath.section == 0{
             var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
             
-            var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+            let currentActivityImageString:String = currentActivity["currentActivityImageString"]!
             if (currentActivityImageString != ""){
                 var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
-                var actionLabelText:String = currentActivity["actionLabelText"]!
-                var aliasLabelText:String = currentActivity["aliasLabel"]!
-                var narrativeTitleLabelText:String = currentActivity["currentNarrativeTitleString"]!
-                var narrativeContentLabelText:String = currentActivity["currentNarrativeContentString"]!
-                var commentsCountLabelText:String = currentActivity["commentCountLabel"]!
-                var writeACommentLabelText:String = "write a comment"
+                let actionLabelText:String = currentActivity["actionLabelText"]!
+                let aliasLabelText:String = currentActivity["aliasLabel"]!
+                let narrativeTitleLabelText:String = currentActivity["currentNarrativeTitleString"]!
+                let narrativeContentLabelText:String = currentActivity["currentNarrativeContentString"]!
+                let commentsCountLabelText:String = currentActivity["commentCountLabel"]!
+                let writeACommentLabelText:String = "write a comment"
         
         
                 var result:CGFloat = 0.0
-                var actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
-                var narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 67), height: CGFloat(MAXFLOAT))
-                var narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 55), height: CGFloat(MAXFLOAT))
-                var aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
-                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
-                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                let actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
+                let narrativeContentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 67), height: CGFloat(MAXFLOAT))
+                let narrativeTitleMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 55), height: CGFloat(MAXFLOAT))
+                let aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
+                let commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                let writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
         
         
-                var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
         
-                var narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let narrativeContentLabelRect:CGRect = narrativeContentLabelText.boundingRectWithSize(narrativeContentMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.valueFont!.fontWithSize(13.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
-                var narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let narrativeTitleLabelRect:CGRect = narrativeTitleLabelText.boundingRectWithSize(narrativeTitleMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(14.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
-                var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
-                var commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
-                var writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.valueFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
         
         
-                var actionLabelHeight = actionLabelRect.size.height
-                var narrativeContentLabelHeight = narrativeContentLabelRect.size.height
-                var narrativeTitleLabelHeight = narrativeTitleLabelRect.size.height
-                var aliasLabelHeight = aliasLabelRect.size.height
-                var commentCountLabelHeight = commentCountLabelRect.size.height
-                var writeACommentLabelHeight = writeACommentLabelRect.size.height
-                var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+                let actionLabelHeight = actionLabelRect.size.height
+                let narrativeContentLabelHeight = narrativeContentLabelRect.size.height
+                let narrativeTitleLabelHeight = narrativeTitleLabelRect.size.height
+                let aliasLabelHeight = aliasLabelRect.size.height
+                let commentCountLabelHeight = commentCountLabelRect.size.height
+                let writeACommentLabelHeight = writeACommentLabelRect.size.height
+                let currentActivityImageString:String = currentActivity["currentActivityImageString"]!
                 var imageHeight:CGFloat = 110 + 12 + 19
                 if (currentActivityImageString == ""){
                     imageHeight = 0
                 }
                 
-        //        println("alias label: \(aliasLabelHeight)")
-        //        println("action content: \(actionLabelHeight)")
-        //        println("narrative title: \(narrativeTitleLabelHeight)")
-        //        println("narrative content: \(narrativeContentLabelHeight)")
-        //        println("comment count: \(commentCountLabelHeight)")
-        //        println("write comment: \(writeACommentLabelHeight)")
+        //        print("alias label: \(aliasLabelHeight)")
+        //        print("action content: \(actionLabelHeight)")
+        //        print("narrative title: \(narrativeTitleLabelHeight)")
+        //        print("narrative content: \(narrativeContentLabelHeight)")
+        //        print("comment count: \(commentCountLabelHeight)")
+        //        print("write comment: \(writeACommentLabelHeight)")
                 result = 22 + aliasLabelHeight + 4 + actionLabelHeight + 12 + imageHeight + narrativeTitleLabelHeight + 4 + narrativeContentLabelHeight + 12 + 16 + 1 + 8 + commentCountLabelHeight + writeACommentLabelHeight + 10
-//                    println("activity card height: \(result)")
+//                    print("activity card height: \(result)")
                     return CGFloat(result)
             }
             else{
                 var currentActivity = self.processedActivities[indexPath.row] as! [String:String!]
-                var actionLabelText:String = currentActivity["actionLabelText"]!
-                var aliasLabelText:String = currentActivity["aliasLabel"]!
-                var commentsCountLabelText:String = currentActivity["commentCountLabel"]!
-                var writeACommentLabelText:String = "write a comment"
+                let actionLabelText:String = currentActivity["actionLabelText"]!
+                let aliasLabelText:String = currentActivity["aliasLabel"]!
+                let commentsCountLabelText:String = currentActivity["commentCountLabel"]!
+                let writeACommentLabelText:String = "write a comment"
                 
                 
                 var result:CGFloat = 0.0
-                var actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
-                var aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
-                var commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
-                var writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                let actionMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 101), height: CGFloat(MAXFLOAT))
+                let aliasMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 135), height: CGFloat(MAXFLOAT))
+                let commentCountMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
+                let writeACommentMaxSize:CGSize = CGSize(width: CGFloat(UIScreen.mainScreen().bounds.width - 85), height: CGFloat(MAXFLOAT))
                 
                 
-                var actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let actionLabelRect:CGRect = actionLabelText.boundingRectWithSize(actionMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
                 
-                var aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let aliasLabelRect:CGRect = aliasLabelText.boundingRectWithSize(aliasMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
                 
-                var commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let commentCountLabelRect:CGRect = commentsCountLabelText.boundingRectWithSize(commentCountMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.titleFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
                 
-                var writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: .UsesLineFragmentOrigin | .UsesFontLeading, attributes:NSDictionary(
+                let writeACommentLabelRect:CGRect = writeACommentLabelText.boundingRectWithSize(writeACommentMaxSize, options: [NSStringDrawingOptions.UsesLineFragmentOrigin, NSStringDrawingOptions.UsesFontLeading], attributes:NSDictionary(
                     object: self.valueFont!.fontWithSize(16.0),
-                    forKey: NSFontAttributeName) as [NSObject : AnyObject], context:nil)
+                    forKey: NSFontAttributeName) as? [String : AnyObject], context:nil)
                 
                 
-                var actionLabelHeight = actionLabelRect.size.height
-                var aliasLabelHeight = aliasLabelRect.size.height
-                var commentCountLabelHeight = commentCountLabelRect.size.height
-                var writeACommentLabelHeight = writeACommentLabelRect.size.height
+                let actionLabelHeight = actionLabelRect.size.height
+                let aliasLabelHeight = aliasLabelRect.size.height
+                let commentCountLabelHeight = commentCountLabelRect.size.height
+                let writeACommentLabelHeight = writeACommentLabelRect.size.height
                 
-                //        println("alias label: \(aliasLabelHeight)")
-                //        println("action content: \(actionLabelHeight)")
-                //        println("comment count: \(commentCountLabelHeight)")
-                //        println("write comment: \(writeACommentLabelHeight)")
+                //        print("alias label: \(aliasLabelHeight)")
+                //        print("action content: \(actionLabelHeight)")
+                //        print("comment count: \(commentCountLabelHeight)")
+                //        print("write comment: \(writeACommentLabelHeight)")
                 result = 22 + aliasLabelHeight + 4 + actionLabelHeight + 12 + 16 + 1 + 8 + commentCountLabelHeight + writeACommentLabelHeight + 10 + 5
-//                println("status height: \(result)")
+//                print("status height: \(result)")
                 return CGFloat(result)
 
             }
@@ -483,15 +484,16 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func loadActivities(context:String){
-        var followingQuery = PFQuery(className: "FollowerFollowing")
+        let followingQuery = PFQuery(className: "FollowerFollowing")
         followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
         followingQuery.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil {
                 // Found FollowerFollowing object for current user
-                var currentUserFollowerFollowingObject = (objects as! [PFObject])[0]
+                let currentUserFollowerFollowingObject = (objects as! [PFObject])[0]
                 var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as! [PFUser]
-                var activityQuery = PFQuery(className: "Activity")
+                let activityQuery = PFQuery(className: "Activity")
+                
                 // Include current user so user's own activities also show up
                 currentUserFollowingUsers.append(PFUser.currentUser()!)
 
@@ -502,6 +504,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 activityQuery.orderByDescending("createdAt")
                 activityQuery.limit = 10
                 if context == "old"{
+                    print("old time stamp")
                     if !self.currentActivities.isEmpty{
                         activityQuery.whereKey("createdAt", lessThan: (self.currentActivities.last as PFObject!).createdAt!)
                     }
@@ -523,135 +526,160 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                     if error == nil {
 
                         // Found activities
-                        var currentActivitiesFound = objects as! [PFObject]
-                        var currentLikedAcitivitiesFoundIdStrings:[String] = []
-                        if context == "old"{
-                            if (objects as! [PFObject]).count == 10{
-                                self.moreActivities = true
-                            }
-                            else{
-                                self.moreActivities = false
-                            }
-                        }
-                        // If activities count is 0, show no activity view, else display activities
-                        if context == "old"{
-                            self.currentActivities.extend(currentActivitiesFound)
-                        }
-                        else if context == "new"{
-                            self.currentActivities.splice(currentActivitiesFound, atIndex: 0)
-                        }
-                        else if context == "update"{
-                            self.currentActivities = currentActivitiesFound
-                        }
-                        if self.currentActivities.count == 0{
-                            self.noActivityView.hidden = false
+                        let currentActivitiesFound = objects as! [PFObject]
+                        if currentActivitiesFound.isEmpty{
                             self.refreshControl?.endRefreshing()
                         }
                         else{
-                            self.noActivityView.hidden = true
-                        }
-                        if currentActivitiesFound.isEmpty{
-                            println("no more activities")
-                            self.refreshControl?.endRefreshing()
-                        }
-                        // Query activities liked by current user
-                        var currentActivitiesFoundCommentCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
-                        var currentActivitiesFoundLikeCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
-                        var likeCountFound = 0
-                        var commentCountFound = 0
-                        var relation = PFUser.currentUser()!.relationForKey("likedActivity")
-                        relation.query()!.findObjectsInBackgroundWithBlock{
-                            (objects, error) -> Void in
-                            if error == nil {
-                                for object in objects as! [PFObject]{
-                                    currentLikedAcitivitiesFoundIdStrings.append(object.objectId!)
+                            var currentLikedAcitivitiesFoundIdStrings:[String] = []
+                            if context == "old"{
+                                if (objects as! [PFObject]).count == 10{
+                                    print("old more activities")
+                                    self.moreActivities = true
+                                }
+                                else{
+                                    print("old no more activities")
+                                    self.moreActivities = false
                                 }
                             }
-                            else {
-                                // Log details of the failure
-                                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                            // If activities count is 0, show no activity view, else display activities
+                            if context == "old"{
+                                print("old extend activities array")
+                                self.currentActivities.extend(currentActivitiesFound)
+                            }
+                            else if context == "new"{
+                                self.currentActivities.splice(currentActivitiesFound, atIndex: 0)
+                            }
+                            else if context == "update"{
+                                self.currentActivities = currentActivitiesFound
+                            }
+                            
+                            if self.currentActivities.count == 0{
+                                self.noActivityView.hidden = false
                                 self.refreshControl?.endRefreshing()
                             }
-                        }
-
-                        // Query like count of activities
-                        for activity in currentActivitiesFound{
-                            var queryLikes = PFQuery(className: "_User")
-                            queryLikes.whereKey("likedActivity", equalTo: activity)
-                            queryLikes.findObjectsInBackgroundWithBlock{
+                            else{
+                                self.noActivityView.hidden = true
+                            }
+                            
+                            
+                            // Query activities liked by current user
+                            var currentActivitiesFoundCommentCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
+                            var currentActivitiesFoundLikeCount = Array(count: currentActivitiesFound.count, repeatedValue: 0)
+                            var likeCountFound = 0
+                            var commentCountFound = 0
+                            let relation = PFUser.currentUser()!.relationForKey("likedActivity")
+                            relation.query()!.findObjectsInBackgroundWithBlock{
                                 (objects, error) -> Void in
                                 if error == nil {
-                                    var count = objects!.count
-                                        currentActivitiesFoundLikeCount[find(currentActivitiesFound, activity)!] = count
+                                    for object in objects as! [PFObject]{
+                                        currentLikedAcitivitiesFoundIdStrings.append(object.objectId!)
+                                    }
+                                }
+                                else {
+                                    // Log details of the failure
+                                    NSLog("Error: %@ %@", error!, error!.userInfo)
+                                    self.refreshControl?.endRefreshing()
+                                }
+                            }
+                            // Query like count of activities
+                            print(currentActivitiesFound.count)
+                            for activity in currentActivitiesFound{
+                                print("start counting")
+                                let queryLikes = PFQuery(className: "_User")
+                                queryLikes.whereKey("likedActivity", equalTo: activity)
+                                queryLikes.fromLocalDatastore()
+                                queryLikes.findObjectsInBackgroundWithBlock{
+                                    (objects, error) -> Void in
+                                    if error == nil {
+                                        let count = objects!.count
+                                        print("found like count")
+                                        currentActivitiesFoundLikeCount[currentActivitiesFound.indexOf(activity)!] = count
                                         ++likeCountFound
-                                    
+                                        
                                         // Query comment count of activities
-                                        var queryComments = PFQuery(className: "Comment")
+                                        let queryComments = PFQuery(className: "Comment")
+                                        queryComments.fromLocalDatastore()
                                         queryComments.whereKey("activity", equalTo: activity)
                                         queryComments.findObjectsInBackgroundWithBlock{
                                             (objects, error) -> Void in
                                             if error == nil {
-                                                var count = objects!.count
-                                                currentActivitiesFoundCommentCount[find(currentActivitiesFound, activity)!] = count
+                                                let count = objects!.count
+                                                print("found comment count")
+                                                currentActivitiesFoundCommentCount[currentActivitiesFound.indexOf(activity)!] = count
                                                 ++commentCountFound
                                                 if likeCountFound == currentActivitiesFound.count && commentCountFound == currentActivitiesFound.count{
-
+                                                    
                                                     self.prepareDataForTableView(currentActivitiesFound, currentActivitiesFoundCommentCount: currentActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: currentActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
-//                                                    println(self.processedActivities)
+                                                    print(self.processedActivities)
                                                     self.loadNotifications()
                                                     if self.processedActivities.count == 0{
-
-//                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                        
+                                                        //                                                        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
                                                         self.tableView.reloadData()
                                                     }
                                                     else{
                                                         if context == "update"{
-                                                            self.tableView.reloadRowsAtIndexPaths(self.tableView.indexPathsForVisibleRows()!, withRowAnimation: UITableViewRowAnimation.None)
+                                                            self.tableView.reloadRowsAtIndexPaths(self.tableView.indexPathsForVisibleRows!, withRowAnimation: UITableViewRowAnimation.None)
                                                         }
                                                         else if context == "old"{
-//                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
-//                                                            println("reload old")
-//                                                            println(self.processedActivities)
-                                                            self.tableView.reloadData()
+                                                            
+                                                            //                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                            //                                                            print("reload old")
+                                                            //                                                            print(self.processedActivities)
+                                                            self.tableView.beginUpdates()
+                                                            var indexPaths:[NSIndexPath] = []
+                                                            let indexStart = self.tableView.numberOfRowsInSection(0)
+                                                            print(indexStart)
+                                                            for (var i = indexStart; i < indexStart + currentActivitiesFound.count; i++){
+                                                                indexPaths.append(NSIndexPath(forRow: i, inSection: 0))
+                                                            }
+                                                            print(indexPaths)
+                                                            self.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Fade)
+                                                            self.tableView.endUpdates()
+                                                            print(self.tableView.numberOfRowsInSection(0))
                                                         }
                                                         else if context == "new"{
-//                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+                                                            //                                                            self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
+
                                                             self.tableView.reloadData()
                                                         }
                                                     }
-//                                                    println("hello")
+                                                    //                                                    print("hello")
                                                     self.refreshControl?.endRefreshing()
                                                     
                                                 }
                                             }
                                             else {
                                                 // Log details of the failure
-                                                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                                NSLog("Error: %@ %@", error!, error!.userInfo)
                                                 self.refreshControl?.endRefreshing()
                                                 
                                             }
                                         }
-
+                                        
+                                    }
+                                    else {
+                                        // Log details of the failure
+                                        NSLog("Error: %@ %@", error!, error!.userInfo)
+                                        self.refreshControl?.endRefreshing()
+                                    }
                                 }
-                                else {
-                                    // Log details of the failure
-                                    NSLog("Error: %@ %@", error!, error!.userInfo!)
-                                    self.refreshControl?.endRefreshing()
-                                }
+                                
                             }
-                            
-                        }
+
+                    }
 
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error!, error!.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo)
                         self.refreshControl?.endRefreshing()
 
                     }
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
                 self.refreshControl?.endRefreshing()
 
             }
@@ -661,12 +689,13 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 
 
     func loadMoreActivities(){
-     println("load more activities")
+     print("load more activities")
         self.loadActivities("old")
     }
     
     
     func prepareDataForTableView(activitiesToAppend:[PFObject], currentActivitiesFoundCommentCount:[Int], currentActivitiesFoundLikeCount:[Int], currentLikedAcitivitiesFoundIdStrings:[String], context:String){
+        print("prepare")
 //        self.processedActivities.removeAllObjects()
         var activityCount = 0
         if context == "update"{
@@ -676,16 +705,16 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
         }
 
         for activity in activitiesToAppend{
-            var currentActivityCreatedTime = activity.createdAt!
-            var currentActivityChallenge = activity["challenge"] as! PFObject
-            var currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
-            var currentActivityUser = activity["ownerUser"] as! PFUser
-            var currentAvatarString = currentActivityUser["avatar"] as! String
-            var currentAvatarColor = currentActivityUser["color"] as! String
-            var currentAction = currentActivityChallenge["action"] as! String
-            var currentChallengeTrackNumber = (currentActivityUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            let currentActivityCreatedTime = activity.createdAt!
+            let currentActivityChallenge = activity["challenge"] as! PFObject
+            let currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
+            let currentActivityUser = activity["ownerUser"] as! PFUser
+            let currentAvatarString = currentActivityUser["avatar"] as! String
+            let currentAvatarColor = currentActivityUser["color"] as! String
+            let currentAction = currentActivityChallenge["action"] as! String
+            var currentChallengeTrackNumber = Int((currentActivityUserChallengeData["challengeTrackNumber"] as! String))!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
-            var activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
+            let activityCreatedTimeLabel = currentActivityCreatedTime.shortTimeAgoSinceNow()
 
             
             var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username!, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
@@ -728,7 +757,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
                 }
             }
 
-            if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId!){
+            if currentLikedAcitivitiesFoundIdStrings.contains(activity.objectId!){
                 currentActivityDictionary.updateValue("yes", forKey: "liked")
             }
             
@@ -755,21 +784,21 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Register current user's liking of an activity on Parse if Like button tapped
     func likeButtonTapped(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
-        var likedActivity = self.currentActivities[currentIndexPath.row]
+        let currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        let likedActivity = self.currentActivities[currentIndexPath.row]
         
-        var user = PFUser.currentUser()!
-        var relation = user.relationForKey("likedActivity")
-        var currentLikeButton = sender.view as! UIImageView
+        let user = PFUser.currentUser()!
+        let relation = user.relationForKey("likedActivity")
+        let currentLikeButton = sender.view as! UIImageView
         var currentLikeCount = 0
-        var currentLikeCountLabel = sender.view?.superview?.subviews[0] as! UILabel
-        var currentLikeCountText:String = currentLikeCountLabel.text!
+        let currentLikeCountLabel = sender.view?.superview?.subviews[0] as! UILabel
+        let currentLikeCountText:String = currentLikeCountLabel.text!
         
         if currentLikeCountText == ""{
             currentLikeCount = 0
         }
         else{
-            currentLikeCount = currentLikeCountText.componentsSeparatedByString(" ")[0].toInt()!
+            currentLikeCount = Int(currentLikeCountText.componentsSeparatedByString(" ")[0])!
         }
         if currentLikeButton.image == UIImage(named: "likeButtonFilled-icon"){
             currentLikeButton.image = UIImage(named: "likeButton-icon")
@@ -791,7 +820,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             self.processedActivities.replaceObjectAtIndex(currentIndexPath.row, withObject: currentActivityDictionary)
             self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId!)
-            var likedActivityQuery = relation.query()
+//            let likedActivityQuery = relation.query()
             relation.removeObject(likedActivity)
             self.currentLikedAcitivitiesIdStrings = self.currentLikedAcitivitiesIdStrings.filter{$0 != likedActivity.objectId}
             user.saveInBackgroundWithBlock{(succeeded, error) -> Void in
@@ -821,14 +850,14 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             self.processedActivities.replaceObjectAtIndex(currentIndexPath.row, withObject: currentActivityDictionary)
             self.tableView.reloadData()
             currentLikedAcitivitiesIdStrings.append(likedActivity.objectId!)
-            var likedActivityQuery = relation.query()
+//            let likedActivityQuery = relation.query()
             relation.addObject(likedActivity)
             user.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                 if error == nil{
 //                    self.loadActivities()
 //                    self.tableView.reloadData()
                     
-                    var newLikeNotification = PFObject(className: "Notification")
+                    let newLikeNotification = PFObject(className: "Notification")
                     newLikeNotification["sender"] = PFUser.currentUser()
                     newLikeNotification["receiver"] = likedActivity["ownerUser"] as! PFUser
                     newLikeNotification["activity"] = likedActivity
@@ -847,8 +876,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func showPersonDetail(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
-        var currentActivity = self.currentActivities[currentIndexPath.row]
+        let currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        let currentActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = currentActivity
         self.performSegueWithIdentifier("showPersonDetail", sender: self)
     }
@@ -856,18 +885,18 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     
     // Perform segue to show activity detail if comment button tapped
     func commentButtonTapped(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        let currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
         
-        var toCommentActivity = self.currentActivities[currentIndexPath.row]
+        let toCommentActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toCommentActivity
         self.selectedSegment = "Comments"
         self.performSegueWithIdentifier("showActivityExpanded", sender: self)
     }
     
     func showActivityContentPreviewTapped(sender:UITapGestureRecognizer){
-        var currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
+        let currentIndexPath = self.tableView.indexPathForRowAtPoint(sender.locationInView(self.tableView)) as NSIndexPath!
         
-        var toPreviewActivity = self.currentActivities[currentIndexPath.row]
+        let toPreviewActivity = self.currentActivities[currentIndexPath.row]
         self.currentActivity = toPreviewActivity
         self.selectedSegment = "About"
         self.performSegueWithIdentifier("showActivityExpanded", sender: self)
@@ -884,7 +913,7 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
     }
     
     func loadNotifications(){
-        var notificationQuery = PFQuery(className: "Notification")
+        let notificationQuery = PFQuery(className: "Notification")
         notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser()!)
         notificationQuery.whereKey("read", equalTo: false)
         notificationQuery.includeKey("sender")
@@ -894,8 +923,8 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
             (objects, error) -> Void in
             if error == nil{
                 self.notifications = objects as! [PFObject]
-                for notification in self.notifications{
-                }
+//                for notification in self.notifications{
+//                }
                 (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true
                 (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).badgeValue = "\(self.notifications.count)"
 //                if self.notifications.count != 0 {
@@ -906,15 +935,15 @@ class ActivityTabViewController: UITableViewController, UITableViewDelegate, UIT
 //                }
             }
             else{
-                println("didn't find any notifications")
+                print("didn't find any notifications")
             }
         }
     }
     
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath == NSIndexPath(forRow: 0, inSection: 1) && self.moreActivities{
-            println("load old")
+        if indexPath == NSIndexPath(forRow: self.tableView.numberOfRowsInSection(0) - 3, inSection: 0) && self.moreActivities{
+            print("load old")
             self.loadActivities("old")
         }
     }

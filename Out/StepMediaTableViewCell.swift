@@ -23,28 +23,28 @@ class StepMediaTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.mediaContextLabel = UILabel(frame: CGRectZero)
-        self.mediaContextLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mediaContextLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(self.mediaContextLabel)
         
         self.mediaPreviewView = UIView(frame: CGRectZero)
-        self.mediaPreviewView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mediaPreviewView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(self.mediaPreviewView)
         
         self.mediaPreviewImageView = UIImageView(frame: CGRectZero)
-        self.mediaPreviewImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mediaPreviewImageView.translatesAutoresizingMaskIntoConstraints = false
         self.mediaPreviewView.addSubview(self.mediaPreviewImageView)
         
         self.mediaBlurbLabel = UILabel(frame: CGRectZero)
-        self.mediaBlurbLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.mediaBlurbLabel.translatesAutoresizingMaskIntoConstraints = false
         self.mediaPreviewView.addSubview(self.mediaBlurbLabel)
         
-        var viewsDictionary = ["mediaContextLabel":self.mediaContextLabel, "mediaPreviewView":self.mediaPreviewView, "mediaPreviewImageView":self.mediaPreviewImageView, "mediaBlurbLabel":self.mediaBlurbLabel]
+        let viewsDictionary = ["mediaContextLabel":self.mediaContextLabel, "mediaPreviewView":self.mediaPreviewView, "mediaPreviewImageView":self.mediaPreviewImageView, "mediaBlurbLabel":self.mediaBlurbLabel]
         
-        var metricsDictinoary = ["sideMargin":15]
+        let metricsDictinoary = ["sideMargin":15]
         
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mediaContextLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictinoary, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mediaContextLabel]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictinoary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[mediaContextLabel]-6-[mediaPreviewView]-6-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictinoary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[mediaContextLabel]-6-[mediaPreviewView]-6-|", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDictinoary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

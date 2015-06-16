@@ -37,7 +37,7 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
 
         self.prompt1 = UILabel(frame: CGRectZero)
         self.prompt1.numberOfLines = 0
-        self.prompt1.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.prompt1.translatesAutoresizingMaskIntoConstraints = false
         self.prompt1.textAlignment = NSTextAlignment.Left
         self.prompt1.font = titleFont?.fontWithSize(16.0)
         self.prompt1.preferredMaxLayoutWidth = contentView.frame.width - 20
@@ -49,7 +49,7 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         
         self.prompt2 = UILabel(frame: CGRectZero)
         self.prompt2.numberOfLines = 0
-        self.prompt2.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.prompt2.translatesAutoresizingMaskIntoConstraints = false
         self.prompt2.textAlignment = NSTextAlignment.Left
         self.prompt2.font = titleFont?.fontWithSize(16.0)
         self.prompt2.preferredMaxLayoutWidth = contentView.frame.width - 20
@@ -60,27 +60,27 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
         contentView.addSubview(prompt2)
         
         self.textView1 = UITextView(frame: CGRectZero)
-        self.textView1.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.textView1.translatesAutoresizingMaskIntoConstraints = false
         self.textView1.userInteractionEnabled = true
         self.textView1.isFirstResponder()
         self.textView1.font = valueFont?.fontWithSize(16.0)
         contentView.addSubview(textView1)
         
         self.textView2 = UITextView(frame: CGRectZero)
-        self.textView2.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.textView2.translatesAutoresizingMaskIntoConstraints = false
         self.textView2.font = valueFont?.fontWithSize(16.0)
         self.textView2.userInteractionEnabled = true
         contentView.addSubview(textView2)
         
-        var viewsDictionary = ["prompt1":prompt1, "prompt2":prompt2, "textView1":textView1, "textView2":textView2]
-        var metricsDictionary = ["promptBottomMargin":promptBottomMargin, "textFieldBottomMargin":textFieldBottomMargin]
+        let viewsDictionary = ["prompt1":prompt1, "prompt2":prompt2, "textView1":textView1, "textView2":textView2]
+        let metricsDictionary = ["promptBottomMargin":promptBottomMargin, "textFieldBottomMargin":textFieldBottomMargin]
         
-        var horizontalConstraintsPrompt1:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[prompt1]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var horizontalConstraintsPrompt2:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[prompt2]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var horizontalConstraintsAnswer1:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textView1]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var horizontalConstraintsAnswer2:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textView2]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraintsPrompt1:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[prompt1]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraintsPrompt2:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[prompt2]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraintsAnswer1:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textView1]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraintsAnswer2:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[textView2]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[prompt1]-promptBottomMargin-[textView1(>=80)]-promptBottomMargin-[prompt2]-promptBottomMargin-[textView2(>=80)]-textFieldBottomMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-[prompt1]-promptBottomMargin-[textView1(>=80)]-promptBottomMargin-[prompt2]-promptBottomMargin-[textView2(>=80)]-textFieldBottomMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraintsPrompt1)
         contentView.addConstraints(horizontalConstraintsPrompt2)
@@ -91,8 +91,8 @@ class PromptAndAnswerTableViewCell: UITableViewCell, CollectStepData{
     
     
     func collectData() -> [String : String] {
-        var textEntry1 = self.textView1.text
-        var textEntry2 = self.textView2.text
+        let textEntry1 = self.textView1.text
+        let textEntry2 = self.textView2.text
         
         return ["answer1":textEntry1, "answer2":textEntry2]
     }

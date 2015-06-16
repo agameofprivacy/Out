@@ -43,16 +43,16 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.navigationItem.title = "Resources"
         // Do any additional setup after loading the view.
         
-        var searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchResources")
+        let searchButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "searchResources")
         self.navigationItem.rightBarButtonItem = searchButton
         
-        var mapButton = UIBarButtonItem(image: UIImage(named: "mapIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showOnMap")
+        let mapButton = UIBarButtonItem(image: UIImage(named: "mapIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showOnMap")
         self.navigationItem.leftBarButtonItem = mapButton
         
         self.addChildViewController(self.resourcesTableViewController)
 
         self.resourcesTableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
-        self.resourcesTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.resourcesTableView.translatesAutoresizingMaskIntoConstraints = false
         self.resourcesTableView.delegate = self
         self.resourcesTableView.dataSource = self
         self.resourcesTableView.rowHeight = UITableViewAutomaticDimension
@@ -69,13 +69,13 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
 //        self.resourcesTableViewController.refreshControl?.attributedTitle = nil
         self.view.addSubview(self.resourcesTableView)
         
-        var metricsDictionary = ["sideMargin":15, "buttonsSideMargin":(UIScreen.mainScreen().bounds.width - (130 * 2 + 18))/2]
-        var viewsDictionary = ["resourcesTableView":self.resourcesTableView]
+        let metricsDictionary = ["sideMargin":15, "buttonsSideMargin":(UIScreen.mainScreen().bounds.width - (130 * 2 + 18))/2]
+        let viewsDictionary = ["resourcesTableView":self.resourcesTableView]
         
         
-        var tableViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[resourcesTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let tableViewHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[resourcesTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[resourcesTableView]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[resourcesTableView]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
 
         self.view.addConstraints(tableViewHorizontalConstraints)
         self.view.addConstraints(verticalConstraints)
@@ -99,27 +99,27 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0{
-            var cell = tableView.dequeueReusableCellWithIdentifier("CrisisHelpTableViewCell") as! CrisisHelpTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("CrisisHelpTableViewCell") as! CrisisHelpTableViewCell
             cell.logoImageView.image = UIImage(named: self.emergencyServiceProvider["logoImage"] as! String)
             cell.descriptionLabel.text = self.emergencyServiceProvider["description"] as? String
-            var callButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "call")
+            let callButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "call")
             cell.callButton.addGestureRecognizer(callButtonTapGestureRecognizer)
             return cell
         }
-        else if indexPath.section == tableView.numberOfSections() - 1{
-            var organization = self.otherOrganizationsNearby[indexPath.row]
-            var cell = tableView.dequeueReusableCellWithIdentifier("ResourceTableViewCell") as! ResourceTableViewCell
+        else if indexPath.section == tableView.numberOfSections - 1{
+            let organization = self.otherOrganizationsNearby[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("ResourceTableViewCell") as! ResourceTableViewCell
             cell.logoImageView.image = UIImage(named: organization["logoImage"] as! String)
             cell.descriptionLabel.text = organization["description"] as? String
             return cell
         }
         else{
-            var organization = self.relevantOrganizations[indexPath.row]
-            var cell = tableView.dequeueReusableCellWithIdentifier("RelevantResourceTableViewCell") as! RelevantResourceTableViewCell
+            let organization = self.relevantOrganizations[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("RelevantResourceTableViewCell") as! RelevantResourceTableViewCell
             cell.logoImageView.image = UIImage(named: organization["logoImage"] as! String)
             cell.descriptionLabel.text = organization["description"] as? String
             var keysString:String = "Relevance: "
-            var objectId:String = organization.objectId!
+            let objectId:String = organization.objectId!
             for key in (self.relevantOrganizationsAttributes[objectId]! as [String]){
                 keysString += ((PFUser.currentUser()!)[key] as? String)! + "  "
             }
@@ -137,7 +137,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 return 0
             }
         }
-        else if section == tableView.numberOfSections() - 1{
+        else if section == tableView.numberOfSections - 1{
             return self.otherOrganizationsNearby.count
         }
         else{
@@ -147,14 +147,14 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            var headerView = UIView()
+            let headerView = UIView()
             headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 0.97)
-            var separator = UIView(frame: CGRectZero)
-            separator.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let separator = UIView(frame: CGRectZero)
+            separator.translatesAutoresizingMaskIntoConstraints = false
             separator.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
             headerView.addSubview(separator)
-            var titleLabel = UILabel(frame: CGRectZero)
-            titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let titleLabel = UILabel(frame: CGRectZero)
+            titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.textAlignment = NSTextAlignment.Center
             titleLabel.font = UIFont(name: "HelveticaNeue-CondensedBold", size: 13.0)
             switch section{
@@ -165,24 +165,24 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 else{
                     titleLabel.text = nil
                 }
-            case tableView.numberOfSections() - 1: titleLabel.text = "OTHER NEARBY RESOURCES"
+            case tableView.numberOfSections - 1: titleLabel.text = "OTHER NEARBY RESOURCES"
             default: titleLabel.text = "RELEVANT RESOURCES"
             }
             
             headerView.addSubview(titleLabel)
             
-            var metricsDictionary = ["sideMargin":7.5, "barWidth":(UIScreen.mainScreen().bounds.width - 7.5 * 4 - 100)/2]
-            var viewsDictionary = ["titleLabel":titleLabel, "separator":separator]
+            let metricsDictionary = ["sideMargin":7.5, "barWidth":(UIScreen.mainScreen().bounds.width - 7.5 * 4 - 100)/2]
+            let viewsDictionary = ["titleLabel":titleLabel, "separator":separator]
             
-            var centerHConstraint = NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+            let centerHConstraint = NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
             headerView.addConstraint(centerHConstraint)
             
 //            var centerYConstraint = NSLayoutConstraint(item: titleLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
 //            headerView.addConstraint(centerYConstraint)
             
-            var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
             headerView.addConstraints(horizontalConstraints)
-            var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[titleLabel]-6-[separator(0.75)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[titleLabel]-6-[separator(0.75)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
             headerView.addConstraints(verticalConstraints)
 
             return headerView
@@ -233,7 +233,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
             self.selectedResourceItem = self.emergencyServiceProvider
             self.performSegueWithIdentifier("showResourceDetail", sender: self)
         }
-        else if indexPath.section == tableView.numberOfSections() - 1{
+        else if indexPath.section == tableView.numberOfSections - 1{
             self.selectedResourceItem = self.otherOrganizationsNearby[indexPath.row]
             self.performSegueWithIdentifier("showResourceDetail", sender: self)
         }
@@ -245,17 +245,17 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
     
     
     func searchResources(){
-        println("search resources!")
+        print("search resources!")
     }
     
     func call(){
-        var phoneNumber = self.emergencyServiceProvider["phoneNumber"] as! String
+        let phoneNumber = self.emergencyServiceProvider["phoneNumber"] as! String
         UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(phoneNumber)")!)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showResourceDetail"{
-            var newVC = segue.destinationViewController as! ResourceDetailViewController
+            let newVC = segue.destinationViewController as! ResourceDetailViewController
             newVC.resourceItem = self.selectedResourceItem
             newVC.currentGeoPoint = self.currentGeoPoint
         }
@@ -283,7 +283,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2D(latitude: self.currentGeoPoint.latitude, longitude: self.currentGeoPoint.longitude), self.mapWidth, self.mapHeight), animated: true)
 
                 // do something with the new geoPoint
-                var emergencyServiceProviderQuery = PFQuery(className: "Organization")
+                let emergencyServiceProviderQuery = PFQuery(className: "Organization")
                 //                emergencyServiceProviderQuery.whereKey("city", equalTo: PFUser.currentUser()["city"])
                 //                emergencyServiceProviderQuery.whereKey("state", equalTo: PFUser.currentUser()["state"])
                 emergencyServiceProviderQuery.whereKey("type", equalTo: "crisis-handling")
@@ -293,13 +293,13 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                     if error == nil{
                         if (objects as! [PFObject]).count > 0{
                             self.emergencyServiceProvider = (objects as! [PFObject])[0]
-                            var annotation = MKPointAnnotation()
+                            let annotation = MKPointAnnotation()
                             annotation.coordinate = CLLocationCoordinate2DMake((self.emergencyServiceProvider["location"] as! PFGeoPoint).latitude, (self.emergencyServiceProvider["location"] as! PFGeoPoint).longitude)
-                            annotation.title = self.emergencyServiceProvider["name"] as! String
-                            annotation.subtitle = self.emergencyServiceProvider["streetAddress"] as! String
+                            annotation.title = self.emergencyServiceProvider["name"] as? String
+                            annotation.subtitle = self.emergencyServiceProvider["streetAddress"] as? String
                             self.annotations.append(annotation)
                         }
-                        var query = PFQuery(className: "Organization")
+                        let query = PFQuery(className: "Organization")
                         query.whereKey("location", nearGeoPoint: geoPoint!, withinMiles: 10.0)
                         query.whereKey("type", equalTo: "community")
                         query.orderByAscending("location")
@@ -314,12 +314,12 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                     var weight = 0
                                     var relevance:[String] = []
                                     for parameter in self.backgroundParameterArray{
-                                        if contains(object["tags"] as! [String], (PFUser.currentUser()!)[parameter] as! String){
+                                        if (object["tags"] as! [String]).contains((PFUser.currentUser()!)[parameter] as! String){
                                             ++weight
                                             relevance.append(parameter)
                                         }
                                     }
-//                                    println(weight)
+//                                    print(weight)
                                     if weight == 0{
                                         self.otherOrganizationsNearby.append(object as PFObject)
                                     }
@@ -327,22 +327,22 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                         self.relevantOrganizations.append(object as PFObject)
                                         self.relevantOrganizationsAttributes.updateValue(relevance, forKey: (object as PFObject).objectId!)
                                     }
-                                    var annotation = MKPointAnnotation()
+                                    let annotation = MKPointAnnotation()
                                     annotation.coordinate = CLLocationCoordinate2DMake((object["location"] as! PFGeoPoint).latitude, (object["location"] as! PFGeoPoint).longitude)
-                                    annotation.title = object["name"] as! String
-                                    annotation.subtitle = object["streetAddress"] as! String
+                                    annotation.title = object["name"] as? String
+                                    annotation.subtitle = object["streetAddress"] as? String
                                     self.annotations.append(annotation)
                                 }
                                 self.mapView.addAnnotations(self.annotations)
 //                                self.mapClusterController.addAnnotations(self.annotations, withCompletionHandler: nil)
-//                                println(self.annotations.last?.description)
+//                                print(self.annotations.last?.description)
 //                                self.mapClusterController.selectAnnotation(self.annotations.last, andZoomToRegionWithLatitudinalMeters: 500, longitudinalMeters: 500)
                                 CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: self.currentGeoPoint.latitude, longitude: self.currentGeoPoint.longitude), completionHandler:
                                     {(placemarks, error) in
-                                        if (error != nil) {println("reverse geodcode fail: \(error.localizedDescription)")}
+                                        if (error != nil) {print("reverse geodcode fail: \(error!.localizedDescription)")}
                                         else{
-                                            let pm = placemarks as! [CLPlacemark]
-                                            var placemark:CLPlacemark = pm[0]
+                                            let pm = placemarks as [CLPlacemark]!
+                                            let placemark:CLPlacemark = pm[0]
                                             self.currentAddressDictionary = placemark.addressDictionary
                                             self.resourcesTableViewController.refreshControl!.endRefreshing()
                                             self.resourcesTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 3)), withRowAnimation: UITableViewRowAnimation.None)
@@ -350,28 +350,28 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                 })
                             }
                             else{
-                                println("second failure")
+                                print("second failure")
                             }
                         }
                         
                     }
                     else{
-                                println("first failure")
+                                print("first failure")
                     }
                 }
             }
             else{
-                println("can't find location")
+                print("can't find location")
 //                self.resourcesTableViewController.refreshControl!.endRefreshing()
             }
         }
 
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        var latitude = view.annotation.coordinate.latitude
-        var longitude = view.annotation.coordinate.longitude
-        var resourceQuery = PFQuery(className: "Organization")
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let latitude = view.annotation!.coordinate.latitude
+        let longitude = view.annotation!.coordinate.longitude
+        let resourceQuery = PFQuery(className: "Organization")
         resourceQuery.whereKey("location", equalTo: PFGeoPoint(latitude: latitude, longitude: longitude))
         resourceQuery.findObjectsInBackgroundWithBlock{
             (objects, error) -> Void in
@@ -380,24 +380,24 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 self.performSegueWithIdentifier("showResourceDetail", sender: self)
             }
             else{
-                println("organization lookup failed")
+                print("organization lookup failed")
             }
         }
 
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation.isKindOfClass(MKUserLocation){
             return nil
         }
         else{
-            var pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
+            let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pinView")
             pinView.animatesDrop = true
             pinView.pinColor = MKPinAnnotationColor.Red
             pinView.enabled = true
             pinView.canShowCallout = true
             
-            pinView.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            pinView.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
             return pinView
         }
     }

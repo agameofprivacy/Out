@@ -40,7 +40,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
         self.galleryCollectionView.alwaysBounceHorizontal = true
         self.galleryCollectionView.directionalLockEnabled = true
         self.galleryCollectionView.tag = 12345 as Int
-        self.galleryCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.galleryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         self.galleryCollectionView.showsHorizontalScrollIndicator = false
         
@@ -56,7 +56,7 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell:GallerySelectCollectionViewCell = self.galleryCollectionView.dequeueReusableCellWithReuseIdentifier("GallerySelectCollectionViewCell", forIndexPath: indexPath) as! GallerySelectCollectionViewCell
+        let cell:GallerySelectCollectionViewCell = self.galleryCollectionView.dequeueReusableCellWithReuseIdentifier("GallerySelectCollectionViewCell", forIndexPath: indexPath) as! GallerySelectCollectionViewCell
         cell.titleLabel.text = itemTitles[indexPath.item]
         cell.imageImageView.image = UIImage(named: itemImages[indexPath.item])
         cell.blurbLabel.text = itemBlurbs[indexPath.item]
@@ -67,10 +67,10 @@ class GallerySelectTableViewCell: UITableViewCell, UICollectionViewDataSource, U
     
     func collectData() -> [String : String] {
         var galleryItems = self.galleryCollectionView.visibleCells()
-        var currentItem = galleryItems[0] as! GallerySelectCollectionViewCell
-        var indexPath:NSIndexPath = self.galleryCollectionView.indexPathForCell(currentItem)!
-        var galleryNumber:String = "\(indexPath.item + 1)"
-        var challengeTrackDictionary:[String:String] = [itemType:galleryNumber]
+        let currentItem = galleryItems[0] as! GallerySelectCollectionViewCell
+        let indexPath:NSIndexPath = self.galleryCollectionView.indexPathForCell(currentItem)!
+        let galleryNumber:String = "\(indexPath.item + 1)"
+        let challengeTrackDictionary:[String:String] = [itemType:galleryNumber]
         return challengeTrackDictionary
     }
 

@@ -24,7 +24,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
     var activityNarrativeTitleLabel:UILabel!
     var prepoChallengeTitleLabel:UILabel!
     var challengeTitleLabel:UILabel!
-    var viewChallengeButton: UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    var viewChallengeButton: UIButton = UIButton(type: UIButtonType.System)
     var actionTextView:UITextView!
 
     var activityContentWebView:UIWebView!
@@ -77,21 +77,21 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         }
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientation.LandscapeLeft.rawValue | UIInterfaceOrientation.LandscapeRight.rawValue | UIInterfaceOrientation.Portrait.rawValue
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [.LandscapeLeft, .LandscapeRight, .Portrait]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Activity"
         
-        var shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareActivityContent")
+        let shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareActivityContent")
         shareButton.enabled = true
         shareButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = shareButton
 
         
-        var URLString = (self.challenge["narrativeURLs"] as! [String])[challengeTrackNumber] as String
+        let URLString = (self.challenge["narrativeURLs"] as! [String])[challengeTrackNumber] as String
         self.automaticallyAdjustsScrollViewInsets = false
         self.activityContentWebView = UIWebView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height - 64))
         self.activityContentWebView.scrollView.contentInset = UIEdgeInsetsMake(130, 0, 49, 0)
@@ -103,11 +103,11 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.view.addSubview(self.activityContentWebView)
  
         
-        var visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         visualEffectView.frame = CGRectMake(0, 0, self.view.frame.width, 130)
 
         
-        var challengeShadeBG = UIView(frame: CGRectMake(0, 64, self.view.frame.width, 130))
+        let challengeShadeBG = UIView(frame: CGRectMake(0, 64, self.view.frame.width, 130))
         challengeShadeBG.layer.masksToBounds = false
 //        challengeShadeBG.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.75)
         challengeShadeBG.layer.shadowColor = UIColor.blackColor().CGColor
@@ -129,7 +129,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         challengeShadeBG.addSubview(visualEffectView)
         
         self.avatarImageView = UIImageView(frame: CGRectZero)
-        self.avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
@@ -138,7 +138,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.avatarImageView)
 
         self.aliasLabel = UILabel(frame: CGRectZero)
-        self.aliasLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.aliasLabel.translatesAutoresizingMaskIntoConstraints = false
         self.aliasLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
         self.aliasLabel.text = self.user.username
         self.aliasLabel.numberOfLines = 1
@@ -146,7 +146,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.aliasLabel)
         
         self.activityNarrativeActionLabel = UILabel(frame: CGRectZero)
-        self.activityNarrativeActionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.activityNarrativeActionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.activityNarrativeActionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         self.activityNarrativeActionLabel.text = (self.challenge["narrativeAction"] as! String)
         self.activityNarrativeActionLabel.numberOfLines = 1
@@ -154,7 +154,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.activityNarrativeActionLabel)
         
         self.activityNarrativeTitleLabel = UILabel(frame: CGRectZero)
-        self.activityNarrativeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.activityNarrativeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.activityNarrativeTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
         self.activityNarrativeTitleLabel.text = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
         self.activityNarrativeTitleLabel.numberOfLines = 1
@@ -162,7 +162,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.activityNarrativeTitleLabel)
 
         self.prepoChallengeTitleLabel = UILabel(frame: CGRectZero)
-        self.prepoChallengeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.prepoChallengeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.prepoChallengeTitleLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         self.prepoChallengeTitleLabel.text = "in"
         self.prepoChallengeTitleLabel.numberOfLines = 1
@@ -170,7 +170,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.prepoChallengeTitleLabel)
         
         self.challengeTitleLabel = UILabel(frame: CGRectZero)
-        self.challengeTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.challengeTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
         self.challengeTitleLabel.text = (self.challenge["title"] as! String)
         self.challengeTitleLabel.numberOfLines = 1
@@ -178,7 +178,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(self.challengeTitleLabel)
 
         self.viewChallengeButton.frame = CGRectZero
-        self.viewChallengeButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.viewChallengeButton.translatesAutoresizingMaskIntoConstraints = false
         self.viewChallengeButton.setTitle("View Challenge", forState: UIControlState.Normal)
         self.viewChallengeButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.viewChallengeButton.titleLabel!.font = UIFont(name: "HelveticaNeue-Light", size: 15.0)
@@ -189,18 +189,18 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(viewChallengeButton)
 
         self.actionTextView = UITextView(frame: CGRectZero)
-        self.actionTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.actionTextView.translatesAutoresizingMaskIntoConstraints = false
         self.actionTextView.font = UIFont(name: "HelveticaNeue-Light", size: 15)
 
-        var narrativeActionString = (self.challenge["narrativeAction"] as! String)
-        var narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
-        var challengeTitleString = (self.challenge["title"] as! String)
-        var prepositionBeforeChallengeString = " in "
+        let narrativeActionString = (self.challenge["narrativeAction"] as! String)
+        let narrativeTitleString = (self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber]
+        let challengeTitleString = (self.challenge["title"] as! String)
+        let prepositionBeforeChallengeString = " in "
 
         var actionString = self.user.username!
         actionString = actionString + " " + narrativeActionString + " " + narrativeTitleString + prepositionBeforeChallengeString + challengeTitleString
-        var actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
-        var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        let actionTextViewAttributedString = NSMutableAttributedString(string: actionString)
+        let textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
         textViewParagraphStyle.lineSpacing = 5
         actionTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (actionString as NSString).rangeOfString(actionString))
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Light", size: 15)!, range: (actionString as NSString).rangeOfString(actionString))
@@ -209,10 +209,10 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         actionTextViewAttributedString.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Medium", size: 15)!, range: (actionString as NSString).rangeOfString(challengeTitleString))
 
         
-        var textViewTappedGestureRecognizer = UITapGestureRecognizer(target: self, action: "textViewTapped:")
+        let textViewTappedGestureRecognizer = UITapGestureRecognizer(target: self, action: "textViewTapped:")
         
         self.actionTextView.attributedText = actionTextViewAttributedString
-        var actionTextViewHeight = self.actionTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 77.5, CGFloat(MAXFLOAT))).height
+        let actionTextViewHeight = self.actionTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 77.5, CGFloat(MAXFLOAT))).height
         self.actionTextView.backgroundColor = UIColor.clearColor()
         self.actionTextView.editable = false
         self.actionTextView.scrollEnabled = false
@@ -223,22 +223,22 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addSubview(actionTextView)
 
         
-        var challengeShadeViewsDictionary =
+        let challengeShadeViewsDictionary =
         [
             "avatarImageView":avatarImageView,
             "viewChallengeButton":viewChallengeButton,
             "actionTextView":self.actionTextView
         ]
         
-        var challengeShadeMetricsDictionary = ["largeVerticalPadding":12, "actionTextViewHeight":actionTextViewHeight]
+        let challengeShadeMetricsDictionary = ["largeVerticalPadding":12, "actionTextViewHeight":actionTextViewHeight]
         
-        var horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[actionTextView]-7.5-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        let horizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[avatarImageView(50)]-12.5-[actionTextView]-7.5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
-        var fourthHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[viewChallengeButton]-7.5-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        let fourthHorizontalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-7.5-[viewChallengeButton]-7.5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
 
-        var verticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-16.5-[avatarImageView(50)]->=7.5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        let verticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-16.5-[avatarImageView(50)]->=7.5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
-        var secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14.5-[actionTextView(actionTextViewHeight)]->=5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
+        let secondVerticalShadeViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-14.5-[actionTextView(actionTextViewHeight)]->=5-[viewChallengeButton(36)]-12-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeShadeMetricsDictionary, views: challengeShadeViewsDictionary)
         
         self.challengeShade.addConstraints(horizontalShadeViewConstraints)
         self.challengeShade.addConstraints(fourthHorizontalShadeViewConstraints)
@@ -246,7 +246,7 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         self.challengeShade.addConstraints(secondVerticalShadeViewConstraints)
         
         // Initialize NSURLRequest object with URL
-        var req = NSURLRequest(URL:NSURL(string: URLString)!)
+        let req = NSURLRequest(URL:NSURL(string: URLString)!)
         
         // Load NSURLRequest
         self.activityContentWebView!.loadRequest(req)
@@ -270,14 +270,14 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
 
 
     func shareActivityContent(){
-        println("share activity")
+        print("share activity")
     }
     
     func textViewTapped(recognizer:UITapGestureRecognizer){
-        var textView:UITextView = recognizer.view as! UITextView
+        let textView:UITextView = recognizer.view as! UITextView
         // Location of the tap in text-container coordinates
         
-        var layoutManager:NSLayoutManager = textView.layoutManager
+        let layoutManager:NSLayoutManager = textView.layoutManager
         var location:CGPoint = recognizer.locationInView(textView)
         location.x -= textView.textContainerInset.left;
         location.y -= textView.textContainerInset.top;
@@ -287,28 +287,28 @@ class ActivityContentPreviewViewController: UIViewController, UIWebViewDelegate 
         var characterIndex:Int
         characterIndex = layoutManager.characterIndexForPoint(location, inTextContainer: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
         
-        var userAliasCharacterRange = count(self.user.username!)
-        var activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + count(self.challenge["narrativeAction"] as! String)
-        var activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + count((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber])
-        var activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + count(" in ")
-        var activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + count(self.challenge["title"] as! String)
+        let userAliasCharacterRange = (self.user.username!).characters.count
+        let activityNarrativeTitleRangeStart = userAliasCharacterRange + 2 + (self.challenge["narrativeAction"] as! String).characters.count
+        let activityNarrativeTitleRangeEnd = activityNarrativeTitleRangeStart + ((self.challenge["narrativeTitles"] as! [String])[self.challengeTrackNumber] as String).characters.count
+        let activityChallengeTitleRangeStart = activityNarrativeTitleRangeEnd + " in ".characters.count
+        let activityChallengeTitleRangeEnd = activityChallengeTitleRangeStart + (self.challenge["title"] as! String).characters.count
 
         
-        if (characterIndex < count(self.user.username!)) {
+        if (characterIndex < (self.user.username!).characters.count) {
             
             // Handle as required...
-            println("username tapped")
+            print("username tapped")
             
         }
         else if (characterIndex >= activityNarrativeTitleRangeStart && characterIndex <= activityNarrativeTitleRangeEnd) {
             
             // Handle as required...
-            println("narrative title tapped")
+            print("narrative title tapped")
         }
         else if (characterIndex >= activityChallengeTitleRangeStart && characterIndex <= activityChallengeTitleRangeEnd) {
             
             // Handle as required...
-            println("challenge title tapped")
+            print("challenge title tapped")
         }
 
 

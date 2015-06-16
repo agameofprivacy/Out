@@ -19,18 +19,18 @@ class StepBlurbTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.stepBlurbLabel = UILabel(frame: CGRectZero)
-        self.stepBlurbLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.stepBlurbLabel.translatesAutoresizingMaskIntoConstraints = false
         self.stepBlurbLabel.numberOfLines = 0
         self.stepBlurbLabel.font = UIFont(name: "HelveticaNeue", size: 13)
 //        self.stepBlurbLabel.preferredMaxLayoutWidth = 345
         contentView.addSubview(self.stepBlurbLabel)
         
-        var viewsDictionary = ["stepBlurbLabel":self.stepBlurbLabel]
-        var metricsDictionary = ["sideMargin": 15]
+        let viewsDictionary = ["stepBlurbLabel":self.stepBlurbLabel]
+        let metricsDictionary = ["sideMargin": 15]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[stepBlurbLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[stepBlurbLabel]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[stepBlurbLabel]-6-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[stepBlurbLabel]-6-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

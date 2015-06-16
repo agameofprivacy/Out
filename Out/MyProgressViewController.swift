@@ -58,15 +58,15 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.alertController = UIAlertController(title: "Select a Sort Category", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in
-//            println("Canceled")
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {(alertController:UIAlertAction!) in
+//            print("Canceled")
         }
         
-        var difficultyAction = UIAlertAction(title: "Difficulty", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("difficulty")}
+        let difficultyAction = UIAlertAction(title: "Difficulty", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("difficulty")}
         
-        var placeAction = UIAlertAction(title: "Place", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("place")}
+        let placeAction = UIAlertAction(title: "Place", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("place")}
         
-        var peopleAction = UIAlertAction(title: "People", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("people")}
+        let peopleAction = UIAlertAction(title: "People", style: UIAlertActionStyle.Default) {(alertController:UIAlertAction!) in self.redrawChartToSort("people")}
 
         
         alertController.addAction(cancelAction)
@@ -80,7 +80,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.toDoTableView.registerClass(ChallengeRecordTableViewCell.self, forCellReuseIdentifier: "ChallengeRecordTableViewCell")
         self.toDoTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.toDoTableView.rowHeight = UITableViewAutomaticDimension
-        self.toDoTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.toDoTableView.translatesAutoresizingMaskIntoConstraints = false
         self.toDoTableView.estimatedRowHeight = 64
         self.view.addSubview(self.toDoTableView)
         
@@ -90,7 +90,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.doneTableView.registerClass(ChallengeRecordTableViewCell.self, forCellReuseIdentifier: "ChallengeRecordTableViewCell")
         self.doneTableView.hidden = true
         self.doneTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.doneTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.doneTableView.translatesAutoresizingMaskIntoConstraints = false
         self.doneTableView.estimatedRowHeight = 64
         self.doneTableView.rowHeight = UITableViewAutomaticDimension
         self.view.addSubview(self.doneTableView)
@@ -100,23 +100,23 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.view.addSubview(self.segmentShade)
         
         self.challengesSwitch = UISegmentedControl(items: ["Remaining","Completed"])
-        self.challengesSwitch.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengesSwitch.translatesAutoresizingMaskIntoConstraints = false
         self.challengesSwitch.tintColor = UIColor.blackColor()
         self.challengesSwitch.selectedSegmentIndex = 0
         self.challengesSwitch.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
         self.segmentShade.addSubview(self.challengesSwitch)
         
         self.segmentShadeBottomSeparator = UIView(frame: CGRectZero)
-        self.segmentShadeBottomSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentShadeBottomSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.segmentShadeBottomSeparator.backgroundColor = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1)
         self.segmentShade.addSubview(self.segmentShadeBottomSeparator)
         
-        var viewsDictionary = ["challengesSwitch":self.challengesSwitch, "segmentShadeBottomSeparator":self.segmentShadeBottomSeparator]
-        var metricsDictionary = ["margin":7.5]
+        let viewsDictionary = ["challengesSwitch":self.challengesSwitch, "segmentShadeBottomSeparator":self.segmentShadeBottomSeparator]
+        let metricsDictionary = ["margin":7.5]
         
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[challengesSwitch]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var separatorBottomHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentShadeBottomSeparator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=8-[challengesSwitch(28)]->=8-[segmentShadeBottomSeparator(1)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[challengesSwitch]-margin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let separatorBottomHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentShadeBottomSeparator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=8-[challengesSwitch(28)]->=8-[segmentShadeBottomSeparator(1)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         self.segmentShade.addConstraints(horizontalConstraints)
         self.segmentShade.addConstraints(separatorBottomHorizontalConstraints)
@@ -181,7 +181,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
 //        var chartViewsDictionary = ["myProgressPieChart":self.myProgressPieChart]
 //        var chartMetricsDictionary = ["sideMargin": 7.5]
 //        
-//        var chartHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[myProgressPieChart(100)]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: chartMetricsDictionary, views: chartViewsDictionary)
+//        var chartHorizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[myProgressPieChart(100)]->=sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: chartMetricsDictionary, views: chartViewsDictionary)
 //        var chartVerticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=15-[myProgressPieChart(100)]->=15-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: chartMetricsDictionary, views: chartViewsDictionary)
 //        
 //        self.chartShade.addConstraints(chartHorizontalConstraints)
@@ -189,11 +189,11 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // UINavigationBar init
         self.navigationItem.title = "Progress"
-        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
+        let closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
 
-        var sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortButtonTapped")
+        let sortButton = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.Plain, target: self, action: "sortButtonTapped")
         sortButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = sortButton
         loadChallenges()
@@ -219,66 +219,66 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:ChallengeRecordTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeRecordTableViewCell") as! ChallengeRecordTableViewCell
+        let cell:ChallengeRecordTableViewCell = tableView.dequeueReusableCellWithIdentifier("ChallengeRecordTableViewCell") as! ChallengeRecordTableViewCell
         
 //        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         if tableView == self.toDoTableView{
-            var challenge = self.toDoChallenges[indexPath.row] as PFObject
-            var challengeTitleText = challenge["title"] as! String
+            let challenge = self.toDoChallenges[indexPath.row] as PFObject
+            let challengeTitleText = challenge["title"] as! String
             if self.currentSortCategory == "difficulty"{
-            var challengeDifficulty = challenge["difficulty"] as! String
+            let challengeDifficulty = challenge["difficulty"] as! String
             cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
             }
             else if self.currentSortCategory == "place"{
-                if contains(challenge["tags"] as! [String], "Home"){
+                if (challenge["tags"] as! [String]).contains("Home"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
                 }
-                else if contains(challenge["tags"] as! [String], "School"){
+                else if (challenge["tags"] as! [String]).contains("School"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
                 }
-                else if contains(challenge["tags"] as! [String], "Work"){
+                else if (challenge["tags"] as! [String]).contains("Work"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
                 }
             }
             else if self.currentSortCategory == "people"{
-                if contains(challenge["tags"] as! [String], "Family"){
+                if (challenge["tags"] as! [String]).contains("Family"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
                 }
-                else if contains(challenge["tags"] as! [String], "Friends"){
+                else if (challenge["tags"] as! [String]).contains("Friends"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
                 }
-                else if contains(challenge["tags"] as! [String], "Strangers"){
+                else if (challenge["tags"] as! [String]).contains("Strangers"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
                 }
             }
             cell.challengeTitleLabel.text = challengeTitleText
         }
         else{
-            var challenge = self.doneChallenges[indexPath.row] as PFObject
-            var challengeTitleText = challenge["title"] as! String
+            let challenge = self.doneChallenges[indexPath.row] as PFObject
+            let challengeTitleText = challenge["title"] as! String
             if self.currentSortCategory == "difficulty"{
-                var challengeDifficulty = challenge["difficulty"] as! String
+                let challengeDifficulty = challenge["difficulty"] as! String
                 cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary[challengeDifficulty]
             }
             else if self.currentSortCategory == "place"{
-                if contains(challenge["tags"] as! [String], "Home"){
+                if (challenge["tags"] as! [String]).contains("Home"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Home"]
                 }
-                else if contains(challenge["tags"] as! [String], "School"){
+                else if (challenge["tags"] as! [String]).contains("School"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["School"]
                 }
-                else if contains(challenge["tags"] as! [String], "Work"){
+                else if (challenge["tags"] as! [String]).contains("Work"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Work"]
                 }
             }
             else if self.currentSortCategory == "people"{
-                if contains(challenge["tags"] as! [String], "Family"){
+                if (challenge["tags"] as! [String]).contains("Family"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Family"]
                 }
-                else if contains(challenge["tags"] as! [String], "Friends"){
+                else if (challenge["tags"] as! [String]).contains("Friends"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Friends"]
                 }
-                else if contains(challenge["tags"] as! [String], "Strangers"){
+                else if (challenge["tags"] as! [String]).contains("Strangers"){
                     cell.challengeTypeIconImageView.backgroundColor = self.colorDictionary["Strangers"]
                 }
             }
@@ -411,13 +411,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if !self.toDoTableView.hidden{
                 // Calculate toDoChallenges difficulty values
                 for challenge in self.toDoChallenges{
-                    if contains(challenge["tags"] as! [String], "Home"){
+                    if (challenge["tags"] as! [String]).contains("Home"){
                         homeChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "School"){
+                    else if (challenge["tags"] as! [String]).contains("School"){
                         schoolChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Work"){
+                    else if (challenge["tags"] as! [String]).contains("Work"){
                         workChallengeCount++
                     }
                 }
@@ -428,13 +428,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 // if doneTableView is shown
             else{
                 for challenge in self.doneChallenges{
-                    if contains(challenge["tags"] as! [String], "Home"){
+                    if (challenge["tags"] as! [String]).contains("Home"){
                         homeChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "School"){
+                    else if (challenge["tags"] as! [String]).contains("School"){
                         schoolChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Work"){
+                    else if (challenge["tags"] as! [String]).contains("Work"){
                         workChallengeCount++
                     }
                 }
@@ -487,13 +487,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             if !self.toDoTableView.hidden{
                 // Calculate toDoChallenges difficulty values
                 for challenge in self.toDoChallenges{
-                    if contains(challenge["tags"] as! [String], "Family"){
+                    if (challenge["tags"] as! [String]).contains("Family"){
                         familyChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Friends"){
+                    else if (challenge["tags"] as! [String]).contains("Friends"){
                         friendsChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Strangers"){
+                    else if (challenge["tags"] as! [String]).contains("Strangers"){
                         strangersChallengeCount++
                     }
                 }
@@ -504,13 +504,13 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 // if doneTableView is shown
             else{
                 for challenge in self.doneChallenges{
-                    if contains(challenge["tags"] as! [String], "Family"){
+                    if (challenge["tags"] as! [String]).contains("Family"){
                         familyChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Friends"){
+                    else if (challenge["tags"] as! [String]).contains("Friends"){
                         friendsChallengeCount++
                     }
-                    else if contains(challenge["tags"] as! [String], "Strangers"){
+                    else if (challenge["tags"] as! [String]).contains("Strangers"){
                         strangersChallengeCount++
                     }
                 }
@@ -564,9 +564,9 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         self.sortedByCategoryLabel.text = sortedSwitchTitleLabel + "challenges sorted by " + self.currentSortCategory
         self.sortedByCategoryLabel.hidden = false
         
-        var param1LabelText:String
-        var param2LabelText:String
-        var param3LabelText:String
+//        let param1LabelText:String
+//        let param2LabelText:String
+//        let param3LabelText:String
 
         
         if self.currentSortCategory == "difficulty"{
@@ -597,7 +597,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func loadChallenges(){
 
-        var queryUserData = PFQuery(className: "UserChallengeData")
+        let queryUserData = PFQuery(className: "UserChallengeData")
         queryUserData.whereKey("username", equalTo: PFUser.currentUser()!)
         queryUserData.whereKey("isCurrent", equalTo: false)
         queryUserData.includeKey("challenge")
@@ -610,7 +610,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
                 self.doneTableView.reloadData()
                 
-                var queryToDoChallenges = PFQuery(className: "Challenge")
+                let queryToDoChallenges = PFQuery(className: "Challenge")
                 var doneChallengesObjectIdArray:[String] = []
                 for challenge in self.doneChallenges{
                     doneChallengesObjectIdArray.append(challenge.objectId!)

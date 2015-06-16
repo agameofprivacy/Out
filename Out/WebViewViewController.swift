@@ -28,7 +28,7 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
         webView.scalesPageToFit = true
         webView.backgroundColor = UIColor(white: 0.90, alpha: 1)
         // Initialize closeButton
-        var closeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneWithView")
+        let closeButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "doneWithView")
         closeButton.enabled = true
         closeButton.tintColor = UIColor.blackColor()
         
@@ -36,15 +36,15 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
         self.navigationItem.rightBarButtonItem = closeButton
         
         // Initialize Back button
-        var backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
         backButton.tintColor = UIColor.blackColor()
         
         // Initialize Reload button
-        var reloadButton = UIBarButtonItem(title: "Reload", style: UIBarButtonItemStyle.Plain, target: self, action: "reload")
+        let reloadButton = UIBarButtonItem(title: "Reload", style: UIBarButtonItemStyle.Plain, target: self, action: "reload")
         reloadButton.tintColor = UIColor.blackColor()
         
         // Initialize flexible space
-        var flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
         
         // Place back button, flexible space and reload button on UIToolBar
         self.toolbarItems = [backButton,flexibleSpace,reloadButton]
@@ -59,7 +59,7 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Initialize NSURLRequest object with URL
-        var req = NSURLRequest(URL:self.url)
+        let req = NSURLRequest(URL:self.url)
 
         // Load NSURLRequest
         self.webView!.loadRequest(req)

@@ -51,7 +51,7 @@ class ChallengeFilterTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChallengeFilterCell", forIndexPath: indexPath) as! ChallengeFilterTableViewCell
         cell.challengeFilterTitleLabel.text = challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle
-        if challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected || contains(filterStrings, challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle){
+        if challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterSelected || filterStrings.contains((challengeFilters[indexPath.section].filterParameters[indexPath.row].parameterTitle)){
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         else{

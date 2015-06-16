@@ -25,11 +25,11 @@ class CreateAccountViewController: XLFormViewController {
         super.viewDidLoad()
 
         // Initialize and place close and confirm buttons
-        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
+        let closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped:")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         self.navigationItem.title = "Signup"
-        var confirmButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.Plain, target: self, action: "confirmButtonTapped:")
+        let confirmButton = UIBarButtonItem(title: "Confirm", style: UIBarButtonItemStyle.Plain, target: self, action: "confirmButtonTapped:")
         confirmButton.tintColor = UIColor.blackColor()
         confirmButton.enabled = false
         self.navigationItem.rightBarButtonItem = confirmButton
@@ -54,7 +54,7 @@ class CreateAccountViewController: XLFormViewController {
 
         row = XLFormRowDescriptor(tag: "Password", rowType: XLFormRowDescriptorTypePassword, title: "Password")
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
-        var paddingView2 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView2 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfig.setObject(paddingView2, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         row.required = true
@@ -62,7 +62,7 @@ class CreateAccountViewController: XLFormViewController {
 
         row = XLFormRowDescriptor(tag: "Verify Password", rowType: XLFormRowDescriptorTypePassword, title: "Verify Password")
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
-        var paddingView3 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView3 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfig.setObject(paddingView3, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         row.required = true
@@ -123,14 +123,14 @@ class CreateAccountViewController: XLFormViewController {
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Age", rowType: XLFormRowDescriptorTypeInteger, title: "Age")
-        var paddingView4 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView4 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
         row.cellConfig.setObject(paddingView4, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
         row = XLFormRowDescriptor(tag: "Ethnicity", rowType: XLFormRowDescriptorTypeText, title: "Ethnicity")
-        var paddingView5 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView5 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
         row.cellConfig.setObject(paddingView5, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
@@ -208,14 +208,14 @@ class CreateAccountViewController: XLFormViewController {
         section.addFormRow(row)
 
         row = XLFormRowDescriptor(tag: "City", rowType: XLFormRowDescriptorTypeText, title: "City")
-        var paddingView6 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView6 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
         row.cellConfig.setObject(paddingView6, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
         row = XLFormRowDescriptor(tag: "Bio", rowType: XLFormRowDescriptorTypeText, title: "Bio")
-        var paddingView7 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
+        let paddingView7 = UIView(frame: CGRectMake(0, 0, 7.5, 20))
         row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey: "textField.textAlignment")
         row.cellConfig.setObject(paddingView7, forKey: "textField.rightView")
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
@@ -255,10 +255,10 @@ class CreateAccountViewController: XLFormViewController {
     
     // Initiate account creation if Confirm button tapped
     func confirmButtonTapped(sender:UIBarButtonItem){
-        let nullObject = NSNull()
+        _ = NSNull()
 
         var values = self.form.formValues()
-        var user = PFUser()
+        let user = PFUser()
 
         user.username = values["Alias"] as? String
         user.password = values["Password"] as? String
@@ -279,7 +279,7 @@ class CreateAccountViewController: XLFormViewController {
             (succeeded, error) -> Void in
             if error == nil {
                 // Hooray! Let them use the app now.
-                var followerFollowingObject = PFObject(className: "FollowerFollowing")
+                let followerFollowingObject = PFObject(className: "FollowerFollowing")
                 followerFollowingObject["ownerUser"] = PFUser.currentUser()
                 followerFollowingObject["requestsFromUsers"] = []
                 followerFollowingObject["followingUsers"] = []

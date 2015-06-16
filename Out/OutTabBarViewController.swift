@@ -16,12 +16,12 @@ class OutTabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        var animalAvatarString = ((PFUser.currentUser()!)["avatar"] as! String) + "-icon"
+        let animalAvatarString = ((PFUser.currentUser()!)["avatar"] as! String) + "-icon"
         // Set UITabBarItem through a for loop
         for var index = 0; index <  self.tabBar.items?.count; ++index{
             
             // Instantiate UITabBarItem
-            var tabItem : UITabBarItem = self.tabBar.items![index] as! UITabBarItem
+            let tabItem : UITabBarItem = self.tabBar.items![index] as UITabBarItem
             
             // Switch assets for UITabBarItem in order
             switch index{
@@ -52,7 +52,7 @@ class OutTabBarViewController: UITabBarController {
                 tabItem.image = UIImage(named: animalAvatarString)
                 
             default:
-                println("no image resourced")
+                print("no image resourced")
             }
         }
     }

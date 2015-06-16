@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     var aliasTextField:UITextField!
     var passwordTextField:UITextField!
     var logoImageView:UIImageView!
-    var loginButton:UIButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+    var loginButton:UIButton = UIButton(type: UIButtonType.System)
 
     // Boolean to determine whether to present tutorial automatically (on app launch)
     var showTutorial = true
@@ -65,33 +65,33 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             containerScrollView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
             self.containerScrollView.hidden = scrollViewHidden
             self.view.backgroundColor = UIColor.whiteColor()
-            println("showTutorial IS \(showTutorial)")
+            print("showTutorial IS \(showTutorial)")
             if (showTutorial){
 
                 // Initialize tutorial pages texts, and pictures.
-                var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
-                var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
-                var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
-                var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
-                var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
-                var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
+                let layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
+                let layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
+                let layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
+                let layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
+                let layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
+                let layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
 
                 // Set the common style for Titles and Description (can be overrided on each page).
-                var titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
+                let titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
                 titleStyle.font = UIFont(name: "HelveticaNeue-Light", size: 26.0)
                 titleStyle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
                 titleStyle.linesNumber = 1
                 titleStyle.offset = 175
                 
                 // Set the common style for SubTitles and Description (can be overrided on each page).
-                var subStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
+                let subStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
                 subStyle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
                 subStyle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
                 subStyle.linesNumber = 2
                 subStyle.offset = 135
                 
                 
-                var listPages: [ICETutorialPage] = [layer0, layer1, layer2, layer3, layer4, layer5]
+                let listPages: [ICETutorialPage] = [layer0, layer1, layer2, layer3, layer4, layer5]
                 
                 controller = ICETutorialController(pages: listPages, delegate: self)
                 ICETutorialStyle.sharedInstance().titleStyle = titleStyle
@@ -106,16 +106,16 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             
             // Initialize logoImage UIImageView
             logoImageView = UIImageView(frame: CGRectZero)
-            logoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+            logoImageView.translatesAutoresizingMaskIntoConstraints = false
             logoImageView.image = UIImage(named: "out_logo_png")
             logoImageView.userInteractionEnabled = true
-            var viewTutorial = UITapGestureRecognizer(target: self, action: "viewTutorial")
+            let viewTutorial = UITapGestureRecognizer(target: self, action: "viewTutorial")
             logoImageView.addGestureRecognizer(viewTutorial)
             containerScrollView.addSubview(logoImageView)
 
             // Initialize alias UITextField
             aliasTextField = UITextField(frame: CGRectZero)
-            aliasTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+            aliasTextField.translatesAutoresizingMaskIntoConstraints = false
             aliasTextField.keyboardType = UIKeyboardType.Default
             aliasTextField.autocorrectionType = UITextAutocorrectionType.No
             aliasTextField.placeholder = "alias"
@@ -127,7 +127,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             
             // Initialize password UITextField
             passwordTextField = UITextField(frame: CGRectZero)
-            passwordTextField.setTranslatesAutoresizingMaskIntoConstraints(false)
+            passwordTextField.translatesAutoresizingMaskIntoConstraints = false
             passwordTextField.keyboardType = UIKeyboardType.Default
             passwordTextField.placeholder = "passcode"
             passwordTextField.textAlignment = NSTextAlignment.Left
@@ -137,7 +137,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             containerScrollView.addSubview(passwordTextField)
             
             // Initialize login UIButton properties
-            loginButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+            loginButton.translatesAutoresizingMaskIntoConstraints = false
             loginButton.addTarget(self, action: "loginButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
             loginButton.setTitle("Login", forState: UIControlState.Normal)
             loginButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Center
@@ -152,14 +152,13 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             let viewsDictionary = ["logoImageView":logoImageView, "aliasTextField":aliasTextField, "passwordTextField":passwordTextField, "loginButton":loginButton]
             let metricsDictionary = ["longVerticalSpace": 33,"mediumVerticalSpace": 20, "shortVerticalSpace": 16]
             
-            var horizontalCenterConstraint = NSLayoutConstraint(item: self.logoImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.containerScrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
-            let horizontalLogoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=109.5-[logoImageView(101)]->=109.5-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-            let horizontalFormConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[aliasTextField(>=280)]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            let horizontalCenterConstraint = NSLayoutConstraint(item: self.logoImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.containerScrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+            let horizontalLogoConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=109.5-[logoImageView(101)]->=109.5-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
+            let horizontalFormConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[aliasTextField(>=280)]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
             
             let verticalTopConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=70-[logoImageView(101)]-20-[aliasTextField(44)]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
-            let verticalSecondConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aliasTextField(44)]-0-[passwordTextField(44)]-20-[loginButton(44)]->=20-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+            let verticalSecondConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aliasTextField(44)]-0-[passwordTextField(44)]-20-[loginButton(44)]->=20-|", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDictionary, views: viewsDictionary)
 
-            
             self.containerScrollView.addConstraint(horizontalCenterConstraint)
             self.containerScrollView.addConstraints(horizontalFormConstraints)
             self.containerScrollView.addConstraints(horizontalLogoConstraints)
@@ -183,15 +182,15 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
 //                            // Send the Identity Token to Layer to authenticate the user
 //                            self.layerClient.authenticateWithIdentityToken(token as! String, completion: {(authenticatedUserID, error) -> Void in
 //                                if (error != nil){
-//                                    println("Parse User authenticated with Layer Identity Token")
+//                                    print("Parse User authenticated with Layer Identity Token")
 //                                }
 //                                else{
-//                                    println("Parse User failed to authenticate with token with error: \(error)")
+//                                    print("Parse User failed to authenticate with token with error: \(error)")
 //                                }
 //                            })
 //                        }
 //                        else{
-//                            println("Parse Cloud function failed to be called to generate token with error: \(error)")
+//                            print("Parse Cloud function failed to be called to generate token with error: \(error)")
 //                        }
 //                    }
 //                }
@@ -229,7 +228,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.performSegueWithIdentifier("signup", sender: self)
         self.containerScrollView.hidden = false
         self.aliasTextField.resignFirstResponder()
-        println("signup!")
+        print("signup!")
     }
 
     // Login button tapped to authenticate provided user credentials
@@ -237,7 +236,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.loginButton.enabled = false
         self.aliasTextField.enabled = false
         self.passwordTextField.enabled = false
-        PFUser.logInWithUsernameInBackground(self.aliasTextField.text, password:self.passwordTextField.text) {
+        PFUser.logInWithUsernameInBackground(self.aliasTextField.text!, password:self.passwordTextField.text!) {
             (user, error) -> Void in
             if (error == nil) {
                 // Do stuff after successful login.
@@ -257,28 +256,28 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     func viewTutorial(){
         // Init the pages texts, and pictures.
         
-        var layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
-        var layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
-        var layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
-        var layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
-        var layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
-        var layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
+        let layer0: ICETutorialPage = ICETutorialPage(title: "", subTitle: "", pictureName: "Logo_tutorial", duration: 2.5)
+        let layer1: ICETutorialPage = ICETutorialPage(title: "Dashboard", subTitle: "Get an overview of your challenges\nand your current challenges.", pictureName: "Dashboard_tutorial", duration: 4.0)
+        let layer2: ICETutorialPage = ICETutorialPage(title: "Challenges", subTitle: "Take on challenges to go forward\nin your coming out journey.", pictureName: "Challenges_tutorial", duration: 4.0)
+        let layer3: ICETutorialPage = ICETutorialPage(title: "Activity", subTitle: "See challenges completed by people\nyou follow and cheer them up.", pictureName: "Activity_tutorial", duration: 4.0)
+        let layer4: ICETutorialPage = ICETutorialPage(title: "People", subTitle: "Find and connect with others with\n similar backgrounds as you.", pictureName: "People_tutorial", duration: 4.0)
+        let layer5: ICETutorialPage = ICETutorialPage(title: "Help", subTitle: "Reach out for help if you would like\nsomeone to talk to or chat with.", pictureName: "Help_tutorial", duration: 4.0)
         
         // Set the common style for SubTitles and Description (can be overrided on each page).
-        var titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
+        let titleStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
         titleStyle.font = UIFont(name: "HelveticaNeue-Light", size: 26.0)
         titleStyle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
         titleStyle.linesNumber = 1
         titleStyle.offset = 210
 
         // Set the common style for Titles and Description (can be overrided on each page).
-        var subStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
+        let subStyle: ICETutorialLabelStyle = ICETutorialLabelStyle()
         subStyle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         subStyle.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
         subStyle.linesNumber = 2
         subStyle.offset = 160
         
-        var listPages: [ICETutorialPage] = [layer0, layer1, layer2, layer3, layer4, layer5]
+        let listPages: [ICETutorialPage] = [layer0, layer1, layer2, layer3, layer4, layer5]
         
         controller = ICETutorialController(pages: listPages, delegate: self)
         ICETutorialStyle.sharedInstance().titleStyle = titleStyle
@@ -306,31 +305,31 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         if !(UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.isConnected{
             (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.connectWithCompletion { (success, error) -> Void in
                 if (!success){
-                    println("Failed to connect to Layer: \(error)")
+                    print("Failed to connect to Layer: \(error)")
                 }
                 else{
-                    var user:PFUser = PFUser.currentUser()!
-                    var userID:NSString = user.objectId!
+                    let user:PFUser = PFUser.currentUser()!
+                    let userID:NSString = user.objectId!
                     self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
                         if (error == nil){
                             self.performSegueWithIdentifier("LoggedIn", sender: nil)
                         }
                         else{
-                            println("Failed Authenticating Layer Client with error: \(error)")
+                            print("Failed Authenticating Layer Client with error: \(error)")
                         }
                     })
                 }
             }
         }
         else{
-            var user:PFUser = PFUser.currentUser()!
-            var userID:NSString = user.objectId!
+            let user:PFUser = PFUser.currentUser()!
+            let userID:NSString = user.objectId!
             self.authenticateLayerWithUserID(userID as String, authenticationCompletion: { (error) -> Void in
                 if (error == nil){
                     self.performSegueWithIdentifier("LoggedIn", sender: nil)
                 }
                 else{
-                    println("Failed Authenticating Layer Client with error: \(error)")
+                    print("Failed Authenticating Layer Client with error: \(error)")
                 }
             })
         }
@@ -339,11 +338,11 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
     func authenticateLayerWithUserID(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
         // Check to see if the layerClient is already authenticated.
         let authenticatedUserID = (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID
-        println(authenticatedUserID)
+        print(authenticatedUserID)
         if authenticatedUserID != nil{
             // If the layerClient is authenticated with the requested userID, complete the authentication process.
             if authenticatedUserID == userID {
-                println("Layer Authenticated as User \(authenticatedUserID)")
+                print("Layer Authenticated as User \(authenticatedUserID)")
                 authenticationCompletion(error: nil)
             } else {
                 // If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
@@ -381,7 +380,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
                 // 3. Submit identity token to Layer for validation
                 (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticateWithIdentityToken(identityToken) { authenticatedUserID, error in
                     if authenticatedUserID != nil {
-                        println("Layer Authenticated as User: \(authenticatedUserID)")
+                        print("Layer Authenticated as User: \(authenticatedUserID)")
                         authenticationCompletion(error: nil)
                     } else {
                         authenticationCompletion(error: error)
@@ -399,7 +398,12 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         let parameters = ["app_id": appID, "user_id": userID, "nonce": nonce]
-        let requestBody = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+        let requestBody: NSData?
+        do {
+            requestBody = try NSJSONSerialization.dataWithJSONObject(parameters, options: [])
+        } catch _ {
+            requestBody = nil
+        }
         request.HTTPBody = requestBody
         
         let sessionConfiguration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -412,13 +416,13 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
             }
             
             // Deserialize the response
-            let responseObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
+            let responseObject = NSJSONSerialization.JSONObjectWithData(data!, options: [])
             if responseObject["error"] == nil {
                 let identityToken = responseObject["identity_token"] as! String
                 tokenCompletion(identityToken, nil)
             } else {
                 let domain = "layer-identity-provider.herokuapp.com"
-                let code = responseObject["status"]!.integerValue
+                let code = responseObject["status"]!!.integerValue
                 let userInfo = [
                     NSLocalizedDescriptionKey: "Layer Identity Provider Returned an Error.",
                     NSLocalizedRecoverySuggestionErrorKey: "There may be a problem with your APPID."
@@ -428,7 +432,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
                 tokenCompletion(nil, error)
             }
         }
-        dataTask.resume()
+        dataTask!.resume()
     }
 
 

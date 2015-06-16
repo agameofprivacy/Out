@@ -68,49 +68,49 @@ class PersonTableViewCell: UITableViewCell {
         self.layoutMargins = UIEdgeInsetsZero
         self.separatorInset = UIEdgeInsetsZero
         self.userAvatar = UIImageView(frame: CGRectZero)
-        self.userAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAvatar.translatesAutoresizingMaskIntoConstraints = false
         self.userAvatar.layer.cornerRadius = 25
         self.userAvatar.clipsToBounds = true
         self.userAvatar.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(self.userAvatar)
         
         self.userAlias = UILabel(frame: CGRectZero)
-        self.userAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAlias.translatesAutoresizingMaskIntoConstraints = false
         self.userAlias.textAlignment = NSTextAlignment.Left
         self.userAlias.font = regularFont?.fontWithSize(15.0)
         contentView.addSubview(self.userAlias)
         
         self.userOrientationAge = UILabel(frame: CGRectZero)
-        self.userOrientationAge.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userOrientationAge.translatesAutoresizingMaskIntoConstraints = false
         self.userOrientationAge.textAlignment = NSTextAlignment.Left
         self.userOrientationAge.font = titleFont?.fontWithSize(14.0)
         contentView.addSubview(self.userOrientationAge)
         
         self.userLocation = UILabel(frame: CGRectZero)
-        self.userLocation.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userLocation.translatesAutoresizingMaskIntoConstraints = false
         self.userLocation.textAlignment = NSTextAlignment.Left
         self.userLocation.font = valueFont?.fontWithSize(14.0)
         contentView.addSubview(self.userLocation)
         
         self.separatorView = UIView(frame: CGRectZero)
-        self.separatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.backgroundColor = UIColor(white: 0.85, alpha: 1)
         contentView.addSubview(self.separatorView)
         
-        var viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation, "separator":self.separatorView]
-        var metricsDictionary = ["verticalMargin":15, "sideMargin":15]
+        let viewsDictionary = ["userAvatar":userAvatar, "userAlias":userAlias, "userOrientationAge":userOrientationAge, "userLocation":userLocation, "separator":self.separatorView]
+        let metricsDictionary = ["verticalMargin":15, "sideMargin":15]
         
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]->=sideMargin-[userOrientationAge]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-20-[userAlias]->=sideMargin-[userOrientationAge]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-verticalMargin-[userAvatar(50)]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-29-[userAlias]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-29-[userAlias]", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22.5-[userOrientationAge]-2-[userLocation]", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let orientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-22.5-[userOrientationAge]-2-[userLocation]", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
-        var secondOrientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[userLocation]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let secondOrientationAgeLocationVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[userLocation]->=verticalMargin-[separator(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         
         contentView.addConstraints(horizontalConstraints)

@@ -25,18 +25,18 @@ class HeroImageTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
 
         self.heroImage = UIImageView(frame: CGRectZero)
-        self.heroImage.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.heroImage.translatesAutoresizingMaskIntoConstraints = false
         self.heroImage.contentMode = UIViewContentMode.ScaleAspectFill
         self.heroImage.clipsToBounds = true
         self.heroImage.layer.cornerRadius = 5
         contentView.addSubview(self.heroImage)
         
-        var viewsDictionary = ["heroImage":self.heroImage]
-        var metricsDictionary = ["bottomMargin":4]
+        let viewsDictionary = ["heroImage":self.heroImage]
+        let metricsDictionary = ["bottomMargin":4]
         
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImage]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[heroImage]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==130)]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[heroImage(==130)]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

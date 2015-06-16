@@ -31,17 +31,17 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
         self.pickerView = UIPickerView(frame: CGRectZero)
-        self.pickerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.pickerView.translatesAutoresizingMaskIntoConstraints = false
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
         self.pickerView.showsSelectionIndicator = true
         self.pickerView.hidden = true
         contentView.addSubview(self.pickerView)
         
-        var viewsDictionary = ["pickerView":pickerView]
-        var metricsDictionary = ["zeroMargin":0]
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-120-[pickerView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-zeroMargin-[pickerView]-zeroMargin-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        let viewsDictionary = ["pickerView":pickerView]
+        let metricsDictionary = ["zeroMargin":0]
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-120-[pickerView]-8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-zeroMargin-[pickerView]-zeroMargin-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)
@@ -52,8 +52,8 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
         return values.count
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        var valueLabel = UILabel()
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let valueLabel = UILabel()
         valueLabel.textAlignment = NSTextAlignment.Right
         valueLabel.font = valueFont
         valueLabel.text = self.values[row]
@@ -66,7 +66,7 @@ class PickerViewTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPicker
     }
     
     func collectData() -> [String : String] {
-        var selectedRow = self.pickerView.selectedRowInComponent(0)
+        let selectedRow = self.pickerView.selectedRowInComponent(0)
         self.userDataDictionary = [key:values[selectedRow]]
         return self.userDataDictionary
     }

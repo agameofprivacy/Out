@@ -72,12 +72,12 @@ class MyProfileViewController: UIViewController {
         // UINavigationBar init
         self.navigationItem.title = "Profile"
 
-        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
+        let closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         
         
-        var editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editButtonTapped")
+        let editButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: "editButtonTapped")
         editButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = editButton
 
@@ -87,7 +87,7 @@ class MyProfileViewController: UIViewController {
         self.containerView = TPKeyboardAvoidingScrollView(frame: self.view.frame)
         self.containerView.alwaysBounceVertical = true
         self.avatarImageView = UIImageView(frame: CGRectZero)
-        self.avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 50
         self.avatarImageView.clipsToBounds = true
@@ -96,7 +96,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.avatarImageView)
         
         self.aliasLabel = UILabel(frame: CGRectZero)
-        self.aliasLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.aliasLabel.translatesAutoresizingMaskIntoConstraints = false
         self.aliasLabel.text = PFUser.currentUser()!.username
         self.aliasLabel.textAlignment = NSTextAlignment.Center
         self.aliasLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -105,7 +105,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.aliasLabel)
 
         self.genderIdentityTitleLabel = UILabel(frame: CGRectZero)
-        self.genderIdentityTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.genderIdentityTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.genderIdentityTitleLabel.text = "Gender Identity"
         self.genderIdentityTitleLabel.textAlignment = NSTextAlignment.Center
         self.genderIdentityTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 14.0)
@@ -114,7 +114,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.genderIdentityTitleLabel)
 
         self.genderIdentityLabel = UILabel(frame: CGRectZero)
-        self.genderIdentityLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.genderIdentityLabel.translatesAutoresizingMaskIntoConstraints = false
         self.genderIdentityLabel.text = PFUser.currentUser()!["genderIdentity"] as? String
         self.genderIdentityLabel.textAlignment = NSTextAlignment.Center
         self.genderIdentityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -123,7 +123,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.genderIdentityLabel)
 
         self.sexualOrientationTitleLabel = UILabel(frame: CGRectZero)
-        self.sexualOrientationTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.sexualOrientationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.sexualOrientationTitleLabel.text = "Sexual Orientation"
         self.sexualOrientationTitleLabel.textAlignment = NSTextAlignment.Center
         self.sexualOrientationTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 14.0)
@@ -132,7 +132,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.sexualOrientationTitleLabel)
         
         self.sexualOrientationLabel = UILabel(frame: CGRectZero)
-        self.sexualOrientationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.sexualOrientationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.sexualOrientationLabel.text = PFUser.currentUser()!["sexualOrientation"] as? String
         self.sexualOrientationLabel.textAlignment = NSTextAlignment.Center
         self.sexualOrientationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -141,7 +141,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.sexualOrientationLabel)
 
         self.ageTitleLabel = UILabel(frame: CGRectZero)
-        self.ageTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.ageTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.ageTitleLabel.text = "Age"
         self.ageTitleLabel.textAlignment = NSTextAlignment.Center
         self.ageTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 14.0)
@@ -150,8 +150,8 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.ageTitleLabel)
         
         self.ageLabel = UILabel(frame: CGRectZero)
-        self.ageLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var userAge = PFUser.currentUser()!["age"] as! Int
+        self.ageLabel.translatesAutoresizingMaskIntoConstraints = false
+        let userAge = PFUser.currentUser()!["age"] as! Int
         self.ageLabel.text = "\(userAge)"
         self.ageLabel.textAlignment = NSTextAlignment.Center
         self.ageLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -160,7 +160,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.ageLabel)
 
         self.ethnicityTitleLabel = UILabel(frame: CGRectZero)
-        self.ethnicityTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.ethnicityTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.ethnicityTitleLabel.text = "Ethnicity"
         self.ethnicityTitleLabel.textAlignment = NSTextAlignment.Center
         self.ethnicityTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 14.0)
@@ -169,7 +169,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.ethnicityTitleLabel)
         
         self.ethnicityLabel = UILabel(frame: CGRectZero)
-        self.ethnicityLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.ethnicityLabel.translatesAutoresizingMaskIntoConstraints = false
         self.ethnicityLabel.text = (PFUser.currentUser()!["ethnicity"] as? String)?.lowercaseString
         self.ethnicityLabel.textAlignment = NSTextAlignment.Center
         self.ethnicityLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -178,7 +178,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.ethnicityLabel)
 
         self.locationTitleLabel = UILabel(frame: CGRectZero)
-        self.locationTitleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.locationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.locationTitleLabel.text = "Location"
         self.locationTitleLabel.textAlignment = NSTextAlignment.Center
         self.locationTitleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 14.0)
@@ -187,7 +187,7 @@ class MyProfileViewController: UIViewController {
         self.containerView.addSubview(self.locationTitleLabel)
         
         self.locationLabel = UILabel(frame: CGRectZero)
-        self.locationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.locationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.locationLabel.text = ((PFUser.currentUser()!)["city"] as? String)!.lowercaseString + ", " + ((PFUser.currentUser()!)["state"] as? String)!.lowercaseString
         self.locationLabel.textAlignment = NSTextAlignment.Center
         self.locationLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
@@ -199,15 +199,15 @@ class MyProfileViewController: UIViewController {
         self.view.addSubview(self.containerView)
 
         
-        var viewsDictionary = ["avatarImageView":self.avatarImageView, "aliasLabel":aliasLabel, "genderIdentityTitleLabel":genderIdentityTitleLabel, "genderIdentityLabel":genderIdentityLabel, "sexualOrientationTitleLabel":sexualOrientationTitleLabel, "sexualOrientationLabel":sexualOrientationLabel, "ageTitleLabel":ageTitleLabel, "ageLabel":ageLabel, "ethnicityTitleLabel":ethnicityTitleLabel, "ethnicityLabel":ethnicityLabel, "locationTitleLabel":locationTitleLabel, "locationLabel":locationLabel]
+        let viewsDictionary = ["avatarImageView":self.avatarImageView, "aliasLabel":aliasLabel, "genderIdentityTitleLabel":genderIdentityTitleLabel, "genderIdentityLabel":genderIdentityLabel, "sexualOrientationTitleLabel":sexualOrientationTitleLabel, "sexualOrientationLabel":sexualOrientationLabel, "ageTitleLabel":ageTitleLabel, "ageLabel":ageLabel, "ethnicityTitleLabel":ethnicityTitleLabel, "ethnicityLabel":ethnicityLabel, "locationTitleLabel":locationTitleLabel, "locationLabel":locationLabel]
         
-        var metricsDictionary = ["sideMargin": 12]
+        let metricsDictionary = ["sideMargin": 12]
         
-        var horizontalViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[avatarImageView(100)]->=sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|->=sideMargin-[avatarImageView(100)]->=sideMargin-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var horizontalCenterConstraint = NSLayoutConstraint(item: self.avatarImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.containerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
+        let horizontalCenterConstraint = NSLayoutConstraint(item: self.avatarImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.containerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
         
-        var verticalViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-40-[avatarImageView(100)]-14-[aliasLabel]-38-[ageTitleLabel]-2-[ageLabel]-22-[genderIdentityTitleLabel]-2-[genderIdentityLabel]-22-[sexualOrientationTitleLabel]-2-[sexualOrientationLabel]-22-[ethnicityTitleLabel]-2-[ethnicityLabel]-22-[locationTitleLabel]-2-[locationLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-40-[avatarImageView(100)]-14-[aliasLabel]-38-[ageTitleLabel]-2-[ageLabel]-22-[genderIdentityTitleLabel]-2-[genderIdentityLabel]-22-[sexualOrientationTitleLabel]-2-[sexualOrientationLabel]-22-[ethnicityTitleLabel]-2-[ethnicityLabel]-22-[locationTitleLabel]-2-[locationLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
         
         self.containerView.addConstraint(horizontalCenterConstraint)
         self.containerView.addConstraints(horizontalViewsConstraints)
@@ -230,7 +230,7 @@ class MyProfileViewController: UIViewController {
     
     // Enter Profile Edit mode
     func editButtonTapped(){
-        println("Edit profile!")
+        print("Edit profile!")
     }
 
 

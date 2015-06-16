@@ -45,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
         self.window?.backgroundColor = UIColor(red: 0.88, green: 0.88, blue: 0.88, alpha: 1)
         
         
-        var userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        var settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        let userNotificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
+        let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
 //            
 ////            // Request an authentication nonce from Layer
 ////            layerClient.requestAuthenticationNonceWithCompletion({ (nonce, error) -> Void in
-////                println("Authentifcation nonce \(nonce)")
+////                print("Authentifcation nonce \(nonce)")
 ////                if (nonce != nil){
 ////                    var user = PFUser.currentUser()!
 ////                    var userID = user.objectId!
@@ -82,15 +82,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
 ////                            // Send the Identity Token to Layer to authenticate the user
 ////                            self.layerClient.authenticateWithIdentityToken(token as! String, completion: {(authenticatedUserID, error) -> Void in
 ////                                if (error != nil){
-////                                    println("Parse User authenticated with Layer Identity Token")
+////                                    print("Parse User authenticated with Layer Identity Token")
 ////                                }
 ////                                else{
-////                                    println("Parse User failed to authenticate with token with error: \(error)")
+////                                    print("Parse User failed to authenticate with token with error: \(error)")
 ////                                }
 ////                            })
 ////                        }
 ////                        else{
-////                            println("Parse Cloud function failed to be called to generate token with error: \(error)")
+////                            print("Parse Cloud function failed to be called to generate token with error: \(error)")
 ////                        }
 ////                    }
 ////                }
@@ -99,11 +99,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
 //            
 ////            LayerAuthenticationHelper(layerClient: layerClient).authenticateWithLayer { error in
 ////                if let error = error {
-////                    println("Failed to connect to Layer: \(error.localizedDescription)")
+////                    print("Failed to connect to Layer: \(error.localizedDescription)")
 ////                } else {
 //////                    let navigationController = self.window?.rootViewController as! UINavigationController
 //////                    (navigationController.topViewController as ChatViewController).layerClient = self.layerClient
-////                    println("layer authentication success")
+////                    print("layer authentication success")
 ////                    // Register for push
 //////                    self.registerApplicationForPushNotifications(application)
 ////                }
@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
 
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        var currentInstallation:PFInstallation = PFInstallation.currentInstallation()
+        let currentInstallation:PFInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.channels = ["global"]
         currentInstallation.saveInBackgroundWithBlock(nil)
@@ -151,11 +151,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
 //        PFUser.logOut()
     }
 //    func tutorialController(tutorialController: ICETutorialController!, didClickOnLeftButton sender: UIButton!) {
-//        println("left button clicked")
+//        print("left button clicked")
 //    }
 //    
 //    func tutorialController(tutorialController: ICETutorialController!, didClickOnRightButton sender: UIButton!) {
-//        println("right button clicked")
+//        print("right button clicked")
 //    }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -179,55 +179,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate, LYRClientDelegate, UIAler
     // MARK: - LYRClientDelegate
     
     func layerClient(client: LYRClient!, didReceiveAuthenticationChallengeWithNonce nonce: String!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didAuthenticateAsUserID userID: String!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didFailOperationWithError error: NSError!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didFailSynchronizationWithError error: NSError!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didFinishContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didFinishSynchronizationWithChanges changes: [AnyObject]!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, didLoseConnectionWithError error: NSError!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, objectsDidChange changes: [AnyObject]!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, willAttemptToConnect attemptNumber: UInt, afterDelay delayInterval: NSTimeInterval, maximumNumberOfAttempts attemptLimit: UInt) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClient(client: LYRClient!, willBeginContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!, withProgress progress: LYRProgress!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClientDidConnect(client: LYRClient!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClientDidDeauthenticate(client: LYRClient!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
     
     func layerClientDidDisconnect(client: LYRClient!) {
-        println(__FUNCTION__)
+        print(__FUNCTION__)
     }
 
     

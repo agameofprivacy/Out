@@ -15,11 +15,11 @@ class ComposeChallengeReviewViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        var submitButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: "submitReview")
+        let submitButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.Plain, target: self, action: "submitReview")
         submitButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = submitButton
         
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelReview")
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelReview")
         cancelButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = cancelButton
 
@@ -32,7 +32,7 @@ class ComposeChallengeReviewViewController: UIViewController {
     }
     
     func submitReview(){
-        println("Review Submitted")
+        print("Review Submitted")
     }
     
     func cancelReview(){

@@ -29,7 +29,7 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
 
         self.challengeIntro = UILabel(frame: CGRectZero)
         self.challengeIntro.numberOfLines = 0
-        self.challengeIntro.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeIntro.translatesAutoresizingMaskIntoConstraints = false
         self.challengeIntro.textAlignment = NSTextAlignment.Left
         self.challengeIntro.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.challengeIntro.preferredMaxLayoutWidth = self.bounds.width - 10
@@ -41,7 +41,7 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
         
         self.stepTitles = UILabel(frame: CGRectZero)
         self.stepTitles.numberOfLines = 0
-        self.stepTitles.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.stepTitles.translatesAutoresizingMaskIntoConstraints = false
         self.stepTitles.textAlignment = NSTextAlignment.Left
         self.stepTitles.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         self.stepTitles.preferredMaxLayoutWidth = self.bounds.width - 10
@@ -53,8 +53,8 @@ class ChallengeOverviewTableViewCell: UITableViewCell {
         let viewsDictionary = ["challengeIntro":challengeIntro, "stepTitles":stepTitles]
         let metricsDictionary = ["mediumVerticalSpace":14, "longVerticalSpace":20]
         
-        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeIntro]->=8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-mediumVerticalSpace-[challengeIntro]-longVerticalSpace-[stepTitles]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeIntro]->=8-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-mediumVerticalSpace-[challengeIntro]-longVerticalSpace-[stepTitles]->=0-|", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

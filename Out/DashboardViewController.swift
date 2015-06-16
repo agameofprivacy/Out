@@ -127,30 +127,30 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Contained views init and layout
         self.profileProgressView = UIView(frame: CGRectZero)
-        self.profileProgressView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.profileProgressView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.profileProgressView)
         
         self.challengeOnDeckView = UIView(frame: CGRectZero)
-        self.challengeOnDeckView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.challengeOnDeckView)
         
         self.announcementsView = UIView(frame: CGRectZero)
-        self.announcementsView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.announcementsView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.announcementsView)
 
         self.inspirationView = UIView(frame: CGRectZero)
-        self.inspirationView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationView.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(self.inspirationView)
         
-        var screenWidth = self.view.bounds.size.width
-        var contentWidth = screenWidth - 24
+        let screenWidth = self.view.bounds.size.width
+        let contentWidth = screenWidth - 24
 
-        var containerViewsDictionary = ["profileProgressView":self.profileProgressView, "challengeOnDeckView":self.challengeOnDeckView, "announcementsView":self.announcementsView, "inspirationView":self.inspirationView]
-        var containerMetricsDictionary = ["sideMargin": 12, "topMargin":30, "bottomMargin":30, "contentWidth": contentWidth]
+        let containerViewsDictionary = ["profileProgressView":self.profileProgressView, "challengeOnDeckView":self.challengeOnDeckView, "announcementsView":self.announcementsView, "inspirationView":self.inspirationView]
+        let containerMetricsDictionary = ["sideMargin": 12, "topMargin":30, "bottomMargin":30, "contentWidth": contentWidth]
         
-        var horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView(==contentWidth)]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        let horizontalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[profileProgressView(==contentWidth)]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
-        var verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[profileProgressView]->=30-[announcementsView]->=15-[challengeOnDeckView]->=20-[inspirationView]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: containerMetricsDictionary, views: containerViewsDictionary)
+        let verticalContainerViewsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-25-[profileProgressView]->=30-[announcementsView]->=15-[challengeOnDeckView]->=20-[inspirationView]-bottomMargin-|", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: containerMetricsDictionary, views: containerViewsDictionary)
         
         self.scrollView.addConstraints(horizontalContainerViewsConstraints)
         self.scrollView.addConstraints(verticalContainerViewsConstraints)
@@ -158,29 +158,29 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
         // Profile and progress view containers init and layout
         self.profileView = UIView(frame: CGRectZero)
-        self.profileView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProfileTapped")
+        self.profileView.translatesAutoresizingMaskIntoConstraints = false
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProfileTapped")
         self.profileView.addGestureRecognizer(profileTapGestureRecognizer)
         self.profileProgressView.addSubview(self.profileView)
         
         self.profileProgressSeparator = UIView(frame: CGRectZero)
-        self.profileProgressSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.profileProgressSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.profileProgressSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.profileProgressView.addSubview(self.profileProgressSeparator)
         
         self.recordView = UIView(frame: CGRectZero)
-        self.recordView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        var progressTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProgressTapped")
+        self.recordView.translatesAutoresizingMaskIntoConstraints = false
+        let progressTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "myProgressTapped")
         self.recordView.addGestureRecognizer(progressTapGestureRecognizer)
         self.profileProgressView.addSubview(self.recordView)
         
-        var profileProgressSubcontainersViewsDictionary = ["profileView":self.profileView, "profileProgressSeparator":self.profileProgressSeparator, "recordView":self.recordView]
-        var profileProgressSubcontainersMetricsDictionary = ["sideMargin":21]
+        let profileProgressSubcontainersViewsDictionary = ["profileView":self.profileView, "profileProgressSeparator":self.profileProgressSeparator, "recordView":self.recordView]
+        let profileProgressSubcontainersMetricsDictionary = ["sideMargin":21]
         
-        var horizontalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[profileView]-sideMargin-[profileProgressSeparator(1)]-sideMargin-[recordView]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
+        let horizontalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[profileView]-sideMargin-[profileProgressSeparator(1)]-sideMargin-[recordView]->=0-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
         
-        var verticalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[recordView]-0-|", options: NSLayoutFormatOptions(0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
-        var verticalProfileProgressSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[profileProgressSeparator]-0-|", options: NSLayoutFormatOptions(0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
+        let verticalProfileProgressConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[recordView]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
+        let verticalProfileProgressSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[profileProgressSeparator]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: profileProgressSubcontainersMetricsDictionary, views: profileProgressSubcontainersViewsDictionary)
         
         self.profileProgressView.addConstraints(horizontalProfileProgressConstraints)
         self.profileProgressView.addConstraints(verticalProfileProgressConstraints)
@@ -189,7 +189,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Profile view init and layout
         self.avatarImageView = UIImageView(frame: CGRectZero)
-        self.avatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.avatarImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.avatarImageView.layer.cornerRadius = 25
         self.avatarImageView.clipsToBounds = true
@@ -205,11 +205,11 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         if self.view.bounds.width == 320{
             self.myProfileLabel.font = regularFont?.fontWithSize(16.0)
         }
-        self.myProfileLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.myProfileLabel.translatesAutoresizingMaskIntoConstraints = false
         self.profileView.addSubview(self.myProfileLabel)
 
         self.currentUserLabel = UILabel(frame: CGRectZero)
-        self.currentUserLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.currentUserLabel.translatesAutoresizingMaskIntoConstraints = false
         self.currentUserLabel.text = PFUser.currentUser()!.username
         self.currentUserLabel.font = regularFont?.fontWithSize(13.0)
         if self.view.bounds.width == 320{
@@ -219,14 +219,14 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.profileView.addSubview(self.currentUserLabel)
         
         
-        var profileViewViewsDictionary = ["avatarImageView":self.avatarImageView, "myProfileLabel":self.myProfileLabel, "currentUserLabel":self.currentUserLabel]
-        var profileViewMetricsDictionary = ["inBetweenPadding":18]
+        let profileViewViewsDictionary = ["avatarImageView":self.avatarImageView, "myProfileLabel":self.myProfileLabel, "currentUserLabel":self.currentUserLabel]
+        let profileViewMetricsDictionary = ["inBetweenPadding":18]
         
-        var horizontalprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[avatarImageView(50)]-inBetweenPadding-[myProfileLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
+        let horizontalprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[avatarImageView(50)]-inBetweenPadding-[myProfileLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
         
-        var verticalLeftprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[avatarImageView(50)]-0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
+        let verticalLeftprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[avatarImageView(50)]-0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
         
-        var verticalRightprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-4-[myProfileLabel]-2-[currentUserLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
+        let verticalRightprofileViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-4-[myProfileLabel]-2-[currentUserLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: profileViewMetricsDictionary, views: profileViewViewsDictionary)
         
         self.profileView.addConstraints(horizontalprofileViewConstraints)
         self.profileView.addConstraints(verticalLeftprofileViewConstraints)
@@ -235,7 +235,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Record view init and layout
         self.recordsLabel = UILabel(frame: CGRectZero)
-        self.recordsLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.recordsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.recordsLabel.text = "Progress"
         self.recordsLabel.textAlignment = NSTextAlignment.Left
         self.recordsLabel.font = regularFont?.fontWithSize(20.0)
@@ -246,7 +246,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.recordView.addSubview(self.recordsLabel)
         
         self.recordSubLabel = UILabel(frame: CGRectZero)
-        self.recordSubLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.recordSubLabel.translatesAutoresizingMaskIntoConstraints = false
         self.recordSubLabel.text = "past challenges"
         self.recordSubLabel.font = regularFont?.fontWithSize(13.0)
         if self.view.bounds.width == 320{
@@ -255,20 +255,20 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.recordSubLabel.textAlignment = NSTextAlignment.Left
         self.recordView.addSubview(self.recordSubLabel)
         
-        var items:NSArray = [PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.34, color: self.colorDictionary["casualGreen"],description: "")]
+        let items:NSArray = [PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intermediateYellow"],description: ""), PNPieChartDataItem(value: 0.33, color: self.colorDictionary["intenseRed"],description: ""),PNPieChartDataItem(value: 0.34, color: self.colorDictionary["casualGreen"],description: "")]
         self.myProgressPieChart = PNPieChart(frame: CGRectMake(0, 0, 50, 50), items: items as [AnyObject])
         self.myProgressPieChart.strokeChart()
         self.recordView.addSubview(self.myProgressPieChart)
 
-        var recordViewViewsDictionary = ["recordsLabel":self.recordsLabel, "myProgressPieChart":self.myProgressPieChart, "recordSubLabel":self.recordSubLabel]
+        let recordViewViewsDictionary = ["recordsLabel":self.recordsLabel, "myProgressPieChart":self.myProgressPieChart, "recordSubLabel":self.recordSubLabel]
         
-        var myProgresssViewMetricsDictionary = ["inBetweenPadding":18]
+        let myProgresssViewMetricsDictionary = ["inBetweenPadding":18]
         
-        var horizontalrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[myProgressPieChart(50)]-inBetweenPadding-[recordsLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
+        let horizontalrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[myProgressPieChart(50)]-inBetweenPadding-[recordsLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
         
-        var verticalLeftrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[myProgressPieChart(50)]-0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
+        let verticalLeftrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[myProgressPieChart(50)]-0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
         
-        var verticalRightrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-4-[recordsLabel]-2-[recordSubLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
+        let verticalRightrecordViewConstraint:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-4-[recordsLabel]-2-[recordSubLabel]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: myProgresssViewMetricsDictionary, views: recordViewViewsDictionary)
         
         self.recordView.addConstraints(horizontalrecordViewConstraint)
         self.recordView.addConstraints(verticalLeftrecordViewConstraint)
@@ -276,7 +276,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Announcements label init and layout
         self.announcementsLabel = UILabel(frame: CGRectZero)
-        self.announcementsLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.announcementsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.announcementsLabel.text = "What's New"
         self.announcementsLabel.textAlignment = NSTextAlignment.Left
         self.announcementsLabel.font = titleFont?.fontWithSize(15.0)
@@ -284,12 +284,12 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.announcementsView.addSubview(self.announcementsLabel)
         
         self.announcementsHeaderSeparator = UIView(frame: CGRectZero)
-        self.announcementsHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.announcementsHeaderSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.announcementsHeaderSeparator.backgroundColor = UIColor.blackColor()
         self.announcementsView.addSubview(self.announcementsHeaderSeparator)
         
         self.announcementsPageControl = UIPageControl(frame: CGRectZero)
-        self.announcementsPageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.announcementsPageControl.translatesAutoresizingMaskIntoConstraints = false
         self.announcementsPageControl.hidesForSinglePage = true
         self.announcementsPageControl.backgroundColor = UIColor.clearColor()
         self.announcementsPageControl.currentPageIndicatorTintColor = UIColor(red:0.2, green: 0.2, blue:0.2, alpha: 1)
@@ -302,7 +302,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.announcementsCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.announcementsLayout)
         self.announcementsLayout.itemSize = CGSizeMake(self.view.frame.size.width - 30, 54)
         self.announcementsLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-        self.announcementsCollectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.announcementsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         self.announcementsCollectionView.showsHorizontalScrollIndicator = false
         self.announcementsCollectionView.pagingEnabled = true
         self.announcementsCollectionView.alwaysBounceHorizontal = true
@@ -312,16 +312,16 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.announcementsCollectionView.registerClass(DashboardAnnouncementsCollectionViewCell.self, forCellWithReuseIdentifier: "DashboardAnnouncementsCollectionViewCell")
         self.announcementsView.addSubview(self.announcementsCollectionView)
 
-        var announcementsViewsDictionary = ["announcementsLabel":self.announcementsLabel, "announcementsHeaderSeparator":self.announcementsHeaderSeparator, "announcementsPageControl":self.announcementsPageControl, "announcementsCollectionView":self.announcementsCollectionView]
-        var announcementsMetricsDictionary = ["pageControlRightSideMargin":15]
+        let announcementsViewsDictionary = ["announcementsLabel":self.announcementsLabel, "announcementsHeaderSeparator":self.announcementsHeaderSeparator, "announcementsPageControl":self.announcementsPageControl, "announcementsCollectionView":self.announcementsCollectionView]
+        let announcementsMetricsDictionary = ["pageControlRightSideMargin":15]
         
-        var horizontalannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[announcementsLabel]-[announcementsPageControl]-0-|", options: NSLayoutFormatOptions(0), metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
+        let horizontalannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[announcementsLabel]-[announcementsPageControl]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
         
-        var horizontalAnnouncementsCollectionViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[announcementsCollectionView]-0-|", options: NSLayoutFormatOptions(0), metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
+        let horizontalAnnouncementsCollectionViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[announcementsCollectionView]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
         
-        var verticalLeftannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[announcementsLabel]-2-[announcementsHeaderSeparator(1)]-15-[announcementsCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
+        let verticalLeftannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[announcementsLabel]-2-[announcementsHeaderSeparator(1)]-15-[announcementsCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
         
-        var verticalRightannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[announcementsPageControl(18)]-2-[announcementsHeaderSeparator(1)]-15-[announcementsCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
+        let verticalRightannouncementsConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[announcementsPageControl(18)]-2-[announcementsHeaderSeparator(1)]-15-[announcementsCollectionView(60)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: announcementsMetricsDictionary, views: announcementsViewsDictionary)
         
         self.announcementsView.addConstraints(horizontalannouncementsConstraints)
         self.announcementsView.addConstraints(horizontalAnnouncementsCollectionViewConstraints)
@@ -331,7 +331,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Challenge on deck label init and layout
         self.challengeOnDeckLabel = UILabel(frame: CGRectZero)
-        self.challengeOnDeckLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckLabel.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckLabel.text = "Challenge Highlight"
         self.challengeOnDeckLabel.textAlignment = NSTextAlignment.Left
         self.challengeOnDeckLabel.font = titleFont?.fontWithSize(15.0)
@@ -339,24 +339,24 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.challengeOnDeckView.addSubview(self.challengeOnDeckLabel)
         
         self.challengeOnDeckHeaderSeparator = UIView(frame: CGRectZero)
-        self.challengeOnDeckHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckHeaderSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckHeaderSeparator.backgroundColor = UIColor.blackColor()
         self.challengeOnDeckView.addSubview(self.challengeOnDeckHeaderSeparator)
         
         self.challengeOnDeckCard = UIView(frame: CGRectZero)
-        self.challengeOnDeckCard.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckCard.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckView.addSubview(self.challengeOnDeckCard)
         
-        var challengeOnDeckViewViewsDictionary = ["challengeOnDeckLabel":self.challengeOnDeckLabel, "challengeOnDeckHeaderSeparator":self.challengeOnDeckHeaderSeparator, "challengeOnDeckView":self.challengeOnDeckView, "challengeOnDeckCard":self.challengeOnDeckCard]
-        var challengeOnDeckMetricsDictionary = ["pageControlRightSideMargin":15]
+        let challengeOnDeckViewViewsDictionary = ["challengeOnDeckLabel":self.challengeOnDeckLabel, "challengeOnDeckHeaderSeparator":self.challengeOnDeckHeaderSeparator, "challengeOnDeckView":self.challengeOnDeckView, "challengeOnDeckCard":self.challengeOnDeckCard]
+        let challengeOnDeckMetricsDictionary = ["pageControlRightSideMargin":15]
         
-        var horizontalchallengeOnDeckConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
+        let horizontalchallengeOnDeckConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
         
-        var horizontalChallengeOnDeckSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckHeaderSeparator]-0-|", options: NSLayoutFormatOptions(0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
+        let horizontalChallengeOnDeckSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckHeaderSeparator]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
         
-        var horizontalChallengeOnDeckViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckCard]-0-|", options: NSLayoutFormatOptions(0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
+        let horizontalChallengeOnDeckViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckCard]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
         
-        var verticalLeftchallengeOnDeckConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[challengeOnDeckLabel]-2-[challengeOnDeckHeaderSeparator(1)]-18-[challengeOnDeckCard]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
+        let verticalLeftchallengeOnDeckConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[challengeOnDeckLabel]-2-[challengeOnDeckHeaderSeparator(1)]-18-[challengeOnDeckCard]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: challengeOnDeckMetricsDictionary, views: challengeOnDeckViewViewsDictionary)
         
         self.challengeOnDeckView.addConstraints(horizontalchallengeOnDeckConstraints)
         self.challengeOnDeckView.addConstraints(horizontalChallengeOnDeckSeparatorConstraints)
@@ -365,7 +365,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
 
         // Challenge on deck init and layout
         self.challengeOnDeckTitle = UILabel(frame: CGRectZero)
-        self.challengeOnDeckTitle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckTitle.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckTitle.textAlignment = NSTextAlignment.Left
         self.challengeOnDeckTitle.textColor = UIColor.blackColor()
         self.challengeOnDeckTitle.font = self.titleFont?.fontWithSize(15.0)
@@ -375,7 +375,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.challengeOnDeckCard.addSubview(self.challengeOnDeckTitle)
         
         self.challengeOnDeckInstruction = UILabel(frame: CGRectZero)
-        self.challengeOnDeckInstruction.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckInstruction.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckInstruction.textAlignment = NSTextAlignment.Left
         self.challengeOnDeckInstruction.textColor = UIColor.blackColor()
         self.challengeOnDeckInstruction.font = self.regularFont?.fontWithSize(14.0)
@@ -383,22 +383,22 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.challengeOnDeckInstruction.text = "Now would be a good time to schedule for your volunteer shift."
         self.challengeOnDeckCard.addSubview(self.challengeOnDeckInstruction)
         
-        self.challengeOnDeckChevronButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        self.challengeOnDeckChevronButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.challengeOnDeckChevronButton = UIButton(type: UIButtonType.System)
+        self.challengeOnDeckChevronButton.translatesAutoresizingMaskIntoConstraints = false
         self.challengeOnDeckChevronButton.setImage(UIImage(named:"chevron-icon"), forState: UIControlState.Normal)
         self.challengeOnDeckCard.addSubview(self.challengeOnDeckChevronButton)
         
-        var challengeOnDeckCardViewsDictionary = ["challengeOnDeckTitle":self.challengeOnDeckTitle, "challengeOnDeckInstruction":self.challengeOnDeckInstruction, "challengeOnDeckChevronButton":self.challengeOnDeckChevronButton]
-        var challengeOnDeckCardMetricsDictionary = ["shortVerticalMargin":10]
+        let challengeOnDeckCardViewsDictionary = ["challengeOnDeckTitle":self.challengeOnDeckTitle, "challengeOnDeckInstruction":self.challengeOnDeckInstruction, "challengeOnDeckChevronButton":self.challengeOnDeckChevronButton]
+        let challengeOnDeckCardMetricsDictionary = ["shortVerticalMargin":10]
         
         
-        var horizontalTitleChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckTitle]-[challengeOnDeckChevronButton(20)]-5-|", options: NSLayoutFormatOptions(0), metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
+        let horizontalTitleChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckTitle]-[challengeOnDeckChevronButton(20)]-5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
 
-        var horizontalInstructionChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckInstruction]-[challengeOnDeckChevronButton(20)]-5-|", options: NSLayoutFormatOptions(0), metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
+        let horizontalInstructionChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[challengeOnDeckInstruction]-[challengeOnDeckChevronButton(20)]-5-|", options: NSLayoutFormatOptions(rawValue:0), metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
 
-        var verticalChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[challengeOnDeckTitle]-3-[challengeOnDeckInstruction]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
+        let verticalChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[challengeOnDeckTitle]-3-[challengeOnDeckInstruction]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
         
-        var verticalRightChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[challengeOnDeckChevronButton(20)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
+        let verticalRightChallengeOnDeckCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-15-[challengeOnDeckChevronButton(20)]->=0-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: challengeOnDeckCardMetricsDictionary, views: challengeOnDeckCardViewsDictionary)
 
         self.challengeOnDeckCard.addConstraints(horizontalTitleChallengeOnDeckCardConstraints)
         self.challengeOnDeckCard.addConstraints(verticalChallengeOnDeckCardConstraints)
@@ -407,7 +407,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Inspiration label init and layout
         self.inspirationLabel = UILabel(frame: CGRectZero)
-        self.inspirationLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationLabel.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationLabel.text = "Inspiration"
         self.inspirationLabel.textAlignment = NSTextAlignment.Left
         self.inspirationLabel.font = titleFont?.fontWithSize(15.0)
@@ -415,24 +415,24 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationView.addSubview(self.inspirationLabel)
         
         self.inspirationHeaderSeparator = UILabel(frame: CGRectZero)
-        self.inspirationHeaderSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationHeaderSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationHeaderSeparator.backgroundColor = UIColor.blackColor()
         self.inspirationView.addSubview(self.inspirationHeaderSeparator)
         
         self.inspirationCard = UIView(frame: CGRectZero)
-        self.inspirationCard.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationCard.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationView.addSubview(self.inspirationCard)
         
-        var inspirationViewsDictionary = ["inspirationLabel":self.inspirationLabel, "inspirationHeaderSeparator":self.inspirationHeaderSeparator, "inspirationCard":self.inspirationCard]
-        var inspirationMetricsDictionary = ["pageControlRightSideMargin":15]
+        let inspirationViewsDictionary = ["inspirationLabel":self.inspirationLabel, "inspirationHeaderSeparator":self.inspirationHeaderSeparator, "inspirationCard":self.inspirationCard]
+        let inspirationMetricsDictionary = ["pageControlRightSideMargin":15]
         
-        var horizontalinspirationConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
+        let horizontalinspirationConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
         
-        var horizontalInspirationSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationHeaderSeparator]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
+        let horizontalInspirationSeparatorConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationHeaderSeparator]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
 
-        var horizontalInspirationCardViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationCard]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
+        let horizontalInspirationCardViewConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationCard]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
         
-        var verticalLeftinspirationConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[inspirationLabel]-2-[inspirationHeaderSeparator(1)]-15-[inspirationCard]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
+        let verticalLeftinspirationConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[inspirationLabel]-2-[inspirationHeaderSeparator(1)]-15-[inspirationCard]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationMetricsDictionary, views: inspirationViewsDictionary)
         
         self.inspirationView.addConstraints(horizontalInspirationCardViewConstraints)
         self.inspirationView.addConstraints(horizontalinspirationConstraints)
@@ -442,7 +442,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         
         // Inspiration init and layout
         self.inspirationContentLabel = UILabel(frame: CGRectZero)
-        self.inspirationContentLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationContentLabel.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationContentLabel.textAlignment = NSTextAlignment.Left
         self.inspirationContentLabel.textColor = UIColor.blackColor()
         self.inspirationContentLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15.0)
@@ -451,7 +451,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationCard.addSubview(self.inspirationContentLabel)
         
         self.inspirationAuthorAvatarImageView = UIImageView(frame: CGRectZero)
-        self.inspirationAuthorAvatarImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationAuthorAvatarImageView.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationAuthorAvatarImageView.image = UIImage(named: "lynn-photo")
         self.inspirationAuthorAvatarImageView.layer.cornerRadius = 30
         self.inspirationAuthorAvatarImageView.clipsToBounds = true
@@ -464,7 +464,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationCard.addSubview(self.inspirationAuthorAvatarImageView)
         
         self.inspirationAuthorNameLabel = UILabel(frame: CGRectZero)
-        self.inspirationAuthorNameLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationAuthorNameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationAuthorNameLabel.textAlignment = NSTextAlignment.Left
         self.inspirationAuthorNameLabel.textColor = UIColor.blackColor()
         self.inspirationAuthorNameLabel.font = self.titleFont?.fontWithSize(14.0)
@@ -472,7 +472,7 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationCard.addSubview(self.inspirationAuthorNameLabel)
         
         self.inspirationAuthorRoleLabel = UILabel(frame: CGRectZero)
-        self.inspirationAuthorRoleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.inspirationAuthorRoleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationAuthorRoleLabel.textAlignment = NSTextAlignment.Left
         self.inspirationAuthorRoleLabel.textColor = UIColor.blackColor()
         self.inspirationAuthorRoleLabel.font = self.regularFont?.fontWithSize(14.0)
@@ -482,9 +482,9 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationCard.addSubview(self.inspirationAuthorRoleLabel)
         
         
-        var tapRecognizer = UITapGestureRecognizer(target: self, action: "presentWebView:")
-        self.inspirationReadMoreButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        self.inspirationReadMoreButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "presentWebView:")
+        self.inspirationReadMoreButton = UIButton(type: UIButtonType.System)
+        self.inspirationReadMoreButton.translatesAutoresizingMaskIntoConstraints = false
         self.inspirationReadMoreButton.tintColor = UIColor.blackColor()
         self.inspirationReadMoreButton.layer.borderColor = UIColor.blackColor().CGColor
         self.inspirationReadMoreButton.layer.borderWidth = 1
@@ -494,19 +494,19 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         self.inspirationReadMoreButton.addGestureRecognizer(tapRecognizer)
         self.inspirationCard.addSubview(self.inspirationReadMoreButton)
         
-        var inspirationCardViewsDictionary = ["inspirationContentLabel":self.inspirationContentLabel, "inspirationAuthorAvatarImageView":self.inspirationAuthorAvatarImageView, "inspirationAuthorNameLabel":self.inspirationAuthorNameLabel, "inspirationAuthorRoleLabel":self.inspirationAuthorRoleLabel, "inspirationReadMoreButton":self.inspirationReadMoreButton]
+        let inspirationCardViewsDictionary = ["inspirationContentLabel":self.inspirationContentLabel, "inspirationAuthorAvatarImageView":self.inspirationAuthorAvatarImageView, "inspirationAuthorNameLabel":self.inspirationAuthorNameLabel, "inspirationAuthorRoleLabel":self.inspirationAuthorRoleLabel, "inspirationReadMoreButton":self.inspirationReadMoreButton]
         
-        var inspirationCardMetricsDictionary = ["shortVerticalMargin":8]
+        let inspirationCardMetricsDictionary = ["shortVerticalMargin":8]
         
-        var horizontalInspirationCardBylineConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationAuthorAvatarImageView(60)]-14-[inspirationContentLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        let horizontalInspirationCardBylineConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationAuthorAvatarImageView(60)]-14-[inspirationContentLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var horizontalInspirationCardReadMoreButtonConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationReadMoreButton]-0-|", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        let horizontalInspirationCardReadMoreButtonConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[inspirationReadMoreButton]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var verticalLeftInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[inspirationAuthorAvatarImageView(60)]->=20-[inspirationReadMoreButton(40)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        let verticalLeftInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[inspirationAuthorAvatarImageView(60)]->=20-[inspirationReadMoreButton(40)]->=0-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var verticalLeftSecondInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[inspirationContentLabel]-12-[inspirationAuthorNameLabel]-0-[inspirationAuthorRoleLabel]", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        let verticalLeftSecondInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[inspirationContentLabel]-12-[inspirationAuthorNameLabel]-0-[inspirationAuthorRoleLabel]", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
-        var verticalLeftThirdInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[inspirationAuthorRoleLabel]->=24-[inspirationReadMoreButton(40)]", options: NSLayoutFormatOptions(0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
+        let verticalLeftThirdInspirationCardConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[inspirationAuthorRoleLabel]->=24-[inspirationReadMoreButton(40)]", options: NSLayoutFormatOptions(rawValue:0), metrics: inspirationCardMetricsDictionary, views: inspirationCardViewsDictionary)
         
         self.inspirationCard.addConstraints(horizontalInspirationCardReadMoreButtonConstraints)
         self.inspirationCard.addConstraints(horizontalInspirationCardBylineConstraints)
@@ -532,17 +532,17 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
         if (segue.identifier == "LoggedOut"){
             PFInstallation.currentInstallation().removeObjectForKey("currentUser")
             PFInstallation.currentInstallation().saveInBackgroundWithBlock(nil)
-            var vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
+            let vc:LoginViewController = segue.destinationViewController.childViewControllers[0] as! LoginViewController
             vc.showTutorial = false
             vc.scrollViewHidden = false
             PFUser.logOut()
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            println(appDelegate.layerClient.description)
+            print(appDelegate.layerClient.description)
             appDelegate.layerClient.deauthenticateWithCompletion { (success, error) -> Void in
                 if (error == nil) {
-                    println("Successfully deauthenticated \(success)")
+                    print("Successfully deauthenticated \(success)")
                 } else {
-                    println("Failed to deauthenticate: \(error)")
+                    print("Failed to deauthenticate: \(error)")
                 }
             }
         }
@@ -567,14 +567,14 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     // Update announcements view pagecontrol when scrolling on view ends
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        var currentPage:CGFloat = self.announcementsCollectionView.contentOffset.x / self.announcementsCollectionView.frame.size.width
+        let currentPage:CGFloat = self.announcementsCollectionView.contentOffset.x / self.announcementsCollectionView.frame.size.width
         self.announcementsPageControl.currentPage = Int(ceil(Float(currentPage)))
 
     }
 
     // Announcements view collection view delegate method
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardAnnouncementsCollectionViewCell", forIndexPath: indexPath) as! DashboardAnnouncementsCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DashboardAnnouncementsCollectionViewCell", forIndexPath: indexPath) as! DashboardAnnouncementsCollectionViewCell
         if indexPath.item == 0{
             cell.avatarImageView.image = self.avatarImageDictionary["elephant"]!
             cell.avatarImageView.backgroundColor = self.colorDictionary["teal"]
@@ -606,9 +606,9 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
     
     // Protocol implementation for PresentNewView
     func presentWebView(url: NSURL) {
-        var webView = WebViewViewController()
+        let webView = WebViewViewController()
         webView.url = NSURL(string: "http://ai.eecs.umich.edu/people/conway/conway.html#Reflections")
-        var newViewController = UINavigationController(rootViewController: webView)
+        let newViewController = UINavigationController(rootViewController: webView)
         newViewController.setToolbarHidden(false, animated: true)
         self.presentViewController(newViewController, animated: true, completion: nil)
     }

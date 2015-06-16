@@ -51,14 +51,14 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.noChallengeView = UIView(frame: self.challengesTableView.frame)
         self.noChallengeView.center = self.challengesTableView.center
         
-        var noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
+        let noChallengeViewTitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5, self.noChallengeView.frame.width, 32))
         noChallengeViewTitle.text = "No More Activities"
         noChallengeViewTitle.textAlignment = NSTextAlignment.Center
         noChallengeViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noChallengeViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noChallengeView.addSubview(noChallengeViewTitle)
         
-        var noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
+        let noChallengeViewSubtitle = UILabel(frame: CGRectMake(0, 2 * self.noChallengeView.frame.height / 5 + 31, self.noChallengeView.frame.width, 30))
         noChallengeViewSubtitle.text = "you're done with them all!"
         noChallengeViewSubtitle.textAlignment = NSTextAlignment.Center
         noChallengeViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
@@ -97,12 +97,12 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-        var challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as! PFObject
+        let challengeObject:PFObject = self.challengeModelsObjects[indexPath.item] as! PFObject
 
         let cell:ChallengeGalleryTableViewCell = self.challengesTableView.dequeueReusableCellWithIdentifier("ChallengeGalleryTableViewCell") as! ChallengeGalleryTableViewCell
         cell.titleLabel.text = challengeObject["title"] as! String?
-        var reasonType:String = challengeObject["reason"]![0] as! String
-        var reasonText:String = challengeObject["reason"]![1] as! String
+        let reasonType:String = challengeObject["reason"]![0] as! String
+        let reasonText:String = challengeObject["reason"]![1] as! String
         cell.reasonLabel.text = "\(reasonType): \(reasonText)"
         cell.introLabel.text = challengeObject["blurb"] as! String?
         
@@ -112,9 +112,9 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
     // Add challenge to user's current challenges on Parse if challenge tapped, then reload available challenges in current view
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as! PFObject
+        let selectedChallengeObject:PFObject = self.challengeModelsObjects[indexPath.row] as! PFObject
 
-        var newChallengeModel = PFObject(className: "UserChallengeData")
+        let newChallengeModel = PFObject(className: "UserChallengeData")
         newChallengeModel["alias"] = PFUser.currentUser()!.username
         newChallengeModel["title"] = selectedChallengeObject["title"]
         newChallengeModel["version"] = selectedChallengeObject["version"]
@@ -146,14 +146,14 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengeModelsObjects.removeAll(keepCapacity: true)
         self.currentChallengesStrings.removeAll(keepCapacity: true)
         
-        var query = PFQuery(className:"Challenge")
+        let query = PFQuery(className:"Challenge")
         // Apply filters if count of filter strings is greater than 0
         if filters.count > 0{
             query.whereKey("tags", containedIn: filters)
         }
         
         // Query challenges already current to the user
-        var currentChallengesQuery = PFQuery(className: "UserChallengeData")
+        let currentChallengesQuery = PFQuery(className: "UserChallengeData")
         currentChallengesQuery.whereKey("username", equalTo: PFUser.currentUser()!)
 
         currentChallengesQuery.findObjectsInBackgroundWithBlock {
@@ -171,8 +171,8 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                         var indexForToRemove:[Int] = []
                         // Remove challenges that are already current to user
                         if self.challengeModelsObjects.count > 0{
-                            for (index,challenge) in enumerate(self.challengeModelsObjects){
-                                if contains(self.currentChallengesStrings, challenge["title"] as! String){
+                            for (index,challenge) in self.challengeModelsObjects.enumerate(){
+                                if self.currentChallengesStrings.contains(challenge["title"] as! String){
                                     indexForToRemove += [index]
                                 }
                             }
@@ -189,12 +189,12 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
                         }
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error!, error!.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo)
                     }
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
             }
         }
     }
@@ -214,7 +214,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
 // Helper Array extension to remove objects in array
 extension Array {
     mutating func removeObjectAtIndexes(indexes: [Int]) {
-        var indexSet = NSMutableIndexSet()
+        let indexSet = NSMutableIndexSet()
 
         for index in indexes {
             indexSet.addIndex(index)

@@ -66,7 +66,7 @@ class PersonFollowTableViewCell: UITableViewCell {
         self.separatorInset = UIEdgeInsetsZero
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.userAvatar = UIImageView(frame: CGRectZero)
-        self.userAvatar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAvatar.translatesAutoresizingMaskIntoConstraints = false
         self.userAvatar.userInteractionEnabled = true
         self.userAvatar.layer.cornerRadius = 25
         self.userAvatar.clipsToBounds = true
@@ -74,36 +74,36 @@ class PersonFollowTableViewCell: UITableViewCell {
         contentView.addSubview(self.userAvatar)
         
         self.userAlias = UILabel(frame: CGRectZero)
-        self.userAlias.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userAlias.translatesAutoresizingMaskIntoConstraints = false
         self.userAlias.textAlignment = NSTextAlignment.Left
         self.userAlias.font = regularFont?.fontWithSize(17.0)
         contentView.addSubview(self.userAlias)
         
         self.userOrientationAge = UILabel(frame: CGRectZero)
-        self.userOrientationAge.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.userOrientationAge.translatesAutoresizingMaskIntoConstraints = false
         self.userOrientationAge.textAlignment = NSTextAlignment.Left
         self.userOrientationAge.font = titleFont?.fontWithSize(14.0)
         contentView.addSubview(self.userOrientationAge)
         
-        self.followButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        self.followButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.followButton = UIButton(type: UIButtonType.System)
+        self.followButton.translatesAutoresizingMaskIntoConstraints = false
         self.followButton.layer.borderColor = UIColor.blackColor().CGColor
         self.followButton.layer.borderWidth = 1
         self.followButton.layer.cornerRadius = 5
         self.followButton.setTitle("Follow", forState: UIControlState.Normal)
         contentView.addSubview(self.followButton)
         
-        var viewsDictionary = ["userAvatar":self.userAvatar, "userAlias":self.userAlias, "userOrientationAge":self.userOrientationAge, "followButton":self.followButton]
+        let viewsDictionary = ["userAvatar":self.userAvatar, "userAlias":self.userAlias, "userOrientationAge":self.userOrientationAge, "followButton":self.followButton]
         
-        var metricsDictionary = ["sideMargin":15, "verticalMargin":15]
+        let metricsDictionary = ["sideMargin":15, "verticalMargin":15]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-sideMargin-[userAlias]-[followButton(120)]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[userAvatar(50)]-sideMargin-[userAlias]-[followButton(120)]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=verticalMargin-[userAvatar(50)]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=verticalMargin-[userAvatar(50)]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=20-[userAlias]-2-[userOrientationAge]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let aliasVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=20-[userAlias]-2-[userOrientationAge]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
-        var followButtonVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=25-[followButton(30)]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let followButtonVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=25-[followButton(30)]->=verticalMargin-|", options: NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(avatarVerticalConstraints)

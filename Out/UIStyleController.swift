@@ -14,14 +14,14 @@ class UIStyleController: NSObject {
     class func applyStyle(){
         
         // UINavigationBar Appearance Object
-        var navigationBarAppearance:UINavigationBar = UINavigationBar.appearance()
+//        var navigationBarAppearance:UINavigationBar = UINavigationBar.appearance()
         // Modify UINavigationBar title styles
 //        var navFont = UIFont(name: "HelveticaNeue-Light", size: 19.5)
 //        navigationBarAppearance.titleTextAttributes = NSDictionary(objectsAndKeys: navFont!, NSFontAttributeName)
 //        navigationBarAppearance.setTitleVerticalPositionAdjustment(0, forBarMetrics: UIBarMetrics.Default)
 
         // UIWindow Appearance Object
-        var window:UIWindow = UIWindow.appearance()
+        let window:UIWindow = UIWindow.appearance()
         window.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1)
         
         // Set UITabBar tint color

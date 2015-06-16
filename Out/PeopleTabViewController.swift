@@ -87,17 +87,17 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         // UINavigationBar init and layout
         self.navigationItem.title = "People"
 
-        var addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPeople:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPeople:")
         addButton.enabled = true
         addButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = addButton
         
-        var chatButton = UIBarButtonItem(image: UIImage(named: "chatIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showPeerChat")
+        let chatButton = UIBarButtonItem(image: UIImage(named: "chatIcon"), style: UIBarButtonItemStyle.Plain, target: self, action: "showPeerChat")
         self.navigationItem.leftBarButtonItem = chatButton
         
         // followingTableView init
         self.followingTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
-        self.followingTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.followingTableView.translatesAutoresizingMaskIntoConstraints = false
         self.followingTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followingTableView.backgroundColor = UIColor.whiteColor()
         self.followingTableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -118,7 +118,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 
         // followerTableView init
         self.followerTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
-        self.followerTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.followerTableView.translatesAutoresizingMaskIntoConstraints = false
         self.followerTableView.registerClass(PersonTableViewCell.self, forCellReuseIdentifier: "PersonTableViewCell")
         self.followerTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.followerTableView.backgroundColor = UIColor.whiteColor()
@@ -141,20 +141,20 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.FollowerTableViewController.refreshControl!.addTarget(self, action: "loadPeople", forControlEvents: UIControlEvents.ValueChanged)
         
         self.segmentedControlView = UIView(frame: CGRectZero)
-        self.segmentedControlView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControlView.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControlView.backgroundColor = UIColor.whiteColor()
         
         self.view.addSubview(self.segmentedControlView)
         
         self.segmentedControl = UISegmentedControl(items: ["Followers","Following"])
-        self.segmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControl.tintColor = UIColor.blackColor()
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
         self.segmentedControlView.addSubview(self.segmentedControl)
         
         self.segmentedControlViewSeparator = UIView(frame: CGRectZero)
-        self.segmentedControlViewSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.segmentedControlViewSeparator.translatesAutoresizingMaskIntoConstraints = false
         self.segmentedControlViewSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
         self.segmentedControlView.addSubview(self.segmentedControlViewSeparator)
 
@@ -230,7 +230,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        
 //        var mentorCellMetricsDictionary = ["sideMargin":15, "topMargin":64 + 16, "bottomMargin": 18]
 //        
-//        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=26-[mentorOrganization]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
+//        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[mentorAvatar(50)]-20-[mentorRole]->=26-[mentorOrganization]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
 //        
 //
 //        var avatarVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|->=0-[mentorAvatar(50)]-15-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: mentorCellMetricsDictionary, views: mentorCellViewsDictionary)
@@ -246,20 +246,20 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        self.mentorCellOverlay.addConstraints(rightVerticalConstraints)
         
         
-        var viewsDictionary = ["segmentedControlView":segmentedControlView, "followingTableView":self.followingTableView, "followerTableView":followerTableView]
-        var metricsDiciontary = ["margin":0]
+        let viewsDictionary = ["segmentedControlView":segmentedControlView, "followingTableView":self.followingTableView, "followerTableView":followerTableView]
+        let metricsDiciontary = ["margin":0]
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[segmentedControlView(44.5)]", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDiciontary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[segmentedControlView(44.5)]", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDiciontary, views: viewsDictionary)
         
-        var followingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-44.5-[followingTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        let followingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-44.5-[followingTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDiciontary, views: viewsDictionary)
 
-        var followerViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[followerTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        let followerViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[followerTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDiciontary, views: viewsDictionary)
 
-        var horizontalFollowingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[followingTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        let horizontalFollowingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[followingTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDiciontary, views: viewsDictionary)
         
-        var horizontalFollowerViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[followerTableView]|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        let horizontalFollowerViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[followerTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDiciontary, views: viewsDictionary)
         
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControlView]-margin-|", options: NSLayoutFormatOptions(0), metrics: metricsDiciontary, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControlView]-margin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDiciontary, views: viewsDictionary)
 
         self.view.addConstraints(horizontalFollowingViewConstraints)
         self.view.addConstraints(horizontalFollowerViewConstraints)
@@ -268,14 +268,14 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addConstraints(verticalConstraints)
         self.view.addConstraints(horizontalConstraints)
         
-        var segmentsViewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
-        var segmentsMetricsDictionary = ["margin":7.5]
+        let segmentsViewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
+        let segmentsMetricsDictionary = ["margin":7.5]
         
-        var segmentsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControl]-margin-|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+        let segmentsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-margin-[segmentedControl]-margin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
         
-        var segmentsSeparatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+        let segmentsSeparatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
 
-        var segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
+        let segmentsVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: segmentsMetricsDictionary, views: segmentsViewsDictionary)
         
         self.segmentedControlView.addConstraints(segmentsHorizontalConstraints)
         self.segmentedControlView.addConstraints(segmentsSeparatorHorizontalConstraints)
@@ -286,13 +286,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.noFollowerView.backgroundColor = UIColor.whiteColor()
         self.noFollowerView.center = self.view.center
         
-        var noFollowerViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5, self.noFollowerView.frame.width, 32))
+        let noFollowerViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5, self.noFollowerView.frame.width, 32))
         noFollowerViewTitle.text = "No Followers"
         noFollowerViewTitle.textAlignment = NSTextAlignment.Center
         noFollowerViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noFollowerViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowerView.addSubview(noFollowerViewTitle)
-        var noFollowerViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5 + 31, self.noFollowerView.frame.width, 60))
+        let noFollowerViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowerView.frame.height / 5 + 31, self.noFollowerView.frame.width, 60))
         noFollowerViewSubtitle.text = "you will receive a follow request\nif someone follows you"
         noFollowerViewSubtitle.textAlignment = NSTextAlignment.Center
         noFollowerViewSubtitle.numberOfLines = 2
@@ -308,13 +308,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.noFollowingView.center = self.view.center
         self.noFollowingView.backgroundColor = UIColor.whiteColor()
         
-        var noFollowingViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5, self.noFollowingView.frame.width, 32))
+        let noFollowingViewTitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5, self.noFollowingView.frame.width, 32))
         noFollowingViewTitle.text = "Not Following Anyone"
         noFollowingViewTitle.textAlignment = NSTextAlignment.Center
         noFollowingViewTitle.font = UIFont(name: "HelveticaNeue", size: 26.0)
         noFollowingViewTitle.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
         self.noFollowingView.addSubview(noFollowingViewTitle)
-        var noFollowingViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5 + 31, self.noFollowingView.frame.width, 30))
+        let noFollowingViewSubtitle = UILabel(frame: CGRectMake(0, 1 * self.noFollowingView.frame.height / 5 + 31, self.noFollowingView.frame.width, 30))
         noFollowingViewSubtitle.text = "tap '+' to add people"
         noFollowingViewSubtitle.textAlignment = NSTextAlignment.Center
         noFollowingViewSubtitle.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
@@ -331,7 +331,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.identifier == "presentPeopleGallery"{
         }
         else if segue.identifier == "showPersonDetail"{
-            var newVC = segue.destinationViewController as! PersonDetailViewController
+            let newVC = segue.destinationViewController as! PersonDetailViewController
             newVC.user = self.user
         }
     }
@@ -372,57 +372,57 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         if tableView == self.followerTableView{
             // If section is for displaying follower(s)
             if(indexPath.section == 1){
-                var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
+                let cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
                 var followersUsers:[PFUser] = self.followers
-                var user = followersUsers[indexPath.row] as PFUser
+                let user = followersUsers[indexPath.row] as PFUser
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
                 cell.userAlias.text = user.username
-                var userOrientation = user["sexualOrientation"] as! String
-                var userAge = user["age"] as! Int
+                let userOrientation = user["sexualOrientation"] as! String
+                let userAge = user["age"] as! Int
                 cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-                var userCity = user["city"] as! String
-                var userState = user["state"] as! String
+                let userCity = user["city"] as! String
+                let userState = user["state"] as! String
                 cell.userLocation.text = "\(userCity), \(userState)"
-                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.addGestureRecognizer(tapGestureRecognizer)
                 return cell
             }
             // If section is for displaying follow requests
             else{
-                var cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as! PersonFollowTableViewCell
+                let cell:PersonFollowTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonFollowTableViewCell") as! PersonFollowTableViewCell
                 var followingRequestsFromUsers:[PFUser] = self.followingRequestedFrom as [PFUser]
-                var user = followingRequestsFromUsers[indexPath.row] as PFUser
+                let user = followingRequestsFromUsers[indexPath.row] as PFUser
                 cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
                 cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
                 cell.userAlias.text = user.username
-                var userOrientation = user["sexualOrientation"] as! String
-                var userAge = user["age"] as! Int
+                let userOrientation = user["sexualOrientation"] as! String
+                let userAge = user["age"] as! Int
                 cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-                var userCity = user["city"] as! String
-                var userState = user["state"] as! String
+                _ = user["city"] as! String
+                _ = user["state"] as! String
                 cell.followButton.addTarget(self, action: "acceptButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
                 cell.followButton.setTitle("Accept", forState: UIControlState.Normal)
-                var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
                 cell.userAvatar.addGestureRecognizer(tapGestureRecognizer)
                 return cell
             }
         }
         // Display following
         else if tableView == self.followingTableView{
-            var cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
+            let cell:PersonTableViewCell = tableView.dequeueReusableCellWithIdentifier("PersonTableViewCell") as! PersonTableViewCell
             var followingUsers:[PFUser] = self.following
-            var user = followingUsers[indexPath.row] as PFUser
+            let user = followingUsers[indexPath.row] as PFUser
             cell.userAvatar.backgroundColor = self.colorDictionary[user["color"] as! String]
             cell.userAvatar.image = self.avatarImageDictionary[user["avatar"] as! String]!
             cell.userAlias.text = user.username
-            var userOrientation = user["sexualOrientation"] as! String
-            var userAge = user["age"] as! Int
+            let userOrientation = user["sexualOrientation"] as! String
+            let userAge = user["age"] as! Int
             cell.userOrientationAge.text = "\(userOrientation) . \(userAge)"
-            var userCity = user["city"] as! String
-            var userState = user["state"] as! String
+            let userCity = user["city"] as! String
+            let userState = user["state"] as! String
             cell.userLocation.text = "\(userCity), \(userState)"
-            var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "showPersonDetail:")
             cell.addGestureRecognizer(tapGestureRecognizer)
             return cell
         }
@@ -493,17 +493,17 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Add PFUser to list of approved followers if Accept button tapped
     func acceptButtonTapped(sender:UIButton){
-        var currentCell = sender.superview?.superview as! PersonFollowTableViewCell
-        var currentIndexPath:NSIndexPath = self.followerTableView.indexPathForCell(currentCell)!
-        var userToAcceptFollowRequest = self.followingRequestedFrom[currentIndexPath.row] as PFUser
+        let currentCell = sender.superview?.superview as! PersonFollowTableViewCell
+        let currentIndexPath:NSIndexPath = self.followerTableView.indexPathForCell(currentCell)!
+        let userToAcceptFollowRequest = self.followingRequestedFrom[currentIndexPath.row] as PFUser
         var currentUserFollowingRequestedFrom = self.followingRequestedFrom
         
-        var queryUserFollowRequestedFromFollowerFollowing = PFQuery(className: "FollowerFollowing")
+        let queryUserFollowRequestedFromFollowerFollowing = PFQuery(className: "FollowerFollowing")
         queryUserFollowRequestedFromFollowerFollowing.whereKey("ownerUser", equalTo:currentUserFollowingRequestedFrom[currentIndexPath.row])
         queryUserFollowRequestedFromFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil {
-                var userFollowRequestedFrom = (objects as! [PFObject])[0]
+                let userFollowRequestedFrom = (objects as! [PFObject])[0]
                 var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as! [PFUser]
                 userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser()!)
                 userFollowRequestedFrom["followingUsers"] = userFollowRequestedFromCurrentlyfollowing
@@ -512,7 +512,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.followerTableView.hidden = false
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
             }
         }
 
@@ -523,7 +523,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         self.followerFollowingObject["followers"] = currentUserFollowers
         self.followerFollowingObject.saveInBackgroundWithBlock{(succeeded, error) -> Void in
             if error == nil{
-                var followRequestApprovedNotification = PFObject(className: "Notification")
+                let followRequestApprovedNotification = PFObject(className: "Notification")
                 followRequestApprovedNotification["sender"] = PFUser.currentUser()
                 followRequestApprovedNotification["receiver"] = userToAcceptFollowRequest
                 followRequestApprovedNotification["read"] = false
@@ -542,7 +542,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     // Load people data from Parse
     func loadPeople(){
 //        self.followerTableView.hidden = true
-        var queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
+        let queryFollowerFollowing = PFQuery(className:"FollowerFollowing")
         queryFollowerFollowing.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
         queryFollowerFollowing.includeKey("followingUsers")
         queryFollowerFollowing.includeKey("followers")
@@ -573,7 +573,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.FollowingTableViewController.refreshControl!.endRefreshing()
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
             }
         }
     }
@@ -584,7 +584,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     func showPersonDetail(sender:UITapGestureRecognizer){
         if self.segmentedControl.selectedSegmentIndex == 0{
-            var currentIndexPath = self.followerTableView.indexPathForRowAtPoint(sender.locationInView(self.followerTableView)) as NSIndexPath!
+            let currentIndexPath = self.followerTableView.indexPathForRowAtPoint(sender.locationInView(self.followerTableView)) as NSIndexPath!
             if currentIndexPath.section == 1{
                 self.user = self.followers[currentIndexPath.row]
             }
@@ -594,13 +594,13 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
             self.performSegueWithIdentifier("showPersonDetail", sender: self)
         }
         else{
-            var currentIndexPath = self.followingTableView.indexPathForRowAtPoint(sender.locationInView(self.followingTableView)) as NSIndexPath!
+            let currentIndexPath = self.followingTableView.indexPathForRowAtPoint(sender.locationInView(self.followingTableView)) as NSIndexPath!
             self.user = self.following[currentIndexPath.row]
             self.performSegueWithIdentifier("showPersonDetail", sender: self)
 
 
         }
-        println("")
+        print("")
     }
     
     func showPeerChat(){

@@ -21,7 +21,7 @@ class HelpTalkViewController: UIViewController {
         self.placeholderImageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.placeholderImageView.image = UIImage(named: "help_talk_placeholder")
         self.placeholderImageView.userInteractionEnabled = true
-        var endTalkRecognizer = UITapGestureRecognizer(target: self, action: "endTalkTapped")
+        let endTalkRecognizer = UITapGestureRecognizer(target: self, action: "endTalkTapped")
         self.placeholderImageView.addGestureRecognizer(endTalkRecognizer)
         self.view.addSubview(self.placeholderImageView)
         

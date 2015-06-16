@@ -17,12 +17,12 @@ class ComposeViewController: UIViewController {
         // UINavigationBar init and layout
         self.navigationItem.title = "Compose"
         
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonTapped")
         cancelButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = cancelButton
         
-        var postButton = UIBarButtonItem(title: "Post", style: UIBarButtonItemStyle.Plain, target: self, action: "postButtonTapped")
-        postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!, NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
+        let postButton = UIBarButtonItem(title: "Post", style: UIBarButtonItemStyle.Plain, target: self, action: "postButtonTapped")
+        postButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: NSFontAttributeName, UIFont(name: "HelveticaNeue-Medium", size: 18.0)!) as? [String : AnyObject], forState: UIControlState.Normal)
         postButton.tintColor = UIColor.blackColor()
         self.navigationItem.rightBarButtonItem = postButton
     }
@@ -39,6 +39,6 @@ class ComposeViewController: UIViewController {
 
     // Post composition if Post button tapped
     func postButtonTapped(){
-        println("posted!")
+        print("posted!")
     }
 }

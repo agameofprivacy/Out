@@ -34,7 +34,7 @@ class ResourceDetailTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.logoBannerImageView = UIImageView(frame: CGRectZero)
-        self.logoBannerImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.logoBannerImageView.translatesAutoresizingMaskIntoConstraints = false
         self.logoBannerImageView.image = UIImage(named: "trevorBanner")
         self.logoBannerImageView.contentMode = UIViewContentMode.ScaleAspectFit
         contentView.addSubview(self.logoBannerImageView)
@@ -45,13 +45,13 @@ class ResourceDetailTableViewCell: UITableViewCell {
         //        contentView.addSubview(self.aliasLabel)
         
         self.basicsLabel = UILabel(frame: CGRectZero)
-        self.basicsLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.basicsLabel.translatesAutoresizingMaskIntoConstraints = false
         self.basicsLabel.text = "user basic stats"
         self.basicsLabel.textAlignment = NSTextAlignment.Center
         contentView.addSubview(self.basicsLabel)
         
         self.aboutTextView = UILabel(frame: CGRectZero)
-        self.aboutTextView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.aboutTextView.translatesAutoresizingMaskIntoConstraints = false
         self.aboutTextView.text = "user advance stats"
         self.aboutTextView.backgroundColor = UIColor.clearColor()
         self.aboutTextView.textAlignment = NSTextAlignment.Left
@@ -61,7 +61,7 @@ class ResourceDetailTableViewCell: UITableViewCell {
         contentView.addSubview(self.aboutTextView)
         
         self.contactButton = UIButton(frame: CGRectZero)
-        self.contactButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.contactButton.translatesAutoresizingMaskIntoConstraints = false
         self.contactButton.setTitle("Contact", forState: UIControlState.Normal)
         self.contactButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.contactButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16)
@@ -72,7 +72,7 @@ class ResourceDetailTableViewCell: UITableViewCell {
         contentView.addSubview(self.contactButton)
         
         self.directionsButton = UIButton(frame: CGRectZero)
-        self.directionsButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.directionsButton.translatesAutoresizingMaskIntoConstraints = false
         self.directionsButton.setTitle("Directions", forState: UIControlState.Normal)
         self.directionsButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         self.directionsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16)
@@ -82,31 +82,31 @@ class ResourceDetailTableViewCell: UITableViewCell {
         contentView.addSubview(self.directionsButton)
         
         self.separatorView = UIView(frame: CGRectZero)
-        self.separatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.separatorView.translatesAutoresizingMaskIntoConstraints = false
         self.separatorView.backgroundColor = UIColor(white: 0.85, alpha: 1)
         contentView.addSubview(self.separatorView)
         //        var aboutTextViewHeight = self.aboutTextView.sizeThatFits(CGSizeMake(UIScreen.mainScreen().bounds.width - 15, CGFloat(MAXFLOAT))).height
         
-        var metricsDictionary = ["sideMargin":15, "buttonMargin":(UIScreen.mainScreen().bounds.width - 278)/2]
-        var viewsDictionary = ["logoBannerImageView":self.logoBannerImageView, "basicsLabel":self.basicsLabel, "aboutTextView":self.aboutTextView, "contactButton":self.contactButton, "directionsButton":self.directionsButton, "separatorView":self.separatorView]
+        let metricsDictionary = ["sideMargin":15, "buttonMargin":(UIScreen.mainScreen().bounds.width - 278)/2]
+        let viewsDictionary = ["logoBannerImageView":self.logoBannerImageView, "basicsLabel":self.basicsLabel, "aboutTextView":self.aboutTextView, "contactButton":self.contactButton, "directionsButton":self.directionsButton, "separatorView":self.separatorView]
         
         
-        var topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoBannerImageView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var logoBannerImageViewCenterConstraint = NSLayoutConstraint(item: self.logoBannerImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
-        var secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[basicsLabel]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let topHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoBannerImageView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let logoBannerImageViewCenterConstraint = NSLayoutConstraint(item: self.logoBannerImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
+        let secondHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[basicsLabel]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var aboutTextViewHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[aboutTextView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let aboutTextViewHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[aboutTextView]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-buttonMargin-[contactButton(130)]-18-[directionsButton(130)]-buttonMargin-|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: metricsDictionary, views: viewsDictionary)
+        let thirdHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-buttonMargin-[contactButton(130)]-18-[directionsButton(130)]-buttonMargin-|", options: [NSLayoutFormatOptions.AlignAllTop, NSLayoutFormatOptions.AlignAllBottom], metrics: metricsDictionary, views: viewsDictionary)
         
-        var fourthHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separatorView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let fourthHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[separatorView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[logoBannerImageView]-12-[basicsLabel]-10-[aboutTextView]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
+        let topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[logoBannerImageView]-12-[basicsLabel]-10-[aboutTextView]", options: NSLayoutFormatOptions.AlignAllCenterX, metrics: metricsDictionary, views: viewsDictionary)
         
-        var secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[contactButton(36)]-24-[separatorView(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let secondVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[contactButton(36)]-24-[separatorView(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         
-        //        var fourthVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[contactButton(36)]-30-[separatorView(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        //        var fourthVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[aboutTextView]-20-[contactButton(36)]-30-[separatorView(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
         
         //        var buttonHorizontalConstraint = NSLayoutConstraint(item: self.contactButton, attribute: NSLayoutAttribute.CenterXWithinMargins, relatedBy: NSLayoutRelation.Equal, toItem: self.separatorView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0)
         self.contentView.addConstraint(logoBannerImageViewCenterConstraint)

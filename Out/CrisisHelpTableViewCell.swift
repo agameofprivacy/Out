@@ -27,7 +27,7 @@ class CrisisHelpTableViewCell: UITableViewCell {
 
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.paperView = UIView(frame: CGRectZero)
-        self.paperView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.paperView.translatesAutoresizingMaskIntoConstraints = false
         self.paperView.backgroundColor = UIColor.whiteColor()
         self.paperView.layer.shadowColor = UIColor(white: 0, alpha: 1).CGColor
         self.paperView.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -39,7 +39,7 @@ class CrisisHelpTableViewCell: UITableViewCell {
         contentView.addSubview(self.paperView)
         
         self.logoImageView = UIImageView(frame: CGRectZero)
-        self.logoImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.logoImageView.translatesAutoresizingMaskIntoConstraints = false
         self.logoImageView.layer.cornerRadius = 5
         self.logoImageView.clipsToBounds = true
         self.logoImageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -48,13 +48,13 @@ class CrisisHelpTableViewCell: UITableViewCell {
         self.paperView.addSubview(self.logoImageView)
 
         self.descriptionLabel = UILabel(frame: CGRectZero)
-        self.descriptionLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 13.0)
         self.descriptionLabel.numberOfLines = 0
         self.paperView.addSubview(self.descriptionLabel)
         
         self.callButton = UIButton(frame: CGRectZero)
-        self.callButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.callButton.translatesAutoresizingMaskIntoConstraints = false
         self.callButton.setTitle("Call", forState: UIControlState.Normal)
         self.callButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16.0)
         self.callButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -64,7 +64,7 @@ class CrisisHelpTableViewCell: UITableViewCell {
         self.paperView.addSubview(self.callButton)
 
         self.messageButton = UIButton(frame: CGRectZero)
-        self.messageButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.messageButton.translatesAutoresizingMaskIntoConstraints = false
         self.messageButton.setTitle("Message", forState: UIControlState.Normal)
         self.messageButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 16.0)
         self.messageButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -72,26 +72,26 @@ class CrisisHelpTableViewCell: UITableViewCell {
         self.messageButton.layer.borderColor = UIColor.blackColor().CGColor
         self.messageButton.layer.cornerRadius = 8
         self.paperView.addSubview(self.messageButton)
-        var buttonWidth = (UIScreen.mainScreen().bounds.width - 20 * 3 - 15)/2
-        var metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6, "buttonWidth":buttonWidth]
-        var viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "descriptionLabel":self.descriptionLabel, "callButton":self.callButton, "messageButton":self.messageButton]
+        let buttonWidth = (UIScreen.mainScreen().bounds.width - 20 * 3 - 15)/2
+        let metricsDictionary = ["sideMargin":7.5, "largeVerticalPadding":6, "buttonWidth":buttonWidth]
+        let viewsDictionary = ["paperView":self.paperView, "logoImageView":self.logoImageView, "descriptionLabel":self.descriptionLabel, "callButton":self.callButton, "messageButton":self.messageButton]
         
-        var paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let paperHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[paperView]-sideMargin-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
 
-        var paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let paperVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[paperView]-8-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(paperHorizontalConstraints)
         contentView.addConstraints(paperVerticalConstraints)
         
-        var logoImageHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoImageView]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let logoImageHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[logoImageView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var descriptionLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let descriptionLabelHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[descriptionLabel]-20-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var buttonsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[callButton(buttonWidth)]-20-[messageButton(buttonWidth)]-20-|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: metricsDictionary, views: viewsDictionary)
+        let buttonsHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-20-[callButton(buttonWidth)]-20-[messageButton(buttonWidth)]-20-|", options: [NSLayoutFormatOptions.AlignAllTop, NSLayoutFormatOptions.AlignAllBottom], metrics: metricsDictionary, views: viewsDictionary)
         
-        var topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[logoImageView(105)]-10-[descriptionLabel]", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+        let topVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-20-[logoImageView(105)]-10-[descriptionLabel]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDictionary, views: viewsDictionary)
         
-        var leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[descriptionLabel]-25-[callButton(36)]-30-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let leftVerticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:[descriptionLabel]-25-[callButton(36)]-30-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(logoImageHorizontalConstraints)
         contentView.addConstraints(descriptionLabelHorizontalConstraints)

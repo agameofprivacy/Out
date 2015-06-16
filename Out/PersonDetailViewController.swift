@@ -60,7 +60,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.navigationItem.title = self.user.username
         self.tableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
-        self.tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.registerClass(PersonDetailTableViewCell.self, forCellReuseIdentifier: "PersonDetailTableViewCell")
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
         self.tableView.registerClass(StatusActivityTableViewCell.self, forCellReuseIdentifier: "StatusActivityTableViewCell")
@@ -72,21 +72,21 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(self.tableView)
         
-        var viewsDictionary = ["tableView":self.tableView]
+        let viewsDictionary = ["tableView":self.tableView]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
 
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
-        var age = self.user["age"] as! Int
-        var ageString = "\(age)"
-        var sexualOrientation = self.user["sexualOrientation"] as! String
-        var genderIdentity = self.user["genderIdentity"] as! String
-        var ethnicity = self.user["ethnicity"] as! String
-        var religion = self.user["religion"] as! String
-        var city = self.user["city"] as! String
-        var state = self.user["state"] as! String
+        let age = self.user["age"] as! Int
+        let ageString = "\(age)"
+        let sexualOrientation = self.user["sexualOrientation"] as! String
+        let genderIdentity = self.user["genderIdentity"] as! String
+        let ethnicity = self.user["ethnicity"] as! String
+        let religion = self.user["religion"] as! String
+        let city = self.user["city"] as! String
+        let state = self.user["state"] as! String
 
         self.aboutArray.append(["Age", ageString])
         self.aboutArray.append(["Sexual Orientation", sexualOrientation])
@@ -116,20 +116,20 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         case 0:
             return 1
         default:
-            var numberOfRows = self.aboutArray.count + self.userActivities.count + 2
+            let numberOfRows = self.aboutArray.count + self.userActivities.count + 2
             return numberOfRows
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath == NSIndexPath(forRow: 0, inSection: 0){
-            var age = self.user["age"] as! Int
-            var basicStatsString = "\(age)" + " · " + (self.user["sexualOrientation"] as! String) + " · " + (self.user["genderIdentity"] as! String)
+            let age = self.user["age"] as! Int
+            let basicStatsString = "\(age)" + " · " + (self.user["sexualOrientation"] as! String) + " · " + (self.user["genderIdentity"] as! String)
 //            var advanceStatsString = (self.user["ethnicity"] as! String) + " · " + (self.user["religion"] as! String) + " · " + (self.user["city"] as! String) + " " + (self.user["state"] as! String)
             
-            var advanceStatsString = self.user["shortBio"] as! String
+            let advanceStatsString = self.user["shortBio"] as! String
             
-            var cell = tableView.dequeueReusableCellWithIdentifier("PersonDetailTableViewCell") as! PersonDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("PersonDetailTableViewCell") as! PersonDetailTableViewCell
             
             
             
@@ -138,10 +138,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             cell.avatarImageView.image = cell.avatarImageDictionary[self.user["avatar"] as! String]!
             cell.avatarImageView.backgroundColor = cell.colorDictionary[self.user["color"] as! String]
             if self.followStatusChecked{
-                if contains(self.currentUserFollowingId, self.user.objectId!){
+                if self.currentUserFollowingId.contains(self.user.objectId!){
                     cell.followButton.setTitle("Unfollow", forState: UIControlState.Normal)
                 }
-                else if contains(self.followingRequestedId, PFUser.currentUser()!.objectId!){
+                else if self.followingRequestedId.contains(PFUser.currentUser()!.objectId!){
                     cell.followButton.setTitle("Requested", forState: UIControlState.Normal)
                 }
 //                else if contains(self.currentUserFollowerId, self.user.objectId){
@@ -152,13 +152,13 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 cell.followButton.enabled = true
             }
-            var followButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "followButtonTapped:")
+            let followButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "followButtonTapped:")
             cell.followButton.addGestureRecognizer(followButtonTapGestureRecognizer)
             return cell
         }
         else if indexPath.section == 1{
             if indexPath.row < self.aboutArray.count{
-                var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
+                let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
                 cell.textLabel!.text = self.aboutArray[indexPath.row][0]
                 cell.detailTextLabel!.text = self.aboutArray[indexPath.row][1]
                 return cell
@@ -166,9 +166,9 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             else if indexPath.row < self.aboutArray.count + self.userActivities.count && self.processedActivities.count > 0{
                 var currentActivity = self.processedActivities[indexPath.row - self.aboutArray.count] as! [String:String!]
                 
-                var currentActivityImageString:String = currentActivity["currentActivityImageString"]!
+                let currentActivityImageString:String = currentActivity["currentActivityImageString"]!
                 if (currentActivityImageString != ""){
-                    var cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
+                    let cell:ActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell") as! ActivityTableViewCell
                     cell.heroImageView.image = UIImage(named: currentActivityImageString)
 //                    var activityContentPreviewTapRecognizer = UITapGestureRecognizer(target: self, action: "showActivityContentPreviewTapped:")
 //                    cell.contentCanvas.addGestureRecognizer(activityContentPreviewTapRecognizer)
@@ -205,7 +205,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     return cell
                 }
                 else{
-                    var cell:StatusActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("StatusActivityTableViewCell") as! StatusActivityTableViewCell
+                    let cell:StatusActivityTableViewCell = tableView.dequeueReusableCellWithIdentifier("StatusActivityTableViewCell") as! StatusActivityTableViewCell
                     
                     cell.reverseTimeLabel.text = currentActivity["timeLabel"]!
                     cell.avatarImageView.image = UIImage(named: currentActivity["avatarImageViewImageString"]!)
@@ -236,7 +236,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
             else{
-                var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
+                let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
                 if indexPath.row == self.tableView.numberOfRowsInSection(1) - 2{
                     cell.textLabel!.text = "Report for Spam"
                     cell.detailTextLabel!.text = "Report this user for spam activity"
@@ -249,34 +249,34 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
         else{
-            var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
+            let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
             return cell
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1{
-            var segmentedControlView = UIView()
+            let segmentedControlView = UIView()
             segmentedControlView.backgroundColor = UIColor.whiteColor()
             
-            var segmentedControl = UISegmentedControl(items: ["About","Activities", "More"])
-            segmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let segmentedControl = UISegmentedControl(items: ["About","Activities", "More"])
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
             segmentedControl.tintColor = UIColor.blackColor()
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
             segmentedControlView.addSubview(segmentedControl)
             
-            var segmentedControlViewSeparator = UIView(frame: CGRectZero)
-            segmentedControlViewSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let segmentedControlViewSeparator = UIView(frame: CGRectZero)
+            segmentedControlViewSeparator.translatesAutoresizingMaskIntoConstraints = false
             segmentedControlViewSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
             segmentedControlView.addSubview(segmentedControlViewSeparator)
             
-            var metricsDictionary = ["sideMargin":7.5]
-            var viewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
+            let metricsDictionary = ["sideMargin":7.5]
+            let viewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
             
-            var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-            var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[segmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-            var separatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+            let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[segmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+            let separatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 
             segmentedControlView.addConstraints(verticalConstraints)
             segmentedControlView.addConstraints(horizontalConstraints)
@@ -310,25 +310,25 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
     func valueChanged(segment:UISegmentedControl){
         switch segment.selectedSegmentIndex{
         case 0:
-            println("About")
+            print("About")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         case 1:
-            println("Activities")
+            print("Activities")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.aboutArray.count, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         default:
-            println("More")
+            print("More")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.tableView.numberOfRowsInSection(1) - 1, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         }
     }
 
     func loadActivities(context:String){
-        var followingQuery = PFQuery(className: "FollowerFollowing")
+        let followingQuery = PFQuery(className: "FollowerFollowing")
         followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
         followingQuery.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil {
                 // Found FollowerFollowing object for current user
-                var activityQuery = PFQuery(className: "Activity")
+                let activityQuery = PFQuery(className: "Activity")
                 // Include current user so user's own activities also show up
                 activityQuery.whereKey("ownerUser", equalTo: self.user)
                 activityQuery.includeKey("challenge")
@@ -358,7 +358,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     if error == nil {
                         
                         // Found activities
-                        var userActivitiesFound = objects as! [PFObject]
+                        let userActivitiesFound = objects as! [PFObject]
                         var currentLikedAcitivitiesFoundIdStrings:[String] = []
                         if context == "old"{
                             if (objects as! [PFObject]).count == 10{
@@ -386,7 +386,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
 //                            self.noActivityView.hidden = true
                         }
                         if userActivitiesFound.isEmpty{
-                            println("no more activities")
+                            print("no more activities")
 //                            self.refreshControl?.endRefreshing()
                         }
                         // Query activities liked by current user
@@ -394,7 +394,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         var userActivitiesFoundLikeCount = Array(count: userActivitiesFound.count, repeatedValue: 0)
                         var likeCountFound = 0
                         var commentCountFound = 0
-                        var relation = PFUser.currentUser()!.relationForKey("likedActivity")
+                        let relation = PFUser.currentUser()!.relationForKey("likedActivity")
                         relation.query()!.findObjectsInBackgroundWithBlock{
                             (objects, error) -> Void in
                             if error == nil {
@@ -404,30 +404,30 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                             }
                             else {
                                 // Log details of the failure
-                                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                NSLog("Error: %@ %@", error!, error!.userInfo)
 //                                self.refreshControl?.endRefreshing()
                             }
                         }
                         
                         // Query like count of activities
                         for activity in userActivitiesFound{
-                            var queryLikes = PFQuery(className: "_User")
+                            let queryLikes = PFQuery(className: "_User")
                             queryLikes.whereKey("likedActivity", equalTo: activity)
                             queryLikes.findObjectsInBackgroundWithBlock{
                                 (objects, error) -> Void in
                                 if error == nil {
-                                    var count = objects!.count
-                                    userActivitiesFoundLikeCount[find(userActivitiesFound, activity)!] = count
+                                    let count = objects!.count
+                                    userActivitiesFoundLikeCount[userActivitiesFound.indexOf(activity)!] = count
                                     ++likeCountFound
                                     
                                     // Query comment count of activities
-                                    var queryComments = PFQuery(className: "Comment")
+                                    let queryComments = PFQuery(className: "Comment")
                                     queryComments.whereKey("activity", equalTo: activity)
                                     queryComments.findObjectsInBackgroundWithBlock{
                                         (objects, error) -> Void in
                                         if error == nil {
-                                            var count = objects!.count
-                                            userActivitiesFoundCommentCount[find(userActivitiesFound, activity)!] = count
+                                            let count = objects!.count
+                                            userActivitiesFoundCommentCount[userActivitiesFound.indexOf(activity)!] = count
                                             ++commentCountFound
                                             if likeCountFound == userActivitiesFound.count && commentCountFound == userActivitiesFound.count{
                                                 self.prepareDataForTableView(userActivitiesFound, currentActivitiesFoundCommentCount: userActivitiesFoundCommentCount, currentActivitiesFoundLikeCount: userActivitiesFoundLikeCount, currentLikedAcitivitiesFoundIdStrings: currentLikedAcitivitiesFoundIdStrings, context:context)
@@ -446,7 +446,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                         }
                                         else {
                                             // Log details of the failure
-                                            NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                            NSLog("Error: %@ %@", error!, error!.userInfo)
 //                                            self.refreshControl?.endRefreshing()
                                             
                                         }
@@ -455,7 +455,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                 }
                                 else {
                                     // Log details of the failure
-                                    NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                    NSLog("Error: %@ %@", error!, error!.userInfo)
 //                                    self.refreshControl?.endRefreshing()
                                 }
                             }
@@ -464,14 +464,14 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         
                     } else {
                         // Log details of the failure
-                        NSLog("Error: %@ %@", error!, error!.userInfo!)
+                        NSLog("Error: %@ %@", error!, error!.userInfo)
 //                        self.refreshControl?.endRefreshing()
                         
                     }
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error!, error!.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo)
 //                self.refreshControl?.endRefreshing()
                 
             }
@@ -489,16 +489,16 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         for activity in activitiesToAppend{
-            var currentActivityCreatedTime = activity.createdAt
-            var currentActivityChallenge = activity["challenge"] as! PFObject
-            var currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
-            var currentActivityUser = activity["ownerUser"] as! PFUser
-            var currentAvatarString = currentActivityUser["avatar"] as! String
-            var currentAvatarColor = currentActivityUser["color"] as! String
-            var currentAction = currentActivityChallenge["action"] as! String
-            var currentChallengeTrackNumber = (currentActivityUserChallengeData["challengeTrackNumber"] as! String).toInt()!
+            let currentActivityCreatedTime = activity.createdAt
+            let currentActivityChallenge = activity["challenge"] as! PFObject
+            let currentActivityUserChallengeData = activity["userChallengeData"] as! PFObject
+            let currentActivityUser = activity["ownerUser"] as! PFUser
+            let currentAvatarString = currentActivityUser["avatar"] as! String
+            let currentAvatarColor = currentActivityUser["color"] as! String
+            let currentAction = currentActivityChallenge["action"] as! String
+            var currentChallengeTrackNumber = Int((currentActivityUserChallengeData["challengeTrackNumber"] as! String))!
             currentChallengeTrackNumber = currentChallengeTrackNumber - 1
-            var activityCreatedTimeLabel = currentActivityCreatedTime!.shortTimeAgoSinceNow()
+            let activityCreatedTimeLabel = currentActivityCreatedTime!.shortTimeAgoSinceNow()
             
             
             var currentActivityDictionary = ["timeLabel":activityCreatedTimeLabel, "avatarImageViewImageString":"\(currentAvatarString)-icon", "avatarImageViewBackgroundColorString":currentAvatarColor, "aliasLabel":currentActivityUser.username, "actionLabelText":currentAction, "currentActivityImageString":"", "currentNarrativeTitleString":"", "currentNarrativeContentString":"", "likeCountLabel":"", "commentCountLabel":"No comment", "liked":"no"]
@@ -546,7 +546,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
             
-            if contains(currentLikedAcitivitiesFoundIdStrings, activity.objectId!){
+            if currentLikedAcitivitiesFoundIdStrings.contains(activity.objectId!){
                 currentActivityDictionary.updateValue("yes", forKey: "liked")
             }
             if context == "old"{
@@ -569,7 +569,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func loadFollowerFollowing(){
-        var followingQuery = PFQuery(className: "FollowerFollowing")
+        let followingQuery = PFQuery(className: "FollowerFollowing")
         followingQuery.whereKey("ownerUser", equalTo: PFUser.currentUser()!)
 //        followingQuery.includeKey("followers")
 //        followingQuery.includeKey("followingUsers")
@@ -584,7 +584,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         self.currentUserFollowingId.append(user.objectId!)
                     }
                     
-                    var followingRequestQuery = PFQuery(className: "FollowerFollowing")
+                    let followingRequestQuery = PFQuery(className: "FollowerFollowing")
                     followingRequestQuery.whereKey("ownerUser", equalTo: self.user)
                     followingRequestQuery.findObjectsInBackgroundWithBlock{
                         (objects, error) -> Void in
@@ -593,7 +593,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                 for user in object["requestsFromUsers"] as! [PFUser]{
                                     self.followingRequestedId.append(user.objectId!)
                                 }
-                                println(self.followingRequestedId)
+                                print(self.followingRequestedId)
                                 self.followStatusChecked = true
                                 self.tableView.reloadData()
                             }
@@ -612,12 +612,12 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func followButtonTapped(sender:UITapGestureRecognizer){
-        var followButton = sender.view as! UIButton
+        let followButton = sender.view as! UIButton
         if followButton.titleLabel?.text == "Follow"{
-            println("Follow")
-            var userToFollow = self.user
+            print("Follow")
+            let userToFollow = self.user
             var currentUserFollowingRequested:[PFUser] = (PFUser.currentUser()!)["followingRequested"] as! [PFUser]
-            var userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
+//            let userToFollowFollowingRequestsFrom:[PFUser] = userToFollow["followingRequestsFrom"] as! [PFUser]
             currentUserFollowingRequested.append(userToFollow)
             PFUser.currentUser()!.fetchInBackgroundWithBlock{
                 (object, error) -> Void in
@@ -625,14 +625,14 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     (PFUser.currentUser()!)["followingRequested"] = currentUserFollowingRequested
                     (PFUser.currentUser()!).saveInBackgroundWithBlock{(succeeded, error) -> Void in
                         if error == nil{
-                            var queryFollowRequests = PFQuery(className:"FollowerFollowing")
+                            let queryFollowRequests = PFQuery(className:"FollowerFollowing")
                             queryFollowRequests.whereKey("ownerUser", equalTo: userToFollow)
                             queryFollowRequests.findObjectsInBackgroundWithBlock{
                                 (objects, error) -> Void in
                                 if error == nil {
                                     // The find succeeded.
                                     var followRequestsFrom = objects as! [PFObject]
-                                    var currentFollowerFollowingObject = followRequestsFrom[0] as PFObject
+                                    let currentFollowerFollowingObject = followRequestsFrom[0] as PFObject
                                     var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
                                     currentFollowRequestsFrom.append(PFUser.currentUser()!)
                                     currentFollowerFollowingObject["requestsFromUsers"] = currentFollowRequestsFrom
@@ -640,11 +640,11 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                         if error == nil{
                                             self.loadFollowerFollowing()
                                             if (self.parentViewController?.childViewControllers[0].isKindOfClass(PeopleGalleryViewController) != nil){
-                                                var peopleGallery = self.parentViewController?.childViewControllers[0] as! PeopleGalleryViewController
+                                                let peopleGallery = self.parentViewController?.childViewControllers[0] as! PeopleGalleryViewController
                                                 peopleGallery.loadPeople()
                                             }
                                             //                            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
-                                            var followRequestSentNotification = PFObject(className: "Notification")
+                                            let followRequestSentNotification = PFObject(className: "Notification")
                                             followRequestSentNotification["sender"] = PFUser.currentUser()
                                             followRequestSentNotification["receiver"] = userToFollow
                                             followRequestSentNotification["read"] = false
@@ -652,21 +652,21 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                             followRequestSentNotification.saveInBackgroundWithBlock{(succeeded, error) -> Void in
                                                 if error == nil{
                                                     // Send iOS Notification
-                                                    println("Follow request sent")
+                                                    print("Follow request sent")
                                                 }
                                             }
                                             
                                         }
                                         else{
                                             // Log details of the failure
-                                            NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                            NSLog("Error: %@ %@", error!, error!.userInfo)
                                         }
                                         
                                     }
                                 }
                                 else {
                                     // Log details of the failure
-                                    NSLog("Error: %@ %@", error!, error!.userInfo!)
+                                    NSLog("Error: %@ %@", error!, error!.userInfo)
                                 }
                             }
                         }
@@ -676,10 +676,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     
                 }
                 else if followButton.titleLabel?.text == "Unfollow"{
-                    println("Unfollow")
+                    print("Unfollow")
                 }
                 else if followButton.titleLabel?.text == "Requested"{
-                    println("Requested")
+                    print("Requested")
                 }
 
                 else{

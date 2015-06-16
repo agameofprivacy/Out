@@ -58,12 +58,12 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.navigationItem.title = self.resourceItem["name"] as? String
         
-        var shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareResource")
+        let shareButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareResource")
         self.navigationItem.rightBarButtonItem = shareButton
 
         
         self.tableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
-        self.tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.registerClass(ResourceDetailTableViewCell.self, forCellReuseIdentifier: "ResourceDetailTableViewCell")
         self.tableView.registerClass(EventTableViewCell.self, forCellReuseIdentifier: "EventTableViewCell")
         
@@ -74,22 +74,22 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.view.addSubview(self.tableView)
         
-        var viewsDictionary = ["tableView":self.tableView]
+        let viewsDictionary = ["tableView":self.tableView]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
         
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
 
-        var type = self.resourceItem["type"] as! String
-        var scale = self.resourceItem["scale"] as! String
-        var tags = self.resourceItem["tags"] as! [String]
-        var phoneNumber = self.resourceItem["phoneNumber"] as! String
-        var email = self.resourceItem["email"] as! String
-        var streetAddress = self.resourceItem["streetAddress"] as! String
-        var city = self.resourceItem["city"] as! String
-        var state = self.resourceItem["state"] as! String
+        let type = self.resourceItem["type"] as! String
+        let scale = self.resourceItem["scale"] as! String
+        let tags = self.resourceItem["tags"] as! [String]
+        let phoneNumber = self.resourceItem["phoneNumber"] as! String
+        let email = self.resourceItem["email"] as! String
+        let streetAddress = self.resourceItem["streetAddress"] as! String
+        let city = self.resourceItem["city"] as! String
+        let state = self.resourceItem["state"] as! String
         
         self.aboutArray.append(["Type", type])
         self.aboutArray.append(["Scale", scale])
@@ -118,20 +118,20 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
         case 0:
             return 1
         default:
-            var numberOfRows = self.aboutArray.count + self.events.count + 2
+            let numberOfRows = self.aboutArray.count + self.events.count + 2
             return numberOfRows
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath == NSIndexPath(forRow: 0, inSection: 0){
-            var type = self.resourceItem["type"] as! String
-            var basicStatsString = type + " · " + (self.resourceItem["scale"] as! String)
+            let type = self.resourceItem["type"] as! String
+            let basicStatsString = type + " · " + (self.resourceItem["scale"] as! String)
             //            var advanceStatsString = (self.user["ethnicity"] as! String) + " · " + (self.user["religion"] as! String) + " · " + (self.user["city"] as! String) + " " + (self.user["state"] as! String)
             
-            var advanceStatsString = self.resourceItem["description"] as! String
+            let advanceStatsString = self.resourceItem["description"] as! String
             
-            var cell = tableView.dequeueReusableCellWithIdentifier("ResourceDetailTableViewCell") as! ResourceDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("ResourceDetailTableViewCell") as! ResourceDetailTableViewCell
             
             
             
@@ -142,21 +142,21 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
         else if indexPath.section == 1{
             if indexPath.row < self.aboutArray.count{
-                var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
+                let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
                 cell.textLabel!.text = self.aboutArray[indexPath.row][0]
                 cell.detailTextLabel!.text = self.aboutArray[indexPath.row][1]
                 return cell
             }
             else if indexPath.row < self.aboutArray.count + self.events.count && self.events.count > 0{
-                var cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
+                let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Value1")
                 cell.textLabel!.text = "Event"
                 cell.detailTextLabel!.text = "Event Value"
                 return cell
 
             }
             else{
-                var name = self.resourceItem["name"] as! String
-                var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
+                let name = self.resourceItem["name"] as! String
+                let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
                 if indexPath.row == self.tableView.numberOfRowsInSection(1) - 2{
                     cell.textLabel!.text = "Activities"
                     cell.detailTextLabel!.text = "View activities related to \(name)"
@@ -169,34 +169,34 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         else{
-            var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
+            let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Subtitle")
             return cell
         }
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1{
-            var segmentedControlView = UIView()
+            let segmentedControlView = UIView()
             segmentedControlView.backgroundColor = UIColor.whiteColor()
             
-            var segmentedControl = UISegmentedControl(items: ["About","Events", "More"])
-            segmentedControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let segmentedControl = UISegmentedControl(items: ["About","Events", "More"])
+            segmentedControl.translatesAutoresizingMaskIntoConstraints = false
             segmentedControl.tintColor = UIColor.blackColor()
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
             segmentedControlView.addSubview(segmentedControl)
             
-            var segmentedControlViewSeparator = UIView(frame: CGRectZero)
-            segmentedControlViewSeparator.setTranslatesAutoresizingMaskIntoConstraints(false)
+            let segmentedControlViewSeparator = UIView(frame: CGRectZero)
+            segmentedControlViewSeparator.translatesAutoresizingMaskIntoConstraints = false
             segmentedControlViewSeparator.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
             segmentedControlView.addSubview(segmentedControlViewSeparator)
             
-            var metricsDictionary = ["sideMargin":7.5]
-            var viewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
+            let metricsDictionary = ["sideMargin":7.5]
+            let viewsDictionary = ["segmentedControl":segmentedControl, "segmentedControlViewSeparator":segmentedControlViewSeparator]
             
-            var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-            var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[segmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-            var separatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+            let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-8-[segmentedControl(28)]-8-[segmentedControlViewSeparator(0.5)]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+            let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideMargin-[segmentedControl]-sideMargin-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+            let separatorHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[segmentedControlViewSeparator]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
             
             segmentedControlView.addConstraints(verticalConstraints)
             segmentedControlView.addConstraints(horizontalConstraints)
@@ -230,13 +230,13 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
     func valueChanged(segment:UISegmentedControl){
         switch segment.selectedSegmentIndex{
         case 0:
-            println("About")
+            print("About")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         case 1:
-            println("Activities")
+            print("Activities")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.aboutArray.count, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         default:
-            println("More")
+            print("More")
             self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.tableView.numberOfRowsInSection(1) - 1, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         }
     }
@@ -308,7 +308,7 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
 //        var logoViewHorizontalConstraint = NSLayoutConstraint(item: self.logoImageView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0)
 //        self.scrollView.addConstraint(logoViewHorizontalConstraint)
 //        
-//        var mapHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mapView]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
+//        var mapHorizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[mapView]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
 //
 //        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[logoImageView]-30-[mapView(200)][tableView(300)]|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
 //        
@@ -336,11 +336,11 @@ class ResourceDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func shareResource(){
-        println("share")
+        print("share")
     }
 
     func viewMap(){
-        println("view map")
+        print("view map")
     }
     
 }

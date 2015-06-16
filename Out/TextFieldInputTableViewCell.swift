@@ -33,24 +33,24 @@ class TextFieldInputTableViewCell: UITableViewCell, CollectStepData {
         
         
         self.textField = UITextField(frame: CGRectZero)
-        self.textField.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.textField.translatesAutoresizingMaskIntoConstraints = false
         self.textField.textAlignment = NSTextAlignment.Left
         self.textField.font = valueFont?.fontWithSize(fontSize)
         self.textField.placeholder = self.placeholderText
         contentView.addSubview(self.textField)
         
-        var viewsDictionary = ["textField":self.textField]
-        var metricsDictionary = ["sideEdgeMargin":8]
+        let viewsDictionary = ["textField":self.textField]
+        let metricsDictionary = ["sideEdgeMargin":8]
         
-        var horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideEdgeMargin-[textField]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-sideEdgeMargin-[textField]-sideEdgeMargin-|", options: NSLayoutFormatOptions.AlignAllCenterY, metrics: metricsDictionary, views: viewsDictionary)
         
-        var verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-18-[textField]-18-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-18-[textField]-18-|", options: NSLayoutFormatOptions.AlignAllLeft, metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)
     }
     func collectData() -> [String : String] {
-        self.userDataDictionary = [self.key:self.textField.text]
+        self.userDataDictionary = [self.key:self.textField.text!]
         return userDataDictionary
     }
     

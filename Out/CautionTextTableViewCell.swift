@@ -31,7 +31,7 @@ class CautionTextTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.None
 
         self.cautionTextLabel = UILabel(frame: CGRectZero)
-        self.cautionTextLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.cautionTextLabel.translatesAutoresizingMaskIntoConstraints = false
         self.cautionTextLabel.font = titleFont?.fontWithSize(16.0)
         self.cautionTextLabel.numberOfLines = 0
         self.cautionTextLabel.textAlignment = NSTextAlignment.Left
@@ -41,11 +41,11 @@ class CautionTextTableViewCell: UITableViewCell {
         }
         contentView.addSubview(self.cautionTextLabel)
         
-        var viewsDictionary = ["cautionTextLabel":self.cautionTextLabel]
-        var metricsDictionary = ["topMargin":topMargin, "bottomMargin":bottomMargin]
+        let viewsDictionary = ["cautionTextLabel":self.cautionTextLabel]
+        let metricsDictionary = ["topMargin":topMargin, "bottomMargin":bottomMargin]
         
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[cautionTextLabel]-0-|", options: NSLayoutFormatOptions(0), metrics: metricsDictionary, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[cautionTextLabel]-bottomMargin-|", options: NSLayoutFormatOptions.AlignAllLeft | NSLayoutFormatOptions.AlignAllRight, metrics: metricsDictionary, views: viewsDictionary)
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[cautionTextLabel]-0-|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDictionary, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[cautionTextLabel]-bottomMargin-|", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDictionary, views: viewsDictionary)
         
         contentView.addConstraints(horizontalConstraints)
         contentView.addConstraints(verticalConstraints)

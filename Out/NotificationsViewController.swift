@@ -56,13 +56,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         // UINavigationBar init and layout
         self.navigationItem.title = "Notifications"
-        var closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
+        let closeButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "closeButtonTapped")
         closeButton.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem = closeButton
         
         
         self.notificationsTableView = TPKeyboardAvoidingTableView(frame: CGRectZero)
-        self.notificationsTableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.notificationsTableView.translatesAutoresizingMaskIntoConstraints = false
         self.notificationsTableView.registerClass(NotificationTableViewCell.self, forCellReuseIdentifier: "notificationCell")
         self.notificationsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.notificationsTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -73,9 +73,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         self.notificationsTableView.estimatedRowHeight = 100
         self.view.addSubview(self.notificationsTableView)
         
-        var viewsDictionary = ["notificationsTableView":self.notificationsTableView]
-        var horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[notificationsTableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        var verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[notificationsTableView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
+        let viewsDictionary = ["notificationsTableView":self.notificationsTableView]
+        let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[notificationsTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[notificationsTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
 //        loadAdditionalNotifications()
@@ -111,7 +111,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath == NSIndexPath(forRow: self.readNotifications.count, inSection: 1){
-            var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
+            let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMore")
             if !noMoreActivities{
                 cell.textLabel?.text = "loading more notifications"
             }
@@ -126,7 +126,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         }
         
-        var cell:NotificationTableViewCell = self.notificationsTableView.dequeueReusableCellWithIdentifier("notificationCell") as! NotificationTableViewCell
+        let cell:NotificationTableViewCell = self.notificationsTableView.dequeueReusableCellWithIdentifier("notificationCell") as! NotificationTableViewCell
         var notification:PFObject
 
         if (indexPath.section == 0){
@@ -136,17 +136,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             notification = self.readNotifications[indexPath.row] as PFObject
         }
         
-        var sender = notification["sender"] as! PFUser
-        var receiver = notification["receiver"] as! PFUser
+        let sender = notification["sender"] as! PFUser
+//        let receiver = notification["receiver"] as! PFUser
 
-        var notificationCreatedTime = notification.createdAt!
-        var notificationTimeLabel = notificationCreatedTime.timeAgoSinceNow()
-        var notificationType = notification["type"] as! String
+        let notificationCreatedTime = notification.createdAt!
+        let notificationTimeLabel = notificationCreatedTime.timeAgoSinceNow()
+        let notificationType = notification["type"] as! String
 
         var notificationString:String = ""
         var challengeTitleString:String = ""
         if notificationType == "comment" || notificationType == "like"{
-            var challenge = (notification["activity"] as! PFObject)["challenge"] as! PFObject
+            let challenge = (notification["activity"] as! PFObject)["challenge"] as! PFObject
             challengeTitleString = challenge["title"] as! String
             var narrativeActionString:String
             if notificationType == "comment"{
@@ -167,8 +167,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             notificationString = ""
         }
         
-        var notificationTextViewAttributedString = NSMutableAttributedString(string: notificationString)
-        var textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
+        let notificationTextViewAttributedString = NSMutableAttributedString(string: notificationString)
+        let textViewParagraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle()
         textViewParagraphStyle.lineSpacing = 0
 
 //        notificationTextViewAttributedString.addAttribute(NSParagraphStyleAttributeName, value: textViewParagraphStyle, range: (notificationString as NSString).rangeOfString(notificationString))
@@ -219,10 +219,10 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0{
-            println("View notified activity: \(indexPath.row)")
+            print("View notified activity: \(indexPath.row)")
         }
         else{
-            println("View notified activity: \(indexPath.row)")
+            print("View notified activity: \(indexPath.row)")
         }
     }
         
@@ -252,7 +252,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func loadAdditionalNotifications(){
-        var notificationQuery = PFQuery(className: "Notification")
+        let notificationQuery = PFQuery(className: "Notification")
         notificationQuery.whereKey("receiver", equalTo: PFUser.currentUser()!)
         notificationQuery.whereKey("read", equalTo: true)
         notificationQuery.includeKey("sender")
@@ -281,7 +281,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
             else{
-                println("didn't find any notifications")
+                print("didn't find any notifications")
             }
         }
     }
