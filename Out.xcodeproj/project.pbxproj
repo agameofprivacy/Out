@@ -312,6 +312,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2CEAD054A7F345A23E45A47 /* Pods.framework in Frameworks */,
 				2C5DC8EC1AE9FF950085C2EA /* Social.framework in Frameworks */,
 				2C5DC8EA1AE9FF8F0085C2EA /* Accounts.framework in Frameworks */,
 				2C4FE2371AE9FE900009B1A6 /* libsqlite3.dylib in Frameworks */,
@@ -329,7 +330,6 @@
 				2C1C23AE19E87B62006975DA /* CoreGraphics.framework in Frameworks */,
 				2C1C23AC19E87B5B006975DA /* CFNetwork.framework in Frameworks */,
 				2C1C23AA19E87B54006975DA /* AudioToolbox.framework in Frameworks */,
-				A2CEAD054A7F345A23E45A47 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1087,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1116,6 +1117,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
