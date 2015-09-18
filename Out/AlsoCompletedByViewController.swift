@@ -60,6 +60,8 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
 
         
         self.tableView = TPKeyboardAvoidingTableView(frame: self.view.frame, style: UITableViewStyle.Plain)
+        self.tableView.contentInset.top = 64
+        self.tableView.contentInset.bottom = 49.5
 //        self.tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -108,7 +110,7 @@ class AlsoCompletedByViewController: UIViewController, UITableViewDelegate, UITa
             (objects, error) -> Void in
             if error == nil{
                 var newCompletedByPeople:[PFUser] = []
-                for object in objects as! [PFObject]{
+                for object in objects!{
                     newCompletedByPeople.append(object["username"] as! PFUser)
                 }
                 if newCompletedByPeople != self.completedByPeople{

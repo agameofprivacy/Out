@@ -15,6 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SLKInputAccessoryView.h"
 
 @class SLKTextViewController;
 @class SLKTextView;
@@ -22,7 +23,13 @@
 typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
     SLKCounterStyleNone,
     SLKCounterStyleSplit,
-    SLKCounterStyleCountdown
+    SLKCounterStyleCountdown,
+    SLKCounterStyleCountdownReversed
+};
+
+typedef NS_ENUM(NSUInteger, SLKCounterPosition) {
+    SLKCounterPositionTop,
+    SLKCounterPositionBottom
 };
 
 /** @name A custom tool bar encapsulating messaging controls. */
@@ -39,6 +46,9 @@ typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
  */
 @property (nonatomic, strong) SLKTextView *textView;
 
+/** The custom input accessory view, used as empty achor view to detect the keyboard frame. */
+@property (nonatomic, strong) SLKInputAccessoryView *inputAccessoryView;
+
 /** The left action button action. */
 @property (nonatomic, strong) UIButton *leftButton;
 
@@ -50,6 +60,12 @@ typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
 
 /** The inner padding to use when laying out content in the view. Default is {5, 8, 5, 8}. */
 @property (nonatomic, assign) UIEdgeInsets contentInset;
+
+/** The minimum height based on the intrinsic content size's. */
+@property (nonatomic, readonly) CGFloat minimumInputbarHeight;
+
+/** The most appropriate height calculated based on the amount of lines of text and other factors. */
+@property (nonatomic, readonly) CGFloat appropriateHeight;
 
 
 #pragma mark - Initialization
@@ -78,10 +94,10 @@ typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
 @property (nonatomic, strong) UILabel *editorTitle;
 
 /** The 'cancel' button displayed left in the accessoryView. */
-@property (nonatomic, strong) UIButton *editortLeftButton;
+@property (nonatomic, strong) UIButton *editorLeftButton;
 
 /** The 'accept' button displayed right in the accessoryView. */
-@property (nonatomic, strong) UIButton *editortRightButton;
+@property (nonatomic, strong) UIButton *editorRightButton;
 
 /** The accessory view's maximum height. Default is 38 pts. */
 @property (nonatomic, assign) CGFloat editorContentViewHeight;
@@ -89,7 +105,7 @@ typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
 /** A Boolean value indicating whether the control is in edit mode. */
 @property (nonatomic, getter = isEditing) BOOL editing;
 
-/** 
+/**
  Verifies if the text can be edited.
  
  @param text The text to be edited.
@@ -113,13 +129,25 @@ typedef NS_ENUM(NSUInteger, SLKCounterStyle) {
 /// @name Text Counting
 ///------------------------------------------------
 
+/** The label used to display the character counts. */
+@property (nonatomic, readonly) UILabel *charCountLabel;
+
 /** The maximum character count allowed. If larger than 0, a character count label will be displayed on top of the right button. Default is 0, which means limitless.*/
 @property (nonatomic, readwrite) NSUInteger maxCharCount;
 
 /** The character counter formatting. Ignored if maxCharCount is 0. Default is None. */
 @property (nonatomic, assign) SLKCounterStyle counterStyle;
 
+/** The character counter layout style. Ignored if maxCharCount is 0. Default is SLKCounterPositionTop. */
+@property (nonatomic, assign) SLKCounterPosition counterPosition;
+
 /** YES if the maxmimum character count has been exceeded. */
 @property (nonatomic, readonly) BOOL limitExceeded;
+
+/** The normal color used for character counter label. Default is lightGrayColor. */
+@property (nonatomic, strong, readwrite) UIColor *charCountLabelNormalColor;
+
+/** The color used for character counter label when it has exceeded the limit. Default is redColor. */
+@property (nonatomic, strong, readwrite) UIColor *charCountLabelWarningColor;
 
 @end

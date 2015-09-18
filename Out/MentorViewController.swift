@@ -19,7 +19,7 @@ class MentorViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Mentor"
         let reportButton = UIBarButtonItem(title: "Report", style: UIBarButtonItemStyle.Plain, target: self, action: "reportButtonTapped")
-        reportButton.setTitleTextAttributes(NSDictionary(objectsAndKeys: NSFontAttributeName, UIFont(name: "HelveticaNeue-Medium", size: 18.0)!) as? [String : AnyObject], forState: UIControlState.Normal)
+        reportButton.setTitleTextAttributes(NSDictionary(object: NSFontAttributeName, forKey: UIFont(name: "HelveticaNeue-Medium", size: 18.0)!) as? [String : AnyObject], forState: UIControlState.Normal)
         reportButton.tintColor = UIColor.redColor()
         self.navigationItem.rightBarButtonItem = reportButton
 

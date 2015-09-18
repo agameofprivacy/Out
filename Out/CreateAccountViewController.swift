@@ -17,7 +17,7 @@ class CreateAccountViewController: XLFormViewController {
     
     var sexualOrientationArray = ["Asexual", "Bisexual", "Demisexual", "Gay", "Gray-Asexual", "Lesbian", "Pansexual", "Polysexual", "Pomosexual", "Queer", "Straight", "No label", "Other"]
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -41,7 +41,7 @@ class CreateAccountViewController: XLFormViewController {
         var row: XLFormRowDescriptor
         
         // Alias & password section
-        section = XLFormSectionDescriptor.formSectionWithTitle("Login (Required)") as! XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Login (Required)") 
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "Alias", rowType: XLFormRowDescriptorTypeAccount, title: "Alias")
@@ -69,21 +69,25 @@ class CreateAccountViewController: XLFormViewController {
         section.addFormRow(row)
         
         // Background section
-        section = XLFormSectionDescriptor.formSectionWithTitle("Background (Optional)") as! XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Background (Optional)") 
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
         row.selectorOptions = []
+        let genderOptions:NSMutableArray = []
         for gender in self.genderArray{
-            row.selectorOptions.append(XLFormOptionsObject(value: gender, displayText: gender))
+            genderOptions.addObject(XLFormOptionsObject(value: gender, displayText: gender))
         }
+        row.selectorOptions = genderOptions as [AnyObject]
         section.addFormRow(row)
 
         row = XLFormRowDescriptor(tag: "Sexual Orientation", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Sexual Orientation")
         row.selectorOptions = []
+        let sexualOrientationOptions:NSMutableArray = []
         for sexualOrientation in self.sexualOrientationArray{
-            row.selectorOptions.append(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
+            sexualOrientationOptions.addObject(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
         }
+        row.selectorOptions = genderOptions as [AnyObject]
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Avatar", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Avatar")

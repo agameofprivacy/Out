@@ -29,7 +29,10 @@
 @property (nonatomic, strong) NSLayoutConstraint *bottomMarginWC;
 @property (nonatomic, strong) NSLayoutConstraint *rightButtonWC;
 @property (nonatomic, strong) NSLayoutConstraint *rightMarginWC;
+@property (nonatomic, strong) NSLayoutConstraint *rightButtonTopMarginC;
+@property (nonatomic, strong) NSLayoutConstraint *rightButtonBottomMarginC;
 @property (nonatomic, strong) NSLayoutConstraint *editorContentViewHC;
+@property (nonatomic, strong) NSArray *charCountLabelVCs;
 
 @property (nonatomic, strong) UILabel *charCountLabel;
 
@@ -68,23 +71,29 @@
 
 - (void)slk_commonInit
 {
+    self.charCountLabelNormalColor = [UIColor lightGrayColor];
+    self.charCountLabelWarningColor = [UIColor redColor];
+    
     self.autoHideRightButton = YES;
     self.editorContentViewHeight = 38.0;
     self.contentInset = UIEdgeInsetsMake(5.0, 8.0, 5.0, 8.0);
-
+    
     [self addSubview:self.editorContentView];
     [self addSubview:self.leftButton];
     [self addSubview:self.rightButton];
     [self addSubview:self.textView];
     [self addSubview:self.charCountLabel];
-
+    
     [self slk_setupViewConstraints];
     [self slk_updateConstraintConstants];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeTextViewText:) name:UITextViewTextDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeTextViewContentSize:) name:SLKTextViewContentSizeDidChangeNotification object:nil];
+    self.counterStyle = SLKCounterStyleNone;
+    self.counterPosition = SLKCounterPositionTop;
+    
+    [self slk_registerNotifications];
     
     [self.leftButton.imageView addObserver:self forKeyPath:NSStringFromSelector(@selector(image)) options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    [self.rightButton.titleLabel addObserver:self forKeyPath:NSStringFromSelector(@selector(font)) options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
 }
 
 
@@ -102,7 +111,7 @@
 
 - (CGSize)intrinsicContentSize
 {
-    return CGSizeMake(UIViewNoIntrinsicMetric, 44.0);
+    return CGSizeMake(UIViewNoIntrinsicMetric, [self minimumInputbarHeight]);
 }
 
 + (BOOL)requiresConstraintBasedLayout
@@ -115,15 +124,14 @@
 
 - (SLKTextView *)textView
 {
-    if (!_textView)
-    {
+    if (!_textView) {
         Class class = self.textViewClass ? : [SLKTextView class];
         
-        _textView = [class new];
+        _textView = [[class alloc] init];
         _textView.translatesAutoresizingMaskIntoConstraints = NO;
         _textView.font = [UIFont systemFontOfSize:15.0];
         _textView.maxNumberOfLines = [self slk_defaultNumberOfLines];
-        
+
         _textView.typingSuggestionEnabled = YES;
         _textView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         _textView.keyboardType = UIKeyboardTypeTwitter;
@@ -134,21 +142,25 @@
         _textView.layer.cornerRadius = 5.0;
         _textView.layer.borderWidth = 0.5;
         _textView.layer.borderColor =  [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:205.0/255.0 alpha:1.0].CGColor;
-        
-        // Adds an aditional action to a private gesture to detect when the magnifying glass becomes visible
-        for (UIGestureRecognizer *gesture in _textView.gestureRecognizers) {
-            if ([gesture isKindOfClass:NSClassFromString(@"UIVariableDelayLoupeGesture")]) {
-                [gesture addTarget:self action:@selector(slk_willShowLoupe:)];
-            }
-        }
     }
     return _textView;
 }
 
+- (SLKInputAccessoryView *)inputAccessoryView
+{
+    if (!_inputAccessoryView)
+    {
+        _inputAccessoryView = [[SLKInputAccessoryView alloc] initWithFrame:CGRectZero];
+        _inputAccessoryView.backgroundColor = [UIColor clearColor];
+        _inputAccessoryView.userInteractionEnabled = NO;
+    }
+    
+    return _inputAccessoryView;
+}
+
 - (UIButton *)leftButton
 {
-    if (!_leftButton)
-    {
+    if (!_leftButton) {
         _leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _leftButton.translatesAutoresizingMaskIntoConstraints = NO;
         _leftButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
@@ -158,54 +170,35 @@
 
 - (UIButton *)rightButton
 {
-    if (!_rightButton)
-    {
+    if (!_rightButton) {
         _rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _rightButton.translatesAutoresizingMaskIntoConstraints = NO;
         _rightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
         _rightButton.enabled = NO;
         
-        [_rightButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
+        NSString *title = NSLocalizedString(@"Send", nil);
+        
+        [_rightButton setTitle:title forState:UIControlStateNormal];
     }
     return _rightButton;
 }
 
 - (UIView *)editorContentView
 {
-    if (!_editorContentView)
-    {
+    if (!_editorContentView) {
         _editorContentView = [UIView new];
         _editorContentView.translatesAutoresizingMaskIntoConstraints = NO;
         _editorContentView.backgroundColor = self.backgroundColor;
         _editorContentView.clipsToBounds = YES;
         _editorContentView.hidden = YES;
         
-        _editorTitle = [UILabel new];
-        _editorTitle.translatesAutoresizingMaskIntoConstraints = NO;
-        _editorTitle.text = NSLocalizedString(@"Editing Message", nil);
-        _editorTitle.textAlignment = NSTextAlignmentCenter;
-        _editorTitle.backgroundColor = [UIColor clearColor];
-        _editorTitle.font = [UIFont boldSystemFontOfSize:15.0];
         [_editorContentView addSubview:self.editorTitle];
-        
-        _editortLeftButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _editortLeftButton.translatesAutoresizingMaskIntoConstraints = NO;
-        _editortLeftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        _editortLeftButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [_editortLeftButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
-        [_editorContentView addSubview:self.editortLeftButton];
-        
-        _editortRightButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _editortRightButton.translatesAutoresizingMaskIntoConstraints = NO;
-        _editortRightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _editortRightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
-        _editortRightButton.enabled = NO;
-        [_editortRightButton setTitle:NSLocalizedString(@"Save", nil) forState:UIControlStateNormal];
-        [_editorContentView addSubview:self.editortRightButton];
+        [_editorContentView addSubview:self.editorLeftButton];
+        [_editorContentView addSubview:self.editorRightButton];
         
         NSDictionary *views = @{@"label": self.editorTitle,
-                                @"leftButton": self.editortLeftButton,
-                                @"rightButton": self.editortRightButton,
+                                @"leftButton": self.editorLeftButton,
+                                @"rightButton": self.editorRightButton,
                                 };
         
         NSDictionary *metrics = @{@"left" : @(self.contentInset.left),
@@ -220,10 +213,56 @@
     return _editorContentView;
 }
 
+- (UILabel *)editorTitle
+{
+    if (!_editorTitle) {
+        _editorTitle = [UILabel new];
+        _editorTitle.translatesAutoresizingMaskIntoConstraints = NO;
+        _editorTitle.textAlignment = NSTextAlignmentCenter;
+        _editorTitle.backgroundColor = [UIColor clearColor];
+        _editorTitle.font = [UIFont boldSystemFontOfSize:15.0];
+        
+        NSString *title = NSLocalizedString(@"Editing Message", nil);
+        
+        _editorTitle.text = title;
+    }
+    return _editorTitle;
+}
+
+- (UIButton *)editorLeftButton
+{
+    if (!_editorLeftButton) {
+        _editorLeftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _editorLeftButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _editorLeftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _editorLeftButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        
+        NSString *title = NSLocalizedString(@"Cancel", nil);
+        
+        [_editorLeftButton setTitle:title forState:UIControlStateNormal];
+    }
+    return _editorLeftButton;
+}
+
+- (UIButton *)editorRightButton
+{
+    if (!_editorRightButton) {
+        _editorRightButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _editorRightButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _editorRightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _editorRightButton.titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+        _editorRightButton.enabled = NO;
+        
+        NSString *title = NSLocalizedString(@"Save", nil);
+        
+        [_editorRightButton setTitle:title forState:UIControlStateNormal];
+    }
+    return _editorRightButton;
+}
+
 - (UILabel *)charCountLabel
 {
-    if (!_charCountLabel)
-    {
+    if (!_charCountLabel) {
         _charCountLabel = [UILabel new];
         _charCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _charCountLabel.backgroundColor = [UIColor clearColor];
@@ -235,20 +274,67 @@
     return _charCountLabel;
 }
 
-- (NSUInteger)slk_defaultNumberOfLines
+- (BOOL)isViewVisible
 {
-    if (SLK_IS_IPAD) {
-        return 8;
+    SEL selector = NSSelectorFromString(@"isViewVisible");
+    
+    if ([self.controller respondsToSelector:selector]) {
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        BOOL visible = (BOOL)[self.controller performSelector:selector];
+#pragma clang diagnostic pop
+        
+        return visible;
     }
-    if (SLK_IS_IPHONE4) {
-        return 4;
-    }
-    else {
-        return 6;
-    }
+    return NO;
 }
 
-- (BOOL)slk_limitExceeded
+- (CGFloat)minimumInputbarHeight
+{
+    CGFloat minimumTextViewHeight = self.textView.intrinsicContentSize.height;
+    minimumTextViewHeight += self.contentInset.top + self.contentInset.bottom;
+    
+    return minimumTextViewHeight;
+}
+
+- (CGFloat)appropriateHeight
+{
+    CGFloat height = 0.0;
+    CGFloat minimumHeight = [self minimumInputbarHeight];
+    
+    if (self.textView.numberOfLines == 1) {
+        height = minimumHeight;
+    }
+    else if (self.textView.numberOfLines < self.textView.maxNumberOfLines) {
+        height = [self slk_inputBarHeightForLines:self.textView.numberOfLines];
+    }
+    else {
+        height = [self slk_inputBarHeightForLines:self.textView.maxNumberOfLines];
+    }
+    
+    if (height < minimumHeight) {
+        height = minimumHeight;
+    }
+    
+    if (self.isEditing) {
+        height += self.editorContentViewHeight;
+    }
+    
+    return roundf(height);
+}
+
+- (CGFloat)slk_inputBarHeightForLines:(NSUInteger)numberOfLines
+{
+    CGFloat height = self.textView.intrinsicContentSize.height;
+    height -= self.textView.font.lineHeight;
+    height += roundf(self.textView.font.lineHeight*numberOfLines);
+    height += self.contentInset.top+self.contentInset.bottom;
+    
+    return height;
+}
+
+- (BOOL)limitExceeded
 {
     NSString *text = [self.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -278,24 +364,20 @@
             return 0.0;
         }
     }
-    
     return self.contentInset.right;
 }
 
-- (BOOL)isViewVisible
+- (NSUInteger)slk_defaultNumberOfLines
 {
-    SEL selector = NSSelectorFromString(@"isViewVisible");
-    
-    if ([self.controller respondsToSelector:selector]) {
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        BOOL visible = (BOOL)[self.controller performSelector:selector];
-#pragma clang diagnostic pop
-        
-        return visible;
+    if (SLK_IS_IPAD) {
+        return 8;
     }
-    return NO;
+    if (SLK_IS_IPHONE4) {
+        return 4;
+    }
+    else {
+        return 6;
+    }
 }
 
 
@@ -304,7 +386,6 @@
 - (void)setBackgroundColor:(UIColor *)color
 {
     self.barTintColor = color;
-    self.textView.inputAccessoryView.backgroundColor = color;
     self.editorContentView.backgroundColor = color;
 }
 
@@ -352,21 +433,54 @@
     _editorContentView.hidden = !editing;
 }
 
+- (void)setCounterPosition:(SLKCounterPosition)counterPosition
+{
+    if (self.counterPosition == counterPosition && self.charCountLabelVCs) {
+        return;
+    }
+    
+    // Clears the previous constraints
+    if (_charCountLabelVCs.count > 0) {
+        [self removeConstraints:_charCountLabelVCs];
+        _charCountLabelVCs = nil;
+    }
+    
+    _counterPosition = counterPosition;
+    
+    NSDictionary *views = @{@"rightButton": self.rightButton,
+                            @"charCountLabel": self.charCountLabel
+                            };
+    
+    NSDictionary *metrics = @{@"top" : @(self.contentInset.top),
+                              @"bottom" : @(-self.contentInset.bottom/2.0)
+                              };
+    
+    // Constraints are different depending of the counter's position type
+    if (counterPosition == SLKCounterPositionBottom) {
+        _charCountLabelVCs = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[charCountLabel]-(bottom)-[rightButton]" options:0 metrics:metrics views:views];
+    }
+    else {
+        _charCountLabelVCs = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(top@750)-[charCountLabel]-(>=0)-|" options:0 metrics:metrics views:views];
+    }
+    
+    [self addConstraints:self.charCountLabelVCs];
+}
+
 
 #pragma mark - Text Editing
 
 - (BOOL)canEditText:(NSString *)text
 {
-    if (self.isEditing && [self.textView.text isEqualToString:text]) {
+    if ((self.isEditing && [self.textView.text isEqualToString:text]) || self.controller.isTextInputbarHidden) {
         return NO;
     }
-
+    
     return YES;
 }
 
 - (void)beginTextEditing
 {
-    if (self.isEditing) {
+    if (self.isEditing || self.controller.isTextInputbarHidden) {
         return;
     }
     
@@ -381,7 +495,7 @@
 
 - (void)endTextEdition
 {
-    if (!self.isEditing) {
+    if (!self.isEditing || self.controller.isTextInputbarHidden) {
         return;
     }
     
@@ -406,29 +520,13 @@
     if (self.counterStyle == SLKCounterStyleCountdown) {
         counter = [NSString stringWithFormat:@"%ld", (long)(text.length - self.maxCharCount)];
     }
+    if (self.counterStyle == SLKCounterStyleCountdownReversed)
+    {
+        counter = [NSString stringWithFormat:@"%ld", (long)(self.maxCharCount - text.length)];
+    }
     
     self.charCountLabel.text = counter;
-    self.charCountLabel.textColor = [self slk_limitExceeded] ?  [UIColor redColor] : [UIColor lightGrayColor];
-}
-
-
-#pragma mark - Magnifying Glass handling
-
-- (void)slk_willShowLoupe:(UIGestureRecognizer *)gesture
-{
-    if (gesture.state == UIGestureRecognizerStateChanged) {
-        self.textView.loupeVisible = YES;
-    }
-    else {
-        self.textView.loupeVisible = NO;
-    }
-    
-    // We still need to notify a selection change in the textview after the magnifying class is dismissed
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        if (self.textView.delegate && [self.textView.delegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
-            [self.textView.delegate textViewDidChangeSelection:self.textView];
-        }
-    }
+    self.charCountLabel.textColor = [self limitExceeded] ? self.charCountLabelWarningColor : self.charCountLabelNormalColor;
 }
 
 
@@ -484,18 +582,24 @@
     }
 }
 
+- (void)slk_didChangeContentSizeCategory:(NSNotification *)notification
+{
+    if (!self.textView.isDynamicTypeEnabled) {
+        return;
+    }
+    
+    [self layoutIfNeeded];
+}
+
 
 #pragma mark - View Auto-Layout
 
 - (void)slk_setupViewConstraints
 {
-    UIImage *leftButtonImg = [self.leftButton imageForState:UIControlStateNormal];
-    
     [self.rightButton sizeToFit];
     
-    CGFloat leftVerMargin = (self.intrinsicContentSize.height - leftButtonImg.size.height) / 2.0;
     CGFloat rightVerMargin = (self.intrinsicContentSize.height - CGRectGetHeight(self.rightButton.frame)) / 2.0;
-
+    
     NSDictionary *views = @{@"textView": self.textView,
                             @"leftButton": self.leftButton,
                             @"rightButton": self.rightButton,
@@ -507,18 +611,14 @@
                               @"bottom" : @(self.contentInset.bottom),
                               @"left" : @(self.contentInset.left),
                               @"right" : @(self.contentInset.right),
-                              @"leftVerMargin" : @(leftVerMargin),
                               @"rightVerMargin" : @(rightVerMargin),
-                              @"minTextViewHeight" : @(self.textView.intrinsicContentSize.height),
                               };
-
+    
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left)-[leftButton(0)]-(<=left)-[textView]-(right)-[rightButton(0)]-(right)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[leftButton(0)]-(0@750)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=rightVerMargin)-[rightButton]-(<=rightVerMargin)-|" options:0 metrics:metrics views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(<=top)-[charCountLabel]-(>=0)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left@250)-[charCountLabel(<=50@1000)]-(right@750)-|" options:0 metrics:metrics views:views]];
-
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView(0)]-(<=top)-[textView(minTextViewHeight@250)]-(bottom)-|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[contentView(0)]-(<=top)-[textView(0@999)]-(bottom)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:metrics views:views]];
     
     self.editorContentViewHC = [self slk_constraintForAttribute:NSLayoutAttributeHeight firstItem:self.editorContentView secondItem:nil];
@@ -528,15 +628,18 @@
     
     self.leftMarginWC = [self slk_constraintsForAttribute:NSLayoutAttributeLeading][0];
     self.bottomMarginWC = [self slk_constraintForAttribute:NSLayoutAttributeBottom firstItem:self secondItem:self.leftButton];
-
+    
     self.rightButtonWC = [self slk_constraintForAttribute:NSLayoutAttributeWidth firstItem:self.rightButton secondItem:nil];
     self.rightMarginWC = [self slk_constraintsForAttribute:NSLayoutAttributeTrailing][0];
+    
+    self.rightButtonTopMarginC = [self slk_constraintForAttribute:NSLayoutAttributeTop firstItem:self.rightButton secondItem:self];
+    self.rightButtonBottomMarginC = [self slk_constraintForAttribute:NSLayoutAttributeBottom firstItem:self secondItem:self.rightButton];
 }
 
 - (void)slk_updateConstraintConstants
 {
     CGFloat zero = 0.0;
-
+    
     if (self.isEditing)
     {
         self.editorContentViewHC.constant = self.editorContentViewHeight;
@@ -547,10 +650,9 @@
         self.rightButtonWC.constant = zero;
         self.rightMarginWC.constant = zero;
     }
-    else
-    {
+    else {
         self.editorContentViewHC.constant = zero;
-
+        
         CGSize leftButtonSize = [self.leftButton imageForState:self.leftButton.state].size;
         
         if (leftButtonSize.width > 0) {
@@ -563,8 +665,16 @@
         
         self.rightButtonWC.constant = [self slk_appropriateRightButtonWidth];
         self.rightMarginWC.constant = [self slk_appropriateRightButtonMargin];
+        
+        [self.rightButton sizeToFit];
+        
+        CGFloat rightVerMargin = (self.intrinsicContentSize.height - CGRectGetHeight(self.rightButton.frame)) / 2.0;
+        
+        self.rightButtonTopMarginC.constant = rightVerMargin;
+        self.rightButtonBottomMarginC.constant = rightVerMargin;
     }
 }
+
 
 #pragma mark - Observers
 
@@ -580,9 +690,31 @@
         
         [self slk_updateConstraintConstants];
     }
+    else if ([object isEqual:self.rightButton.titleLabel] && [keyPath isEqualToString:NSStringFromSelector(@selector(font))]) {
+        [self slk_updateConstraintConstants];
+    }
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+
+#pragma mark - NSNotificationCenter register/unregister
+
+- (void)slk_registerNotifications
+{
+    [self slk_unregisterNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeTextViewText:) name:UITextViewTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeTextViewContentSize:) name:SLKTextViewContentSizeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeContentSizeCategory:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
+
+- (void)slk_unregisterNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SLKTextViewContentSizeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 
@@ -590,10 +722,10 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:SLKTextViewContentSizeDidChangeNotification object:nil];
+    [self slk_unregisterNotifications];
     
     [_leftButton.imageView removeObserver:self forKeyPath:NSStringFromSelector(@selector(image))];
+    [_rightButton.titleLabel removeObserver:self forKeyPath:NSStringFromSelector(@selector(font))];
     
     _leftButton = nil;
     _rightButton = nil;
@@ -603,8 +735,8 @@
     
     _editorContentView = nil;
     _editorTitle = nil;
-    _editortLeftButton = nil;
-    _editortRightButton = nil;
+    _editorLeftButton = nil;
+    _editorRightButton = nil;
     
     _leftButtonWC = nil;
     _leftButtonHC = nil;
@@ -612,6 +744,8 @@
     _bottomMarginWC = nil;
     _rightButtonWC = nil;
     _rightMarginWC = nil;
+    _rightButtonTopMarginC = nil;
+    _rightButtonBottomMarginC = nil;
     _editorContentViewHC = nil;
 }
 

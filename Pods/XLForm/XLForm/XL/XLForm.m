@@ -26,7 +26,7 @@
 
 #import "XLForm.h"
 
-NSString * const XLFormRowDescriptorTypeText = @"text";
+NSString *const XLFormRowDescriptorTypeText = @"text";
 NSString *const XLFormRowDescriptorTypeName = @"name";
 NSString *const XLFormRowDescriptorTypeURL = @"url";
 NSString *const XLFormRowDescriptorTypeEmail = @"email";
@@ -51,9 +51,11 @@ NSString *const XLFormRowDescriptorTypeSelectorSegmentedControl = @"selectorSegm
 NSString *const XLFormRowDescriptorTypeDateInline = @"dateInline";
 NSString *const XLFormRowDescriptorTypeDateTimeInline = @"datetimeInline";
 NSString *const XLFormRowDescriptorTypeTimeInline = @"timeInline";
+NSString *const XLFormRowDescriptorTypeCountDownTimerInline = @"countDownTimerInline";
 NSString *const XLFormRowDescriptorTypeDate = @"date";
 NSString *const XLFormRowDescriptorTypeDateTime = @"datetime";
 NSString *const XLFormRowDescriptorTypeTime = @"time";
+NSString *const XLFormRowDescriptorTypeCountDownTimer = @"countDownTimer";
 NSString *const XLFormRowDescriptorTypeDatePicker = @"datePicker";
 NSString *const XLFormRowDescriptorTypePicker = @"picker";
 NSString *const XLFormRowDescriptorTypeSlider = @"slider";

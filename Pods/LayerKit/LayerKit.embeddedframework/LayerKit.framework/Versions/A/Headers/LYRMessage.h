@@ -38,6 +38,14 @@ typedef NS_ENUM(NSInteger, LYRRecipientStatus) {
 ///------------------
 
 /**
+ @abstract The option key used in the Message initializer options to specify the APNS configuration for each recipient on an individual basis. The value given for this key
+ must be a dictionary whose keys are user IDs and values are sub-dictionaries that may contain values for the `LYRMessageOptionsPushNotificationAlertKey` and `LYRMessageOptionsPushNotificationSoundNameKey`
+ keys. Per recipient push configuration can be combined with a default configuration specified by the `LYRMessageOptionsPushNotificationAlertKey` to produce fall-back behavior
+ for recipients that are not explicitly mentioned.
+ */
+extern NSString *const LYRMessageOptionsPushNotificationPerRecipientConfigurationKey;
+
+/**
  @abstract The option key used in the message to specify the APNS alert message the server should include in the push delivered to the receiver of the message.
  The value associated to this key must be passed in the `options` dictionary argument when creating the message.
  */
@@ -102,7 +110,7 @@ extern NSString *const LYRMessageOptionsPushNotificationSoundNameKey;
  @abstract The date and time that the message was originally sent.
  @discussion The `sentAt` property is queryable using all predicate operators.
  */
-@property (nonatomic, readonly) NSDate *sentAt LYR_QUERYABLE_PROPERTY;
+@property (nonatomic, readonly) NSDate *sentAt LYR_QUERYABLE_PROPERTY LYR_QUERYABLE_FROM(LYRConversation);
 
 /**
  @abstract The date and time that the message was received by the authenticated user.

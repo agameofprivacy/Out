@@ -9,20 +9,20 @@
 #import "DashboardChallengeOnDeckCollectionViewFlowLayout.h"
 #import "DashboardAnnouncementsCollectionViewFlowLayout.h"
 #import "DashboardInspirationCollectionViewFlowLayout.h"
-#import "TPKeyboardAvoiding/TPKeyboardAvoidingTableView.h"
-#import "TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h"
-#import "UICountingLabel/UICountingLabel.h"
+#import <TPKeyboardAvoiding/TPKeyboardAvoidingTableView.h>
+#import <TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h>
+#import <UICountingLabel/UICountingLabel.h>
 #import "PNChart.h"
-#import "SlackTextViewController/SLKTextViewController.h"
+#import <SlackTextViewController/SLKTextViewController.h>
 #import "DateTools.h"
 #import <HockeySDK/HockeySDK.h>
-#import <LayerKit/LayerKit.h>
-#import "ICETutorial/ICETutorialController.h"
-#import "COSTouchVisualizer/COSTouchVisualizerWindow.h"
+
+#import <ICETutorial/ICETutorialController.h>
+#import <COSTouchVisualizer/COSTouchVisualizerWindow.h>
 #import "ChallengeCardsCollectionViewFlowLayout.h"
-#import "BBBadgeBarButtonItem/BBBadgeBarButtonItem.h"
-#import "XLForm/XLForm.h"
-#import "AutoScrollLabel/CBAutoScrollLabel.h"
-#import "CCHMapClusterController/CCHMapClusterController.h"
+#import <BBBadgeBarButtonItem/BBBadgeBarButtonItem.h>
+#import <XLForm/XLForm.h>
+#import <AutoScrollLabel/CBAutoScrollLabel.h>
+#import <CCHMapClusterController/CCHMapClusterController.h>
 
 #endif

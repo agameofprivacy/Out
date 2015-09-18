@@ -19,7 +19,7 @@ class FieldsAndActivatorTableViewCell: UITableViewCell {
     let titleFont = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
     let valueFont = UIFont(name: "HelveticaNeue-Light", size: 18.0)
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

@@ -605,7 +605,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             (objects, error) -> Void in
             if error == nil {
                 self.doneChallenges.removeAll(keepCapacity: false)
-                for challengeData in objects as! [PFObject]{
+                for challengeData in objects!{
                     self.doneChallenges.append(challengeData["challenge"] as! PFObject)
                 }
                 self.doneTableView.reloadData()
@@ -620,7 +620,7 @@ class MyProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                     (challenges, error) -> Void in
                     if error == nil {
                         self.toDoChallenges.removeAll(keepCapacity: false)
-                        self.toDoChallenges = challenges as! [PFObject]
+                        self.toDoChallenges = challenges!
                         self.toDoTableView.reloadData()
                         self.redrawChartToSort("difficulty")
                     }

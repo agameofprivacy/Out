@@ -16,7 +16,7 @@ class CrisisHelpTableViewCell: UITableViewCell {
     var callButton:UIButton!
     var messageButton:UIButton!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

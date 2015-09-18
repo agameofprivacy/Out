@@ -60,6 +60,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.navigationItem.title = self.user.username
         self.tableView = TPKeyboardAvoidingTableView(frame: CGRectZero, style: UITableViewStyle.Plain)
+        self.tableView.contentInset.bottom = 49.5
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         self.tableView.registerClass(PersonDetailTableViewCell.self, forCellReuseIdentifier: "PersonDetailTableViewCell")
         self.tableView.registerClass(ActivityTableViewCell.self, forCellReuseIdentifier: "ActivityTableViewCell")
@@ -75,7 +76,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         let viewsDictionary = ["tableView":self.tableView]
         
         let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
-        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[tableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
 
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
@@ -358,10 +359,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     if error == nil {
                         
                         // Found activities
-                        let userActivitiesFound = objects as! [PFObject]
+                        let userActivitiesFound = objects!
                         var currentLikedAcitivitiesFoundIdStrings:[String] = []
                         if context == "old"{
-                            if (objects as! [PFObject]).count == 10{
+                            if (objects!.count == 10){
 //                                self.moreActivities = true
                             }
                             else{
@@ -370,10 +371,10 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         }
                         // If activities count is 0, show no activity view, else display activities
                         if context == "old"{
-                            self.userActivities.extend(userActivitiesFound)
+                            self.userActivities.appendContentsOf(userActivitiesFound)
                         }
                         else if context == "new"{
-                            self.userActivities.splice(userActivitiesFound, atIndex: 0)
+                            self.userActivities.insertContentsOf(userActivitiesFound, at: 0)
                         }
                         else if context == "update"{
                             self.userActivities = userActivitiesFound
@@ -398,7 +399,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                         relation.query()!.findObjectsInBackgroundWithBlock{
                             (objects, error) -> Void in
                             if error == nil {
-                                for object in objects as! [PFObject]{
+                                for object in objects!{
                                     currentLikedAcitivitiesFoundIdStrings.append(object.objectId!)
                                 }
                             }
@@ -551,18 +552,18 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
             }
             if context == "old"{
                 self.processedActivities.addObject(currentActivityDictionary)
-                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
-                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
+                self.currentActivitiesLikeCount.appendContentsOf(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.appendContentsOf(currentActivitiesFoundCommentCount)
             }
             else if context == "new"{
                 self.processedActivities.insertObject(currentActivityDictionary, atIndex: 0)
-                self.currentActivitiesLikeCount.splice(currentActivitiesFoundLikeCount, atIndex: 0)
-                self.currentActivitiesCommentCount.splice(currentActivitiesFoundCommentCount, atIndex: 0)
+                self.currentActivitiesLikeCount.insertContentsOf(currentActivitiesFoundLikeCount, at: 0)
+                self.currentActivitiesCommentCount.insertContentsOf(currentActivitiesFoundCommentCount, at: 0)
             }
             else if context == "update"{
                 self.processedActivities.addObject(currentActivityDictionary)
-                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
-                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
+                self.currentActivitiesLikeCount.appendContentsOf(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.appendContentsOf(currentActivitiesFoundCommentCount)
             }
             ++activityCount
         }
@@ -576,7 +577,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
         followingQuery.findObjectsInBackgroundWithBlock{
             (objects, error) -> Void in
             if error == nil {
-                for object in objects as! [PFObject]{
+                for object in objects!{
                     for user in object["followers"] as! [PFUser]{
                         self.currentUserFollowerId.append(user.objectId!)
                     }
@@ -589,7 +590,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                     followingRequestQuery.findObjectsInBackgroundWithBlock{
                         (objects, error) -> Void in
                         if error == nil{
-                            for object in objects as! [PFObject]{
+                            for object in objects!{
                                 for user in object["requestsFromUsers"] as! [PFUser]{
                                     self.followingRequestedId.append(user.objectId!)
                                 }
@@ -631,7 +632,7 @@ class PersonDetailViewController: UIViewController, UITableViewDelegate, UITable
                                 (objects, error) -> Void in
                                 if error == nil {
                                     // The find succeeded.
-                                    var followRequestsFrom = objects as! [PFObject]
+                                    var followRequestsFrom = objects!
                                     let currentFollowerFollowingObject = followRequestsFrom[0] as PFObject
                                     var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
                                     currentFollowRequestsFrom.append(PFUser.currentUser()!)

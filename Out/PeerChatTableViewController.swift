@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PeerChatTableViewController: UITableViewController, LYRClientDelegate {
+class PeerChatTableViewController: UITableViewController {
 
     var conversations:NSOrderedSet = NSOrderedSet(array: [])
     
@@ -61,7 +61,7 @@ class PeerChatTableViewController: UITableViewController, LYRClientDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Plain")
         cell.textLabel?.text = "Conversation"
-        cell.detailTextLabel?.text = "\((self.conversations.objectAtIndex(indexPath.row) as! LYRConversation).participants)"
+//        cell.detailTextLabel?.text = "\((self.conversations.objectAtIndex(indexPath.row) as! LYRConversation).participants)"
         return cell
     }
     
@@ -71,8 +71,8 @@ class PeerChatTableViewController: UITableViewController, LYRClientDelegate {
     }
     
     func loadConversations(){
-        let query = LYRQuery(`queryableClass`: LYRConversation.self)
-        query.resultType = LYRQueryResultType.Objects
+//        let query = LYRQuery(`queryableClass`: LYRConversation.self)
+//        query.resultType = LYRQueryResultType.Objects
 //        let error:NSError?
 //        self.conversations = ((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.executeQuery(query))
 //        if let error = error {
@@ -155,56 +155,56 @@ class PeerChatTableViewController: UITableViewController, LYRClientDelegate {
     
     // MARK: - LYRClientDelegate
     
-    func layerClient(client: LYRClient!, didReceiveAuthenticationChallengeWithNonce nonce: String!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didAuthenticateAsUserID userID: String!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didFailOperationWithError error: NSError!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didFailSynchronizationWithError error: NSError!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didFinishContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didFinishSynchronizationWithChanges changes: [AnyObject]!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, didLoseConnectionWithError error: NSError!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, objectsDidChange changes: [AnyObject]!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, willAttemptToConnect attemptNumber: UInt, afterDelay delayInterval: NSTimeInterval, maximumNumberOfAttempts attemptLimit: UInt) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClient(client: LYRClient!, willBeginContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!, withProgress progress: LYRProgress!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClientDidConnect(client: LYRClient!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClientDidDeauthenticate(client: LYRClient!) {
-        print(__FUNCTION__)
-    }
-    
-    func layerClientDidDisconnect(client: LYRClient!) {
-        print(__FUNCTION__)
-    }
+//    func layerClient(client: LYRClient!, didReceiveAuthenticationChallengeWithNonce nonce: String!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didAuthenticateAsUserID userID: String!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didFailOperationWithError error: NSError!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didFailSynchronizationWithError error: NSError!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didFinishContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didFinishSynchronizationWithChanges changes: [AnyObject]!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, didLoseConnectionWithError error: NSError!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, objectsDidChange changes: [AnyObject]!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, willAttemptToConnect attemptNumber: UInt, afterDelay delayInterval: NSTimeInterval, maximumNumberOfAttempts attemptLimit: UInt) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClient(client: LYRClient!, willBeginContentTransfer contentTransferType: LYRContentTransferType, ofObject object: AnyObject!, withProgress progress: LYRProgress!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClientDidConnect(client: LYRClient!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClientDidDeauthenticate(client: LYRClient!) {
+//        print(__FUNCTION__)
+//    }
+//    
+//    func layerClientDidDisconnect(client: LYRClient!) {
+//        print(__FUNCTION__)
+//    }
 
 }

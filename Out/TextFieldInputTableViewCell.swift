@@ -21,7 +21,7 @@ class TextFieldInputTableViewCell: UITableViewCell, CollectStepData {
     
     let fontSize:CGFloat = 16.0
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

@@ -199,7 +199,7 @@ class ActivityDetailViewController: SLKTextViewController {
         commentsQuery.findObjectsInBackgroundWithBlock{
             (objects, error) -> Void in
             if error == nil {
-                self.comments = objects as! [PFObject]
+                self.comments = objects!
                 self.tableView.reloadData()
             }
             else {

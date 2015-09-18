@@ -75,7 +75,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         let viewsDictionary = ["notificationsTableView":self.notificationsTableView]
         let horizontalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("H:|[notificationsTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
-        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|[notificationsTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
+        let verticalConstraints:Array = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[notificationsTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: nil, views: viewsDictionary)
         self.view.addConstraints(horizontalConstraints)
         self.view.addConstraints(verticalConstraints)
 //        loadAdditionalNotifications()
@@ -267,13 +267,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             (objects, error) -> Void in
             if error == nil{
                 if objects!.count >= 15{
-                    self.readNotifications.extend(objects as! [PFObject])
+                    self.readNotifications.appendContentsOf(objects!)
                     UIView.setAnimationsEnabled(false)
                     self.notificationsTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)
                     UIView.setAnimationsEnabled(true)
                 }
                 else{
-                    self.readNotifications.extend(objects as! [PFObject])
+                    self.readNotifications.appendContentsOf(objects!)
                     UIView.setAnimationsEnabled(false)
                     self.notificationsTableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, 2)), withRowAnimation: UITableViewRowAnimation.None)
                     UIView.setAnimationsEnabled(true)

@@ -33,7 +33,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
         self.challengesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.challengesTableView.rowHeight = UITableViewAutomaticDimension
         self.challengesTableView.estimatedRowHeight = 150
-        self.challengesTableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        self.challengesTableView.contentInset = UIEdgeInsets(top: 64 + 12, left: 0, bottom: 0, right: 0)
         
         self.challengesTableView.registerClass(ChallengeGalleryTableViewCell.self, forCellReuseIdentifier: "ChallengeGalleryTableViewCell")
         
@@ -160,7 +160,7 @@ class ChallengeGalleryViewController: UIViewController, UITableViewDelegate, UIT
             (objects, error) -> Void in
             if error == nil {
                 // Found user's current challenges, add challenge title to currentChallengesStrings
-                for object in objects as! [PFObject]{
+                for object in objects!{
                     self.currentChallengesStrings += [(object["title"] as! String)]
                 }
                 query.findObjectsInBackgroundWithBlock {

@@ -15,7 +15,7 @@ class StepMediaTableViewCell: UITableViewCell {
     var mediaPreviewImageView:UIImageView!
     var mediaBlurbLabel:UILabel!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

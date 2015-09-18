@@ -40,47 +40,52 @@ class PeopleFilterViewController: XLFormViewController {
 //        self.tableView.dataSource = self
 //        self.view.addSubview(self.tableView)
         
+        self.tableView.contentInset.top = 64
         
         // Do any additional setup after loading the view.
         let form = XLFormDescriptor(title: "filter")
         var section:XLFormSectionDescriptor
         var row:XLFormRowDescriptor
 
-        section = XLFormSectionDescriptor.formSectionWithTitle("Age, Identity, and Orientation") as! XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Age, Identity, and Orientation") 
         form.addFormSection(section)
 
         row = XLFormRowDescriptor(tag: "Gender Identity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Gender Identity")
         row.selectorOptions = []
+        let genderOptions:NSMutableArray = []
         for gender in self.genderArray{
-            row.selectorOptions.append(XLFormOptionsObject(value: gender, displayText: gender))
+            genderOptions.addObject(XLFormOptionsObject(value: gender, displayText: gender))
         }
+        row.selectorOptions = genderOptions as [AnyObject]
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Sexual Orientation", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Sexual Orientation")
         row.selectorOptions = []
+        let sexualOrientationOptions:NSMutableArray = []
         for sexualOrientation in self.sexualOrientationArray{
-            row.selectorOptions.append(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
+            sexualOrientationOptions.addObject(XLFormOptionsObject(value: sexualOrientation, displayText: sexualOrientation))
         }
+        row.selectorOptions = genderOptions as [AnyObject]
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Minimum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Minimum Age")
         row.selectorOptions = []
+        let ageRange:NSMutableArray = []
         for (var i = 13; i <= 99; ++i){
-            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
+            ageRange.addObject(XLFormOptionsObject(value: i, displayText: "\(i)"))
         }
+        row.selectorOptions = ageRange as [AnyObject]
         row.title = "Minimum Age"
         section.addFormRow(row)
         
         row = XLFormRowDescriptor(tag: "Maximum Age", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Maximum Age")
         row.selectorOptions = []
-        for (var i = 13; i <= 99; ++i){
-            row.selectorOptions.append(XLFormOptionsObject(value: i, displayText: "\(i)"))
-        }
         row.title = "Maximum Age"
+        row.selectorOptions = ageRange as [AnyObject]
         section.addFormRow(row)
         
         
-        section = XLFormSectionDescriptor.formSectionWithTitle("Location") as! XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Location") 
         form.addFormSection(section)
         
         row = XLFormRowDescriptor(tag: "State", rowType: XLFormRowDescriptorTypeSelectorPickerViewInline, title: "State")
@@ -147,7 +152,7 @@ class PeopleFilterViewController: XLFormViewController {
         row.cellConfig.setObject(UITextFieldViewMode.Always.rawValue, forKey: "textField.rightViewMode")
         section.addFormRow(row)
 
-        section = XLFormSectionDescriptor.formSectionWithTitle("Culture") as! XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSectionWithTitle("Culture") 
         form.addFormSection(section)
 
         row = XLFormRowDescriptor(tag: "Ethnicity", rowType: XLFormRowDescriptorTypeSelectorPush, title: "Ethnicity")

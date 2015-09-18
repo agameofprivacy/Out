@@ -22,7 +22,7 @@ class ChallengeGalleryTableViewCell: UITableViewCell {
     let labelInsetTop = 24
     let labelInsetBottom = 26
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

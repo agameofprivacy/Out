@@ -63,6 +63,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         self.resourcesTableView.separatorStyle = UITableViewCellSeparatorStyle.None
 //        self.resourcesTableView.sectionFooterHeight = 6
         self.resourcesTableView.contentInset.bottom = 6
+        self.resourcesTableView.contentInset.top = 64
         self.resourcesTableViewController.tableView = self.resourcesTableView
         self.resourcesTableViewController.refreshControl = UIRefreshControl()
         self.resourcesTableViewController.refreshControl!.addTarget(self, action: "updateLocation", forControlEvents: UIControlEvents.ValueChanged)
@@ -291,8 +292,8 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                 emergencyServiceProviderQuery.findObjectsInBackgroundWithBlock{
                     (objects, error) -> Void in
                     if error == nil{
-                        if (objects as! [PFObject]).count > 0{
-                            self.emergencyServiceProvider = (objects as! [PFObject])[0]
+                        if (objects!.count > 0){
+                            self.emergencyServiceProvider = objects![0]
                             let annotation = MKPointAnnotation()
                             annotation.coordinate = CLLocationCoordinate2DMake((self.emergencyServiceProvider["location"] as! PFGeoPoint).latitude, (self.emergencyServiceProvider["location"] as! PFGeoPoint).longitude)
                             annotation.title = self.emergencyServiceProvider["name"] as? String
@@ -310,7 +311,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
                                 self.relevantOrganizationsAttributes.removeAll(keepCapacity: false)
                                 self.otherOrganizationsNearby.removeAll(keepCapacity: false)
                                 // process objects to store in order of weight and associate parameters contributing to weight with object
-                                for object in objects as! [PFObject]{
+                                for object in objects!{
                                     var weight = 0
                                     var relevance:[String] = []
                                     for parameter in self.backgroundParameterArray{
@@ -376,7 +377,7 @@ class HelpResourcesTabViewController: UIViewController, CLLocationManagerDelegat
         resourceQuery.findObjectsInBackgroundWithBlock{
             (objects, error) -> Void in
             if (error==nil){
-                self.selectedResourceItem = (objects as! [PFObject])[0]
+                self.selectedResourceItem = objects![0]
                 self.performSegueWithIdentifier("showResourceDetail", sender: self)
             }
             else{

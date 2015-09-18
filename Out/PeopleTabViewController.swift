@@ -111,6 +111,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
 //        self.followingTableView.layoutMargins = UIEdgeInsetsZero
 //        self.followingTableView.separatorInset = UIEdgeInsetsZero
         self.followingTableView.hidden = true
+        self.followingTableView.contentInset.bottom = 49.5
         self.view.addSubview(self.followingTableView)
         self.FollowingTableViewController.tableView = self.followingTableView
         self.FollowingTableViewController.refreshControl = UIRefreshControl()
@@ -251,7 +252,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-64-[segmentedControlView(44.5)]", options: [NSLayoutFormatOptions.AlignAllLeft, NSLayoutFormatOptions.AlignAllRight], metrics: metricsDiciontary, views: viewsDictionary)
         
-        let followingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-44.5-[followingTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDiciontary, views: viewsDictionary)
+        let followingViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-108.5-[followingTableView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: metricsDiciontary, views: viewsDictionary)
 
         let followerViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[followerTableView]|", options: NSLayoutFormatOptions(rawValue:0), metrics: metricsDiciontary, views: viewsDictionary)
 
@@ -503,7 +504,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         queryUserFollowRequestedFromFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil {
-                let userFollowRequestedFrom = (objects as! [PFObject])[0]
+                let userFollowRequestedFrom = objects![0]
                 var userFollowRequestedFromCurrentlyfollowing:[PFUser] = userFollowRequestedFrom["followingUsers"] as! [PFUser]
                 userFollowRequestedFromCurrentlyfollowing.append(PFUser.currentUser()!)
                 userFollowRequestedFrom["followingUsers"] = userFollowRequestedFromCurrentlyfollowing
@@ -550,7 +551,7 @@ class PeopleTabViewController: UIViewController, UITableViewDelegate, UITableVie
         queryFollowerFollowing.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil {
-                self.followerFollowingObject = (objects as! [PFObject])[0]
+                self.followerFollowingObject = objects![0]
                 self.followingRequestedFrom = self.followerFollowingObject["requestsFromUsers"] as! [PFUser]
                 self.following = self.followerFollowingObject["followingUsers"] as! [PFUser]
                 self.followers = self.followerFollowingObject["followers"] as! [PFUser]

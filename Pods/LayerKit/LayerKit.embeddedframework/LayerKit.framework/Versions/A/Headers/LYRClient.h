@@ -12,6 +12,7 @@
 #import "LYRConversation.h"
 #import "LYRMessage.h"
 #import "LYRMessagePart.h"
+#import "LYRAnnouncement.h"
 #import "LYRConstants.h"
 #import "LYRPolicy.h"
 #import "LYRProgress.h"
@@ -55,16 +56,15 @@ extern NSString *const LYRClientDidFinishSynchronizationNotification;
  @abstract Posted when the objects associated with a client have changed due to local mutation or synchronization activities.
  @discussion The Layer client provides a flexible notification system for informing applications when changes have
  occured on domain objects in response to local mutation or synchronization activities. The system is designed to be general
- purpose and models changes as the creation, update, or deletion of an object. Changes are modeled as simple
- dictionaries with a fixed key space that is defined below.
+ purpose and models changes as the creation, update, or deletion of an object. Changes are modeled as `LYRObjectChange` objects.
  @see LYRConstants.h
  */
 extern NSString *const LYRClientObjectsDidChangeNotification;
 
 /**
  @abstract The key into the `userInfo` of a `LYRClientObjectsDidChangeNotification` notification for an array of changes.
- @discussion Each element in array retrieved from the user info for the `LYRClientObjectChangesUserInfoKey` key is a dictionary whose value models a 
- single object change event for a Layer model object. The change dictionary contains information about the object that changed, what type of
+ @discussion Each element in array retrieved from the user info for the `LYRClientObjectChangesUserInfoKey` key is an `LYRObjectChange` object which models a
+ single object change event for a Layer model object. The `LYRObjectChange` contains information about the object that changed, what type of
  change occurred (create, update, or delete) and additional details for updates such as the property that changed and its value before and after mutation.
  Change notifications are emitted after synchronization has completed and represent the current state of the Layer client's database.
  @see LYRConstants.h
@@ -233,7 +233,7 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 /**
  @abstract Tells the delegate that objects associated with the client have changed due to local mutation or synchronization activities.
  @param client The client that received the changes.
- @param changes An array of `NSDictionary` objects, each one describing a change.
+ @param changes An array of `LYRObjectChange` objects, each one describing a change.
  @see LYRConstants.h
  */
 - (void)layerClient:(LYRClient *)client objectsDidChange:(NSArray *)changes;
@@ -278,11 +278,12 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 
 /**
  @abstract Creates and returns a new Layer client instance.
+ @param appID An app id url obtained from the Layer Developer Portal. https://developer.layer.com/projects
  @return Returns a newly created Layer client object.
  @warning Throws `NSInternalInconsistencyException` when creating another Layer Client instance with the same `appID` value under the same process (application).
  However multiple instances of Layer Client with the same `appID` are allowed if running the code under Unit Tests.
  */
-+ (instancetype)clientWithAppID:(NSUUID *)appID;
++ (instancetype)clientWithAppID:(NSURL *)appID;
 
 /**
  @abstract The object that acts as the delegate of the receiving client.
@@ -292,7 +293,7 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 /**
  @abstract The app key.
  */
-@property (nonatomic, copy, readonly) NSUUID *appID;
+@property (nonatomic, copy, readonly) NSURL *appID;
 
 ///--------------------------------
 /// @name Managing Connection State
@@ -395,10 +396,11 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 
 /**
  @abstract Creates a new Conversation with the given set of participants.
- @discussion This method will create a new `LYRConversation` instance, creating new message instances with a new `LYRConversation` object instance and sending them will also result in creation of a new conversation for other participants. If you wish to ensure that only one Conversation exists for a set of participants then query for an existing Conversation using `conversationsForParticipants:` first.
+ @discussion This method will create a new `LYRConversation` instance, creating new message instances with a new `LYRConversation` object instance and sending them will also result in creation of a new conversation for other participants. If you wish to ensure that only one Conversation exists for a set of participants then set the value for the `LYRConversationOptionsDistinctByParticipantsKey` key to true in the `options` parameter.
  @param participants A set of participants with which to initialize the new Conversation.
  @param options A dictionary of options to apply to the conversation.
- @return The newly created Conversation.
+ @param error A pointer to an error that upon failure is set to an error object describing why execution failed.
+ @return The newly created Conversation or `nil` if an attempt is made to create a conversation with a distinct participants list, but one already exists. The existing conversation will be set as the value for the `LYRExistingDistinctConversationKey` in the `userInfo` dictionary of the error parameter.
  */
 - (LYRConversation *)newConversationWithParticipants:(NSSet *)participants options:(NSDictionary *)options error:(NSError **)error;
 
@@ -425,6 +427,13 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 - (NSOrderedSet *)executeQuery:(LYRQuery *)query error:(NSError **)error;
 
 /**
+ @abstract Executes the given query asynchronously and passes the results back in a completion block.
+ @param query The query to execute. Cannot be `nil`.
+ @param completion The block that will be passed once Layer has executed the query.  If successful the `resultSet` will have the results, and if unsuccessful `error` will contain the specific query error.
+ */
+- (void)executeQuery:(LYRQuery *)query completion:(void (^)(NSOrderedSet *resultSet, NSError *error))completion;
+
+/**
  @abstract Executes the given query and returns a count of the number of results.
  @param query The query to execute. Cannot be `nil`.
  @param error A pointer to an error that upon failure is set to an error object describing why execution failed.
@@ -433,11 +442,19 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 - (NSUInteger)countForQuery:(LYRQuery *)query error:(NSError **)error;
 
 /**
+ @abstract Executes the given query asynchronously and ppasses the result count and error back in a completion block.
+ @param query The query to execute. Cannot be `nil`.
+ @param completion The block that will be passed once Layer has executed the query.  If successful the `count` will have the count requested in the query, and if unsuccessful `error` will contain the specific query error.
+ */
+- (void)countForQuery:(LYRQuery *)query completion:(void (^)(NSUInteger count, NSError *error))completion;
+
+/**
  @abstract Creates and returns a new query controller with the given query.
  @param query The query to create a controller with.
+ @param error A pointer to an error that upon failure is set to a `NSError` object describing why query controller creation failed.
  @return A newly created query controller.
  */
-- (LYRQueryController *)queryControllerWithQuery:(LYRQuery *)query;
+- (LYRQueryController *)queryControllerWithQuery:(LYRQuery *)query error:(NSError **)error;
 
 ///-------------------------------
 /// @name Marking Messages as Read
@@ -531,7 +548,7 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
 
 /**
  @abstract Configures the set of MIME Types for `LYRMessagePart` objects that will be automatically downloaded upon synchronization.
- @discussion A value of `nil` indicates that all content is to be downloaded automatically and an empty `NSSet` indicates that no content should be. The default value is a set containing the MIME Type @"text/plain".
+ @discussion A value of `nil` indicates that all content is to be downloaded automatically and an empty `NSSet` indicates that no content should be. The default value is a set containing the MIME Type @"text/plain". Message parts belonging to latest messages will be auto-downloaded first.
  */
 @property (nonatomic) NSSet *autodownloadMIMETypes;
 
@@ -661,6 +678,9 @@ extern NSString *const LYRClientContentTransferProgressUserInfoKey;
     return [client countForQuery:query error:&error];
  */
 - (NSUInteger)countOfUnreadMessagesInConversation:(LYRConversation *)conversation __deprecated;
+
+// DEPRECATED: Use `LYRClient`'s `queryControllerWithQuery:error:` instead.
+- (LYRQueryController *)queryControllerWithQuery:(LYRQuery *)query __deprecated;
 
 @end
 

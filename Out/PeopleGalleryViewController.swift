@@ -76,6 +76,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
         self.peopleTableView.registerClass(PersonFollowTableViewCell.self, forCellReuseIdentifier: "PersonFollowTableViewCell")
         self.peopleTableView.delegate = self
         self.peopleTableView.dataSource = self
+        self.peopleTableView.contentInset.top = 64
         self.peopleTableView.hidden = true
         self.peopleTableView.layoutMargins = UIEdgeInsetsZero
         self.peopleTableView.separatorInset = UIEdgeInsetsZero
@@ -359,7 +360,7 @@ class PeopleGalleryViewController: UIViewController, UITableViewDelegate, UITabl
                             if error == nil {
                                 // The find succeeded.
                                 self.loadPeople()
-                                self.followRequestsFrom = objects as! [PFObject]
+                                self.followRequestsFrom = objects!
                                 let currentFollowerFollowingObject = self.followRequestsFrom[0] as! PFObject
                                 var currentFollowRequestsFrom = currentFollowerFollowingObject["requestsFromUsers"] as! [PFUser]
                                 currentFollowRequestsFrom.append(PFUser.currentUser()!)

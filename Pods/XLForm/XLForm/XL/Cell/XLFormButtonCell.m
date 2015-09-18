@@ -49,7 +49,17 @@
     BOOL leftAligmnment = self.rowDescriptor.action.viewControllerClass || [self.rowDescriptor.action.viewControllerStoryboardId length] != 0 || [self.rowDescriptor.action.viewControllerNibName length] != 0 || [self.rowDescriptor.action.formSegueIdenfifier length] != 0 || self.rowDescriptor.action.formSegueClass;
     self.textLabel.textAlignment = leftAligmnment ? NSTextAlignmentLeft : NSTextAlignmentCenter;
     self.accessoryType = !leftAligmnment || isDisabled ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
+    self.editingAccessoryType = self.accessoryType;
     self.selectionStyle = isDisabled ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
+    
+    if (!leftAligmnment){
+        CGFloat red, green, blue, alpha;
+        [self.tintColor getRed:&red green:&green blue:&blue alpha:&alpha];
+        self.textLabel.textColor  = [UIColor colorWithRed:red green:green blue:blue alpha:(isDisabled ? 0.3 : 1.0)];
+    }
+    else{
+        self.textLabel.textColor = nil;
+    }
 }
 
 
@@ -59,7 +69,7 @@
         self.rowDescriptor.action.formBlock(self.rowDescriptor);
     }
     else if (self.rowDescriptor.action.formSelector){
-        [controller performFormSeletor:self.rowDescriptor.action.formSelector withObject:self.rowDescriptor];
+        [controller performFormSelector:self.rowDescriptor.action.formSelector withObject:self.rowDescriptor];
     }
     else if ([self.rowDescriptor.action.formSegueIdenfifier length] != 0){
         [controller performSegueWithIdentifier:self.rowDescriptor.action.formSegueIdenfifier sender:self.rowDescriptor];

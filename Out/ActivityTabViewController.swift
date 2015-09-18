@@ -490,7 +490,7 @@ class ActivityTabViewController: UITableViewController {
             (objects, error) -> Void in
             if error == nil {
                 // Found FollowerFollowing object for current user
-                let currentUserFollowerFollowingObject = (objects as! [PFObject])[0]
+                let currentUserFollowerFollowingObject = objects![0]
                 var currentUserFollowingUsers = currentUserFollowerFollowingObject["followingUsers"] as! [PFUser]
                 let activityQuery = PFQuery(className: "Activity")
                 
@@ -526,14 +526,14 @@ class ActivityTabViewController: UITableViewController {
                     if error == nil {
 
                         // Found activities
-                        let currentActivitiesFound = objects as! [PFObject]
+                        let currentActivitiesFound = objects!
                         if currentActivitiesFound.isEmpty{
                             self.refreshControl?.endRefreshing()
                         }
                         else{
                             var currentLikedAcitivitiesFoundIdStrings:[String] = []
                             if context == "old"{
-                                if (objects as! [PFObject]).count == 10{
+                                if (objects!.count == 10){
                                     print("old more activities")
                                     self.moreActivities = true
                                 }
@@ -545,10 +545,10 @@ class ActivityTabViewController: UITableViewController {
                             // If activities count is 0, show no activity view, else display activities
                             if context == "old"{
                                 print("old extend activities array")
-                                self.currentActivities.extend(currentActivitiesFound)
+                                self.currentActivities.appendContentsOf(currentActivitiesFound)
                             }
                             else if context == "new"{
-                                self.currentActivities.splice(currentActivitiesFound, atIndex: 0)
+                                self.currentActivities.insertContentsOf(currentActivitiesFound, at: 0)
                             }
                             else if context == "update"{
                                 self.currentActivities = currentActivitiesFound
@@ -572,7 +572,7 @@ class ActivityTabViewController: UITableViewController {
                             relation.query()!.findObjectsInBackgroundWithBlock{
                                 (objects, error) -> Void in
                                 if error == nil {
-                                    for object in objects as! [PFObject]{
+                                    for object in objects!{
                                         currentLikedAcitivitiesFoundIdStrings.append(object.objectId!)
                                     }
                                 }
@@ -763,18 +763,18 @@ class ActivityTabViewController: UITableViewController {
             
             if context == "old"{
                 self.processedActivities.addObject(currentActivityDictionary)
-                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
-                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
+                self.currentActivitiesLikeCount.appendContentsOf(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.appendContentsOf(currentActivitiesFoundCommentCount)
             }
             else if context == "new"{
                 self.processedActivities.insertObject(currentActivityDictionary, atIndex: 0)
-                self.currentActivitiesLikeCount.splice(currentActivitiesFoundLikeCount, atIndex: 0)
-                self.currentActivitiesCommentCount.splice(currentActivitiesFoundCommentCount, atIndex: 0)
+                self.currentActivitiesLikeCount.insertContentsOf(currentActivitiesFoundLikeCount, at: 0)
+                self.currentActivitiesCommentCount.insertContentsOf(currentActivitiesFoundCommentCount, at: 0)
             }
             else if context == "update"{
                 self.processedActivities.addObject(currentActivityDictionary)
-                self.currentActivitiesLikeCount.extend(currentActivitiesFoundLikeCount)
-                self.currentActivitiesCommentCount.extend(currentActivitiesFoundCommentCount)
+                self.currentActivitiesLikeCount.appendContentsOf(currentActivitiesFoundLikeCount)
+                self.currentActivitiesCommentCount.appendContentsOf(currentActivitiesFoundCommentCount)
             }
             ++activityCount
             
@@ -922,7 +922,7 @@ class ActivityTabViewController: UITableViewController {
         notificationQuery.findObjectsInBackgroundWithBlock {
             (objects, error) -> Void in
             if error == nil{
-                self.notifications = objects as! [PFObject]
+                self.notifications = objects!
 //                for notification in self.notifications{
 //                }
                 (self.navigationItem.leftBarButtonItem as! BBBadgeBarButtonItem).enabled = true

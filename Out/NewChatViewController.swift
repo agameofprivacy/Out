@@ -10,7 +10,7 @@ import UIKit
 
 class NewChatViewController: UIViewController {
 
-    var conversation: LYRConversation!
+//    var conversation: LYRConversation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,36 +45,36 @@ class NewChatViewController: UIViewController {
 //                print("New Conversation creation failed: \(error!.localizedDescription)")
 //            }
 //        }
-        let messageText = "test"
-        // Creates a message part with text/plain MIME Type
-        let messagePart = LYRMessagePart(text: messageText)
-        
-        // Creates and returns a new message object with the given conversation and array of message parts
-        let pushMessage = "\((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID), says, \(messageText)"
-        let message: LYRMessage!
-        do {
-            message = try (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.newMessageWithParts([messagePart], options: [LYRMessageOptionsPushNotificationAlertKey: pushMessage])
-        } catch _ {
-            message = nil
-        }
+//        let messageText = "test"
+//        // Creates a message part with text/plain MIME Type
+//        let messagePart = LYRMessagePart(text: messageText)
+//        
+//        // Creates and returns a new message object with the given conversation and array of message parts
+//        let pushMessage = "\((UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID), says, \(messageText)"
+//        let message: LYRMessage!
+//        do {
+//            message = try (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.newMessageWithParts([messagePart], options: [LYRMessageOptionsPushNotificationAlertKey: pushMessage])
+//        } catch _ {
+//            message = nil
+//        }
         
         // Sends the specified message
-        var error: NSError?
-        let success: Bool
-        do {
-            try conversation.sendMessage(message)
-            success = true
-        } catch let error1 as NSError {
-            error = error1
-            success = false
-        }
-        if success {
-            // If the message was sent by the participant, show the sentAt time and mark the message as read
-            print("Message queued to be sent: \(messageText)")
-//            inputTextView.text = ""
-        } else {
-            print("Message send failed: \(error!.localizedDescription)")
-        }
+//        var error: NSError?
+//        let success: Bool
+//        do {
+//            try conversation.sendMessage(message)
+//            success = true
+//        } catch let error1 as NSError {
+//            error = error1
+//            success = false
+//        }
+//        if success {
+//            // If the message was sent by the participant, show the sentAt time and mark the message as read
+//            print("Message queued to be sent: \(messageText)")
+////            inputTextView.text = ""
+//        } else {
+//            print("Message send failed: \(error!.localizedDescription)")
+//        }
 
     }
     /*

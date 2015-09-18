@@ -18,24 +18,28 @@
 #import "SLKTextView+SLKAdditions.h"
 #import "SLKUIConstants.h"
 
-NSString * const SLKTextViewTextWillChangeNotification =        @"SLKTextViewTextWillChangeNotification";
-NSString * const SLKTextViewContentSizeDidChangeNotification =  @"SLKTextViewContentSizeDidChangeNotification";
-NSString * const SLKTextViewDidPasteItemNotification =          @"SLKTextViewDidPasteItemNotification";
-NSString * const SLKTextViewDidShakeNotification =              @"SLKTextViewDidShakeNotification";
+NSString * const SLKTextViewTextWillChangeNotification =            @"SLKTextViewTextWillChangeNotification";
+NSString * const SLKTextViewContentSizeDidChangeNotification =      @"SLKTextViewContentSizeDidChangeNotification";
+NSString * const SLKTextViewSelectedRangeDidChangeNotification =    @"SLKTextViewSelectedRangeDidChangeNotification";
+NSString * const SLKTextViewDidPasteItemNotification =              @"SLKTextViewDidPasteItemNotification";
+NSString * const SLKTextViewDidShakeNotification =                  @"SLKTextViewDidShakeNotification";
 
-NSString * const SLKTextViewPastedItemContentType =             @"SLKTextViewPastedItemContentType";
-NSString * const SLKTextViewPastedItemMediaType =               @"SLKTextViewPastedItemMediaType";
-NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPastedItemData";
+NSString * const SLKTextViewPastedItemContentType =                 @"SLKTextViewPastedItemContentType";
+NSString * const SLKTextViewPastedItemMediaType =                   @"SLKTextViewPastedItemMediaType";
+NSString * const SLKTextViewPastedItemData =                        @"SLKTextViewPastedItemData";
 
 @interface SLKTextView ()
 
 // The label used as placeholder
 @property (nonatomic, strong) UILabel *placeholderLabel;
 
+// The initial font point size, used for dynamic type calculations
+@property (nonatomic) CGFloat initialFontSize;
+
 // The keyboard commands available for external keyboards
 @property (nonatomic, strong) NSArray *keyboardCommands;
 
-// Used for moving the care up/down
+// Used for moving the caret up/down
 @property (nonatomic) UITextLayoutDirection verticalMoveDirection;
 @property (nonatomic) CGRect verticalMoveStartCaretRect;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
@@ -49,9 +53,9 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 
 #pragma mark - Initialization
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer
 {
-    if (self = [super init]) {
+    if (self = [super initWithFrame:frame textContainer:textContainer]) {
         [self slk_commonInit];
     }
     return self;
@@ -67,11 +71,11 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 
 - (void)slk_commonInit
 {
-    self.placeholderColor = [UIColor lightGrayColor];
-    self.pastableMediaTypes = SLKPastableMediaTypeNone;
+    _pastableMediaTypes = SLKPastableMediaTypeNone;
+    _dynamicTypeEnabled = YES;
+
     self.undoManagerEnabled = YES;
-    
-    self.font = [UIFont systemFontOfSize:14.0];
+
     self.editable = YES;
     self.selectable = YES;
     self.scrollEnabled = YES;
@@ -79,10 +83,7 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
     self.directionalLockEnabled = YES;
     self.dataDetectorTypes = UIDataDetectorTypeNone;
     
-    // UITextView notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeText:) name:UITextViewTextDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didEndEditing:) name:UITextViewTextDidEndEditingNotification object:nil];
+    [self slk_registerNotifications];
     
     [self addObserver:self forKeyPath:NSStringFromSelector(@selector(contentSize)) options:NSKeyValueObservingOptionNew context:NULL];
 }
@@ -92,7 +93,10 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 
 - (CGSize)intrinsicContentSize
 {
-    return CGSizeMake(UIViewNoIntrinsicMetric, 34.0);
+    CGFloat height = self.font.lineHeight;
+    height += self.textContainerInset.top + self.textContainerInset.bottom;
+    
+    return CGSizeMake(UIViewNoIntrinsicMetric, height);
 }
 
 + (BOOL)requiresConstraintBasedLayout
@@ -100,19 +104,18 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
     return YES;
 }
 
-- (void)layoutIfNeeded
-{
-    [super layoutIfNeeded];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     self.placeholderLabel.hidden = [self slk_shouldHidePlaceholder];
+    
     if (!self.placeholderLabel.hidden) {
-        self.placeholderLabel.frame = [self slk_placeholderRectThatFits:self.bounds];
-        [self sendSubviewToBack:self.placeholderLabel];
+        
+        [UIView performWithoutAnimation:^{
+            self.placeholderLabel.frame = [self slk_placeholderRectThatFits:self.bounds];
+            [self sendSubviewToBack:self.placeholderLabel];
+        }];
     }
 }
 
@@ -121,15 +124,14 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 
 - (UILabel *)placeholderLabel
 {
-    if (!_placeholderLabel)
-    {
+    if (!_placeholderLabel) {
         _placeholderLabel = [UILabel new];
         _placeholderLabel.clipsToBounds = NO;
         _placeholderLabel.autoresizesSubviews = NO;
         _placeholderLabel.numberOfLines = 1;
         _placeholderLabel.font = self.font;
         _placeholderLabel.backgroundColor = [UIColor clearColor];
-        _placeholderLabel.textColor = self.placeholderColor;
+        _placeholderLabel.textColor = [UIColor lightGrayColor];
         _placeholderLabel.hidden = YES;
         
         [self addSubview:_placeholderLabel];
@@ -149,16 +151,44 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 
 - (NSUInteger)numberOfLines
 {
-    return abs(self.contentSize.height/self.font.lineHeight);
+    CGFloat contentHeight = self.contentSize.height;
+    contentHeight -= self.textContainerInset.top + self.textContainerInset.bottom;
+
+    return fabs(contentHeight/self.font.lineHeight);
 }
 
-// Returns a different number of lines when landscape and only on iPhone
 - (NSUInteger)maxNumberOfLines
 {
-    if (SLK_IS_IPHONE && SLK_IS_LANDSCAPE) {
-        return 2.0;
+    NSUInteger numberOfLines = _maxNumberOfLines;
+    
+    if (SLK_IS_LANDSCAPE) {
+        if ((SLK_IS_IPHONE4 || SLK_IS_IPHONE5)) {
+            numberOfLines = 2.0; // 2 lines max on smaller iPhones
+        }
+        else if (SLK_IS_IPHONE) {
+            numberOfLines /= 2.0; // Half size on larger iPhone
+        }
     }
-    return _maxNumberOfLines;
+    
+    if (self.isDynamicTypeEnabled) {
+        NSString *contentSizeCategory = [[UIApplication sharedApplication] preferredContentSizeCategory];
+        CGFloat pointSizeDifference = [SLKTextView pointSizeDifferenceForCategory:contentSizeCategory];
+        
+        CGFloat factor = pointSizeDifference/self.initialFontSize;
+        
+        if (fabs(factor) > 0.75) {
+            factor = 0.75;
+        }
+        
+        numberOfLines -= floorf(numberOfLines * factor); // Calculates a dynamic number of lines depending of the user preferred font size
+    }
+    
+    return numberOfLines;
+}
+
+- (BOOL)isTypingSuggestionEnabled
+{
+    return (self.autocorrectionType == UITextAutocorrectionTypeNo) ? NO : YES;
 }
 
 // Returns only a supported pasted item
@@ -166,7 +196,7 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
 {
     NSString *contentType = [self slk_pasteboardContentType];
     NSData *data = [[UIPasteboard generalPasteboard] dataForPasteboardType:contentType];
-
+    
     if (data && [data isKindOfClass:[NSData class]])
     {
         SLKPastableMediaType mediaType = SLKPastableMediaTypeFromNSString(contentType);
@@ -237,7 +267,6 @@ NSString * const SLKTextViewPastedItemData =                    @"SLKTextViewPas
     if (self.pastableMediaTypes & SLKPastableMediaTypeImages) {
         [types addObject:NSStringFromSLKPastableMediaType(SLKPastableMediaTypeImages)];
     }
-    
     
     return types;
 }
@@ -329,6 +358,7 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 - (void)setPlaceholder:(NSString *)placeholder
 {
     self.placeholderLabel.text = placeholder;
+    self.accessibilityLabel = placeholder;
     
     [self setNeedsLayout];
 }
@@ -357,8 +387,6 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
         return;
     }
     
-    _typingSuggestionEnabled = enabled;
-    
     self.autocorrectionType = enabled ? UITextAutocorrectionTypeDefault : UITextAutocorrectionTypeNo;
     self.spellCheckingType = enabled ? UITextSpellCheckingTypeDefault : UITextSpellCheckingTypeNo;
     
@@ -367,6 +395,36 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 
 
 #pragma mark - UITextView Overrides
+
+- (NSArray *)gestureRecognizers
+{
+    NSArray *gestureRecognizers = [super gestureRecognizers];
+    
+    // Adds an aditional action to a private gesture to detect when the magnifying glass becomes visible
+    for (UIGestureRecognizer *gesture in gestureRecognizers) {
+        if ([gesture isMemberOfClass:NSClassFromString(@"UIVariableDelayLoupeGesture")]) {
+            
+            NSArray *targets = [gesture valueForKeyPath:@"_targets"];
+            if (targets.count > 0) {
+                [gesture addTarget:self action:@selector(slk_willShowLoupe:)];
+            }
+        }
+    }
+    
+    return gestureRecognizers;
+}
+
+- (void)setSelectedRange:(NSRange)selectedRange
+{
+    [super setSelectedRange:selectedRange];
+}
+
+- (void)setSelectedTextRange:(UITextRange *)selectedTextRange
+{
+    [super setSelectedTextRange:selectedTextRange];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SLKTextViewSelectedRangeDidChangeNotification object:self userInfo:nil];
+}
 
 - (void)setText:(NSString *)text
 {
@@ -388,10 +446,38 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 
 - (void)setFont:(UIFont *)font
 {
-    [super setFont:font];
+    NSString *contentSizeCategory = [[UIApplication sharedApplication] preferredContentSizeCategory];
+    
+    [self setFontName:font.familyName pointSize:font.pointSize withContentSizeCategory:contentSizeCategory];
+    
+    self.initialFontSize = font.pointSize;
+}
+
+- (void)setFontName:(NSString *)fontName pointSize:(CGFloat)pointSize withContentSizeCategory:(NSString *)contentSizeCategory
+{
+    if (self.isDynamicTypeEnabled) {
+        pointSize += [SLKTextView pointSizeDifferenceForCategory:contentSizeCategory];
+    }
+    
+    UIFont *dynamicFont = [UIFont fontWithName:fontName size:pointSize];
+    
+    [super setFont:dynamicFont];
     
     // Updates the placeholder font too
-    self.placeholderLabel.font = self.font;
+    self.placeholderLabel.font = dynamicFont;
+}
+
+- (void)setDynamicTypeEnabled:(BOOL)dynamicTypeEnabled
+{
+    if (self.isDynamicTypeEnabled == dynamicTypeEnabled) {
+        return;
+    }
+    
+    _dynamicTypeEnabled = dynamicTypeEnabled;
+    
+    NSString *contentSizeCategory = [[UIApplication sharedApplication] preferredContentSizeCategory];
+
+    [self setFontName:self.font.familyName pointSize:self.initialFontSize withContentSizeCategory:contentSizeCategory];
 }
 
 - (void)setTextAlignment:(NSTextAlignment)textAlignment
@@ -400,14 +486,6 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
     
     // Updates the placeholder text alignment too
     self.placeholderLabel.textAlignment = textAlignment;
-}
-
-
-#pragma mark - UITextInputTraits Overrides
-
-- (void)insertText:(NSString *)text
-{
-    [super insertText:text];
 }
 
 
@@ -456,7 +534,7 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
         && self.selectedRange.length > 0) {
         return YES;
     }
-
+    
     if (action == @selector(paste:) && [self slk_isPasteboardItemSupported]) {
         return YES;
     }
@@ -483,8 +561,7 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 {
     id pastedItem = [self slk_pastedItem];
     
-    if ([pastedItem isKindOfClass:[NSDictionary class]])
-    {
+    if ([pastedItem isKindOfClass:[NSDictionary class]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SLKTextViewDidPasteItemNotification object:nil userInfo:pastedItem];
     }
     else if ([pastedItem isKindOfClass:[NSString class]]) {
@@ -503,6 +580,25 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 
 
 #pragma mark - Custom Actions
+
+- (void)slk_willShowLoupe:(UIGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateChanged) {
+        self.loupeVisible = YES;
+    }
+    else {
+        self.loupeVisible = NO;
+    }
+    
+    // We still need to notify a selection change in the textview after the magnifying class is dismissed
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
+            [self.delegate textViewDidChangeSelection:self];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:SLKTextViewSelectedRangeDidChangeNotification object:self userInfo:nil];
+    }
+}
 
 - (void)slk_flashScrollIndicatorsIfNeeded
 {
@@ -581,6 +677,23 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
     }
     
     // Do something
+}
+
+- (void)slk_didChangeContentSizeCategory:(NSNotification *)notification
+{
+    if (!self.isDynamicTypeEnabled) {
+        return;
+    }
+    
+    NSString *contentSizeCategory = notification.userInfo[UIContentSizeCategoryNewValueKey];
+    
+    [self setFontName:self.font.familyName pointSize:self.initialFontSize withContentSizeCategory:contentSizeCategory];
+    
+    NSString *text = [self.text copy];
+    
+    // Reloads the content size of the text view
+    [self setText:@" "];
+    [self setText:text];
 }
 
 
@@ -689,7 +802,6 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
     }
     
     if (start) {
-        
         UITextPosition *end = [self slk_closestPositionToPosition:start inDirection:direction];
         
         if (end) {
@@ -764,11 +876,32 @@ SLKPastableMediaType SLKPastableMediaTypeFromNSString(NSString *string)
 }
 
 
+#pragma mark - NSNotificationCenter register/unregister
+
+- (void)slk_registerNotifications
+{
+    [self slk_unregisterNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeText:) name:UITextViewTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didEndEditing:) name:UITextViewTextDidEndEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(slk_didChangeContentSizeCategory:) name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
+
+- (void)slk_unregisterNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidEndEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
+
+
 #pragma mark - Lifeterm
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self slk_unregisterNotifications];
     
     [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(contentSize))];
     

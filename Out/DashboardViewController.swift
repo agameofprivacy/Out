@@ -536,15 +536,15 @@ class DashboardViewController: UIViewController, UICollectionViewDataSource, UIC
             vc.showTutorial = false
             vc.scrollViewHidden = false
             PFUser.logOut()
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            print(appDelegate.layerClient.description)
-            appDelegate.layerClient.deauthenticateWithCompletion { (success, error) -> Void in
-                if (error == nil) {
-                    print("Successfully deauthenticated \(success)")
-                } else {
-                    print("Failed to deauthenticate: \(error)")
-                }
-            }
+//            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//            print(appDelegate.layerClient.description)
+//            appDelegate.layerClient.deauthenticateWithCompletion { (success, error) -> Void in
+//                if (error == nil) {
+//                    print("Successfully deauthenticated \(success)")
+//                } else {
+//                    print("Failed to deauthenticate: \(error)")
+//                }
+//            }
         }
     }
     

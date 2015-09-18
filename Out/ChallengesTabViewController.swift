@@ -37,7 +37,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
 
         
         // Current challenges cards collection view init and layout
-        currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
+        currentChallengesCardsCollectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 64, self.view.frame.size.width, self.view.frame.size.height), collectionViewLayout: layout)
         currentChallengesCardsCollectionView.collectionViewLayout = layout
         currentChallengesCardsCollectionView.delegate = self
         currentChallengesCardsCollectionView.dataSource = self
@@ -164,7 +164,7 @@ class ChallengesTabViewController: UIViewController, UICollectionViewDataSource,
             (objects, error) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.currentChallengesObjects = objects as! [PFObject]
+                self.currentChallengesObjects = objects!
                 self.cardNumberPageControl.numberOfPages = self.currentChallengesObjects.count
                 self.currentChallengesCardsCollectionView.reloadData()
                 self.activityIndicator.stopAnimating()

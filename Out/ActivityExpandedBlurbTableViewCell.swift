@@ -14,7 +14,7 @@ class ActivityExpandedBlurbTableViewCell: UITableViewCell {
     var actionTextView:UITextView!
     var bottomSeparatorView:UIView!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

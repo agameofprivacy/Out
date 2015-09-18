@@ -32,7 +32,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
     var countofCellTypeDictionary:[String:[Int]] = ["":[0]]
     var shownHiddenRows:[NSIndexPath] = []
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -390,7 +390,7 @@ class ChallengesTabCollectionViewCell: UICollectionViewCell, UITableViewDataSour
             (objects, error) -> Void in
             if error == nil {
                 // The find succeeded.
-                self.currentChallengeModel = (objects as! [PFObject])[0]
+                self.currentChallengeModel = objects![0]
                 self.canvasTableView.reloadData()
                 self.activityIndicator.stopAnimating()
                 self.canvasTableView.hidden = false

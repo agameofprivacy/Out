@@ -42,30 +42,32 @@ typedef NS_ENUM(NSUInteger, XLFormSectionInsertMode) {
 
 @interface XLFormSectionDescriptor : NSObject
 
-@property (nonatomic) NSString * title;
-@property (nonatomic) NSString * footerTitle;
-@property (readonly) NSMutableArray * formRows;
+@property (nonatomic, nullable) NSString * title;
+@property (nonatomic, nullable) NSString * footerTitle;
+@property (readonly, nonnull) NSMutableArray * formRows;
 
 @property (readonly) XLFormSectionInsertMode sectionInsertMode;
 @property (readonly) XLFormSectionOptions sectionOptions;
-@property XLFormRowDescriptor * multivaluedRowTemplate;
-@property (readonly) XLFormRowDescriptor * multivaluedAddButton;
-@property (nonatomic) NSString * multivaluedTag;
+@property (nullable) XLFormRowDescriptor * multivaluedRowTemplate;
+@property (readonly, nullable) XLFormRowDescriptor * multivaluedAddButton;
+@property (nonatomic, nullable) NSString * multivaluedTag;
 
-@property (weak) XLFormDescriptor * formDescriptor;
+@property (weak, null_unspecified) XLFormDescriptor * formDescriptor;
 
+@property (nonnull) id hidden;
+-(BOOL)isHidden;
 
-+(id)formSection;
-+(id)formSectionWithTitle:(NSString *)title;
-+(id)formSectionWithTitle:(NSString *)title multivaluedSection:(BOOL)multivaluedSection DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Use formSectionWithTitle:sectionType: instead");
-+(id)formSectionWithTitle:(NSString *)title sectionOptions:(XLFormSectionOptions)sectionOptions;
-+(id)formSectionWithTitle:(NSString *)title sectionOptions:(XLFormSectionOptions)sectionOptions sectionInsertMode:(XLFormSectionInsertMode)sectionInsertMode;
++(nonnull instancetype)formSection;
++(nonnull instancetype)formSectionWithTitle:(nullable NSString *)title;
++(nonnull instancetype)formSectionWithTitle:(nullable NSString *)title multivaluedSection:(BOOL)multivaluedSection DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Use formSectionWithTitle:sectionType: instead");
++(nonnull instancetype)formSectionWithTitle:(nullable NSString *)title sectionOptions:(XLFormSectionOptions)sectionOptions;
++(nonnull instancetype)formSectionWithTitle:(nullable NSString *)title sectionOptions:(XLFormSectionOptions)sectionOptions sectionInsertMode:(XLFormSectionInsertMode)sectionInsertMode;
 
 -(BOOL)isMultivaluedSection;
--(void)addFormRow:(XLFormRowDescriptor *)formRow;
--(void)addFormRow:(XLFormRowDescriptor *)formRow afterRow:(XLFormRowDescriptor *)afterRow;
--(void)addFormRow:(XLFormRowDescriptor *)formRow beforeRow:(XLFormRowDescriptor *)beforeRow;
+-(void)addFormRow:(nonnull XLFormRowDescriptor *)formRow;
+-(void)addFormRow:(nonnull XLFormRowDescriptor *)formRow afterRow:(nonnull XLFormRowDescriptor *)afterRow;
+-(void)addFormRow:(nonnull XLFormRowDescriptor *)formRow beforeRow:(nonnull XLFormRowDescriptor *)beforeRow;
 -(void)removeFormRowAtIndex:(NSUInteger)index;
--(void)removeFormRow:(XLFormRowDescriptor *)formRow;
+-(void)removeFormRow:(nonnull XLFormRowDescriptor *)formRow;
 
 @end

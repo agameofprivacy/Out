@@ -1,6 +1,0 @@
-framework module ICETutorial {
-  umbrella header "Pods-ICETutorial-umbrella.h"
-
-  export *
-  module * { export * }
-}

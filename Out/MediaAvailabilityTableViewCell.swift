@@ -23,7 +23,7 @@ class MediaAvailabilityTableViewCell: UITableViewCell {
     
     var userDataDictionary:[String:String] = ["":""]
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 

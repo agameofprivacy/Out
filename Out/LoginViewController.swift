@@ -10,7 +10,7 @@ import UIKit
 import ICETutorial
 import TPKeyboardAvoiding
 import Parse
-import LayerKit
+
 
 private let LQSLayerAppIDString = "2b505222-c8f2-11e4-9b75-eae81f0006da"
 
@@ -336,60 +336,60 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
         self.performSegueWithIdentifier("LoggedIn", sender: nil)
     }
     
-    func authenticateLayerWithUserID(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
-        // Check to see if the layerClient is already authenticated.
-        let authenticatedUserID = (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID
-        print(authenticatedUserID)
-        if authenticatedUserID != nil{
-            // If the layerClient is authenticated with the requested userID, complete the authentication process.
-            if authenticatedUserID == userID {
-                print("Layer Authenticated as User \(authenticatedUserID)")
-                authenticationCompletion(error: nil)
-            } else {
-                // If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
-                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.deauthenticateWithCompletion { success, error in
-                    if success {
-                        self.authenticationTokenWithUserId(userID, authenticationCompletion: authenticationCompletion)
-                    } else if let error = error {
-                        authenticationCompletion(error: error)
-                    } else {
-                        assertionFailure("Must have an error when success = false")
-                    }
-                }
-            }
-        } else {
-            // If the layerClient isn't already authenticated, then authenticate.
-            authenticationTokenWithUserId(userID, authenticationCompletion: authenticationCompletion)
-        }
-    }
+//    func authenticateLayerWithUserID(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
+//        // Check to see if the layerClient is already authenticated.
+//        let authenticatedUserID = (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticatedUserID
+//        print(authenticatedUserID)
+//        if authenticatedUserID != nil{
+//            // If the layerClient is authenticated with the requested userID, complete the authentication process.
+//            if authenticatedUserID == userID {
+//                print("Layer Authenticated as User \(authenticatedUserID)")
+//                authenticationCompletion(error: nil)
+//            } else {
+//                // If the authenticated userID is different, then deauthenticate the current client and re-authenticate with the new userID.
+//                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.deauthenticateWithCompletion { success, error in
+//                    if success {
+//                        self.authenticationTokenWithUserId(userID, authenticationCompletion: authenticationCompletion)
+//                    } else if let error = error {
+//                        authenticationCompletion(error: error)
+//                    } else {
+//                        assertionFailure("Must have an error when success = false")
+//                    }
+//                }
+//            }
+//        } else {
+//            // If the layerClient isn't already authenticated, then authenticate.
+//            authenticationTokenWithUserId(userID, authenticationCompletion: authenticationCompletion)
+//        }
+//    }
     
-    func authenticationTokenWithUserId(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
-        // 1. Request an authentication Nonce from Layer
-        (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.requestAuthenticationNonceWithCompletion { nonce, error in
-            if nonce == nil {
-                authenticationCompletion(error: error)
-                return
-            }
-            
-            // 2. Acquire identity Token from Layer Identity Service
-            self.requestIdentityTokenForUserID(userID, appID: (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.appID.UUIDString, nonce: nonce) { identityToken, error in
-                if identityToken == nil {
-                    authenticationCompletion(error: error)
-                    return
-                }
-                
-                // 3. Submit identity token to Layer for validation
-                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticateWithIdentityToken(identityToken) { authenticatedUserID, error in
-                    if authenticatedUserID != nil {
-                        print("Layer Authenticated as User: \(authenticatedUserID)")
-                        authenticationCompletion(error: nil)
-                    } else {
-                        authenticationCompletion(error: error)
-                    }
-                }
-            }
-        }
-    }
+//    func authenticationTokenWithUserId(userID: String, authenticationCompletion: AuthenticationCompletionBlock) {
+//        // 1. Request an authentication Nonce from Layer
+//        (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.requestAuthenticationNonceWithCompletion { nonce, error in
+//            if nonce == nil {
+//                authenticationCompletion(error: error)
+//                return
+//            }
+//            
+//            // 2. Acquire identity Token from Layer Identity Service
+//            self.requestIdentityTokenForUserID(userID, appID: (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.appID.UUIDString, nonce: nonce) { identityToken, error in
+//                if identityToken == nil {
+//                    authenticationCompletion(error: error)
+//                    return
+//                }
+//                
+//                // 3. Submit identity token to Layer for validation
+//                (UIApplication.sharedApplication().delegate as! AppDelegate).layerClient.authenticateWithIdentityToken(identityToken) { authenticatedUserID, error in
+//                    if authenticatedUserID != nil {
+//                        print("Layer Authenticated as User: \(authenticatedUserID)")
+//                        authenticationCompletion(error: nil)
+//                    } else {
+//                        authenticationCompletion(error: error)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func requestIdentityTokenForUserID(userID: String, appID: String, nonce: String, tokenCompletion: IdentityTokenCompletionBlock) {
         let identityTokenURL = NSURL(string: "https://layer-identity-provider.herokuapp.com/identity_tokens")!
@@ -433,7 +433,7 @@ class LoginViewController: UIViewController, ICETutorialControllerDelegate {
 //                tokenCompletion(nil, error)
 //            }
         }
-        dataTask!.resume()
+        dataTask.resume()
     }
 
 

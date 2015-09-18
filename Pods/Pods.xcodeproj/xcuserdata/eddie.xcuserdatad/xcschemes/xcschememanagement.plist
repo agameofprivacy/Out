@@ -4,57 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AutoScrollLabel.xcscheme</key>
+		<key>AutoScrollLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-BBBadgeBarButtonItem.xcscheme</key>
+		<key>BBBadgeBarButtonItem.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Bolts.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CCHMapClusterController.xcscheme</key>
+		<key>CCHMapClusterController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-COSTouchVisualizer.xcscheme</key>
+		<key>COSTouchVisualizer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ICETutorial.xcscheme</key>
+		<key>ICETutorial.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Parse.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SlackTextViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-TPKeyboardAvoiding.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-UICountingLabel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-XLForm.xcscheme</key>
+		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -64,65 +44,85 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SlackTextViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TPKeyboardAvoiding.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UICountingLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>XLForm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1017FB34BC32C64ABD8F2871</key>
+		<key>0AB3353C62328EC36577A83392CD975D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35C79B9EFF21E0266E59C578</key>
+		<key>1285CB0B1C850F060AD7315AE370DCBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4596D681EDF7C146E410197B</key>
+		<key>2DE3AAAD29F843172D2D2510C4703B1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>500F2864DECF5D5EAA077CA9</key>
+		<key>36CF0B8711C4BEFF50019FF9507A2F89</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5411CBC187080A80EACAEEF3</key>
+		<key>37632AB2BA19E6DF70F1F76E92250E17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AEC278A56E7CD4A69C4C9120</key>
+		<key>6912BE8EC0FD2A4B4FB2038A46123223</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA28EA22F2F768ED0882434F</key>
+		<key>84D9273CD17B01C7D00C5580802686E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C641A907E8DDABBE415AE540</key>
+		<key>8568C31DB3151BD9C0C8E5F259541AE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D03843BB76131A6649E0E877</key>
+		<key>E3084953F7A569D954E29073DAF0BE48</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1195235ED7ADC8BD21188C4</key>
+		<key>EC19C6B32D8D1845093C2F36A85BF697</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F452557C6B031EF8AB7816FB</key>
+		<key>EFBF05E81120660B697A098161A19CDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FAD6AC8864F58A437304E14A</key>
+		<key>F024B85D99DC7636DE9F41F8175554BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

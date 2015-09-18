@@ -50,21 +50,6 @@ typedef NS_ENUM(NSInteger, LYRObjectChangeType) {
 	LYRObjectChangeTypeDelete   = 2
 };
 
-/**
- @abstract A key into a change dictionary describing the change type. @see `LYRObjectChangeType` for possible types.
- */
-extern NSString *const LYRObjectChangeTypeKey; // Expect values defined in the enum `LYRObjectChangeType` as `NSNumber` integer values.
-
-/**
- @abstract A key into a change dictionary for the object that was created, updated, or deleted.
- */
-extern NSString *const LYRObjectChangeObjectKey; // The `LYRConversation` or `LYRMessage` that changed.
-
-// Only applicable to `LYRObjectChangeTypeUpdate`
-extern NSString *const LYRObjectChangePropertyKey; // i.e. participants, metadata, userInfo, index
-extern NSString *const LYRObjectChangeOldValueKey; // The value before synchronization
-extern NSString *const LYRObjectChangeNewValueKey; // The value after synchronization
-
 ///-----------------------
 /// @name Typing Indicator
 ///-----------------------
@@ -89,3 +74,31 @@ typedef NS_ENUM(NSInteger, LYRContentTransferType) {
     LYRContentTransferTypeDownload              = 0,
     LYRContentTransferTypeUpload                = 1
 };
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ DEPRECATED: Use the `type` property on `LYRObjectChange` instead.
+ */
+extern NSString *const LYRObjectChangeTypeKey __deprecated;
+
+/*
+ DEPRECATED: Use the `object` property on `LYRObjectChange` instead.
+ */
+extern NSString *const LYRObjectChangeObjectKey __deprecated;
+
+/*
+ DEPRECATED: Use the `property` property on `LYRObjectChange` instead.
+ */
+extern NSString *const LYRObjectChangePropertyKey __deprecated;
+
+/*
+ DEPRECATED: Use the `beforeValue` property on `LYRObjectChange` instead.
+ */
+extern NSString *const LYRObjectChangeOldValueKey __deprecated;
+
+/*
+ DEPRECATED: Use the `afterValue` property on `LYRObjectChange` instead.
+ */
+extern NSString *const LYRObjectChangeNewValueKey __deprecated;
+
